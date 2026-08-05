@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MAS → Onda Sinusoidal</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
 <style>
   body { margin: 0; padding: 8px; background: #0F1923; display: flex; flex-direction: column; align-items: center; font-family: system-ui, sans-serif; }
   .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding-bottom: 6px; }
@@ -12,93 +13,139 @@
   .ctrl label { font-size: 8px; color: #8899AA; text-transform: uppercase; }
   .ctrl .val { font-size: 13px; font-weight: 700; color: #5BC0B3; }
   input[type=range] { width: 75px; accent-color: #249D8F; }
-  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: #162231; color: #8899AA; cursor: pointer; font-size: 10px; align-self: center; }
+  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: #162231; color: #8899AA; cursor: pointer; font-size: 10px; align-self: center; transition: all 0.15s; }
   .btn.on { background: #249D8F; color: #fff; border-color: #249D8F; }
+  .btn.sound { border-color: rgba(232,116,97,0.5); }
+  .btn.sound.on { background: #E87461; border-color: #E87461; }
 </style>
 </head>
 <body>
 <div class="controls">
   <div class="ctrl"><label>Amplitud</label><span class="val" id="av">55</span><input type="range" id="as" min="15" max="75" value="55"></div>
-  <div class="ctrl"><label>Frecuencia</label><span class="val" id="fv">1×</span><input type="range" id="fs" min="0.3" max="3" value="1" step="0.1"></div>
+  <div class="ctrl"><label>Frecuencia</label><span class="val" id="fv">220 Hz</span><input type="range" id="fs" min="1" max="8" value="2" step="0.25"></div>
   <div class="ctrl"><label>Velocidad</label><span class="val" id="sv">1×</span><input type="range" id="ss" min="0.3" max="3" value="1" step="0.1"></div>
   <button class="btn on" id="pb">Pausa</button>
+  <button class="btn sound on" id="sb">🔊 Sonido</button>
 </div>
 <div id="cv"></div>
 
 <script>
-let A=55, freq=1, speed=1, paused=false, t=0;
+let A=55, freqVal=2, speed=1, paused=false, t=0;
+let osc=null, soundOn=true;
+let audioStarted=false;
+
+// Map visual freq to audible Hz: 1→110, 2→220, 4→440, 8→880
+function freqToHz(f){ return f * 110; }
+
+function startAudio(){
+  if(!audioStarted){
+    Tone.start();
+    audioStarted=true;
+  }
+}
+
+function toggleSound(){
+  startAudio();
+  if(soundOn){
+    if(osc){osc.stop();osc.dispose();osc=null;}
+    soundOn=false;
+    document.getElementById('sb').textContent='🔇 Silencio';
+    document.getElementById('sb').classList.remove('on');
+  } else {
+    osc = new Tone.Oscillator(freqToHz(freqVal), 'sine').toDestination().start();
+    osc.volume.value = -12;
+    soundOn=true;
+    document.getElementById('sb').textContent='🔊 Sonido';
+    document.getElementById('sb').classList.add('on');
+  }
+}
 
 function setup(){
-  let c = createCanvas(550,200);
+  let c = createCanvas(580,210);
   c.parent('cv');
 
   document.getElementById('as').oninput=function(){A=+this.value;document.getElementById('av').textContent=A;};
-  document.getElementById('fs').oninput=function(){freq=+this.value;document.getElementById('fv').textContent=freq.toFixed(1)+'×';};
+  document.getElementById('fs').oninput=function(){
+    freqVal=+this.value;
+    document.getElementById('fv').textContent=freqToHz(freqVal)+' Hz';
+    if(osc) osc.frequency.value = freqToHz(freqVal);
+  };
   document.getElementById('ss').oninput=function(){speed=+this.value;document.getElementById('sv').textContent=speed.toFixed(1)+'×';};
   document.getElementById('pb').onclick=function(){paused=!paused;this.textContent=paused?'Reanudar':'Pausa';this.classList.toggle('on',!paused);};
+  document.getElementById('sb').onclick=toggleSound;
 }
 
 function draw(){
   background(15,25,35);
   if(!paused) t+=0.025;
-  let a = t*2*freq;
-  let sx=90, st=30, sb=160;
-  let my = sb + sin(a)*A;
+  let a = t*2*freqVal;
+  let sx=85, st=25, sb=165;
+  let massY = sb + sin(a)*A;
 
   // Support
-  stroke(140); strokeWeight(2); line(sx,8,sx,st);
-  fill(140); noStroke(); triangle(sx-7,8,sx+7,8,sx,3);
+  stroke(140); strokeWeight(2); line(sx,6,sx,st);
+  fill(140); noStroke(); triangle(sx-7,6,sx+7,6,sx,2);
 
   // Spring
   stroke('#5BC0B3'); strokeWeight(1.8); noFill();
   beginShape();
   for(let i=0;i<=16;i++){
-    let sy=st+(my-st-12)*(i/16);
+    let sy=st+(massY-st-12)*(i/16);
     vertex(sx+(i%2==0?-6:6),sy);
   }
   endShape();
 
   // Mass
   fill('#249D8F'); stroke('#249D8F'); strokeWeight(1);
-  rect(sx-13,my-2,26,15,3);
+  rect(sx-13,massY-2,26,15,3);
 
   // Labels
   fill(160); noStroke(); textAlign(CENTER); textSize(9);
-  text('Masa',sx,my+24);
-  text('Resorte',sx,6);
+  text('Masa',sx,massY+24);
+  text('Resorte',sx,4);
 
   // Equilibrium
   stroke(80,90,105,100); strokeWeight(1);
   drawingContext.setLineDash([2,4]); line(sx-20,sb,sx+20,sb); drawingContext.setLineDash([]);
 
   // Wave axis
-  let w0=155, w1=540, wy=100;
+  let w0=150, w1=570, wy=105;
   stroke(45,55,68); strokeWeight(1); line(w0,wy,w1,wy);
 
-  // Traveling wave
+  // Traveling wave — sincronizada con el resorte
+  // En x=w0, la fase debe ser igual a 'a' para que coincida con la masa
   noFill(); strokeWeight(2); stroke('#249D8F');
   beginShape();
   for(let x=w0;x<=w1;x+=1.5){
     let ph=map(x,w0,w1,0,TWO_PI*2);
-    vertex(x,wy+sin(ph-t*2*speed)*A);
+    vertex(x,wy+sin(a - ph*speed)*A);
   }
   endShape();
 
-  // Connector dot
-  let cy=wy+sin(-t*2*speed)*A;
+  // Connector — ahora coinciden exactamente
   stroke('#E87461'); strokeWeight(1);
-  drawingContext.setLineDash([3,4]); line(sx+13,my,w0,cy); drawingContext.setLineDash([]);
-  fill('#E87461'); noStroke(); ellipse(w0,cy,5,5);
+  drawingContext.setLineDash([3,4]); line(sx+13,massY,w0,wy+sin(a)*A); drawingContext.setLineDash([]);
+  fill('#E87461'); noStroke(); ellipse(w0,wy+sin(a)*A,6,6);
 
   // Arrow
-  let ax=w0+110;
-  stroke('#249D8F'); strokeWeight(1.2); line(ax-18,wy-55,ax+18,wy-55);
-  fill('#249D8F'); noStroke(); triangle(ax+18,wy-55,ax+13,wy-59,ax+13,wy-51);
-  fill('#249D8F'); textSize(8); textAlign(CENTER); text('→',ax,wy-61);
+  let ax=w0+120;
+  stroke('#249D8F'); strokeWeight(1.2); line(ax-18,wy-60,ax+18,wy-60);
+  fill('#249D8F'); noStroke(); triangle(ax+18,wy-60,ax+13,wy-64,ax+13,wy-56);
+  fill('#249D8F'); textSize(8); textAlign(CENTER); text('→',ax,wy-66);
 
-  // Title
+  // Title + frequency
   fill(180); textSize(11); textAlign(CENTER);
-  text('MAS → Onda Sinusoidal',275,192);
+  text('MAS → Onda Sinusoidal',290,202);
+
+  // Audio indicator
+  if(soundOn){
+    fill('#E87461'); textSize(9); textAlign(RIGHT);
+    text('🔊 '+freqToHz(freqVal)+' Hz',570,14);
+  }
+
+  // Frequency label on wave
+  fill(150); textSize(9); textAlign(LEFT);
+  text('λ',w0+5,wy-8);
 }
 </script>
 </body>

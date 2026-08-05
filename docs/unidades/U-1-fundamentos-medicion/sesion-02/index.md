@@ -22,7 +22,7 @@
 
     Una revolución completa equivale a 360° — un ciclo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el elemento básico del que todo se compone (Fourier).
 
-    <iframe src="simulacion-mas.html" width="100%" height="270" style="border: none; border-radius: 8px;"></iframe>
+    <iframe src="simulacion-mas.html" width="100%" height="290" style="border: none; border-radius: 8px;"></iframe>
 
 ???+ note "Propagación: compresión y rarefacción"
 
