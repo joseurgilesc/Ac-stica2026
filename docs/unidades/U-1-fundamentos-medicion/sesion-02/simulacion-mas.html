@@ -3,23 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Movimiento Armónico Simple → Onda Sinusoidal</title>
+<title>MAS → Onda Sinusoidal</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 <style>
-  :root { --teal: #249D8F; --teal-dark: #1A7A6F; --bg: #0F1923; --surface: #162231; --text: #E0E6ED; --text-dim: #8899AA; }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); }
-  canvas { display: block; border-radius: 10px; border: 1px solid rgba(36,157,143,0.3); }
-  .container { max-width: 760px; width: 100%; padding: 6px; }
-  .controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 10px 6px 6px; }
-  .control-group { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 80px; background: var(--surface); border-radius: 8px; padding: 6px 10px; border: 1px solid rgba(36,157,143,0.25); }
-  .control-group label { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.6px; }
-  .control-group .value { font-size: 15px; font-weight: 700; color: #5BC0B3; }
-  input[type=range] { width: 90px; accent-color: var(--teal); }
-  .btn { padding: 6px 14px; border-radius: 14px; border: 1px solid rgba(36,157,143,0.4); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 11px; transition: all 0.2s; }
+  :root { --teal: #249D8F; --bg: #0F1923; --surface: #162231; --text: #E0E6ED; --text-dim: #8899AA; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); display: flex; flex-direction: column; align-items: center; }
+  .container { max-width: 560px; width: 100%; padding: 4px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 6px 4px 4px; }
+  .control-group { display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 70px; background: var(--surface); border-radius: 6px; padding: 4px 8px; border: 1px solid rgba(36,157,143,0.25); }
+  .control-group label { font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .control-group .value { font-size: 13px; font-weight: 700; color: #5BC0B3; }
+  input[type=range] { width: 80px; accent-color: var(--teal); }
+  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 10px; }
   .btn:hover { border-color: #5BC0B3; color: #fff; }
   .btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
-  .info { color: var(--text-dim); font-size: 10px; text-align: center; padding: 2px 6px; }
+  canvas { display: block !important; margin: 0 auto; border-radius: 6px; }
 </style>
 </head>
 <body>
@@ -32,174 +31,100 @@
     </div>
     <div class="control-group">
       <label>Frecuencia</label>
-      <span class="value" id="freqVal">1x</span>
+      <span class="value" id="freqVal">1×</span>
       <input type="range" id="freqSlider" min="0.3" max="3" value="1" step="0.1">
     </div>
     <div class="control-group">
-      <label>Velocidad onda</label>
-      <span class="value" id="speedVal">1x</span>
+      <label>Velocidad</label>
+      <span class="value" id="speedVal">1×</span>
       <input type="range" id="speedSlider" min="0.3" max="3" value="1" step="0.1">
     </div>
-    <button class="btn active" id="pauseBtn">⏯ Pausa</button>
+    <button class="btn active" id="pauseBtn">Pausa</button>
   </div>
   <div id="canvasContainer"></div>
-  <div class="info">El resorte representa elasticidad + inercia. Su movimiento vertical se proyecta como onda horizontal en el tiempo.</div>
 </div>
 
 <script>
-let amplitude = 55;
-let oscFreq = 1.0;
-let waveSpeed = 1.0;
-let paused = false;
-let time = 0;
-
-const TEAL = '#249D8F';
-const TEAL_LIGHT = '#5BC0B3';
-const CORAL = '#E87461';
+let amplitude = 55, oscFreq = 1.0, waveSpeed = 1.0, paused = false, time = 0;
+const W = 550, H = 200;
+const TEAL = '#249D8F', TEAL_LIGHT = '#5BC0B3', CORAL = '#E87461';
 
 function setup() {
-  let cnv = createCanvas(740, 260);
+  let cnv = createCanvas(W, H);
   cnv.parent('canvasContainer');
 
-  document.getElementById('ampSlider').addEventListener('input', function() {
-    amplitude = parseInt(this.value);
-    document.getElementById('ampVal').textContent = amplitude;
-  });
-  document.getElementById('freqSlider').addEventListener('input', function() {
-    oscFreq = parseFloat(this.value);
-    document.getElementById('freqVal').textContent = oscFreq.toFixed(1) + 'x';
-  });
-  document.getElementById('speedSlider').addEventListener('input', function() {
-    waveSpeed = parseFloat(this.value);
-    document.getElementById('speedVal').textContent = waveSpeed.toFixed(1) + 'x';
-  });
-  document.getElementById('pauseBtn').addEventListener('click', function() {
+  document.getElementById('ampSlider').oninput = function() { amplitude = +this.value; document.getElementById('ampVal').textContent = amplitude; };
+  document.getElementById('freqSlider').oninput = function() { oscFreq = +this.value; document.getElementById('freqVal').textContent = oscFreq.toFixed(1)+'×'; };
+  document.getElementById('speedSlider').oninput = function() { waveSpeed = +this.value; document.getElementById('speedVal').textContent = waveSpeed.toFixed(1)+'×'; };
+  document.getElementById('pauseBtn').onclick = function() {
     paused = !paused;
-    this.textContent = paused ? '▶ Reanudar' : '⏯ Pausa';
+    this.textContent = paused ? 'Reanudar' : 'Pausa';
     this.classList.toggle('active', !paused);
-  });
+  };
 }
 
 function draw() {
   background(15, 25, 35);
-
-  if (!paused) {
-    time += 0.025;
-  }
-
-  let springX = 105;
-  let springTop = 45;
-  let springBase = 200;
+  if (!paused) time += 0.025;
   let ang = time * 2 * oscFreq;
-  let massY = springBase + sin(ang) * amplitude;
 
-  // LEFT: Mass-spring system
-  stroke(160);
-  strokeWeight(2.5);
-  line(springX, 18, springX, springTop);
-  fill(160); noStroke();
-  triangle(springX-10, 18, springX+10, 18, springX, 8);
+  let sx = 90, sTop = 30, sBase = 160;
+  let massY = sBase + sin(ang) * amplitude;
 
-  // Spring zigzag
-  stroke(TEAL_LIGHT);
-  strokeWeight(2);
-  noFill();
+  // Spring support
+  stroke(140); strokeWeight(2); line(sx, 8, sx, sTop);
+  fill(140); noStroke(); triangle(sx-8, 8, sx+8, 8, sx, 2);
+
+  // Spring
+  stroke(TEAL_LIGHT); strokeWeight(1.8); noFill();
   beginShape();
-  let segs = 16;
-  for (let i = 0; i <= segs; i++) {
-    let t = i / segs;
-    let sy = springTop + (massY - springTop - 16) * t;
-    let sx = springX + (i % 2 === 0 ? -8 : 8);
-    vertex(sx, sy);
+  for (let i = 0; i <= 16; i++) {
+    let sy = sTop + (massY - sTop - 12) * (i/16);
+    vertex(sx + (i%2===0 ? -7 : 7), sy);
   }
   endShape();
 
   // Mass
-  fill(TEAL);
-  stroke(TEAL);
-  strokeWeight(1);
-  rect(springX-16, massY-3, 32, 20, 4);
+  fill(TEAL); stroke(TEAL); strokeWeight(1);
+  rect(sx-14, massY-2, 28, 16, 3);
 
   // Labels
-  fill(180); noStroke();
-  textAlign(CENTER);
-  textSize(10);
-  text('Resorte', springX, 14);
-  text('Masa (m)', springX, massY + 30);
+  fill(160); noStroke(); textAlign(CENTER); textSize(9);
+  text('Masa (m)', sx, massY+26);
+  text('Resorte', sx, 6);
 
-  // Equilibrium
-  stroke(90, 100, 115, 120);
-  strokeWeight(1);
-  drawingContext.setLineDash([3, 4]);
-  line(springX-25, springBase, springX+25, springBase);
-  drawingContext.setLineDash([]);
-  textSize(9);
-  fill(120, 130, 145);
-  text('equilibrio', springX, springBase - 6);
+  // Equilibrium line
+  stroke(80,90,105,100); strokeWeight(1);
+  drawingContext.setLineDash([2,4]); line(sx-22, sBase, sx+22, sBase); drawingContext.setLineDash([]);
 
-  // ----- RIGHT: Traveling wave -----
-  let wStart = 195;
-  let wEnd = width - 15;
-  let wY = height / 2;
-
-  // Axis
-  stroke(50, 60, 75);
-  strokeWeight(1);
-  line(wStart, wY, wEnd, wY);
-
-  // Grid lines
-  for (let x = wStart; x < wEnd; x += 80) {
-    stroke(35, 45, 58, 100);
-    line(x, wY-80, x, wY+80);
-  }
+  // Wave zone
+  let w0 = 160, w1 = W-10, wY = H/2;
+  stroke(45,55,68); strokeWeight(1); line(w0, wY, w1, wY);
 
   // Traveling wave
-  noFill();
-  strokeWeight(2.5);
-  stroke(TEAL);
+  noFill(); strokeWeight(2); stroke(TEAL);
   beginShape();
-  for (let x = wStart; x <= wEnd; x += 1.5) {
-    let phase = map(x, wStart, wEnd, 0, TWO_PI * 2.2);
-    let y = wY + sin(phase - time * 2 * waveSpeed) * amplitude;
-    vertex(x, y);
+  for (let x = w0; x <= w1; x += 1.5) {
+    let ph = map(x, w0, w1, 0, TWO_PI * 2.0);
+    vertex(x, wY + sin(ph - time * 2 * waveSpeed) * amplitude);
   }
   endShape();
 
-  // Connection line and dot
-  let connY = wY + sin(-time * 2 * waveSpeed) * amplitude;
-  stroke(CORAL, 100);
-  strokeWeight(1.2);
-  drawingContext.setLineDash([3, 5]);
-  line(springX+16, massY, wStart, connY);
-  drawingContext.setLineDash([]);
-  fill(CORAL);
-  noStroke();
-  ellipse(wStart, connY, 7, 7);
+  // Connector
+  let cy = wY + sin(-time * 2 * waveSpeed) * amplitude;
+  stroke(CORAL, 90); strokeWeight(1);
+  drawingContext.setLineDash([3,4]); line(sx+14, massY, w0, cy); drawingContext.setLineDash([]);
+  fill(CORAL); noStroke(); ellipse(w0, cy, 5, 5);
 
-  // Arrow showing propagation
-  let ax = wStart + 150;
-  let ay = wY - 72;
-  stroke(TEAL, 100);
-  strokeWeight(1.3);
-  line(ax-25, ay, ax+25, ay);
-  fill(TEAL, 100); noStroke();
-  triangle(ax+25, ay, ax+18, ay-5, ax+18, ay+5);
-  fill(TEAL, 130);
-  textSize(9);
-  textAlign(CENTER);
-  text('Propagación →', ax, ay - 10);
+  // Propagation arrow
+  let ax = w0 + 120;
+  stroke(TEAL, 90); strokeWeight(1.2); line(ax-18, wY-58, ax+18, wY-58);
+  fill(TEAL, 90); noStroke(); triangle(ax+18, wY-58, ax+13, wY-62, ax+13, wY-54);
+  fill(TEAL, 120); textSize(8); textAlign(CENTER); text('→', ax, wY-64);
 
   // Title
-  fill(190);
-  textAlign(CENTER);
-  textSize(13);
-  text('Movimiento Armónico Simple  →  Onda Sinusoidal', width/2, height-12);
-
-  // Parameter display
-  fill(120, 135, 150);
-  textSize(9);
-  textAlign(RIGHT);
-  text(`A=${amplitude}  f=${oscFreq.toFixed(1)}×  v=${waveSpeed.toFixed(1)}×`, width-10, height-26);
+  fill(180); textSize(11); textAlign(CENTER);
+  text('MAS → Onda Sinusoidal', W/2, H-8);
 }
 </script>
 </body>

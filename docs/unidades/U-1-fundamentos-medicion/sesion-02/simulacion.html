@@ -3,35 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulación de Onda Sonora - Sesión 2</title>
+<title>Simulación de Onda Sonora</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 <style>
-  :root {
-    --teal: #249D8F;
-    --teal-dark: #1A7A6F;
-    --teal-light: #5BC0B3;
-    --bg: #0F1923;
-    --surface: #162231;
-    --text: #E0E6ED;
-    --text-dim: #8899AA;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); }
-  canvas { display: block; border-radius: 12px; border: 2px solid var(--teal); }
-  .container { max-width: 820px; width: 100%; padding: 8px; }
-  .controls { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 12px 8px; }
-  .control-group { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 90px; background: var(--surface); border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(36,157,143,0.3); }
-  .control-group label { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; }
-  .control-group .value { font-size: 16px; font-weight: 700; color: var(--teal-light); font-variant-numeric: tabular-nums; }
-  input[type=range] { width: 100px; accent-color: var(--teal); }
-  .toggles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 4px 8px 10px; }
-  .toggle-btn { padding: 5px 12px; border-radius: 16px; border: 1px solid rgba(36,157,143,0.4); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 11px; transition: all 0.2s; }
+  :root { --teal: #249D8F; --bg: #0F1923; --surface: #162231; --text: #E0E6ED; --text-dim: #8899AA; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); display: flex; flex-direction: column; align-items: center; }
+  .container { max-width: 620px; width: 100%; padding: 4px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 6px 4px 4px; }
+  .control-group { display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 70px; background: var(--surface); border-radius: 6px; padding: 4px 8px; border: 1px solid rgba(36,157,143,0.25); }
+  .control-group label { font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .control-group .value { font-size: 13px; font-weight: 700; color: #5BC0B3; }
+  input[type=range] { width: 80px; accent-color: var(--teal); }
+  .toggles { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; padding: 4px 4px 2px; }
+  .toggle-btn { padding: 3px 9px; border-radius: 10px; border: 1px solid rgba(36,157,143,0.3); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 9px; }
   .toggle-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
-  .toggle-btn:hover { border-color: var(--teal-light); }
-  .info { color: var(--text-dim); font-size: 10px; text-align: center; padding: 2px 8px 8px; }
-  .legend { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 4px 8px; font-size: 10px; color: var(--text-dim); }
-  .legend-item { display: flex; align-items: center; gap: 4px; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .toggle-btn:hover { border-color: #5BC0B3; }
+  canvas { display: block !important; margin: 0 auto; border-radius: 6px; }
 </style>
 </head>
 <body>
@@ -48,163 +36,99 @@
       <input type="range" id="freqSlider" min="1" max="8" value="2" step="0.5">
     </div>
     <div class="control-group">
-      <label>Fase (°)</label>
-      <span class="value" id="phaseVal">0</span>
+      <label>Fase</label>
+      <span class="value" id="phaseVal">0°</span>
       <input type="range" id="phaseSlider" min="0" max="360" value="0" step="15">
     </div>
     <div class="control-group">
       <label>Velocidad</label>
-      <span class="value" id="speedVal">1x</span>
+      <span class="value" id="speedVal">1×</span>
       <input type="range" id="speedSlider" min="0" max="3" value="1" step="0.25">
     </div>
   </div>
-
   <div class="toggles">
     <button class="toggle-btn active" data-layer="displacement">Desplazamiento</button>
     <button class="toggle-btn active" data-layer="pressure">Presión</button>
     <button class="toggle-btn active" data-layer="particles">Partículas</button>
     <button class="toggle-btn active" data-layer="density">Densidad</button>
   </div>
-
   <div id="canvasContainer"></div>
-
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#249D8F"></div> Desplazamiento</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#E87461"></div> Presión</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#F4B860"></div> Compresión</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#5BC0B3"></div> Rarefacción</div>
-  </div>
-
-  <div class="info">Modifica los parámetros y activa/desactiva capas para analizar cada fenómeno por separado</div>
 </div>
 
 <script>
-let amplitude = 100;
-let baseFreq = 2;
-let phaseOffset = 0;
-let animSpeed = 1;
-let time = 0;
-
-let showDisplacement = true;
-let showPressure = true;
-let showParticles = true;
-let showDensity = true;
-
-// Teal palette
-const TEAL = '#249D8F';
-const TEAL_LIGHT = '#5BC0B3';
-const TEAL_DARK = '#1A7A6F';
-const BORDER_TEAL = 'rgba(36,157,143,0.4)';
-const GRID_COLOR = 'rgba(36,157,143,0.12)';
+let amplitude = 100, baseFreq = 2, phaseOffset = 0, animSpeed = 1, time = 0;
+let showDisplacement = true, showPressure = true, showParticles = true, showDensity = true;
+const W = 600, H = 300;
+const TEAL = '#249D8F', TEAL_LIGHT = '#5BC0B3', CORAL = '#E87461';
+const GRID = 'rgba(36,157,143,0.1)';
 
 function setup() {
-  let cnv = createCanvas(790, 380);
+  let cnv = createCanvas(W, H);
   cnv.parent('canvasContainer');
 
-  document.getElementById('ampSlider').addEventListener('input', function() {
-    amplitude = parseInt(this.value);
-    document.getElementById('ampVal').textContent = amplitude;
-  });
-  document.getElementById('freqSlider').addEventListener('input', function() {
-    baseFreq = parseFloat(this.value);
-    document.getElementById('freqVal').textContent = baseFreq.toFixed(1);
-  });
-  document.getElementById('phaseSlider').addEventListener('input', function() {
-    phaseOffset = radians(parseInt(this.value));
-    document.getElementById('phaseVal').textContent = this.value;
-  });
-  document.getElementById('speedSlider').addEventListener('input', function() {
-    animSpeed = parseFloat(this.value);
-    document.getElementById('speedVal').textContent = animSpeed === 0 ? 'Pausa' : animSpeed.toFixed(2) + 'x';
-  });
+  document.getElementById('ampSlider').oninput = function() { amplitude = +this.value; document.getElementById('ampVal').textContent = amplitude; };
+  document.getElementById('freqSlider').oninput = function() { baseFreq = +this.value; document.getElementById('freqVal').textContent = baseFreq.toFixed(1); };
+  document.getElementById('phaseSlider').oninput = function() { phaseOffset = radians(+this.value); document.getElementById('phaseVal').textContent = this.value+'°'; };
+  document.getElementById('speedSlider').oninput = function() { animSpeed = +this.value; document.getElementById('speedVal').textContent = animSpeed===0?'Pausa':animSpeed.toFixed(2)+'×'; };
 
   document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.onclick = function() {
       this.classList.toggle('active');
-      let layer = this.dataset.layer;
-      if (layer === 'displacement') showDisplacement = this.classList.contains('active');
-      if (layer === 'pressure') showPressure = this.classList.contains('active');
-      if (layer === 'particles') showParticles = this.classList.contains('active');
-      if (layer === 'density') showDensity = this.classList.contains('active');
-    });
+      let l = this.dataset.layer;
+      if (l==='displacement') showDisplacement = this.classList.contains('active');
+      if (l==='pressure') showPressure = this.classList.contains('active');
+      if (l==='particles') showParticles = this.classList.contains('active');
+      if (l==='density') showDensity = this.classList.contains('active');
+    };
   });
 }
 
 function draw() {
   background(15, 25, 35);
+  if (animSpeed > 0) time += 0.016 * animSpeed;
 
-  if (animSpeed > 0) {
-    time += 0.016 * animSpeed;
-  }
-
-  let centerY = height / 2;
+  let cY = H/2, n = 40, sp = (W-70)/n;
 
   // Grid
-  stroke(GRID_COLOR);
-  strokeWeight(1);
-  for (let x = 0; x < width; x += 50) {
-    line(x, 0, x, height);
-  }
-  line(0, centerY, width, centerY);
-
-  // Axis labels
-  noStroke();
-  fill(100, 120, 140);
-  textSize(11);
-  textAlign(CENTER);
-  text('Tiempo →', width - 35, centerY - 10);
-  textAlign(LEFT, CENTER);
-  text('⟳ Desplazamiento', 6, 16);
-
-  let numParticles = 48;
-  let spacing = (width - 80) / numParticles;
+  stroke(GRID); strokeWeight(1);
+  for (let x=0; x<W; x+=50) line(x, 0, x, H);
+  line(0, cY, W, cY);
 
   // Density zones
   if (showDensity) {
-    for (let i = 0; i <= numParticles; i++) {
-      let x = 40 + i * spacing;
-      let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
-      let density = cos(angle);
-      if (abs(density) > 0.2) {
-        let alpha = abs(density) * 30;
-        if (density > 0) {
-          fill(244, 184, 96, alpha); // warm compression
-        } else {
-          fill(91, 192, 179, alpha); // cool rarefaction
-        }
-        noStroke();
-        rect(x - spacing/2, 6, spacing, height - 12);
+    for (let i=0; i<=n; i++) {
+      let x = 35 + i*sp;
+      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
+      let d = cos(ang);
+      if (abs(d) > 0.2) {
+        let a = abs(d)*25;
+        fill(d>0 ? 'rgba(244,184,96,'+a+')' : 'rgba(91,192,179,'+a+')');
+        noStroke(); rect(x-sp/2, 2, sp, H-4);
       }
     }
   }
 
-  // Displacement wave
+  // Displacement
   if (showDisplacement) {
-    noFill();
-    strokeWeight(2.5);
-    stroke(TEAL);
+    noFill(); strokeWeight(2); stroke(TEAL);
     beginShape();
-    for (let i = 0; i <= numParticles; i++) {
-      let x = 40 + i * spacing;
-      let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
-      let y = centerY + sin(angle) * amplitude;
-      vertex(x, y);
+    for (let i=0; i<=n; i++) {
+      let x = 35 + i*sp;
+      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
+      vertex(x, cY + sin(ang)*amplitude);
     }
     endShape();
   }
 
-  // Pressure wave
+  // Pressure
   if (showPressure) {
-    noFill();
-    strokeWeight(1.8);
-    stroke(232, 116, 97, 180);
-    drawingContext.setLineDash([5, 5]);
+    noFill(); strokeWeight(1.5); stroke(CORAL);
+    drawingContext.setLineDash([4,4]);
     beginShape();
-    for (let i = 0; i <= numParticles; i++) {
-      let x = 40 + i * spacing;
-      let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
-      let y = centerY + cos(angle) * amplitude;
-      vertex(x, y);
+    for (let i=0; i<=n; i++) {
+      let x = 35 + i*sp;
+      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
+      vertex(x, cY + cos(ang)*amplitude);
     }
     endShape();
     drawingContext.setLineDash([]);
@@ -213,31 +137,21 @@ function draw() {
   // Particles
   if (showParticles) {
     noStroke();
-    for (let i = 0; i <= numParticles; i++) {
-      let x = 40 + i * spacing;
-      let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
-      let y = centerY + sin(angle) * amplitude;
-      let density = cos(angle);
-
-      if (density > 0.25) {
-        fill(244, 184, 96, 220);
-      } else if (density < -0.25) {
-        fill(91, 192, 179, 220);
-      } else {
-        fill(150, 160, 175, 130);
-      }
-
-      let r = 4 + density * 1.8;
-      ellipse(x, y, r, r);
+    for (let i=0; i<=n; i++) {
+      let x = 35 + i*sp;
+      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
+      let y = cY + sin(ang)*amplitude;
+      let d = cos(ang);
+      if (d > 0.25) fill(244,184,96,200);
+      else if (d < -0.25) fill(91,192,179,200);
+      else fill(140,150,165,110);
+      ellipse(x, y, 3.5 + d*1.5, 3.5 + d*1.5);
     }
   }
 
-  // Status bar
-  noStroke();
-  fill(120, 140, 155);
-  textAlign(RIGHT);
-  textSize(10);
-  text(`f = ${baseFreq.toFixed(1)} ciclos | A = ${amplitude} px | φ = ${degrees(phaseOffset).toFixed(0)}°`, width - 10, height - 8);
+  // Status
+  fill(130,140,155); textAlign(RIGHT); textSize(9);
+  text(`f=${baseFreq.toFixed(1)}  A=${amplitude}  φ=${degrees(phaseOffset).toFixed(0)}°`, W-8, H-6);
 }
 </script>
 </body>

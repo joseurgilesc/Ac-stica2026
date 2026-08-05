@@ -22,7 +22,7 @@
 
     Una revolución completa equivale a 360° — un ciclo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el elemento básico del que todo se compone (Fourier).
 
-    <iframe src="simulacion-mas.html" width="100%" height="300" style="border: none; border-radius: 8px;"></iframe>
+    <iframe src="simulacion-mas.html" width="100%" height="270" style="border: none; border-radius: 8px;"></iframe>
 
 ???+ note "Propagación: compresión y rarefacción"
 
@@ -85,7 +85,7 @@ Modifica los parámetros y activa/desactiva capas para analizar cada fenómeno:
 - **Partículas** — puntos coloreados por zona de compresión o rarefacción
 - **Densidad** — fondo graduado según concentración molecular
 
-<iframe src="simulacion.html" width="100%" height="560" style="border: none; border-radius: 8px;"></iframe>
+<iframe src="simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
 
 ---
 
