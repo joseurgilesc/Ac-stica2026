@@ -22,6 +22,8 @@ Una masa en un resorte que oscila arriba y abajo describe un **movimiento armón
 
 Una revolución completa equivale a 360° — un ciclo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el elemento básico del que todo se compone (Fourier).
 
+<iframe src="simulacion-mas.html" width="100%" height="300" style="border: none; border-radius: 8px;"></iframe>
+
 ### Propagación: compresión y rarefacción
 
 Las partículas de aire **no viajan con la onda**: vibran localmente mientras la perturbación se propaga. El movimiento alternado crea:

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movimiento Armónico Simple → Onda Sinusoidal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<style>
+  :root { --teal: #249D8F; --teal-dark: #1A7A6F; --bg: #0F1923; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0; display: flex; justify-content: center; background: var(--bg); }
+  canvas { display: block; border-radius: 8px; }
+</style>
+</head>
+<body>
+<script>
+let time = 0;
+let phase = 0;
+const TEAL = '#249D8F';
+const TEAL_LIGHT = '#5BC0B3';
+const CORAL = '#E87461';
+
+function setup() {
+  createCanvas(740, 280).parent(document.body);
+}
+
+function draw() {
+  background(15, 25, 35);
+  time += 0.02;
+  
+  let springX = 120;
+  let springTop = 50;
+  let springBase = 210;
+  let massY = springBase + sin(time) * 55;
+  
+  // LEFT: Mass-spring system
+  // Fixed support
+  stroke(180);
+  strokeWeight(3);
+  line(springX, 20, springX, springTop);
+  // Triangle support
+  fill(180); noStroke();
+  triangle(springX-12, 20, springX+12, 20, springX, 8);
+  
+  // Spring (zigzag)
+  stroke(TEAL_LIGHT);
+  strokeWeight(2);
+  noFill();
+  beginShape();
+  let segments = 14;
+  for (let i = 0; i <= segments; i++) {
+    let t = i / segments;
+    let sy = springTop + (massY - springTop - 18) * t;
+    let sx = springX + (i % 2 === 0 ? -10 : 10);
+    vertex(sx, sy);
+  }
+  endShape();
+  
+  // Mass
+  fill(TEAL);
+  stroke(TEAL);
+  strokeWeight(1);
+  rect(springX-18, massY-2, 36, 22, 4);
+  
+  // Label
+  fill(180); noStroke();
+  textAlign(CENTER);
+  textSize(11);
+  text('Masa + Resorte', springX, 20);
+  text('MAS', springX, massY + 32);
+  
+  // Equilibrium line
+  stroke(100, 100, 120, 100);
+  strokeWeight(1);
+  drawingContext.setLineDash([3, 5]);
+  line(springX-30, springBase, springX+30, springBase);
+  drawingContext.setLineDash([]);
+  
+  // RIGHT: Wave tracing
+  let waveStartX = 220;
+  let waveEndX = width - 30;
+  let waveY = height / 2;
+  
+  // Axis
+  stroke(60, 70, 85);
+  strokeWeight(1);
+  line(waveStartX, waveY, waveEndX, waveY);
+  
+  // Grid
+  for (let x = waveStartX; x < waveEndX; x += 80) {
+    stroke(40, 50, 65);
+    line(x, waveY-80, x, waveY+80);
+  }
+  
+  // Connector line
+  stroke(CORAL, 150);
+  strokeWeight(1.5);
+  drawingContext.setLineDash([3, 4]);
+  line(springX+18, massY, waveStartX, waveY + sin(time) * 55);
+  drawingContext.setLineDash([]);
+  
+  // Traced wave
+  noFill();
+  strokeWeight(2.5);
+  
+  // Draw wave from current position back
+  stroke(TEAL);
+  beginShape();
+  for (let x = waveEndX; x >= waveStartX; x -= 1) {
+    let t = map(x, waveStartX, waveEndX, 0, TWO_PI * 1.5);
+    let y = waveY + sin(time - t + PI/2) * 55;
+    vertex(x, y);
+  }
+  endShape();
+  
+  // Current point on wave
+  let currentWaveY = waveY + sin(time) * 55;
+  fill(CORAL);
+  noStroke();
+  ellipse(waveStartX, currentWaveY, 9, 9);
+  
+  // Labels
+  fill(160); noStroke();
+  textAlign(CENTER);
+  textSize(12);
+  text('Onda Sinusoidal', waveEndX-80, waveY-65);
+  
+  // Arrow
+  textAlign(LEFT);
+  fill(CORAL);
+  textSize(10);
+  text('← El movimiento de la masa', waveStartX + 12, currentWaveY - 14);
+  text('  traza la onda en el tiempo', waveStartX + 12, currentWaveY);
+  
+  // Cycle indicator
+  let cx = waveStartX + 160;
+  stroke(TEAL, 60);
+  strokeWeight(1);
+  noFill();
+  let cycleEnd = waveStartX + 320;
+  line(cycleEnd, waveY-70, cycleEnd, waveY+70);
+  fill(TEAL, 180);
+  noStroke();
+  textSize(10);
+  textAlign(CENTER);
+  text('1 ciclo (360°)', (waveStartX + cycleEnd) / 2, waveY+80);
+  
+  // Title
+  fill(200);
+  textAlign(CENTER);
+  textSize(14);
+  text('Movimiento Armónico Simple  →  Onda Sinusoidal', width/2, height-14);
+}
+</script>
+</body>
+</html>
