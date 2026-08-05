@@ -13,7 +13,7 @@
   .ctrl label { font-size: 8px; color: #8899AA; text-transform: uppercase; }
   .ctrl .val { font-size: 13px; font-weight: 700; color: #5BC0B3; }
   input[type=range] { width: 75px; accent-color: #249D8F; }
-  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: #162231; color: #8899AA; cursor: pointer; font-size: 10px; align-self: center; transition: all 0.15s; }
+  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: #162231; color: #8899AA; cursor: pointer; font-size: 10px; align-self: center; }
   .btn.on { background: #249D8F; color: #fff; border-color: #249D8F; }
   .btn.sound { border-color: rgba(232,116,97,0.5); }
   .btn.sound.on { background: #E87461; border-color: #E87461; }
@@ -21,27 +21,24 @@
 </head>
 <body>
 <div class="controls">
-  <div class="ctrl"><label>Amplitud</label><span class="val" id="av">55</span><input type="range" id="as" min="15" max="75" value="55"></div>
+  <div class="ctrl"><label>Amplitud / Vol</label><span class="val" id="av">55</span><input type="range" id="as" min="15" max="75" value="55"></div>
   <div class="ctrl"><label>Frecuencia</label><span class="val" id="fv">220 Hz</span><input type="range" id="fs" min="1" max="8" value="2" step="0.25"></div>
-  <div class="ctrl"><label>Velocidad</label><span class="val" id="sv">1×</span><input type="range" id="ss" min="0.3" max="3" value="1" step="0.1"></div>
   <button class="btn on" id="pb">Pausa</button>
   <button class="btn sound on" id="sb">🔊 Sonido</button>
 </div>
 <div id="cv"></div>
 
 <script>
-let A=55, freqVal=2, speed=1, paused=false, t=0;
-let osc=null, soundOn=true;
-let audioStarted=false;
+let A=55, freqVal=2, paused=false, phase=0;
+let osc=null, soundOn=true, audioStarted=false;
+let history=[]; // trace buffer
+const MAX_HISTORY=400;
 
-// Map visual freq to audible Hz: 1→110, 2→220, 4→440, 8→880
-function freqToHz(f){ return f * 110; }
+function freqToHz(f){ return f*110; }
+function ampToDb(a){ return map(a,15,75,-30,-6); }
 
 function startAudio(){
-  if(!audioStarted){
-    Tone.start();
-    audioStarted=true;
-  }
+  if(!audioStarted){ Tone.start(); audioStarted=true; }
 }
 
 function toggleSound(){
@@ -52,8 +49,8 @@ function toggleSound(){
     document.getElementById('sb').textContent='🔇 Silencio';
     document.getElementById('sb').classList.remove('on');
   } else {
-    osc = new Tone.Oscillator(freqToHz(freqVal), 'sine').toDestination().start();
-    osc.volume.value = -12;
+    osc = new Tone.Oscillator(freqToHz(freqVal),'sine').toDestination().start();
+    osc.volume.value = ampToDb(A);
     soundOn=true;
     document.getElementById('sb').textContent='🔊 Sonido';
     document.getElementById('sb').classList.add('on');
@@ -61,26 +58,42 @@ function toggleSound(){
 }
 
 function setup(){
-  let c = createCanvas(580,210);
+  let c = createCanvas(580,220);
   c.parent('cv');
 
-  document.getElementById('as').oninput=function(){A=+this.value;document.getElementById('av').textContent=A;};
+  document.getElementById('as').oninput=function(){
+    A=+this.value;
+    document.getElementById('av').textContent=A;
+    if(osc) osc.volume.value = ampToDb(A);
+  };
   document.getElementById('fs').oninput=function(){
     freqVal=+this.value;
     document.getElementById('fv').textContent=freqToHz(freqVal)+' Hz';
     if(osc) osc.frequency.value = freqToHz(freqVal);
+    history=[]; // reset trace on freq change
   };
-  document.getElementById('ss').oninput=function(){speed=+this.value;document.getElementById('sv').textContent=speed.toFixed(1)+'×';};
-  document.getElementById('pb').onclick=function(){paused=!paused;this.textContent=paused?'Reanudar':'Pausa';this.classList.toggle('on',!paused);};
+  document.getElementById('pb').onclick=function(){
+    paused=!paused;
+    this.textContent=paused?'Reanudar':'Pausa';
+    this.classList.toggle('on',!paused);
+    if(paused){ if(osc) osc.stop(); }
+    else { if(soundOn && osc){ osc.start(); } }
+  };
   document.getElementById('sb').onclick=toggleSound;
 }
 
 function draw(){
   background(15,25,35);
-  if(!paused) t+=0.025;
-  let a = t*2*freqVal;
+
+  if(!paused){
+    phase += 0.025 * 2 * freqVal;
+    // Add current mass position to trace
+    history.push(sin(phase));
+    if(history.length > MAX_HISTORY) history.shift();
+  }
+
   let sx=85, st=25, sb=165;
-  let massY = sb + sin(a)*A;
+  let massY = sb + sin(phase)*A;
 
   // Support
   stroke(140); strokeWeight(2); line(sx,6,sx,st);
@@ -108,44 +121,53 @@ function draw(){
   stroke(80,90,105,100); strokeWeight(1);
   drawingContext.setLineDash([2,4]); line(sx-20,sb,sx+20,sb); drawingContext.setLineDash([]);
 
-  // Wave axis
-  let w0=150, w1=570, wy=105;
+  // Wave zone
+  let w0=150, w1=570, wy=110;
   stroke(45,55,68); strokeWeight(1); line(w0,wy,w1,wy);
 
-  // Traveling wave — sincronizada con el resorte
-  // En x=w0, la fase debe ser igual a 'a' para que coincida con la masa
+  // Connector line to wave start
+  let waveStartY = wy + sin(phase)*A;
+  stroke('#E87461', 80); strokeWeight(1);
+  drawingContext.setLineDash([3,4]);
+  line(sx+13, massY, w0, waveStartY);
+  drawingContext.setLineDash([]);
+
+  // Draw traced wave from history (like paper moving left)
   noFill(); strokeWeight(2); stroke('#249D8F');
   beginShape();
-  for(let x=w0;x<=w1;x+=1.5){
-    let ph=map(x,w0,w1,0,TWO_PI*2);
-    vertex(x,wy+sin(a - ph*speed)*A);
+  let step = (w1-w0)/MAX_HISTORY;
+  for(let i=0; i<history.length; i++){
+    let x = w0 + i*step;
+    let y = wy + history[i]*A;
+    vertex(x,y);
   }
   endShape();
 
-  // Connector — ahora coinciden exactamente
-  stroke('#E87461'); strokeWeight(1);
-  drawingContext.setLineDash([3,4]); line(sx+13,massY,w0,wy+sin(a)*A); drawingContext.setLineDash([]);
-  fill('#E87461'); noStroke(); ellipse(w0,wy+sin(a)*A,6,6);
+  // Current point dot at wave start
+  fill('#E87461'); noStroke();
+  ellipse(w0, waveStartY, 6, 6);
 
-  // Arrow
-  let ax=w0+120;
-  stroke('#249D8F'); strokeWeight(1.2); line(ax-18,wy-60,ax+18,wy-60);
-  fill('#249D8F'); noStroke(); triangle(ax+18,wy-60,ax+13,wy-64,ax+13,wy-56);
-  fill('#249D8F'); textSize(8); textAlign(CENTER); text('→',ax,wy-66);
+  // "Paper" direction arrow
+  stroke('#249D8F', 100); strokeWeight(1.2);
+  let ax=w0+160;
+  line(ax-22,wy-65,ax+22,wy-65);
+  fill('#249D8F',100); noStroke();
+  triangle(ax+22,wy-65,ax+16,wy-69,ax+16,wy-61);
+  fill('#249D8F',120); textSize(8); textAlign(CENTER); text('papel →',ax,wy-71);
 
-  // Title + frequency
+  // Title
   fill(180); textSize(11); textAlign(CENTER);
-  text('MAS → Onda Sinusoidal',290,202);
+  text('Movimiento Armónico Simple → Onda Sinusoidal',290,214);
 
-  // Audio indicator
+  // Frequency display
   if(soundOn){
     fill('#E87461'); textSize(9); textAlign(RIGHT);
     text('🔊 '+freqToHz(freqVal)+' Hz',570,14);
   }
 
-  // Frequency label on wave
-  fill(150); textSize(9); textAlign(LEFT);
-  text('λ',w0+5,wy-8);
+  // Amplitude indicator
+  fill(150); textSize(8); textAlign(LEFT);
+  text('A='+A+'  ≈ '+ampToDb(A).toFixed(0)+' dB',10,14);
 }
 </script>
 </body>
