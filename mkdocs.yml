@@ -1,0 +1,89 @@
+site_name: "Acústica Aplicada a la Producción Musical"
+site_description: "Material de clase — Acústica Aplicada a la Producción Musical"
+site_author: "José Urgilés"
+repo_url: https://github.com/joseurgilesc/Ac-stica2026
+repo_name: joseurgilesc/Ac-stica2026
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Modo oscuro
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.arithmatex
+  - footnotes
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: es
+
+nav:
+  - Inicio: index.md
+  - Objetivos: objetivos.md
+  - Logros de Aprendizaje: logros.md
+  - Calendario: calendario.md
+  - Bibliografía: bibliografia.md
+  - Sesiones:
+      - "Sesión 1": sesiones/sesion-01.md
+      - "Sesión 2": sesiones/sesion-02.md
+      - "Sesión 3": sesiones/sesion-03.md
+      - "Sesión 4": sesiones/sesion-04.md
+      - "Sesión 5": sesiones/sesion-05.md
+      - "Sesión 6": sesiones/sesion-06.md
+      - "Sesión 7": sesiones/sesion-07.md
+      - "Sesión 8": sesiones/sesion-08.md
+      - "Sesión 9": sesiones/sesion-09.md
+      - "Sesión 10": sesiones/sesion-10.md
+      - "Sesión 11": sesiones/sesion-11.md
+      - "Sesión 12": sesiones/sesion-12.md
+      - "Sesión 13": sesiones/sesion-13.md
+      - "Sesión 14": sesiones/sesion-14.md
+      - "Sesión 15": sesiones/sesion-15.md
+      - "Sesión 16": sesiones/sesion-16.md
+      - "Sesión 17": sesiones/sesion-17.md
+      - "Sesión 18": sesiones/sesion-18.md
+      - "Sesión 19": sesiones/sesion-19.md
+      - "Sesión 20": sesiones/sesion-20.md
+      - "Sesión 21": sesiones/sesion-21.md
+      - "Sesión 22": sesiones/sesion-22.md
+      - "Sesión 23": sesiones/sesion-23.md
+      - "Sesión 24": sesiones/sesion-24.md
+      - "Sesión 25": sesiones/sesion-25.md
+      - "Sesión 26": sesiones/sesion-26.md
+      - "Sesión 27": sesiones/sesion-27.md
+      - "Sesión 28": sesiones/sesion-28.md
+      - "Sesión 29": sesiones/sesion-29.md
+      - "Sesión 30": sesiones/sesion-30.md
+      - "Sesión 31": sesiones/sesion-31.md
+      - "Sesión 32": sesiones/sesion-32.md
