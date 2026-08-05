@@ -44,7 +44,7 @@ Que el estudiante comprenda la naturaleza ondulatoria del sonido y relacione los
 
 ## 2. Desarrollo — Teoría guiada con simulación
 
-Proyectar la [simulación p5.js](simulacion.html) en pantalla.
+Proyectar la [simulación p5.js](../unidades/U-1-fundamentos-medicion/sesion-02/simulacion.html) en pantalla.
 
 ### Secuencia sugerida
 
@@ -120,7 +120,7 @@ Cada estudiante debe escribir en su bitácora digital:
 
 ## Recursos adicionales para el docente
 
-- [Simulación local de la sesión](simulacion.html) — abrir en navegador directamente
+- [Simulación local de la sesión](../unidades/U-1-fundamentos-medicion/sesion-02/simulacion.html) — abrir en navegador directamente
 - [p5.js Web Editor](https://editor.p5js.org/) — para modificar el código si se desea
 - Visualizador de espectro: [Spectrum Analyzer](https://academo.org/demos/spectrum-analyzer/) (online)
 - App de osciloscopio para móvil: buscar "Oscilloscope" en tienda de apps
