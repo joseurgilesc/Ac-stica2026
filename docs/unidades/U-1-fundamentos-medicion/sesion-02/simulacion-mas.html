@@ -31,8 +31,6 @@
 <script>
 let A=55, freqVal=2, paused=false, phase=0;
 let osc=null, soundOn=true, audioStarted=false;
-let history=[]; // trace buffer
-const MAX_HISTORY=400;
 
 function freqToHz(f){ return f*110; }
 function ampToDb(a){ return map(a,15,75,-30,-6); }
@@ -70,7 +68,6 @@ function setup(){
     freqVal=+this.value;
     document.getElementById('fv').textContent=freqToHz(freqVal)+' Hz';
     if(osc) osc.frequency.value = freqToHz(freqVal);
-    history=[]; // reset trace on freq change
   };
   document.getElementById('pb').onclick=function(){
     paused=!paused;
@@ -87,9 +84,6 @@ function draw(){
 
   if(!paused){
     phase += 0.025 * 2 * freqVal;
-    // Add current mass position to trace
-    history.push(sin(phase));
-    if(history.length > MAX_HISTORY) history.shift();
   }
 
   let sx=85, st=25, sb=165;
@@ -132,13 +126,13 @@ function draw(){
   line(sx+13, massY, w0, waveStartY);
   drawingContext.setLineDash([]);
 
-  // Draw traced wave from history (like paper moving left)
+  // Wave trace — like an oscilloscope: x=w0 is "now", right side is the past
   noFill(); strokeWeight(2); stroke('#249D8F');
   beginShape();
-  let step = (w1-w0)/MAX_HISTORY;
-  for(let i=0; i<history.length; i++){
-    let x = w0 + i*step;
-    let y = wy + history[i]*A;
+  for(let x=w0; x<=w1; x+=1.5){
+    // x=w0 → phase=actual, x=w1 → phase=4 ciclos atrás
+    let pastPhase = map(x, w0, w1, 0, 4*TWO_PI);
+    let y = wy + sin(phase - pastPhase)*A;
     vertex(x,y);
   }
   endShape();
