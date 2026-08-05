@@ -35,6 +35,10 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -42,7 +46,8 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.tabbed
-  - pymdownx.arithmatex
+  - pymdownx.arithmatex:
+      generic: true
   - footnotes
   - attr_list
   - md_in_html
