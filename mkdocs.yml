@@ -7,12 +7,14 @@ repo_name: joseurgilesc/Ac-stica2026
 theme:
   name: material
   language: es
+  logo: img/logo.svg
   features:
     - navigation.sections
     - navigation.expand
     - navigation.indexes
     - navigation.top
     - navigation.tracking
+    - navigation.path
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -54,36 +56,44 @@ nav:
   - Logros de Aprendizaje: logros.md
   - Calendario: calendario.md
   - Bibliografía: bibliografia.md
-  - Sesiones:
-      - "Sesión 1": sesiones/sesion-01.md
-      - "Sesión 2": sesiones/sesion-02.md
-      - "Sesión 3": sesiones/sesion-03.md
-      - "Sesión 4": sesiones/sesion-04.md
-      - "Sesión 5": sesiones/sesion-05.md
-      - "Sesión 6": sesiones/sesion-06.md
-      - "Sesión 7": sesiones/sesion-07.md
-      - "Sesión 8": sesiones/sesion-08.md
-      - "Sesión 9": sesiones/sesion-09.md
-      - "Sesión 10": sesiones/sesion-10.md
-      - "Sesión 11": sesiones/sesion-11.md
-      - "Sesión 12": sesiones/sesion-12.md
-      - "Sesión 13": sesiones/sesion-13.md
-      - "Sesión 14": sesiones/sesion-14.md
-      - "Sesión 15": sesiones/sesion-15.md
-      - "Sesión 16": sesiones/sesion-16.md
-      - "Sesión 17": sesiones/sesion-17.md
-      - "Sesión 18": sesiones/sesion-18.md
-      - "Sesión 19": sesiones/sesion-19.md
-      - "Sesión 20": sesiones/sesion-20.md
-      - "Sesión 21": sesiones/sesion-21.md
-      - "Sesión 22": sesiones/sesion-22.md
-      - "Sesión 23": sesiones/sesion-23.md
-      - "Sesión 24": sesiones/sesion-24.md
-      - "Sesión 25": sesiones/sesion-25.md
-      - "Sesión 26": sesiones/sesion-26.md
-      - "Sesión 27": sesiones/sesion-27.md
-      - "Sesión 28": sesiones/sesion-28.md
-      - "Sesión 29": sesiones/sesion-29.md
-      - "Sesión 30": sesiones/sesion-30.md
-      - "Sesión 31": sesiones/sesion-31.md
-      - "Sesión 32": sesiones/sesion-32.md
+  - "Unidad 1: Fundamentos del sonido y medición":
+      - "Unidad 1: Fundamentos del sonido y medición": unidades/U-1-fundamentos-medicion/index.md
+      - "Sesión 1: Introducción a la acústica aplicada a la producción musical": unidades/U-1-fundamentos-medicion/sesion-01/index.md
+      - "Sesión 2: Naturaleza física del sonido": unidades/U-1-fundamentos-medicion/sesion-02/index.md
+      - "Sesión 3: Velocidad de propagación del sonido": unidades/U-1-fundamentos-medicion/sesion-03/index.md
+      - "Sesión 4: Señales periódicas y aperiódicas": unidades/U-1-fundamentos-medicion/sesion-04/index.md
+      - "Sesión 5: Introducción a los logaritmos": unidades/U-1-fundamentos-medicion/sesion-05/index.md
+      - "Sesión 6: Nivel de presión sonora": unidades/U-1-fundamentos-medicion/sesion-06/index.md
+      - "Sesión 7: Suma y resta de niveles sonoros": unidades/U-1-fundamentos-medicion/sesion-07/index.md
+      - "Sesión 8: Tipos de fuentes sonoras": unidades/U-1-fundamentos-medicion/sesion-08/index.md
+  - "Unidad 2: Propagación del sonido en exteriores":
+      - "Unidad 2: Propagación del sonido en exteriores": unidades/U-2-propagacion-exterior/index.md
+      - "Sesión 9: Propagación en campo libre": unidades/U-2-propagacion-exterior/sesion-09/index.md
+      - "Sesión 10: Absorción atmosférica": unidades/U-2-propagacion-exterior/sesion-10/index.md
+      - "Sesión 11: Efecto del suelo": unidades/U-2-propagacion-exterior/sesion-11/index.md
+      - "Sesión 12: Diagramas de rayo": unidades/U-2-propagacion-exterior/sesion-12/index.md
+      - "Sesión 13: Difracción del sonido": unidades/U-2-propagacion-exterior/sesion-13/index.md
+      - "Sesión 14: Efecto Doppler": unidades/U-2-propagacion-exterior/sesion-14/index.md
+      - "Sesión 15: Integración de fundamentos y propagación exterior": unidades/U-2-propagacion-exterior/sesion-15/index.md
+  - "Unidad 3: Sonido en interiores y acondicionamiento acústico":
+      - "Unidad 3: Sonido en interiores y acondicionamiento acústico": unidades/U-3-interiores-acondicionamiento/index.md
+      - "Sesión 17: Introducción al sonido en interiores": unidades/U-3-interiores-acondicionamiento/sesion-17/index.md
+      - "Sesión 18: Coeficiente de absorción": unidades/U-3-interiores-acondicionamiento/sesion-18/index.md
+      - "Sesión 19: Reverberación": unidades/U-3-interiores-acondicionamiento/sesion-19/index.md
+      - "Sesión 20: Cálculo del tiempo de reverberación": unidades/U-3-interiores-acondicionamiento/sesion-20/index.md
+      - "Sesión 21: Reflexiones tempranas": unidades/U-3-interiores-acondicionamiento/sesion-21/index.md
+      - "Sesión 22: Campo directo": unidades/U-3-interiores-acondicionamiento/sesion-22/index.md
+      - "Sesión 23: Interferencia": unidades/U-3-interiores-acondicionamiento/sesion-23/index.md
+      - "Sesión 24: Modos de sala": unidades/U-3-interiores-acondicionamiento/sesion-24/index.md
+      - "Sesión 25: Tratamiento de bajas frecuencias": unidades/U-3-interiores-acondicionamiento/sesion-25/index.md
+      - "Sesión 26: Difusión acústica en interiores": unidades/U-3-interiores-acondicionamiento/sesion-26/index.md
+  - "Unidad 4: Aislamiento acústico y diseño de espacios de producción":
+      - "Unidad 4: Aislamiento acústico y diseño de espacios de producción": unidades/U-4-aislamiento-diseno/index.md
+      - "Sesión 27: Ruido de fondo": unidades/U-4-aislamiento-diseno/sesion-27/index.md
+      - "Sesión 28: Transmisión de sonido": unidades/U-4-aislamiento-diseno/sesion-28/index.md
+      - "Sesión 29: Estructuras compuestas": unidades/U-4-aislamiento-diseno/sesion-29/index.md
+      - "Sesión 30: Privacidad acústica": unidades/U-4-aislamiento-diseno/sesion-30/index.md
+      - "Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto": unidades/U-4-aislamiento-diseno/sesion-31/index.md
+  - Exámenes:
+      - "Examen Interciclo (Sesión 16)": examen-interciclo.md
+      - "Examen Final (Sesión 32)": examen-final.md
