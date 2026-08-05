@@ -60,7 +60,7 @@ let amplitude = 100, baseFreq = 2, phaseOffset = 0, animSpeed = 1, time = 0;
 let showDisplacement = true, showPressure = true, showParticles = true, showDensity = true;
 const W = 600, H = 300;
 const TEAL = '#249D8F', TEAL_LIGHT = '#5BC0B3', CORAL = '#E87461';
-const GRID = 'rgba(36,157,143,0.1)';
+const GRID_C = [36, 157, 143, 25];
 
 function setup() {
   let cnv = createCanvas(W, H);
@@ -90,7 +90,7 @@ function draw() {
   let cY = H/2, n = 40, sp = (W-70)/n;
 
   // Grid
-  stroke(GRID); strokeWeight(1);
+  stroke(GRID_C); strokeWeight(1);
   for (let x=0; x<W; x+=50) line(x, 0, x, H);
   line(0, cY, W, cY);
 
@@ -102,7 +102,8 @@ function draw() {
       let d = cos(ang);
       if (abs(d) > 0.2) {
         let a = abs(d)*25;
-        fill(d>0 ? 'rgba(244,184,96,'+a+')' : 'rgba(91,192,179,'+a+')');
+        if (d > 0) fill(244, 184, 96, a);
+        else fill(91, 192, 179, a);
         noStroke(); rect(x-sp/2, 2, sp, H-4);
       }
     }
