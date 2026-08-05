@@ -1,128 +1,216 @@
 # Sesión 2: Naturaleza física del sonido
 
-**📚 Sesión** | *Herramientas: p5.js, Google Classroom*
-
-## Contenidos
-
-### El sonido como onda mecánica
-
-El sonido puede entenderse de dos maneras complementarias (Everest & Pohlmann, 2009, p. 1):
-
-- Como **estímulo físico**: una onda que viaja a través del aire u otro medio elástico. Es un problema de física.
-- Como **sensación**: una excitación del mecanismo auditivo que resulta en la percepción del sonido. Es un problema psicoacústico.
-
-!!! note "Objetivo vs. Subjetivo"
-    La **frecuencia** es una propiedad objetiva (se mide en Hz con un osciloscopio).  
-    El **tono** (*pitch*) es una propiedad subjetiva (cómo el oído percibe esa frecuencia).  
-    No son lo mismo, aunque están relacionados.
-
-Para que un medio pueda conducir sonido, debe poseer dos propiedades fundamentales: **elasticidad** e **inercia**. Sin ellas, la vibración no puede propagarse.
-
-### El movimiento armónico simple y la onda sinusoidal
-
-El movimiento de una masa en un resorte (Fig. 1-1 del libro) es el ejemplo clásico de **movimiento armónico simple**. Si se coloca un lápiz en la masa y se desliza un papel a velocidad constante, la curva resultante es una **onda sinusoidal** (*sine wave*).
-
-La onda sinusoidal es la forma de onda más pura y fundamental en acústica. Una revolución completa equivale a 360° (un ciclo).
-
-### Propagación: compresión y rarefacción
-
-Cuando una onda sonora viaja por el aire, las partículas no se desplazan grandes distancias — vibran alrededor de su posición de equilibrio. Lo que viaja es la **perturbación**, no las partículas mismas.
-
-El movimiento de las partículas crea zonas alternantes:
-
-- **Compresión (C)**: moléculas agrupadas → presión ligeramente superior a la atmosférica (~14.7 lb/in²).
-- **Rarefacción (R)**: moléculas separadas → presión ligeramente inferior a la atmosférica.
-
-!!! tip "Dato clave"
-    La diferencia de presión entre una compresión y una rarefacción es minúscula. El sonido más tenue que el oído puede detectar (20 µPa) es **5,000 millones de veces menor** que la presión atmosférica.
-
-### Movimiento de partículas: ondas longitudinales
-
-Existen tres tipos de movimiento de partículas en ondas:
-
-| Tipo | Ejemplo | Movimiento |
-|---|---|---|
-| Circular | Ondas en el agua | Partículas trazan órbitas circulares |
-| Transversal | Cuerda de violín | Partículas vibran perpendicular a la dirección de la onda |
-| **Longitudinal** | **Sonido en el aire** | **Partículas vibran en la misma dirección que viaja la onda** |
-
-En el sonido en el aire, las partículas se mueven hacia adelante y hacia atrás en la dirección de propagación. Su desplazamiento máximo es de apenas unas diezmilésimas de pulgada, incluso para sonidos fuertes.
-
-### Velocidad del sonido
-
-La velocidad del sonido en el aire es aproximadamente:
-
-\[
-v \approx 344 \text{ m/s} \approx 1,130 \text{ ft/s} \approx 770 \text{ mi/h}
-\]
-
-Factores que afectan la velocidad:
-
-- **Medio**: más rápido en sólidos (acero: ~16,700 ft/s) que en líquidos (agua: ~4,900 ft/s) que en gases (aire: ~1,130 ft/s).
-- **Temperatura**: aumenta ~1.1 ft/s por cada °F de aumento.
-- **Humedad**: a mayor humedad, mayor velocidad.
-
-!!! warning "No confundir"
-    La **velocidad del sonido** (qué tan rápido viaja la energía) es diferente de la **velocidad de partícula** (qué tan rápido vibra una partícula individual). La velocidad de partícula depende de la intensidad del sonido.
-
-### Amplitud, frecuencia, período, fase y longitud de onda
-
-La relación fundamental de la acústica:
-
-\[
-\lambda = \frac{v}{f}
-\]
-
-Donde:
-- \(\lambda\) = longitud de onda (ft o m)
-- \(v\) = velocidad del sonido (~1,130 ft/s en aire)
-- \(f\) = frecuencia (Hz)
-
-| Frecuencia | Longitud de onda (aprox.) | Ejemplo |
-|---|---|---|
-| 20 Hz | 56.5 ft (17.2 m) | Límite inferior audible |
-| 100 Hz | 11.3 ft (3.4 m) | Grave profundo |
-| 440 Hz | 2.57 ft (0.78 m) | La central (A4) |
-| 1,000 Hz | 1.13 ft (0.34 m) | Frecuencia de referencia |
-| 5,000 Hz | 2.7 in (6.9 cm) | Agudo |
-| 10,000 Hz | 1.35 in (3.4 cm) | Muy agudo |
-
-> **"This relationship is perhaps the most fundamentally important relationship in audio."** — Everest & Pohlmann, p. 7
+**📚 Sesión** | *Herramientas: p5.js, Google Classroom, DAW*
 
 ---
 
-## Simulación interactiva: Onda sonora
+## Contenidos
 
-Usa los controles para modificar los parámetros de la onda y observa cómo cambia su comportamiento. La simulación muestra:
+### 1. El sonido como onda mecánica
 
-- 🟡 **Partículas de aire** vibrando
-- 🔵 **Línea azul**: desplazamiento de las partículas (onda sinusoidal)
-- 🔴 **Línea roja punteada**: presión sonora (derivada del desplazamiento, en fase de coseno)
-- 🟠 **Partículas amarillas**: zonas de compresión (moléculas juntas)
-- 🔵 **Partículas azules**: zonas de rarefacción (moléculas separadas)
+El sonido puede entenderse de dos maneras complementarias (Everest & Pohlmann, 2009, p. 1):
 
-<iframe src="simulacion.html" width="100%" height="480" style="border: none; border-radius: 8px;"></iframe>
+| Perspectiva | Definición | Campo |
+|---|---|---|
+| **Estímulo físico** | Onda que viaja a través de un medio elástico | Física / Acústica |
+| **Sensación** | Excitación del mecanismo auditivo que produce percepción | Psicoacústica |
+
+!!! note "Frecuencia ≠ Tono"
+    La **frecuencia** es objetiva (se mide en Hz).  
+    El **tono** (*pitch*) es subjetivo (cómo el oído la percibe).  
+    *"We cannot equate frequency and pitch, but they are analogous."* (p. 1)
+
+Para que un medio propague sonido, necesita dos propiedades:
+
+```
+┌─────────────────────────────────────────────┐
+│            MEDIO ELÁSTICO                   │
+│                                             │
+│   Elasticidad  +  Inercia  =  Sonido ✓      │
+│   (restaura la  (resiste el                 │
+│    posición)     cambio)                    │
+│                                             │
+│   Sin elasticidad → no hay restauración     │
+│   Sin inercia     → no hay oscilación       │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+### 2. Movimiento armónico simple y la onda sinusoidal
+
+```
+    Masa en resorte           Onda sinusoidal resultante
+    ───────────────           ─────────────────────────
+
+      ✦ +5 ─┐                      ┌─┐
+            │                     ╱   ╲
+      │  0 ─┼─ ✦              ───✦─────✦─── tiempo
+            │                       ╲   ╱
+      ✦ -5 ─┘                      └─┘
+                                          
+    Una revolución = 360° = 1 ciclo = 1λ
+```
+
+El movimiento de la masa arriba y abajo, extendido en el tiempo, produce una **onda sinusoidal** — la forma de onda más pura y fundamental en acústica.
+
+!!! tip "Concepto clave"
+    La onda sinusoidal es al sonido lo que el círculo es a la geometría: el elemento básico del que todo se compone. Cualquier sonido periódico puede descomponerse en sinusoides (Fourier).
+
+---
+
+### 3. Propagación: compresión y rarefacción
+
+Las partículas de aire NO viajan con la onda — **vibran localmente** mientras la perturbación se propaga.
+
+```
+  Dirección de la onda →→→→→→→→→→→→→→→→
+
+  ┌─────────────────────────────────────────────────────┐
+  │  ●●●●●  │  ●  ●  ●  │  ●●●●●  │  ●  ●  ●  │  ●●●●●  │
+  │    C    │     R      │    C    │     R     │    C    │
+  └─────────────────────────────────────────────────────┘
+       ↑          ↑           ↑          ↑         ↑
+  COMPRESIÓN  RAREFACCIÓN  COMPRESIÓN RAREFACCIÓN COMPRESIÓN
+  (alta P)    (baja P)     (alta P)   (baja P)   (alta P)
+```
+
+| Zona | Moléculas | Presión relativa |
+|---|---|---|
+| **Compresión (C)** | Agrupadas ●●●●● | > Atmosférica (+ΔP) |
+| **Rarefacción (R)** | Separadas ● ● ● | < Atmosférica (−ΔP) |
+
+!!! warning "Escala minúscula"
+    La diferencia de presión en una onda sonora es ínfima. El sonido más tenue detectable (20 µPa) es ~**5,000 millones de veces menor** que la presión atmosférica. El oído humano es extraordinariamente sensible.
+
+---
+
+### 4. Movimiento de partículas: ondas longitudinales
+
+Existen tres tipos de movimiento ondulatorio:
+
+```
+  A) CIRCULAR         B) TRANSVERSAL        C) LONGITUDINAL
+     (agua)              (cuerda)              (sonido en aire)
+
+     ╭─○─╮             ╱╲  ╱╲              →●→ ●← ●→ ●← ●→
+     ○   ○            ╱  ╲╱  ╲               →  →  →  →  →
+     ╰─○─╯               ↘↗                  partículas vibran
+   (órbitas)         (⟂ a la onda)          (∥ a la onda)
+```
+
+> El sonido en el aire es una **onda longitudinal**: las partículas vibran en la misma dirección en que viaja la onda. Su desplazamiento máximo es de apenas **unas diezmilésimas de pulgada**, incluso para sonidos fuertes (p. 4).
+
+---
+
+### 5. Velocidad del sonido
+
+\[
+\boxed{v_{\text{aire}} \approx 344\text{ m/s} \;\approx\; 1,130\text{ ft/s} \;\approx\; 770\text{ mi/h}}
+\]
+
+| Medio | Velocidad | Comparación |
+|---|---|---|
+| Aire (20°C) | 344 m/s | Referencia |
+| Agua dulce | ~1,490 m/s | ~4.3× más rápido |
+| Acero | ~5,090 m/s | ~14.8× más rápido |
+| Luz (vacío) | 300,000,000 m/s | ~870,000× más rápido |
+
+!!! info "Factores que afectan la velocidad"
+    - **↑ Temperatura** → ↑ velocidad (+0.6 m/s por °C)
+    - **↑ Humedad** → ↑ velocidad (ligeramente)
+    - **↑ Densidad del medio** → ↑ velocidad (sólidos > líquidos > gases)
+    - La frecuencia y la intensidad **no afectan** significativamente la velocidad
+
+---
+
+### 6. Amplitud, frecuencia, fase y longitud de onda
+
+```
+        λ (longitud de onda)
+    ├──────────┤
+        ┌─┐                 Amplitud (A) = altura máxima
+       ╱   ╲               Período (T)   = tiempo de 1 ciclo
+      ✦     ✦              Frecuencia (f) = 1/T ciclos/seg [Hz]
+       ╲   ╱   A           Fase (φ)       = desplazamiento temporal
+        └─┘
+    ├─────┤
+        T
+```
+
+**La relación fundamental de la acústica:**
+
+\[
+\Large{\lambda = \frac{v}{f}}
+\]
+
+| Frecuencia | Longitud de onda (aire, 20°C) | Referencia musical |
+|---|---|---|
+| 20 Hz | 17.2 m | Límite inferior audible |
+| 50 Hz | 6.88 m | Subgrave electrónico |
+| 100 Hz | 3.44 m | Grave de bajo |
+| 440 Hz | 0.78 m | **La central (A4)** — diapasón |
+| 1,000 Hz | 0.34 m | Frecuencia de referencia |
+| 4,000 Hz | 8.6 cm | Presencia vocal |
+| 10,000 Hz | 3.4 cm | Brillo / aire |
+| 20,000 Hz | 1.7 cm | Límite superior audible |
+
+!!! tip "¿Por qué importa λ?"
+    La longitud de onda determina cómo interactúa el sonido con los objetos:
+    - Si λ >> objeto → el sonido lo **rodea** (difracción)
+    - Si λ << objeto → el sonido se **refleja**
+    - Esto explica por qué los graves (λ grande) son difíciles de controlar en salas pequeñas
+
+---
+
+## Simulación interactiva
+
+Modifica los parámetros y activa/desactiva capas para analizar cada fenómeno por separado:
+
+- 🟢 **Desplazamiento** — onda sinusoidal de las partículas
+- 🔴 **Presión** — derivada (coseno), máx. en cruces por cero
+- 🟡🔵 **Partículas** — coloreadas por zona (compresión/rarefacción)
+- 🟠🟢 **Densidad** — fondo coloreado por concentración de moléculas
+
+<iframe src="simulacion.html" width="100%" height="560" style="border: none; border-radius: 8px;"></iframe>
 
 ---
 
 ## Actividades
 
-- Demostración física de vibración utilizando una cuerda, membrana, altavoz o diapasón.
-- Observación de formas de onda de voz, instrumentos y tonos sinusoidales en un DAW u osciloscopio.
-- Uso de la simulación en p5.js para modificar amplitud, frecuencia, fase y velocidad de animación de una onda.
-- Registro de capturas de tres configuraciones diferentes de la simulación (documentar los valores usados).
-- Elaboración de una tabla donde describas qué cambia visual y auditivamente al modificar cada parámetro:
+### En clase
+
+- **Demostración física**: vibración con cuerda, diapasón o altavoz — observar nodos y antinodos.
+- **Observación en DAW**: capturar formas de onda de voz, guitarra, sinusoidal y ruido blanco. Comparar.
+- **Simulación p5.js**:
+    1. Configurar 3 combinaciones diferentes de parámetros (ej: baja frecuencia + alta amplitud vs alta frecuencia + baja amplitud)
+    2. Capturar pantalla de cada configuración
+    3. Activar/desactivar capas para entender cada fenómeno por separado
+
+### Para entregar
 
 | Parámetro | ¿Qué cambia visualmente? | ¿Qué cambia auditivamente? |
 |---|---|---|
-| Amplitud | | |
-| Frecuencia | | |
-| Fase | | |
-| Velocidad | | |
+| **Amplitud** | | |
+| **Frecuencia** | | |
+| **Fase** | | |
+| **Velocidad** | | |
 
-- Actividad en Classroom: asocia los conceptos físicos (amplitud, frecuencia, fase, longitud de onda, compresión, rarefacción) con elementos observables en la simulación.
-- Conclusión breve en la bitácora: explica con tus palabras la diferencia entre amplitud, frecuencia y fase. ¿Por qué el sonido es una onda longitudinal y no transversal?
+### En Classroom
+
+Asocia cada término con lo que observas en la simulación:
+
+- Amplitud → ________________
+- Frecuencia → ________________
+- Fase → ________________
+- Longitud de onda → ________________
+- Compresión → ________________
+- Rarefacción → ________________
+
+### En la bitácora
+
+Responde en 150 palabras: ¿Por qué el sonido en el aire es una onda longitudinal y no transversal? ¿Qué pasaría si no existiera un medio elástico?
 
 ---
 
-*Referencia: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 1, pp. 1-7.*
+*Basado en: Everest, F. A. & Pohlmann, K. C. (2009). **Master Handbook of Acoustics** (5th ed.). McGraw-Hill. Capítulo 1: Fundamentals of Sound, pp. 1–16.*
