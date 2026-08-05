@@ -6,153 +6,100 @@
 <title>Simulación de Onda Sonora</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 <style>
-  :root { --teal: #249D8F; --bg: #0F1923; --surface: #162231; --text: #E0E6ED; --text-dim: #8899AA; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); display: flex; flex-direction: column; align-items: center; }
-  .container { max-width: 620px; width: 100%; padding: 4px; }
-  .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 6px 4px 4px; }
-  .control-group { display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 70px; background: var(--surface); border-radius: 6px; padding: 4px 8px; border: 1px solid rgba(36,157,143,0.25); }
-  .control-group label { font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-  .control-group .value { font-size: 13px; font-weight: 700; color: #5BC0B3; }
-  input[type=range] { width: 80px; accent-color: var(--teal); }
-  .toggles { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; padding: 4px 4px 2px; }
-  .toggle-btn { padding: 3px 9px; border-radius: 10px; border: 1px solid rgba(36,157,143,0.3); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 9px; }
-  .toggle-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
-  .toggle-btn:hover { border-color: #5BC0B3; }
-  canvas { display: block !important; margin: 0 auto; border-radius: 6px; }
+  body { margin: 0; padding: 8px; background: #0F1923; display: flex; flex-direction: column; align-items: center; font-family: system-ui, sans-serif; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding-bottom: 4px; }
+  .ctrl { display: flex; flex-direction: column; align-items: center; gap: 1px; background: #162231; border-radius: 6px; padding: 4px 8px; border: 1px solid rgba(36,157,143,0.25); }
+  .ctrl label { font-size: 8px; color: #8899AA; text-transform: uppercase; }
+  .ctrl .val { font-size: 13px; font-weight: 700; color: #5BC0B3; }
+  input[type=range] { width: 75px; accent-color: #249D8F; }
+  .toggles { display: flex; gap: 5px; justify-content: center; padding-bottom: 4px; }
+  .tb { padding: 3px 8px; border-radius: 10px; border: 1px solid rgba(36,157,143,0.3); background: #162231; color: #8899AA; cursor: pointer; font-size: 9px; }
+  .tb.on { background: #249D8F; color: #fff; border-color: #249D8F; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="controls">
-    <div class="control-group">
-      <label>Amplitud</label>
-      <span class="value" id="ampVal">100</span>
-      <input type="range" id="ampSlider" min="10" max="160" value="100" step="1">
-    </div>
-    <div class="control-group">
-      <label>Frecuencia</label>
-      <span class="value" id="freqVal">2</span>
-      <input type="range" id="freqSlider" min="1" max="8" value="2" step="0.5">
-    </div>
-    <div class="control-group">
-      <label>Fase</label>
-      <span class="value" id="phaseVal">0°</span>
-      <input type="range" id="phaseSlider" min="0" max="360" value="0" step="15">
-    </div>
-    <div class="control-group">
-      <label>Velocidad</label>
-      <span class="value" id="speedVal">1×</span>
-      <input type="range" id="speedSlider" min="0" max="3" value="1" step="0.25">
-    </div>
-  </div>
-  <div class="toggles">
-    <button class="toggle-btn active" data-layer="displacement">Desplazamiento</button>
-    <button class="toggle-btn active" data-layer="pressure">Presión</button>
-    <button class="toggle-btn active" data-layer="particles">Partículas</button>
-    <button class="toggle-btn active" data-layer="density">Densidad</button>
-  </div>
-  <div id="canvasContainer"></div>
+<div class="controls">
+  <div class="ctrl"><label>Amplitud</label><span class="val" id="av">100</span><input type="range" id="as" min="10" max="160" value="100"></div>
+  <div class="ctrl"><label>Frecuencia</label><span class="val" id="fv">2</span><input type="range" id="fs" min="1" max="8" value="2" step="0.5"></div>
+  <div class="ctrl"><label>Fase</label><span class="val" id="pv">0°</span><input type="range" id="ps" min="0" max="360" value="0" step="15"></div>
+  <div class="ctrl"><label>Velocidad</label><span class="val" id="sv">1×</span><input type="range" id="ss" min="0" max="3" value="1" step="0.25"></div>
 </div>
+<div class="toggles">
+  <button class="tb on" data-l="d">Desplazamiento</button>
+  <button class="tb on" data-l="p">Presión</button>
+  <button class="tb on" data-l="pt">Partículas</button>
+  <button class="tb on" data-l="dn">Densidad</button>
+</div>
+<div id="cv"></div>
 
 <script>
-let amplitude = 100, baseFreq = 2, phaseOffset = 0, animSpeed = 1, time = 0;
-let showDisplacement = true, showPressure = true, showParticles = true, showDensity = true;
-const W = 600, H = 300;
-const TEAL = '#249D8F', TEAL_LIGHT = '#5BC0B3', CORAL = '#E87461';
-const GRID_C = [36, 157, 143, 25];
+let A=100, freq=2, ph=0, speed=1, t=0;
+let sd=true, sp=true, spt=true, sdn=true;
 
-function setup() {
-  let cnv = createCanvas(W, H);
-  cnv.parent('canvasContainer');
+function setup(){
+  let c = createCanvas(600,280);
+  c.parent('cv');
 
-  document.getElementById('ampSlider').oninput = function() { amplitude = +this.value; document.getElementById('ampVal').textContent = amplitude; };
-  document.getElementById('freqSlider').oninput = function() { baseFreq = +this.value; document.getElementById('freqVal').textContent = baseFreq.toFixed(1); };
-  document.getElementById('phaseSlider').oninput = function() { phaseOffset = radians(+this.value); document.getElementById('phaseVal').textContent = this.value+'°'; };
-  document.getElementById('speedSlider').oninput = function() { animSpeed = +this.value; document.getElementById('speedVal').textContent = animSpeed===0?'Pausa':animSpeed.toFixed(2)+'×'; };
-
-  document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.onclick = function() {
-      this.classList.toggle('active');
-      let l = this.dataset.layer;
-      if (l==='displacement') showDisplacement = this.classList.contains('active');
-      if (l==='pressure') showPressure = this.classList.contains('active');
-      if (l==='particles') showParticles = this.classList.contains('active');
-      if (l==='density') showDensity = this.classList.contains('active');
-    };
-  });
+  document.getElementById('as').oninput=function(){A=+this.value;document.getElementById('av').textContent=A;};
+  document.getElementById('fs').oninput=function(){freq=+this.value;document.getElementById('fv').textContent=freq.toFixed(1);};
+  document.getElementById('ps').oninput=function(){ph=radians(+this.value);document.getElementById('pv').textContent=this.value+'°';};
+  document.getElementById('ss').oninput=function(){speed=+this.value;document.getElementById('sv').textContent=speed===0?'Pausa':speed.toFixed(2)+'×';};
+  document.querySelectorAll('.tb').forEach(b=>{b.onclick=function(){
+    this.classList.toggle('on');let l=this.dataset.l;
+    if(l==='d')sd=this.classList.contains('on');if(l==='p')sp=this.classList.contains('on');
+    if(l==='pt')spt=this.classList.contains('on');if(l==='dn')sdn=this.classList.contains('on');
+  };});
 }
 
-function draw() {
-  background(15, 25, 35);
-  if (animSpeed > 0) time += 0.016 * animSpeed;
-
-  let cY = H/2, n = 40, sp = (W-70)/n;
+function draw(){
+  background(15,25,35);
+  if(speed>0) t+=0.016*speed;
+  let cy=140, n=38, spc=(600-70)/n;
 
   // Grid
-  stroke(GRID_C); strokeWeight(1);
-  for (let x=0; x<W; x+=50) line(x, 0, x, H);
-  line(0, cY, W, cY);
+  stroke(36,157,143,20); strokeWeight(1);
+  for(let x=0;x<600;x+=50)line(x,0,x,280);
+  line(0,cy,600,cy);
 
-  // Density zones
-  if (showDensity) {
-    for (let i=0; i<=n; i++) {
-      let x = 35 + i*sp;
-      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
-      let d = cos(ang);
-      if (abs(d) > 0.2) {
-        let a = abs(d)*25;
-        if (d > 0) fill(244, 184, 96, a);
-        else fill(91, 192, 179, a);
-        noStroke(); rect(x-sp/2, 2, sp, H-4);
+  // Density
+  if(sdn){noStroke();
+    for(let i=0;i<=n;i++){
+      let x=35+i*spc, d=cos((i/n)*TWO_PI*freq - t*TWO_PI + ph);
+      if(abs(d)>0.2){let a=abs(d)*30;
+        if(d>0)fill(244,184,96,a);else fill(91,192,179,a);
+        rect(x-spc/2,2,spc,276);
       }
     }
   }
 
   // Displacement
-  if (showDisplacement) {
-    noFill(); strokeWeight(2); stroke(TEAL);
+  if(sd){noFill();strokeWeight(2);stroke('#249D8F');
     beginShape();
-    for (let i=0; i<=n; i++) {
-      let x = 35 + i*sp;
-      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
-      vertex(x, cY + sin(ang)*amplitude);
-    }
+    for(let i=0;i<=n;i++){let x=35+i*spc;vertex(x,cy+sin((i/n)*TWO_PI*freq - t*TWO_PI + ph)*A);}
     endShape();
   }
 
   // Pressure
-  if (showPressure) {
-    noFill(); strokeWeight(1.5); stroke(CORAL);
+  if(sp){noFill();strokeWeight(1.5);stroke('#E87461');
     drawingContext.setLineDash([4,4]);
     beginShape();
-    for (let i=0; i<=n; i++) {
-      let x = 35 + i*sp;
-      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
-      vertex(x, cY + cos(ang)*amplitude);
-    }
+    for(let i=0;i<=n;i++){let x=35+i*spc;vertex(x,cy+cos((i/n)*TWO_PI*freq - t*TWO_PI + ph)*A);}
     endShape();
     drawingContext.setLineDash([]);
   }
 
   // Particles
-  if (showParticles) {
-    noStroke();
-    for (let i=0; i<=n; i++) {
-      let x = 35 + i*sp;
-      let ang = (i/n)*TWO_PI*baseFreq - time*TWO_PI + phaseOffset;
-      let y = cY + sin(ang)*amplitude;
-      let d = cos(ang);
-      if (d > 0.25) fill(244,184,96,200);
-      else if (d < -0.25) fill(91,192,179,200);
-      else fill(140,150,165,110);
-      ellipse(x, y, 3.5 + d*1.5, 3.5 + d*1.5);
+  if(spt){noStroke();
+    for(let i=0;i<=n;i++){
+      let x=35+i*spc, d=cos((i/n)*TWO_PI*freq - t*TWO_PI + ph);
+      let y=cy+sin((i/n)*TWO_PI*freq - t*TWO_PI + ph)*A;
+      if(d>0.25)fill(244,184,96,200);else if(d<-0.25)fill(91,192,179,200);else fill(140,150,165,100);
+      ellipse(x,y,3.5+d*1.5,3.5+d*1.5);
     }
   }
 
-  // Status
-  fill(130,140,155); textAlign(RIGHT); textSize(9);
-  text(`f=${baseFreq.toFixed(1)}  A=${amplitude}  φ=${degrees(phaseOffset).toFixed(0)}°`, W-8, H-6);
+  fill(130,140,155);textAlign(RIGHT);textSize(9);
+  text('f='+freq.toFixed(1)+' A='+A+' φ='+(degrees(ph).toFixed(0))+'°',590,274);
 }
 </script>
 </body>
