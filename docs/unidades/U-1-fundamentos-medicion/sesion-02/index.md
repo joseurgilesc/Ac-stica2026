@@ -80,10 +80,10 @@ La velocidad del sonido aumenta con la temperatura (~0.6 m/s por °C), con la hu
 
 Modifica los parámetros y activa/desactiva capas para analizar cada fenómeno:
 
-- 🟢 **Desplazamiento** — movimiento sinusoidal de las partículas
-- 🔴 **Presión** — derivada de la posición (máxima en los cruces por cero)
-- 🟡🔵 **Partículas** — coloreadas por zona de compresión o rarefacción
-- 🟠🟢 **Densidad** — fondo graduado según concentración molecular
+- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
+- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
+- **Partículas** — puntos coloreados por zona de compresión o rarefacción
+- **Densidad** — fondo graduado según concentración molecular
 
 <iframe src="simulacion.html" width="100%" height="560" style="border: none; border-radius: 8px;"></iframe>
 
