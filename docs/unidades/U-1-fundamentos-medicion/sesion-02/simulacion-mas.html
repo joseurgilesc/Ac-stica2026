@@ -6,49 +6,110 @@
 <title>Movimiento Armónico Simple → Onda Sinusoidal</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 <style>
-  :root { --teal: #249D8F; --teal-dark: #1A7A6F; --bg: #0F1923; }
+  :root { --teal: #249D8F; --teal-dark: #1A7A6F; --bg: #0F1923; --surface: #162231; --text: #E0E6ED; --text-dim: #8899AA; }
   * { box-sizing: border-box; }
-  body { margin: 0; padding: 0; display: flex; justify-content: center; background: var(--bg); }
-  canvas { display: block; border-radius: 8px; }
+  body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); }
+  canvas { display: block; border-radius: 10px; border: 1px solid rgba(36,157,143,0.3); }
+  .container { max-width: 760px; width: 100%; padding: 6px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 10px 6px 6px; }
+  .control-group { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 80px; background: var(--surface); border-radius: 8px; padding: 6px 10px; border: 1px solid rgba(36,157,143,0.25); }
+  .control-group label { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.6px; }
+  .control-group .value { font-size: 15px; font-weight: 700; color: #5BC0B3; }
+  input[type=range] { width: 90px; accent-color: var(--teal); }
+  .btn { padding: 6px 14px; border-radius: 14px; border: 1px solid rgba(36,157,143,0.4); background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 11px; transition: all 0.2s; }
+  .btn:hover { border-color: #5BC0B3; color: #fff; }
+  .btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .info { color: var(--text-dim); font-size: 10px; text-align: center; padding: 2px 6px; }
 </style>
 </head>
 <body>
+<div class="container">
+  <div class="controls">
+    <div class="control-group">
+      <label>Amplitud</label>
+      <span class="value" id="ampVal">55</span>
+      <input type="range" id="ampSlider" min="15" max="75" value="55" step="1">
+    </div>
+    <div class="control-group">
+      <label>Frecuencia</label>
+      <span class="value" id="freqVal">1x</span>
+      <input type="range" id="freqSlider" min="0.3" max="3" value="1" step="0.1">
+    </div>
+    <div class="control-group">
+      <label>Velocidad onda</label>
+      <span class="value" id="speedVal">1x</span>
+      <input type="range" id="speedSlider" min="0.3" max="3" value="1" step="0.1">
+    </div>
+    <button class="btn active" id="pauseBtn">⏯ Pausa</button>
+  </div>
+  <div id="canvasContainer"></div>
+  <div class="info">El resorte representa elasticidad + inercia. Su movimiento vertical se proyecta como onda horizontal en el tiempo.</div>
+</div>
+
 <script>
+let amplitude = 55;
+let oscFreq = 1.0;
+let waveSpeed = 1.0;
+let paused = false;
 let time = 0;
+
 const TEAL = '#249D8F';
 const TEAL_LIGHT = '#5BC0B3';
 const CORAL = '#E87461';
 
 function setup() {
-  createCanvas(740, 280).parent(document.body);
+  let cnv = createCanvas(740, 260);
+  cnv.parent('canvasContainer');
+
+  document.getElementById('ampSlider').addEventListener('input', function() {
+    amplitude = parseInt(this.value);
+    document.getElementById('ampVal').textContent = amplitude;
+  });
+  document.getElementById('freqSlider').addEventListener('input', function() {
+    oscFreq = parseFloat(this.value);
+    document.getElementById('freqVal').textContent = oscFreq.toFixed(1) + 'x';
+  });
+  document.getElementById('speedSlider').addEventListener('input', function() {
+    waveSpeed = parseFloat(this.value);
+    document.getElementById('speedVal').textContent = waveSpeed.toFixed(1) + 'x';
+  });
+  document.getElementById('pauseBtn').addEventListener('click', function() {
+    paused = !paused;
+    this.textContent = paused ? '▶ Reanudar' : '⏯ Pausa';
+    this.classList.toggle('active', !paused);
+  });
 }
 
 function draw() {
   background(15, 25, 35);
-  time += 0.025;
 
-  let springX = 110;
-  let springTop = 50;
-  let springBase = 205;
-  let massY = springBase + sin(time * 2) * 55;
+  if (!paused) {
+    time += 0.025;
+  }
+
+  let springX = 105;
+  let springTop = 45;
+  let springBase = 200;
+  let ang = time * 2 * oscFreq;
+  let massY = springBase + sin(ang) * amplitude;
 
   // LEFT: Mass-spring system
-  stroke(180);
-  strokeWeight(3);
-  line(springX, 20, springX, springTop);
-  fill(180); noStroke();
-  triangle(springX-12, 20, springX+12, 20, springX, 8);
+  stroke(160);
+  strokeWeight(2.5);
+  line(springX, 18, springX, springTop);
+  fill(160); noStroke();
+  triangle(springX-10, 18, springX+10, 18, springX, 8);
 
   // Spring zigzag
   stroke(TEAL_LIGHT);
   strokeWeight(2);
   noFill();
   beginShape();
-  let segments = 14;
-  for (let i = 0; i <= segments; i++) {
-    let t = i / segments;
-    let sy = springTop + (massY - springTop - 18) * t;
-    let sx = springX + (i % 2 === 0 ? -10 : 10);
+  let segs = 16;
+  for (let i = 0; i <= segs; i++) {
+    let t = i / segs;
+    let sy = springTop + (massY - springTop - 16) * t;
+    let sx = springX + (i % 2 === 0 ? -8 : 8);
     vertex(sx, sy);
   }
   endShape();
@@ -57,85 +118,88 @@ function draw() {
   fill(TEAL);
   stroke(TEAL);
   strokeWeight(1);
-  rect(springX-18, massY-2, 36, 22, 4);
+  rect(springX-16, massY-3, 32, 20, 4);
 
+  // Labels
   fill(180); noStroke();
   textAlign(CENTER);
-  textSize(11);
-  text('Masa + Resorte', springX, 20);
-  text('MAS', springX, massY + 32);
+  textSize(10);
+  text('Resorte', springX, 14);
+  text('Masa (m)', springX, massY + 30);
 
-  // Equilibrium line
-  stroke(100, 100, 120, 100);
+  // Equilibrium
+  stroke(90, 100, 115, 120);
   strokeWeight(1);
-  drawingContext.setLineDash([3, 5]);
-  line(springX-30, springBase, springX+30, springBase);
+  drawingContext.setLineDash([3, 4]);
+  line(springX-25, springBase, springX+25, springBase);
   drawingContext.setLineDash([]);
+  textSize(9);
+  fill(120, 130, 145);
+  text('equilibrio', springX, springBase - 6);
 
-  // RIGHT: Traveling wave
-  let waveStartX = 200;
-  let waveEndX = width - 20;
-  let waveY = height / 2;
+  // ----- RIGHT: Traveling wave -----
+  let wStart = 195;
+  let wEnd = width - 15;
+  let wY = height / 2;
 
   // Axis
-  stroke(60, 70, 85);
+  stroke(50, 60, 75);
   strokeWeight(1);
-  line(waveStartX, waveY, waveEndX, waveY);
+  line(wStart, wY, wEnd, wY);
 
-  // Grid
-  for (let x = waveStartX; x < waveEndX; x += 80) {
-    stroke(40, 50, 65, 80);
-    line(x, waveY-80, x, waveY+80);
+  // Grid lines
+  for (let x = wStart; x < wEnd; x += 80) {
+    stroke(35, 45, 58, 100);
+    line(x, wY-80, x, wY+80);
   }
 
-  // Traveling wave — se desplaza con el tiempo
+  // Traveling wave
   noFill();
   strokeWeight(2.5);
   stroke(TEAL);
   beginShape();
-  for (let x = waveStartX; x <= waveEndX; x += 2) {
-    let phase = map(x, waveStartX, waveEndX, 0, TWO_PI * 2.0);
-    let y = waveY + sin(phase - time * 2) * 55;
+  for (let x = wStart; x <= wEnd; x += 1.5) {
+    let phase = map(x, wStart, wEnd, 0, TWO_PI * 2.2);
+    let y = wY + sin(phase - time * 2 * waveSpeed) * amplitude;
     vertex(x, y);
   }
   endShape();
 
-  // Connector line from mass to current wave position at x=waveStartX
-  let connY = waveY + sin(-time * 2) * 55;
-  stroke(CORAL, 120);
-  strokeWeight(1.5);
-  drawingContext.setLineDash([3, 4]);
-  line(springX+18, massY, waveStartX, connY);
+  // Connection line and dot
+  let connY = wY + sin(-time * 2 * waveSpeed) * amplitude;
+  stroke(CORAL, 100);
+  strokeWeight(1.2);
+  drawingContext.setLineDash([3, 5]);
+  line(springX+16, massY, wStart, connY);
   drawingContext.setLineDash([]);
-
-  // Dot at connection point
   fill(CORAL);
   noStroke();
-  ellipse(waveStartX, connY, 8, 8);
+  ellipse(wStart, connY, 7, 7);
 
-  // Labels
-  fill(160); noStroke();
+  // Arrow showing propagation
+  let ax = wStart + 150;
+  let ay = wY - 72;
+  stroke(TEAL, 100);
+  strokeWeight(1.3);
+  line(ax-25, ay, ax+25, ay);
+  fill(TEAL, 100); noStroke();
+  triangle(ax+25, ay, ax+18, ay-5, ax+18, ay+5);
+  fill(TEAL, 130);
+  textSize(9);
   textAlign(CENTER);
-  textSize(12);
-  text('Onda viajera', width - 80, waveY-68);
-
-  // Arrow showing travel direction
-  stroke(TEAL, 120);
-  strokeWeight(1.5);
-  let arrowX = waveStartX + 180;
-  let arrowY = waveY - 70;
-  line(arrowX-20, arrowY, arrowX+20, arrowY);
-  fill(TEAL, 120); noStroke();
-  triangle(arrowX+20, arrowY, arrowX+14, arrowY-5, arrowX+14, arrowY+5);
-  fill(TEAL, 160);
-  textSize(10);
-  text('Propagación →', arrowX, arrowY - 12);
+  text('Propagación →', ax, ay - 10);
 
   // Title
-  fill(200);
+  fill(190);
   textAlign(CENTER);
-  textSize(14);
-  text('Movimiento Armónico Simple  →  Onda Sinusoidal viajera', width/2, height-14);
+  textSize(13);
+  text('Movimiento Armónico Simple  →  Onda Sinusoidal', width/2, height-12);
+
+  // Parameter display
+  fill(120, 135, 150);
+  textSize(9);
+  textAlign(RIGHT);
+  text(`A=${amplitude}  f=${oscFreq.toFixed(1)}×  v=${waveSpeed.toFixed(1)}×`, width-10, height-26);
 }
 </script>
 </body>
