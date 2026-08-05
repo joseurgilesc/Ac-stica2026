@@ -2,6 +2,36 @@
 
 ---
 
+??? info "Unidades y símbolos (glosario de referencia)"
+    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
+
+    | Símbolo / Unidad | Nombre | ¿Qué mide? | Equivalencia |
+    |---|---|---|---|
+    | **Hz** | Hertz | Frecuencia (ciclos por segundo) | 1 Hz = 1/s |
+    | **kHz** | Kilohertz | Frecuencia | 1 kHz = 1,000 Hz |
+    | **m** | Metro | Longitud de onda, distancia | — |
+    | **cm** | Centímetro | Longitud de onda | 1 cm = 0.01 m |
+    | **ft** | Pie (*foot*) | Longitud | 1 ft ≈ 0.3048 m |
+    | **in** | Pulgada (*inch*) | Longitud | 1 in ≈ 2.54 cm |
+    | **mi** | Milla (*mile*) | Distancia | 1 mi ≈ 1.609 km |
+    | **m/s** | Metro por segundo | Velocidad | — |
+    | **ft/s** | Pie por segundo | Velocidad | 1 ft/s ≈ 0.3048 m/s |
+    | **mi/h** | Milla por hora | Velocidad | 1 mi/h ≈ 1.609 km/h |
+    | **s** | Segundo | Tiempo | — |
+    | **ms** | Milisegundo | Tiempo | 1 ms = 0.001 s |
+    | **Pa** | Pascal | Presión | 1 Pa = 1 N/m² |
+    | **µPa** | Micropascal | Presión sonora | 1 µPa = 10⁻⁶ Pa |
+    | **lb/in²** (psi) | Libra por pulgada cuadrada | Presión | 1 psi ≈ 6,895 Pa |
+    | **dB** | Decibel | Nivel de presión sonora | Escala logarítmica |
+    | **rad** | Radián | Ángulo, fase | 2π rad = 360° |
+    | **°** | Grado | Ángulo, fase | 360° = 1 ciclo |
+    | **λ** (lambda) | Longitud de onda | Distancia por ciclo | λ = v / f |
+    | **T** | Período | Duración de un ciclo | T = 1 / f |
+    | **φ** (phi) | Fase inicial | Desplazamiento de la onda | En radianes o grados |
+    | **A** | Amplitud | Máximo desplazamiento | — |
+    | **f** | Frecuencia | Ciclos por segundo | f = 1 / T |
+    | **v** | Velocidad del sonido | Rapidez de propagación | ~344 m/s en aire |
+
 ???+ note "El sonido como onda mecánica"
 
     El sonido puede entenderse de dos maneras complementarias (Everest & Pohlmann, 2009, p. 1):
