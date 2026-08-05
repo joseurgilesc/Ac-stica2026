@@ -2,44 +2,20 @@ site_name: "Acústica Aplicada a la Producción Musical"
 site_description: "Material de clase — Acústica Aplicada a la Producción Musical"
 site_author: "José Urgilés"
 repo_url: https://github.com/joseurgilesc/Ac-stica2026
-repo_name: joseurgilesc/Ac-stica2026
 
 theme:
-  name: material
+  name: lantana
   language: es
   logo: img/logo.svg
-  features:
-    - navigation.sections
-    - navigation.expand
-    - navigation.indexes
-    - navigation.top
-    - navigation.tracking
-    - navigation.path
-    - search.suggest
-    - search.highlight
-    - content.code.copy
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Modo oscuro
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Modo claro
+  nav_style: primary
+  highlightjs: true
+  hljs_style: github
 
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.highlight
-  - pymdownx.inlinehilite
-  - pymdownx.tabbed
-  - pymdownx.arithmatex
   - footnotes
   - attr_list
   - md_in_html

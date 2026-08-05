@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulación de Onda Sonora - Sesión 2</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<style>
+  body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; background: #1a1a2e; font-family: system-ui, sans-serif; }
+  canvas { display: block; border-radius: 8px; }
+  .controls { padding: 12px 20px; color: #e0e0e0; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; max-width: 800px; }
+  .control-group { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 100px; }
+  .control-group label { font-size: 12px; color: #a0a0b0; text-transform: uppercase; letter-spacing: 0.5px; }
+  .control-group .value { font-size: 16px; font-weight: bold; color: #64b5f6; }
+  input[type=range] { width: 120px; accent-color: #64b5f6; }
+  .info { color: #808090; font-size: 11px; text-align: center; padding: 4px 20px 12px; }
+</style>
+</head>
+<body>
+<div class="controls">
+  <div class="control-group">
+    <label>Amplitud</label>
+    <span class="value" id="ampVal">100</span>
+    <input type="range" id="ampSlider" min="10" max="160" value="100" step="1">
+  </div>
+  <div class="control-group">
+    <label>Frecuencia</label>
+    <span class="value" id="freqVal">2</span>
+    <input type="range" id="freqSlider" min="1" max="8" value="2" step="0.5">
+  </div>
+  <div class="control-group">
+    <label>Fase</label>
+    <span class="value" id="phaseVal">0°</span>
+    <input type="range" id="phaseSlider" min="0" max="360" value="0" step="15">
+  </div>
+  <div class="control-group">
+    <label>Velocidad</label>
+    <span class="value" id="speedVal">1x</span>
+    <input type="range" id="speedSlider" min="0" max="3" value="1" step="0.25">
+  </div>
+</div>
+<div id="canvasContainer"></div>
+<div class="info">🟡 Puntos: partículas de aire | Línea azul: desplazamiento | Línea roja punteada: presión</div>
+
+<script>
+let amplitude = 100;
+let baseFreq = 2;
+let phaseOffset = 0;
+let animSpeed = 1;
+let time = 0;
+
+function setup() {
+  let cnv = createCanvas(780, 340);
+  cnv.parent('canvasContainer');
+  textFont('system-ui');
+
+  document.getElementById('ampSlider').addEventListener('input', function() {
+    amplitude = parseInt(this.value);
+    document.getElementById('ampVal').textContent = amplitude;
+  });
+  document.getElementById('freqSlider').addEventListener('input', function() {
+    baseFreq = parseFloat(this.value);
+    document.getElementById('freqVal').textContent = baseFreq.toFixed(1);
+  });
+  document.getElementById('phaseSlider').addEventListener('input', function() {
+    phaseOffset = radians(parseInt(this.value));
+    document.getElementById('phaseVal').textContent = this.value + '°';
+  });
+  document.getElementById('speedSlider').addEventListener('input', function() {
+    animSpeed = parseFloat(this.value);
+    document.getElementById('speedVal').textContent = animSpeed === 0 ? 'Pausa' : animSpeed.toFixed(2) + 'x';
+  });
+}
+
+function draw() {
+  background(26, 26, 46);
+
+  if (animSpeed > 0) {
+    time += 0.016 * animSpeed;
+  }
+
+  let centerY = height / 2;
+
+  // Draw grid
+  stroke(40, 40, 60);
+  strokeWeight(1);
+  for (let x = 0; x < width; x += 50) {
+    line(x, 0, x, height);
+  }
+  line(0, centerY, width, centerY);
+
+  // Draw axis labels
+  noStroke();
+  fill(100, 100, 120);
+  textSize(10);
+  textAlign(CENTER);
+  text('Tiempo →', width - 30, centerY - 8);
+  textAlign(LEFT);
+  text('← Desplazamiento', 4, 14);
+
+  // Draw particles and wave
+  let numParticles = 50;
+  let spacing = (width - 80) / numParticles;
+
+  noFill();
+  strokeWeight(2);
+
+  // Draw displacement wave (sine)
+  stroke(100, 180, 255, 200);
+  beginShape();
+  for (let i = 0; i <= numParticles; i++) {
+    let x = 40 + i * spacing;
+    let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
+    let y = centerY + sin(angle) * amplitude;
+    vertex(x, y);
+  }
+  endShape();
+
+  // Draw pressure wave (cosine = derivative of sine, shifted 90°)
+  stroke(255, 100, 100, 120);
+  drawingContext.setLineDash([4, 6]);
+  beginShape();
+  for (let i = 0; i <= numParticles; i++) {
+    let x = 40 + i * spacing;
+    let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
+    let y = centerY + cos(angle) * amplitude;
+    vertex(x, y);
+  }
+  endShape();
+  drawingContext.setLineDash([]);
+
+  // Draw particles
+  noStroke();
+  for (let i = 0; i <= numParticles; i++) {
+    let x = 40 + i * spacing;
+    let angle = (i / numParticles) * TWO_PI * baseFreq - time * TWO_PI + phaseOffset;
+    let y = centerY + sin(angle) * amplitude;
+
+    // Density visualization: particles closer together = compression
+    let density = cos(angle);
+    if (density > 0.3) {
+      fill(255, 200, 50, 200);
+    } else if (density < -0.3) {
+      fill(100, 150, 255, 200);
+    } else {
+      fill(150, 150, 170, 150);
+    }
+
+    let r = 4 + density * 2;
+    ellipse(x, y, r, r);
+  }
+
+  // Legend
+  noStroke();
+  textAlign(LEFT);
+  textSize(11);
+
+  fill(100, 180, 255);
+  rect(10, height - 52, 12, 12, 2);
+  fill(200, 200, 210);
+  text('Desplazamiento (onda sinusoidal)', 26, height - 41);
+
+  fill(255, 100, 100);
+  rect(10, height - 32, 12, 12, 2);
+  fill(200, 200, 210);
+  text('Presión (derivada, coseno)', 26, height - 21);
+
+  fill(255, 200, 50);
+  rect(240, height - 52, 12, 12, 2);
+  fill(200, 200, 210);
+  text('Compresión (partículas juntas)', 256, height - 41);
+
+  fill(100, 150, 255);
+  rect(240, height - 32, 12, 12, 2);
+  fill(200, 200, 210);
+  text('Rarefacción (partículas separadas)', 256, height - 21);
+
+  // Current values display
+  textAlign(RIGHT);
+  fill(180, 180, 200);
+  textSize(11);
+  let freq = baseFreq;
+  text(`Frecuencia: ${freq.toFixed(1)} ciclos | Amplitud: ${amplitude} px | Fase: ${degrees(phaseOffset).toFixed(0)}°`, width - 12, height - 8);
+}
+</script>
+</body>
+</html>
