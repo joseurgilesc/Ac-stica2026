@@ -41,8 +41,10 @@
 ???+ note "Velocidad del sonido"
 
     \[
-    \boxed{v_{\text{aire}} \approx 344\text{ m/s} \;\approx\; 1,130\text{ ft/s} \;\approx\; 770\text{ mi/h}}
+    \boxed{v \approx 344\text{ m/s} \;\approx\; 1,130\text{ ft/s} \;\approx\; 770\text{ mi/h}}
     \]
+
+    Donde \(v\) es la velocidad del sonido en el aire a 20°C y presión atmosférica normal.
 
     | Medio | Velocidad | vs. Aire |
     |---|---|---|
@@ -50,29 +52,50 @@
     | Agua dulce | ~1,490 m/s | ~4.3× |
     | Acero | ~5,090 m/s | ~14.8× |
 
-    La velocidad del sonido aumenta con la temperatura (~0.6 m/s por °C), con la humedad (ligeramente), y con la densidad del medio. No depende de la frecuencia ni de la intensidad.
+    La velocidad del sonido aumenta con la temperatura (~\(+0.6\text{ m/s}\) por °C), con la humedad (ligeramente), y con la densidad del medio. No depende de la frecuencia ni de la intensidad.
 
 ???+ note "Amplitud, frecuencia, fase y longitud de onda"
+
+    Una onda sinusoidal se describe matemáticamente como:
+
+    \[
+    y(t) = A \cdot \sin(2\pi f t + \phi)
+    \]
+
+    | Símbolo | Nombre | Unidad | Significado físico |
+    |---|---|---|---|
+    | \(y(t)\) | Desplazamiento | m | Posición de la partícula en el instante \(t\) |
+    | \(A\) | Amplitud | m | Máximo desplazamiento desde el equilibrio |
+    | \(f\) | Frecuencia | Hz (1/s) | Ciclos por segundo — determina el tono |
+    | \(t\) | Tiempo | s | Instante de observación |
+    | \(\phi\) | Fase inicial | rad | Desplazamiento horizontal de la onda (0 a \(2\pi\)) |
+    | \(T = 1/f\) | Período | s | Duración de un ciclo completo |
 
     **La relación fundamental de la acústica:**
 
     \[
-    \Large{\lambda = \frac{v}{f}}
+    \lambda = \frac{v}{f}
     \]
+
+    | Símbolo | Nombre | Unidad | Significado |
+    |---|---|---|---|
+    | \(\lambda\) | Longitud de onda | m | Distancia que recorre la onda en un ciclo |
+    | \(v\) | Velocidad del sonido | m/s | ~344 m/s en aire a 20°C |
+    | \(f\) | Frecuencia | Hz | Ciclos por segundo |
 
     | Frecuencia | Longitud de onda (aire, 20°C) | Referencia musical |
     |---|---|---|
-    | 20 Hz | 17.2 m | Límite inferior audible |
-    | 50 Hz | 6.88 m | Subgrave |
-    | 100 Hz | 3.44 m | Grave de bajo |
-    | 440 Hz | 0.78 m | **La central (A4)** |
-    | 1,000 Hz | 0.34 m | Referencia |
-    | 4,000 Hz | 8.6 cm | Presencia vocal |
-    | 10,000 Hz | 3.4 cm | Brillo / aire |
-    | 20,000 Hz | 1.7 cm | Límite superior audible |
+    | 20 Hz | \(\lambda \approx 17.2\) m | Límite inferior audible |
+    | 50 Hz | \(\lambda \approx 6.88\) m | Subgrave |
+    | 100 Hz | \(\lambda \approx 3.44\) m | Grave de bajo |
+    | 440 Hz | \(\lambda \approx 0.78\) m | **La central (A4)** |
+    | 1,000 Hz | \(\lambda \approx 0.34\) m | Referencia |
+    | 4,000 Hz | \(\lambda \approx 8.6\) cm | Presencia vocal |
+    | 10,000 Hz | \(\lambda \approx 3.4\) cm | Brillo / aire |
+    | 20,000 Hz | \(\lambda \approx 1.7\) cm | Límite superior audible |
 
-    !!! tip "¿Por qué importa λ?"
-        Si λ es mucho mayor que un obstáculo, el sonido lo **rodea** (difracción). Si λ es mucho menor, el sonido se **refleja**. Esto explica por qué los graves (λ grande) son difíciles de controlar en recintos pequeños.
+    !!! tip "¿Por qué importa \(\lambda\)?"
+        Si \(\lambda\) es mucho mayor que un obstáculo, el sonido lo **rodea** (difracción). Si \(\lambda\) es mucho menor, el sonido se **refleja**. Esto explica por qué los graves (\(\lambda\) grande) son difíciles de controlar en recintos pequeños.
 
 ---
 
