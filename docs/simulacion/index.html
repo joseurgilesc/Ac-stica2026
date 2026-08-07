@@ -37,7 +37,8 @@
     .status.cam-off { background: rgba(255,255,255,0.05); color: #aaa; }
     .status.cam-on { background: rgba(0,255,100,0.1); color: #0f0; border: 1px solid rgba(0,255,100,0.2); }
     .status.loading { background: rgba(255,200,0,0.1); color: #ff0; border: 1px solid rgba(255,200,0,0.2); }
-    #controls .help { font-size: 11px; color: #666; margin-top: 16px; line-height: 1.5; }
+    #controls .help { font-size: 11px; color: #888; margin-top: 16px; line-height: 1.5; }
+    #controls .debug { font-size: 10px; color: #666; margin-top: 10px; word-break: break-all; }
     #cam-msg {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       background: rgba(0,0,0,0.9); color: #fff; padding: 20px 28px;
@@ -62,22 +63,26 @@
   <button id="btn-reset">🔄 Reiniciar fuente</button>
 
   <label for="sens">Sensibilidad: <b id="val-sens">0.5</b></label>
-  <input type="range" id="sens" min="0.2" max="1.5" step="0.1" value="0.5">
+  <input type="range" id="sens" min="0.2" max="2.0" step="0.1" value="0.5">
 
   <label>
     <input type="checkbox" id="show-labels" checked> Mostrar etiquetas
   </label>
-
   <label>
-    <input type="checkbox" id="show-particles" checked> Mostrar partículas
+    <input type="checkbox" id="show-particles" checked> Mostrar bandas de color
   </label>
+  <label>
+    <input type="checkbox" id="show-cam"> Mostrar cámara (espejo)
+  </label>
+
+  <div class="debug" id="debug-info">Esperando...</div>
 
   <div class="help">
     <b>Instrucciones:</b><br>
     • Mueve el mouse horizontalmente<br>
     • O activa la cámara y mueve tu mano<br>
-    • Observa compresiones (rojo) y rarefacciones (azul)<br>
-    • Las partículas vibran localmente<br>
+    • Las partículas vibran en su lugar<br>
+    • Rojo = compresión, Azul = rarefacción<br>
     • La perturbación se propaga
   </div>
 </div>
@@ -89,36 +94,32 @@
 </div>
 
 <script>
-// ── State ──
 const COLS = 50, ROWS = 10;
 const CELL_W = 16, CELL_H = 16;
-const GRID_X = 320, GRID_Y = 200;
+const GRID_X = 320, GRID_Y = 240;
 let particles = [];
 let sourceX, targetX;
 let useCamera = false, camReady = false, modelLoading = false;
 let handpose, video;
 let mouseControl = true;
 let prevPredict = 0;
-
-// UI refs
-let statusMsg, btnCam, btnMouse, btnReset, sliderSens, chkLabels, chkParticles, valSens;
-let camMsg, camAllow;
-let showLabels = true, showParticles = true;
+let debugEl, statusMsg;
+let showLabels = true, showBands = true, showCam = false;
+let handX = 0, handY = 0, handDetected = false;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let c = createCanvas(windowWidth, windowHeight);
   textFont('system-ui');
 
-  // Init particle grid
-  for (let c = 0; c < COLS; c++) {
+  for (let col = 0; col < COLS; col++) {
     for (let r = 0; r < ROWS; r++) {
       particles.push({
-        baseX: GRID_X + c * CELL_W,
+        baseX: GRID_X + col * CELL_W,
         baseY: GRID_Y + r * CELL_H,
-        x: GRID_X + c * CELL_W,
+        x: GRID_X + col * CELL_W,
         y: GRID_Y + r * CELL_H,
         phase: random(TWO_PI),
-        col: c,
+        col: col,
         row: r,
       });
     }
@@ -126,38 +127,29 @@ function setup() {
   sourceX = GRID_X + 2 * CELL_W;
   targetX = sourceX;
 
-  // UI bindings
+  debugEl = select('#debug-info');
   statusMsg = select('#status-msg');
-  btnCam = select('#btn-cam');
-  btnMouse = select('#btn-mouse');
-  btnReset = select('#btn-reset');
-  sliderSens = select('#sens');
-  chkLabels = select('#show-labels');
-  chkParticles = select('#show-particles');
-  valSens = select('#val-sens');
-  camMsg = select('#cam-msg');
-  camAllow = select('#cam-allow');
 
-  btnReset.mousePressed(() => { sourceX = targetX = GRID_X + 2 * CELL_W; });
-  sliderSens.input(() => valSens.html(sliderSens.value()));
+  select('#btn-reset').mousePressed(() => { sourceX = targetX = GRID_X + 2 * CELL_W; });
+  select('#sens').input(() => select('#val-sens').html(select('#sens').value()));
+  select('#show-labels').changed(() => showLabels = select('#show-labels').checked());
+  select('#show-particles').changed(() => showBands = select('#show-particles').checked());
+  select('#show-cam').changed(() => showCam = select('#show-cam').checked());
 
-  btnCam.mousePressed(() => {
+  select('#btn-cam').mousePressed(() => {
     if (modelLoading) return;
-    camMsg.style('display', 'block');
+    select('#cam-msg').style('display', 'block');
   });
-
-  camAllow.mousePressed(() => {
-    camMsg.style('display', 'none');
+  select('#cam-allow').mousePressed(() => {
+    select('#cam-msg').style('display', 'none');
     startCamera();
   });
-
-  btnMouse.mousePressed(() => {
-    useCamera = false;
-    camReady = false;
-    mouseControl = true;
+  select('#btn-mouse').mousePressed(() => {
+    useCamera = false; camReady = false; mouseControl = true;
     if (video) { video.remove(); video = null; }
     statusMsg.removeClass('cam-on').removeClass('loading').addClass('cam-off');
     statusMsg.html('🖱️ Modo mouse activo');
+    debugEl.html('Esperando...');
   });
 }
 
@@ -166,166 +158,162 @@ function startCamera() {
   modelLoading = true;
   statusMsg.removeClass('cam-off').addClass('loading');
   statusMsg.html('⏳ Cargando modelo de mano...');
+  debugEl.html('Iniciando cámara...');
 
   video = createCapture(VIDEO, () => {
-    video.size(640, 480);
-    video.hide();
+    debugEl.html('Cámara lista. Cargando modelo ML...');
+  });
+  video.size(640, 480);
+  video.hide();
 
-    // ml5 handpose
-    handpose = ml5.handpose(video, { flipHorizontal: true }, () => {
-      console.log('✅ Handpose model loaded');
-      camReady = true;
-      useCamera = true;
-      mouseControl = false;
-      modelLoading = false;
-      statusMsg.removeClass('loading').addClass('cam-on');
-      statusMsg.html('📷 Cámara activa — mueve tu mano');
-    });
+  let options = { flipHorizontal: true, runtime: 'tfjs' };
+  handpose = ml5.handpose(video, options, function() {
+    console.log('✅ Handpose model loaded');
+    camReady = true;
+    useCamera = true;
+    mouseControl = false;
+    modelLoading = false;
+    statusMsg.removeClass('loading').addClass('cam-on');
+    statusMsg.html('📷 Cámara activa — mueve tu mano');
+    debugEl.html('Modelo listo. Detectando mano...');
   });
 }
 
 function draw() {
   background(22, 22, 42);
 
-  let sens = sliderSens ? parseFloat(sliderSens.value()) : 0.5;
-  showLabels = chkLabels ? chkLabels.checked() : true;
-  showParticles = chkParticles ? chkParticles.checked() : true;
+  let sens = select('#sens') ? parseFloat(select('#sens').value()) : 0.5;
 
   // ── Source movement ──
-  if (useCamera && camReady && handpose && video) {
-    // Throttle prediction to ~10 fps
+  if (useCamera && camReady && handpose) {
     if (millis() - prevPredict > 100) {
       prevPredict = millis();
-      handpose.predict().then(results => {
+      // Try callback-style predict
+      handpose.predict(function(err, results) {
+        if (err) { debugEl.html('Error: ' + err.message); return; }
+        handDetected = false;
         if (results && results.length > 0) {
-          let keypoints = results[0].landmarks;
-          if (keypoints && keypoints.length > 0) {
-            let wrist = keypoints[0];
-            // Map wrist x (0..640) to source range
-            let nx = constrain(wrist[0] / 640, 0, 1);
+          handDetected = true;
+          let pred = results[0];
+          let wrist = pred.landmarks ? pred.landmarks[0] : null;
+          if (wrist) {
+            handX = wrist[0];
+            handY = wrist[1];
+            let nx = constrain(handX / 640, 0, 1);
             targetX = GRID_X + 2 * CELL_W + (nx - 0.5) * (COLS - 4) * CELL_W;
+            debugEl.html(`Mano detectada ✅<br>x=${handX.toFixed(0)} → nx=${nx.toFixed(3)}`);
           }
         }
-      }).catch(() => {});
+        if (!handDetected) {
+          debugEl.html('Buscando mano...');
+        }
+      });
     }
   } else if (mouseControl) {
-    let nx = constrain((mouseX - GRID_X) / (COLS * CELL_W), 0, 1);
-    if (mouseX > GRID_X - 50 && mouseX < GRID_X + COLS * CELL_W + 50) {
+    if (mouseX > GRID_X - 60 && mouseX < GRID_X + COLS * CELL_W + 60) {
+      let nx = constrain((mouseX - GRID_X) / (COLS * CELL_W), 0, 1);
       targetX = GRID_X + 2 * CELL_W + (nx - 0.5) * (COLS - 4) * CELL_W;
+      debugEl.html(`Mouse x=${mouseX.toFixed(0)} → nx=${nx.toFixed(3)}`);
     }
   }
 
-  // Smooth source movement
+  // Smooth source
   sourceX += (targetX - sourceX) * 0.35;
   sourceX = constrain(sourceX, GRID_X + CELL_W, GRID_X + (COLS - 2) * CELL_W);
 
-  // Animation params
+  // ── Draw video feed as background ──
+  if (showCam && video && camReady) {
+    push();
+    translate(GRID_X + COLS * CELL_W + 20, GRID_Y);
+    scale(-0.3, 0.3);
+    image(video, 0, 0);
+    pop();
+  }
+
+  // ── Draw particles + bands ──
   let sourceDisplacement = (targetX - (GRID_X + 2 * CELL_W)) * sens;
   let propagationSpeed = 8;
   let attenuation = 0.94;
 
-  // ── Draw particles ──
   noStroke();
+
+  // Compression/rarefaction bands
+  if (showBands) {
+    for (let col = 0; col < COLS; col++) {
+      let colX = GRID_X + col * CELL_W;
+      let sampleP = particles[col * ROWS];
+      if (!sampleP) continue;
+      let osc = sampleP.x - sampleP.baseX;
+      if (abs(osc) < 0.1) continue;
+      let alpha = map(abs(osc), 0, max(abs(sourceDisplacement) * 0.8, 0.5), 3, 30);
+      if (osc > 0) fill(255, 50, 50, alpha);
+      else fill(50, 50, 255, alpha);
+      rect(colX - 1, GRID_Y - 5, CELL_W + 1, ROWS * CELL_H + 10);
+    }
+  }
+
+  // Particles
   for (let p of particles) {
     let dist = p.col;
     let delay = dist / propagationSpeed;
     let amplitude = sourceDisplacement * pow(attenuation, max(0, dist - 2));
-
     let oscillation = amplitude * sin(frameCount * 0.12 + p.phase - delay * 1.5);
     p.x = p.baseX + oscillation;
 
-    if (!showParticles) {
-      // Still draw background color bands
-      fill(0);
-      continue;
-    }
-
     let displacement = oscillation;
     let c;
-    if (abs(displacement) < 0.15) {
-      c = color(60, 60, 80, 80);
-    } else if (displacement > 0) {
-      let r = map(displacement, 0, max(abs(sourceDisplacement) * 0.8, 0.5), 120, 255);
-      c = color(r, 25, 35, 220);
+    if (abs(displacement) < 0.1) c = color(60, 60, 80, 60);
+    else if (displacement > 0) {
+      let r = map(displacement, 0, max(abs(sourceDisplacement) * 0.8, 0.5), 100, 255);
+      c = color(r, 25, 35, 200);
     } else {
       let b = map(displacement, -max(abs(sourceDisplacement) * 0.8, 0.5), 0, 80, 240);
-      c = color(25, 40, b, 220);
+      c = color(25, 40, b, 200);
     }
     fill(c);
     ellipse(p.x, p.y, 9, 9);
   }
 
-  // ── Compression/rarefaction bands ──
-  if (showParticles) {
-    for (let c = 0; c < COLS; c++) {
-      let colX = GRID_X + c * CELL_W;
-      let sampleP = particles[c * ROWS]; // sample one particle per column
-      if (!sampleP) continue;
-      let osc = sampleP.x - sampleP.baseX;
-      if (abs(osc) < 0.15) continue;
-
-      let alpha = map(abs(osc), 0, max(abs(sourceDisplacement), 0.5), 5, 25);
-      if (osc > 0) {
-        fill(255, 50, 50, alpha);
-      } else {
-        fill(50, 50, 255, alpha);
-      }
-      noStroke();
-      rect(colX - 1, GRID_Y - 5, CELL_W, ROWS * CELL_H + 10);
-    }
-  }
-
-  // ── Source indicator ──
+  // ── Source ──
   let srcH = ROWS * CELL_H + 20;
-  // Membrane cone
   fill(255, 180, 40);
-  noStroke();
   rect(sourceX - 5, GRID_Y - 10, 10, srcH + 20, 3);
   fill(255, 220, 80);
   rect(sourceX - 2, GRID_Y, 4, srcH, 2);
 
-  // ── Grid lines ──
-  if (showParticles) {
-    stroke(255, 255, 255, 8);
-    strokeWeight(0.5);
-    for (let c = 0; c <= COLS; c++) {
-      line(GRID_X + c * CELL_W, GRID_Y - 10, GRID_X + c * CELL_W, GRID_Y + ROWS * CELL_H + 10);
-    }
-    for (let r = 0; r <= ROWS; r++) {
-      line(GRID_X, GRID_Y + r * CELL_H, GRID_X + COLS * CELL_W, GRID_Y + r * CELL_H);
-    }
-    noStroke();
-  }
+  // ── Grid ──
+  stroke(255, 255, 255, 6);
+  strokeWeight(0.5);
+  for (let col = 0; col <= COLS; col++)
+    line(GRID_X + col * CELL_W, GRID_Y - 10, GRID_X + col * CELL_W, GRID_Y + ROWS * CELL_H + 10);
+  for (let r = 0; r <= ROWS; r++)
+    line(GRID_X, GRID_Y + r * CELL_H, GRID_X + COLS * CELL_W, GRID_Y + r * CELL_H);
+  noStroke();
 
   // ── Labels ──
   if (showLabels) {
     textSize(13);
     textAlign(CENTER, TOP);
     noStroke();
-
     fill(255, 180, 40);
     text('Fuente vibrante', sourceX, GRID_Y - 22);
-
     let rightEdge = GRID_X + COLS * CELL_W;
     fill(255, 90, 90);
-    text('Compresión (rojo)', GRID_X + 10 * CELL_W, GRID_Y - 22);
-
+    text('Compresión', GRID_X + 14 * CELL_W, GRID_Y - 22);
     fill(90, 90, 255);
-    text('Rarefacción (azul)', GRID_X + 22 * CELL_W, GRID_Y - 22);
+    text('Rarefacción', GRID_X + 26 * CELL_W, GRID_Y - 22);
 
-    // Propagation arrow
     let arrY = GRID_Y + ROWS * CELL_H + 25;
-    stroke(255, 255, 255, 80);
+    stroke(255, 255, 255, 70);
     strokeWeight(1);
     line(GRID_X, arrY, rightEdge, arrY);
     line(rightEdge, arrY, rightEdge - 10, arrY - 4);
     line(rightEdge, arrY, rightEdge - 10, arrY + 4);
-    fill(255, 255, 255, 140);
+    fill(255, 255, 255, 130);
     noStroke();
     textSize(11);
     text('→ Dirección de propagación', GRID_X + (COLS * CELL_W) / 2, arrY + 8);
-
-    fill(255, 255, 255, 100);
+    fill(255, 255, 255, 90);
     textSize(10);
     text('↔ Movimiento local de partículas', GRID_X + (COLS * CELL_W) / 2, arrY + 24);
   }
