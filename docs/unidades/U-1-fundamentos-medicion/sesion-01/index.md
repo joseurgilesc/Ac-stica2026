@@ -56,15 +56,9 @@
 
     Una masa en un resorte que oscila describe un **movimiento armónico simple**. Si se registra su posición en el tiempo, se obtiene una **onda sinusoidal** — la forma más pura y fundamental en acústica.
 
-    <figure markdown="span">
-      ![Fig. 1-1: Masa en un resorte vibrando a su frecuencia natural](../../../img/FIGURE%201-1.png)
-      <figcaption>**Fig. 1-1** — Una masa en un resorte vibra a su frecuencia natural por la elasticidad del resorte y la inercia de la masa. Elasticidad e inercia son las dos propiedades que todo medio debe poseer para conducir sonido (Everest & Pohlmann, 2009, p. 2).</figcaption>
-    </figure>
+    [:material-play-circle:{ .lg .middle } **Abrir simulación interactiva — Figuras 1-1 y 1-2**](../simulacion/mas/){ .md-button .md-button--primary }
 
-    <figure markdown="span">
-      ![Fig. 1-2: Trazado de una onda sinusoidal](../../../img/FIGURE%201-2.png)
-      <figcaption>**Fig. 1-2** — Un lápiz sujeto a la masa vibrante traza una onda sinusoidal sobre una tira de papel que se mueve a velocidad constante. Muestra la relación entre movimiento armónico simple y la onda sinusoidal (Everest & Pohlmann, 2009, p. 3).</figcaption>
-    </figure>
+    En la simulación podés variar la rigidez del resorte, la amplitud y la velocidad del papel. Observá cómo el lápiz traza la onda sinusoidal mientras la masa oscila.
 
     Una revolución completa equivale a 360° — un ciclo completo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el bloque elemental del que todo se compone (Fourier).
 
