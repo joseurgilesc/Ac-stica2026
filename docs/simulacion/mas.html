@@ -81,8 +81,8 @@ function draw() {
   let supportY = 50;
   let massRestY = 220;    // equilibrium position of mass
   let maxDisp = 80 * amplitude;
-  let paperTop = 360;
-  let paperBottom = height - 40;
+  let paperTop = massRestY - maxDisp - 20;
+  let paperBottom = massRestY + maxDisp + 20;
 
   // ── Physics ──
   if (!paused) {
@@ -98,11 +98,10 @@ function draw() {
   let massY = massRestY + position * maxDisp;
   let penX = GX + GW * 0.65;
 
-  // ── Pen tip (on paper) ──
-  let penTipX = penX - 90;
-  // Map massY to paper Y range
-  let penTipY = map(massY, massRestY - maxDisp, massRestY + maxDisp, paperTop + 10, paperBottom - 30);
-  penTipY = constrain(penTipY, paperTop + 10, paperBottom - 30);
+  // Pen tip is horizontally aligned with the mass center
+  let penTipX = penX - 95;
+  // Pen tip Y = same as mass Y (rigid horizontal arm)
+  let penTipY = massY;
 
   // ── Record wave history ──
   if (!paused && frameCount % 2 === 0) {
@@ -187,10 +186,13 @@ function draw() {
   circle(penX, massY, 14);
   circle(penX, massY, 6);
 
-  // --- Connecting arm (mass → pen tip) ---
-  stroke(36, 157, 143, 160);
-  strokeWeight(2);
-  line(penX, massY, penTipX, penTipY);
+  // --- Connecting arm (rigid horizontal bar: mass → pen tip) ---
+  stroke(36, 157, 143, 180);
+  strokeWeight(2.5);
+  // Small vertical drop from mass center, then horizontal to pen
+  line(penX, massY, penX, massY + 10);
+  line(penX, massY + 10, penTipX, massY + 10);
+  line(penTipX, massY + 10, penTipX, penTipY);
 
   // --- Pen ---
   fill(26, 122, 111);
