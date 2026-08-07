@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulación: El cuerpo como fuente sonora</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; background: #1a1a2e; font-family: system-ui, sans-serif; }
+    canvas { display: block; }
+    #ui {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(0,0,0,0.75); color: #fff;
+      padding: 12px 16px; border-radius: 8px;
+      font-size: 13px; line-height: 1.6; max-width: 260px;
+    }
+    #ui button {
+      display: block; margin: 6px 0; padding: 6px 12px;
+      border: none; border-radius: 4px; cursor: pointer;
+      background: #e94560; color: #fff; font-size: 13px; width: 100%;
+    }
+    #ui button:hover { background: #ff6b81; }
+    #ui input[type=range] { width: 100%; margin: 4px 0; }
+    #cam-warning {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      background: rgba(0,0,0,0.85); color: #fff; padding: 24px 32px;
+      border-radius: 12px; text-align: center; display: none; z-index: 10;
+    }
+    #cam-warning button {
+      margin-top: 12px; padding: 8px 20px; background: #0f3460; color: #fff;
+      border: none; border-radius: 4px; cursor: pointer; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<div id="ui">
+  <strong>🎛️ Controles</strong>
+  <button id="btn-reset">🔄 Reiniciar</button>
+  <label>Sensibilidad <span id="val-sens">0.5</span></label>
+  <input type="range" id="sens" min="0.2" max="1.5" step="0.1" value="0.5">
+  <label>
+    <input type="checkbox" id="show-labels" checked> Mostrar etiquetas
+  </label>
+  <p style="font-size:11px;color:#aaa;margin-top:8px">
+    🖱️ Si no hay cámara, usa el mouse (mueve horizontalmente)
+  </p>
+</div>
+<div id="cam-warning">
+  <p>📷 Esta simulación necesita acceso a la cámara para detectar tu mano.</p>
+  <p style="font-size:12px;color:#aaa">El procesamiento es local. No se graba ni envía ninguna imagen.</p>
+  <button id="btn-cam">Permitir cámara</button>
+  <p style="font-size:11px;color:#888;margin-top:8px">O usa el mouse como alternativa</p>
+</div>
+<script>
+// ── Particle system ──
+const COLS = 60, ROWS = 10;
+const CELL_W = 18, CELL_H = 18;
+const OFFSET_X = 100, OFFSET_Y = 60;
+let particles = [];
+let sourceX = 0;
+let targetX = 0;
+let useCamera = false;
+let handpose, video;
+let cameraReady = false;
+
+// UI elements
+let btnReset, sliderSens, chkLabels, btnCam, camWarning, valSens;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // Initialize particles in a grid
+  for (let c = 0; c < COLS; c++) {
+    for (let r = 0; r < ROWS; r++) {
+      particles.push({
+        baseX: OFFSET_X + c * CELL_W,
+        baseY: OFFSET_Y + r * CELL_H,
+        x: OFFSET_X + c * CELL_W,
+        y: OFFSET_Y + r * CELL_H,
+        phase: random(TWO_PI),
+        col: c,
+        row: r,
+      });
+    }
+  }
+  sourceX = OFFSET_X + 2 * CELL_W;  // source at column 2
+
+  // UI
+  btnReset = select('#btn-reset');
+  sliderSens = select('#sens');
+  chkLabels = select('#show-labels');
+  btnCam = select('#btn-cam');
+  camWarning = select('#cam-warning');
+  valSens = select('#val-sens');
+
+  btnReset.mousePressed(() => { sourceX = OFFSET_X + 2 * CELL_W; });
+  sliderSens.input(() => { valSens.html(sliderSens.value()); });
+  btnCam.mousePressed(() => { startCamera(); });
+
+  // Show camera prompt after a moment
+  setTimeout(() => { camWarning.style('display', 'block'); }, 500);
+}
+
+function startCamera() {
+  camWarning.style('display', 'none');
+  video = createCapture(VIDEO, () => {
+    video.size(640, 480);
+    video.hide();
+    handpose = ml5.handpose(video, () => {
+      console.log('Handpose ready');
+      cameraReady = true;
+      useCamera = true;
+    });
+  });
+}
+
+function draw() {
+  background(26, 26, 46);
+
+  let sens = sliderSens ? parseFloat(sliderSens.value()) : 0.5;
+  let showLabels = chkLabels ? chkLabels.checked() : true;
+
+  // ── Source movement ──
+  if (useCamera && cameraReady && handpose && video) {
+    handpose.predict().then(results => {
+      if (results && results.length > 0) {
+        let hand = results[0];
+        let wrist = hand.landmarks[0];  // wrist position
+        // Map hand x (0-640) to source movement range
+        let nx = constrain(wrist[0] / 640, 0, 1);
+        targetX = OFFSET_X + 2 * CELL_W + (nx - 0.5) * 8 * CELL_W;
+      }
+    });
+  } else {
+    // Mouse as fallback
+    let nx = constrain(mouseX / width, 0, 1);
+    targetX = OFFSET_X + 2 * CELL_W + (nx - 0.5) * 8 * CELL_W;
+  }
+
+  // Smooth source movement
+  sourceX += (targetX - sourceX) * 0.3;
+  sourceX = constrain(sourceX, OFFSET_X + CELL_W, OFFSET_X + (COLS - 2) * CELL_W);
+
+  // ── Calculate propagation ──
+  let sourceDisplacement = (targetX - (OFFSET_X + 2 * CELL_W)) * sens;
+  let propagationSpeed = 6;
+  let attenuation = 0.92;
+
+  // ── Update and draw particles ──
+  noStroke();
+  for (let p of particles) {
+    let dist = p.col;  // distance in columns from source (index 2)
+    let delay = dist / propagationSpeed;
+    let amplitude = sourceDisplacement * pow(attenuation, max(0, dist - 2));
+
+    // Oscillation around base position
+    let oscillation = amplitude * sin(frameCount * 0.15 + p.phase - delay * 2);
+    p.x = p.baseX + oscillation;
+
+    // Determine compression/rarefaction
+    let displacement = oscillation;
+    let c;
+    if (abs(displacement) < 0.1) {
+      c = color(255, 255, 255, 100);  // neutral
+    } else if (displacement > 0) {
+      let r = map(displacement, 0, amplitude, 100, 255);
+      c = color(r, 30, 30, 200);  // red = compression
+    } else {
+      let b = map(displacement, -amplitude, 0, 100, 255);
+      c = color(30, 30, b, 200);  // blue = rarefaction
+    }
+    fill(c);
+    ellipse(p.x, p.y, 8, 8);
+  }
+
+  // ── Draw source ──
+  fill(255, 200, 50);
+  rect(sourceX - 6, OFFSET_Y - 20, 12, ROWS * CELL_H + 40, 4);
+  // Source membrane
+  fill(255, 230, 100);
+  rect(sourceX - 3, OFFSET_Y - 5, 6, ROWS * CELL_H + 10, 2);
+
+  // ── Labels ──
+  if (showLabels) {
+    textSize(12);
+    textAlign(CENTER, TOP);
+
+    // Source label
+    fill(255, 200, 50);
+    noStroke();
+    text('⭐ Fuente vibrante', sourceX, OFFSET_Y - 30);
+
+    // Compression label
+    fill(255, 80, 80);
+    text('🔴 Compresión', OFFSET_X + 10 * CELL_W, OFFSET_Y - 15);
+
+    // Rarefaction label
+    fill(80, 80, 255);
+    text('🔵 Rarefacción', OFFSET_X + 16 * CELL_W, OFFSET_Y - 15);
+
+    // Propagation direction
+    stroke(255, 255, 255, 100);
+    strokeWeight(1);
+    let arrowY = OFFSET_Y + ROWS * CELL_H + 12;
+    line(OFFSET_X, arrowY, OFFSET_X + COLS * CELL_W, arrowY);
+    let arrX = OFFSET_X + COLS * CELL_W;
+    line(arrX, arrowY, arrX - 8, arrowY - 4);
+    line(arrX, arrowY, arrX - 8, arrowY + 4);
+    fill(255, 255, 255, 150);
+    noStroke();
+    textSize(11);
+    text('→ Dirección de propagación', OFFSET_X + (COLS * CELL_W) / 2, arrowY + 6);
+
+    // Local movement label
+    textSize(10);
+    fill(255, 255, 255, 120);
+    text('↔ Movimiento local de las partículas', OFFSET_X + (COLS * CELL_W) / 2, arrowY + 22);
+  }
+
+  // ── Info bar ──
+  noStroke();
+  fill(0, 0, 0, 150);
+  rect(0, height - 30, width, 30);
+  fill(255);
+  textAlign(LEFT, CENTER);
+  textSize(12);
+  if (useCamera && cameraReady) {
+    text('📷 Cámara activa — Mueve tu mano horizontalmente', 12, height - 15);
+  } else {
+    text('🖱️ Modo mouse — Mueve el cursor horizontalmente | Activa la cámara para detección de mano', 12, height - 15);
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+</body>
+</html>
