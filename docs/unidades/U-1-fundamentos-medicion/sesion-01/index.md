@@ -2,6 +2,18 @@
 
 ---
 
+<div class="grid cards" markdown>
+
+-   :material-waveform:{ .lg .middle } **Simulación interactiva**
+
+    ---
+
+    Explorá la relación entre compresión, rarefacción y la onda de presión sonora. Cambiá la frecuencia, escuchá el tono y observá cómo se comportan las partículas de aire.
+
+    [:octicons-arrow-right-24: Abrir simulación](../simulacion/)
+
+</div>
+
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
 
