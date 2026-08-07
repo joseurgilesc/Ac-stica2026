@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulación: Onda sinusoidal — Compresión y Rarefacción</title>
+  <title>Simulación: Compresión y Rarefacción del Sonido</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
   <style>
@@ -11,18 +11,15 @@
     body { margin: 0; overflow: hidden; background: #080816; font-family: system-ui, sans-serif; }
     canvas { display: block; }
     #panel {
-      position: absolute; top: 0; left: 0; width: 230px; height: 100vh;
+      position: absolute; top: 0; left: 0; width: 220px; height: 100vh;
       background: rgba(5,5,18,0.95); color: #fff; padding: 12px;
       font-size: 11px; z-index: 5; overflow-y: auto;
       border-right: 1px solid rgba(255,255,255,0.06);
     }
     #panel h3 { margin: 0 0 6px; font-size: 13px; color: #f0a030; }
-    #panel button {
-      width: 100%; margin: 3px 0; padding: 6px 8px;
-      border: none; border-radius: 4px; cursor: pointer;
-      background: #1a2744; color: #ccc; font-size: 11px;
-    }
+    #panel button { width: 100%; margin: 3px 0; padding: 6px 8px; border: none; border-radius: 4px; cursor: pointer; background: #1a2744; color: #ccc; font-size: 11px; }
     #panel button:hover { background: #243b63; }
+    #panel select { width: 100%; padding: 4px; background: #1a2744; color: #ccc; border: 1px solid #333; border-radius: 4px; font-size: 11px; margin-bottom: 4px; }
     #panel input[type=range] { width: 100%; accent-color: #f0a030; margin: 3px 0; }
     #panel label { display: block; margin: 6px 0 2px; color: #aaa; font-size: 10px; }
     #panel .val { color: #f0a030; font-weight: bold; }
@@ -33,59 +30,52 @@
 <body>
 
 <div id="panel">
-  <h3>🎵 Onda de sonido</h3>
-
+  <h3>🎵 Ondas de sonido</h3>
   <div class="section">
     <label>Frecuencia: <span class="val" id="fv">220 Hz</span></label>
-    <select id="note-select" style="width:100%;padding:4px;background:#1a2744;color:#ccc;border:1px solid #333;border-radius:4px;font-size:11px;margin-bottom:4px">
-      <option value="55">A1 — 55 Hz (grave)</option>
+    <select id="note-select">
+      <option value="55">A1 — 55 Hz</option>
       <option value="110">A2 — 110 Hz</option>
       <option value="165">E3 — 165 Hz</option>
       <option value="220" selected>A3 — 220 Hz</option>
-      <option value="262">C4 — 262 Hz (Do central)</option>
+      <option value="262">C4 — 262 Hz (Do)</option>
       <option value="330">E4 — 330 Hz</option>
-      <option value="440">A4 — 440 Hz (La referencia)</option>
+      <option value="440">A4 — 440 Hz (La)</option>
       <option value="524">C5 — 524 Hz</option>
       <option value="660">E5 — 660 Hz</option>
-      <option value="784">G5 — 784 Hz</option>
-      <option value="880">A5 — 880 Hz (agudo)</option>
-      <option value="1048">C6 — 1048 Hz</option>
+      <option value="880">A5 — 880 Hz</option>
     </select>
     <input type="range" id="freq" min="40" max="1200" value="220" step="1">
-    <label style="color:#666;font-size:9px">Grave ← deslizador fino → Agudo</label>
   </div>
-
   <div class="section">
     <label>Amplitud: <span class="val" id="av">1.0</span></label>
     <input type="range" id="amp" min="0.3" max="2.0" step="0.1" value="1.0">
   </div>
-
   <div class="section">
     <button id="btn-play">▶️ Activar sonido</button>
     <button id="btn-stop" style="display:none">⏸️ Silenciar</button>
   </div>
-
   <div class="legend">
-    <b style="color:#ff5555">🔴 Compresión</b><br>
-    Cresta de la onda → partículas juntas<br><br>
-    <b style="color:#5588ff">🔵 Rarefacción</b><br>
-    Valle de la onda → partículas separadas<br><br>
-    <b>⬆ Frecuencia</b> = más ciclos<br>
-    <b>⬆ Amplitud</b> = más desplazamiento<br><br>
-    ← Las partículas vibran<br>
-    La onda viaja →
+    <b>Onda de desplazamiento:</b><br>
+    <b style="color:#ff6666">⬆ Cresta = Compresión</b><br>
+    Partículas se juntan — presión ↑<br><br>
+    <b style="color:#6699ff">⬇ Valle = Rarefacción</b><br>
+    Partículas se separan — presión ↓<br><br>
+    La onda avanza →<br>
+    Las partículas no viajan.
   </div>
 </div>
 
 <script>
 let freq = 220, amp = 1.0, time = 0, playing = false;
 let synth;
-let NUM_P = 300;
 let particles = [];
+let noiseOff = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('system-ui');
+  noiseSeed(42);
 
   synth = new Tone.Synth({
     oscillator: { type: 'sine' },
@@ -93,227 +83,165 @@ function setup() {
     volume: -14
   }).toDestination();
 
-  for (let i = 0; i < NUM_P; i++) particles.push({ x: 0, y: 0, rest: 0 });
+  // Create particle grid
+  let cols = 60, rows = 10;
+  for (let c = 0; c < cols; c++)
+    for (let r = 0; r < rows; r++)
+      particles.push({ col: c, row: r, nx: random(1000), ny: random(1000), x: 0, y: 0 });
 
   let fs = select('#freq'), as = select('#amp'), ns = select('#note-select');
-  fs.input(() => { 
-    freq = parseFloat(fs.value()); 
-    select('#fv').html(freq + ' Hz'); 
+  fs.input(() => {
+    freq = parseFloat(fs.value()); select('#fv').html(freq + ' Hz');
     if (playing) synth.frequency.value = freq;
-    // Sync dropdown to closest note
-    let opts = ns.elt.options;
-    let best = opts[0];
-    for (let o of opts) {
-      if (Math.abs(parseFloat(o.value) - freq) < Math.abs(parseFloat(best.value) - freq)) best = o;
-    }
+    let opts = ns.elt.options, best = opts[0];
+    for (let o of opts) if (Math.abs(+o.value - freq) < Math.abs(+best.value - freq)) best = o;
     ns.elt.value = best.value;
   });
-  ns.changed(() => {
-    freq = parseFloat(ns.value());
-    fs.elt.value = freq;
-    select('#fv').html(freq + ' Hz');
-    if (playing) synth.frequency.value = freq;
-  });
+  ns.changed(() => { freq = parseFloat(ns.value()); fs.elt.value = freq; select('#fv').html(freq + ' Hz'); if (playing) synth.frequency.value = freq; });
   as.input(() => { amp = parseFloat(as.value()); select('#av').html(amp.toFixed(1)); });
-
   select('#btn-play').mousePressed(() => {
     if (Tone.context.state !== 'running') Tone.start();
-    synth.frequency.value = freq;
-    synth.triggerAttack(freq);
-    playing = true;
-    select('#btn-play').style('display', 'none');
-    select('#btn-stop').style('display', 'block');
+    synth.frequency.value = freq; synth.triggerAttack(freq);
+    playing = true; select('#btn-play').style('display', 'none'); select('#btn-stop').style('display', 'block');
   });
   select('#btn-stop').mousePressed(() => {
     synth.triggerRelease();
-    playing = false;
-    select('#btn-play').style('display', 'block');
-    select('#btn-stop').style('display', 'none');
+    playing = false; select('#btn-play').style('display', 'block'); select('#btn-stop').style('display', 'none');
   });
 }
 
 function draw() {
   background(8, 8, 22);
 
-  let GX = 250;
-  let GW = width - GX - 30;
+  let GX = 240, GW = width - GX - 30;
   let CY = height / 2 + 30;
-  let maxAmp = 130 * amp;
-  let visFreq = constrain(freq / 100, 0.4, 8);  // show 0.4-8 cycles
+  let maxAmp = 140 * amp;
+  let visFreq = constrain(freq / 120, 0.3, 7);
 
   time += deltaTime * 0.001;
+  noiseOff += deltaTime * 0.0002;
 
-  // ── Zone labels at the top ──
+  let cols = 60, rows = 10;
+  let colW = GW / cols;
+  let rowH = (maxAmp * 2 + 50) / rows;
+  let gridTop = CY - maxAmp - 25;
+
+  // ── Draw crest (compression) and trough (rarefaction) highlight zones ──
   noStroke();
-  textAlign(CENTER, TOP);
-  textSize(20);
-  fill(255, 210, 80);
-  text('ONDA SINUSOIDAL — SONIDO PURO', GX + GW / 2, 20);
-
-  textSize(13);
-  fill(200, 200, 200);
-  text(`Frecuencia: ${freq} Hz  ·  Amplitud: ${amp.toFixed(1)}`, GX + GW / 2, 48);
-
-  // ── Draw the wave with filled area ──
-  let STEPS = 500;
-  let wave = [];
-
-  for (let i = 0; i <= STEPS; i++) {
-    let x = GX + (i / STEPS) * GW;
-    let phase = (i / STEPS) * TWO_PI * visFreq + time * 2;
-    let y = CY - sin(phase) * maxAmp;
-    wave.push({ x, y, phase });
+  for (let x = GX; x < GX + GW; x += 4) {
+    let phase = ((x - GX) / GW) * TWO_PI * visFreq + time * 2;
+    let val = sin(phase);
+    let a;
+    if (val > 0.05) { a = map(val, 0.05, 1, -20, 40); fill(255, 60, 60, a); }
+    else if (val < -0.05) { a = map(-val, 0.05, 1, -20, 40); fill(60, 80, 255, a); }
+    else continue;
+    rect(x - 1, gridTop, 3, maxAmp * 2 + 50);
   }
-
-  // Filled area under wave
-  noStroke();
-  beginShape();
-  fill(100, 180, 255, 25);
-  for (let w of wave) vertex(w.x, w.y);
-  vertex(GX + GW, CY + maxAmp + 5);
-  vertex(GX, CY + maxAmp + 5);
-  endShape(CLOSE);
-
-  // ── Compression/Rarefaction highlights ──
-  for (let i = 1; i < wave.length; i++) {
-    let dy = wave[i].y - wave[i-1].y;
-    let w = (GW / STEPS) * 2;
-    if (dy < -0.3) {
-      // Going up = crest approaching = compression
-      fill(255, 60, 60, 18);
-      rect(wave[i].x - w / 2, CY - maxAmp - 20, w, maxAmp * 2 + 40);
-    } else if (dy > 0.3) {
-      // Going down = trough approaching = rarefaction
-      fill(60, 80, 255, 18);
-      rect(wave[i].x - w / 2, CY - maxAmp - 20, w, maxAmp * 2 + 40);
-    }
-  }
-
-  // ── Wave line ──
-  stroke(100, 200, 255, 200);
-  strokeWeight(3);
-  noFill();
-  beginShape();
-  for (let w of wave) vertex(w.x, w.y);
-  endShape();
-
-  // ── Center line ──
-  stroke(255, 255, 255, 15);
-  strokeWeight(1);
-  line(GX, CY, GX + GW, CY);
-  noStroke();
 
   // ── Particles ──
-  let spacing = GW / NUM_P;
-  let numRows = 6;
-  let baseRowGap = 16;
+  noStroke();
+  let prevX = 0;
 
-  for (let i = 0; i < NUM_P; i++) {
-    let baseX = GX + i * spacing;
-    let phase = (i / NUM_P) * TWO_PI * visFreq + time * 2;
+  for (let p of particles) {
+    let col = p.col, row = p.row;
+    let baseX = GX + col * colW + colW / 2;
+    let baseY = gridTop + row * rowH + rowH / 2;
+
+    let phase = (col / cols) * TWO_PI * visFreq + time * 2;
     let waveVal = sin(phase);
-    let waveY = CY - waveVal * maxAmp;
 
-    // Compression (crest, waveVal > 0): particles cluster horizontally
-    // Rarefaction (trough, waveVal < 0): particles spread apart
-    let clusterShift = -waveVal * 14 * amp;  // horizontal shift toward crest
-    let px = baseX + clusterShift;
-    let rowGap = baseRowGap - waveVal * 8 * amp;  // tighter rows at crest
+    // Simple local clustering based on wave value at this column
+    // Compare to adjacent columns: if crest (waveVal > 0), compress spacing
+    // If trough (waveVal < 0), expand spacing
+    let phasePrev = ((col - 1) / cols) * TWO_PI * visFreq + time * 2;
+    let slope = sin(phase) - sin(phasePrev);
+
+    // At crest (waveVal > 0): shift particles toward each other
+    // At trough (waveVal < 0): shift particles away from each other
+    let clusterStrength = -waveVal;  // negative at crest = pull together, positive at trough = push apart
+    let shiftX = clusterStrength * colW * 0.35 * amp;
+
+    // Perlin noise
+    let nx = noise(p.nx + noiseOff) - 0.5;
+    let ny = noise(p.ny + noiseOff) - 0.5;
+
+    p.x = baseX + shiftX + nx * 4 * amp;
+    p.y = baseY + ny * 4 * amp;
+
+    // Size: smaller at compression (dense), larger at rarefaction (spread)
+    let sz = waveVal > 0 ? 4.5 - waveVal * 1.5 : 4.5 + (-waveVal) * 2;
 
     // Color
     let r, g, b, alpha;
-    if (waveVal > 0.05) {
+    if (waveVal > 0.04) {
       let t = constrain(waveVal, 0, 1);
-      r = lerp(220, 255, t); g = lerp(160, 50, t); b = lerp(160, 50, t);
-      alpha = lerp(130, 240, t);
-    } else if (waveVal < -0.05) {
+      r = 255; g = lerp(160, 45, t); b = lerp(160, 45, t);
+      alpha = lerp(80, 230, t);
+    } else if (waveVal < -0.04) {
       let t = constrain(-waveVal, 0, 1);
-      r = lerp(160, 50, t); g = lerp(160, 90, t); b = lerp(220, 255, t);
-      alpha = lerp(130, 240, t);
+      r = lerp(160, 45, t); g = lerp(160, 105, t); b = 255;
+      alpha = lerp(80, 230, t);
     } else {
-      r = 160; g = 160; b = 180; alpha = 80;
+      r = 140; g = 140; b = 160; alpha = 40;
     }
-
     fill(r, g, b, alpha);
-    noStroke();
-    let row = i % numRows - Math.floor(numRows / 2);
-    let py = waveY + row * rowGap;
-    let sz = 4 + abs(waveVal) * 3 * amp;  // slightly bigger at extremes
-    ellipse(px, py, sz, sz);
+    ellipse(p.x, p.y, sz, sz);
   }
 
-  // ── Compression/Rarefaction labels on wave ──
+  // ── Sine wave line ──
+  stroke(180, 220, 255, 200);
+  strokeWeight(3);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 400; i++) {
+    let x = GX + (i / 400) * GW;
+    let phase = (i / 400) * TWO_PI * visFreq + time * 2;
+    vertex(x, CY - sin(phase) * maxAmp);
+  }
+  endShape();
+
+  // Center line
+  stroke(255, 255, 255, 12);
+  strokeWeight(0.5);
+  line(GX, CY, GX + GW, CY);
   noStroke();
-  textAlign(CENTER, CENTER);
 
-  // Find crest and trough positions
-  for (let i = 0; i < visFreq * 10; i++) {
-    let phaseAtCrest = -PI / 2 + i * TWO_PI / visFreq;
-    let crestX = GX + ((phaseAtCrest - time * 2) / (TWO_PI * visFreq) % 1 + 1) % 1 * GW;
+  // ── Labels ──
+  textAlign(CENTER, TOP);
+  textSize(16);
+  fill(255, 210, 80);
+  text('⬆ CRESTA = COMPRESIÓN (partículas juntas)', GX + GW / 2, 22);
+  textSize(12);
+  fill(180, 180, 200);
+  text(`Frecuencia: ${freq} Hz  ·  Amplitud: ${amp.toFixed(1)}  ·  Cresta → 🔴  |  Valle → 🔵`, GX + GW / 2, 44);
 
-    if (crestX > GX + 20 && crestX < GX + GW - 20) {
-      fill(255, 100, 100, 180);
-      textSize(13);
-      text('COMPRESIÓN', crestX, CY - maxAmp - 20);
-
-      // Mark the crest
-      stroke(255, 100, 100, 100);
-      strokeWeight(1);
-      line(crestX, CY - maxAmp - 8, crestX, CY - maxAmp + 10);
-      noStroke();
-      break;
-    }
-  }
-
-  for (let i = 0; i < visFreq * 10; i++) {
-    let phaseAtTrough = PI / 2 + i * TWO_PI / visFreq;
-    let troughX = GX + ((phaseAtTrough - time * 2) / (TWO_PI * visFreq) % 1 + 1) % 1 * GW;
-
-    if (troughX > GX + 20 && troughX < GX + GW - 20) {
-      fill(100, 130, 255, 180);
-      textSize(13);
-      text('RAREFACCIÓN', troughX, CY + maxAmp + 20);
-      break;
-    }
-  }
-
-  // ── Wavelength marker ──
-  if (visFreq <= 6) {
-    let lamW = GW / visFreq;
-    let lamX = GX + 30;
-    let ly = CY - maxAmp - 55;
-
-    stroke(255, 220, 100, 80);
+  // Wavelength
+  if (visFreq <= 5) {
+    let lamW = GW / visFreq, lx = GX + 15, ly = gridTop - 12;
+    stroke(255, 200, 80, 80);
     strokeWeight(1.5);
-    line(lamX, ly, lamX + lamW, ly);
-    line(lamX, ly - 6, lamX, ly + 6);
-    line(lamX + lamW, ly - 6, lamX + lamW, ly + 6);
+    line(lx, ly, lx + lamW, ly);
+    line(lx, ly - 4, lx, ly + 4);
+    line(lx + lamW, ly - 4, lx + lamW, ly + 4);
     noStroke();
-    fill(255, 220, 100, 120);
-    textSize(11);
-    text(`λ = ${(344 / freq).toFixed(2)} m`, lamX + lamW / 2, ly + 8);
-
+    fill(255, 200, 80, 120);
     textSize(10);
-    fill(255, 220, 100, 80);
-    text(`(velocidad del sonido ${344} m/s ÷ ${freq} Hz)`, lamX + lamW / 2, ly + 22);
+    text(`λ = (344 m/s) ÷ ${freq} Hz = ${(344/freq).toFixed(2)} m`, lx + lamW / 2, ly + 5);
   }
 
-  // ── Bottom bar ──
-  let arrY = height - 50;
-  stroke(255, 255, 255, 40);
-  strokeWeight(1.5);
-  line(GX, arrY, GX + GW, arrY);
-  line(GX + GW, arrY, GX + GW - 10, arrY - 4);
-  line(GX + GW, arrY, GX + GW - 10, arrY + 4);
+  // Bottom
+  let barY = height - 42;
+  stroke(255, 255, 255, 25);
+  strokeWeight(1);
+  line(GX, barY, GX + GW, barY);
+  line(GX + GW, barY, GX + GW - 8, barY - 3);
+  line(GX + GW, barY, GX + GW - 8, barY + 3);
   noStroke();
-  fill(255, 255, 255, 100);
-  textSize(11);
-  text('La onda viaja →   |   Cada partícula solo vibra en su lugar', GX + GW / 2, arrY + 12);
-
-  // Audio indicator
+  fill(255, 255, 255, 70);
+  textSize(10);
+  text('→ Propagación de la onda | Partículas con ruido Perlin natural | Solo vibran, no viajan', GX + GW / 2, barY + 9);
   fill(playing ? '#80ff80' : '#555');
-  textSize(11);
-  text(playing ? '🔊 Sonido: ' + freq + ' Hz' : '🔇 Silencio', GX + GW / 2, height - 15);
+  text(playing ? '🔊 Sonido activo' : '🔇 Silencio', GX + GW / 2, height - 15);
 }
 
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
