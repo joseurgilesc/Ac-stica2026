@@ -4,8 +4,8 @@
 
 !!! tip "Simulaciones interactivas"
 
-    - [🎮 Compresión y rarefacción del sonido](../../simulacion/) — partículas de aire y onda de presión
-    - [🎯 Movimiento armónico simple y onda sinusoidal](../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
+    - [🎮 Compresión y rarefacción del sonido](../../../simulacion/) — partículas de aire y onda de presión
+    - [🎯 Movimiento armónico simple y onda sinusoidal](../../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
 
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
@@ -49,7 +49,7 @@
 
     Una masa en un resorte que oscila describe un **movimiento armónico simple**. Si se registra su posición en el tiempo, se obtiene una **onda sinusoidal** — la forma más pura y fundamental en acústica.
 
-    [🎯 Abrir simulación interactiva — Figuras 1-1 y 1-2](../../simulacion/mas.html)
+    [🎯 Abrir simulación interactiva — Figuras 1-1 y 1-2](../../../simulacion/mas.html)
 
     En la simulación podés variar la rigidez del resorte, la amplitud y la velocidad del papel. Observá cómo el lápiz traza la onda sinusoidal mientras la masa oscila.
 
