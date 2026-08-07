@@ -36,9 +36,23 @@
   <h3>🎵 Onda de sonido</h3>
 
   <div class="section">
-    <label>Frecuencia: <span class="val" id="fv">440 Hz</span></label>
-    <input type="range" id="freq" min="40" max="800" value="200" step="1">
-    <label style="color:#666;font-size:9px">40 Hz (grave) ← → 800 Hz (agudo)</label>
+    <label>Frecuencia: <span class="val" id="fv">220 Hz</span></label>
+    <select id="note-select" style="width:100%;padding:4px;background:#1a2744;color:#ccc;border:1px solid #333;border-radius:4px;font-size:11px;margin-bottom:4px">
+      <option value="55">A1 — 55 Hz (grave)</option>
+      <option value="110">A2 — 110 Hz</option>
+      <option value="165">E3 — 165 Hz</option>
+      <option value="220" selected>A3 — 220 Hz</option>
+      <option value="262">C4 — 262 Hz (Do central)</option>
+      <option value="330">E4 — 330 Hz</option>
+      <option value="440">A4 — 440 Hz (La referencia)</option>
+      <option value="524">C5 — 524 Hz</option>
+      <option value="660">E5 — 660 Hz</option>
+      <option value="784">G5 — 784 Hz</option>
+      <option value="880">A5 — 880 Hz (agudo)</option>
+      <option value="1048">C6 — 1048 Hz</option>
+    </select>
+    <input type="range" id="freq" min="40" max="1200" value="220" step="1">
+    <label style="color:#666;font-size:9px">Grave ← deslizador fino → Agudo</label>
   </div>
 
   <div class="section">
@@ -64,7 +78,7 @@
 </div>
 
 <script>
-let freq = 200, amp = 1.0, time = 0, playing = false;
+let freq = 220, amp = 1.0, time = 0, playing = false;
 let synth;
 let NUM_P = 300;
 let particles = [];
@@ -81,8 +95,25 @@ function setup() {
 
   for (let i = 0; i < NUM_P; i++) particles.push({ x: 0, y: 0, rest: 0 });
 
-  let fs = select('#freq'), as = select('#amp');
-  fs.input(() => { freq = parseFloat(fs.value()); select('#fv').html(freq + ' Hz'); if (playing) synth.frequency.value = freq; });
+  let fs = select('#freq'), as = select('#amp'), ns = select('#note-select');
+  fs.input(() => { 
+    freq = parseFloat(fs.value()); 
+    select('#fv').html(freq + ' Hz'); 
+    if (playing) synth.frequency.value = freq;
+    // Sync dropdown to closest note
+    let opts = ns.elt.options;
+    let best = opts[0];
+    for (let o of opts) {
+      if (Math.abs(parseFloat(o.value) - freq) < Math.abs(parseFloat(best.value) - freq)) best = o;
+    }
+    ns.elt.value = best.value;
+  });
+  ns.changed(() => {
+    freq = parseFloat(ns.value());
+    fs.elt.value = freq;
+    select('#fv').html(freq + ' Hz');
+    if (playing) synth.frequency.value = freq;
+  });
   as.input(() => { amp = parseFloat(as.value()); select('#av').html(amp.toFixed(1)); });
 
   select('#btn-play').mousePressed(() => {
@@ -174,48 +205,41 @@ function draw() {
 
   // ── Particles ──
   let spacing = GW / NUM_P;
+  let numRows = 6;
+  let baseRowGap = 16;
+
   for (let i = 0; i < NUM_P; i++) {
-    let x = GX + i * spacing;
+    let baseX = GX + i * spacing;
     let phase = (i / NUM_P) * TWO_PI * visFreq + time * 2;
-    let waveY = CY - sin(phase) * maxAmp;
-
-    // Calculate local spacing: particles cluster at crest (compression), spread at trough (rarefaction)
-    let phaseNext = ((i + 1) / NUM_P) * TWO_PI * visFreq + time * 2;
-    let slope = sin(phaseNext) - sin(phase);
-    // slope > 0 = going down (rarefaction), slope < 0 = going up (compression)
-
-    // Vertical spread based on slope
-    let clusterEffect = -slope * 40 * amp;
-
-    // Particles organized in 3 rows above and below the wave
-    let row = i % 5 - 2;  // -2, -1, 0, 1, 2
-    let py = waveY + row * (10 + clusterEffect * 0.5);
-
-    // Color: red at crest (compression), blue at trough (rarefaction)
     let waveVal = sin(phase);
-    let r, g, b, alpha;
+    let waveY = CY - waveVal * maxAmp;
 
-    if (waveVal > 0.1) {
-      // Near crest = compression
+    // Compression (crest, waveVal > 0): particles cluster horizontally
+    // Rarefaction (trough, waveVal < 0): particles spread apart
+    let clusterShift = -waveVal * 14 * amp;  // horizontal shift toward crest
+    let px = baseX + clusterShift;
+    let rowGap = baseRowGap - waveVal * 8 * amp;  // tighter rows at crest
+
+    // Color
+    let r, g, b, alpha;
+    if (waveVal > 0.05) {
       let t = constrain(waveVal, 0, 1);
-      r = lerp(200, 255, t);
-      g = lerp(180, 70, t);
-      b = lerp(180, 70, t);
-      alpha = lerp(120, 230, t);
-    } else if (waveVal < -0.1) {
-      // Near trough = rarefaction
+      r = lerp(220, 255, t); g = lerp(160, 50, t); b = lerp(160, 50, t);
+      alpha = lerp(130, 240, t);
+    } else if (waveVal < -0.05) {
       let t = constrain(-waveVal, 0, 1);
-      r = lerp(180, 70, t);
-      g = lerp(180, 100, t);
-      b = lerp(200, 255, t);
-      alpha = lerp(120, 230, t);
+      r = lerp(160, 50, t); g = lerp(160, 90, t); b = lerp(220, 255, t);
+      alpha = lerp(130, 240, t);
     } else {
-      r = 160; g = 160; b = 180; alpha = 100;
+      r = 160; g = 160; b = 180; alpha = 80;
     }
 
     fill(r, g, b, alpha);
     noStroke();
-    ellipse(x, py, 5, 5);
+    let row = i % numRows - Math.floor(numRows / 2);
+    let py = waveY + row * rowGap;
+    let sz = 4 + abs(waveVal) * 3 * amp;  // slightly bigger at extremes
+    ellipse(px, py, sz, sz);
   }
 
   // ── Compression/Rarefaction labels on wave ──
