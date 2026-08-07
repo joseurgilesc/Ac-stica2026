@@ -3,336 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulación: El cuerpo como fuente sonora</title>
+  <title>Simulación: Onda sinusoidal — Compresión y Rarefacción</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; overflow: hidden; background: #0d0d1a; font-family: system-ui, sans-serif; }
+    body { margin: 0; overflow: hidden; background: #080816; font-family: system-ui, sans-serif; }
     canvas { display: block; }
     #panel {
-      position: absolute; top: 0; left: 0; width: 250px; height: 100vh;
-      background: rgba(8,8,22,0.94); color: #fff; padding: 14px;
-      font-size: 12px; z-index: 5; overflow-y: auto;
-      border-right: 1px solid rgba(255,255,255,0.08);
+      position: absolute; top: 0; left: 0; width: 230px; height: 100vh;
+      background: rgba(5,5,18,0.95); color: #fff; padding: 12px;
+      font-size: 11px; z-index: 5; overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.06);
     }
-    #panel h3 { margin: 0 0 6px; font-size: 14px; color: #f0a030; }
+    #panel h3 { margin: 0 0 6px; font-size: 13px; color: #f0a030; }
     #panel button {
-      width: 100%; margin: 4px 0; padding: 7px 10px;
-      border: none; border-radius: 5px; cursor: pointer;
-      background: #162447; color: #ccc; font-size: 12px;
+      width: 100%; margin: 3px 0; padding: 6px 8px;
+      border: none; border-radius: 4px; cursor: pointer;
+      background: #1a2744; color: #ccc; font-size: 11px;
     }
-    #panel button:hover { background: #1f4287; }
-    #panel .status { margin: 8px 0; padding: 6px 10px; border-radius: 5px; font-size: 11px; text-align: center; }
-    .status.off { background: rgba(255,255,255,0.04); color: #777; }
-    .status.on { background: rgba(0,200,80,0.1); color: #0f8; }
-    #panel input[type=range] { width: 100%; accent-color: #f0a030; margin: 4px 0; }
-    #panel label { display: block; margin: 6px 0 2px; color: #aaa; font-size: 11px; }
-    #panel .legend { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 6px; font-size: 11px; line-height: 1.6; }
+    #panel button:hover { background: #243b63; }
+    #panel input[type=range] { width: 100%; accent-color: #f0a030; margin: 3px 0; }
+    #panel label { display: block; margin: 6px 0 2px; color: #aaa; font-size: 10px; }
+    #panel .val { color: #f0a030; font-weight: bold; }
+    #panel .legend { margin-top: 10px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 5px; font-size: 10px; line-height: 1.6; }
+    #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
   </style>
 </head>
 <body>
 
 <div id="panel">
-  <h3>🔊 Ondas de sonido</h3>
-  <div class="status off" id="status">🖱️ Modo mouse</div>
+  <h3>🎵 Onda de sonido</h3>
 
-  <button id="btn-cam">📷 Activar cámara</button>
-  <button id="btn-mouse">🖱️ Usar mouse</button>
-  <button id="btn-reset">🔄 Reiniciar</button>
+  <div class="section">
+    <label>Frecuencia: <span class="val" id="fv">440 Hz</span></label>
+    <input type="range" id="freq" min="40" max="800" value="200" step="1">
+    <label style="color:#666;font-size:9px">40 Hz (grave) ← → 800 Hz (agudo)</label>
+  </div>
 
-  <label>Amplitud: <b id="val-amp">1.0</b></label>
-  <input type="range" id="amp" min="0.3" max="2.5" step="0.1" value="1.0">
+  <div class="section">
+    <label>Amplitud: <span class="val" id="av">1.0</span></label>
+    <input type="range" id="amp" min="0.3" max="2.0" step="0.1" value="1.0">
+  </div>
 
-  <label><input type="checkbox" id="show-cam"> Ver cámara</label>
-  <label><input type="checkbox" id="show-labels" checked> Etiquetas</label>
+  <div class="section">
+    <button id="btn-play">▶️ Activar sonido</button>
+    <button id="btn-stop" style="display:none">⏸️ Silenciar</button>
+  </div>
 
   <div class="legend">
     <b style="color:#ff5555">🔴 Compresión</b><br>
-    Partículas se juntan.<br>
-    Presión ↑ (mayor que la atmosférica).<br><br>
+    Cresta de la onda → partículas juntas<br><br>
     <b style="color:#5588ff">🔵 Rarefacción</b><br>
-    Partículas se separan.<br>
-    Presión ↓ (menor que la atmosférica).<br><br>
-    <b>⚡ La onda avanza →</b><br>
-    Pero las partículas <b>no viajan</b>.<br>
-    Solo vibran y vuelven a su lugar.
+    Valle de la onda → partículas separadas<br><br>
+    <b>⬆ Frecuencia</b> = más ciclos<br>
+    <b>⬆ Amplitud</b> = más desplazamiento<br><br>
+    ← Las partículas vibran<br>
+    La onda viaja →
   </div>
-
-  <div style="margin-top:10px;font-size:10px;color:#666" id="debug"></div>
 </div>
 
 <script>
-// ── Configuration ──
-const PARTICLES = 100;        // number of air particles
-const Y_CENTER = 320;        // vertical center
-const TUBE_START = 120;      // left edge of tube
-const TUBE_END = 1100;       // right edge of tube
-const TUBE_LEN = TUBE_END - TUBE_START;
-const PARTICLE_R = 8;        // particle radius
-
-let particles = [];           // { restX, x, y }
-let speakerX = 0;            // current speaker cone position
-let targetSpeakerX = 0;      // target from mouse/hand
-let restSpeakerX = TUBE_START + 30;  // speaker rest position
-
-let useCam = false, camReady = false;
-let handpose, video;
-let mouseOn = true;
-let lastPred = 0;
-let ampVal = 1.0, showLabels = true, showCam = false;
-let debugEl;
+let freq = 200, amp = 1.0, time = 0, playing = false;
+let synth;
+let NUM_P = 300;
+let particles = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('system-ui');
-  debugEl = select('#debug');
 
-  // Create particles evenly spaced along the tube
-  let spacing = (TUBE_LEN - 60) / PARTICLES;
-  for (let i = 0; i < PARTICLES; i++) {
-    let x = TUBE_START + 50 + i * spacing;
-    particles.push({ restX: x, x: x, y: Y_CENTER, vy: 0 });
-  }
+  synth = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.02, decay: 0.1, sustain: 0.4, release: 0.1 },
+    volume: -14
+  }).toDestination();
 
-  speakerX = restSpeakerX;
-  targetSpeakerX = restSpeakerX;
-  noCursor();
+  for (let i = 0; i < NUM_P; i++) particles.push({ x: 0, y: 0, rest: 0 });
 
-  select('#btn-reset').mousePressed(() => {
-    speakerX = targetSpeakerX = restSpeakerX;
-    for (let p of particles) { p.x = p.restX; p.y = Y_CENTER; }
+  let fs = select('#freq'), as = select('#amp');
+  fs.input(() => { freq = parseFloat(fs.value()); select('#fv').html(freq + ' Hz'); if (playing) synth.frequency.value = freq; });
+  as.input(() => { amp = parseFloat(as.value()); select('#av').html(amp.toFixed(1)); });
+
+  select('#btn-play').mousePressed(() => {
+    if (Tone.context.state !== 'running') Tone.start();
+    synth.frequency.value = freq;
+    synth.triggerAttack(freq);
+    playing = true;
+    select('#btn-play').style('display', 'none');
+    select('#btn-stop').style('display', 'block');
   });
-  select('#amp').input(() => {
-    ampVal = parseFloat(select('#amp').value());
-    select('#val-amp').html(ampVal.toFixed(1));
-  });
-  select('#show-labels').changed(() => showLabels = select('#show-labels').checked());
-  select('#show-cam').changed(() => showCam = select('#show-cam').checked());
-
-  select('#btn-cam').mousePressed(() => {
-    select('#status').removeClass('on').addClass('off').html('⏳ Iniciando...');
-    startCam();
-  });
-  select('#btn-mouse').mousePressed(() => {
-    useCam = false; camReady = false; mouseOn = true;
-    if (video) { video.remove(); video = null; }
-    select('#status').removeClass('on').addClass('off').html('🖱️ Modo mouse');
-    debugEl.html('');
-  });
-}
-
-function startCam() {
-  video = createCapture(VIDEO, () => {});
-  video.size(640, 480);
-  video.hide();
-  handpose = ml5.handpose(video, { flipHorizontal: true, runtime: 'tfjs' }, () => {
-    camReady = true; useCam = true; mouseOn = false;
-    select('#status').removeClass('off').addClass('on').html('📷 Cámara activa');
-    debugEl.html('Modelo listo. Mové tu mano.');
+  select('#btn-stop').mousePressed(() => {
+    synth.triggerRelease();
+    playing = false;
+    select('#btn-play').style('display', 'block');
+    select('#btn-stop').style('display', 'none');
   });
 }
 
 function draw() {
-  background(13, 13, 26);
+  background(8, 8, 22);
 
-  // ── Mouse / Hand input ──
-  let inputVal = 0;
-  if (useCam && camReady && handpose && millis() - lastPred > 80) {
-    lastPred = millis();
-    handpose.predict(function(err, results) {
-      if (!err && results && results.length > 0) {
-        let wrist = results[0].landmarks ? results[0].landmarks[0] : null;
-        if (wrist) {
-          let nx = constrain(wrist[0] / 640, 0, 1);
-          inputVal = (nx - 0.5) * 2 * ampVal;
-          targetSpeakerX = restSpeakerX + inputVal * 80;
-          debugEl.html(`Mano: x=${wrist[0].toFixed(0)} → ${inputVal.toFixed(2)}`);
-        }
-      }
-    });
-  } else if (mouseOn) {
-    let nx = constrain(mouseX / width, 0, 1);
-    inputVal = (nx - 0.5) * 2 * ampVal;
-    targetSpeakerX = restSpeakerX + inputVal * 80;
-  }
+  let GX = 250;
+  let GW = width - GX - 30;
+  let CY = height / 2 + 30;
+  let maxAmp = 130 * amp;
+  let visFreq = constrain(freq / 100, 0.4, 8);  // show 0.4-8 cycles
 
-  // Smooth speaker
-  speakerX += (targetSpeakerX - speakerX) * 0.4;
+  time += deltaTime * 0.001;
 
-  // ── Update particles ──
-  // Speaker displacement affects first particle, propagates right
-  let speakerDisp = (speakerX - restSpeakerX);  // positive = pushed right
-
-  for (let i = 0; i < PARTICLES; i++) {
-    let p = particles[i];
-    // Distance from speaker in terms of particle index
-    let dist = i;
-    let delay = dist * 0.06;  // propagation delay
-    let atten = pow(0.97, dist);  // attenuation
-
-    // Target position: rest + delayed speaker influence
-    let influence = speakerDisp * atten * sin(frameCount * 0.15 - delay);
-    let targetX = p.restX + influence;
-
-    // Smooth toward target
-    p.x += (targetX - p.x) * 0.5;
-
-    // Small random jitter for air-like behavior
-    p.x += random(-0.3, 0.3);
-  }
-
-  // ── Draw tube background ──
+  // ── Zone labels at the top ──
   noStroke();
-  // Tube
-  fill(20, 20, 35);
-  rect(TUBE_START - 10, Y_CENTER - 60, TUBE_LEN + 20, 120, 8);
-  // Tube borders
+  textAlign(CENTER, TOP);
+  textSize(20);
+  fill(255, 210, 80);
+  text('ONDA SINUSOIDAL — SONIDO PURO', GX + GW / 2, 20);
+
+  textSize(13);
+  fill(200, 200, 200);
+  text(`Frecuencia: ${freq} Hz  ·  Amplitud: ${amp.toFixed(1)}`, GX + GW / 2, 48);
+
+  // ── Draw the wave with filled area ──
+  let STEPS = 500;
+  let wave = [];
+
+  for (let i = 0; i <= STEPS; i++) {
+    let x = GX + (i / STEPS) * GW;
+    let phase = (i / STEPS) * TWO_PI * visFreq + time * 2;
+    let y = CY - sin(phase) * maxAmp;
+    wave.push({ x, y, phase });
+  }
+
+  // Filled area under wave
+  noStroke();
+  beginShape();
+  fill(100, 180, 255, 25);
+  for (let w of wave) vertex(w.x, w.y);
+  vertex(GX + GW, CY + maxAmp + 5);
+  vertex(GX, CY + maxAmp + 5);
+  endShape(CLOSE);
+
+  // ── Compression/Rarefaction highlights ──
+  for (let i = 1; i < wave.length; i++) {
+    let dy = wave[i].y - wave[i-1].y;
+    let w = (GW / STEPS) * 2;
+    if (dy < -0.3) {
+      // Going up = crest approaching = compression
+      fill(255, 60, 60, 18);
+      rect(wave[i].x - w / 2, CY - maxAmp - 20, w, maxAmp * 2 + 40);
+    } else if (dy > 0.3) {
+      // Going down = trough approaching = rarefaction
+      fill(60, 80, 255, 18);
+      rect(wave[i].x - w / 2, CY - maxAmp - 20, w, maxAmp * 2 + 40);
+    }
+  }
+
+  // ── Wave line ──
+  stroke(100, 200, 255, 200);
+  strokeWeight(3);
+  noFill();
+  beginShape();
+  for (let w of wave) vertex(w.x, w.y);
+  endShape();
+
+  // ── Center line ──
   stroke(255, 255, 255, 15);
   strokeWeight(1);
-  line(TUBE_START, Y_CENTER - 60, TUBE_START, Y_CENTER + 60);
-  line(TUBE_END, Y_CENTER - 60, TUBE_END, Y_CENTER + 60);
+  line(GX, CY, GX + GW, CY);
   noStroke();
 
-  // ── Draw compression/rarefaction highlights ──
-  for (let i = 1; i < PARTICLES; i++) {
-    let gap = particles[i].x - particles[i-1].x;
-    let restGap = particles[i].restX - particles[i-1].restX;
-    let ratio = gap / restGap;
+  // ── Particles ──
+  let spacing = GW / NUM_P;
+  for (let i = 0; i < NUM_P; i++) {
+    let x = GX + i * spacing;
+    let phase = (i / NUM_P) * TWO_PI * visFreq + time * 2;
+    let waveY = CY - sin(phase) * maxAmp;
 
-    if (ratio < 0.85) {
-      // Compression: particles closer than normal
-      let alpha = map(ratio, 0.5, 0.85, 60, 15);
-      let cx = (particles[i].x + particles[i-1].x) / 2;
-      fill(255, 40, 40, alpha);
-      rect(cx - 6, Y_CENTER - 55, 12, 110, 3);
-    } else if (ratio > 1.2) {
-      // Rarefaction: particles farther than normal
-      let alpha = map(ratio, 1.2, 1.8, 15, 50);
-      let cx = (particles[i].x + particles[i-1].x) / 2;
-      fill(40, 60, 255, alpha);
-      rect(cx - 6, Y_CENTER - 55, 12, 110, 3);
-    }
-  }
+    // Calculate local spacing: particles cluster at crest (compression), spread at trough (rarefaction)
+    let phaseNext = ((i + 1) / NUM_P) * TWO_PI * visFreq + time * 2;
+    let slope = sin(phaseNext) - sin(phase);
+    // slope > 0 = going down (rarefaction), slope < 0 = going up (compression)
 
-  // ── Draw particles ──
-  noStroke();
-  for (let i = 1; i < PARTICLES; i++) {
-    let gap = particles[i].x - particles[i-1].x;
-    let restGap = particles[i].restX - particles[i-1].restX;
-    let ratio = gap / restGap;
-    let c;
-    if (ratio < 0.9) c = color(255, 120, 100, 230);
-    else if (ratio > 1.15) c = color(100, 140, 255, 230);
-    else c = color(180, 180, 200, 180);
+    // Vertical spread based on slope
+    let clusterEffect = -slope * 40 * amp;
 
-    fill(c);
-    let p = particles[i];
-    ellipse(p.x, p.y, PARTICLE_R * 2, PARTICLE_R * 2);
-  }
+    // Particles organized in 3 rows above and below the wave
+    let row = i % 5 - 2;  // -2, -1, 0, 1, 2
+    let py = waveY + row * (10 + clusterEffect * 0.5);
 
-  // First particle in speaker color
-  fill(255, 200, 80, 250);
-  ellipse(particles[0].x, particles[0].y, PARTICLE_R * 2 + 2, PARTICLE_R * 2 + 2);
+    // Color: red at crest (compression), blue at trough (rarefaction)
+    let waveVal = sin(phase);
+    let r, g, b, alpha;
 
-  // ── Draw speaker ──
-  // Speaker housing
-  fill(60, 40, 30);
-  rect(TUBE_START - 60, Y_CENTER - 50, 70, 100, 6);
-  // Speaker magnet (back)
-  fill(80, 50, 40);
-  rect(TUBE_START - 55, Y_CENTER - 25, 20, 50, 3);
-  // Cone
-  fill(180, 120, 50);
-  quad(
-    TUBE_START - 8, Y_CENTER - 40,
-    speakerX, Y_CENTER - 35,
-    speakerX, Y_CENTER + 35,
-    TUBE_START - 8, Y_CENTER + 40
-  );
-  // Dust cap
-  fill(200, 150, 80);
-  ellipse(speakerX, Y_CENTER, 20, 40);
-
-  // ── Speaker movement arrow ──
-  let dir = speakerX - restSpeakerX;
-  if (abs(dir) > 2) {
-    if (dir > 0) {
-      // Pushing right → COMPRESSION
-      fill(255, 80, 80, 200);
-      textSize(14);
-      textAlign(LEFT, CENTER);
-      text('→ EMPUJA (compresión)', TUBE_START - 50, Y_CENTER - 70);
+    if (waveVal > 0.1) {
+      // Near crest = compression
+      let t = constrain(waveVal, 0, 1);
+      r = lerp(200, 255, t);
+      g = lerp(180, 70, t);
+      b = lerp(180, 70, t);
+      alpha = lerp(120, 230, t);
+    } else if (waveVal < -0.1) {
+      // Near trough = rarefaction
+      let t = constrain(-waveVal, 0, 1);
+      r = lerp(180, 70, t);
+      g = lerp(180, 100, t);
+      b = lerp(200, 255, t);
+      alpha = lerp(120, 230, t);
     } else {
-      // Pulling left → RAREFACTION
-      fill(80, 120, 255, 200);
-      textSize(14);
-      textAlign(LEFT, CENTER);
-      text('← JALA (rarefacción)', restSpeakerX - 20, Y_CENTER - 70);
+      r = 160; g = 160; b = 180; alpha = 100;
+    }
+
+    fill(r, g, b, alpha);
+    noStroke();
+    ellipse(x, py, 5, 5);
+  }
+
+  // ── Compression/Rarefaction labels on wave ──
+  noStroke();
+  textAlign(CENTER, CENTER);
+
+  // Find crest and trough positions
+  for (let i = 0; i < visFreq * 10; i++) {
+    let phaseAtCrest = -PI / 2 + i * TWO_PI / visFreq;
+    let crestX = GX + ((phaseAtCrest - time * 2) / (TWO_PI * visFreq) % 1 + 1) % 1 * GW;
+
+    if (crestX > GX + 20 && crestX < GX + GW - 20) {
+      fill(255, 100, 100, 180);
+      textSize(13);
+      text('COMPRESIÓN', crestX, CY - maxAmp - 20);
+
+      // Mark the crest
+      stroke(255, 100, 100, 100);
+      strokeWeight(1);
+      line(crestX, CY - maxAmp - 8, crestX, CY - maxAmp + 10);
+      noStroke();
+      break;
     }
   }
 
-  // ── Labels ──
-  if (showLabels) {
+  for (let i = 0; i < visFreq * 10; i++) {
+    let phaseAtTrough = PI / 2 + i * TWO_PI / visFreq;
+    let troughX = GX + ((phaseAtTrough - time * 2) / (TWO_PI * visFreq) % 1 + 1) % 1 * GW;
+
+    if (troughX > GX + 20 && troughX < GX + GW - 20) {
+      fill(100, 130, 255, 180);
+      textSize(13);
+      text('RAREFACCIÓN', troughX, CY + maxAmp + 20);
+      break;
+    }
+  }
+
+  // ── Wavelength marker ──
+  if (visFreq <= 6) {
+    let lamW = GW / visFreq;
+    let lamX = GX + 30;
+    let ly = CY - maxAmp - 55;
+
+    stroke(255, 220, 100, 80);
+    strokeWeight(1.5);
+    line(lamX, ly, lamX + lamW, ly);
+    line(lamX, ly - 6, lamX, ly + 6);
+    line(lamX + lamW, ly - 6, lamX + lamW, ly + 6);
     noStroke();
-    textAlign(CENTER, TOP);
+    fill(255, 220, 100, 120);
+    textSize(11);
+    text(`λ = ${(344 / freq).toFixed(2)} m`, lamX + lamW / 2, ly + 8);
 
-    // Top title
-    textSize(22);
-    fill(255, 200, 80);
-    text('¿CÓMO VIAJA EL SONIDO?', width / 2, 30);
-
-    textSize(13);
-    fill(255, 100, 100);
-    text('🔴 Las partículas se JUNTAN → compresión → presión ALTA', width / 2, 60);
-    fill(100, 140, 255);
-    text('🔵 Las partículas se SEPARAN → rarefacción → presión BAJA', width / 2, 80);
-
-    // Speaker label
-    fill(200, 200, 200);
-    textSize(12);
-    textAlign(CENTER, CENTER);
-    text('Altavoz', TUBE_START - 25, Y_CENTER + 65);
-
-    // Propagation arrow at bottom
-    let arrY = Y_CENTER + 90;
-    stroke(255, 255, 255, 80);
-    strokeWeight(2);
-    line(TUBE_START + 30, arrY, TUBE_END - 30, arrY);
-    line(TUBE_END - 30, arrY, TUBE_END - 45, arrY - 8);
-    line(TUBE_END - 30, arrY, TUBE_END - 45, arrY + 8);
-    noStroke();
-    fill(255, 255, 255, 170);
-    textSize(12);
-    text('La ONDA avanza en esta dirección →', (TUBE_START + TUBE_END) / 2, arrY + 16);
-
-    fill(255, 255, 255, 110);
     textSize(10);
-    text('Pero cada partícula solo vibra en su lugar y vuelve. No viaja con la onda.', (TUBE_START + TUBE_END) / 2, arrY + 34);
+    fill(255, 220, 100, 80);
+    text(`(velocidad del sonido ${344} m/s ÷ ${freq} Hz)`, lamX + lamW / 2, ly + 22);
   }
 
-  // ── Cam preview ──
-  if (showCam && video && camReady) {
-    push();
-    translate(width - 250, height - 200);
-    scale(-0.3, 0.3);
-    image(video, 0, 0);
-    pop();
-  }
+  // ── Bottom bar ──
+  let arrY = height - 50;
+  stroke(255, 255, 255, 40);
+  strokeWeight(1.5);
+  line(GX, arrY, GX + GW, arrY);
+  line(GX + GW, arrY, GX + GW - 10, arrY - 4);
+  line(GX + GW, arrY, GX + GW - 10, arrY + 4);
+  noStroke();
+  fill(255, 255, 255, 100);
+  textSize(11);
+  text('La onda viaja →   |   Cada partícula solo vibra en su lugar', GX + GW / 2, arrY + 12);
 
-  // ── Mouse cursor (custom) ──
-  if (mouseOn) {
-    noFill();
-    stroke(255, 255, 100, 100);
-    strokeWeight(2);
-    circle(mouseX, mouseY, 30);
-    circle(mouseX, mouseY, 22);
-    stroke(255, 255, 100, 200);
-    strokeWeight(1);
-    line(mouseX - 18, mouseY, mouseX + 18, mouseY);
-    line(mouseX, mouseY - 18, mouseX, mouseY + 18);
-    noStroke();
-  }
+  // Audio indicator
+  fill(playing ? '#80ff80' : '#555');
+  textSize(11);
+  text(playing ? '🔊 Sonido: ' + freq + ' Hz' : '🔇 Silencio', GX + GW / 2, height - 15);
 }
 
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
