@@ -11,12 +11,12 @@
     body { margin: 0; overflow: hidden; background: #0d0d1a; font-family: system-ui, sans-serif; }
     canvas { display: block; }
     #panel {
-      position: absolute; top: 0; left: 0; width: 260px; height: 100vh;
+      position: absolute; top: 0; left: 0; width: 250px; height: 100vh;
       background: rgba(8,8,22,0.94); color: #fff; padding: 14px;
       font-size: 12px; z-index: 5; overflow-y: auto;
       border-right: 1px solid rgba(255,255,255,0.08);
     }
-    #panel h3 { margin: 0 0 8px; font-size: 14px; color: #f0a030; }
+    #panel h3 { margin: 0 0 6px; font-size: 14px; color: #f0a030; }
     #panel button {
       width: 100%; margin: 4px 0; padding: 7px 10px;
       border: none; border-radius: 5px; cursor: pointer;
@@ -25,19 +25,16 @@
     #panel button:hover { background: #1f4287; }
     #panel .status { margin: 8px 0; padding: 6px 10px; border-radius: 5px; font-size: 11px; text-align: center; }
     .status.off { background: rgba(255,255,255,0.04); color: #777; }
-    .status.on { background: rgba(0,200,80,0.1); color: #0f8; border: 1px solid rgba(0,200,80,0.15); }
-    #panel input[type=range] { width: 100%; accent-color: #f0a030; }
+    .status.on { background: rgba(0,200,80,0.1); color: #0f8; }
+    #panel input[type=range] { width: 100%; accent-color: #f0a030; margin: 4px 0; }
     #panel label { display: block; margin: 6px 0 2px; color: #aaa; font-size: 11px; }
-    #panel .legend { margin-top: 14px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 6px; font-size: 11px; line-height: 1.6; }
-    #panel .legend b { color: #f0a030; }
-    .color-red { color: #ff5555; }
-    .color-blue { color: #5588ff; }
+    #panel .legend { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 6px; font-size: 11px; line-height: 1.6; }
   </style>
 </head>
 <body>
 
 <div id="panel">
-  <h3>🔊 Fuente sonora virtual</h3>
+  <h3>🔊 Ondas de sonido</h3>
   <div class="status off" id="status">🖱️ Modo mouse</div>
 
   <button id="btn-cam">📷 Activar cámara</button>
@@ -47,67 +44,81 @@
   <label>Amplitud: <b id="val-amp">1.0</b></label>
   <input type="range" id="amp" min="0.3" max="2.5" step="0.1" value="1.0">
 
-  <label>
-    <input type="checkbox" id="show-labels" checked> Etiquetas
-  </label>
-  <label>
-    <input type="checkbox" id="show-cam"> Ver cámara
-  </label>
+  <label><input type="checkbox" id="show-cam"> Ver cámara</label>
+  <label><input type="checkbox" id="show-labels" checked> Etiquetas</label>
 
   <div class="legend">
-    <b class="color-red">🔴 Compresión</b><br>
-    → Las partículas se juntan.<br>
-    → Presión mayor que la atmosférica.<br><br>
-    <b class="color-blue">🔵 Rarefacción</b><br>
-    → Las partículas se separan.<br>
-    → Presión menor que la atmosférica.<br><br>
+    <b style="color:#ff5555">🔴 Compresión</b><br>
+    Partículas se juntan.<br>
+    Presión ↑ (mayor que la atmosférica).<br><br>
+    <b style="color:#5588ff">🔵 Rarefacción</b><br>
+    Partículas se separan.<br>
+    Presión ↓ (menor que la atmosférica).<br><br>
     <b>⚡ La onda avanza →</b><br>
-    Las partículas <b>no viajan</b> con la onda.<br>
-    Vibran en su lugar y vuelven.
+    Pero las partículas <b>no viajan</b>.<br>
+    Solo vibran y vuelven a su lugar.
   </div>
+
+  <div style="margin-top:10px;font-size:10px;color:#666" id="debug"></div>
 </div>
 
 <script>
-const COLS = 40, ROWS = 8;
-const CELL = 22;
-const GX = 300, GY = 280;
-let particles = [];
-let sourceX, targetX;
+// ── Configuration ──
+const PARTICLES = 100;        // number of air particles
+const Y_CENTER = 320;        // vertical center
+const TUBE_START = 120;      // left edge of tube
+const TUBE_END = 1100;       // right edge of tube
+const TUBE_LEN = TUBE_END - TUBE_START;
+const PARTICLE_R = 8;        // particle radius
+
+let particles = [];           // { restX, x, y }
+let speakerX = 0;            // current speaker cone position
+let targetSpeakerX = 0;      // target from mouse/hand
+let restSpeakerX = TUBE_START + 30;  // speaker rest position
+
 let useCam = false, camReady = false;
 let handpose, video;
 let mouseOn = true;
 let lastPred = 0;
-let handX = 0, handDet = false;
 let ampVal = 1.0, showLabels = true, showCam = false;
+let debugEl;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('system-ui');
+  debugEl = select('#debug');
 
-  for (let c = 0; c < COLS; c++)
-    for (let r = 0; r < ROWS; r++)
-      particles.push({
-        bx: GX + c * CELL, by: GY + r * CELL,
-        x: GX + c * CELL, y: GY + r * CELL,
-        ph: random(TWO_PI), c: c, r: r
-      });
+  // Create particles evenly spaced along the tube
+  let spacing = (TUBE_LEN - 60) / PARTICLES;
+  for (let i = 0; i < PARTICLES; i++) {
+    let x = TUBE_START + 50 + i * spacing;
+    particles.push({ restX: x, x: x, y: Y_CENTER, vy: 0 });
+  }
 
-  sourceX = GX + 2 * CELL;
-  targetX = sourceX;
+  speakerX = restSpeakerX;
+  targetSpeakerX = restSpeakerX;
+  hideCursor();
 
-  select('#btn-reset').mousePressed(() => { sourceX = targetX = GX + 2 * CELL; });
-  select('#amp').input(() => { ampVal = parseFloat(select('#amp').value()); select('#val-amp').html(ampVal.toFixed(1)); });
+  select('#btn-reset').mousePressed(() => {
+    speakerX = targetSpeakerX = restSpeakerX;
+    for (let p of particles) { p.x = p.restX; p.y = Y_CENTER; }
+  });
+  select('#amp').input(() => {
+    ampVal = parseFloat(select('#amp').value());
+    select('#val-amp').html(ampVal.toFixed(1));
+  });
   select('#show-labels').changed(() => showLabels = select('#show-labels').checked());
   select('#show-cam').changed(() => showCam = select('#show-cam').checked());
 
   select('#btn-cam').mousePressed(() => {
-    select('#status').removeClass('on').addClass('off').html('⏳ Iniciando cámara...');
+    select('#status').removeClass('on').addClass('off').html('⏳ Iniciando...');
     startCam();
   });
   select('#btn-mouse').mousePressed(() => {
     useCam = false; camReady = false; mouseOn = true;
     if (video) { video.remove(); video = null; }
     select('#status').removeClass('on').addClass('off').html('🖱️ Modo mouse');
+    debugEl.html('');
   });
 }
 
@@ -118,162 +129,208 @@ function startCam() {
   handpose = ml5.handpose(video, { flipHorizontal: true, runtime: 'tfjs' }, () => {
     camReady = true; useCam = true; mouseOn = false;
     select('#status').removeClass('off').addClass('on').html('📷 Cámara activa');
+    debugEl.html('Modelo listo. Mové tu mano.');
   });
 }
 
 function draw() {
   background(13, 13, 26);
 
-  // ── Input ──
+  // ── Mouse / Hand input ──
+  let inputVal = 0;
   if (useCam && camReady && handpose && millis() - lastPred > 80) {
     lastPred = millis();
     handpose.predict(function(err, results) {
-      handDet = false;
       if (!err && results && results.length > 0) {
         let wrist = results[0].landmarks ? results[0].landmarks[0] : null;
-        if (wrist) { handDet = true; handX = wrist[0]; }
-      }
-      if (handDet) {
-        let nx = constrain(handX / 640, 0, 1);
-        targetX = GX + 2 * CELL + (nx - 0.5) * (COLS - 4) * CELL;
+        if (wrist) {
+          let nx = constrain(wrist[0] / 640, 0, 1);
+          inputVal = (nx - 0.5) * 2 * ampVal;
+          targetSpeakerX = restSpeakerX + inputVal * 80;
+          debugEl.html(`Mano: x=${wrist[0].toFixed(0)} → ${inputVal.toFixed(2)}`);
+        }
       }
     });
   } else if (mouseOn) {
-    let mx = mouseX - GX;
-    if (mx > -80 && mx < COLS * CELL + 80) {
-      let nx = constrain(mx / (COLS * CELL), 0, 1);
-      targetX = GX + 2 * CELL + (nx - 0.5) * (COLS - 4) * CELL;
+    let nx = constrain(mouseX / width, 0, 1);
+    inputVal = (nx - 0.5) * 2 * ampVal;
+    targetSpeakerX = restSpeakerX + inputVal * 80;
+  }
+
+  // Smooth speaker
+  speakerX += (targetSpeakerX - speakerX) * 0.4;
+
+  // ── Update particles ──
+  // Speaker displacement affects first particle, propagates right
+  let speakerDisp = (speakerX - restSpeakerX);  // positive = pushed right
+
+  for (let i = 0; i < PARTICLES; i++) {
+    let p = particles[i];
+    // Distance from speaker in terms of particle index
+    let dist = i;
+    let delay = dist * 0.06;  // propagation delay
+    let atten = pow(0.97, dist);  // attenuation
+
+    // Target position: rest + delayed speaker influence
+    let influence = speakerDisp * atten * sin(frameCount * 0.15 - delay);
+    let targetX = p.restX + influence;
+
+    // Smooth toward target
+    p.x += (targetX - p.x) * 0.5;
+
+    // Small random jitter for air-like behavior
+    p.x += random(-0.3, 0.3);
+  }
+
+  // ── Draw tube background ──
+  noStroke();
+  // Tube
+  fill(20, 20, 35);
+  rect(TUBE_START - 10, Y_CENTER - 60, TUBE_LEN + 20, 120, 8);
+  // Tube borders
+  stroke(255, 255, 255, 15);
+  strokeWeight(1);
+  line(TUBE_START, Y_CENTER - 60, TUBE_START, Y_CENTER + 60);
+  line(TUBE_END, Y_CENTER - 60, TUBE_END, Y_CENTER + 60);
+  noStroke();
+
+  // ── Draw compression/rarefaction highlights ──
+  for (let i = 1; i < PARTICLES; i++) {
+    let gap = particles[i].x - particles[i-1].x;
+    let restGap = particles[i].restX - particles[i-1].restX;
+    let ratio = gap / restGap;
+
+    if (ratio < 0.85) {
+      // Compression: particles closer than normal
+      let alpha = map(ratio, 0.5, 0.85, 60, 15);
+      let cx = (particles[i].x + particles[i-1].x) / 2;
+      fill(255, 40, 40, alpha);
+      rect(cx - 6, Y_CENTER - 55, 12, 110, 3);
+    } else if (ratio > 1.2) {
+      // Rarefaction: particles farther than normal
+      let alpha = map(ratio, 1.2, 1.8, 15, 50);
+      let cx = (particles[i].x + particles[i-1].x) / 2;
+      fill(40, 60, 255, alpha);
+      rect(cx - 6, Y_CENTER - 55, 12, 110, 3);
     }
   }
 
-  sourceX += (targetX - sourceX) * 0.3;
-  sourceX = constrain(sourceX, GX + CELL, GX + (COLS - 2) * CELL);
-
-  let displacement = (targetX - (GX + 2 * CELL)) * ampVal;
-
-  // ── Draw bands (background) ──
+  // ── Draw particles ──
   noStroke();
-  for (let c = 0; c < COLS; c++) {
-    let p = particles[c * ROWS];
-    let osc = p.x - p.bx;
-    if (abs(osc) < 0.08) continue;
-    let alpha = map(abs(osc), 0, max(abs(displacement) * 0.8, 0.5), 2, 35);
-    if (osc > 0) fill(220, 40, 40, alpha);
-    else fill(40, 60, 220, alpha);
-    rect(GX + c * CELL - 1, GY - 8, CELL + 1, ROWS * CELL + 16);
-  }
-
-  // ── Grid lines ──
-  stroke(255, 255, 255, 5);
-  strokeWeight(0.5);
-  for (let c = 0; c <= COLS; c++) line(GX + c * CELL, GY - 8, GX + c * CELL, GY + ROWS * CELL + 8);
-  for (let r = 0; r <= ROWS; r++) line(GX, GY + r * CELL, GX + COLS * CELL, GY + r * CELL);
-  noStroke();
-
-  // ── Particles ──
-  let speed = 8, atten = 0.93;
-  for (let p of particles) {
-    let delay = p.c / speed;
-    let amp = displacement * pow(atten, max(0, p.c - 2));
-    let osc = amp * sin(frameCount * 0.1 + p.ph - delay * 1.2);
-    p.x = p.bx + osc;
-
+  for (let i = 1; i < PARTICLES; i++) {
+    let gap = particles[i].x - particles[i-1].x;
+    let restGap = particles[i].restX - particles[i-1].restX;
+    let ratio = gap / restGap;
     let c;
-    let a = abs(osc);
-    if (a < 0.08) c = color(100, 100, 120, 50);
-    else if (osc > 0) {
-      let r = map(a, 0, max(abs(displacement) * 0.8, 0.5), 180, 255);
-      c = color(r, 40, 50, 230);
-    } else {
-      let b = map(a, 0, max(abs(displacement) * 0.8, 0.5), 120, 255);
-      c = color(40, 60, b, 230);
-    }
+    if (ratio < 0.9) c = color(255, 120, 100, 230);
+    else if (ratio > 1.15) c = color(100, 140, 255, 230);
+    else c = color(180, 180, 200, 180);
+
     fill(c);
-    ellipse(p.x, p.y, 12, 12);
+    let p = particles[i];
+    ellipse(p.x, p.y, PARTICLE_R * 2, PARTICLE_R * 2);
   }
 
-  // ── Source ──
-  let sh = ROWS * CELL;
-  // Speaker cone shape
-  fill(80, 50, 20);
-  rect(sourceX - 12, GY - 10, 24, sh + 20, 4);
-  fill(240, 180, 50);
-  rect(sourceX - 4, GY - 2, 8, sh + 4, 2);
-  // Arrow showing it pushes/pulls
-  if (displacement > 2) {
-    stroke(255, 200, 50, 150);
-    strokeWeight(2);
-    line(sourceX + 6, GY + sh / 2, sourceX + 18, GY + sh / 2);
-    line(sourceX + 18, GY + sh / 2, sourceX + 13, GY + sh / 2 - 5);
-    line(sourceX + 18, GY + sh / 2, sourceX + 13, GY + sh / 2 + 5);
-    noStroke();
-  } else if (displacement < -2) {
-    stroke(255, 200, 50, 150);
-    strokeWeight(2);
-    line(sourceX - 6, GY + sh / 2, sourceX - 18, GY + sh / 2);
-    line(sourceX - 18, GY + sh / 2, sourceX - 13, GY + sh / 2 - 5);
-    line(sourceX - 18, GY + sh / 2, sourceX - 13, GY + sh / 2 + 5);
-    noStroke();
-  }
+  // First particle in speaker color
+  fill(255, 200, 80, 250);
+  ellipse(particles[0].x, particles[0].y, PARTICLE_R * 2 + 2, PARTICLE_R * 2 + 2);
 
-  // ── Cam preview ──
-  if (showCam && video && camReady) {
-    push();
-    translate(GX + COLS * CELL + 30, GY);
-    scale(-0.25, 0.25);
-    image(video, 0, 0);
-    pop();
+  // ── Draw speaker ──
+  // Speaker housing
+  fill(60, 40, 30);
+  rect(TUBE_START - 60, Y_CENTER - 50, 70, 100, 6);
+  // Speaker magnet (back)
+  fill(80, 50, 40);
+  rect(TUBE_START - 55, Y_CENTER - 25, 20, 50, 3);
+  // Cone
+  fill(180, 120, 50);
+  quad(
+    TUBE_START - 8, Y_CENTER - 40,
+    speakerX, Y_CENTER - 35,
+    speakerX, Y_CENTER + 35,
+    TUBE_START - 8, Y_CENTER + 40
+  );
+  // Dust cap
+  fill(200, 150, 80);
+  ellipse(speakerX, Y_CENTER, 20, 40);
+
+  // ── Speaker movement arrow ──
+  let dir = speakerX - restSpeakerX;
+  if (abs(dir) > 2) {
+    if (dir > 0) {
+      // Pushing right → COMPRESSION
+      fill(255, 80, 80, 200);
+      textSize(14);
+      textAlign(LEFT, CENTER);
+      text('→ EMPUJA (compresión)', TUBE_START - 50, Y_CENTER - 70);
+    } else {
+      // Pulling left → RAREFACTION
+      fill(80, 120, 255, 200);
+      textSize(14);
+      textAlign(LEFT, CENTER);
+      text('← JALA (rarefacción)', restSpeakerX - 20, Y_CENTER - 70);
+    }
   }
 
   // ── Labels ──
   if (showLabels) {
     noStroke();
     textAlign(CENTER, TOP);
-    // Title
+
+    // Top title
     textSize(22);
     fill(255, 200, 80);
-    text('ONDAS DE SONIDO EN EL AIRE', GX + COLS * CELL / 2, 30);
+    text('¿CÓMO VIAJA EL SONIDO?', width / 2, 30);
 
-    // Legend inline
     textSize(13);
     fill(255, 100, 100);
-    text('🔴 Compresión — partículas juntas, presión ↑', GX + COLS * CELL / 2, 62);
+    text('🔴 Las partículas se JUNTAN → compresión → presión ALTA', width / 2, 60);
     fill(100, 140, 255);
-    text('🔵 Rarefacción — partículas separadas, presión ↓', GX + COLS * CELL / 2, 82);
+    text('🔵 Las partículas se SEPARAN → rarefacción → presión BAJA', width / 2, 80);
+
+    // Speaker label
     fill(200, 200, 200);
     textSize(12);
-    text('← La fuente (altavoz/mano) empuja y jala el aire →', GX + COLS * CELL / 2, 105);
+    textAlign(CENTER, CENTER);
+    text('Altavoz', TUBE_START - 25, Y_CENTER + 65);
 
-    // At source
-    fill(240, 180, 50);
-    textSize(11);
-    text('Fuente\nvibrante', sourceX, GY - 18);
-
-    // Arrows above compression/rarefaction zones
-    let rightEdge = GX + COLS * CELL;
-
-    // Bottom arrow
-    let arrowY = GY + ROWS * CELL + 28;
+    // Propagation arrow at bottom
+    let arrY = Y_CENTER + 90;
     stroke(255, 255, 255, 80);
-    strokeWeight(1.5);
-    line(GX, arrowY, rightEdge, arrowY);
-    line(rightEdge, arrowY, rightEdge - 12, arrowY - 5);
-    line(rightEdge, arrowY, rightEdge - 12, arrowY + 5);
+    strokeWeight(2);
+    line(TUBE_START + 30, arrY, TUBE_END - 30, arrY);
+    line(TUBE_END - 30, arrY, TUBE_END - 45, arrY - 8);
+    line(TUBE_END - 30, arrY, TUBE_END - 45, arrY + 8);
     noStroke();
-    fill(255, 255, 255, 160);
+    fill(255, 255, 255, 170);
     textSize(12);
-    text('Dirección de propagación de la onda →', GX + COLS * CELL / 2, arrowY + 8);
+    text('La ONDA avanza en esta dirección →', (TUBE_START + TUBE_END) / 2, arrY + 16);
 
+    fill(255, 255, 255, 110);
     textSize(10);
-    fill(200, 200, 200, 120);
-    text('Las partículas solo vibran en su lugar, NO viajan con la onda', GX + COLS * CELL / 2, arrowY + 26);
+    text('Pero cada partícula solo vibra en su lugar y vuelve. No viaja con la onda.', (TUBE_START + TUBE_END) / 2, arrY + 34);
   }
 
-  // ── Mouse tracker line ──
+  // ── Cam preview ──
+  if (showCam && video && camReady) {
+    push();
+    translate(width - 250, height - 200);
+    scale(-0.3, 0.3);
+    image(video, 0, 0);
+    pop();
+  }
+
+  // ── Mouse cursor (custom) ──
   if (mouseOn) {
-    stroke(255, 255, 255, 60);
+    noFill();
+    stroke(255, 255, 100, 100);
+    strokeWeight(2);
+    circle(mouseX, mouseY, 30);
+    circle(mouseX, mouseY, 22);
+    stroke(255, 255, 100, 200);
     strokeWeight(1);
-    line(mouseX, GY - 20, mouseX, GY + ROWS * CELL + 20);
+    line(mouseX - 18, mouseY, mouseX + 18, mouseY);
+    line(mouseX, mouseY - 18, mouseX, mouseY + 18);
     noStroke();
   }
 }
