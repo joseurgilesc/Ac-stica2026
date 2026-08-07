@@ -2,17 +2,17 @@
 
 ---
 
-<div class="grid cards" markdown>
+    <div class="grid cards" markdown>
 
--   :material-waveform:{ .lg .middle } **Simulación interactiva**
+    -   **🎮 Simulación interactiva — Compresión y rarefacción**
 
-    ---
+        ---
 
-    Explorá la relación entre compresión, rarefacción y la onda de presión sonora. Cambiá la frecuencia, escuchá el tono y observá cómo se comportan las partículas de aire.
+        Explorá la relación entre compresión, rarefacción y la onda de presión sonora. Cambiá la frecuencia, escuchá el tono y observá cómo se comportan las partículas de aire.
 
-    [:octicons-arrow-right-24: Abrir simulación](../simulacion/)
+        [Abrir simulación](../../simulacion/)
 
-</div>
+    </div>
 
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
@@ -56,7 +56,7 @@
 
     Una masa en un resorte que oscila describe un **movimiento armónico simple**. Si se registra su posición en el tiempo, se obtiene una **onda sinusoidal** — la forma más pura y fundamental en acústica.
 
-    [:material-play-circle:{ .lg .middle } **Abrir simulación interactiva — Figuras 1-1 y 1-2**](../simulacion/mas/){ .md-button .md-button--primary }
+    [🎯 **Abrir simulación interactiva — Figuras 1-1 y 1-2**](../../simulacion/mas.html){ .md-button .md-button--primary }
 
     En la simulación podés variar la rigidez del resorte, la amplitud y la velocidad del papel. Observá cómo el lápiz traza la onda sinusoidal mientras la masa oscila.
 
