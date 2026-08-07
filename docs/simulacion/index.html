@@ -140,7 +140,16 @@ function draw() {
 
   // ── Particles ──
   noStroke();
-  let prevX = 0;
+
+  // Find nearest crest and trough centers for each column
+  let crestSpacing = GW / visFreq;
+  // The first crest is at phase = PI/2, so position offset from time
+  let crestPhase = PI / 2;
+  let firstCrestScreen = ((crestPhase - time * 2) / (TWO_PI * visFreq)) * GW;
+  // Normalize to [0, crestSpacing)
+  while (firstCrestScreen < -crestSpacing) firstCrestScreen += crestSpacing;
+  while (firstCrestScreen > crestSpacing) firstCrestScreen -= crestSpacing;
+  if (firstCrestScreen < 0) firstCrestScreen += crestSpacing;
 
   for (let p of particles) {
     let col = p.col, row = p.row;
@@ -150,16 +159,25 @@ function draw() {
     let phase = (col / cols) * TWO_PI * visFreq + time * 2;
     let waveVal = sin(phase);
 
-    // Simple local clustering based on wave value at this column
-    // Compare to adjacent columns: if crest (waveVal > 0), compress spacing
-    // If trough (waveVal < 0), expand spacing
-    let phasePrev = ((col - 1) / cols) * TWO_PI * visFreq + time * 2;
-    let slope = sin(phase) - sin(phasePrev);
+    // Find distance to nearest crest (compression center)
+    let localX = baseX - GX;  // position within the wave area
+    let nearestCrest = GX + firstCrestScreen + Math.round((localX - firstCrestScreen) / crestSpacing) * crestSpacing;
+    let distToCrest = baseX - nearestCrest;  // negative = left of crest, positive = right of crest
 
-    // At crest (waveVal > 0): shift particles toward each other
-    // At trough (waveVal < 0): shift particles away from each other
-    let clusterStrength = -waveVal;  // negative at crest = pull together, positive at trough = push apart
-    let shiftX = clusterStrength * colW * 0.35 * amp;
+    // Crest (compression, waveVal > 0): pull toward crest center
+    // Trough (rarefaction, waveVal < 0): push away from crest center
+    let pull = -Math.sign(distToCrest) * abs(waveVal);  // positive waveVal = pull toward crest
+    let shiftX;
+
+    if (waveVal > 0.03) {
+      // Compression: particles move toward the crest center
+      shiftX = pull * colW * 0.45 * amp;
+    } else if (waveVal < -0.03) {
+      // Rarefaction: particles move AWAY from the nearest crest center (= toward trough)
+      shiftX = -pull * colW * 0.25 * amp;
+    } else {
+      shiftX = 0;
+    }
 
     // Perlin noise
     let nx = noise(p.nx + noiseOff) - 0.5;
@@ -169,20 +187,22 @@ function draw() {
     p.y = baseY + ny * 4 * amp;
 
     // Size: smaller at compression (dense), larger at rarefaction (spread)
-    let sz = waveVal > 0 ? 4.5 - waveVal * 1.5 : 4.5 + (-waveVal) * 2;
+    let sz = 4.5;
+    if (waveVal > 0.03) sz -= waveVal * 2 * amp;
+    else if (waveVal < -0.03) sz += (-waveVal) * 2 * amp;
 
     // Color
     let r, g, b, alpha;
-    if (waveVal > 0.04) {
+    if (waveVal > 0.03) {
       let t = constrain(waveVal, 0, 1);
       r = 255; g = lerp(160, 45, t); b = lerp(160, 45, t);
-      alpha = lerp(80, 230, t);
-    } else if (waveVal < -0.04) {
+      alpha = lerp(60, 230, t);
+    } else if (waveVal < -0.03) {
       let t = constrain(-waveVal, 0, 1);
       r = lerp(160, 45, t); g = lerp(160, 105, t); b = 255;
-      alpha = lerp(80, 230, t);
+      alpha = lerp(60, 230, t);
     } else {
-      r = 140; g = 140; b = 160; alpha = 40;
+      r = 140; g = 140; b = 160; alpha = 35;
     }
     fill(r, g, b, alpha);
     ellipse(p.x, p.y, sz, sz);
