@@ -1,0 +1,65 @@
+/* Teal identity — #249D8F — Acústica Aplicada */
+:root {
+  --md-primary-fg-color: #249D8F;
+  --md-primary-fg-color--light: #5BC0B3;
+  --md-primary-fg-color--dark: #1A7A6F;
+  --md-accent-fg-color: #249D8F;
+  --md-accent-fg-color--transparent: rgba(36, 157, 143, 0.1);
+}
+
+/* Code blocks */
+:root > * {
+  --md-code-hl-number-color: #249D8F;
+  --md-code-hl-string-color: #1A7A6F;
+}
+
+/* Admonitions */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #249D8F;
+}
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: rgba(36, 157, 143, 0.1);
+  border-color: #249D8F;
+}
+.md-typeset .tip > .admonition-title::before,
+.md-typeset .tip > summary::before {
+  background-color: #249D8F;
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: #249D8F;
+}
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: rgba(36, 157, 143, 0.1);
+  border-color: #249D8F;
+}
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
+  background-color: #249D8F;
+}
+
+/* Tables */
+.md-typeset table:not([class]) th {
+  background-color: #249D8F;
+  color: white;
+}
+
+/* Links */
+.md-typeset a {
+  color: #249D8F;
+}
+.md-typeset a:hover {
+  color: #1A7A6F;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #249D8F;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1A7A6F;
+}

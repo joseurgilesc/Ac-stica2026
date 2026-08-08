@@ -1,0 +1,2323 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Guía Docente — Sesión 9: Propagación en campo libre - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-docente-sesion-9-propagacion-en-campo-libre" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía Docente — Sesión 9: Propagación en campo libre
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquema-de-la-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquema de la clase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-apertura-cuanto-se-calla-un-parlante-si-me-alejo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Apertura — «¿Cuánto se calla un parlante si me alejo?»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Apertura — «¿Cuánto se calla un parlante si me alejo?»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dinámica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-disparadoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preguntas disparadoras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-desarrollo-teoria-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Desarrollo — Teoría guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Desarrollo — Teoría guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secuencia-sugerida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secuencia sugerida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-practica-medicion-simulacion-e-informe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Práctica — Medición, simulación e informe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Práctica — Medición, simulación e informe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-en-classroom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividad en Classroom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rubrica-formativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rúbrica formativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cierre-discusion-y-bitacora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cierre — Discusión y bitácora
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cierre — Discusión y bitácora">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discusion-guiada-10-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discusión guiada (10 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registro-en-bitacora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registro en bitácora
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-adicionales-para-el-docente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos adicionales para el docente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posibles-dificultades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Posibles dificultades
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-docente-sesion-9-propagacion-en-campo-libre">Guía Docente — Sesión 9: Propagación en campo libre<a class="headerlink" href="#guia-docente-sesion-9-propagacion-en-campo-libre" title="Permanent link">&para;</a></h1>
+<p><strong>Duración estimada:</strong> 1 sesión presencial (≈ 2-3 horas)<br />
+<strong>Herramientas:</strong> Google Classroom, p5.js, parlante Bluetooth, sonómetro (app de celular), cinta métrica de al menos 10 m, calculadora científica<br />
+<strong>Referencia:</strong> Everest &amp; Pohlmann, Capítulo 3, pp. 31–45 (Sound in the Free Field — Spherical Divergence, Inverse Square Law, SWL to SPL Conversion)</p>
+<hr />
+<h2 id="objetivo-de-la-sesion">Objetivo de la sesión<a class="headerlink" href="#objetivo-de-la-sesion" title="Permanent link">&para;</a></h2>
+<p>Que el estudiante comprenda el concepto de campo libre, aplique la ley del inverso del cuadrado para predecir niveles de presión sonora a distancia, mida experimentalmente la divergencia esférica, compare predicción teórica con medición real, e identifique las causas de las desviaciones (reflexiones, ruido de fondo, directividad).</p>
+<hr />
+<h2 id="esquema-de-la-clase">Esquema de la clase<a class="headerlink" href="#esquema-de-la-clase" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Duración</th>
+<th>Actividad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apertura</strong></td>
+<td>15 min</td>
+<td>Experimento visual con parlante y sonómetro a tres distancias</td>
+</tr>
+<tr>
+<td><strong>Desarrollo</strong></td>
+<td>40 min</td>
+<td>Teoría guiada: campo libre, divergencia esférica, ley del inverso del cuadrado, SWL → SPL</td>
+</tr>
+<tr>
+<td><strong>Práctica</strong></td>
+<td>50 min</td>
+<td>Mediciones escalonadas (1 m, 2 m, 4 m, 8 m) + simulación p5.js + informe comparativo</td>
+</tr>
+<tr>
+<td><strong>Cierre</strong></td>
+<td>15 min</td>
+<td>Discusión: ¿por qué el mundo real no se parece al campo libre? + bitácora</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-apertura-cuanto-se-calla-un-parlante-si-me-alejo">1. Apertura — «¿Cuánto se calla un parlante si me alejo?»<a class="headerlink" href="#1-apertura-cuanto-se-calla-un-parlante-si-me-alejo" title="Permanent link">&para;</a></h2>
+<h3 id="materiales">Materiales<a class="headerlink" href="#materiales" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Parlante Bluetooth reproduciendo ruido rosa a volumen fijo</li>
+<li>App de sonómetro proyectada</li>
+<li>Cinta métrica</li>
+</ul>
+<h3 id="dinamica">Dinámica<a class="headerlink" href="#dinamica" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Ubicar el parlante en un extremo del aula (o mejor, en el patio si el clima lo permite).</li>
+<li>Medir el SPL a 1 m exactamente del parlante. Anotar en la pizarra: «SPL(1 m) = XX dBA».</li>
+<li>Medir a 2 m. ¡La clase predice cuánto bajó! Usualmente contestan «la mitad» → medir → bajó ~6 dB, no la mitad de los dB. Refuerzo: dB es logarítmico.</li>
+<li>Medir a 4 m. Preguntar: «Según la predicción, ¿cuánto debería haber bajado respecto a 1 m?» (−12 dB). Medir y comparar.</li>
+<li>Pregunta disparadora: «Si me alejo a 100 m, ¿cuánto debería bajar?» (−40 dB). «¿Creen que en la realidad baja exactamente 40 dB?» (No — entran en juego otros factores).</li>
+</ol>
+<h3 id="preguntas-disparadoras">Preguntas disparadoras<a class="headerlink" href="#preguntas-disparadoras" title="Permanent link">&para;</a></h3>
+<ul>
+<li>«¿Por qué en un concierto la gente de atrás escucha aunque esté 50 veces más lejos que la primera fila?»</li>
+<li>«Si el parlante emite 120 dB a 1 m, ¿a qué distancia el nivel baja a 60 dB?» (Respuesta aproximada: ~512 m en campo libre ideal. 120 − 60 = 60 dB de pérdida. Como −6 dB por duplicación, son 10 duplicaciones: 2¹⁰ = 1,024 m. En realidad mucho antes por absorción atmosférica y otros efectos.)</li>
+<li>«¿Qué es una cámara anecoica y por qué la gente dice que 'enloquece' ahí dentro?»</li>
+</ul>
+<hr />
+<h2 id="2-desarrollo-teoria-guiada">2. Desarrollo — Teoría guiada<a class="headerlink" href="#2-desarrollo-teoria-guiada" title="Permanent link">&para;</a></h2>
+<h3 id="secuencia-sugerida">Secuencia sugerida<a class="headerlink" href="#secuencia-sugerida" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>El campo libre como idealización</strong> (10 min). Explicar que el campo libre es un modelo — una simplificación matemática que asume: (a) medio homogéneo, (b) sin obstáculos, (c) sin reflexiones, (d) fuente puntual. Como toda idealización en física, es falsa pero útil. Mostrar imágenes de una cámara anecoica y explicar que es lo más cercano al campo libre que podemos construir. Comentar: «Es tan silenciosa que la gente escucha su propia sangre fluyendo. El ruido de fondo típico está por debajo de 0 dBA.»</p>
+</li>
+<li>
+<p><strong>La divergencia esférica: cuestión de geometría</strong> (10 min). Dibujar una esfera de radio r. Preguntar: «¿Cuál es el área de esta esfera?» (4πr²). Dibujar una segunda esfera de radio 2r. «¿Cuál es el área ahora?» (16πr² = 4 veces más). «La misma potencia W repartida sobre 4 veces el área → la intensidad es ¼ → en dB: 10·log(¼) = −6 dB.»</p>
+<p>Anotar la fórmula en la pizarra y mantenerla visible toda la clase:</p>
+<div class="arithmatex">\[
+\text{SPL}(r_2) = \text{SPL}(r_1) + 20\log_{10}(r_1/r_2)
+\]</div>
+<p>Derivar la tabla rápida de atenuación: 1 m → 0 dB, 2 m → −6 dB, 4 m → −12 dB, 8 m → −18 dB, 10 m → −20 dB, 100 m → −40 dB.</p>
+<blockquote>
+<p>Insertar <strong>Fig. 3-1</strong> del Everest: fuente puntual — esferas concéntricas mostrando la distribución de energía. Señalar: no hay «pérdida de energía», la energía se conserva. Lo que cambia es la DENSIDAD de energía (intensidad, W/m²).</p>
+</blockquote>
+</li>
+<li>
+<p><strong>De SWL a SPL: la fórmula completa</strong> (10 min). Mostrar la ecuación que relaciona la potencia de la fuente (lo que el fabricante especifica) con la presión en el punto de escucha (lo que el oyente recibe):</p>
+<div class="arithmatex">\[
+\text{SPL}(r) = \text{SWL} + 10\log_{10}(Q/4\pi r^2) + 10.8
+\]</div>
+<p>Explicar cada término con ejemplos numéricos. La constante 10.8 dB es la diferencia entre medir presión e intensidad en condiciones atmosféricas estándar (ρc ≈ 400 rayls). Hacer un ejemplo en vivo: parlante con SWL = 110 dB, Q = 2, r = 8 m → ¿SPL?</p>
+<blockquote>
+<p>Insertar <strong>Fig. 3-2</strong> del Everest: curvas de SPL vs. distancia para distintos SWL. Destacar que todas las curvas son paralelas — la pendiente (−6 dB/dobling) es siempre la misma, lo único que cambia es la «altura» de la curva según el SWL de la fuente.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>¿Qué falla en el mundo real?</strong> (10 min). Presentar una tabla en la pizarra de fenómenos que desvían la medición real de la predicción del campo libre: reflexión del suelo (+dB), absorción atmosférica (−dB en agudos), viento (curva trayectorias), gradientes térmicos (refracción), obstáculos (difracción). No profundizar — es gancho para las sesiones 10 y 11. Preguntar: «Si medimos en el patio del colegio, ¿cuál de estos efectos creen que domina?»</p>
+<blockquote>
+<p>Insertar <strong>Fig. 3-3</strong> del Everest: comparación medición real vs. campo libre — a qué distancia empieza a notarse la diferencia y por qué.</p>
+</blockquote>
+</li>
+</ol>
+<hr />
+<h2 id="3-practica-medicion-simulacion-e-informe">3. Práctica — Medición, simulación e informe<a class="headerlink" href="#3-practica-medicion-simulacion-e-informe" title="Permanent link">&para;</a></h2>
+<h3 id="actividad-en-classroom">Actividad en Classroom<a class="headerlink" href="#actividad-en-classroom" title="Permanent link">&para;</a></h3>
+<p>Publicar como <strong>Tarea</strong> en Google Classroom:</p>
+<p><strong>Título:</strong> Sesión 9 — Propagación en campo libre: medición y predicción</p>
+<p><strong>Instrucciones:</strong></p>
+<p><strong>Parte A — Mediciones escalonadas (en parejas)</strong></p>
+<ol>
+<li>Buscá un espacio exterior amplio (patio, cancha, estacionamiento vacío) con la menor cantidad de superficies reflectantes posible. Alejate al menos 20 m de paredes.</li>
+<li>Configurá un parlante Bluetooth reproduciendo ruido rosa a un volumen fijo (no lo modifiques durante todo el experimento).</li>
+<li>Con un sonómetro (app de celular), medí el nivel en dBA en los siguientes puntos:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Distancia desde la fuente</th>
+<th>dBA medido</th>
+<th>dBA predicho por campo libre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0 m</td>
+<td></td>
+<td>(referencia)</td>
+</tr>
+<tr>
+<td>2.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10.0 m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>16.0 m (si el espacio lo permite)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Para cada distancia, calculá el valor predicho por la ley del inverso del cuadrado usando la fórmula <span class="arithmatex">\(\text{SPL}(r) = \text{SPL}(1\text{m}) + 20\log_{10}(1/r)\)</span>.</li>
+<li>Calculá el error: <span class="arithmatex">\(\text{error} = \text{medido} - \text{predicho}\)</span>.</li>
+<li>Graficá ambas curvas (medida y predicha) en un mismo gráfico con distancia en escala logarítmica en el eje X.</li>
+</ol>
+<p><strong>Parte B — Simulación p5.js</strong></p>
+<ol>
+<li>Abrí la simulación p5.js de fuente puntual (proporcionada por el docente).</li>
+<li>Variá la distancia de escucha (slider) y observá cómo:</li>
+<li>El SPL calculado baja 6 dB cada vez que duplicás la distancia</li>
+<li>La intensidad (W/m²) cae como 1/r²</li>
+<li>El área de la esfera crece como r²</li>
+<li>Capturá una captura de pantalla de la simulación a r = 2 m, r = 4 m y r = 8 m.</li>
+<li>Respondé: ¿Qué representa cada círculo concéntrico en la simulación? ¿Por qué los círculos se dibujan cada vez más espaciados aunque el SPL baja linealmente en dB?</li>
+</ol>
+<p><strong>Parte C — Informe de comparación (300-400 palabras)</strong></p>
+<p>Redactá un informe que incluya:
+1. Tabla con los valores medidos, predichos y errores.
+2. Gráfica comparativa (medido vs. predicho).
+3. Análisis: ¿En qué distancias el error es mayor? ¿Por qué creés que ocurre? (Considerá: reflexión del suelo, ruido de fondo que «tapa» la medición a larga distancia, directividad del parlante — a 1 m quizás no estás en el eje del tweeter.)
+4. ¿Qué mejorarías del diseño experimental si tuvieras que repetirlo?
+5. Conclusión: ¿Se cumple la ley del inverso del cuadrado en tu medición? ¿Qué tan bien?</p>
+<p><strong>Fecha de entrega:</strong> [definir según calendario]</p>
+<h3 id="rubrica-formativa">Rúbrica formativa<a class="headerlink" href="#rubrica-formativa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>✅ Logrado</th>
+<th>⚠️ En proceso</th>
+<th>❌ No logrado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mediciones (Parte A)</td>
+<td>≥7 distancias medidas, tabla completa, predicciones calculadas correctamente</td>
+<td>5-6 distancias o algún error de cálculo</td>
+<td>≤4 distancias o errores conceptuales</td>
+</tr>
+<tr>
+<td>Gráfica (Parte A)</td>
+<td>Ambas curvas en un solo gráfico, eje X logarítmico, leyenda clara</td>
+<td>Gráfico correcto pero ejes lineales o sin leyenda</td>
+<td>Sin gráfico o con errores</td>
+</tr>
+<tr>
+<td>Simulación (Parte B)</td>
+<td>Capturas a 3 distancias, responde correctamente ambas preguntas</td>
+<td>Capturas a 2 distancias o una respuesta vaga</td>
+<td>Sin capturas o sin respuestas</td>
+</tr>
+<tr>
+<td>Informe (Parte C)</td>
+<td>Tabla, gráfica, análisis de errores con causas técnicas, mejora experimental y conclusión</td>
+<td>Informe con análisis superficial</td>
+<td>Sin análisis de causas de error</td>
+</tr>
+<tr>
+<td>Terminología</td>
+<td>Usa correctamente términos: campo libre, divergencia esférica, intensidad, presión, dB SPL, ley del inverso del cuadrado</td>
+<td>Usa algunos términos pero con imprecisiones</td>
+<td>No usa la terminología de la sesión</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-cierre-discusion-y-bitacora">4. Cierre — Discusión y bitácora<a class="headerlink" href="#4-cierre-discusion-y-bitacora" title="Permanent link">&para;</a></h2>
+<h3 id="discusion-guiada-10-min">Discusión guiada (10 min)<a class="headerlink" href="#discusion-guiada-10-min" title="Permanent link">&para;</a></h3>
+<ul>
+<li>«A 10 m, la predicción de campo libre dice que deberíamos perder 20 dB. ¿Perdimos exactamente 20 dB?» (Casi nunca: el suelo refleja, hay viento, el ruido de fondo contamina la medición a larga distancia.)</li>
+<li>«¿En un concierto al aire libre, el sonidista usa la ley del inverso del cuadrado para calcular el sistema?» (Sí, es el punto de partida. Pero después corrige por absorción atmosférica, directividad de las cajas, viento predominante y temperatura. Y mide con un sonómetro en la prueba de sonido para verificar.)</li>
+<li>«¿Por qué el campo libre es un concepto importante si nunca se cumple perfectamente?» (Porque es el modelo más simple — da el límite superior de atenuación. Si algo no funciona ni en campo libre, no va a funcionar en la realidad. Es como asumir 'sin fricción' en mecánica: no existe, pero permite entender la física fundamental antes de agregar complejidad.)</li>
+</ul>
+<h3 id="registro-en-bitacora">Registro en bitácora<a class="headerlink" href="#registro-en-bitacora" title="Permanent link">&para;</a></h3>
+<p>Cada estudiante debe escribir en su bitácora digital:</p>
+<blockquote>
+<p><em>"Hoy medí la divergencia esférica del sonido. En campo libre, una fuente puntual pierde 6 dB cada vez que duplico la distancia desde la fuente — no porque el sonido 'se gaste', sino porque la misma energía se distribuye sobre una superficie esférica que crece como r². La fórmula <span class="arithmatex">\(\text{SPL}(r_2) = \text{SPL}(r_1) + 20\log_{10}(r_1/r_2)\)</span> predice el nivel a cualquier distancia. En la práctica, el suelo, el viento y la absorción atmosférica hacen que la medición real se desvíe del modelo ideal — precisamente el tema de las próximas sesiones. Para compensar una duplicación de distancia y mantener el SPL necesito cuadruplicar la potencia del amplificador. Un parlante con SWL = 120 dB sobre un escenario (Q = 2) entrega unos 97 dB SPL a 20 m."</em></p>
+</blockquote>
+<hr />
+<h2 id="recursos-adicionales-para-el-docente">Recursos adicionales para el docente<a class="headerlink" href="#recursos-adicionales-para-el-docente" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://www.sengpielaudio.com/calculator-distance.htm">Sengpielaudio: Inverse Square Law Calculator</a> — calculadora online de SPL vs. distancia (SWL → SPL)</li>
+<li><a href="https://editor.p5js.org/">Simulación p5.js de fuente puntual</a> — se puede crear un sketch simple con círculos concéntricos que representen los frentes de onda y un indicador numérico del SPL</li>
+<li><a href="https://www.youtube.com/watch?v=9GkZgJxT9Dc">Video: Inside an Anechoic Chamber</a> — recorrido por una cámara anecoica, el silencio más absoluto construido por el ser humano</li>
+<li><a href="http://www.sengpielaudio.com/calculator-air.htm">Tabla de constantes atmosféricas</a> — ρc, velocidad del sonido según temperatura, absorción atmosférica</li>
+<li><a href="https://www.cdc.gov/niosh/topics/noise/app.html">NIOSH Sound Level Meter App</a> — sonómetro calibrado para iOS (error &lt;2 dBA)</li>
+<li><a href="https://www.szynalski.com/tone-generator/">Generador de ruido rosa online</a> — ruido rosa (−3 dB/octava, igual energía por octava)</li>
+</ul>
+<hr />
+<h2 id="posibles-dificultades">Posibles dificultades<a class="headerlink" href="#posibles-dificultades" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«No tenemos espacio exterior para medir hasta 16 m»</td>
+<td>Reducir la escala: medir a 0.5 m, 1 m, 2 m, 4 m (en interior, lo más alejado posible de paredes). La ley se verifica igual: entre 0.5 m y 1 m hay −6 dB, entre 1 m y 2 m hay −6 dB. La diferencia con la predicción será MAYOR en interior por las reflexiones — eso es parte del aprendizaje</td>
+</tr>
+<tr>
+<td>«A larga distancia el ruido de fondo tapa la medición»</td>
+<td>Es un resultado esperado, no un error. Pedir que lo documenten: «A 10 m el parlante medía X dBA, pero el ruido de fondo era Y dBA. La diferencia es Z dB. Cuando la diferencia es &lt;10 dB, el ruido de fondo contamina la medición.» Enseñar la corrección por ruido de fondo (sesión 7): si el ruido de fondo está 10 dB por debajo, el error es &lt;0.5 dB; si está a 3 dB, el error es 3 dB</td>
+</tr>
+<tr>
+<td>«El valor medido es MAYOR que el predicho — ¿está mal?»</td>
+<td>No necesariamente. Una reflexión del suelo en fase puede sumar hasta +6 dB al receptor. Preguntar: «¿A qué distancia estaba el micrófono del suelo? ¿Había alguna pared cerca?» Si el suelo es reflectante (concreto, baldosa), la reflexión del suelo domina el error a distancias medias</td>
+</tr>
+<tr>
+<td>«¿Por qué la fórmula usa 20·log si en sesiones anteriores usamos 10·log?»</td>
+<td>10·log es para relaciones de POTENCIA o INTENSIDAD (W, W/m²). 20·log es para relaciones de PRESIÓN o VOLTAJE (Pa, V). La presión es proporcional a la raíz cuadrada de la intensidad: <span class="arithmatex">\(p \propto \sqrt{I}\)</span>. Por eso: <span class="arithmatex">\(20\log(p_1/p_2) = 10\log(p_1^2/p_2^2) = 10\log(I_1/I_2)\)</span>. Son equivalentes — solo cambia el factor según qué magnitud estemos comparando</td>
+</tr>
+<tr>
+<td>«¿No habíamos visto esto en la sesión 8?»</td>
+<td>En la sesión 8 clasificamos los tipos de fuente (puntual, lineal, plana). Ahora profundizamos en el mecanismo físico: ¿POR QUÉ la puntual pierde 6 dB? Porque la energía se reparte sobre una esfera que crece como r². Y lo medimos experimentalmente. Es la diferencia entre saber que algo pasa y entender por qué pasa</td>
+</tr>
+<tr>
+<td>«La app del celular no es precisa»</td>
+<td>Reconocerlo abiertamente. Las apps de celular tienen error típico de ±2-5 dBA en iPhone, ±5-10 dBA en Android por la variedad de micrófonos. Pero para verificar una ley cualitativa (la curva debería bajar ~6 dB por duplicación) es suficiente. Lo importante es la FORMA de la curva, no el valor absoluto</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Guía docente — Acústica Aplicada a la Producción Musical</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

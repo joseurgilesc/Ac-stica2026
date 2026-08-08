@@ -1,0 +1,2548 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-27/">
+      
+      
+        <link rel="next" href="../sesion-29/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 28: Transmisión de sonido - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-28-transmision-de-sonido-y-ley-de-la-masa" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 28: Transmisión de sonido
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transmision-a-traves-de-una-particion-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transmisión a través de una partición simple
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ley-teorica-de-la-masa-mass-law" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ley teórica de la masa (mass law)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-regla-del-6-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La regla del 6-6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-numerico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo numérico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-determina-el-stc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo se determina el STC?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significan-los-numeros-stc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué significan los números STC?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caminos-de-flanqueo-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caminos de flanqueo típicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transmision-a-traves-de-una-particion-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transmisión a través de una partición simple
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ley-teorica-de-la-masa-mass-law" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ley teórica de la masa (mass law)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-regla-del-6-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La regla del 6-6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-numerico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo numérico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-determina-el-stc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo se determina el STC?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-significan-los-numeros-stc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué significan los números STC?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caminos-de-flanqueo-tipicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caminos de flanqueo típicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-28-transmision-de-sonido-y-ley-de-la-masa">Sesión 28: Transmisión de sonido y ley de la masa<a class="headerlink" href="#sesion-28-transmision-de-sonido-y-ley-de-la-masa" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel de presión sonora</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m2"></a><strong>m²</strong></td>
+<td>Metro cuadrado</td>
+<td>Superficie</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="kg"></a><strong>kg</strong></td>
+<td>Kilogramo</td>
+<td>Masa</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="tl"></a><strong>TL</strong></td>
+<td>Transmission Loss</td>
+<td>Pérdida por transmisión</td>
+<td><span class="arithmatex">\(TL = 10 \log_{10}(1/\tau)\)</span> en dB</td>
+</tr>
+<tr>
+<td><a id="tau"></a><strong>τ</strong> (tau)</td>
+<td>Coeficiente de transmisión</td>
+<td>Fracción de energía sonora que atraviesa una partición</td>
+<td>0 ≤ τ ≤ 1. τ = 0.001 → TL = 30 dB</td>
+</tr>
+<tr>
+<td><a id="nr"></a><strong>NR</strong></td>
+<td>Noise Reduction</td>
+<td>Reducción de ruido entre dos recintos</td>
+<td><span class="arithmatex">\(NR = L_{\text{fuente}} - L_{\text{receptor}}\)</span> en dB</td>
+</tr>
+<tr>
+<td><a id="stc"></a><strong>STC</strong></td>
+<td>Sound Transmission Class</td>
+<td>Índice de aislamiento a ruido aéreo (single-number rating)</td>
+<td>ASTM E413</td>
+</tr>
+<tr>
+<td><a id="c"></a><strong>c</strong></td>
+<td>Velocidad del sonido</td>
+<td>Velocidad de propagación</td>
+<td>~343 m/s (20°C)</td>
+</tr>
+<tr>
+<td><a id="rho"></a><strong>ρ</strong> (rho)</td>
+<td>Densidad del aire</td>
+<td>Masa por unidad de volumen del aire</td>
+<td>~1.21 kg/m³ (20°C)</td>
+</tr>
+<tr>
+<td><a id="ms"></a><strong>m_s</strong></td>
+<td>Masa superficial</td>
+<td>Masa por unidad de área de una partición</td>
+<td>kg/m²</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>¿Cuál es la diferencia entre aislar y absorber?</summary>
+<p>Esta es la confusión #1 en acústica arquitectónica. Los términos NO son intercambiables y confundirlos lleva a soluciones CARAS que no funcionan.</p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Definición</th>
+<th>¿Qué hace?</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aislamiento (Isolation)</strong></td>
+<td>Impedir que el sonido pase de UN recinto a OTRO</td>
+<td>Reduce la energía que ATRAVIESA una barrera</td>
+<td>Una pared de concreto entre dos habitaciones. El sonido rebota y se queda en el recinto fuente</td>
+</tr>
+<tr>
+<td><strong>Absorción (Absorption)</strong></td>
+<td>Convertir energía sonora en calor DENTRO de un recinto</td>
+<td>Reduce la energía que REBOTA en las superficies del MISMO recinto</td>
+<td>Un panel de espuma acústica en la pared. El sonido «desaparece» (se convierte en calor) pero NO impide que pase al vecino</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">La espuma acústica NO aísla</p>
+<p>Este es el error más costoso y más común. Alguien quiere «insonorizar» su estudio y compra $500 en espuma acústica. Forra las paredes. El vecino sigue escuchando TODO. ¿Por qué? Porque la espuma ABSORBE (reduce reflexiones DENTRO de la sala) pero NO AÍSLA (no impide que el sonido ATRAVIESE la pared). La espuma tiene una masa superficial de ~0.3 kg/m². Una pared de yeso de 10 cm tiene ~70 kg/m². La transmisión de sonido a través de un material depende de su MASA SUPERFICIAL, no de su capacidad absorbente. Para aislar necesitás MASA, RIGIDEZ y HERMETICIDAD. La espuma no aporta NINGUNA de las tres.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 1-4</strong> del Everest (o diagrama conceptual equivalente): dos recintos adyacentes separados por una pared. En el recinto fuente, ondas sonoras incidiendo en la pared. Una parte se REFLEJA (absorción insuficiente), una parte se ABSORBE (se convierte en calor DENTRO de la pared), y una parte se TRANSMITE al recinto receptor. Señalar: «Esto es TRANSMISIÓN — lo que llega al receptor es lo que queremos REDUCIR con aislamiento. Las reflexiones en el recinto fuente son lo que reducimos con ABSORCIÓN. Son dos problemas DISTINTOS que requieren soluciones DISTINTAS.»</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Pérdida por transmisión y la ley de la masa</summary>
+<h3 id="transmision-a-traves-de-una-particion-simple">Transmisión a través de una partición simple<a class="headerlink" href="#transmision-a-traves-de-una-particion-simple" title="Permanent link">&para;</a></h3>
+<p>Cuando una onda sonora incide sobre una pared, una fracción de la energía la ATRAVIESA y se re-irradia del otro lado. El <strong>coeficiente de transmisión</strong> τ es la fracción de energía transmitida:</p>
+<div class="arithmatex">\[
+\tau = \frac{E_{\text{transmitida}}}{E_{\text{incidente}}}
+\]</div>
+<p>La <strong>pérdida por transmisión</strong> (Transmission Loss, TL) es:</p>
+<div class="arithmatex">\[
+\boxed{TL = 10 \log_{10}\left(\frac{1}{\tau}\right) = -10 \log_{10}(\tau) \quad \text{dB}}
+\]</div>
+<h3 id="ley-teorica-de-la-masa-mass-law">Ley teórica de la masa (mass law)<a class="headerlink" href="#ley-teorica-de-la-masa-mass-law" title="Permanent link">&para;</a></h3>
+<p>Para una onda plana incidiendo normalmente (90°) sobre una partición infinita y sin rigidez (limp mass law), la TL teórica es (Everest, Cap. 16):</p>
+<div class="arithmatex">\[
+\boxed{TL = 20 \log_{10}(m_s \cdot f) - 47 \quad \text{dB}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(TL\)</span></td>
+<td>Pérdida por transmisión</td>
+<td>dB</td>
+<td>Cuánto atenúa la partición. Más alto = mejor aislamiento</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(m_s\)</span></td>
+<td>Masa superficial</td>
+<td>kg/m²</td>
+<td>Masa por metro cuadrado de la partición. Pared de yeso 10 cm ≈ 70 kg/m². Vidrio 6 mm ≈ 15 kg/m²</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f\)</span></td>
+<td>Frecuencia</td>
+<td>Hz</td>
+<td>La TL DEPENDE de la frecuencia — no es un solo número</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-regla-del-6-6">La regla del 6-6<a class="headerlink" href="#la-regla-del-6-6" title="Permanent link">&para;</a></h3>
+<p>De la fórmula se desprenden dos consecuencias fundamentales:</p>
+<table>
+<thead>
+<tr>
+<th>Regla</th>
+<th>Significado</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Duplicar la masa → +6 dB</strong></td>
+<td>Si duplicás la masa superficial (ej. de un panel de yeso de 12.5 mm a dos paneles de 12.5 mm = 25 mm), la TL aumenta 6 dB en TODAS las frecuencias</td>
+<td>ms: 8 → 16 kg/m² → +6 dB</td>
+</tr>
+<tr>
+<td><strong>Duplicar la frecuencia → +6 dB</strong></td>
+<td>La TL aumenta 6 dB por cada octava que subís en frecuencia. Las frecuencias altas son MÁS FÁCILES de aislar que las bajas</td>
+<td>125 Hz → 250 Hz → +6 dB; 500 Hz → 1 kHz → +6 dB</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">La intuición física de la ley de masa</p>
+<p>¿Por qué más masa = más aislamiento? Imaginá una pelota de ping-pong (poca masa) vs. una bola de boliche (mucha masa). Si les pegás con la misma fuerza, la pelota de ping-pong sale disparada (se mueve fácil → transmite mucha energía). La bola de boliche apenas se mueve (es difícil de mover → transmite poca energía). La pared es igual: una pared LIVIANA vibra fácilmente con la presión sonora y RE-IRRADIA el sonido del otro lado. Una pared PESADA apenas vibra → la energía que pasa al otro lado es mucho menor. La física es newtoniana: F = m·a. La misma fuerza sonora produce menos aceleración (y por tanto menos radiación) en una pared más masiva.</p>
+</div>
+<h3 id="ejemplo-numerico">Ejemplo numérico<a class="headerlink" href="#ejemplo-numerico" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>m_s (kg/m²)</th>
+<th>TL a 125 Hz (dB)</th>
+<th>TL a 500 Hz (dB)</th>
+<th>TL a 2 kHz (dB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vidrio 3 mm</td>
+<td>7.5</td>
+<td>15.4</td>
+<td>21.4</td>
+<td>27.5</td>
+</tr>
+<tr>
+<td>Vidrio 6 mm</td>
+<td>15</td>
+<td>21.4</td>
+<td>27.5</td>
+<td>33.5</td>
+</tr>
+<tr>
+<td>Yeso 12.5 mm (1 placa)</td>
+<td>9</td>
+<td>16.9</td>
+<td>23.0</td>
+<td>29.0</td>
+</tr>
+<tr>
+<td>Yeso 25 mm (2 placas)</td>
+<td>18</td>
+<td>23.0</td>
+<td>29.0</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>Bloque de hormigón 100 mm</td>
+<td>180</td>
+<td>43.0</td>
+<td>49.0</td>
+<td>55.0</td>
+</tr>
+<tr>
+<td>Ladrillo hueco 120 mm</td>
+<td>150</td>
+<td>41.5</td>
+<td>47.5</td>
+<td>53.5</td>
+</tr>
+<tr>
+<td>Puerta de madera maciza 45 mm</td>
+<td>25</td>
+<td>25.8</td>
+<td>31.8</td>
+<td>37.8</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">¿Se cumple exactamente la ley de masa en la práctica?</p>
+<p>No. La ley de masa es una aproximación teórica que asume una pared INFINITA, SIN RIGIDEZ, con incidencia NORMAL. En la realidad aparecen desviaciones: (a) el <strong>efecto de coincidencia</strong> (coincidence effect): a cierta frecuencia crítica, la velocidad de flexión de la onda en la pared IGUALA la velocidad del sonido en el aire → la pared se vuelve «transparente» y el TL CAE drásticamente (puede bajar 10-15 dB en una banda estrecha). (b) Las <strong>resonancias</strong> propias de la partición producen caídas de TL a frecuencias específicas. (c) La <strong>rigidez</strong> (stiffness) domina a MUY bajas frecuencias (&lt; 50-100 Hz) donde la TL es mayor que la predicha por la ley de masa. (d) El sonido NO llega con incidencia normal — en campo difuso, el promedio sobre todos los ángulos de incidencia reduce la TL ~5 dB respecto a la fórmula de incidencia normal.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-5</strong> del Everest: gráfico de TL vs. frecuencia para una partición simple. Eje X logarítmico de 50 Hz a 10 kHz, eje Y de 0 a 70 dB. Mostrar TRES regiones: (a) región controlada por rigidez (stiffness-controlled, bajas frecuencias, TL decreciente), (b) región controlada por masa (mass-controlled, TL crece 6 dB/octava siguiendo la línea recta de la ley de masa), (c) región de coincidencia (coincidence dip — caída abrupta en la frecuencia crítica f_c). Señalar que la ley de masa solo describe la región (b).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Sound Transmission Class (STC) — el número único</summary>
+<p>La TL varía con la frecuencia — una pared puede aislar 25 dB a 125 Hz y 45 dB a 2 kHz. Para comparar materiales se necesita un NÚMERO ÚNICO. El STC (Sound Transmission Class) según ASTM E413 es ese número.</p>
+<h3 id="como-se-determina-el-stc">¿Cómo se determina el STC?<a class="headerlink" href="#como-se-determina-el-stc" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Se mide la TL de la partición en 16 bandas de tercio de octava (125 Hz a 4 kHz).</li>
+<li>Se compara la curva medida con una curva de referencia STC (definida por la norma).</li>
+<li>Se «desliza» la curva de referencia verticalmente hasta que se cumplan dos condiciones: (a) la suma de las desviaciones negativas (bandas donde la TL medida está por DEBAJO de la referencia) no excede 32 dB, y (b) ninguna desviación individual excede 8 dB.</li>
+<li>El valor STC es el valor de la curva de referencia a 500 Hz en esa posición.</li>
+</ol>
+<h3 id="que-significan-los-numeros-stc">¿Qué significan los números STC?<a class="headerlink" href="#que-significan-los-numeros-stc" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>STC</th>
+<th>Descripción</th>
+<th>¿Qué se escucha a través de la pared?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25</td>
+<td>Muy pobre</td>
+<td>Conversación normal perfectamente inteligible. El vecino es parte de tu vida</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Pobre</td>
+<td>Conversación en voz normal audible pero no del todo inteligible. Risas y llantos claros</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Regular</td>
+<td>Conversación en voz alta audible como murmullo. Música con bajo perceptible</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Aceptable</td>
+<td>Conversación en voz alta audible solo como sonido débil. Música con bajo como «tum-tum»</td>
+</tr>
+<tr>
+<td>45</td>
+<td>Bueno</td>
+<td>Conversación a gritos apenas audible. Música con bajo percibida como vibración, no como sonido</td>
+</tr>
+<tr>
+<td>50</td>
+<td>Muy bueno</td>
+<td>Gritos no audibles. Batería y bajo eléctrico perceptibles como vibración lejana</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Excelente</td>
+<td>Instrumentos de percusión fuertes apenas audibles. El vecino puede estar dando un concierto y vos leyendo</td>
+</tr>
+<tr>
+<td>60</td>
+<td>Excepcional</td>
+<td>Prácticamente ningún sonido aéreo audible. Solo percusión muy intensa o amplificación extrema</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">STC no cuenta la historia completa</p>
+<p>El STC es un promedio ponderado que enfatiza las frecuencias de la voz humana (500 Hz – 2 kHz). Dos paredes pueden tener el mismo STC pero comportarse MUY distinto en graves. Ejemplo: una pared de yeso simple (STC 34) y una pared de yeso doble con aislante (STC 34 también pero con mucha mejor performance en graves). Si tu problema es el bajo del vecino, el STC te dice POCO — necesitás mirar la TL en 63 y 125 Hz, no el número único. Por eso las normas más modernas incluyen los términos de adaptación espectral C y Ctr (ISO 717): STC + Ctr aproxima el aislamiento para ruido de tránsito y música (dominante en graves).</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-7</strong> del Everest: gráfico de la curva de referencia STC y una curva de TL medida. Mostrar el «deslizamiento» de la curva de referencia, las desviaciones negativas, la suma de desviaciones ≤ 32 dB, y la lectura del STC a 500 Hz.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Reducción de ruido (Noise Reduction): de la teoría a la realidad</summary>
+<p>La TL te dice cuánto atenúa LA PARED. Pero lo que realmente importa es cuánto se reduce el ruido ENTRE LOS DOS RECINTOS. Eso es la <strong>reducción de ruido</strong> (NR):</p>
+<div class="arithmatex">\[
+\boxed{NR = L_{\text{fuente}} - L_{\text{receptor}} = TL + 10 \log_{10}\left(\frac{A}{S}\right) \quad \text{dB}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(NR\)</span></td>
+<td>Reducción de ruido</td>
+<td>dB</td>
+<td>Diferencia de nivel sonoro entre el recinto fuente y el receptor</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L_{\text{fuente}}\)</span></td>
+<td>Nivel sonoro en el recinto fuente</td>
+<td>dB</td>
+<td>Lo que medís en la habitación donde se produce el sonido</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L_{\text{receptor}}\)</span></td>
+<td>Nivel sonoro en el recinto receptor</td>
+<td>dB</td>
+<td>Lo que medís en la habitación QUE QUERÉS PROTEGER</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(TL\)</span></td>
+<td>Pérdida por transmisión de la partición</td>
+<td>dB</td>
+<td>Lo que aisla la pared en sí</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td>Absorción total del recinto receptor</td>
+<td>m² (sabins métricos)</td>
+<td>Suma de (α_i × S_i) para todas las superficies del recinto receptor</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S\)</span></td>
+<td>Área de la partición separadora</td>
+<td>m²</td>
+<td>La superficie de la pared/techo/piso que comparten ambos recintos</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">TL ≠ NR — la absorción en el recinto receptor IMPORTA</p>
+<p>La NR es SIEMPRE menor o igual que la TL (porque 10·log(A/S) suele ser negativo a menos que A &gt; S). Si el recinto receptor es MUY reverberante (poca absorción, A pequeño), el sonido que logra pasar por la pared REBOTA muchas veces y se ACUMULA → el nivel sonoro en el receptor es MÁS ALTO que si el recinto tuviera absorción. Conclusión: para maximizar el aislamiento ENTRE recintos, necesitás tanto TL (aislar la pared) como ABSORCIÓN en el recinto receptor (para que el sonido que logra pasar no se acumule). Las dos estrategias NO son alternativas — son COMPLEMENTARIAS.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>diagrama conceptual</strong> de dos recintos adyacentes con fuente en uno, receptor en el otro. Mostrar la pared separadora (TL), la absorción en el receptor (A = Σ α_i·S_i), y las fórmulas de NR = L_f − L_r = TL + 10 log(A/S).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Flanqueo: cuando el sonido se escapa por donde no mirás</summary>
+<p>El sonido NO solo atraviesa la pared directamente. Busca —y encuentra— caminos alternativos. El <strong>flanqueo</strong> (flanking transmission) es la transmisión de sonido por vías que NO son la partición separadora directa.</p>
+<h3 id="caminos-de-flanqueo-tipicos">Caminos de flanqueo típicos<a class="headerlink" href="#caminos-de-flanqueo-tipicos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Camino</th>
+<th>Descripción</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Paredes adyacentes</strong></td>
+<td>El sonido vibra la pared del recinto fuente, esa vibración viaja por la ESTRUCTURA hacia paredes laterales, y esas paredes RE-IRRADIAN sonido en el recinto receptor</td>
+<td>Desacoplar la partición de las paredes adyacentes (juntas elásticas, montaje flotante)</td>
+</tr>
+<tr>
+<td><strong>Falso plafón (drop ceiling)</strong></td>
+<td>El sonido pasa POR ENCIMA de la pared divisoria a través del plenum sobre el cielo raso</td>
+<td>La pared divisoria DEBE extenderse hasta la losa estructural, no solo hasta el cielo falso</td>
+</tr>
+<tr>
+<td><strong>Piso flotante / losa</strong></td>
+<td>La vibración viaja por la losa de concreto que es CONTINUA entre ambos recintos</td>
+<td>Piso flotante (floating floor) con capa elástica de desacoplamiento</td>
+</tr>
+<tr>
+<td><strong>Ductos de ventilación</strong></td>
+<td>El sonido viaja por los conductos de aire que conectan ambos recintos</td>
+<td>Silenciadores (duct silencers) en los conductos, tramos con absorción interna</td>
+</tr>
+<tr>
+<td><strong>Tomas eléctricas, cajas de luz</strong></td>
+<td>Agujeros en la pared que CREAN UN CAMINO AÉREO DIRECTO</td>
+<td>Cajas selladas, masilla acústica, NO alinear tomas en caras opuestas de la misma pared</td>
+</tr>
+<tr>
+<td><strong>Puertas y ventanas</strong></td>
+<td>Son los elementos MÁS DÉBILES de cualquier cerramiento. Una pared de STC 55 con una puerta de STC 25 → STC compuesto ≈ 30</td>
+<td>Puertas acústicas (STC ≥ 40), doble puerta con cámara de aire, burletes perimetrales, sellos inferiores automáticos</td>
+</tr>
+<tr>
+<td><strong>Juntas y grietas</strong></td>
+<td>CUALQUIER abertura, por pequeña que sea, transmite sonido. Una grieta de 1 mm × 1 m de largo en una pared de STC 50 puede reducir el STC compuesto a 30</td>
+<td>Sellar TODAS las juntas con sellador acústico (NO silicona común — debe ser flexible permanentemente). La regla: si pasa luz, pasa sonido. Si pasa aire, pasa sonido</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">La regla del eslabón más débil</p>
+<p>El aislamiento de un cerramiento COMPUESTO (pared + puerta + ventana + tomas + ductos) está determinado por el elemento MÁS DÉBIL, no por el promedio. Una pared de ladrillo macizo con TL = 55 dB pero con una ventana de vidrio simple de TL = 25 dB que ocupa el 20% del área → el TL compuesto es aproximadamente 32 dB. Gastar dinero en mejorar la pared cuando tenés una ventana simple es como ponerle candado de titanio a una puerta de cartón. La inversión en aislamiento debe atacar PRIMERO los puntos débiles, no reforzar lo que ya es fuerte.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 17-2</strong> del Everest: diagrama de una sección constructiva mostrando TODOS los caminos de flanqueo simultáneamente. Fuente en recinto A, receptor en recinto B. Flechas mostrando: (1) transmisión directa por la pared, (2) flanqueo por paredes laterales, (3) flanqueo por cielo raso/plenum, (4) flanqueo por piso/losa, (5) flanqueo por ductos, (6) fuga por juntas y penetraciones. Señalar: «La TL compuesta es menor que la TL de CUALQUIERA de estos caminos individuales si no están tratados.»</p>
+</blockquote>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 16, pp. 231–250 (Sound Transmission Loss, Mass Law, STC, Composite Partitions, Flanking Paths). Capítulo 17, pp. 251–275 (Ventilating Systems — Flanking through HVAC, Vibration Isolation, Duct Silencers). ASTM E413 (Classification for Rating Sound Insulation).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

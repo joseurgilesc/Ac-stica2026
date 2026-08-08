@@ -1,0 +1,2549 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-18/">
+      
+      
+        <link rel="next" href="../sesion-20/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 19: Reverberación - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-19-reverberacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 19: Reverberación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eco-vs-reverberacion-no-son-lo-mismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eco vs. reverberación: no son lo mismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-1-crecimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Crecimiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-2-decaimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Decaimiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valores-tipicos-de-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores típicos de RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo rápido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edt-early-decay-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EDT (Early Decay Time)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-mismo-audio-distintas-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 1 — Mismo audio, distintas RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-por-que-un-depto-vacio-hace-eco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 2 — ¿Por qué un depto vacío «hace eco»?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-inteligibilidad-de-la-palabra-vs-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 3 — Inteligibilidad de la palabra vs. RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eco-vs-reverberacion-no-son-lo-mismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eco vs. reverberación: no son lo mismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-1-crecimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Crecimiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-2-decaimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Decaimiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valores-tipicos-de-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores típicos de RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo rápido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edt-early-decay-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EDT (Early Decay Time)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-mismo-audio-distintas-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 1 — Mismo audio, distintas RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-por-que-un-depto-vacio-hace-eco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 2 — ¿Por qué un depto vacío «hace eco»?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-inteligibilidad-de-la-palabra-vs-rt60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 3 — Inteligibilidad de la palabra vs. RT60
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-19-reverberacion">Sesión 19: Reverberación<a class="headerlink" href="#sesion-19-reverberacion" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m2"></a><strong>m²</strong></td>
+<td>Metro cuadrado</td>
+<td>Superficie</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m3"></a><strong>m³</strong></td>
+<td>Metro cúbico</td>
+<td>Volumen</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="s"></a><strong>s</strong></td>
+<td>Segundo</td>
+<td>Tiempo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="ms"></a><strong>ms</strong></td>
+<td>Milisegundo</td>
+<td>Tiempo</td>
+<td>1 ms = 0.001 s</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel de presión sonora</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="rt60"></a><strong>RT60</strong> (o T60)</td>
+<td>Tiempo de reverberación</td>
+<td>Tiempo que tarda el sonido en decaer 60 dB después de apagar la fuente</td>
+<td>En segundos</td>
+</tr>
+<tr>
+<td><a id="edt"></a><strong>EDT</strong></td>
+<td>Early Decay Time</td>
+<td>Tiempo de decaimiento temprano (primeros 10 dB de caída × 6)</td>
+<td>En segundos</td>
+</tr>
+<tr>
+<td><a id="v"></a><strong>V</strong></td>
+<td>Volumen</td>
+<td>Volumen del recinto</td>
+<td>En m³</td>
+</tr>
+<tr>
+<td><a id="a"></a><strong>A</strong></td>
+<td>Absorción total</td>
+<td>Suma ponderada α·S de todas las superficies</td>
+<td>En m² (sabins métricos)</td>
+</tr>
+<tr>
+<td><a id="w"></a><strong>W</strong></td>
+<td>Watt</td>
+<td>Potencia acústica de la fuente</td>
+<td>En watts (W)</td>
+</tr>
+<tr>
+<td><a id="alpha"></a><strong>ᾱ</strong> (alfa barra)</td>
+<td>Coeficiente de absorción promedio</td>
+<td>Promedio ponderado de α en todo el recinto</td>
+<td>ᾱ = A / S_total</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>¿Qué es la reverberación?</summary>
+<p>La <strong>reverberación</strong> es la persistencia del sonido en un recinto después de que la fuente sonora se apaga. No es un eco — es la acumulación de MILES de reflexiones que llegan tan juntas que nuestro cerebro las fusiona en una «cola sonora» continua y difusa (Everest &amp; Pohlmann, 2009, Cap. 11).</p>
+<h3 id="eco-vs-reverberacion-no-son-lo-mismo">Eco vs. reverberación: no son lo mismo<a class="headerlink" href="#eco-vs-reverberacion-no-son-lo-mismo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Fenómeno</th>
+<th>¿Qué es?</th>
+<th>Retardo típico</th>
+<th>¿El cerebro lo percibe como...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sonido directo</strong></td>
+<td>El primer sonido que llega, en línea recta fuente → receptor</td>
+<td>0 ms (referencia)</td>
+<td>La fuente misma — localización, claridad</td>
+</tr>
+<tr>
+<td><strong>Reflexión temprana</strong></td>
+<td>Primeras reflexiones (1-3 rebotes), llegan dentro de los primeros ~50 ms</td>
+<td>5 – 50 ms</td>
+<td>Refuerzo del sonido directo, sensación de «espacio pequeño». Si llegan con mucho nivel y retardo, pueden colorear el sonido</td>
+</tr>
+<tr>
+<td><strong>Eco</strong></td>
+<td>Una reflexión discreta que llega con suficiente retardo (&gt; 50 ms) y nivel como para ser percibida como evento SEPARADO</td>
+<td>&gt; 50 ms</td>
+<td>Una repetición distinguible del sonido original — «eco»</td>
+</tr>
+<tr>
+<td><strong>Reverberación</strong></td>
+<td>Miles de reflexiones tan densas que se fusionan en una cola continua</td>
+<td>A partir de ~80-100 ms, la densidad de reflexiones es tan alta que no se distinguen eventos individuales</td>
+<td>«Ambiente», «cola», envoltura espacial. NO se perciben reflexiones individuales</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">El tiempo de reverberación NO es un efecto digital</p>
+<p>La reverberación es un fenómeno FÍSICO que ocurre en TODO espacio cerrado. Cada vez que hablás en una habitación, estás escuchando la reverberación natural de ese espacio. Los plugins de reverb de tu DAW SIMULAN este fenómeno. Entender la física de la reverberación real te permite usar los plugins con criterio, no con presets al azar.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 11-1</strong> del Everest: representación del campo sonoro en un recinto, mostrando el sonido directo (rayo único) y las múltiples reflexiones que forman el campo reverberante (muchos rayos rebotando).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Crecimiento y decaimiento del sonido en un recinto</summary>
+<p>Imaginá que encendés un parlante dentro de una sala. ¿Qué pasa con el nivel sonoro en el tiempo?</p>
+<h3 id="fase-1-crecimiento">Fase 1: Crecimiento<a class="headerlink" href="#fase-1-crecimiento" title="Permanent link">&para;</a></h3>
+<p>Cuando encendés la fuente, el nivel sonoro NO alcanza su valor máximo instantáneamente. La energía debe «llenar» la sala. Cada reflexión agrega energía al campo reverberante, y el nivel crece gradualmente hasta alcanzar un <strong>estado estacionario</strong> (equilibrio):</p>
+<div class="arithmatex">\[
+\text{Energía que entra (fuente)} = \text{Energía que se pierde (absorción + transmisión)}
+\]</div>
+<p>En este equilibrio, el nivel sonoro es constante. La energía que la fuente inyecta cada segundo es exactamente igual a la energía que las superficies absorben y transmiten cada segundo.</p>
+<h3 id="fase-2-decaimiento">Fase 2: Decaimiento<a class="headerlink" href="#fase-2-decaimiento" title="Permanent link">&para;</a></h3>
+<p>Cuando apagás la fuente, la energía deja de entrar. Pero la energía que YA está en la sala no desaparece instantáneamente — sigue rebotando. Cada vez que una onda choca contra una superficie, una fracción α se absorbe. Después de muchos choques, la energía remanente es tan baja que el sonido se vuelve inaudible.</p>
+<p>Este proceso de «muerte» del sonido es el <strong>decaimiento reverberante</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Reflexión #</th>
+<th>Energía remanente (aprox., ᾱ = 0.20)</th>
+<th>Nivel relativo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 (fuente apagada)</td>
+<td>100%</td>
+<td>0 dB</td>
+</tr>
+<tr>
+<td>1</td>
+<td>80%</td>
+<td>−1.0 dB</td>
+</tr>
+<tr>
+<td>5</td>
+<td>33%</td>
+<td>−4.8 dB</td>
+</tr>
+<tr>
+<td>10</td>
+<td>11%</td>
+<td>−9.7 dB</td>
+</tr>
+<tr>
+<td>20</td>
+<td>1.2%</td>
+<td>−19.3 dB</td>
+</tr>
+<tr>
+<td>40</td>
+<td>0.013%</td>
+<td>−38.7 dB</td>
+</tr>
+<tr>
+<td>60</td>
+<td>0.00015%</td>
+<td>−58.2 dB</td>
+</tr>
+<tr>
+<td><strong>~62</strong></td>
+<td><strong>~0.0001%</strong></td>
+<td><strong>−60 dB</strong> → ¡RT60!</td>
+</tr>
+</tbody>
+</table>
+<p>Cada reflexión reduce la energía en un factor (1 − ᾱ). Si ᾱ = 0.20, cada choque deja el 80% de la energía anterior. Después de N reflexiones, la energía es (0.80)^N de la original.</p>
+<p><strong>Dos factores controlan cuánto tarda en decaer 60 dB:</strong>
+1. <strong>Cuánta energía se absorbe en cada reflexión</strong> → depende de ᾱ (a MAYOR absorción, MENOS reflexiones para bajar 60 dB)
+2. <strong>Cuánto tiempo pasa entre reflexiones</strong> → depende del camino libre medio (a MAYOR sala, MÁS tiempo entre choques)</p>
+<blockquote>
+<p>Insertar <strong>Fig. 11-3</strong> del Everest: curva de decaimiento sonoro — gráfico de nivel (dB) vs. tiempo (s). Mostrar el estado estacionario (nivel constante mientras la fuente está encendida), el momento en que se apaga la fuente, y la caída gradual del nivel. Señalar el punto de −60 dB y la definición de RT60.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>RT60: la medida universal de la reverberación</summary>
+<p>El <strong>tiempo de reverberación RT60</strong> (o T60) es el parámetro más importante en acústica de salas. Se define como:</p>
+<blockquote>
+<p><strong>RT60 = tiempo que tarda el nivel de presión sonora en decaer 60 dB después de que la fuente se apaga.</strong></p>
+</blockquote>
+<p>¿Por qué 60 dB? Porque 60 dB corresponde aproximadamente al rango dinámico entre un sonido forte (fuerte) y la inaudibilidad en una sala de conciertos. Es decir, RT60 mide cuánto tarda un sonido fuerte en «desaparecer» completamente. Y 60 dB equivale a una reducción de energía de 1 millón de veces (10^(60/10) = 1,000,000).</p>
+<h3 id="valores-tipicos-de-rt60">Valores típicos de RT60<a class="headerlink" href="#valores-tipicos-de-rt60" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Recinto</th>
+<th>Volumen típico</th>
+<th>RT60 recomendado</th>
+<th>¿Cómo se percibe?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cabina vocal / locución</strong></td>
+<td>10 – 30 m³</td>
+<td><strong>0.2 – 0.4 s</strong></td>
+<td>Muy seco. Cada sílaba se escucha aislada. Ideal para voz hablada</td>
+</tr>
+<tr>
+<td><strong>Home studio (mezcla)</strong></td>
+<td>30 – 60 m³</td>
+<td><strong>0.3 – 0.5 s</strong></td>
+<td>Seco pero natural. Las decisiones de ecualización y compresión son precisas porque la sala no «ensucia» el sonido</td>
+</tr>
+<tr>
+<td><strong>Sala de control profesional</strong></td>
+<td>60 – 150 m³</td>
+<td><strong>0.2 – 0.4 s</strong></td>
+<td>Extremadamente controlado. Diseñado para que TODAS las frecuencias decaigan de manera uniforme</td>
+</tr>
+<tr>
+<td><strong>Sala de ensayo</strong></td>
+<td>50 – 150 m³</td>
+<td><strong>0.5 – 1.0 s</strong></td>
+<td>Vivo pero controlado. Los músicos se escuchan entre sí sin que el sonido sea un caos</td>
+</tr>
+<tr>
+<td><strong>Aula de clases</strong></td>
+<td>150 – 500 m³</td>
+<td><strong>0.6 – 0.8 s</strong></td>
+<td>Buena inteligibilidad de la palabra. El profesor se entiende sin esfuerzo</td>
+</tr>
+<tr>
+<td><strong>Sala de conciertos (música de cámara)</strong></td>
+<td>1,000 – 5,000 m³</td>
+<td><strong>1.2 – 1.6 s</strong></td>
+<td>Cálido, envolvente. La reverberación «une» las notas y da sensación de espacio</td>
+</tr>
+<tr>
+<td><strong>Sala de conciertos (orquesta sinfónica)</strong></td>
+<td>10,000 – 25,000 m³</td>
+<td><strong>1.8 – 2.2 s</strong></td>
+<td>Majestuoso. La reverberación larga es parte del sonido orquestal</td>
+</tr>
+<tr>
+<td><strong>Catedral gótica</strong></td>
+<td>30,000 – 100,000 m³</td>
+<td><strong>3.0 – 8.0 s</strong></td>
+<td>Inmenso. La palabra hablada es ininteligible. La música coral y el órgano se benefician de la reverberación extrema</td>
+</tr>
+<tr>
+<td><strong>Estacionamiento subterráneo</strong></td>
+<td>&gt; 10,000 m³</td>
+<td><strong>4.0 – 8.0 s</strong></td>
+<td>Incontrolado. Ininteligible. Las frecuencias graves retumban durante varios segundos después de un portazo</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">RT60 depende de la frecuencia</p>
+<p>El RT60 NO es un solo número. Al igual que α, se mide por bandas de frecuencia. Una sala puede tener RT60 = 0.4 s a 1 kHz pero RT60 = 1.5 s a 63 Hz. Este desbalance espectral es uno de los problemas más comunes en estudios de grabación. Lo ideal es que RT60 sea aproximadamente constante en todas las frecuencias (o ligeramente más alto en graves para salas de concierto).</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 11-5</strong> del Everest: medición de RT60 — gráfico de nivel (dB) vs. tiempo (s) mostrando la curva de decaimiento experimental. Señalar los puntos de −5 dB y −35 dB (rango típico de medición T20), y −5 dB a −65 dB (rango para T60, menos usado por limitaciones de ruido de fondo). Incluir la línea de ruido de fondo como referencia.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>La fórmula de Sabine (introducción)</summary>
+<p>Wallace Clement Sabine, considerado el padre de la acústica arquitectónica, descubrió a finales del siglo XIX la relación fundamental entre el volumen de una sala, la absorción total y el tiempo de reverberación. Su fórmula empírica es sorprendentemente simple:</p>
+<div class="arithmatex">\[
+\boxed{RT60 \approx 0.161 \cdot \frac{V}{A}}
+\]</div>
+<p>Donde <span class="arithmatex">\(A = \sum \alpha_i \cdot S_i\)</span> (la absorción total que calculamos en la Sesión 18).</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(RT60\)</span></td>
+<td>Tiempo de reverberación</td>
+<td>s</td>
+<td>Tiempo para decaer 60 dB</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td>Volumen del recinto</td>
+<td>m³</td>
+<td>Largo × Ancho × Alto</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td>Absorción total</td>
+<td>m² (sabins)</td>
+<td><span class="arithmatex">\(A = \sum \alpha_i \cdot S_i\)</span></td>
+</tr>
+<tr>
+<td>0.161</td>
+<td>Constante de Sabine</td>
+<td>—</td>
+<td>Derivada de la velocidad del sonido: <span class="arithmatex">\(0.161 \approx 55.26 / c\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">La intuición detrás de la fórmula</p>
+<ul>
+<li>A MAYOR volumen (<span class="arithmatex">\(V\)</span>), MÁS tiempo de reverberación. Una sala grande «almacena» más energía, y los choques contra las paredes están más espaciados.</li>
+<li>A MAYOR absorción (<span class="arithmatex">\(A\)</span>), MENOS tiempo de reverberación. Cada choque «mata» más energía, así que se necesitan menos reflexiones para decaer 60 dB.</li>
+<li>Si duplicás el volumen (manteniendo A constante), RT60 se duplica. Si duplicás la absorción (manteniendo V constante), RT60 se reduce a la mitad.</li>
+</ul>
+</div>
+<h3 id="ejemplo-rapido">Ejemplo rápido<a class="headerlink" href="#ejemplo-rapido" title="Permanent link">&para;</a></h3>
+<p>Una sala de control tiene <span class="arithmatex">\(V = 80\)</span> m³ y una absorción total promedio <span class="arithmatex">\(A = 40\)</span> m². ¿Cuál es el RT60 estimado?</p>
+<div class="arithmatex">\[
+RT60 \approx 0.161 \cdot \frac{80}{40} = 0.161 \cdot 2 = 0.32\ \text{s}
+\]</div>
+<p>Este valor (~0.3 s) está en el rango recomendado para una sala de control profesional.</p>
+<div class="admonition warning">
+<p class="admonition-title">Limitaciones de la fórmula simple</p>
+<p>La fórmula de Sabine asume que el campo sonoro es DIFUSO (la energía reverberante es igual en todas direcciones y en todos los puntos). Esta condición NO se cumple bien en salas pequeñas o con mucha absorción. Para esos casos existen fórmulas más refinadas (Eyring, Fitzroy) que veremos en detalle en la Sesión 20.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Más allá del RT60: otros parámetros de decaimiento</summary>
+<p>Aunque RT60 es el estándar histórico, no cuenta toda la historia. Los ingenieros acústicos modernos usan parámetros complementarios:</p>
+<h3 id="edt-early-decay-time">EDT (Early Decay Time)<a class="headerlink" href="#edt-early-decay-time" title="Permanent link">&para;</a></h3>
+<p>El <strong>EDT</strong> mide el decaimiento TEMPRANO — los primeros 10 dB de caída, extrapolados a 60 dB (multiplicando por 6). Es más sensible a las primeras reflexiones y correlaciona MEJOR con la percepción subjetiva de «reverberación» que el RT60 en salas pequeñas.</p>
+<div class="arithmatex">\[
+\boxed{EDT = 6 \times T_{10\ \text{dB}}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>¿Qué mide?</th>
+<th>¿Qué refleja?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RT60</strong></td>
+<td>Toda la cola de decaimiento (caída completa de 60 dB)</td>
+<td>La «extinción» total del sonido. Dominado por el campo reverberante tardío</td>
+</tr>
+<tr>
+<td><strong>EDT</strong></td>
+<td>Los primeros 10 dB de caída</td>
+<td>La sensación INMEDIATA de reverberación. Más relevante para la percepción de «vivacidad»</td>
+</tr>
+<tr>
+<td><strong>T20</strong></td>
+<td>Caída de −5 dB a −25 dB, extrapolada ×3</td>
+<td>RT60 estimado con buena inmunidad al ruido de fondo</td>
+</tr>
+<tr>
+<td><strong>T30</strong></td>
+<td>Caída de −5 dB a −35 dB, extrapolada ×2</td>
+<td>RT60 estimado — estándar en mediciones ISO 3382</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué EDT y RT60 pueden ser diferentes?</p>
+<p>En una sala con mucha absorción localizada (ej. nube acústica sobre la mesa de mezcla), las primeras reflexiones decaen MUY rápido (EDT bajo), pero las reflexiones tardías que «sobreviven» en otras partes de la sala decaen más lento (RT60 más alto). EDT bajo + RT60 alto → la sala se siente «seca» pero tiene una cola audible larga. Es una sensación extraña.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Escuchá la reverberación: ejercicios de percepción auditiva</summary>
+<h3 id="ejercicio-1-mismo-audio-distintas-rt60">Ejercicio 1 — Mismo audio, distintas RT60<a class="headerlink" href="#ejercicio-1-mismo-audio-distintas-rt60" title="Permanent link">&para;</a></h3>
+<p>Escuchá (o imaginá) una palmada seca. Ahora imaginá esa misma palmada en:
+- Una cabina vocal (RT60 ≈ 0.2 s) → la palmada es un «clac» seco, casi sin cola.
+- Un living (RT60 ≈ 0.6 s) → la palmada tiene una cola corta pero audible.
+- Una iglesia (RT60 ≈ 4.0 s) → la palmada se convierte en un «CLAaaaaa...» que dura varios segundos.</p>
+<p>El sonido original es el mismo. Lo que cambia es la SALA.</p>
+<h3 id="ejercicio-2-por-que-un-depto-vacio-hace-eco">Ejercicio 2 — ¿Por qué un depto vacío «hace eco»?<a class="headerlink" href="#ejercicio-2-por-que-un-depto-vacio-hace-eco" title="Permanent link">&para;</a></h3>
+<p>Cuando te mudás y el departamento está vacío (sin muebles, sin cortinas, sin alfombra), todas las superficies son duras y reflectantes (paredes desnudas, piso de cerámica o madera). El α promedio es bajísimo (~0.05). Con A pequeño y V fijo, la fórmula de Sabine te da un RT60 alto. Ni bien ponés muebles tapizados, cortinas, alfombra, la absorción A AUMENTA drásticamente y el RT60 baja. La misma habitación «viva» se vuelve «muerta».</p>
+<h3 id="ejercicio-3-inteligibilidad-de-la-palabra-vs-rt60">Ejercicio 3 — Inteligibilidad de la palabra vs. RT60<a class="headerlink" href="#ejercicio-3-inteligibilidad-de-la-palabra-vs-rt60" title="Permanent link">&para;</a></h3>
+<p>Cuanto más larga es la reverberación, más se solapan las sílabas. En una catedral con RT60 = 6 s, la sílaba que estás pronunciando ahora se mezcla con las últimas 30 sílabas que dijiste. El resultado: no se entiende NADA. Por eso en espacios con RT60 alto, los oradores hablan MÁS LENTO y con pausas MÁS LARGAS (para dar tiempo a que la reverberación baje entre sílabas).</p>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 11, pp. 170–197 (Reverberation — Growth and Decay of Sound, RT60, Sabine Formula, Sound Decay Curves).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compresión y Rarefacción del Sonido</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: #f5f5f0; font-family: Georgia, serif; }
+    canvas { display: block; }
+    #panel {
+      position: absolute; top: 0; left: 0; width: 210px; height: 100vh;
+      background: rgba(36, 157, 143, 0.05); color: #1a1a1a; padding: 14px;
+      font-size: 12px; z-index: 5; overflow-y: auto;
+      border-right: 1px solid rgba(36, 157, 143, 0.2);
+    }
+    #panel h3 { margin: 0 0 6px; font-size: 14px; color: #1A7A6F; }
+    #panel button { width: 100%; margin: 3px 0; padding: 6px 8px; border: 1px solid rgba(36, 157, 143, 0.4); border-radius: 3px; cursor: pointer; background: rgba(36, 157, 143, 0.06); font-size: 11px; font-family: Georgia, serif; }
+    #panel button:hover { background: rgba(36, 157, 143, 0.15); }
+    #panel select { width: 100%; padding: 4px; background: #fff; border: 1px solid rgba(36, 157, 143, 0.4); border-radius: 3px; font-size: 11px; margin-bottom: 4px; font-family: Georgia, serif; }
+    #panel input[type=range] { width: 100%; accent-color: #249D8F; margin: 3px 0; }
+    #panel label { display: block; margin: 6px 0 2px; color: #333; font-size: 11px; }
+    #panel .val { font-weight: bold; color: #1A7A6F; }
+    #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(36,157,143,0.15); }
+  </style>
+</head>
+<body>
+
+<div id="panel">
+  <h3>Onda de presión sonora</h3>
+  <div class="section">
+    <label>Frecuencia: <span class="val" id="fv">220 Hz</span></label>
+    <select id="note-select">
+      <option value="55">A1 — 55 Hz</option>
+      <option value="110">A2 — 110 Hz</option>
+      <option value="165">E3 — 165 Hz</option>
+      <option value="220" selected>A3 — 220 Hz</option>
+      <option value="262">C4 — 262 Hz (Do)</option>
+      <option value="330">E4 — 330 Hz</option>
+      <option value="440">A4 — 440 Hz (La)</option>
+      <option value="524">C5 — 524 Hz</option>
+      <option value="660">E5 — 660 Hz</option>
+      <option value="880">A5 — 880 Hz</option>
+    </select>
+    <input type="range" id="freq" min="40" max="1200" value="220" step="1">
+  </div>
+  <div class="section">
+    <label>Amplitud: <span class="val" id="av">1.0</span></label>
+    <input type="range" id="amp" min="0.3" max="1.5" step="0.1" value="1.0">
+  </div>
+  <div class="section">
+    <button id="btn-play">▶ Reproducir sonido</button>
+    <button id="btn-stop" style="display:none">⏸ Silenciar</button>
+  </div>
+  <div class="section">
+    <button id="btn-pause">⏯ Pausar animación</button>
+  </div>
+  <div class="section" style="font-size:11px;line-height:1.6;color:#555;margin-top:10px">
+    <b style="color:#c0392b">Compresión:</b> partículas<br>agrupadas — presión alta<br>
+    <b style="color:#1A7A6F">Rarefacción:</b> partículas<br>dispersas — presión baja<br><br>
+    La onda avanza →<br>
+    Las partículas no viajan.
+  </div>
+</div>
+
+<script>
+let freq = 220, amp = 1.0, time = 0, playing = false, paused = false;
+let synth;
+let particles = [];
+let NUM = 500;
+let noiseOff = 0;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textFont('Georgia');
+  noiseSeed(42);
+
+  synth = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.02, decay: 0.1, sustain: 0.4, release: 0.1 },
+    volume: -16
+  }).toDestination();
+
+  for (let i = 0; i < NUM; i++) {
+    particles.push({
+      baseX: random(1), baseY: random(-0.8, 0.8),
+      seed: random(1000), radius: random(1.2, 3.0),
+    });
+  }
+
+  let fs = select('#freq'), as = select('#amp'), ns = select('#note-select');
+  fs.input(() => {
+    freq = parseFloat(fs.value()); select('#fv').html(freq + ' Hz');
+    if (playing) synth.frequency.value = freq;
+    let opts = ns.elt.options, best = opts[0];
+    for (let o of opts) if (Math.abs(+o.value - freq) < Math.abs(+best.value - freq)) best = o;
+    ns.elt.value = best.value;
+  });
+  ns.changed(() => { freq = parseFloat(ns.value()); fs.elt.value = freq; select('#fv').html(freq + ' Hz'); if (playing) synth.frequency.value = freq; });
+  as.input(() => { amp = parseFloat(as.value()); select('#av').html(amp.toFixed(1)); });
+  select('#btn-play').mousePressed(() => {
+    if (Tone.context.state !== 'running') Tone.start();
+    synth.frequency.value = freq; synth.triggerAttack(freq);
+    playing = true; select('#btn-play').style('display', 'none'); select('#btn-stop').style('display', 'block');
+  });
+  select('#btn-stop').mousePressed(() => {
+    synth.triggerRelease();
+    playing = false; select('#btn-play').style('display', 'block'); select('#btn-stop').style('display', 'none');
+  });
+  select('#btn-pause').mousePressed(() => {
+    paused = !paused;
+    select('#btn-pause').html(paused ? '▶ Reanudar animación' : '⏯ Pausar animación');
+  });
+}
+
+function draw() {
+  background(245, 245, 240);
+
+  let GX = 230, GW = width - GX - 30;
+  let tubeCY = height * 0.32, waveCY = height * 0.72;
+  let tubeH = 150, waveH = 120 * amp;
+  let visFreq = constrain(freq / 120, 0.3, 7);
+
+  if (!paused) { time += deltaTime * 0.001; noiseOff += deltaTime * 0.0002; }
+
+  // ═══ Panel A: Air-particle distribution ═══
+  noStroke();
+  fill(255, 255, 255);
+  rect(GX, tubeCY - tubeH / 2, GW, tubeH);
+
+  stroke(36, 157, 143, 180);
+  strokeWeight(2);
+  line(GX, tubeCY - tubeH / 2, GX + GW, tubeCY - tubeH / 2);
+  line(GX, tubeCY + tubeH / 2, GX + GW, tubeCY + tubeH / 2);
+
+  noStroke();
+  fill(26, 122, 111);
+  textAlign(LEFT, CENTER);
+  textSize(18);
+  text('Distribución de partículas de aire', GX + 12, tubeCY - tubeH / 2 - 18);
+
+  for (let p of particles) {
+    let phase = p.baseX * TWO_PI * visFreq + time * 2;
+    let waveVal = sin(phase);
+    let density = map(waveVal, -1, 1, 0.2, 1.0);
+    let jx = noise(p.seed + noiseOff) - 0.5;
+    let jy = noise(p.seed + 1000 + noiseOff) - 0.5;
+    let px = GX + p.baseX * GW + jx * 8;
+    let py = tubeCY + p.baseY * tubeH * 0.45 + jy * 6;
+    let alpha = waveVal > 0.05 ? map(waveVal, 0.05, 1, 40, 180) : (waveVal < -0.05 ? map(-waveVal, 0.05, 1, 20, 100) : 30);
+    if (random() < density * 0.9) {
+      fill(20, 20, 40, alpha);
+      noStroke();
+      ellipse(px, py, p.radius * 2, p.radius * 2);
+    }
+  }
+
+  stroke(36, 157, 143, 180);
+  strokeWeight(2);
+  noFill();
+  line(GX, tubeCY - tubeH / 2, GX + GW, tubeCY - tubeH / 2);
+  line(GX, tubeCY + tubeH / 2, GX + GW, tubeCY + tubeH / 2);
+  noStroke();
+
+  // ═══ Panel B: Sound-pressure wave ═══
+  fill(255, 255, 255);
+  rect(GX, waveCY - waveH - 30, GW, waveH * 2 + 60);
+
+  stroke(36, 157, 143, 120);
+  strokeWeight(1.5);
+  line(GX, waveCY, GX + GW, waveCY);
+
+  stroke(36, 157, 143);
+  strokeWeight(4);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 400; i++) {
+    let x = GX + (i / 400) * GW;
+    vertex(x, waveCY - sin((i / 400) * TWO_PI * visFreq + time * 2) * waveH);
+  }
+  endShape();
+
+  noStroke();
+  fill(26, 122, 111);
+  textSize(18);
+  text('Onda de presión sonora', GX + 12, waveCY - waveH - 40);
+
+  if (visFreq <= 5) {
+    textSize(16);
+    let cs = ((PI / 2 - time * 2) / (TWO_PI * visFreq)); cs = ((cs % 1) + 1) % 1;
+    let cx = GX + cs * GW;
+    if (cx > GX + 30 && cx < GX + GW - 30) { fill(192, 57, 43); text('Compresión', cx, waveCY - waveH - 15); }
+    let ts = ((3 * PI / 2 - time * 2) / (TWO_PI * visFreq)); ts = ((ts % 1) + 1) % 1;
+    let tx = GX + ts * GW;
+    if (tx > GX + 30 && tx < GX + GW - 30) { fill(26, 122, 111); text('Rarefacción', tx, waveCY + waveH + 8); }
+  }
+
+  if (visFreq <= 3) {
+    drawingContext.setLineDash([6, 4]);
+    let cs = ((PI / 2 - time * 2) / (TWO_PI * visFreq)); cs = ((cs % 1) + 1) % 1; let cx = GX + cs * GW;
+    let ts = ((3 * PI / 2 - time * 2) / (TWO_PI * visFreq)); ts = ((ts % 1) + 1) % 1; let tx = GX + ts * GW;
+    stroke(192, 57, 43, 100); strokeWeight(1);
+    line(cx, tubeCY - tubeH / 2, cx, waveCY - waveH);
+    stroke(26, 122, 111, 100);
+    line(tx, tubeCY - tubeH / 2, tx, waveCY + waveH);
+    drawingContext.setLineDash([]);
+    noStroke();
+  }
+
+  // ═══ Bottom bar ═══
+  fill(0);
+  textSize(13);
+  textAlign(CENTER, CENTER);
+  text(`Frecuencia: ${freq} Hz  |  λ = ${(344/freq).toFixed(2)} m  |  ` + (playing ? '🔊 Sonido activo' : '🔇 Silencio'), width / 2, height - 40);
+  fill(100);
+  textSize(11);
+  text('Líneas punteadas: correspondencia entre cresta (compresión) y valle (rarefacción) con las partículas.', width / 2, height - 18);
+}
+
+function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
+</body>
+</html>

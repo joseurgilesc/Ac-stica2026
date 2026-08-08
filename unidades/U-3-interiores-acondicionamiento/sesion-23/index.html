@@ -1,0 +1,2689 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-22/">
+      
+      
+        <link rel="next" href="../sesion-24/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 23: Interferencia - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-23-interferencia-y-ondas-estacionarias" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 23: Interferencia
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#interferencia-constructiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interferencia constructiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interferencia-destructiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interferencia destructiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodos-y-antinodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodos y antinodos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ondas-estacionarias-entre-dos-paredes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ondas estacionarias entre dos paredes paralelas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-patron-espacial-donde-escucho-que" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El patrón espacial: ¿dónde escucho qué?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mecanismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mecanismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frecuencias-de-cancelacion-valles-nulls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frecuencias de cancelación (valles, nulls)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frecuencias-de-refuerzo-picos-peaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frecuencias de refuerzo (picos, peaks)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-concreto-la-reflexion-de-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo concreto: la reflexión de la consola
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polaridad-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Polaridad (polarity)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase (phase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla comparativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-modos-axiales-entre-paredes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Modos axiales entre paredes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-donde-estan-los-nodos-y-antinodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: ¿Dónde están los nodos y antinodos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#interferencia-constructiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interferencia constructiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interferencia-destructiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interferencia destructiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodos-y-antinodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodos y antinodos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ondas-estacionarias-entre-dos-paredes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ondas estacionarias entre dos paredes paralelas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-patron-espacial-donde-escucho-que" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El patrón espacial: ¿dónde escucho qué?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mecanismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mecanismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frecuencias-de-cancelacion-valles-nulls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frecuencias de cancelación (valles, nulls)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frecuencias-de-refuerzo-picos-peaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frecuencias de refuerzo (picos, peaks)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-concreto-la-reflexion-de-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo concreto: la reflexión de la consola
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polaridad-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Polaridad (polarity)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fase-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase (phase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla comparativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-modos-axiales-entre-paredes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Modos axiales entre paredes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-donde-estan-los-nodos-y-antinodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: ¿Dónde están los nodos y antinodos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-23-interferencia-y-ondas-estacionarias">Sesión 23: Interferencia y ondas estacionarias<a class="headerlink" href="#sesion-23-interferencia-y-ondas-estacionarias" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="ms"></a><strong>ms</strong></td>
+<td>Milisegundo</td>
+<td>Tiempo</td>
+<td>1 ms = 0.001 s</td>
+</tr>
+<tr>
+<td><a id="cm"></a><strong>cm</strong></td>
+<td>Centímetro</td>
+<td>Longitud</td>
+<td>1 cm = 0.01 m</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel (relativo)</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="l"></a><strong>λ</strong> (lambda)</td>
+<td>Longitud de onda</td>
+<td>Distancia que recorre un ciclo completo</td>
+<td>En m (λ = c/f)</td>
+</tr>
+<tr>
+<td><a id="f"></a><strong>f</strong></td>
+<td>Frecuencia</td>
+<td>Ciclos por segundo</td>
+<td>En Hz</td>
+</tr>
+<tr>
+<td><a id="c"></a><strong>c</strong></td>
+<td>Velocidad del sonido</td>
+<td>Velocidad de propagación</td>
+<td>~343 m/s (20°C)</td>
+</tr>
+<tr>
+<td><a id="delta"></a><strong>Δd</strong></td>
+<td>Diferencia de camino</td>
+<td>Diferencia de distancia entre dos trayectorias</td>
+<td>En m</td>
+</tr>
+<tr>
+<td><a id="phi"></a><strong>φ</strong> (phi)</td>
+<td>Ángulo de fase</td>
+<td>Desplazamiento relativo entre dos ondas</td>
+<td>En radianes (rad) o grados (°)</td>
+</tr>
+<tr>
+<td><a id="t"></a><strong>T</strong></td>
+<td>Período</td>
+<td>Duración de un ciclo</td>
+<td>T = 1/f, en segundos</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>El principio de superposición: cuando dos ondas se encuentran</summary>
+<p>En acústica de interiores, el sonido NO viaja por UN solo camino desde la fuente hasta el oyente. Viaja por MÚLTIPLES caminos: el directo y las reflexiones en cada superficie. Cada uno de esos caminos tiene una longitud distinta, y por lo tanto un tiempo de llegada distinto y una FASE distinta.</p>
+<p>Cuando dos (o más) ondas coinciden en el mismo punto del espacio en el mismo instante, NO colisionan ni se destruyen — <strong>se superponen</strong>. El principio de superposición establece que la presión sonora resultante en ese punto es la SUMA ALGEBRAICA de las presiones individuales (Everest &amp; Pohlmann, 2009, Cap. 10, pp. 154–169):</p>
+<div class="arithmatex">\[
+p_{\text{total}}(t) = p_1(t) + p_2(t) + p_3(t) + \ldots
+\]</div>
+<h3 id="interferencia-constructiva">Interferencia constructiva<a class="headerlink" href="#interferencia-constructiva" title="Permanent link">&para;</a></h3>
+<p>Si dos ondas de la MISMA frecuencia llegan EN FASE (diferencia de fase = 0°, 360°, 720°…), las crestas coinciden con crestas y los valles con valles. Las amplitudes se SUMAN:</p>
+<div class="arithmatex">\[
+A_{\text{total}} = A_1 + A_2
+\]</div>
+<p>El resultado es un REFUERZO: el sonido es MÁS FUERTE en ese punto. Si las dos ondas tienen amplitud idéntica, la amplitud resultante es el DOBLE (equivale a +6 dB).</p>
+<p><strong>Condición para interferencia constructiva</strong>: la diferencia de camino Δd debe ser un múltiplo ENTERO de la longitud de onda:</p>
+<div class="arithmatex">\[
+\Delta d = n \cdot \lambda \quad (n = 0, 1, 2, 3, \ldots)
+\]</div>
+<h3 id="interferencia-destructiva">Interferencia destructiva<a class="headerlink" href="#interferencia-destructiva" title="Permanent link">&para;</a></h3>
+<p>Si dos ondas de la MISMA frecuencia llegan EN CONTRAFASE (diferencia de fase = 180°, 540°, 900°…), la cresta de una coincide con el valle de la otra. Las amplitudes se RESTAN:</p>
+<div class="arithmatex">\[
+A_{\text{total}} = |A_1 - A_2|
+\]</div>
+<p>El resultado es una CANCELACIÓN: el sonido es MÁS DÉBIL en ese punto. Si las dos ondas tienen amplitud idéntica, la cancelación es TOTAL (silencio teórico en ese punto).</p>
+<p><strong>Condición para interferencia destructiva</strong>: la diferencia de camino Δd debe ser un múltiplo IMPAR de media longitud de onda:</p>
+<div class="arithmatex">\[
+\Delta d = (2n + 1) \cdot \frac{\lambda}{2} \quad (n = 0, 1, 2, 3, \ldots)
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">La interferencia NO destruye energía</p>
+<p>La energía total del sistema se CONSERVA. Si en un punto hay cancelación (interferencia destructiva), en OTRO punto DEBE haber refuerzo (interferencia constructiva). La energía no desaparece — se REDISTRIBUYE espacialmente. Esto es crucial: no podés «eliminar» un modo de sala con interferencia destructiva en UN punto; la energía se fue a otro lado.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 10-2</strong> del Everest: dos ondas sinusoidales de igual frecuencia. Panel superior: ondas EN FASE → suma constructiva (amplitud doble). Panel inferior: ondas EN CONTRAFASE → suma destructiva (cancelación total si A₁ = A₂). Panel intermedio: diferencia de fase arbitraria → suma parcial.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Ondas estacionarias: cuando la interferencia «se queda quieta»</summary>
+<p>Una <strong>onda estacionaria</strong> (standing wave) es un caso ESPECIAL de interferencia que ocurre cuando dos ondas de IGUAL frecuencia y amplitud viajan en DIRECCIONES OPUESTAS. En una sala, esto sucede cuando una onda incidente y su reflexión desde una pared se superponen.</p>
+<p>A diferencia de una onda viajera (que AVANZA), una onda estacionaria PARECE no moverse: el patrón de presión está FIJO en el espacio.</p>
+<h3 id="nodos-y-antinodos">Nodos y antinodos<a class="headerlink" href="#nodos-y-antinodos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>¿Qué es?</th>
+<th>¿Qué pasa ahí?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nodo</strong> (node)</td>
+<td>Punto donde la presión sonora es SIEMPRE cero (idealmente)</td>
+<td>Las dos ondas llegan siempre en contrafase. Cancelación total permanente. Ahí NO hay sonido</td>
+</tr>
+<tr>
+<td><strong>Antinodo</strong> (antinode)</td>
+<td>Punto donde la presión sonora es MÁXIMA</td>
+<td>Las dos ondas llegan siempre en fase. Refuerzo total permanente. Ahí el sonido es MÁS FUERTE</td>
+</tr>
+</tbody>
+</table>
+<p>La distancia entre dos nodos consecutivos (o dos antinodos consecutivos) es SIEMPRE <strong>λ/2</strong> (media longitud de onda).</p>
+<div class="admonition tip">
+<p class="admonition-title">Visualizá una onda estacionaria</p>
+<p>Imaginá una cuerda de guitarra vibrando. Los extremos están fijos (nodos). El centro vibra con máxima amplitud (antinodo). La cuerda NO parece viajar — simplemente «ondula en el lugar». Una onda estacionaria de sonido en una sala es conceptualmente lo mismo: la presión oscila fuertemente en ciertos puntos fijos y no oscila en otros.</p>
+</div>
+<h3 id="ondas-estacionarias-entre-dos-paredes-paralelas">Ondas estacionarias entre dos paredes paralelas<a class="headerlink" href="#ondas-estacionarias-entre-dos-paredes-paralelas" title="Permanent link">&para;</a></h3>
+<p>En una sala, cada PAR de paredes paralelas puede alojar ondas estacionarias. La condición es que la distancia entre paredes sea un múltiplo de media longitud de onda:</p>
+<div class="arithmatex">\[
+L = n \cdot \frac{\lambda}{2} \quad \Rightarrow \quad \lambda = \frac{2L}{n} \quad \Rightarrow \quad \boxed{f_n = \frac{n \cdot c}{2L}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f_n\)</span></td>
+<td>Frecuencia del n-ésimo modo</td>
+<td>Hz</td>
+<td>Frecuencia a la que se forma la onda estacionaria</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\)</span></td>
+<td>Número de modo</td>
+<td>—</td>
+<td>n = 1, 2, 3, … (cuántas medias longitudes de onda «caben» entre las dos paredes)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>Velocidad del sonido</td>
+<td>m/s</td>
+<td>~343 m/s a 20°C</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L\)</span></td>
+<td>Distancia entre paredes</td>
+<td>m</td>
+<td>Dimensión de la sala en ese eje</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo</strong>: sala con L = 4 m entre paredes paralelas.</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>f_n (Hz)</th>
+<th>¿Qué significa?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(f_1 = 343/(2\times 4) = 42.9\)</span> Hz</td>
+<td>Una media longitud de onda «cabe» entre las paredes. Nodo en cada pared, UN antinodo en el centro</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(f_2 = 85.8\)</span> Hz</td>
+<td>Dos medias longitudes de onda. Nodos en las paredes y en el centro. Dos antinodos a 1/4 y 3/4 de L</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(f_3 = 128.6\)</span> Hz</td>
+<td>Tres medias longitudes de onda. Tres antinodos, cuatro nodos (incluyendo paredes)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(f_4 = 171.4\)</span> Hz</td>
+<td>Cuatro medias longitudes de onda</td>
+</tr>
+</tbody>
+</table>
+<h3 id="el-patron-espacial-donde-escucho-que">El patrón espacial: ¿dónde escucho qué?<a class="headerlink" href="#el-patron-espacial-donde-escucho-que" title="Permanent link">&para;</a></h3>
+<p>Para un modo axial de primer orden (n = 1) entre paredes separadas 4 m:</p>
+<ul>
+<li><strong>Paredes (0 m y 4 m)</strong>: NODOS de presión (la presión es siempre la presión atmosférica, no oscila). Las partículas de aire, en cambio, tienen MÁXIMO desplazamiento en las paredes.</li>
+<li><strong>Centro (2 m)</strong>: ANTINODO de presión. La presión oscila con máxima amplitud. Las partículas de aire están QUIETAS (nodo de velocidad).</li>
+<li><strong>A 1 m y 3 m</strong>: presión intermedia.</li>
+</ul>
+<p><strong>Consecuencia práctica brutal</strong>: si tus oídos están en un ANTINODO de 43 Hz, escuchás esa frecuencia 10-15 dB MÁS FUERTE de lo que realmente está sonando. Si están en un NODO, escuchás esa frecuencia 20-30 dB MÁS BAJA. Las dos posiciones están en la MISMA sala, escuchando los MISMOS monitores, pero el balance espectral es COMPLETAMENTE DISTINTO.</p>
+<blockquote>
+<p>Insertar <strong>Fig. 10-4</strong> del Everest: onda estacionaria entre dos paredes paralelas mostrando los nodos (presión cero) y antinodos (presión máxima). Incluir el perfil de presión a lo largo de la distancia entre paredes.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>El filtro comb (comb filter): interferencia en el dominio de la frecuencia</summary>
+<p>Cuando un sonido llega con un RETARDO respecto a su copia (ej. sonido directo + su reflexión en una superficie), la superposición NO es uniforme en frecuencia: algunas frecuencias se REFUERZAN y otras se CANCELAN, creando un patrón periódico de «dientes de peine» en el espectro. De ahí el nombre <strong>comb filter</strong> (filtro peine).</p>
+<h3 id="mecanismo">Mecanismo<a class="headerlink" href="#mecanismo" title="Permanent link">&para;</a></h3>
+<p>El sonido directo recorre la distancia <span class="arithmatex">\(d_{\text{directo}}\)</span>. La reflexión recorre una distancia MAYOR: <span class="arithmatex">\(d_{\text{reflejada}}\)</span>. La diferencia de camino es:</p>
+<div class="arithmatex">\[
+\Delta d = d_{\text{reflejada}} - d_{\text{directo}}
+\]</div>
+<p>El retardo temporal correspondiente:</p>
+<div class="arithmatex">\[
+\Delta t = \frac{\Delta d}{c}
+\]</div>
+<h3 id="frecuencias-de-cancelacion-valles-nulls">Frecuencias de cancelación (valles, nulls)<a class="headerlink" href="#frecuencias-de-cancelacion-valles-nulls" title="Permanent link">&para;</a></h3>
+<p>La cancelación ocurre cuando la diferencia de camino es un múltiplo IMPAR de media longitud de onda:</p>
+<div class="arithmatex">\[
+\boxed{f_{\text{null}}(k) = \frac{(2k + 1) \cdot c}{2 \cdot \Delta d}} \quad k = 0, 1, 2, \ldots
+\]</div>
+<h3 id="frecuencias-de-refuerzo-picos-peaks">Frecuencias de refuerzo (picos, peaks)<a class="headerlink" href="#frecuencias-de-refuerzo-picos-peaks" title="Permanent link">&para;</a></h3>
+<p>El refuerzo ocurre cuando la diferencia de camino es un múltiplo ENTERO de la longitud de onda:</p>
+<div class="arithmatex">\[
+\boxed{f_{\text{peak}}(k) = \frac{k \cdot c}{\Delta d}} \quad k = 0, 1, 2, \ldots
+\]</div>
+<h3 id="ejemplo-concreto-la-reflexion-de-la-consola">Ejemplo concreto: la reflexión de la consola<a class="headerlink" href="#ejemplo-concreto-la-reflexion-de-la-consola" title="Permanent link">&para;</a></h3>
+<p>Tu monitor está a 1.2 m de tus oídos (sonido directo). La consola de mezcla (superficie reflectante) está a 0.8 m debajo de la línea directa monitor→oído. El camino reflejado monitor→consola→oído recorre 1.6 m (ida y vuelta a la consola). Diferencia de camino: Δd = 1.6 − 1.2 = 0.4 m.</p>
+<table>
+<thead>
+<tr>
+<th>k</th>
+<th>f_null (Hz) — cancelación</th>
+<th>f_peak (Hz) — refuerzo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(f = 343 / (2 \times 0.4) = 429\)</span> Hz</td>
+<td><span class="arithmatex">\(f = 0\)</span> Hz (DC)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(f = 3 \times 343 / (2 \times 0.4) = 1,286\)</span> Hz</td>
+<td><span class="arithmatex">\(f = 343 / 0.4 = 858\)</span> Hz</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(f = 5 \times 343 / (2 \times 0.4) = 2,144\)</span> Hz</td>
+<td><span class="arithmatex">\(f = 2 \times 343 / 0.4 = 1,715\)</span> Hz</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3,001 Hz</td>
+<td>2,573 Hz</td>
+</tr>
+</tbody>
+</table>
+<p>Resultado: el espectro tiene «agujeros» en 429, 1,286, 2,144, 3,001 Hz… y «montañas» en 858, 1,715, 2,573 Hz… La separación entre valles consecutivos es constante: Δf = c/Δd = 343/0.4 = 858 Hz.</p>
+<div class="admonition warning">
+<p class="admonition-title">NO ecualices un comb filter</p>
+<p>Si medís tu sala con REW y ves estos picos y valles, tu instinto va a ser agarrar un ecualizador y «corregirlos». <strong>No funciona.</strong> El comb filter es un problema de DOMINIO TEMPORAL (una reflexión retardada), no de respuesta en frecuencia. Si ecualizás el valle a 429 Hz, estás cambiando TANTO el sonido directo como el reflejado. La cancelación se va a seguir produciendo porque el EQ no elimina el retardo. Peor aún: movés la cabeza 10 cm y el patrón de interferencia cambia completamente — el EQ que «corregía» en una posición ahora CREA un problema nuevo en otra.</p>
+<p>La solución correcta es TRATAR la superficie reflectante (absorción, difusión o reorientación), no ecualizar.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 10-1</strong> del Everest: respuesta en frecuencia de un filtro comb. Eje X: frecuencia (lineal), eje Y: amplitud (dB). Mostrar los «dientes» periódicos de cancelación y refuerzo, y cómo la separación entre valles (Δf) depende de Δd.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Fase y polaridad: dos conceptos que TODO ingeniero de audio debe distinguir</summary>
+<p>En producción musical, «fase» y «polaridad» se usan como sinónimos constantemente. <strong>Son conceptos distintos</strong> y confundirlos causa decisiones técnicas incorrectas.</p>
+<h3 id="polaridad-polarity">Polaridad (polarity)<a class="headerlink" href="#polaridad-polarity" title="Permanent link">&para;</a></h3>
+<p>Es una INVERSIÓN FIJA (180°) de la señal, independiente de la frecuencia: todo el espectro se invierte a la vez. Ocurre por:
+- Un cable balanceado con los pines 2 y 3 intercambiados.
+- El botón «phase invert» (Ø) de una consola o preamplificador (que en realidad invierte polaridad, no fase).
+- Un micrófono cableado al revés.</p>
+<p>La inversión de polaridad afecta a TODAS las frecuencias por igual. Si dos micrófonos capturan la misma fuente con polaridad opuesta, la suma produce cancelación en TODO el espectro (sonido «hueco», pérdida de graves, imagen estéreo colapsada).</p>
+<h3 id="fase-phase">Fase (phase)<a class="headerlink" href="#fase-phase" title="Permanent link">&para;</a></h3>
+<p>Es un DESPLAZAMIENTO EN EL TIEMPO que VARÍA CON LA FRECUENCIA. Ocurre por:
+- Diferencia de distancia entre dos micrófonos (Δd → Δt = Δd/c).
+- Reflexiones en la sala (comb filter).
+- Procesamiento digital (filtros, conversores, plugins).</p>
+<p>La fase es DEPENDIENTE de la frecuencia: un retardo de 1 ms produce 180° de desfase a 500 Hz (cancelación total) pero solo 36° de desfase a 100 Hz (cancelación parcial apenas perceptible).</p>
+<h3 id="tabla-comparativa">Tabla comparativa<a class="headerlink" href="#tabla-comparativa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Polaridad</th>
+<th>Fase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Qué es?</td>
+<td>Inversión de signo (multiplicar por −1)</td>
+<td>Desplazamiento en el tiempo</td>
+</tr>
+<tr>
+<td>¿Depende de la frecuencia?</td>
+<td>NO — afecta todo el espectro por igual</td>
+<td>SÍ — el mismo Δt produce distinto Δφ para cada f</td>
+</tr>
+<tr>
+<td>Causa típica</td>
+<td>Cableado invertido, botón Ø</td>
+<td>Distancia, reflexiones, filtros</td>
+</tr>
+<tr>
+<td>¿Se corrige con EQ?</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>¿Se corrige con alineación temporal?</td>
+<td>No (eso es fase)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>¿Se corrige con botón Ø?</td>
+<td>Sí</td>
+<td>Solo a UNA frecuencia específica</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">La regla 3:1 para grabación multimicrófono</p>
+<p>Para minimizar problemas de fase entre dos micrófonos que capturan la misma fuente, la distancia entre micrófonos debe ser AL MENOS 3 VECES la distancia de cada micrófono a su fuente. Ejemplo: si el mic 1 está a 30 cm del cantante, el mic 2 debe estar al menos a 90 cm del mic 1. Esto asegura que la diferencia de nivel entre lo que capta cada micrófono del OTRO sea ≥ 9 dB, suficiente para que la interferencia de fase sea poco perceptible.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Ejemplo integrador: diagnosticá tu posición de escucha</summary>
+<p>Volvamos a la sala de control de sesiones anteriores: 6 m × 4 m × 3 m. Vamos a analizar qué ondas estacionarias se forman y cómo afectan tu percepción.</p>
+<h3 id="paso-1-modos-axiales-entre-paredes">Paso 1: Modos axiales entre paredes<a class="headerlink" href="#paso-1-modos-axiales-entre-paredes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Eje</th>
+<th>L (m)</th>
+<th>f₁ (Hz)</th>
+<th>f₂ (Hz)</th>
+<th>f₃ (Hz)</th>
+<th>f₄ (Hz)</th>
+<th>f₅ (Hz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Longitudinal (x)</strong></td>
+<td>6.0</td>
+<td>28.6</td>
+<td>57.2</td>
+<td>85.8</td>
+<td>114.3</td>
+<td>142.9</td>
+</tr>
+<tr>
+<td><strong>Transversal (y)</strong></td>
+<td>4.0</td>
+<td>42.9</td>
+<td>85.8</td>
+<td>128.6</td>
+<td>171.5</td>
+<td>214.4</td>
+</tr>
+<tr>
+<td><strong>Vertical (z)</strong></td>
+<td>3.0</td>
+<td>57.2</td>
+<td>114.3</td>
+<td>171.5</td>
+<td>228.7</td>
+<td>285.8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-2-donde-estan-los-nodos-y-antinodos">Paso 2: ¿Dónde están los nodos y antinodos?<a class="headerlink" href="#paso-2-donde-estan-los-nodos-y-antinodos" title="Permanent link">&para;</a></h3>
+<p>Para el modo longitudinal f₁ = 28.6 Hz (eje x, 6 m):</p>
+<ul>
+<li><strong>Nodo de presión</strong> en las paredes x = 0 m y x = 6 m.</li>
+<li><strong>Antinodo de presión</strong> en el centro x = 3 m.</li>
+<li>Si tus oídos están a ~1.5 m de la pared frontal (x = 1.5 m), estás a λ/4 del antinodo → presión aprox. 70% del máximo. Escuchás 28.6 Hz con refuerzo significativo (no máximo, pero cerca).</li>
+</ul>
+<p>Para el modo vertical f₁ = 57.2 Hz (eje z, 3 m):</p>
+<ul>
+<li><strong>Antinodo de presión</strong> en z = 1.5 m (justo a la altura de los oídos si la sala tiene 3 m de alto y estás sentado a ~1.2 m).</li>
+<li>En z = 1.2 m, estás a 0.3 m del antinodo (que está en z = 1.5 m). λ/2 = 3 m, así que λ/4 = 0.75 m. A 0.3 m del antinodo → presión ~90% del máximo. <strong>Escuchás 57.2 Hz MUY reforzado.</strong></li>
+</ul>
+<h3 id="paso-3-diagnostico">Paso 3: Diagnóstico<a class="headerlink" href="#paso-3-diagnostico" title="Permanent link">&para;</a></h3>
+<p>En esta sala, los modos de 28.6 Hz, 42.9 Hz y 57.2 Hz se superponen entre 28 y 60 Hz. Si además los modos y (42.9 Hz) y z (57.2 Hz) tienen antinodos cerca de tu posición de escucha, estás escuchando un REFUERZO ACUMULADO en graves que NO está en la grabación — lo está creando TU SALA.</p>
+<p><strong>La pregunta que todo ingeniero debe hacerse</strong>: «¿El bajo que estoy escuchando está en la mezcla o en mi sala?»</p>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 10, pp. 154–169 (Comb-Filter and Reflection Effects — Superposition, Constructive/Destructive Interference, Standing Waves, Comb Filtering, Phase and Polarity). Capítulo 13, pp. 242–275 (Modal Resonances — Axial Modes and Standing Wave Patterns).</em></p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
