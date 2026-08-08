@@ -185,17 +185,6 @@ function drawWaterRow(gx, gy, gw, rh) {
     noFill();
     circle(orbitCX, orbitCY, orbitR * 2);
 
-    // Trail dots around the circle
-    for (let a = 0; a < 8; a++) {
-      let angle = time * 2.5 + i * 0.8 + a * TWO_PI / 8;
-      let trailX = orbitCX + cos(angle) * orbitR;
-      let trailY = orbitCY + sin(angle) * orbitR;
-      let trailAlpha = map(a, 0, 7, 160, 15);
-      noStroke();
-      fill(224, 90, 71, trailAlpha);
-      circle(trailX, trailY, 2.5);
-    }
-
     // Current particle position
     let angle = time * 2.5 + i * 0.8;
     let partX = orbitCX + cos(angle) * orbitR;
