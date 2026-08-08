@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movimiento de partículas en distintos tipos de onda</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: #F7FAFC; font-family: Inter, system-ui, sans-serif; }
+    canvas { display: block; }
+    #panel {
+      position: absolute; top: 0; left: 0; width: 180px; height: 100vh;
+      background: rgba(255,255,255,0.92); color: #17324D; padding: 12px;
+      font-size: 11px; z-index: 5; overflow-y: auto;
+      border-right: 1px solid #DDE6ED;
+    }
+    #panel h3 { margin: 0 0 6px; font-size: 13px; font-weight: 700; }
+    #panel button { width: 100%; margin: 3px 0; padding: 5px 8px; border: 1px solid #B8C6D3; border-radius: 4px; cursor: pointer; background: #fff; font-size: 11px; font-family: inherit; }
+    #panel button:hover { background: #E8F1F8; }
+    #panel input[type=range] { width: 100%; accent-color: #174A7E; margin: 3px 0; }
+    #panel label { display: block; margin: 6px 0 2px; color: #445B70; font-size: 10px; }
+    #panel .val { font-weight: 600; color: #17324D; }
+    #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDE6ED; }
+    #panel .info { font-size: 10px; color: #587086; line-height: 1.5; margin-top: 10px; }
+    .legend-coral { color: #E05A47; font-weight: 600; }
+    .legend-blue { color: #174A7E; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div id="panel">
+  <h3>Figura 1-4 — Tipos de onda</h3>
+  <div class="section">
+    <label>Velocidad: <span class="val" id="sv">1.0</span></label>
+    <input type="range" id="speed" min="0.3" max="2.5" step="0.1" value="1.0">
+  </div>
+  <div class="section">
+    <button id="btn-pause">⏯ Pausar</button>
+  </div>
+  <div class="info">
+    <span class="legend-coral">●</span> Movimiento de partículas<br>
+    <span class="legend-blue">→</span> Dirección de propagación<br><br>
+    <b>A.</b> Agua — circular<br>
+    <b>B.</b> Cuerda — transversal<br>
+    <b>C.</b> Aire — longitudinal<br><br>
+    Everest & Pohlmann (2009), p. 5.
+  </div>
+</div>
+
+<script>
+let speed = 1.0, paused = false, time = 0;
+let waterParticles = [], stringParticles = [], airParticles = [];
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textFont('Inter');
+
+  // Water particles along a horizontal line
+  for (let i = 0; i < 12; i++) waterParticles.push({ baseX: 0, baseY: 0, phase: random(TWO_PI) });
+  // String particles
+  for (let i = 0; i < 20; i++) stringParticles.push({ baseX: 0, baseY: 0, phase: random(TWO_PI) });
+  // Air particles
+  for (let i = 0; i < 25; i++) airParticles.push({ baseX: 0, baseY: 0, phase: random(TWO_PI) });
+
+  select('#speed').input(() => { speed = parseFloat(select('#speed').value()); select('#sv').html(speed.toFixed(1)); });
+  select('#btn-pause').mousePressed(() => { paused = !paused; select('#btn-pause').html(paused ? '▶ Reanudar' : '⏯ Pausar'); });
+}
+
+function draw() {
+  background(247, 250, 252);
+  if (!paused) time += deltaTime * 0.001 * speed;
+
+  let GX = 200, GW = width - GX - 40;
+  let waveSpeed = 0.8;
+  let waveFreq = 0.6;
+
+  // ─── Layout: 3 rows ───
+  let rowH = (height - 40) / 3;
+  let colW = GW;
+
+  // ═════ Row A: Surface wave ═════
+  let aY = rowH * 0;
+  drawRow(GX, aY, colW, rowH, "A", "Superficie del agua", "Circular");
+
+  // ═════ Row B: Transverse wave ═════
+  let bY = rowH * 1;
+  drawRowB(GX, bY, colW, rowH);
+
+  // ═════ Row C: Longitudinal wave ═════
+  let cY = rowH * 2;
+  drawRowC(GX, cY, colW, rowH);
+
+  // ─── Footer ───
+  noStroke();
+  fill(68, 91, 112);
+  textSize(16);
+  textAlign(CENTER, TOP);
+  text("La trayectoria de cada partícula depende del tipo de onda y del medio en el que se propaga.", width / 2, height - 30);
+  stroke(224, 90, 71);
+  strokeWeight(3);
+  line(width / 2 - 175, height - 12, width / 2 + 175, height - 12);
+  noStroke();
+}
+
+function drawRow(gx, gy, gw, rh, letter, medium, motion) {
+  // Card background
+  fill(255);
+  stroke(221, 230, 237);
+  strokeWeight(1.5);
+  rect(gx, gy + 10, gw, rh - 20, 14);
+
+  // Letter circle
+  fill(232, 241, 248);
+  noStroke();
+  circle(gx + 40, gy + rh / 2, 42);
+  fill(23, 50, 77);
+  textSize(24);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text(letter, gx + 40, gy + rh / 2);
+
+  // Medium name
+  fill(23, 50, 77);
+  textSize(16);
+  textAlign(LEFT, CENTER);
+  text(medium, gx + 80, gy + rh / 2 - 10);
+  textSize(13);
+  fill(68, 91, 112);
+  text("MEDIO", gx + 80, gy + rh / 2 + 12);
+
+  // Travel arrow (blue)
+  let arrowStart = gx + 220;
+  let arrowEnd = gx + gw - 240;
+  stroke(23, 74, 126);
+  strokeWeight(2.5);
+  line(arrowStart, gy + rh / 2, arrowEnd, gy + rh / 2);
+  // Arrowhead
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 - 5);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 + 5);
+
+  // Label
+  noStroke();
+  fill(23, 74, 126);
+  textSize(12);
+  textAlign(CENTER, CENTER);
+  text("Dirección de propagación", (arrowStart + arrowEnd) / 2, gy + rh / 2 - 16);
+
+  // Motion label
+  fill(224, 90, 71);
+  textSize(17);
+  textStyle(BOLD);
+  textAlign(RIGHT, CENTER);
+  text(motion, gx + gw - 25, gy + rh / 2);
+
+  // Column header for motion type
+  noStroke();
+  fill(23, 74, 126);
+  textSize(12);
+  textStyle(NORMAL);
+  textAlign(RIGHT, CENTER);
+  text("MOVIMIENTO DE PARTÍCULAS", gx + gw - 25, gy + 22);
+}
+
+function drawRowB(gx, gy, gw, rh) {
+  // Row B card
+  fill(255);
+  stroke(221, 230, 237);
+  strokeWeight(1.5);
+  rect(gx, gy + 10, gw, rh - 20, 14);
+
+  // Letter
+  fill(232, 241, 248);
+  noStroke();
+  circle(gx + 40, gy + rh / 2, 42);
+  fill(23, 50, 77);
+  textSize(24);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text("B", gx + 40, gy + rh / 2);
+
+  // Medium
+  fill(23, 50, 77);
+  textSize(16);
+  textAlign(LEFT, CENTER);
+  text("Cuerda de violín", gx + 80, gy + rh / 2 - 10);
+  textSize(13);
+  fill(68, 91, 112);
+  textStyle(NORMAL);
+  text("MEDIO", gx + 80, gy + rh / 2 + 12);
+
+  // Travel arrow
+  let arrowStart = gx + 220, arrowEnd = gx + gw - 240;
+  stroke(23, 74, 126);
+  strokeWeight(2.5);
+  line(arrowStart, gy + rh / 2, arrowEnd, gy + rh / 2);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 - 5);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 + 5);
+  noStroke();
+  fill(23, 74, 126);
+  textSize(12);
+  textStyle(NORMAL);
+  textAlign(CENTER, CENTER);
+  text("Dirección de propagación", (arrowStart + arrowEnd) / 2, gy + rh / 2 - 16);
+
+  // String particles (transverse wave)
+  let cx = arrowStart + 60;
+  let midline = gy + rh / 2;
+  let spacing = 25;
+
+  // Draw the wave line
+  stroke(23, 74, 126);
+  strokeWeight(2);
+  noFill();
+  beginShape();
+  for (let i = 0; i < 18; i++) {
+    let px = cx + i * spacing;
+    let phase = i * 0.5 + time * 3;
+    let py = midline - sin(phase) * 28;
+    vertex(px, py);
+  }
+  endShape();
+
+  // Draw particles with vertical motion arrows
+  for (let i = 0; i < 12; i++) {
+    let px = cx + i * spacing * 1.5;
+    let phase = i * 0.5 + time * 3;
+    let py = midline - sin(phase) * 28;
+
+    // Vertical arrow (coral)
+    let arrowLen = 15;
+    stroke(224, 90, 71);
+    strokeWeight(2.2);
+    if (cos(phase) > 0) {
+      line(px, py, px, py - arrowLen);
+      line(px, py - arrowLen, px - 4, py - arrowLen + 6);
+      line(px, py - arrowLen, px + 4, py - arrowLen + 6);
+    } else {
+      line(px, py, px, py + arrowLen);
+      line(px, py + arrowLen, px - 4, py + arrowLen - 6);
+      line(px, py + arrowLen, px + 4, py + arrowLen - 6);
+    }
+
+    // Particle dot
+    noStroke();
+    fill(224, 90, 71);
+    circle(px, py, 8);
+
+    // Dashed vertical guide
+    stroke(184, 198, 211);
+    strokeWeight(1);
+    drawingContext.setLineDash([5, 5]);
+    line(px, py - 35, px, py + 35);
+    drawingContext.setLineDash([]);
+  }
+
+  // Motion label
+  noStroke();
+  fill(224, 90, 71);
+  textSize(17);
+  textStyle(BOLD);
+  textAlign(RIGHT, CENTER);
+  text("Transversal", gx + gw - 25, gy + rh / 2);
+}
+
+function drawRowC(gx, gy, gw, rh) {
+  // Row C card
+  fill(255);
+  stroke(221, 230, 237);
+  strokeWeight(1.5);
+  rect(gx, gy + 10, gw, rh - 20, 14);
+
+  // Letter
+  fill(232, 241, 248);
+  noStroke();
+  circle(gx + 40, gy + rh / 2, 42);
+  fill(23, 50, 77);
+  textSize(24);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text("C", gx + 40, gy + rh / 2);
+
+  // Medium
+  fill(23, 50, 77);
+  textSize(16);
+  textAlign(LEFT, CENTER);
+  text("Sonido en el aire", gx + 80, gy + rh / 2 - 10);
+  textSize(13);
+  fill(68, 91, 112);
+  textStyle(NORMAL);
+  text("MEDIO", gx + 80, gy + rh / 2 + 12);
+
+  // Travel arrow
+  let arrowStart = gx + 220, arrowEnd = gx + gw - 240;
+  stroke(23, 74, 126);
+  strokeWeight(2.5);
+  line(arrowStart, gy + rh / 2, arrowEnd, gy + rh / 2);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 - 5);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 + 5);
+  noStroke();
+  fill(23, 74, 126);
+  textSize(12);
+  textStyle(NORMAL);
+  textAlign(CENTER, CENTER);
+  text("Dirección de propagación", (arrowStart + arrowEnd) / 2, gy + rh / 2 - 16);
+
+  // Air particles (longitudinal wave)
+  let cx = arrowStart + 50;
+  let midline = gy + rh / 2;
+  let spacing = 28;
+
+  // Horizontal dashed guides for each particle
+  for (let i = 0; i < 14; i++) {
+    let baseX = cx + i * spacing;
+    let phase = i * 0.6 + time * 3;
+    let dx = sin(phase) * 22;  // displacement
+    let px = baseX + dx;
+
+    // Dashed guide
+    stroke(184, 198, 211);
+    strokeWeight(1);
+    drawingContext.setLineDash([5, 5]);
+    line(baseX - 30, midline, baseX + 30, midline);
+    drawingContext.setLineDash([]);
+
+    // Horizontal arrow
+    stroke(224, 90, 71);
+    strokeWeight(2.2);
+    let dir = cos(phase) > 0 ? 1 : -1;
+    line(px, midline, px + dir * 14, midline);
+    line(px + dir * 14, midline, px + dir * 10, midline - 5);
+    line(px + dir * 14, midline, px + dir * 10, midline + 5);
+
+    // Particle
+    noStroke();
+    fill(224, 90, 71);
+    circle(px, midline, 8);
+  }
+
+  // Motion label
+  noStroke();
+  fill(224, 90, 71);
+  textSize(17);
+  textStyle(BOLD);
+  textAlign(RIGHT, CENTER);
+  text("Longitudinal", gx + gw - 25, gy + rh / 2);
+}
+
+function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
+</body>
+</html>
