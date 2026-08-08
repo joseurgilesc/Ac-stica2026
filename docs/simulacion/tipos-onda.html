@@ -179,21 +179,10 @@ function drawWaterRow(gx, gy, gw, rh) {
     let orbitCX = cx + i * spacing + 10;
     let orbitCY = midline + 5;
 
-    // Clear visible circular orbit
-    stroke(184, 198, 211);
-    strokeWeight(1.2);
-    noFill();
-    circle(orbitCX, orbitCY, orbitR * 2);
-
     // Current particle position
     let angle = time * 2.5 + i * 0.8;
     let partX = orbitCX + cos(angle) * orbitR;
     let partY = orbitCY + sin(angle) * orbitR;
-
-    // Arrow from center to particle
-    stroke(224, 90, 71);
-    strokeWeight(2);
-    line(orbitCX, orbitCY, partX, partY);
 
     // Main particle
     noStroke();
