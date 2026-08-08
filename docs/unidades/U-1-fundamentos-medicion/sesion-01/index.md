@@ -72,10 +72,9 @@
 
 ???+ note "Tipos de ondas: cómo se mueven las partículas"
 
-    <figure markdown="span">
-      ![Fig. 1-4: Tipos de ondas](../../../img/FIGURE%201-4.png)
-      <figcaption>**Fig. 1-4** — Tres formas de movimiento de partículas: (A) circular en la superficie del agua, (B) transversal en una cuerda de violín, (C) longitudinal en el aire (Everest & Pohlmann, 2009, p. 5).</figcaption>
-    </figure>
+    [📊 **Abrir simulación interactiva — Figura 1-4**](../../../simulacion/tipos-onda.html){ .md-button }
+
+    Tres tipos de movimiento de partículas: (A) circular en la superficie del agua, (B) transversal en una cuerda de violín, (C) longitudinal en el aire. Observá cómo se mueve cada partícula según el medio y el tipo de onda.
 
     | Tipo | Movimiento de partícula | Dirección relativa a la onda | Ejemplo |
     |---|---|---|---|
