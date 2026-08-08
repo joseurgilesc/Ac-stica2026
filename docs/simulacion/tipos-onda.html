@@ -79,9 +79,9 @@ function draw() {
   let rowH = (height - 40) / 3;
   let colW = GW;
 
-  // ═════ Row A: Surface wave ═════
+  // ═════ Row A: Surface wave (water) ═════
   let aY = rowH * 0;
-  drawRow(GX, aY, colW, rowH, "A", "Superficie del agua", "Circular");
+  drawWaterRow(GX, aY, colW, rowH);
 
   // ═════ Row B: Transverse wave ═════
   let bY = rowH * 1;
@@ -101,6 +101,112 @@ function draw() {
   strokeWeight(3);
   line(width / 2 - 175, height - 12, width / 2 + 175, height - 12);
   noStroke();
+}
+
+function drawWaterRow(gx, gy, gw, rh) {
+  // Card background
+  fill(255);
+  stroke(221, 230, 237);
+  strokeWeight(1.5);
+  rect(gx, gy + 10, gw, rh - 20, 14);
+
+  // Letter
+  fill(232, 241, 248);
+  noStroke();
+  circle(gx + 40, gy + rh / 2, 42);
+  fill(23, 50, 77);
+  textSize(24);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text("A", gx + 40, gy + rh / 2);
+
+  // Medium
+  fill(23, 50, 77);
+  textSize(16);
+  textAlign(LEFT, CENTER);
+  text("Superficie del agua", gx + 80, gy + rh / 2 - 10);
+  textSize(13);
+  fill(68, 91, 112);
+  textStyle(NORMAL);
+  text("MEDIO", gx + 80, gy + rh / 2 + 12);
+
+  // Travel arrow (blue)
+  let arrowStart = gx + 220, arrowEnd = gx + gw - 240;
+  stroke(23, 74, 126);
+  strokeWeight(2.5);
+  line(arrowStart, gy + rh / 2, arrowEnd, gy + rh / 2);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 - 5);
+  line(arrowEnd, gy + rh / 2, arrowEnd - 10, gy + rh / 2 + 5);
+  noStroke();
+  fill(23, 74, 126);
+  textSize(12);
+  textStyle(NORMAL);
+  textAlign(CENTER, CENTER);
+  text("Dirección de propagación", (arrowStart + arrowEnd) / 2, gy + rh / 2 - 16);
+
+  // Motion label
+  fill(224, 90, 71);
+  textSize(17);
+  textStyle(BOLD);
+  textAlign(RIGHT, CENTER);
+  text("Circular", gx + gw - 25, gy + rh / 2);
+
+  // Water particles in circular motion
+  let midline = gy + rh / 2;
+  let cx = arrowStart + 60;
+  let spacing = 40;
+  let orbitR = 20;
+
+  // Draw water surface wave
+  stroke(23, 74, 126);
+  strokeWeight(2.5);
+  noFill();
+  beginShape();
+  for (let i = 0; i < 18; i++) {
+    let px = cx + i * spacing * 0.7;
+    let phase = i * 0.7 + time * 2;
+    let py = midline - sin(phase) * 18;
+    vertex(px, py);
+  }
+  endShape();
+
+  // Draw particles on circular orbits
+  for (let i = 0; i < 8; i++) {
+    let px = cx + i * spacing;
+    let phase = i * 0.7 + time * 2;
+    let orbitCX = px;
+    let orbitCY = midline - 8;
+
+    // Dashed circular orbit
+    stroke(184, 198, 211);
+    strokeWeight(1);
+    drawingContext.setLineDash([4, 4]);
+    noFill();
+    circle(orbitCX, orbitCY, orbitR * 2);
+    drawingContext.setLineDash([]);
+
+    // Particle position on orbit
+    let angle = time * 3 + i * 0.5;
+    let partX = orbitCX + cos(angle) * orbitR;
+    let partY = orbitCY + sin(angle) * orbitR;
+
+    // Coral arrow from center
+    stroke(224, 90, 71);
+    strokeWeight(2);
+    line(orbitCX, orbitCY, partX, partY);
+
+    // Particle dot
+    noStroke();
+    fill(224, 90, 71);
+    circle(partX, partY, 8);
+
+    // Small arrowhead on particle
+    stroke(224, 90, 71);
+    strokeWeight(1.5);
+    let perpX = -sin(angle);
+    let perpY = cos(angle);
+    line(partX, partY, partX + perpX * 7, partY + perpY * 7);
+  }
 }
 
 function drawRow(gx, gy, gw, rh, letter, medium, motion) {
