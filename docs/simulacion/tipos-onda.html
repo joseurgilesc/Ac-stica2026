@@ -154,27 +154,30 @@ function drawWaterRow(gx, gy, gw, rh) {
   // Water particles in circular motion
   let midline = gy + rh / 2;
   let cx = arrowStart + 50;
-  let spacing = 48;
-  let orbitR = 18;
+  let spacing = 52;
+  let orbitR = 16;
 
-  // Draw water surface wave (blue line)
-  stroke(23, 74, 126, 120);
-  strokeWeight(2.5);
+  // Concentric ripple circles on the water surface (top)
   noFill();
-  beginShape();
-  for (let i = 0; i < 18; i++) {
-    let px = cx + i * spacing * 0.7;
-    let phase = i * 0.7 + time * 2;
-    let py = midline - sin(phase) * 14;
-    vertex(px, py);
+  stroke(23, 74, 126, 70);
+  strokeWeight(1.5);
+  let ripplePhase = (time * speed * 0.8) % 1;
+  for (let r = 0; r < 5; r++) {
+    let radius = 15 + ripplePhase * 30 + r * 32;
+    let alpha = map(r, 0, 4, 100, 10);
+    stroke(23, 74, 126, alpha);
+    circle(cx + spacing * 3, midline - 30, radius * 2);
   }
-  endShape();
 
-  // Draw particles on clear circular orbits
-  for (let i = 0; i < 7; i++) {
-    let px = cx + i * spacing;
-    let orbitCX = px - orbitR / 2;
-    let orbitCY = midline - 5;
+  // Source dot for ripples
+  fill(23, 74, 126);
+  noStroke();
+  circle(cx + spacing * 3, midline - 30, 6);
+
+  // Individual particles tracing circular orbits
+  for (let i = 0; i < 6; i++) {
+    let orbitCX = cx + i * spacing + 10;
+    let orbitCY = midline + 5;
 
     // Clear visible circular orbit
     stroke(184, 198, 211);
@@ -182,38 +185,31 @@ function drawWaterRow(gx, gy, gw, rh) {
     noFill();
     circle(orbitCX, orbitCY, orbitR * 2);
 
-    // Particle positions (5 dots around the circle showing the path)
+    // Trail dots around the circle
     for (let a = 0; a < 8; a++) {
       let angle = time * 2.5 + i * 0.8 + a * TWO_PI / 8;
       let trailX = orbitCX + cos(angle) * orbitR;
       let trailY = orbitCY + sin(angle) * orbitR;
-      let trailAlpha = map(a, 0, 7, 180, 20);
+      let trailAlpha = map(a, 0, 7, 160, 15);
       noStroke();
       fill(224, 90, 71, trailAlpha);
-      circle(trailX, trailY, 3);
+      circle(trailX, trailY, 2.5);
     }
 
-    // Current particle position (bright)
+    // Current particle position
     let angle = time * 2.5 + i * 0.8;
     let partX = orbitCX + cos(angle) * orbitR;
     let partY = orbitCY + sin(angle) * orbitR;
 
     // Arrow from center to particle
     stroke(224, 90, 71);
-    strokeWeight(2.2);
+    strokeWeight(2);
     line(orbitCX, orbitCY, partX, partY);
 
     // Main particle
     noStroke();
     fill(224, 90, 71);
-    circle(partX, partY, 8);
-
-    // Small tangential arrow
-    stroke(224, 90, 71);
-    strokeWeight(1.5);
-    let tanX = -sin(angle);
-    let tanY = cos(angle);
-    line(partX, partY, partX + tanX * 6, partY + tanY * 6);
+    circle(partX, partY, 7);
   }
 }
 
