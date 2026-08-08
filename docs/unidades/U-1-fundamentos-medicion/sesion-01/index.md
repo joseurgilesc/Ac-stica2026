@@ -6,6 +6,7 @@
 
     - [🎮 Compresión y rarefacción del sonido](../../../simulacion/) — partículas de aire y onda de presión
     - [🎯 Movimiento armónico simple y onda sinusoidal](../../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
+    - [📊 Tipos de ondas — circular, transversal y longitudinal](../../../simulacion/tipos-onda.html) — Figura 1-4 del Everest
 
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
