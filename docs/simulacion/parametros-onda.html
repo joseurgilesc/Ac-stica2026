@@ -30,15 +30,15 @@
 <div id="panel">
   <h3>y(t) = A · sin(2π f t + φ)</h3>
   <div class="section">
-    <label>Amplitud (A): <span class="val" id="av">20 m</span></label>
+    <label>Amplitud (A): <input type="number" id="amp-num" value="20" min="5" max="60" step="1" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> m</label>
     <input type="range" id="amp" min="5" max="60" value="20" step="1">
   </div>
   <div class="section">
-    <label>Frecuencia (f): <span class="val" id="fv">1 Hz</span></label>
+    <label>Frecuencia (f): <input type="number" id="freq-num" value="1" min="0.3" max="5" step="0.1" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> Hz</label>
     <input type="range" id="freq" min="0.3" max="5" value="1" step="0.1">
   </div>
   <div class="section">
-    <label>Fase (φ): <span class="val" id="pv">0°</span></label>
+    <label>Fase (φ): <input type="number" id="phase-num" value="0" min="0" max="360" step="5" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> °</label>
     <input type="range" id="phase" min="0" max="360" value="0" step="5">
   </div>
   <div class="section">
@@ -60,13 +60,34 @@ function setup() {
   textFont('Georgia');
 
   let as = select('#amp'), fs = select('#freq'), ps = select('#phase');
-  as.input(() => { amplitude = parseFloat(as.value()); select('#av').html(amplitude + ' m'); });
-  fs.input(() => { frequency = parseFloat(fs.value()); select('#fv').html(frequency.toFixed(1) + ' Hz'); updateInfo(); });
-  ps.input(() => { phase = parseFloat(ps.value()); select('#pv').html(phase + '\u00B0'); });
+  let an = select('#amp-num'), fn = select('#freq-num'), pn = select('#phase-num');
+
+  function setAmp(v) {
+    amplitude = v;
+    as.elt.value = v;
+    an.elt.value = v;
+    updateInfo();
+  }
+  function setFreq(v) {
+    frequency = v;
+    fs.elt.value = v;
+    fn.elt.value = v;
+    updateInfo();
+  }
+  function setPhase(v) {
+    phase = v;
+    ps.elt.value = v;
+    pn.elt.value = v;
+  }
+
+  as.input(() => setAmp(parseFloat(as.value())));
+  an.input(() => { let v = parseFloat(an.value()); if (!isNaN(v)) setAmp(constrain(v, 5, 60)); });
+  fs.input(() => setFreq(parseFloat(fs.value())));
+  fn.input(() => { let v = parseFloat(fn.value()); if (!isNaN(v)) setFreq(constrain(v, 0.3, 5)); });
+  ps.input(() => setPhase(parseFloat(ps.value())));
+  pn.input(() => { let v = parseFloat(pn.value()); if (!isNaN(v)) setPhase(constrain(v, 0, 360)); });
   select('#btn-reset').mousePressed(() => {
-    amplitude = 20; frequency = 1; phase = 0;
-    as.elt.value = 20; fs.elt.value = 1; ps.elt.value = 0;
-    select('#av').html('20 m'); select('#fv').html('1 Hz'); select('#pv').html('0\u00B0');
+    setAmp(20); setFreq(1); setPhase(0);
     updateInfo();
   });
   select('#btn-pause').mousePressed(() => {
