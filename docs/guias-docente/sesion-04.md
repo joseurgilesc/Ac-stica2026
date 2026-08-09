@@ -54,7 +54,27 @@ Que el estudiante distinga entre tonos puros, ondas complejas y ruido, comprenda
    - Fundamental + armónicos impares (100 + 300 + 500...) → se aproxima a onda cuadrada (sonido de clarinete)
    - Fundamental + todos los armónicos decreciendo como 1/n → diente de sierra (sonido de cuerda frotada)
 
-   Distinguir **armónico** (múltiplo entero exacto) de **parcial** (cualquier componente). Mostrar el espectro de una campana o platillo: tiene parciales inarmónicos → no produce sensación de altura definida.
+       Distinguir **armónico** (múltiplo entero exacto) de **parcial** (cualquier componente). Mostrar el espectro de una campana o platillo: tiene parciales inarmónicos → no produce sensación de altura definida.
+
+    **La serie armónica en notación musical.** Proyectar la siguiente imagen que muestra los primeros 8 parciales de la serie armónica sobre Do (C) y su correspondencia con la notación en pentagrama:
+
+    ![Serie armónica sobre Do](../img/serie_armonica.svg)
+
+    Tabla de referencia para los primeros 8 parciales:
+
+    | Parcial | Relación con $f_0$ | Intervalo desde el anterior | Nota (sobre C) |
+    |:-------:|:-------------------:|:---------------------------:|:--------------:|
+    | 1 | Fundamental | — | C |
+    | 2 | Octava | 8.ª justa | C |
+    | 3 | Octava + 5.ª | 5.ª justa | G |
+    | 4 | Dos octavas | 4.ª justa | C |
+    | 5 | Dos octavas + 3.ª mayor | 3.ª mayor (lig. baja) | E |
+    | 6 | Dos octavas + 5.ª | 3.ª menor | G |
+    | 7 | Dos octavas + 7.ª menor | 3.ª menor (baja) | B♭ |
+    | 8 | Tres octavas | 2.ª mayor | C |
+
+    !!! tip "Conexión con la producción musical"
+        Los primeros seis parciales forman un acorde mayor. Esto explica por qué un equalizador que realza 3 kHz en una nota grave está reforzando un armónico agudo — no la fundamental. Comprender la serie te permite ecualizar con criterio musical, no solo técnico.
 
 3. **Fase: mismo espectro, distinta forma de onda** (10 min). Proyectar las Figs. 1-9 y 1-11 del Everest. Mostrar que dos ondas con idénticos componentes frecuenciales y amplitudes pueden verse completamente diferentes si cambia la fase. Aclarar: el oído es poco sensible a la fase en estado estacionario, pero la fase es crítica en la suma de señal directa + reflejada y en la localización espacial.
 
@@ -101,6 +121,27 @@ Capturá la forma de onda y el espectro de cada timbre. Escribí una breve descr
 Redactá un comentario técnico que responda: ¿por qué dos instrumentos que tocan la misma nota suenan diferente? Usá los conceptos de **fundamental, armónicos, parciales, espectro y timbre**. Mencioná al menos un ejemplo concreto de los instrumentos que analizaste.
 
 **Fecha de entrega:** [definir según calendario]
+
+**Parte D — Serie armónica a mano (individual)**
+
+1. En papel pentagramado, escribí las series armónicas de cuatro notas fundamentales: **G (Sol)**, **D (Re)**, **B♭ (Si bemol)** y **F (Fa)**.
+2. Para cada fundamental, dibujá los primeros **8 parciales** en redondas sobre un pentagrama en clave de sol.
+3. Etiquetá cada parcial con su número (1 a 8) debajo de la nota.
+4. Entregá una foto clara o escaneo de las cuatro series.
+
+| Parcial | G (Sol) | D (Re) | B♭ (Sib) | F (Fa) |
+|:-------:|:-------:|:------:|:--------:|:------:|
+| 1 | G3 | D3 | B♭2 | F2 |
+| 2 | G4 | D4 | B♭3 | F3 |
+| 3 | D5 | A4 | F4 | C4 |
+| 4 | G5 | D5 | B♭4 | F4 |
+| 5 | B5 | F♯5 | D5 | A4 |
+| 6 | D6 | A5 | F5 | C5 |
+| 7 | F6 | C6 | A♭5 | E♭5 |
+| 8 | G6 | D6 | B♭5 | F5 |
+
+!!! note "Objetivo de este ejercicio"
+    Escribir la serie a mano obliga al estudiante a internalizar la relación entre la serie armónica (concepto físico) y la notación musical (herramienta del músico). Al hacerlo para cuatro fundamentales distintas, se refuerza el patrón de intervalos sin depender de una sola tonalidad.
 
 ### Rúbrica formativa
 
