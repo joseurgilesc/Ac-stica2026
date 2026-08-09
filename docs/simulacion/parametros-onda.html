@@ -158,39 +158,40 @@ function draw() {
   endShape();
 
   // ── Phase visualization ──
-  // The zero-crossing moves with time. Phase shows the offset between
-  // where it IS (with phase) and where it WOULD BE (without phase).
-  let baseZeroX = GX + ((time * 2) % TWO_PI) / (TWO_PI * frequency) * GW;
-  // Wrap to keep within visible area
-  while (baseZeroX < GX) baseZeroX += GW / frequency;
-  while (baseZeroX > GX + GW / frequency) baseZeroX -= GW / frequency;
+  // Reference zero-crossing (going up) of the φ=0 wave
+  let baseZeroX = GX + 5 + ((time * 2) % TWO_PI) / (TWO_PI * frequency) * GW;
+  let lamPxPhase = GW / frequency;
+  while (baseZeroX > GX + lamPxPhase) baseZeroX -= lamPxPhase;
+  let shiftPx = (phase / 360) * lamPxPhase;
+  let phaseZeroX = baseZeroX + shiftPx;
 
-  let shiftPx = (phase / 360) * (GW / frequency);
-
-  // Dashed reference line: where the zero-crossing WOULD be at phase=0
-  stroke(36, 157, 143, 70);
-  strokeWeight(1);
-  drawingContext.setLineDash([4, 4]);
-  line(baseZeroX, CY - maxAmp - 5, baseZeroX, CY + maxAmp + 5);
-  drawingContext.setLineDash([]);
-
+  // At φ=90°, phaseZeroX aligns with the CREST of reference wave
+  // Draw highlighted band between the two zero-crossings
   if (phase > 0) {
-    let phaseX = baseZeroX + shiftPx;
+    // Teal band showing the phase shift region
+    fill(224, 90, 71, 12);
+    noStroke();
+    rect(baseZeroX, CY - maxAmp, shiftPx, maxAmp * 2);
+
+    // Reference line
+    stroke(36, 157, 143, 70);
+    strokeWeight(1);
+    drawingContext.setLineDash([4, 4]);
+    line(baseZeroX, CY - maxAmp - 5, baseZeroX, CY + maxAmp + 5);
+    drawingContext.setLineDash([]);
 
     // Phase-shifted line
-    stroke(224, 90, 71, 160);
-    strokeWeight(1.5);
-    drawingContext.setLineDash([3, 3]);
-    line(phaseX, CY - maxAmp - 5, phaseX, CY + maxAmp + 5);
-    drawingContext.setLineDash([]);
+    stroke(224, 90, 71, 180);
+    strokeWeight(2);
+    line(phaseZeroX, CY - maxAmp - 5, phaseZeroX, CY + maxAmp + 5);
 
     // Arrow
     let arrowY = CY - maxAmp - 22;
-    stroke(224, 90, 71, 160);
+    stroke(224, 90, 71, 180);
     strokeWeight(1.5);
-    line(baseZeroX, arrowY, phaseX, arrowY);
-    line(phaseX, arrowY, phaseX - 8, arrowY - 5);
-    line(phaseX, arrowY, phaseX - 8, arrowY + 5);
+    line(baseZeroX, arrowY, phaseZeroX, arrowY);
+    line(phaseZeroX, arrowY, phaseZeroX - 8, arrowY - 5);
+    line(phaseZeroX, arrowY, phaseZeroX - 8, arrowY + 5);
 
     noStroke();
     fill(224, 90, 71);
@@ -199,14 +200,13 @@ function draw() {
     text('\u03C6 = ' + phase + '\u00B0', baseZeroX + shiftPx / 2, arrowY - 4);
   }
 
-  // Circle indicator (top right) — always shows current phase
+  // Circle indicator (top right)
   let cx = GX + GW - 80, cr = 30;
   stroke(224, 90, 71, 80);
   strokeWeight(1);
   noFill();
   circle(cx, 60, cr * 2);
 
-  // Dot on circle at current phase
   let dotAngle = -radians(phase) + PI / 2;
   let dx = cx + cos(dotAngle) * cr;
   let dy = 60 - sin(dotAngle) * cr;
@@ -214,7 +214,6 @@ function draw() {
   noStroke();
   circle(dx, dy, 6);
 
-  // Cross lines
   stroke(36, 157, 143, 40);
   strokeWeight(0.5);
   line(cx - cr, 60, cx + cr, 60);
