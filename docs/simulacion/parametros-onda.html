@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parámetros de una onda sinusoidal</title>
+  <title>Parametros de una onda sinusoidal</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <style>
     * { box-sizing: border-box; }
@@ -17,8 +17,8 @@
     }
     #panel h3 { margin: 0 0 6px; font-size: 13px; color: #1A7A6F; }
     #panel label { display: block; margin: 6px 0 2px; color: #333; font-size: 10px; }
-    #panel .val { font-weight: bold; color: #1A7A6F; }
     #panel input[type=range] { width: 100%; accent-color: #249D8F; margin: 3px 0; }
+    #panel input[type=number] { width: 55px; padding: 2px; border: 1px solid #ccc; border-radius: 3px; font-size: 11px; }
     #panel button { width: 100%; margin: 3px 0; padding: 5px 8px; border: 1px solid rgba(36,157,143,0.3); border-radius: 3px; cursor: pointer; background: rgba(36,157,143,0.05); font-size: 11px; font-family: Georgia, serif; }
     #panel button:hover { background: rgba(36,157,143,0.12); }
     #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(36,157,143,0.12); }
@@ -28,275 +28,187 @@
 <body>
 
 <div id="panel">
-  <h3>y(t) = A · sin(2π f t + φ)</h3>
+  <h3>y(t) = A sin(2pi f t + phi)</h3>
   <div class="section">
-    <label>Amplitud (A): <input type="number" id="amp-num" value="20" min="5" max="60" step="1" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> m</label>
+    <label>A (m): <input type="number" id="ampN" value="20" min="5" max="60" step="1"></label>
     <input type="range" id="amp" min="5" max="60" value="20" step="1">
   </div>
   <div class="section">
-    <label>Frecuencia (f): <input type="number" id="freq-num" value="1" min="0.3" max="5" step="0.1" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> Hz</label>
+    <label>f (Hz): <input type="number" id="freqN" value="1" min="0.3" max="5" step="0.1"></label>
     <input type="range" id="freq" min="0.3" max="5" value="1" step="0.1">
   </div>
   <div class="section">
-    <label>Fase (φ): <input type="number" id="phase-num" value="0" min="0" max="360" step="5" style="width:55px;padding:2px;border:1px solid #ccc;border-radius:3px;font-size:11px"> °</label>
+    <label>phi (deg): <input type="number" id="phaseN" value="0" min="0" max="360" step="5"></label>
     <input type="range" id="phase" min="0" max="360" value="0" step="5">
   </div>
   <div class="section">
-    <button id="btn-pause">⏯ Pausar</button>
-    <button id="btn-reset">🔄 Valores iniciales</button>
+    <button id="btn-pause">Pausar</button>
+    <button id="btn-reset">Valores iniciales</button>
   </div>
   <div class="section">
-    <div class="info"><b>T</b> = 1/f = <span id="tv">1.00 s</span></div>
-    <div class="info"><b>λ</b> = v/f = <span id="lv">344 m</span></div>
+    <div class="info">T = 1/f = <b id="tv">1.000 s</b></div>
+    <div class="info">lambda = v/f = <b id="lv">344.0 m</b>  (v = 344 m/s)</div>
   </div>
 </div>
 
 <script>
-let amplitude = 20, frequency = 1, phase = 0;
-let time = 0, vSound = 344, paused = false;
+let amp = 20, freq = 1, phaseDeg = 0;
+let t = 0, paused = false;
+const V = 344;
+const GX = 230;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('Georgia');
 
-  let as = select('#amp'), fs = select('#freq'), ps = select('#phase');
-  let an = select('#amp-num'), fn = select('#freq-num'), pn = select('#phase-num');
+  let aS = select('#amp'), aN = select('#ampN');
+  let fS = select('#freq'), fN = select('#freqN');
+  let pS = select('#phase'), pN = select('#phaseN');
 
-  function setAmp(v) {
-    amplitude = v;
-    as.elt.value = v;
-    an.elt.value = v;
-    updateInfo();
-  }
-  function setFreq(v) {
-    frequency = v;
-    fs.elt.value = v;
-    fn.elt.value = v;
-    updateInfo();
-  }
-  function setPhase(v) {
-    phase = v;
-    ps.elt.value = v;
-    pn.elt.value = v;
+  function sync() {
+    aS.elt.value = aN.elt.value = amp;
+    fS.elt.value = fN.elt.value = freq;
+    pS.elt.value = pN.elt.value = phaseDeg;
+    select('#tv').html((1/freq).toFixed(3) + ' s');
+    select('#lv').html((V/freq).toFixed(1) + ' m');
   }
 
-  as.input(() => setAmp(parseFloat(as.value())));
-  an.input(() => { let v = parseFloat(an.value()); if (!isNaN(v)) setAmp(constrain(v, 5, 60)); });
-  fs.input(() => setFreq(parseFloat(fs.value())));
-  fn.input(() => { let v = parseFloat(fn.value()); if (!isNaN(v)) setFreq(constrain(v, 0.3, 5)); });
-  ps.input(() => setPhase(parseFloat(ps.value())));
-  pn.input(() => { let v = parseFloat(pn.value()); if (!isNaN(v)) setPhase(constrain(v, 0, 360)); });
+  aS.input(() => { amp = +aS.value(); sync(); });
+  aN.input(() => { amp = constrain(+aN.value()||20, 5, 60); sync(); });
+  fS.input(() => { freq = +fS.value(); sync(); });
+  fN.input(() => { freq = constrain(+fN.value()||1, 0.3, 5); sync(); });
+  pS.input(() => { phaseDeg = +pS.value(); sync(); });
+  pN.input(() => { phaseDeg = constrain(+pN.value()||0, 0, 360); sync(); });
+
   select('#btn-reset').mousePressed(() => {
-    setAmp(20); setFreq(1); setPhase(0);
-    time = 0;
-    updateInfo();
+    amp = 20; freq = 1; phaseDeg = 0; t = 0; sync();
   });
   select('#btn-pause').mousePressed(() => {
     paused = !paused;
-    select('#btn-pause').html(paused ? '\u25B6 Reanudar' : '\u23EF Pausar');
+    select('#btn-pause').html(paused ? 'Reanudar' : 'Pausar');
   });
-  updateInfo();
-}
 
-function updateInfo() {
-  let T = 1 / frequency;
-  let lambda = vSound / frequency;
-  select('#tv').html(T.toFixed(3) + ' s');
-  select('#lv').html(lambda.toFixed(1) + ' m');
+  sync();
 }
 
 function draw() {
   background(245, 245, 240);
+  if (!paused) t += deltaTime * 0.001;
 
-  if (!paused) time += deltaTime * 0.001;
+  let GW = width - GX - 30;
+  let CY = height * 0.5;
+  let maxAmp = map(amp, 5, 60, 25, 200);
+  let ph = phaseDeg * PI / 180;
 
-  let GX = 230, GW = width - GX - 30;
-  let CY = height * 0.52;
-  let maxAmp = map(amplitude, 5, 60, 25, 220);
-  let phaseRad = phase * PI / 180;
-
-  // ── Amplitude zone ──
-  stroke(36, 157, 143, 40);
-  strokeWeight(1.5);
-  line(GX - 10, CY - maxAmp, GX + GW, CY - maxAmp);
-  line(GX - 10, CY + maxAmp, GX + GW, CY + maxAmp);
-
-  // Amplitude arrows
-  stroke(36, 157, 143, 80);
-  strokeWeight(1);
-  line(GX - 25, CY, GX - 25, CY - maxAmp);
-  line(GX - 25, CY, GX - 25, CY + maxAmp);
-  line(GX - 30, CY - maxAmp + 8, GX - 25, CY - maxAmp);
-  line(GX - 20, CY - maxAmp + 8, GX - 25, CY - maxAmp);
-  line(GX - 30, CY + maxAmp - 8, GX - 25, CY + maxAmp);
-  line(GX - 20, CY + maxAmp - 8, GX - 25, CY + maxAmp);
-
-  noStroke();
-  fill(26, 122, 111, 140);
-  textSize(11);
-  textAlign(RIGHT, CENTER);
-  text('A = ' + amplitude + ' m', GX - 35, CY);
-  text('0', GX - 10, CY);
-
-  // ── Zero line ──
+  // --- Center line ---
   stroke(36, 157, 143, 60);
   strokeWeight(1.5);
   line(GX, CY, GX + GW, CY);
   noStroke();
 
-  // ── Start marker (shows where wave begins) ──
-  let startVal = sin(0 - time * 2 - phaseRad);
-  let startY = CY - startVal * maxAmp;
-  fill(36, 157, 143);
+  // --- Amplitude zone ---
+  stroke(36, 157, 143, 30);
+  strokeWeight(1);
+  line(GX, CY - maxAmp, GX + GW, CY - maxAmp);
+  line(GX, CY + maxAmp, GX + GW, CY + maxAmp);
   noStroke();
-  circle(GX, startY, 7);
+  fill(26, 122, 111, 100);
+  textSize(10);
+  textAlign(RIGHT, CENTER);
+  text('A='+amp+'m', GX-10, CY-maxAmp/2);
+  text('0', GX-10, CY);
 
-  // ── Wave curve ──
+  // --- Wave: y = A * sin(2*pi*freq * u - omega*t + phi) ---
+  // At u=0 (left edge), t=0, phi=0: sin(0)=0 ✓
   stroke(36, 157, 143);
   strokeWeight(3);
   noFill();
   beginShape();
-  let prevY = startY;
-  vertex(GX, startY);
   for (let i = 0; i <= 400; i++) {
-    let x = GX + (i / 400) * GW;
-    if (i === 0) continue; // already added start
-    let val = sin((i / 400) * TWO_PI * frequency - time * 2 - phaseRad);
+    let x = GX + (i/400) * GW;
+    let u = (i/400);  // 0..1
+    let val = sin(TWO_PI * freq * u - t * 2 + ph);
     vertex(x, CY - val * maxAmp);
   }
   endShape();
 
-  // ── Phase visualization: mark first zero-crossing ──
-  let lamPx = GW / frequency;
-  // Position where phase=0 wave first crosses zero going UP:
-  // sin(u*2pi*f - wt) = 0 → u*2pi*f = wt → u = wt/(2pi*f)
-  // In pixels: x = GX + (wt % 2pi)/(2pi) * lamPx
-  let refX = GX + ((time * 2) % TWO_PI) / TWO_PI * lamPx;
-  while (refX < GX) refX += lamPx;
-  while (refX > GX + lamPx) refX -= lamPx;
+  // --- Start dot ---
+  let startVal = sin(0 - t*2 + ph);
+  fill(36, 157, 143);
+  noStroke();
+  circle(GX, CY - startVal * maxAmp, 7);
 
-  // Phase-shifted wave first crosses zero going UP at:
-  // sin(u*2pi*f - wt - φ) = 0 → u*2pi*f = wt + φ
-  let phaseX = GX + ((time * 2 + phaseRad) % TWO_PI) / TWO_PI * lamPx;
-  while (phaseX < GX) phaseX += lamPx;
-  while (phaseX > GX + lamPx) phaseX -= lamPx;
+  // --- Phase marker ---
+  let lamPx = GW / freq;
+  if (phaseDeg > 0) {
+    // Reference: where would the wave cross zero going up at phi=0?
+    // sin(2pi*f*u - wt) = 0 => 2pi*f*u = wt => u = wt/(2pi*f)
+    let refU = ((t*2) % TWO_PI) / (TWO_PI * freq);
+    let refX = GX + refU * GW;
+    if (refX < GX) refX += lamPx;
 
-  let shiftPx = phaseX - refX;
-  if (shiftPx < -lamPx / 2) shiftPx += lamPx;
-  if (shiftPx > lamPx / 2) shiftPx -= lamPx;
+    // With phase: sin(2pi*f*u - wt + ph) = 0 => 2pi*f*u = wt - ph
+    let phaseU = (((t*2 - ph) % TWO_PI) + TWO_PI) % TWO_PI / (TWO_PI * freq);
+    let phaseX = GX + phaseU * GW;
+    if (phaseX < GX) phaseX += lamPx;
 
-  if (phase > 0) {
-    // Triangle marker at reference position
-    fill(36, 157, 143, 140);
+    // Triangles
+    fill(36, 157, 143, 150);
     noStroke();
-    triangle(refX - 6, CY - maxAmp - 5, refX + 6, CY - maxAmp - 5, refX, CY - maxAmp - 15);
+    triangle(refX-6, CY-maxAmp-5, refX+6, CY-maxAmp-5, refX, CY-maxAmp-16);
 
-    // Triangle marker at phase-shifted position
     fill(224, 90, 71);
-    triangle(phaseX - 6, CY - maxAmp - 5, phaseX + 6, CY - maxAmp - 5, phaseX, CY - maxAmp - 15);
+    triangle(phaseX-6, CY-maxAmp-5, phaseX+6, CY-maxAmp-5, phaseX, CY-maxAmp-16);
 
     // Connecting line
     stroke(224, 90, 71, 150);
     strokeWeight(1.5);
-    line(refX, CY - maxAmp - 10, phaseX, CY - maxAmp - 10);
-    line(phaseX, CY - maxAmp - 10, phaseX - 7, CY - maxAmp - 14);
-    line(phaseX, CY - maxAmp - 10, phaseX - 7, CY - maxAmp - 6);
-
+    line(refX, CY-maxAmp-10, phaseX, CY-maxAmp-10);
     noStroke();
     fill(224, 90, 71);
     textSize(10);
     textAlign(CENTER, BOTTOM);
-    let midX = (refX + phaseX) / 2;
-    text('\u03C6 = ' + phase + '\u00B0', midX, CY - maxAmp - 20);
+    text('phi='+phaseDeg+'°', (refX+phaseX)/2, CY-maxAmp-20);
   }
 
-  // Circle indicator
-  let cx = GX + GW - 80, cr = 30;
-  stroke(224, 90, 71, 80);
-  strokeWeight(1);
-  noFill();
-  circle(cx, 60, cr * 2);
-
-  let dotAngle = -(phase * PI / 180) + PI / 2;
-  let dx = cx + cos(dotAngle) * cr;
-  let dy = 60 - sin(dotAngle) * cr;
-  fill(224, 90, 71);
-  noStroke();
-  circle(dx, dy, 6);
-
-  stroke(36, 157, 143, 40);
-  strokeWeight(0.5);
-  line(cx - cr, 60, cx + cr, 60);
-  line(cx, 60 - cr, cx, 60 + cr);
-
-  noStroke();
-  fill(224, 90, 71, 120);
-  textSize(10);
-  textAlign(LEFT, CENTER);
-  text('\u03C6', cx + cr + 8, dy);
-
-  // ── Wavelength marker ──
-  lamPx = GW / frequency;
-  if (lamPx < GW * 0.85 && lamPx > 50) {
-    let lx = GX + 5;
-    let ly = CY + maxAmp + 35;
-    stroke(255, 180, 40, 150);
-    strokeWeight(2);
-    line(lx, ly, lx + lamPx, ly);
-    line(lx, ly - 7, lx, ly + 7);
-    line(lx + lamPx, ly - 7, lx + lamPx, ly + 7);
-    noStroke();
-    fill(255, 180, 40);
-    textSize(12);
-    textAlign(CENTER, TOP);
-    text('λ = ' + (vSound/frequency).toFixed(1) + ' m', lx + lamPx / 2, ly + 8);
+  // --- Wavelength ---
+  if (lamPx < GW*0.85 && lamPx > 50) {
+    let lx = GX + 5, ly = CY + maxAmp + 35;
+    stroke(255,180,40,150); strokeWeight(2);
+    line(lx, ly, lx+lamPx, ly);
+    line(lx, ly-7, lx, ly+7);
+    line(lx+lamPx, ly-7, lx+lamPx, ly+7);
+    noStroke(); fill(255,180,40);
+    textSize(12); textAlign(CENTER, TOP);
+    text('lambda = '+(V/freq).toFixed(1)+' m', lx+lamPx/2, ly+8);
   }
 
-  // ── Period marker ──
-  let periodPx = GW / frequency;
-  if (periodPx < GW * 0.85) {
-    let px = GX + 5;
-    let py = CY - maxAmp - 38;
-    stroke(100, 160, 255, 150);
-    strokeWeight(2);
-    line(px, py, px + periodPx, py);
-    line(px, py - 7, px, py + 7);
-    line(px + periodPx, py - 7, px + periodPx, py + 7);
-    noStroke();
-    fill(100, 160, 255);
-    textSize(11);
-    textAlign(CENTER, BOTTOM);
-    text('T = ' + (1/frequency).toFixed(3) + ' s', px + periodPx / 2, py - 8);
+  // --- Period ---
+  if (lamPx < GW*0.85) {
+    let px = GX+5, py = CY-maxAmp-38;
+    stroke(100,160,255,150); strokeWeight(2);
+    line(px, py, px+lamPx, py);
+    line(px, py-7, px, py+7);
+    line(px+lamPx, py-7, px+lamPx, py+7);
+    noStroke(); fill(100,160,255);
+    textSize(11); textAlign(CENTER, BOTTOM);
+    text('T = '+(1/freq).toFixed(3)+' s', px+lamPx/2, py-8);
   }
 
-  // ── Title ──
-  noStroke();
-  fill(26, 122, 111);
-  textSize(15);
+  // --- Title ---
+  fill(26,122,111); textSize(14);
   textAlign(CENTER, TOP);
-  text('Desplazamiento: y(t) = ' + amplitude + ' \u00B7 sin(2\u03C0\u00B7' + frequency.toFixed(1) + '\u00B7t + ' + phase + '\u00B0)', GX + GW / 2, 20);
-
-  textSize(10);
-  fill(120);
-  text('Amplitud en metros (m) | T = ' + (1/frequency).toFixed(2) + ' s | λ = ' + (vSound/frequency).toFixed(1) + ' m | v = ' + vSound + ' m/s', GX + GW / 2, 42);
+  text('y(t) = '+amp+' sin(2pi '+freq.toFixed(1)+' t + '+phaseDeg+'deg)', GX+GW/2, 18);
+  fill(120); textSize(10);
+  text('T='+(1/freq).toFixed(2)+'s | lambda='+(V/freq).toFixed(1)+'m | v='+V+' m/s', GX+GW/2, 38);
 
   // Legend
-  textAlign(LEFT, TOP);
-  textSize(10);
-  fill(255, 180, 40);
-  text('🟡 λ — longitud de onda', width - 200, 76);
-  fill(100, 160, 255);
-  text('🔵 T — período', width - 200, 91);
-  fill(224, 90, 71);
-  text('🔴 φ — fase', width - 200, 106);
+  textAlign(LEFT, TOP); textSize(10);
+  fill(255,180,40); text('lambda', width-200, 70);
+  fill(100,160,255); text('T', width-200, 82);
+  fill(224,90,71); text('phi', width-200, 94);
 
-  // Play/pause indicator
-  if (paused) {
-    fill(224, 90, 71);
-    textSize(13);
-    textAlign(RIGHT, TOP);
-    text('\u23F8 PAUSADO', GX + GW, 20);
-  }
+  if (paused) { fill(224,90,71); textSize(13); textAlign(RIGHT, TOP); text('PAUSADO', GX+GW, 18); }
 }
 
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
