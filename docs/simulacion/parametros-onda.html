@@ -88,6 +88,7 @@ function setup() {
   pn.input(() => { let v = parseFloat(pn.value()); if (!isNaN(v)) setPhase(constrain(v, 0, 360)); });
   select('#btn-reset').mousePressed(() => {
     setAmp(20); setFreq(1); setPhase(0);
+    time = 0;
     updateInfo();
   });
   select('#btn-pause').mousePressed(() => {
