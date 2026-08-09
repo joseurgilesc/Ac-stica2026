@@ -105,6 +105,10 @@
     y(t) = A \cdot \sin(2\pi f t + \phi)
     \]
 
+    [🎛️ **Abrir simulación interactiva — Parámetros de la onda**](../../../simulacion/parametros-onda.html){ .md-button }
+
+    Modificá la amplitud, frecuencia y fase para ver cómo cambia la onda, su período (T) y su longitud de onda (λ).
+
     | Símbolo | Nombre | Unidad | Significado físico |
     |---|---|---|---|
     | \(y(t)\) | Desplazamiento | m | Posición de la partícula en el instante \(t\) |

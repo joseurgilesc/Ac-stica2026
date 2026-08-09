@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parámetros de una onda sinusoidal</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: #f5f5f0; font-family: Georgia, serif; }
+    canvas { display: block; }
+    #panel {
+      position: absolute; top: 0; left: 0; width: 210px; height: 100vh;
+      background: rgba(36, 157, 143, 0.04); color: #1a1a1a; padding: 12px;
+      font-size: 11px; z-index: 5; overflow-y: auto;
+      border-right: 1px solid rgba(36, 157, 143, 0.15);
+    }
+    #panel h3 { margin: 0 0 6px; font-size: 13px; color: #1A7A6F; }
+    #panel label { display: block; margin: 6px 0 2px; color: #333; font-size: 10px; }
+    #panel .val { font-weight: bold; color: #1A7A6F; }
+    #panel input[type=range] { width: 100%; accent-color: #249D8F; margin: 3px 0; }
+    #panel button { width: 100%; margin: 3px 0; padding: 5px 8px; border: 1px solid rgba(36,157,143,0.3); border-radius: 3px; cursor: pointer; background: rgba(36,157,143,0.05); font-size: 11px; font-family: Georgia, serif; }
+    #panel button:hover { background: rgba(36,157,143,0.12); }
+    #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(36,157,143,0.12); }
+    #panel .info { padding: 6px 8px; margin: 4px 0; background: rgba(36,157,143,0.06); border-radius: 4px; font-size: 10px; }
+  </style>
+</head>
+<body>
+
+<div id="panel">
+  <h3>y(t) = A · sin(2π f t + φ)</h3>
+  <div class="section">
+    <label>Amplitud (A): <span class="val" id="av">20</span></label>
+    <input type="range" id="amp" min="5" max="40" value="20" step="1">
+  </div>
+  <div class="section">
+    <label>Frecuencia (f): <span class="val" id="fv">1 Hz</span></label>
+    <input type="range" id="freq" min="0.5" max="3" value="1" step="0.1">
+  </div>
+  <div class="section">
+    <label>Fase (φ): <span class="val" id="pv">0°</span></label>
+    <input type="range" id="phase" min="0" max="360" value="0" step="5">
+  </div>
+  <div class="section">
+    <button id="btn-reset">🔄 Valores iniciales</button>
+  </div>
+  <div class="section">
+    <div class="info"><b>T</b> = 1/f = <span id="tv">1.00 s</span></div>
+    <div class="info"><b>λ</b> = v/f = <span id="lv">344 m</span></div>
+  </div>
+</div>
+
+<script>
+let amplitude = 20, frequency = 1, phase = 0;
+let time = 0, vSound = 344;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textFont('Georgia');
+
+  let as = select('#amp'), fs = select('#freq'), ps = select('#phase');
+  as.input(() => { amplitude = parseFloat(as.value()); select('#av').html(amplitude); });
+  fs.input(() => { frequency = parseFloat(fs.value()); select('#fv').html(frequency + ' Hz'); updateInfo(); });
+  ps.input(() => { phase = parseFloat(ps.value()); select('#pv').html(phase + '°'); });
+  select('#btn-reset').mousePressed(() => {
+    amplitude = 20; frequency = 1; phase = 0;
+    as.elt.value = 20; fs.elt.value = 1; ps.elt.value = 0;
+    select('#av').html('20'); select('#fv').html('1 Hz'); select('#pv').html('0°');
+    updateInfo();
+  });
+  updateInfo();
+}
+
+function updateInfo() {
+  let T = 1 / frequency;
+  let lambda = vSound / frequency;
+  select('#tv').html(T.toFixed(3) + ' s');
+  select('#lv').html(lambda.toFixed(1) + ' m');
+}
+
+function draw() {
+  background(245, 245, 240);
+
+  let GX = 230, GW = width - GX - 30;
+  let CY = height * 0.55;
+  let maxAmp = map(amplitude, 5, 40, 30, 200);
+  let phaseRad = radians(phase);
+
+  time += deltaTime * 0.001;
+
+  // ── Wave ──
+  // Draw zero line
+  stroke(36, 157, 143, 60);
+  strokeWeight(1);
+  line(GX, CY, GX + GW, CY);
+  noStroke();
+
+  // Amplitude markers
+  stroke(36, 157, 143, 40);
+  strokeWeight(0.5);
+  drawingContext.setLineDash([4, 4]);
+  line(GX, CY - maxAmp, GX + GW, CY - maxAmp);
+  line(GX, CY + maxAmp, GX + GW, CY + maxAmp);
+  drawingContext.setLineDash([]);
+  noStroke();
+
+  // Label A
+  fill(26, 122, 111, 120);
+  textSize(11);
+  textAlign(RIGHT, CENTER);
+  text('A', GX - 5, CY - maxAmp / 2);
+
+  // Wave curve
+  stroke(36, 157, 143);
+  strokeWeight(3);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 400; i++) {
+    let x = GX + (i / 400) * GW;
+    let val = amplitude * sin((i / 400) * TWO_PI * frequency + time * 2 + phaseRad);
+    vertex(x, CY - val);
+  }
+  endShape();
+
+  // ── Wavelength marker ──
+  let lamPx = GW / frequency;
+  if (lamPx < GW * 0.8 && lamPx > 50) {
+    let lx = GX + GW * 0.05;
+    let ly = CY + maxAmp + 30;
+    stroke(255, 180, 40, 120);
+    strokeWeight(1.5);
+    line(lx, ly, lx + lamPx, ly);
+    line(lx, ly - 6, lx, ly + 6);
+    line(lx + lamPx, ly - 6, lx + lamPx, ly + 6);
+    noStroke();
+    fill(255, 180, 40);
+    textSize(12);
+    textAlign(CENTER, TOP);
+    text(`λ = ${(vSound/frequency).toFixed(1)} m`, lx + lamPx / 2, ly + 6);
+  }
+
+  // ── Period marker (time domain) ──
+  let periodX = GX + GW * 0.05;
+  let py = CY - maxAmp - 30;
+  let periodPx = GW / frequency;
+  if (periodPx < GW * 0.8) {
+    stroke(100, 160, 255, 120);
+    strokeWeight(1.5);
+    line(periodX, py, periodX + periodPx, py);
+    line(periodX, py - 6, periodX, py + 6);
+    line(periodX + periodPx, py - 6, periodX + periodPx, py + 6);
+    noStroke();
+    fill(100, 160, 255);
+    textSize(11);
+    textAlign(CENTER, BOTTOM);
+    text(`T = ${(1/frequency).toFixed(3)} s`, periodX + periodPx / 2, py - 6);
+  }
+
+  // ── Phase marker ──
+  if (phase > 0) {
+    let phaseShiftX = (phase / 360) * (GW / frequency);
+    let px = GX + GW * 0.05;
+    stroke(224, 90, 71, 100);
+    strokeWeight(1.5);
+    drawingContext.setLineDash([5, 3]);
+    line(px, CY - maxAmp - 10, px + phaseShiftX, CY - maxAmp - 10);
+    drawingContext.setLineDash([]);
+    noStroke();
+    fill(224, 90, 71);
+    textSize(10);
+    textAlign(CENTER, BOTTOM);
+    text(`φ = ${phase}°`, px + phaseShiftX / 2, CY - maxAmp - 14);
+  }
+
+  // ── Title ──
+  noStroke();
+  fill(26, 122, 111);
+  textSize(16);
+  textAlign(CENTER, TOP);
+  text(`y(t) = ${amplitude} · sin(2π·${frequency}·t + ${phase}°)`, GX + GW / 2, 20);
+
+  textSize(11);
+  fill(120);
+  text(`T = ${(1/frequency).toFixed(2)} s  |  λ = ${(vSound/frequency).toFixed(1)} m  |  v = ${vSound} m/s`, GX + GW / 2, 42);
+
+  // Legend
+  textAlign(LEFT, TOP);
+  textSize(10);
+  fill(255, 180, 40);
+  text('🟡 λ — longitud de onda', width - 200, 20);
+  fill(100, 160, 255);
+  text('🔵 T — período', width - 200, 35);
+  fill(224, 90, 71);
+  text('🔴 φ — fase', width - 200, 50);
+}
+
+function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
+</body>
+</html>
