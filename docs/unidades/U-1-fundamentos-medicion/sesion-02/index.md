@@ -129,17 +129,4 @@
 
 ---
 
-## Simulación interactiva
-
-Modifica los parámetros y activa/desactiva capas para analizar cada fenómeno:
-
-- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
-- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
-- **Partículas** — puntos coloreados por zona de compresión o rarefacción
-- **Densidad** — fondo graduado según concentración molecular
-
-<iframe src="simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
-
----
-
 *Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 1, pp. 1–16.*
