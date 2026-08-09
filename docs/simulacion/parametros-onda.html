@@ -30,18 +30,19 @@
 <div id="panel">
   <h3>y(t) = A · sin(2π f t + φ)</h3>
   <div class="section">
-    <label>Amplitud (A): <span class="val" id="av">20</span></label>
-    <input type="range" id="amp" min="5" max="40" value="20" step="1">
+    <label>Amplitud (A): <span class="val" id="av">20 m</span></label>
+    <input type="range" id="amp" min="5" max="60" value="20" step="1">
   </div>
   <div class="section">
     <label>Frecuencia (f): <span class="val" id="fv">1 Hz</span></label>
-    <input type="range" id="freq" min="0.5" max="3" value="1" step="0.1">
+    <input type="range" id="freq" min="0.3" max="5" value="1" step="0.1">
   </div>
   <div class="section">
     <label>Fase (φ): <span class="val" id="pv">0°</span></label>
     <input type="range" id="phase" min="0" max="360" value="0" step="5">
   </div>
   <div class="section">
+    <button id="btn-pause">⏯ Pausar</button>
     <button id="btn-reset">🔄 Valores iniciales</button>
   </div>
   <div class="section">
@@ -52,21 +53,25 @@
 
 <script>
 let amplitude = 20, frequency = 1, phase = 0;
-let time = 0, vSound = 344;
+let time = 0, vSound = 344, paused = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('Georgia');
 
   let as = select('#amp'), fs = select('#freq'), ps = select('#phase');
-  as.input(() => { amplitude = parseFloat(as.value()); select('#av').html(amplitude); });
-  fs.input(() => { frequency = parseFloat(fs.value()); select('#fv').html(frequency + ' Hz'); updateInfo(); });
-  ps.input(() => { phase = parseFloat(ps.value()); select('#pv').html(phase + '°'); });
+  as.input(() => { amplitude = parseFloat(as.value()); select('#av').html(amplitude + ' m'); });
+  fs.input(() => { frequency = parseFloat(fs.value()); select('#fv').html(frequency.toFixed(1) + ' Hz'); updateInfo(); });
+  ps.input(() => { phase = parseFloat(ps.value()); select('#pv').html(phase + '\u00B0'); });
   select('#btn-reset').mousePressed(() => {
     amplitude = 20; frequency = 1; phase = 0;
     as.elt.value = 20; fs.elt.value = 1; ps.elt.value = 0;
-    select('#av').html('20'); select('#fv').html('1 Hz'); select('#pv').html('0°');
+    select('#av').html('20 m'); select('#fv').html('1 Hz'); select('#pv').html('0\u00B0');
     updateInfo();
+  });
+  select('#btn-pause').mousePressed(() => {
+    paused = !paused;
+    select('#btn-pause').html(paused ? '\u25B6 Reanudar' : '\u23EF Pausar');
   });
   updateInfo();
 }
@@ -81,117 +86,181 @@ function updateInfo() {
 function draw() {
   background(245, 245, 240);
 
+  if (!paused) time += deltaTime * 0.001;
+
   let GX = 230, GW = width - GX - 30;
-  let CY = height * 0.55;
-  let maxAmp = map(amplitude, 5, 40, 30, 200);
+  let CY = height * 0.52;
+  let maxAmp = map(amplitude, 5, 60, 25, 220);
   let phaseRad = radians(phase);
 
-  time += deltaTime * 0.001;
+  // ── Amplitude zone ──
+  stroke(36, 157, 143, 40);
+  strokeWeight(1.5);
+  line(GX - 10, CY - maxAmp, GX + GW, CY - maxAmp);
+  line(GX - 10, CY + maxAmp, GX + GW, CY + maxAmp);
 
-  // ── Wave ──
-  // Draw zero line
-  stroke(36, 157, 143, 60);
+  // Amplitude arrows
+  stroke(36, 157, 143, 80);
   strokeWeight(1);
+  line(GX - 25, CY, GX - 25, CY - maxAmp);
+  line(GX - 25, CY, GX - 25, CY + maxAmp);
+  line(GX - 30, CY - maxAmp + 8, GX - 25, CY - maxAmp);
+  line(GX - 20, CY - maxAmp + 8, GX - 25, CY - maxAmp);
+  line(GX - 30, CY + maxAmp - 8, GX - 25, CY + maxAmp);
+  line(GX - 20, CY + maxAmp - 8, GX - 25, CY + maxAmp);
+
+  noStroke();
+  fill(26, 122, 111, 140);
+  textSize(11);
+  textAlign(RIGHT, CENTER);
+  text('A = ' + amplitude + ' m', GX - 35, CY);
+  text('0', GX - 10, CY);
+
+  // ── Zero line ──
+  stroke(36, 157, 143, 60);
+  strokeWeight(1.5);
   line(GX, CY, GX + GW, CY);
   noStroke();
 
-  // Amplitude markers
-  stroke(36, 157, 143, 40);
-  strokeWeight(0.5);
-  drawingContext.setLineDash([4, 4]);
-  line(GX, CY - maxAmp, GX + GW, CY - maxAmp);
-  line(GX, CY + maxAmp, GX + GW, CY + maxAmp);
-  drawingContext.setLineDash([]);
-  noStroke();
-
-  // Label A
-  fill(26, 122, 111, 120);
-  textSize(11);
-  textAlign(RIGHT, CENTER);
-  text('A', GX - 5, CY - maxAmp / 2);
-
-  // Wave curve
+  // ── Wave curve ──
   stroke(36, 157, 143);
   strokeWeight(3);
   noFill();
   beginShape();
   for (let i = 0; i <= 400; i++) {
     let x = GX + (i / 400) * GW;
-    let val = amplitude * sin((i / 400) * TWO_PI * frequency + time * 2 + phaseRad);
-    vertex(x, CY - val);
+    let val = sin((i / 400) * TWO_PI * frequency + time * 2 + phaseRad);
+    vertex(x, CY - val * maxAmp);
   }
   endShape();
 
-  // ── Wavelength marker ──
-  let lamPx = GW / frequency;
-  if (lamPx < GW * 0.8 && lamPx > 50) {
-    let lx = GX + GW * 0.05;
-    let ly = CY + maxAmp + 30;
-    stroke(255, 180, 40, 120);
-    strokeWeight(1.5);
-    line(lx, ly, lx + lamPx, ly);
-    line(lx, ly - 6, lx, ly + 6);
-    line(lx + lamPx, ly - 6, lx + lamPx, ly + 6);
-    noStroke();
-    fill(255, 180, 40);
-    textSize(12);
-    textAlign(CENTER, TOP);
-    text(`λ = ${(vSound/frequency).toFixed(1)} m`, lx + lamPx / 2, ly + 6);
-  }
-
-  // ── Period marker (time domain) ──
-  let periodX = GX + GW * 0.05;
-  let py = CY - maxAmp - 30;
-  let periodPx = GW / frequency;
-  if (periodPx < GW * 0.8) {
-    stroke(100, 160, 255, 120);
-    strokeWeight(1.5);
-    line(periodX, py, periodX + periodPx, py);
-    line(periodX, py - 6, periodX, py + 6);
-    line(periodX + periodPx, py - 6, periodX + periodPx, py + 6);
-    noStroke();
-    fill(100, 160, 255);
-    textSize(11);
-    textAlign(CENTER, BOTTOM);
-    text(`T = ${(1/frequency).toFixed(3)} s`, periodX + periodPx / 2, py - 6);
-  }
-
-  // ── Phase marker ──
+  // ── Phase visualization ──
   if (phase > 0) {
-    let phaseShiftX = (phase / 360) * (GW / frequency);
-    let px = GX + GW * 0.05;
-    stroke(224, 90, 71, 100);
-    strokeWeight(1.5);
-    drawingContext.setLineDash([5, 3]);
-    line(px, CY - maxAmp - 10, px + phaseShiftX, CY - maxAmp - 10);
+    let shiftPx = (phase / 360) * (GW / frequency);
+    let refStartX = GX + 5;
+    let refEndX = refStartX + shiftPx;
+
+    // Dashed reference line from origin to phase-shifted start
+    stroke(224, 90, 71, 120);
+    strokeWeight(2);
+    drawingContext.setLineDash([6, 4]);
+
+    // Show vertical line at t=0 position for reference (phase=0 wave starts here going up)
+    let zeroCrossX = GX + 5;
+    line(zeroCrossX, CY - maxAmp - 10, zeroCrossX, CY + maxAmp + 10);
+
+    // Draw the phase-shifted start position
+    let phaseStartX = zeroCrossX + shiftPx;
+    stroke(224, 90, 71, 180);
+    strokeWeight(2);
+    drawingContext.setLineDash([3, 3]);
+    line(phaseStartX, CY - maxAmp - 15, phaseStartX, CY + maxAmp + 15);
     drawingContext.setLineDash([]);
+
+    // Arrow showing shift
+    stroke(224, 90, 71, 180);
+    strokeWeight(1.5);
+    let arrowY = CY - maxAmp - 22;
+    line(zeroCrossX, arrowY, phaseStartX, arrowY);
+    line(phaseStartX, arrowY, phaseStartX - 8, arrowY - 5);
+    line(phaseStartX, arrowY, phaseStartX - 8, arrowY + 5);
+
     noStroke();
     fill(224, 90, 71);
     textSize(10);
     textAlign(CENTER, BOTTOM);
-    text(`φ = ${phase}°`, px + phaseShiftX / 2, CY - maxAmp - 14);
+    text('φ = ' + phase + '\u00B0', zeroCrossX + shiftPx / 2, arrowY - 4);
+
+    // Circle indicator at the circle diagram (top right)
+    let cx = GX + GW - 80, cr = 30;
+    stroke(224, 90, 71, 80);
+    strokeWeight(1);
+    noFill();
+    circle(cx, 60, cr * 2);
+
+    // Dot on circle at current phase
+    let dotAngle = -phaseRad + PI / 2;
+    let dx = cx + cos(dotAngle) * cr;
+    let dy = 60 - sin(dotAngle) * cr;
+    fill(224, 90, 71);
+    noStroke();
+    circle(dx, dy, 6);
+
+    // Cross lines
+    stroke(36, 157, 143, 40);
+    strokeWeight(0.5);
+    line(cx - cr, 60, cx + cr, 60);
+    line(cx, 60 - cr, cx, 60 + cr);
+
+    noStroke();
+    fill(224, 90, 71, 120);
+    textSize(10);
+    textAlign(LEFT, CENTER);
+    text('φ', cx + cr + 8, dy);
+  }
+
+  // ── Wavelength marker ──
+  let lamPx = GW / frequency;
+  if (lamPx < GW * 0.85 && lamPx > 50) {
+    let lx = GX + 5;
+    let ly = CY + maxAmp + 35;
+    stroke(255, 180, 40, 150);
+    strokeWeight(2);
+    line(lx, ly, lx + lamPx, ly);
+    line(lx, ly - 7, lx, ly + 7);
+    line(lx + lamPx, ly - 7, lx + lamPx, ly + 7);
+    noStroke();
+    fill(255, 180, 40);
+    textSize(12);
+    textAlign(CENTER, TOP);
+    text('λ = ' + (vSound/frequency).toFixed(1) + ' m', lx + lamPx / 2, ly + 8);
+  }
+
+  // ── Period marker ──
+  let periodPx = GW / frequency;
+  if (periodPx < GW * 0.85) {
+    let px = GX + 5;
+    let py = CY - maxAmp - 38;
+    stroke(100, 160, 255, 150);
+    strokeWeight(2);
+    line(px, py, px + periodPx, py);
+    line(px, py - 7, px, py + 7);
+    line(px + periodPx, py - 7, px + periodPx, py + 7);
+    noStroke();
+    fill(100, 160, 255);
+    textSize(11);
+    textAlign(CENTER, BOTTOM);
+    text('T = ' + (1/frequency).toFixed(3) + ' s', px + periodPx / 2, py - 8);
   }
 
   // ── Title ──
   noStroke();
   fill(26, 122, 111);
-  textSize(16);
+  textSize(15);
   textAlign(CENTER, TOP);
-  text(`y(t) = ${amplitude} · sin(2π·${frequency}·t + ${phase}°)`, GX + GW / 2, 20);
+  text('Desplazamiento: y(t) = ' + amplitude + ' \u00B7 sin(2\u03C0\u00B7' + frequency.toFixed(1) + '\u00B7t + ' + phase + '\u00B0)', GX + GW / 2, 20);
 
-  textSize(11);
+  textSize(10);
   fill(120);
-  text(`T = ${(1/frequency).toFixed(2)} s  |  λ = ${(vSound/frequency).toFixed(1)} m  |  v = ${vSound} m/s`, GX + GW / 2, 42);
+  text('Amplitud en metros (m) | T = ' + (1/frequency).toFixed(2) + ' s | λ = ' + (vSound/frequency).toFixed(1) + ' m | v = ' + vSound + ' m/s', GX + GW / 2, 42);
 
   // Legend
   textAlign(LEFT, TOP);
   textSize(10);
   fill(255, 180, 40);
-  text('🟡 λ — longitud de onda', width - 200, 20);
+  text('🟡 λ — longitud de onda', width - 200, 76);
   fill(100, 160, 255);
-  text('🔵 T — período', width - 200, 35);
+  text('🔵 T — período', width - 200, 91);
   fill(224, 90, 71);
-  text('🔴 φ — fase', width - 200, 50);
+  text('🔴 φ — fase', width - 200, 106);
+
+  // Play/pause indicator
+  if (paused) {
+    fill(224, 90, 71);
+    textSize(13);
+    textAlign(RIGHT, TOP);
+    text('\u23F8 PAUSADO', GX + GW, 20);
+  }
 }
 
 function windowResized() { resizeCanvas(windowWidth, windowHeight); }
