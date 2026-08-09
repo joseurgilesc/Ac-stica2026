@@ -2,10 +2,6 @@
 
 ---
 
-!!! tip "Simulaciones interactivas"
-
-    - [🎯 Movimiento armónico simple y onda sinusoidal](../../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
-
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
 
@@ -56,7 +52,7 @@
 
     Una revolución completa equivale a 360° — un ciclo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el elemento básico del que todo se compone (Fourier).
 
-    <iframe src="simulacion-mas.html" width="100%" height="290" style="border: none; border-radius: 8px;"></iframe>
+    [🎯 **Abrir simulación interactiva — Figuras 1-1 y 1-2**](../../../simulacion/mas.html){ .md-button }
 
 ???+ note "Propagación: compresión y rarefacción"
 
