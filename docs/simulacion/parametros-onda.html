@@ -157,60 +157,72 @@ function draw() {
   }
   endShape();
 
-  // ── Phase visualization ──
-  // Find the first zero-crossing (going UP) of the drawn wave
-  // The wave formula at x (in screen coords) is:
-  // value = sin((x-GX)/GW * 2pi*frequency - time*2 - phaseRad)
-  // Zero crossing going UP when the argument = 0 (mod 2pi)
-  // So: (x-GX)/GW * 2pi*frequency - time*2 - phaseRad = 0 + 2pi*k
-  // => x = GX + (time*2 + phaseRad + 2pi*k) / (2pi*frequency) * GW
-  // First crossing (k=0): x0 = GX + (time*2 + phaseRad) * GW / (2pi*frequency)
-
-  let lamPx = GW / frequency;
-
-  // Zero crossing of the ACTUAL wave (with phase)
-  let actualZeroX = GX + ((time * 2 + phaseRad) % TWO_PI) / TWO_PI * lamPx;
-  while (actualZeroX > GX + lamPx) actualZeroX -= lamPx;
-
-  // Reference zero crossing (phase=0)
-  let refZeroX = GX + ((time * 2) % TWO_PI) / TWO_PI * lamPx;
-  while (refZeroX > GX + lamPx) refZeroX -= lamPx;
-
-  // The distance between them IS the phase shift
-  let shiftPx = actualZeroX - refZeroX;
-  if (shiftPx < 0) shiftPx += lamPx;
-
+  // ── Phase visualization (visible when paused or at low speed) ──
   if (phase > 0) {
-    // Band showing phase shift
-    fill(224, 90, 71, 12);
-    noStroke();
-    rect(refZeroX, CY - maxAmp, shiftPx, maxAmp * 2);
+    let lamPx = GW / frequency;
+    // Find zero crossings by scanning a few points
+    let crossings = [];
+    let steps = Math.floor(GW);
+    let prevVal = null;
+    for (let i = 0; i < steps; i++) {
+      let x = GX + i;
+      let u = (x - GX) / GW;
+      let val = sin(u * TWO_PI * frequency - time * 2 - phaseRad);
+      if (prevVal !== null && prevVal < 0 && val >= 0) {
+        crossings.push(x);
+      }
+      prevVal = val;
+    }
+    // Find the same for phase=0
+    let refCrossings = [];
+    prevVal = null;
+    for (let i = 0; i < steps; i++) {
+      let x = GX + i;
+      let u = (x - GX) / GW;
+      let val = sin(u * TWO_PI * frequency - time * 2);
+      if (prevVal !== null && prevVal < 0 && val >= 0) {
+        refCrossings.push(x);
+      }
+      prevVal = val;
+    }
 
-    // Reference line (phase=0 crossing)
-    stroke(36, 157, 143, 70);
-    strokeWeight(1);
-    drawingContext.setLineDash([4, 4]);
-    line(refZeroX, CY - maxAmp - 5, refZeroX, CY + maxAmp + 5);
-    drawingContext.setLineDash([]);
+    if (crossings.length > 0 && refCrossings.length > 0) {
+      let actualZeroX = crossings[0];
+      let refZeroX = refCrossings[0];
+      let shiftPx = actualZeroX - refZeroX;
+      if (shiftPx < 0) shiftPx += lamPx;
 
-    // Actual phase line
-    stroke(224, 90, 71, 180);
-    strokeWeight(2);
-    line(actualZeroX, CY - maxAmp - 5, actualZeroX, CY + maxAmp + 5);
+      // Band
+      fill(224, 90, 71, 12);
+      noStroke();
+      rect(refZeroX, CY - maxAmp, shiftPx, maxAmp * 2);
 
-    // Arrow
-    let arrowY = CY - maxAmp - 22;
-    stroke(224, 90, 71, 180);
-    strokeWeight(1.5);
-    line(refZeroX, arrowY, actualZeroX, arrowY);
-    line(actualZeroX, arrowY, actualZeroX - 8, arrowY - 5);
-    line(actualZeroX, arrowY, actualZeroX - 8, arrowY + 5);
+      // Reference line
+      stroke(36, 157, 143, 70);
+      strokeWeight(1);
+      drawingContext.setLineDash([4, 4]);
+      line(refZeroX, CY - maxAmp - 5, refZeroX, CY + maxAmp + 5);
+      drawingContext.setLineDash([]);
 
-    noStroke();
-    fill(224, 90, 71);
-    textSize(10);
-    textAlign(CENTER, BOTTOM);
-    text('\u03C6 = ' + phase + '\u00B0', refZeroX + shiftPx / 2, arrowY - 4);
+      // Phase line
+      stroke(224, 90, 71, 180);
+      strokeWeight(2);
+      line(actualZeroX, CY - maxAmp - 5, actualZeroX, CY + maxAmp + 5);
+
+      // Arrow
+      let arrowY = CY - maxAmp - 22;
+      stroke(224, 90, 71, 180);
+      strokeWeight(1.5);
+      line(refZeroX, arrowY, actualZeroX, arrowY);
+      line(actualZeroX, arrowY, actualZeroX - 8, arrowY - 5);
+      line(actualZeroX, arrowY, actualZeroX - 8, arrowY + 5);
+
+      noStroke();
+      fill(224, 90, 71);
+      textSize(10);
+      textAlign(CENTER, BOTTOM);
+      text('\u03C6 = ' + phase + '\u00B0', refZeroX + shiftPx / 2, arrowY - 4);
+    }
   }
 
   // Circle indicator
