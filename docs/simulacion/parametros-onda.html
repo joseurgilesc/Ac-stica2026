@@ -143,15 +143,23 @@ function draw() {
   line(GX, CY, GX + GW, CY);
   noStroke();
 
+  // ── Start marker (shows where wave begins) ──
+  let startVal = sin(0 - time * 2 - phaseRad);
+  let startY = CY - startVal * maxAmp;
+  fill(36, 157, 143);
+  noStroke();
+  circle(GX, startY, 7);
+
   // ── Wave curve ──
   stroke(36, 157, 143);
   strokeWeight(3);
   noFill();
   beginShape();
+  let prevY = startY;
+  vertex(GX, startY);
   for (let i = 0; i <= 400; i++) {
     let x = GX + (i / 400) * GW;
-    // At x=GX (pos=0), phase=0, t=0: sin(0)=0, going UP
-    // Positive phase shifts wave to the RIGHT (easier to see)
+    if (i === 0) continue; // already added start
     let val = sin((i / 400) * TWO_PI * frequency - time * 2 - phaseRad);
     vertex(x, CY - val * maxAmp);
   }
