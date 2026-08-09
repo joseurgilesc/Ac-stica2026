@@ -138,40 +138,8 @@ function draw() {
   noStroke();
   circle(GX, CY - startVal * maxAmp, 7);
 
-  // --- Phase marker ---
-  let lamPx = GW / freq;
-  if (phaseDeg > 0) {
-    // Reference: where would the wave cross zero going up at phi=0?
-    // sin(2pi*f*u - wt) = 0 => 2pi*f*u = wt => u = wt/(2pi*f)
-    let refU = ((t*2) % TWO_PI) / (TWO_PI * freq);
-    let refX = GX + refU * GW;
-    if (refX < GX) refX += lamPx;
-
-    // With phase: sin(2pi*f*u - wt + ph) = 0 => 2pi*f*u = wt - ph
-    let phaseU = (((t*2 - ph) % TWO_PI) + TWO_PI) % TWO_PI / (TWO_PI * freq);
-    let phaseX = GX + phaseU * GW;
-    if (phaseX < GX) phaseX += lamPx;
-
-    // Triangles
-    fill(36, 157, 143, 150);
-    noStroke();
-    triangle(refX-6, CY-maxAmp-5, refX+6, CY-maxAmp-5, refX, CY-maxAmp-16);
-
-    fill(224, 90, 71);
-    triangle(phaseX-6, CY-maxAmp-5, phaseX+6, CY-maxAmp-5, phaseX, CY-maxAmp-16);
-
-    // Connecting line
-    stroke(224, 90, 71, 150);
-    strokeWeight(1.5);
-    line(refX, CY-maxAmp-10, phaseX, CY-maxAmp-10);
-    noStroke();
-    fill(224, 90, 71);
-    textSize(10);
-    textAlign(CENTER, BOTTOM);
-    text('phi='+phaseDeg+'°', (refX+phaseX)/2, CY-maxAmp-20);
-  }
-
   // --- Wavelength ---
+  let lamPx = GW / freq;
   if (lamPx < GW*0.85 && lamPx > 50) {
     let lx = GX + 5, ly = CY + maxAmp + 35;
     stroke(255,180,40,150); strokeWeight(2);
