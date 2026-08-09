@@ -239,7 +239,7 @@ function draw() {
   text('\u03C6', cx + cr + 8, dy);
 
   // ── Wavelength marker ──
-  let lamPx = GW / frequency;
+  lamPx = GW / frequency;
   if (lamPx < GW * 0.85 && lamPx > 50) {
     let lx = GX + 5;
     let ly = CY + maxAmp + 35;
