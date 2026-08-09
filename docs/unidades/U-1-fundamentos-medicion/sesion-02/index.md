@@ -2,6 +2,10 @@
 
 ---
 
+!!! tip "Simulaciones interactivas"
+
+    - [🎯 Movimiento armónico simple y onda sinusoidal](../../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
+
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
 

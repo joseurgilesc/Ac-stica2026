@@ -5,7 +5,6 @@
 !!! tip "Simulaciones interactivas"
 
     - [🎮 Compresión y rarefacción del sonido](../../../simulacion/) — partículas de aire y onda de presión
-    - [🎯 Movimiento armónico simple y onda sinusoidal](../../../simulacion/mas.html) — Figuras 1-1 y 1-2 del Everest
     - [📊 Tipos de ondas — circular, transversal y longitudinal](../../../simulacion/tipos-onda.html) — Figura 1-4 del Everest
 
 ??? info "Unidades y símbolos (glosario de referencia)"
@@ -49,10 +48,6 @@
 ???+ note "Movimiento armónico simple y la onda sinusoidal"
 
     Una masa en un resorte que oscila describe un **movimiento armónico simple**. Si se registra su posición en el tiempo, se obtiene una **onda sinusoidal** — la forma más pura y fundamental en acústica.
-
-    [🎯 Abrir simulación interactiva — Figuras 1-1 y 1-2](../../../simulacion/mas.html)
-
-    En la simulación podés variar la rigidez del resorte, la amplitud y la velocidad del papel. Observá cómo el lápiz traza la onda sinusoidal mientras la masa oscila.
 
     Una revolución completa equivale a 360° — un ciclo completo. La onda sinusoidal es al sonido lo que el círculo a la geometría: el bloque elemental del que todo se compone (Fourier).
 
