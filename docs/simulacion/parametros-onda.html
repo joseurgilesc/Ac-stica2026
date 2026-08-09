@@ -129,7 +129,9 @@ function draw() {
   beginShape();
   for (let i = 0; i <= 400; i++) {
     let x = GX + (i / 400) * GW;
-    let val = sin((i / 400) * TWO_PI * frequency + time * 2 + phaseRad);
+    // At x=GX (pos=0), phase=0, t=0: sin(0)=0, going UP
+    // Positive phase shifts wave to the RIGHT (easier to see)
+    let val = sin((i / 400) * TWO_PI * frequency - time * 2 - phaseRad);
     vertex(x, CY - val * maxAmp);
   }
   endShape();
@@ -137,30 +139,26 @@ function draw() {
   // ── Phase visualization ──
   if (phase > 0) {
     let shiftPx = (phase / 360) * (GW / frequency);
-    let refStartX = GX + 5;
-    let refEndX = refStartX + shiftPx;
-
-    // Dashed reference line from origin to phase-shifted start
-    stroke(224, 90, 71, 120);
-    strokeWeight(2);
-    drawingContext.setLineDash([6, 4]);
-
-    // Show vertical line at t=0 position for reference (phase=0 wave starts here going up)
     let zeroCrossX = GX + 5;
+
+    // Reference line (where phase=0 wave crosses going up)
+    stroke(224, 90, 71, 80);
+    strokeWeight(1);
+    drawingContext.setLineDash([4, 4]);
     line(zeroCrossX, CY - maxAmp - 10, zeroCrossX, CY + maxAmp + 10);
 
-    // Draw the phase-shifted start position
+    // Phase-shifted line (wave shifted RIGHT)
     let phaseStartX = zeroCrossX + shiftPx;
-    stroke(224, 90, 71, 180);
-    strokeWeight(2);
+    stroke(224, 90, 71, 160);
+    strokeWeight(1.5);
     drawingContext.setLineDash([3, 3]);
-    line(phaseStartX, CY - maxAmp - 15, phaseStartX, CY + maxAmp + 15);
+    line(phaseStartX, CY - maxAmp - 10, phaseStartX, CY + maxAmp + 10);
     drawingContext.setLineDash([]);
 
-    // Arrow showing shift
-    stroke(224, 90, 71, 180);
-    strokeWeight(1.5);
+    // Arrow from reference to shifted position
     let arrowY = CY - maxAmp - 22;
+    stroke(224, 90, 71, 160);
+    strokeWeight(1.5);
     line(zeroCrossX, arrowY, phaseStartX, arrowY);
     line(phaseStartX, arrowY, phaseStartX - 8, arrowY - 5);
     line(phaseStartX, arrowY, phaseStartX - 8, arrowY + 5);
@@ -169,7 +167,7 @@ function draw() {
     fill(224, 90, 71);
     textSize(10);
     textAlign(CENTER, BOTTOM);
-    text('φ = ' + phase + '\u00B0', zeroCrossX + shiftPx / 2, arrowY - 4);
+    text('\u03C6 = ' + phase + '\u00B0', zeroCrossX + shiftPx / 2, arrowY - 4);
 
     // Circle indicator at the circle diagram (top right)
     let cx = GX + GW - 80, cr = 30;
