@@ -157,41 +157,48 @@ function draw() {
   }
   endShape();
 
-  // ── Phase visualization ──
+  // ── Phase visualization: mark first zero-crossing ──
+  let lamPx = GW / frequency;
+  // Position where phase=0 wave first crosses zero going UP:
+  // sin(u*2pi*f - wt) = 0 → u*2pi*f = wt → u = wt/(2pi*f)
+  // In pixels: x = GX + (wt % 2pi)/(2pi) * lamPx
+  let refX = GX + ((time * 2) % TWO_PI) / TWO_PI * lamPx;
+  while (refX < GX) refX += lamPx;
+  while (refX > GX + lamPx) refX -= lamPx;
+
+  // Phase-shifted wave first crosses zero going UP at:
+  // sin(u*2pi*f - wt - φ) = 0 → u*2pi*f = wt + φ
+  let phaseX = GX + ((time * 2 + phaseRad) % TWO_PI) / TWO_PI * lamPx;
+  while (phaseX < GX) phaseX += lamPx;
+  while (phaseX > GX + lamPx) phaseX -= lamPx;
+
+  let shiftPx = phaseX - refX;
+  if (shiftPx < -lamPx / 2) shiftPx += lamPx;
+  if (shiftPx > lamPx / 2) shiftPx -= lamPx;
+
   if (phase > 0) {
-    let lamPx = GW / frequency;
-    let shiftPx = (phase / 360) * lamPx;
-
-    // Colored band from left edge showing the phase delay
-    fill(224, 90, 71, 15);
+    // Triangle marker at reference position
+    fill(36, 157, 143, 140);
     noStroke();
-    rect(GX, CY - maxAmp, shiftPx, maxAmp * 2);
+    triangle(refX - 6, CY - maxAmp - 5, refX + 6, CY - maxAmp - 5, refX, CY - maxAmp - 15);
 
-    // Marker at left edge (where wave WOULD start at φ=0)
-    stroke(36, 157, 143, 100);
+    // Triangle marker at phase-shifted position
+    fill(224, 90, 71);
+    triangle(phaseX - 6, CY - maxAmp - 5, phaseX + 6, CY - maxAmp - 5, phaseX, CY - maxAmp - 15);
+
+    // Connecting line
+    stroke(224, 90, 71, 150);
     strokeWeight(1.5);
-    drawingContext.setLineDash([4, 4]);
-    line(GX, CY - maxAmp - 5, GX, CY + maxAmp + 5);
-    drawingContext.setLineDash([]);
-
-    // Marker at phase-shifted start
-    stroke(224, 90, 71, 200);
-    strokeWeight(2.5);
-    line(GX + shiftPx, CY - maxAmp - 5, GX + shiftPx, CY + maxAmp + 5);
-
-    // Arrow
-    let arrowY = CY - maxAmp - 22;
-    stroke(224, 90, 71, 180);
-    strokeWeight(1.8);
-    line(GX, arrowY, GX + shiftPx, arrowY);
-    line(GX + shiftPx, arrowY, GX + shiftPx - 9, arrowY - 5);
-    line(GX + shiftPx, arrowY, GX + shiftPx - 9, arrowY + 5);
+    line(refX, CY - maxAmp - 10, phaseX, CY - maxAmp - 10);
+    line(phaseX, CY - maxAmp - 10, phaseX - 7, CY - maxAmp - 14);
+    line(phaseX, CY - maxAmp - 10, phaseX - 7, CY - maxAmp - 6);
 
     noStroke();
     fill(224, 90, 71);
     textSize(10);
     textAlign(CENTER, BOTTOM);
-    text('\u03C6 = ' + phase + '\u00B0  (\u03BB/' + (360/phase).toFixed(0) + ')', GX + shiftPx / 2, arrowY - 6);
+    let midX = (refX + phaseX) / 2;
+    text('\u03C6 = ' + phase + '\u00B0', midX, CY - maxAmp - 20);
   }
 
   // Circle indicator
