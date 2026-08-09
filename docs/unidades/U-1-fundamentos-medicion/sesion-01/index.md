@@ -5,7 +5,6 @@
 !!! tip "Simulaciones interactivas"
 
     - [🎮 Compresión y rarefacción del sonido](../../../simulacion/) — partículas de aire y onda de presión
-    - [📊 Tipos de ondas — circular, transversal y longitudinal](../../../simulacion/tipos-onda.html) — Figura 1-4 del Everest
 
 ??? info "Unidades y símbolos (glosario de referencia)"
     Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.

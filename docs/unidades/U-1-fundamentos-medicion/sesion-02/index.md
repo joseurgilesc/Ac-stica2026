@@ -66,7 +66,20 @@
 
 ???+ note "Movimiento de partículas: ondas longitudinales"
 
-    Existen tres tipos de movimiento ondulatorio, pero el sonido en el aire es una **onda longitudinal**: las partículas vibran en la misma dirección en que viaja la onda. Su desplazamiento máximo es de apenas unas diezmilésimas de pulgada, incluso para sonidos fuertes.
+    Existen tres tipos de movimiento ondulatorio. La diferencia clave está en cómo se mueven las partículas respecto a la dirección de propagación:
+
+    | Tipo | Movimiento de partícula | Dirección relativa | Ejemplo |
+    |---|---|---|---|
+    | **Circular** | Órbitas | Mixta | Superficie del agua |
+    | **Transversal** | Perpendicular | 90° | Cuerda de violín |
+    | **Longitudinal** | Paralela | 0° | **Sonido en el aire** |
+
+    [📊 **Abrir simulación interactiva — Figura 1-4**](../../../simulacion/tipos-onda.html){ .md-button }
+
+    El sonido en el aire es una **onda longitudinal**: las partículas vibran hacia adelante y atrás en la misma dirección en que viaja la onda. Su desplazamiento máximo es de apenas unas diezmilésimas de pulgada, incluso para sonidos fuertes.
+
+    !!! info "¿Por qué el sonido en el aire solo puede ser longitudinal?"
+        Los fluidos (gases y líquidos) no resisten esfuerzos de corte (*shear stress*): si empujás el aire lateralmente, no "rebota". Solo reaccionan a compresiones y expansiones. Por eso las ondas transversales solo existen en **sólidos** (cuerdas, varillas, la corteza terrestre), donde las fuerzas elásticas restauran la deformación lateral.
 
 ???+ note "Velocidad del sonido"
 
