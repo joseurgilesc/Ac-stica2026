@@ -187,10 +187,20 @@ function draw() {
     }
 
     if (crossings.length > 0 && refCrossings.length > 0) {
+      // Use the crossing closest to the left edge (GX)
       let actualZeroX = crossings[0];
       let refZeroX = refCrossings[0];
+      // Calculate shift directly from phase
+      let lamPx = GW / frequency;
+      let expectedShift = (phase / 360) * lamPx;
       let shiftPx = actualZeroX - refZeroX;
-      if (shiftPx < 0) shiftPx += lamPx;
+      // Normalize shift to 0..lamPx
+      while (shiftPx < 0) shiftPx += lamPx;
+      while (shiftPx >= lamPx) shiftPx -= lamPx;
+      // If shift is > half wavelength, we picked wrong crossing pair
+      if (shiftPx > lamPx * 0.5) {
+        if (crossings.length > 1) actualZeroX = crossings[1];
+      }
 
       // Band
       fill(224, 90, 71, 12);
