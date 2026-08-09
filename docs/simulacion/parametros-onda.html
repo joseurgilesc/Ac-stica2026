@@ -157,82 +157,41 @@ function draw() {
   }
   endShape();
 
-  // ── Phase visualization (visible when paused or at low speed) ──
+  // ── Phase visualization ──
   if (phase > 0) {
     let lamPx = GW / frequency;
-    // Find zero crossings by scanning a few points
-    let crossings = [];
-    let steps = Math.floor(GW);
-    let prevVal = null;
-    for (let i = 0; i < steps; i++) {
-      let x = GX + i;
-      let u = (x - GX) / GW;
-      let val = sin(u * TWO_PI * frequency - time * 2 - phaseRad);
-      if (prevVal !== null && prevVal < 0 && val >= 0) {
-        crossings.push(x);
-      }
-      prevVal = val;
-    }
-    // Find the same for phase=0
-    let refCrossings = [];
-    prevVal = null;
-    for (let i = 0; i < steps; i++) {
-      let x = GX + i;
-      let u = (x - GX) / GW;
-      let val = sin(u * TWO_PI * frequency - time * 2);
-      if (prevVal !== null && prevVal < 0 && val >= 0) {
-        refCrossings.push(x);
-      }
-      prevVal = val;
-    }
+    let shiftPx = (phase / 360) * lamPx;
 
-    if (crossings.length > 0 && refCrossings.length > 0) {
-      // Use the crossing closest to the left edge (GX)
-      let actualZeroX = crossings[0];
-      let refZeroX = refCrossings[0];
-      // Calculate shift directly from phase
-      let lamPx = GW / frequency;
-      let expectedShift = (phase / 360) * lamPx;
-      let shiftPx = actualZeroX - refZeroX;
-      // Normalize shift to 0..lamPx
-      while (shiftPx < 0) shiftPx += lamPx;
-      while (shiftPx >= lamPx) shiftPx -= lamPx;
-      // If shift is > half wavelength, we picked wrong crossing pair
-      if (shiftPx > lamPx * 0.5) {
-        if (crossings.length > 1) actualZeroX = crossings[1];
-      }
+    // Colored band from left edge showing the phase delay
+    fill(224, 90, 71, 15);
+    noStroke();
+    rect(GX, CY - maxAmp, shiftPx, maxAmp * 2);
 
-      // Band
-      fill(224, 90, 71, 12);
-      noStroke();
-      rect(refZeroX, CY - maxAmp, shiftPx, maxAmp * 2);
+    // Marker at left edge (where wave WOULD start at φ=0)
+    stroke(36, 157, 143, 100);
+    strokeWeight(1.5);
+    drawingContext.setLineDash([4, 4]);
+    line(GX, CY - maxAmp - 5, GX, CY + maxAmp + 5);
+    drawingContext.setLineDash([]);
 
-      // Reference line
-      stroke(36, 157, 143, 70);
-      strokeWeight(1);
-      drawingContext.setLineDash([4, 4]);
-      line(refZeroX, CY - maxAmp - 5, refZeroX, CY + maxAmp + 5);
-      drawingContext.setLineDash([]);
+    // Marker at phase-shifted start
+    stroke(224, 90, 71, 200);
+    strokeWeight(2.5);
+    line(GX + shiftPx, CY - maxAmp - 5, GX + shiftPx, CY + maxAmp + 5);
 
-      // Phase line
-      stroke(224, 90, 71, 180);
-      strokeWeight(2);
-      line(actualZeroX, CY - maxAmp - 5, actualZeroX, CY + maxAmp + 5);
+    // Arrow
+    let arrowY = CY - maxAmp - 22;
+    stroke(224, 90, 71, 180);
+    strokeWeight(1.8);
+    line(GX, arrowY, GX + shiftPx, arrowY);
+    line(GX + shiftPx, arrowY, GX + shiftPx - 9, arrowY - 5);
+    line(GX + shiftPx, arrowY, GX + shiftPx - 9, arrowY + 5);
 
-      // Arrow
-      let arrowY = CY - maxAmp - 22;
-      stroke(224, 90, 71, 180);
-      strokeWeight(1.5);
-      line(refZeroX, arrowY, actualZeroX, arrowY);
-      line(actualZeroX, arrowY, actualZeroX - 8, arrowY - 5);
-      line(actualZeroX, arrowY, actualZeroX - 8, arrowY + 5);
-
-      noStroke();
-      fill(224, 90, 71);
-      textSize(10);
-      textAlign(CENTER, BOTTOM);
-      text('\u03C6 = ' + phase + '\u00B0', refZeroX + shiftPx / 2, arrowY - 4);
-    }
+    noStroke();
+    fill(224, 90, 71);
+    textSize(10);
+    textAlign(CENTER, BOTTOM);
+    text('\u03C6 = ' + phase + '\u00B0  (\u03BB/' + (360/phase).toFixed(0) + ')', GX + shiftPx / 2, arrowY - 6);
   }
 
   // Circle indicator
