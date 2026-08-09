@@ -113,7 +113,7 @@ function draw() {
   let GX = 230, GW = width - GX - 30;
   let CY = height * 0.52;
   let maxAmp = map(amplitude, 5, 60, 25, 220);
-  let phaseRad = radians(phase);
+  let phaseRad = phase * PI / 180;
 
   // ── Amplitude zone ──
   stroke(36, 157, 143, 40);
@@ -217,7 +217,7 @@ function draw() {
   noFill();
   circle(cx, 60, cr * 2);
 
-  let dotAngle = -radians(phase) + PI / 2;
+  let dotAngle = -(phase * PI / 180) + PI / 2;
   let dx = cx + cos(dotAngle) * cr;
   let dy = 60 - sin(dotAngle) * cr;
   fill(224, 90, 71);
