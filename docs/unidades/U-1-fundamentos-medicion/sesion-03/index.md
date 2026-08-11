@@ -57,9 +57,9 @@
 
 ???+ note "Propagación: compresión y rarefacción"
 
-    > Insertar **Fig. 1-5** del Everest: las moléculas de aire se agrupan en zonas de compresión (C) y se separan en zonas de rarefacción (R). Las flechas indican la dirección promedio del movimiento molecular. La onda avanza hacia la derecha porque las zonas de compresión se forman ligeramente a la derecha de las crestas anteriores.
+    [🎮 **Abrir simulación interactiva — Figuras 1-5 y 1-6**](../../../simulacion/){ .md-button }
 
-    > Insertar **Fig. 1-6** del Everest: (A) vista instantánea de regiones comprimidas y enrarecidas de una onda sonora en el aire, (B) las regiones comprimidas están ligeramente por encima y las enrarecidas ligeramente por debajo de la presión atmosférica (~14.7 [lb/in²](#psi)).
+    Las moléculas de aire se agrupan en zonas de **compresión (C)** y se separan en zonas de **rarefacción (R)**. La simulación muestra ambos paneles: la distribución de partículas y la onda de presión sonora, con las líneas punteadas que conectan las crestas con las compresiones y los valles con las rarefacciones.
 
     La onda sonora se propaga por **transferencia de momento** de una partícula a otra. Cada molécula vibra localmente; lo que viaja es la perturbación, no la materia.
 
