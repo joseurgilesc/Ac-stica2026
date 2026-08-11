@@ -83,7 +83,10 @@
     !!! info "¿Por qué suenan consonantes la octava y la quinta?"
         Los intervalos que aparecen **antes** en la serie armónica (octava 2:1, quinta 3:2) son los que el oído percibe como más consonantes. No es una convención cultural arbitraria: es una consecuencia directa de la física del sonido. Cuanto más temprano aparece un intervalo en la serie, más consonante nos resulta.
 
-    > Insertar **Fig. 1-9** del Everest: suma de armónicos en fase. Cuando todos los armónicos comienzan alineados (fase 0°), la forma de onda resultante tiene picos pronunciados. Compárese con la Fig. 1-11.
+    <figure markdown="span">
+      ![Fig. 1-9: Combinacion de ondas sinusoidales](../../../img/combinacion_de_ondas_senoidales.svg)
+      <figcaption>**Fig. 1-9** — Suma de armónicos en fase. Cuando todos los armónicos comienzan alineados (fase 0°), la forma de onda resultante tiene picos pronunciados. Compárese con la Fig. 1-11.</figcaption>
+    </figure>
 
 ???+ note "Fase y su efecto sobre la forma de onda"
 
