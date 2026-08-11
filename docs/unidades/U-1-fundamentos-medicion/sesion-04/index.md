@@ -166,19 +166,8 @@
 
     En una mezcla profesional, cada fuente ocupa una región espectral. Las frecuencias graves (20–250 [Hz](#hz)) contienen la fundamental de bajo, bombo y sintetizadores. Los medios (250–4,000 [Hz](#hz)) llevan la inteligibilidad vocal y el cuerpo de guitarras y teclados. Los agudos (4,000–20,000 [Hz](#hz)) aportan brillo, «aire» y definición de transitorios.
 
----
-
-## Simulación interactiva
-
-Abrí la simulación y explorá cómo la suma de ondas sinusoidales produce formas de onda complejas:
-
-- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
-- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
-- **Partículas** — puntos coloreados por zona de compresión o rarefacción
-- **Densidad** — fondo graduado según concentración molecular
-
-<iframe src="../sesion-02/simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
 
 ---
+
 
 *Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 1 (pp. 7–11: Complex Waves, Harmonics, Phase, Partials, Octaves, Spectrum) y Capítulo 5 (Signals, Speech, Music, and Noise).*

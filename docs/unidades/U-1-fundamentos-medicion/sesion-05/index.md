@@ -193,19 +193,8 @@
     !!! tip "No mezcles las referencias"
         0 dB SPL es el umbral de audición (silencio casi absoluto). 0 dBFS es el máximo nivel digital posible antes de distorsión (lo más fuerte que permite el sistema). Son escalas completamente distintas — la confusión es una fuente frecuente de errores en estudiantes principiantes.
 
----
-
-## Simulación interactiva
-
-Modificá los parámetros y activá/desactivá capas para analizar cada fenómeno:
-
-- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
-- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
-- **Partículas** — puntos coloreados por zona de compresión o rarefacción
-- **Densidad** — fondo graduado según concentración molecular
-
-<iframe src="../sesion-02/simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
 
 ---
+
 
 *Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 2, pp. 17–30 (Sound Levels and the Decibel).*
