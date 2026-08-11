@@ -57,10 +57,6 @@
 
 ???+ note "Propagación: compresión y rarefacción"
 
-    [🎮 **Abrir simulación interactiva — Figuras 1-5 y 1-6**](../../../simulacion/){ .md-button }
-
-    Las moléculas de aire se agrupan en zonas de **compresión (C)** y se separan en zonas de **rarefacción (R)**. La simulación muestra ambos paneles: la distribución de partículas y la onda de presión sonora, con las líneas punteadas que conectan las crestas con las compresiones y los valles con las rarefacciones.
-
     La onda sonora se propaga por **transferencia de momento** de una partícula a otra. Cada molécula vibra localmente; lo que viaja es la perturbación, no la materia.
 
 ???+ note "Velocidad del sonido en diferentes medios"
@@ -170,21 +166,6 @@
     | \(t\) | Tiempo | [s](#s) | Instante de observación |
     | \(\phi\) | Fase inicial | rad o [°](#deg) | Desplazamiento horizontal de la onda (0 a \(2\pi\)) |
     | \(T = 1/f\) | Período | [s](#s) | Duración de un ciclo completo |
-
-    <iframe src="../sesion-02/simulacion-mas.html" width="100%" height="290" style="border: none; border-radius: 8px;"></iframe>
-
----
-
-## Simulación interactiva
-
-Modificá los parámetros y activá/desactivá capas para analizar cada fenómeno:
-
-- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
-- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
-- **Partículas** — puntos coloreados por zona de compresión o rarefacción
-- **Densidad** — fondo graduado según concentración molecular
-
-<iframe src="../sesion-02/simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
 
 ---
 
