@@ -60,6 +60,29 @@
     !!! warning "Todo armónico es un parcial, pero no todo parcial es armónico"
         Un **armónico** es un sobretono cuya frecuencia es múltiplo entero exacto de la fundamental. Un **parcial** es cualquier componente frecuencial, sea armónico o no. Instrumentos como campanas, platillos y tambores tienen parciales **inarmónicos** — no siguen la serie armónica exacta. Por eso suenan «metálicos» o «sin altura definida».
 
+???+ note "La serie armónica y la música"
+
+    La serie armónica no es solo un concepto físico: es la base matemática de la armonía musical occidental. Cada nota musical contiene dentro de sí una serie de frecuencias que son múltiplos enteros de la fundamental. Los primeros armónicos definen los intervalos más consonantes: la octava (2:1), la quinta (3:2), la cuarta (4:3), la tercera mayor (5:4).
+
+    <figure markdown="span">
+      ![Serie armónica en notación musical](../../../img/serie_armonica.svg)
+      <figcaption>**Serie armónica** — Primeros 16 armónicos de Do2 (65.4 Hz). Cada armónico es un múltiplo entero de la frecuencia fundamental. Las notas marcadas con ♭ o ♮ pequeño se desvían del temperamento igual: son las «notas de la naturaleza», no las del piano.</figcaption>
+    </figure>
+
+    | Armónico | Relación | Intervalo respecto a la fundamental | Nota (aprox.) |
+    |---|---|---|---|
+    | 1° (\(f_0\)) | 1:1 | Unísono | Do |
+    | 2° | 2:1 | Octava | Do |
+    | 3° | 3:1 | Octava + quinta | Sol |
+    | 4° | 4:1 | Dos octavas | Do |
+    | 5° | 5:1 | Dos octavas + tercera mayor | Mi (♭ en temperamento) |
+    | 6° | 6:1 | Dos octavas + quinta | Sol |
+    | 7° | 7:1 | Dos octavas + séptima menor | Si♭ (♭ en temperamento) |
+    | 8° | 8:1 | Tres octavas | Do |
+
+    !!! info "¿Por qué suenan consonantes la octava y la quinta?"
+        Los intervalos que aparecen **antes** en la serie armónica (octava 2:1, quinta 3:2) son los que el oído percibe como más consonantes. No es una convención cultural arbitraria: es una consecuencia directa de la física del sonido. Cuanto más temprano aparece un intervalo en la serie, más consonante nos resulta.
+
     > Insertar **Fig. 1-9** del Everest: suma de armónicos en fase. Cuando todos los armónicos comienzan alineados (fase 0°), la forma de onda resultante tiene picos pronunciados. Compárese con la Fig. 1-11.
 
 ???+ note "Fase y su efecto sobre la forma de onda"
