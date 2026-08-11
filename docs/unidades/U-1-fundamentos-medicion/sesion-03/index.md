@@ -121,9 +121,15 @@
     | \(T\) | Período | [s](#s) | Duración de un ciclo completo |
     | \(f\) | Frecuencia | [Hz](#hz) | Ciclos por segundo (\(f = 1/T\)) |
 
-    > Insertar **Fig. 1-7** del Everest: la longitud de onda λ es la distancia entre dos puntos correspondientes en ciclos sucesivos. Puede medirse entre picos consecutivos o entre dos cruces por cero equivalentes.
+    <figure markdown="span">
+      ![Fig. 1-7: Longitud de onda y amplitud](../../../img/longitud_de_onda_y_amplitud.svg)
+      <figcaption>**Fig. 1-7** — Longitud de onda λ entre dos crestas consecutivas y amplitud pico desde el eje de equilibrio. La longitud de onda puede medirse entre dos puntos correspondientes cualesquiera de ciclos sucesivos.</figcaption>
+    </figure>
 
-    > Insertar **Fig. 1-8** del Everest: dos nomogramas para determinar gráficamente la longitud de onda en aire a partir de una frecuencia conocida (o viceversa), basados en \(v = 1,130\) ft/s.
+    <figure markdown="span">
+      ![Fig. 1-8: Frecuencia y longitud de onda](../../../img/frecuencia_y_longitud_de_onda.svg)
+      <figcaption>**Fig. 1-8** — Relación inversa entre frecuencia y longitud de onda en el aire (v = 343 m/s). Al aumentar la frecuencia, la longitud de onda disminuye proporcionalmente.</figcaption>
+    </figure>
 
 ???+ note "Longitudes de onda de frecuencias musicales"
 
