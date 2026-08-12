@@ -103,7 +103,10 @@
     | \(A_n\) | Amplitud del armónico n | Determina cuánto contribuye al timbre |
     | \(\phi_n\) | Fase del armónico n | Desplazamiento temporal — cambia la forma de onda |
 
-    > Insertar **Fig. 1-11** del Everest: armónicos fuera de fase. Con los mismos componentes frecuenciales y las mismas amplitudes que en la Fig. 1-9, pero con relaciones de fase diferentes, la forma de onda es completamente distinta. Sin embargo, el oído **es poco sensible a cambios de fase** en señales estacionarias: ambos casos suenan prácticamente igual.
+    <figure markdown="span">
+      ![Fig. 1-11: Armonicos fuera de fase](../../../img/figura_1_11.png)
+      <figcaption>**Fig. 1-11** — Armónicos fuera de fase. Con los mismos componentes frecuenciales y las mismas amplitudes que en la Fig. 1-9, pero con relaciones de fase diferentes, la forma de onda es completamente distinta. Sin embargo, el oído **es poco sensible a cambios de fase** en señales estacionarias: ambos casos suenan prácticamente igual.</figcaption>
+    </figure>
 
     !!! tip "Fase y audición"
         Aunque el oído es relativamente insensible a la fase de componentes armónicos en estado estacionario, la fase es crítica en otras situaciones: (1) cuando dos señales idénticas se combinan con polaridad invertida se cancelan, (2) en la localización espacial (diferencias interaurales de fase), (3) en la suma de señales reflejadas con la directa en una sala.
