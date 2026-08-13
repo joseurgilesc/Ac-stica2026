@@ -18,90 +18,74 @@
     .highlight { background: #e6f7f3; border-left: 4px solid #249D8F; }
     button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; }
     button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
-    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
   </style>
 </head>
 <body>
 <div id="mixer">
+  <h2>Suma de dos fuentes sonoras</h2>
+  <p style="color:#526079">Observa cómo se superponen las ondas sinusoidales. Dos ondas en fase duplican la amplitud (+6 dB); dos ondas distintas suman energía (+3 dB).</p>
+
+  <div class="row">
+    <label>Fuente A:</label>
+    <input type="range" id="sliderA" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valA" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Fuente B:</label>
+    <input type="range" id="sliderB" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valB" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Modo:</label>
+    <button id="btnMode">Incoherente (frecuencias distintas)</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Diferencia ΔL</div><div class="val" id="diff">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Corrección</div><div class="val" id="corr">+3.0 dB</div></div>
+    <div class="stat highlight"><div class="lbl">Resultado</div><div class="val" id="exact">73.01 dB</div></div>
+  </div>
+</div>
+
 <script>
 const TEAL = [36, 157, 143];
 const CORAL = [224, 90, 71];
 const INDIGO = [79, 111, 178];
+const TEAL_DARK = [26, 122, 111];
 
-const TABLE = [
-  { d: 0, c: 3.0 }, { d: 1, c: 2.5 }, { d: 2, c: 2.1 }, { d: 3, c: 1.8 },
-  { d: 4, c: 1.5 }, { d: 5, c: 1.2 }, { d: 6, c: 1.0 }, { d: 7, c: 0.8 },
-  { d: 8, c: 0.6 }, { d: 9, c: 0.5 }, { d: 10, c: 0.4 }, { d: 11, c: 0.3 },
-  { d: 12, c: 0.2 },
-];
+const F_A = 1.0;
+const F_B_COHERENT = 1.0;
+const F_B_INCOHERENT = 1.8;
 
-let sliderA, sliderB;
-let valDiff, valCorr, valApprox, valExact;
+let sliderA, sliderB, btnMode;
 let coherent = false;
-let btnMode;
 let time = 0;
 
-// Display frequencies (low for clarity)
-const F_A = 1.0;       // cycles across screen for source A
-const F_B_COHERENT = 1.0;   // same freq when coherent
-const F_B_INCOHERENT = 1.8; // different freq when incoherent
-
 function setup() {
-  const root = select('#mixer');
+  const cw = min(860, windowWidth - 40);
+  const cnv = createCanvas(cw, 420);
+  cnv.parent('mixer');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
 
-  const heading = createElement('h2', 'Suma de dos fuentes sonoras');
-  heading.parent(root);
+  sliderA = select('#sliderA');
+  sliderB = select('#sliderB');
+  btnMode = select('#btnMode');
 
-  const lead = createP('Observa cómo se superponen las ondas. Dos ondas en fase duplican la amplitud (+6 dB); dos ondas distintas suman energía (+3 dB).');
-  lead.parent(root);
-  lead.style('color', '#526079');
+  sliderA.input(() => { select('#valA').html(sliderA.value() + ' dB'); });
+  sliderB.input(() => { select('#valB').html(sliderB.value() + ' dB'); });
 
-  // Source A
-  const rowA = createDiv('');
-  rowA.parent(root); rowA.addClass('row');
-  createElement('label', 'Fuente A:').parent(rowA);
-  sliderA = createSlider(40, 100, 70, 0.1);
-  sliderA.parent(rowA); sliderA.style('flex', '1 1 300px');
-  const valA = createSpan('70 dB'); valA.parent(rowA); valA.style('font-weight', '700');
-  sliderA.input(() => { valA.html(sliderA.value() + ' dB'); update(); });
-
-  // Source B
-  const rowB = createDiv('');
-  rowB.parent(root); rowB.addClass('row');
-  createElement('label', 'Fuente B:').parent(rowB);
-  sliderB = createSlider(40, 100, 70, 0.1);
-  sliderB.parent(rowB); sliderB.style('flex', '1 1 300px');
-  const valB = createSpan('70 dB'); valB.parent(rowB); valB.style('font-weight', '700');
-  sliderB.input(() => { valB.html(sliderB.value() + ' dB'); update(); });
-
-  // Mode toggle
-  const rowMode = createDiv('');
-  rowMode.parent(root); rowMode.addClass('row');
-  createElement('label', 'Modo:').parent(rowMode);
-  btnMode = createButton('Incoherente (frecuencias distintas)');
-  btnMode.parent(rowMode);
   btnMode.mousePressed(() => {
     coherent = !coherent;
     btnMode.html(coherent ? 'Coherente (en fase)' : 'Incoherente (frecuencias distintas)');
     btnMode.toggleClass('active', coherent);
-    update();
   });
 
-  // Stats
-  const stats = createDiv('');
-  stats.parent(root); stats.addClass('stats');
-  valDiff = createStat(stats, 'Diferencia ΔL');
-  valCorr = createStat(stats, 'Corrección (tabla)');
-  valApprox = createStat(stats, 'Resultado aproximado');
-  valExact = createStat(stats, 'Resultado exacto');
-  valExact.parent().addClass('highlight');
-
-  // Canvas
-  const cw = min(860, windowWidth - 40);
-  createCanvas(cw, 420).parent(root);
-
   textFont('system-ui');
-  update();
 }
 
 function draw() {
@@ -110,47 +94,65 @@ function draw() {
 
   const LA = Number(sliderA.value());
   const LB = Number(sliderB.value());
-  // Exact sum depends on mode: coherent (pressure sum) vs incoherent (energy sum)
+
+  // Amplitudes (pressure), 70 dB = 1.0
+  const ampA = Math.pow(10, (LA - 70) / 20);
+  const ampB = Math.pow(10, (LB - 70) / 20);
+  const fB = coherent ? F_B_COHERENT : F_B_INCOHERENT;
+
+  // Resultado
   const Lsum = coherent
     ? 20 * Math.log10(Math.pow(10, LA/20) + Math.pow(10, LB/20))
     : 10 * Math.log10(Math.pow(10, LA/10) + Math.pow(10, LB/10));
 
-  // Amplitudes (pressure, proportional to 10^(L/20)), normalized to 70 dB = 1.0
-  const ampA = Math.pow(10, (LA - 70) / 20);
-  const ampB = Math.pow(10, (LB - 70) / 20);
+  // Update stats
+  const diff = Math.abs(LA - LB);
+  select('#diff').html(diff.toFixed(1) + ' dB');
+  select('#corr').html('+' + (Lsum - Math.max(LA, LB)).toFixed(1) + ' dB' + (coherent ? ' (presión)' : ' (energía)'));
+  select('#exact').html(Lsum.toFixed(2) + ' dB');
 
-  const fB = coherent ? F_B_COHERENT : F_B_INCOHERENT;
-
-  // Normalize display scale to the max amplitude present
   const maxAmp = Math.max(ampA, ampB, ampA + ampB, 0.5);
 
-  const GX = 40;
-  const GW = width - 80;
+  const GX = 20;
+  const GW = width - 40;
   const panelH = 110;
-  const top1 = 20;
+  const top1 = 10;
 
-  // ── Panel 1: Fuente A ──
-  drawWavePanel(GX, top1, GW, panelH, 'Fuente A (' + LA.toFixed(1) + ' dB)', ampA / maxAmp, F_A, 0, TEAL);
+  drawWave(GX, top1, GW, panelH, 'Fuente A (' + LA.toFixed(1) + ' dB)', ampA / maxAmp, F_A, TEAL);
+  drawWave(GX, top1 + panelH + 5, GW, panelH, 'Fuente B (' + LB.toFixed(1) + ' dB)', ampB / maxAmp, fB, coherent ? INDIGO : CORAL);
 
-  // ── Panel 2: Fuente B ──
-  drawWavePanel(GX, top1 + panelH + 5, GW, panelH, 'Fuente B (' + LB.toFixed(1) + ' dB)', ampB / maxAmp, fB, 0, coherent ? INDIGO : CORAL);
+  // Suma
+  noStroke();
+  fill(230, 247, 243);
+  rect(GX, top1 + 2 * (panelH + 5), GW, panelH, 8);
+  stroke(0, 0, 0, 20); strokeWeight(1);
+  line(GX + 10, top1 + 2 * (panelH + 5) + panelH/2, GX + GW - 10, top1 + 2 * (panelH + 5) + panelH/2);
+  noStroke(); fill(23, 32, 51); textAlign(LEFT, TOP); textSize(12);
+  textStyle(BOLD);
+  text('Suma (' + Lsum.toFixed(1) + ' dB)', GX + 12, top1 + 2 * (panelH + 5) + 6);
+  textStyle(NORMAL);
 
-  // ── Panel 3: Suma ──
-  drawSumPanel(GX, top1 + 2 * (panelH + 5), GW, panelH, 'Suma (' + Lsum.toFixed(1) + ' dB)', ampA, ampB, fB, maxAmp);
+  noFill(); stroke(TEAL_DARK[0], TEAL_DARK[1], TEAL_DARK[2]); strokeWeight(2.5);
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let wx = GX + 10 + (i / 200) * (GW - 20);
+    let vA = ampA * Math.sin(i / 200 * TWO_PI * F_A + time * 2 * F_A);
+    let vB = ampB * Math.sin(i / 200 * TWO_PI * fB + time * 2 * fB);
+    let s = (vA + vB) / maxAmp;
+    vertex(wx, top1 + 2 * (panelH + 5) + panelH/2 - s * (panelH/2 - 10));
+  }
+  endShape();
 }
 
-function drawWavePanel(x, y, w, h, label, amp, freq, phase, color) {
-  // Panel background
+function drawWave(x, y, w, h, label, amp, freq, col) {
   noStroke();
   fill(248, 250, 255);
   rect(x, y, w, h, 8);
 
-  // Center line
   stroke(0, 0, 0, 20);
   strokeWeight(1);
   line(x + 10, y + h / 2, x + w - 10, y + h / 2);
 
-  // Label
   noStroke();
   fill(23, 32, 51);
   textAlign(LEFT, TOP);
@@ -159,89 +161,16 @@ function drawWavePanel(x, y, w, h, label, amp, freq, phase, color) {
   text(label, x + 12, y + 6);
   textStyle(NORMAL);
 
-  // Wave
   noFill();
-  stroke(color[0], color[1], color[2]);
+  stroke(col[0], col[1], col[2]);
   strokeWeight(2);
   beginShape();
   for (let i = 0; i <= 200; i++) {
     let wx = x + 10 + (i / 200) * (w - 20);
-    let val = amp * Math.sin(i / 200 * TWO_PI * freq + time * 2 * freq + phase);
-    vertex(wx, y + h / 2 - val * (h / 2 - 10));
+    let v = amp * Math.sin(i / 200 * TWO_PI * freq + time * 2 * freq);
+    vertex(wx, y + h / 2 - v * (h / 2 - 10));
   }
   endShape();
-}
-
-function drawSumPanel(x, y, w, h, label, ampA, ampB, fB, maxAmp) {
-  // Panel background
-  noStroke();
-  fill(230, 247, 243);
-  rect(x, y, w, h, 8);
-
-  // Center line
-  stroke(0, 0, 0, 20);
-  strokeWeight(1);
-  line(x + 10, y + h / 2, x + w - 10, y + h / 2);
-
-  // Label
-  noStroke();
-  fill(23, 32, 51);
-  textAlign(LEFT, TOP);
-  textSize(12);
-  textStyle(BOLD);
-  text(label, x + 12, y + 6);
-  textStyle(NORMAL);
-
-  // Sum wave (algebraic sum of A and B)
-  noFill();
-  stroke(26, 122, 111);
-  strokeWeight(2.5);
-  beginShape();
-  for (let i = 0; i <= 200; i++) {
-    let wx = x + 10 + (i / 200) * (w - 20);
-    let valA = ampA * Math.sin(i / 200 * TWO_PI * F_A + time * 2 * F_A);
-    let valB = ampB * Math.sin(i / 200 * TWO_PI * fB + time * 2 * fB);
-    let sum = (valA + valB) / maxAmp;
-    vertex(wx, y + h / 2 - sum * (h / 2 - 10));
-  }
-  endShape();
-}
-
-function update() {
-  if (!sliderA) return;
-  const L1 = Number(sliderA.value());
-  const L2 = Number(sliderB.value());
-  const higher = Math.max(L1, L2);
-  const lower = Math.min(L1, L2);
-  const diff = higher - lower;
-
-  let corr = 0;
-  for (const t of TABLE) {
-    if (diff >= t.d) corr = t.c;
-    else break;
-  }
-  if (diff > 12) corr = 0.1;
-
-  const approx = higher + corr;
-  const exact = coherent
-    ? 20 * Math.log10(Math.pow(10, L1/20) + Math.pow(10, L2/20))
-    : 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
-
-  // Correction = amount to add to the higher level
-  const correction = exact - higher;
-
-  valDiff.html(diff.toFixed(1) + ' dB');
-  valCorr.html('+' + correction.toFixed(1) + ' dB' + (coherent ? ' (presión)' : ' (tabla)'));
-  valApprox.html(approx.toFixed(1) + ' dB');
-  valExact.html(exact.toFixed(2) + ' dB');
-}
-
-function createStat(parent, label) {
-  const card = createDiv('');
-  card.parent(parent); card.addClass('stat');
-  const lbl = createDiv(label); lbl.parent(card); lbl.addClass('lbl');
-  const val = createDiv(''); val.parent(card); val.addClass('val');
-  return val;
 }
 
 function windowResized() {
@@ -249,6 +178,5 @@ function windowResized() {
   resizeCanvas(cw, 420);
 }
 </script>
-</div>
 </body>
 </html>
