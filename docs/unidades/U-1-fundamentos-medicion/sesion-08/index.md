@@ -34,6 +34,10 @@
 
     > Insertar **Fig. 3-1** del Everest: fuente puntual y divergencia esférica — mostrando cómo la energía sonora de una fuente puntual se distribuye sobre una superficie esférica cada vez mayor. Al duplicar la distancia (\(r \to 2r\)), el área de la esfera se cuadruplica (\(4\pi r^2 \to 16\pi r^2\)), por lo que la intensidad se divide entre 4 → −6 dB.
 
+    [🎛️ **Abrir simulación interactiva — Tres maneras de expandirse**](../../../simulacion/tipos-fuente.html){ .md-button }
+
+    Mueve el micrófono entre 1 y 16 metros y alterna entre fuente puntual, lineal y plana. Observa el frente de onda y la curva de caída de nivel: −6 dB, −3 dB o ≈ 0 dB por duplicación de distancia.
+
     ### ¿Por qué existe esta diferencia?
 
     La energía total emitida por la fuente se conserva, pero se distribuye sobre un área cada vez mayor:

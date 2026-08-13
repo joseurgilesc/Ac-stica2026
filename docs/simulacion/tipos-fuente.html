@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuentes puntual, lineal y plana</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 120px; font-weight: 600; }
+    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
+    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
+    .stat .val { font-weight: 700; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Tres maneras de expandirse</h2>
+  <p style="color:#526079">Compara la pérdida de nivel de fuentes puntual, lineal y plana al duplicar la distancia.</p>
+
+  <div class="row">
+    <label>Nivel a 1 metro:</label>
+    <input type="range" id="level" min="60" max="100" value="90" step="1" style="flex:1 1 250px">
+    <span id="levelVal" style="font-weight:700">90 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Distancia del mic:</label>
+    <input type="range" id="dist" min="1" max="16" value="1" step="0.1" style="flex:1 1 250px">
+    <span id="distVal" style="font-weight:700">1.0 m</span>
+  </div>
+
+  <div class="row">
+    <label>Tipo de fuente:</label>
+    <button id="btnPuntual" class="active">Puntual</button>
+    <button id="btnLineal">Lineal</button>
+    <button id="btnPlana">Plana</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Nivel en el micrófono</div><div class="val" id="micLevel">90.0 dB</div></div>
+    <div class="stat"><div class="lbl">Pérdida total</div><div class="val" id="loss">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Pérdida por duplicar distancia</div><div class="val" id="lossPerDouble">—</div></div>
+  </div>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+
+let levelSlider, distSlider;
+let btnPuntual, btnLineal, btnPlana;
+let sourceType = 'puntual'; // 'puntual' | 'lineal' | 'plana'
+
+function setup() {
+  const cw = min(880, windowWidth - 40);
+  const cnv = createCanvas(cw, 460);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  levelSlider = select('#level');
+  distSlider = select('#dist');
+  btnPuntual = select('#btnPuntual');
+  btnLineal = select('#btnLineal');
+  btnPlana = select('#btnPlana');
+
+  levelSlider.input(() => select('#levelVal').html(levelSlider.value() + ' dB'));
+  distSlider.input(() => select('#distVal').html(Number(distSlider.value()).toFixed(1) + ' m'));
+
+  btnPuntual.mousePressed(() => { sourceType = 'puntual'; refreshButtons(); });
+  btnLineal.mousePressed(() => { sourceType = 'lineal'; refreshButtons(); });
+  btnPlana.mousePressed(() => { sourceType = 'plana'; refreshButtons(); });
+
+  textFont('system-ui');
+}
+
+function refreshButtons() {
+  btnPuntual.toggleClass('active', sourceType === 'puntual');
+  btnLineal.toggleClass('active', sourceType === 'lineal');
+  btnPlana.toggleClass('active', sourceType === 'plana');
+}
+
+function sourceLevel(d) {
+  const L0 = Number(levelSlider.value());
+  if (sourceType === 'puntual') return L0 - 20 * Math.log10(d);
+  if (sourceType === 'lineal') return L0 - 10 * Math.log10(d);
+  return L0; // plana
+}
+
+function draw() {
+  background(255);
+
+  const L0 = Number(levelSlider.value());
+  const d = Number(distSlider.value());
+  const Lmic = sourceLevel(d);
+
+  // Stats
+  select('#micLevel').html(Lmic.toFixed(1) + ' dB');
+  select('#loss').html((L0 - Lmic).toFixed(1) + ' dB');
+  select('#lossPerDouble').html(
+    sourceType === 'puntual' ? '−6 dB' :
+    sourceType === 'lineal' ? '−3 dB' :
+    '≈ 0 dB'
+  );
+
+  // ── Scene layout ──
+  const sceneX = 30;
+  const sceneW = width - 60;
+  const sceneY = 40;
+  const sceneH = 180;
+
+  // Source position (left)
+  const srcX = sceneX + 30;
+  const srcY = sceneY + sceneH / 2;
+
+  // Distance scale: 1 m to 16 m maps to sceneW
+  const dMin = 1, dMax = 16;
+  const micX = map(d, dMin, dMax, srcX + 20, sceneX + sceneW - 20);
+
+  // Scene background
+  noStroke();
+  fill(248, 250, 255);
+  rect(sceneX, sceneY, sceneW, sceneH, 10);
+
+  // Wave fronts
+  if (sourceType === 'puntual') {
+    // Concentric circles (spherical)
+    noFill();
+    stroke(TEAL[0], TEAL[1], TEAL[2], 120);
+    strokeWeight(1.5);
+    for (let r = 20; r < 300; r += 28) {
+      circle(srcX, srcY, r * 2);
+    }
+  } else if (sourceType === 'lineal') {
+    // Vertical line source, cylindrical wavefronts
+    stroke(TEAL[0], TEAL[1], TEAL[2], 120);
+    strokeWeight(1.5);
+    noFill();
+    for (let r = 20; r < 300; r += 28) {
+      line(srcX + r, sceneY + 10, srcX + r, sceneY + sceneH - 10);
+    }
+  } else {
+    // Plane: parallel vertical lines
+    stroke(TEAL[0], TEAL[1], TEAL[2], 120);
+    strokeWeight(1.5);
+    for (let x = srcX; x < sceneX + sceneW - 10; x += 28) {
+      line(x, sceneY + 10, x, sceneY + sceneH - 10);
+    }
+  }
+
+  // Source marker
+  if (sourceType === 'puntual') {
+    fill(TEAL[0], TEAL[1], TEAL[2]);
+    noStroke();
+    circle(srcX, srcY, 14);
+  } else if (sourceType === 'lineal') {
+    fill(TEAL[0], TEAL[1], TEAL[2]);
+    noStroke();
+    rect(srcX - 4, sceneY + 10, 8, sceneH - 20, 3);
+  } else {
+    fill(TEAL[0], TEAL[1], TEAL[2]);
+    noStroke();
+    rect(srcX - 4, sceneY + 10, 8, sceneH - 20, 3);
+  }
+
+  // Source label
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  text('Fuente', srcX, sceneY + sceneH + 6);
+  textStyle(NORMAL);
+
+  // Mic marker (draggable-looking)
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(micX, srcY, 12);
+  // Mic label
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  textAlign(CENTER, BOTTOM);
+  textSize(11);
+  text('mic', micX, srcY - 14);
+
+  // Distance ticks
+  fill(82, 96, 121);
+  textAlign(CENTER, TOP);
+  textSize(9);
+  for (let m = 1; m <= 16; m++) {
+    let tx = map(m, dMin, dMax, srcX + 20, sceneX + sceneW - 20);
+    if (m % 2 === 1) text(m + 'm', tx, sceneY + sceneH + 20);
+  }
+
+  // ── Graph: level vs distance ──
+  const gx = 70;
+  const gy = 280;
+  const gw = width - 140;
+  const gh = 150;
+
+  // Graph background
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 20, gy - 20, gw + 40, gh + 40, 8);
+
+  // Axes
+  stroke(100);
+  strokeWeight(1.5);
+  line(gx, gy + gh, gx + gw, gy + gh); // x
+  line(gx, gy, gx, gy + gh); // y
+
+  // Grid lines (horizontal, every 6 dB)
+  const Lmin = 50, Lmax = 100;
+  stroke(200);
+  strokeWeight(0.5);
+  for (let L = 60; L <= 100; L += 10) {
+    let gyv = map(L, Lmin, Lmax, gy + gh, gy);
+    line(gx, gyv, gx + gw, gyv);
+    fill(100);
+    noStroke();
+    textAlign(RIGHT, CENTER);
+    textSize(9);
+    text(L + ' dB', gx - 8, gyv);
+  }
+
+  // Distance ticks on x
+  fill(100);
+  textAlign(CENTER, TOP);
+  textSize(9);
+  for (let m = 1; m <= 16; m++) {
+    let tx = map(m, 1, 16, gx, gx + gw);
+    stroke(200); strokeWeight(0.5);
+    line(tx, gy + gh, tx, gy + gh + 4);
+    noStroke();
+    if (m % 2 === 0 || m === 1) text(m + 'm', tx, gy + gh + 6);
+  }
+
+  // Curves for all three types (ghosted)
+  const curves = {
+    puntual: [TEAL, 'Puntual (−6 dB)'],
+    lineal: [INDIGO, 'Lineal (−3 dB)'],
+    plana: [CORAL, 'Plana (0 dB)'],
+  };
+  for (const key in curves) {
+    let col = curves[key][0];
+    let alpha = key === sourceType ? 255 : 80;
+    stroke(col[0], col[1], col[2], alpha);
+    strokeWeight(key === sourceType ? 3 : 1.5);
+    noFill();
+    beginShape();
+    for (let i = 0; i <= 100; i++) {
+      let dd = 1 + (i / 100) * 15; // 1 to 16 m
+      let Lv;
+      if (key === 'puntual') Lv = L0 - 20 * Math.log10(dd);
+      else if (key === 'lineal') Lv = L0 - 10 * Math.log10(dd);
+      else Lv = L0;
+      let px = map(dd, 1, 16, gx, gx + gw);
+      let py = map(constrain(Lv, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+      vertex(px, py);
+    }
+    endShape();
+  }
+
+  // Legend
+  let ly = gy - 30;
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('Nivel vs distancia', gx, ly);
+  textStyle(NORMAL);
+  let lxx = gx + 140;
+  for (const key in curves) {
+    let col = curves[key][0];
+    stroke(col[0], col[1], col[2]);
+    strokeWeight(3);
+    line(lxx, ly + 5, lxx + 20, ly + 5);
+    noStroke();
+    fill(col[0], col[1], col[2]);
+    text(curves[key][1], lxx + 25, ly);
+    lxx += 150;
+  }
+
+  // Current mic position on graph
+  let mx = map(d, 1, 16, gx, gx + gw);
+  let my = map(constrain(Lmic, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(mx, my, 10);
+}
+
+function windowResized() {
+  const cw = min(880, windowWidth - 40);
+  resizeCanvas(cw, 460);
+}
+</script>
+</body>
+</html>
