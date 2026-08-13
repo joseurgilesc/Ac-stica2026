@@ -20,6 +20,7 @@ let logLabExponentLabel;
 let logLabRatioValue;
 let logLabPressureValue;
 let logLabDbValue;
+let logLabPsychoValue;
 
 const LOG_LAB_MAX_EXPONENT = 6;
 const LOG_LAB_REFERENCE_PRESSURE = 20e-6; // 20 µPa en aire
@@ -88,6 +89,26 @@ function setup() {
   logLabRatioValue = createStat(stats, "Relación p/p₀");
   logLabPressureValue = createStat(stats, "Presión sonora");
   logLabDbValue = createStat(stats, "Nivel Lp");
+
+  // Psychoacoustic description card
+  const psychoCard = createDiv();
+  psychoCard.parent(root);
+  psychoCard.style("padding", "14px 16px");
+  psychoCard.style("background", "#eef3ff");
+  psychoCard.style("border-radius", "12px");
+  psychoCard.style("margin-bottom", "14px");
+  psychoCard.style("border-left", "4px solid #35589b");
+
+  const psychoLabel = createDiv("¿Qué experimenta una persona a este nivel?");
+  psychoLabel.parent(psychoCard);
+  psychoLabel.style("font-size", "12px");
+  psychoLabel.style("color", "#526079");
+  psychoLabel.style("margin-bottom", "4px");
+
+  logLabPsychoValue = createDiv("");
+  logLabPsychoValue.parent(psychoCard);
+  logLabPsychoValue.style("font-weight", "600");
+  logLabPsychoValue.style("font-size", "14px");
 
   const canvasWidth = constrain(windowWidth - 36, 280, 920);
   const canvas = createCanvas(canvasWidth, 430);
@@ -243,6 +264,24 @@ function updateLogLabValues() {
   logLabRatioValue.html(`${formatNumber(ratio)} veces`);
   logLabPressureValue.html(formatPressure(pressure));
   logLabDbValue.html(`${decibels.toFixed(1)} dB SPL`);
+  logLabPsychoValue.html(getPsychoacousticDescription(decibels));
+}
+
+function getPsychoacousticDescription(db) {
+  const d = Math.round(db);
+  if (d < 5) return "Umbral de audición: apenas perceptible en total silencio. Es la referencia de 20 µPa (0 dB SPL).";
+  if (d < 15) return "Respiración suave, hojas al viento. Entorno de silencio casi absoluto.";
+  if (d < 25) return "Susurro, biblioteca silenciosa. Conversación a muy baja voz.";
+  if (d < 35) return "Dormitorio tranquilo por la noche. Casi no interfiere con la concentración.";
+  if (d < 45) return "Sala de estar tranquila. Sonido de fondo suave y cómodo.";
+  if (d < 55) return "Conversación normal a un metro. Ambiente de oficina silencioso.";
+  if (d < 65) return "Conversación animada, restaurante. La voz debe alzarse ligeramente.";
+  if (d < 75) return "Tráfico, aspiradora. Exposición prolongada empieza a ser molesta.";
+  if (d < 85) return "Calle muy transitada, despertador. Riesgo si la exposición es continua (8 h).";
+  if (d < 95) return "Camión pesado, tren. Daño auditivo posible con exposición prolongada.";
+  if (d < 105) return "Concierto, martillo neumático. Daño tras 15-30 min sin protección.";
+  if (d < 115) return "Discoteca, sirena. Daño auditivo en pocos minutos.";
+  return "Umbral de dolor: el oído siente presión física y dolor inmediato.";
 }
 
 function createStat(parent, label) {
