@@ -24,7 +24,10 @@
     !!! danger "70 dB + 70 dB ≠ 140 dB"
         Los decibeles **no se suman linealmente** porque representan relaciones logarítmicas, no cantidades absolutas. Sumar dB directamente es como sumar los exponentes: \(10^3 + 10^3 = 2,000\), no \(10^6\). En dB: 70 dB SPL + 70 dB SPL = **73 dB SPL**, no 140 dB SPL.
 
-    > Insertar **Fig. 2-5** del Everest: gráfico de suma de decibeles — este nomograma permite leer directamente el resultado de sumar dos niveles sin hacer cálculos. Para fuentes iguales, la suma es el nivel individual +3 dB. Para fuentes con diferencia ∆L, se suma un valor ∆L⁺ que decrece cuanto mayor es la diferencia.
+    <figure markdown="span">
+      ![Fig. 2-5: Nomograma de suma de decibeles](../../../img/suma_de_decibeles.svg)
+      <figcaption>**Fig. 2-5** — Nomograma de suma de niveles. La curva indica cuánto sumar al nivel mayor según la diferencia ΔL entre dos fuentes. Con fuentes iguales (ΔL = 0) se suman 3 dB; a mayor diferencia, menos aporta la fuente débil.</figcaption>
+    </figure>
 
     ### La regla general de suma de niveles
 
