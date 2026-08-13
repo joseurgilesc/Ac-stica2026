@@ -205,7 +205,7 @@
     !!! tip "No mezcles las referencias"
         0 dB SPL es el umbral de audición (silencio casi absoluto). 0 dBFS es el máximo nivel digital posible antes de distorsión (lo más fuerte que permite el sistema). Son escalas completamente distintas — la confusión es una fuente frecuente de errores en estudiantes principiantes.
 
-### ¿Qué tipo de dB ves en el mezclador? dBFS
+    **¿Qué tipo de dB ves en el mezclador? dBFS**
 
     Cuando abrís la DAW (Pro Tools, Logic, Ableton), los **faders y medidores usan dBFS**, no dB SPL. La escala funciona **al revés** de lo que uno espera:
 
@@ -220,7 +220,7 @@
 
     En dB SPL, "0" es el silencio y subís hacia 120 (dolor). En dBFS, "0" es el **techo** y bajás hacia −∞ (silencio). Son referencias opuestas.
 
-    ### El headroom: la regla de oro del digital
+    **El headroom: la regla de oro del digital**
 
     En digital hay que **alejarse del 0 dBFS**. Se deja margen (*headroom*):
 
@@ -231,7 +231,7 @@
     !!! warning "El error del principiante"
         Muchos estudiantes suben el fader hasta que el meter toca 0 dBFS "para que suene fuerte". Eso solo genera distorsión digital (clipping) sin aportar calidad. En digital, el volumen final se controla en la **escucha** (bajando/subiendo el volumen del monitor en dB SPL), no pegando la señal al techo de dBFS.
 
-    ### De la sala al DAW: el camino completo
+    **De la sala al DAW: el camino completo**
 
     ```
     Monitor emite potencia (SWL)
@@ -253,6 +253,19 @@
     | **dBu/dBV** | Voltaje | Consola, outboard |
     | **dBFS** | Full scale digital | Faders y meters de la DAW |
     | **LUFS** | Sonoridad | Plataformas de streaming |
+
+    **El fader: ¿por qué +6 dB arriba y −∞ abajo?**
+
+    El fader es un **multiplicador**, no un generador de sonido. Su posición en dB indica el factor por el que multiplica la señal:
+
+    | Posición | Factor | Efecto |
+    |---|---|---|
+    | **+6 dB** | ×2 | El doble de nivel (poco refuerzo permitido) |
+    | **0 dB** | ×1 | *Unity* — la señal pasa intacta |
+    | **−6 dB** | ×0.5 | La mitad |
+    | **−∞ dB** | ×0 | Silencio total (mute) |
+
+    La fórmula es `factor = 10^(dB/20)`. Por eso `+6 dB = 10^0.3 = ×2`, y `−∞ = 10^(−∞) = ×0`. El +6 dB superior es un pequeño margen de ganancia; no se da más porque en digital pegarías contra el techo de 0 dBFS y clipearías. El −∞ inferior es la forma matemática de decir "apagado".
 
 
 ---
