@@ -25,7 +25,14 @@
 
     Eso es una relación de **1,000,000 a 1** — seis órdenes de magnitud. Si intentáramos graficar esto en una escala lineal, el umbral de audición sería invisible. Peor aún: el oído no percibe los cambios de presión de forma lineal, sino **logarítmica**.
 
-    > Insertar **Fig. 2-1** del Everest: escala logarítmica — compárese la compresión de una escala lineal (donde la distancia entre 1 y 2 es igual que entre 1,000,001 y 1,000,002) con la escala logarítmica, donde cada ciclo representa una década (×10).
+    <figure markdown="span">
+      ![Fig. 2-1: Presión sonora RMS y nivel de presión sonora](../../../img/presion_rms_y_nivel_sonoro.svg)
+      <figcaption>**Fig. 2-1** — Presión sonora RMS en escala logarítmica y nivel de presión sonora en decibelios, referido a 20 micropascales. La escala logarítmica comprime un rango enorme de presiones en valores manejables.</figcaption>
+    </figure>
+
+    [🎛️ **Abrir laboratorio interactivo — La regla que se comprime**](../../../simulacion/logaritmos-decibeles.html){ .md-button }
+
+    Mueve el deslizador para comparar la escala lineal con la logarítmica y ver cómo el logaritmo cuenta saltos de ×10. Observa la relación p/p₀, la presión sonora y el nivel en dB SPL.
 
     ### La intuición logarítmica
 

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logaritmos y decibeles — La regla que se comprime</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #log-lab { max-width: 960px; margin: 0 auto; padding: 16px; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; }
+    button:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+<script>
+let logLabSlider;
+let logLabExponentLabel;
+let logLabRatioValue;
+let logLabPressureValue;
+let logLabDbValue;
+
+const LOG_LAB_MAX_EXPONENT = 6;
+const LOG_LAB_REFERENCE_PRESSURE = 20e-6; // 20 µPa en aire
+
+// Teal theme colors
+const TEAL = [36, 157, 143];
+const TEAL_DARK = [26, 122, 111];
+const ACCENT = [213, 94, 56]; // coral marker
+
+function setup() {
+  const root = createDiv();
+  root.id("log-lab");
+  root.style("max-width", "960px");
+  root.style("margin", "0 auto");
+  root.style("font-family", "system-ui, sans-serif");
+  root.style("color", "#172033");
+
+  const heading = createElement("h2", "La regla que se comprime");
+  heading.parent(root);
+  heading.style("margin-bottom", "4px");
+
+  const lead = createP(
+    "El logaritmo cuenta cuántos saltos de ×10 separan dos cantidades."
+  );
+  lead.parent(root);
+  lead.style("margin-top", "0");
+  lead.style("color", "#526079");
+
+  const controls = createDiv();
+  controls.parent(root);
+  controls.style("display", "flex");
+  controls.style("align-items", "center");
+  controls.style("gap", "12px");
+  controls.style("flex-wrap", "wrap");
+  controls.style("margin", "18px 0 12px");
+
+  const divideButton = createButton("÷10");
+  divideButton.parent(controls);
+  styleButton(divideButton);
+  divideButton.mousePressed(() => changeExponent(-1));
+
+  logLabSlider = createSlider(0, LOG_LAB_MAX_EXPONENT, 3, 0.01);
+  logLabSlider.parent(controls);
+  logLabSlider.style("flex", "1 1 280px");
+  logLabSlider.attribute("aria-label", "Exponente en base diez");
+  logLabSlider.input(updateLogLabValues);
+
+  const multiplyButton = createButton("×10");
+  multiplyButton.parent(controls);
+  styleButton(multiplyButton, true);
+  multiplyButton.mousePressed(() => changeExponent(1));
+
+  logLabExponentLabel = createSpan("");
+  logLabExponentLabel.parent(root);
+  logLabExponentLabel.style("display", "block");
+  logLabExponentLabel.style("font-weight", "600");
+  logLabExponentLabel.style("margin-bottom", "12px");
+
+  const stats = createDiv();
+  stats.parent(root);
+  stats.style("display", "grid");
+  stats.style("grid-template-columns", "repeat(auto-fit, minmax(160px, 1fr))");
+  stats.style("gap", "10px");
+  stats.style("margin-bottom", "14px");
+
+  logLabRatioValue = createStat(stats, "Relación p/p₀");
+  logLabPressureValue = createStat(stats, "Presión sonora");
+  logLabDbValue = createStat(stats, "Nivel Lp");
+
+  const canvasWidth = constrain(windowWidth - 36, 280, 920);
+  const canvas = createCanvas(canvasWidth, 430);
+  canvas.parent(root);
+  canvas.attribute("aria-label", "Comparación entre una escala lineal y una escala logarítmica");
+  canvas.style("display", "block");
+  canvas.style("width", "100%");
+  canvas.style("height", "auto");
+  canvas.style("border", "1px solid #d8deea");
+  canvas.style("border-radius", "14px");
+
+  textFont("system-ui");
+  updateLogLabValues();
+}
+
+function draw() {
+  background("#f8faff");
+
+  const exponent = Number(logLabSlider.value());
+  const ratio = Math.pow(10, exponent);
+
+  drawEquation(exponent, ratio);
+  drawLinearScale(ratio);
+  drawLogScale(exponent);
+}
+
+function drawEquation(exponent, ratio) {
+  noStroke();
+  fill("#172033");
+  textAlign(CENTER, CENTER);
+  textStyle(BOLD);
+  textSize(width < 520 ? 16 : 20);
+  text(`10 ^ ${formatExponent(exponent)} = ${formatNumber(ratio)}`, width / 2, 42);
+
+  textStyle(NORMAL);
+  textSize(width < 520 ? 13 : 15);
+  fill("#526079");
+  text(`log₁₀(${formatNumber(ratio)}) = ${formatExponent(exponent)}`, width / 2, 70);
+}
+
+function drawLinearScale(ratio) {
+  const left = 62;
+  const right = width - 34;
+  const y = 170;
+
+  fill("#172033");
+  noStroke();
+  textAlign(LEFT, CENTER);
+  textStyle(BOLD);
+  textSize(14);
+  text("Escala lineal — diferencias iguales", left, y - 58);
+
+  textStyle(NORMAL);
+  textSize(12);
+  fill("#526079");
+  text("Los valores pequeños quedan comprimidos junto al inicio.", left, y - 35);
+
+  stroke("#aab5c8");
+  strokeWeight(2);
+  line(left, y, right, y);
+
+  const linearTicks = [1, 250000, 500000, 750000, 1000000];
+  linearTicks.forEach((value) => {
+    const x = map(value, 1, 1000000, left, right);
+    stroke("#aab5c8");
+    line(x, y - 6, x, y + 6);
+    noStroke();
+    fill("#526079");
+    textAlign(CENTER, TOP);
+    textSize(11);
+    text(formatAxisNumber(value), x, y + 10);
+  });
+
+  const markerX = map(ratio, 1, 1000000, left, right);
+  drawMarker(markerX, y, ACCENT);
+}
+
+function drawLogScale(exponent) {
+  const left = 62;
+  const right = width - 34;
+  const y = 318;
+
+  fill("#172033");
+  noStroke();
+  textAlign(LEFT, CENTER);
+  textStyle(BOLD);
+  textSize(14);
+  text("Escala logarítmica — razones iguales", left, y - 63);
+
+  textStyle(NORMAL);
+  textSize(12);
+  fill("#526079");
+  text("Cada tramo representa una multiplicación por 10.", left, y - 40);
+
+  stroke(TEAL);
+  strokeWeight(3);
+  line(left, y, right, y);
+
+  for (let power = 0; power <= LOG_LAB_MAX_EXPONENT; power += 1) {
+    const x = map(power, 0, LOG_LAB_MAX_EXPONENT, left, right);
+    stroke(TEAL);
+    strokeWeight(2);
+    line(x, y - 8, x, y + 8);
+
+    noStroke();
+    fill("#172033");
+    textAlign(CENTER, TOP);
+    textSize(width < 520 ? 10 : 11);
+    text(formatAxisNumber(Math.pow(10, power)), x, y + 13);
+
+    if (power < LOG_LAB_MAX_EXPONENT) {
+      const nextX = map(power + 1, 0, LOG_LAB_MAX_EXPONENT, left, right);
+      fill("#526079");
+      textAlign(CENTER, BOTTOM);
+      text("×10", (x + nextX) / 2, y - 13);
+    }
+  }
+
+  const markerX = map(exponent, 0, LOG_LAB_MAX_EXPONENT, left, right);
+  drawMarker(markerX, y, ACCENT);
+
+  noStroke();
+  fill("#172033");
+  textAlign(CENTER, TOP);
+  textSize(12);
+  text(`${formatExponent(exponent)} saltos desde 1`, constrain(markerX, left + 70, right - 70), y + 48);
+}
+
+function drawMarker(x, y, markerColor) {
+  noStroke();
+  fill(markerColor);
+  circle(x, y, 16);
+  stroke(markerColor);
+  strokeWeight(1.5);
+  line(x, y - 18, x, y + 18);
+}
+
+function changeExponent(amount) {
+  const current = Number(logLabSlider.value());
+  const next = constrain(Math.round((current + amount) * 100) / 100, 0, LOG_LAB_MAX_EXPONENT);
+  logLabSlider.value(next);
+  updateLogLabValues();
+}
+
+function updateLogLabValues() {
+  if (!logLabSlider) return;
+  const exponent = Number(logLabSlider.value());
+  const ratio = Math.pow(10, exponent);
+  const pressure = LOG_LAB_REFERENCE_PRESSURE * ratio;
+  const decibels = 20 * Math.log10(ratio);
+
+  logLabExponentLabel.html(`Exponente: n = ${formatExponent(exponent)}`);
+  logLabRatioValue.html(`${formatNumber(ratio)} veces`);
+  logLabPressureValue.html(formatPressure(pressure));
+  logLabDbValue.html(`${decibels.toFixed(1)} dB SPL`);
+}
+
+function createStat(parent, label) {
+  const card = createDiv();
+  card.parent(parent);
+  card.style("padding", "12px 14px");
+  card.style("background", "#eef3ff");
+  card.style("border-radius", "12px");
+
+  const statLabel = createDiv(label);
+  statLabel.parent(card);
+  statLabel.style("font-size", "12px");
+  statLabel.style("color", "#526079");
+  statLabel.style("margin-bottom", "4px");
+
+  const value = createDiv("");
+  value.parent(card);
+  value.style("font-weight", "700");
+  return value;
+}
+
+function styleButton(button, primary = false) {
+  button.style("padding", "8px 14px");
+  button.style("border-radius", "9px");
+  button.style("border", primary ? "1px solid " + rgbStr(TEAL_DARK) : "1px solid #aab5c8");
+  button.style("background", primary ? rgbStr(TEAL) : "#ffffff");
+  button.style("color", primary ? "#ffffff" : "#172033");
+  button.style("cursor", "pointer");
+  button.style("font-weight", "600");
+}
+
+function rgbStr(c) {
+  return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+}
+
+function formatExponent(value) {
+  return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(2);
+}
+
+function formatNumber(value) {
+  if (value >= 100000) return Math.round(value).toLocaleString("es-EC");
+  if (value >= 1000) return value.toLocaleString("es-EC", { maximumFractionDigits: 1 });
+  if (value >= 10) return value.toLocaleString("es-EC", { maximumFractionDigits: 2 });
+  return value.toLocaleString("es-EC", { maximumFractionDigits: 3 });
+}
+
+function formatAxisNumber(value) {
+  if (value === 1000000) return "1 M";
+  if (value >= 1000) return `${Math.round(value / 1000)} k`;
+  return String(value);
+}
+
+function formatPressure(pascals) {
+  if (pascals < 0.001) return `${(pascals * 1e6).toFixed(1)} µPa`;
+  if (pascals < 1) return `${(pascals * 1000).toFixed(2)} mPa`;
+  return `${pascals.toFixed(2)} Pa`;
+}
+
+function windowResized() {
+  const nextWidth = constrain(windowWidth - 36, 280, 920);
+  resizeCanvas(nextWidth, 430);
+}
+</script>
+</body>
+</html>
