@@ -17,6 +17,10 @@
     | <a id="pa"></a>**Pa** | Pascal | Presión | 1 Pa = 1 N/m² |
     | <a id="w"></a>**W** | Watt (Vatio) | Potencia | 1 W = 1 J/s |
     | <a id="log"></a>**log₁₀** | Logaritmo en base 10 | Exponente al que hay que elevar 10 para obtener el número | log₁₀(100) = 2 |
+    | <a id="dbfs"></a>**dBFS** | Decibel Full Scale | Nivel digital — 0 dBFS es el máximo antes de distorsión | Todo por debajo es negativo |
+    | <a id="dbu"></a>**dBu** | Decibel (voltaje) | Nivel eléctrico profesional | 0 dBu = 0.775 V, nominal +4 dBu |
+    | <a id="dbv"></a>**dBV** | Decibel (voltaje) | Nivel eléctrico de consumo | 0 dBV = 1 V, nominal −10 dBV |
+    | <a id="lufs"></a>**LUFS** | Loudness Units Full Scale | Sonoridad percibida | Estándar de streaming |
     | <a id="s"></a>**s** | Segundo | Tiempo | — |
 
 ???+ note "¿Por qué decibeles? El problema de la escala lineal"
@@ -196,9 +200,59 @@
     | **dBV** | 0 dBV = 1 V | Equipos de consumo (−10 dBV) |
     | **dBFS** | 0 dBFS = máximo digital (Full Scale) | DAWs, interfaces de audio |
     | **dB SPL** | 0 dB SPL = 20 µPa (umbral de audición) | Medición acústica con sonómetro |
+    | **LUFS** | Sonoridad percibida | Streaming (Spotify, YouTube) |
 
     !!! tip "No mezcles las referencias"
         0 dB SPL es el umbral de audición (silencio casi absoluto). 0 dBFS es el máximo nivel digital posible antes de distorsión (lo más fuerte que permite el sistema). Son escalas completamente distintas — la confusión es una fuente frecuente de errores en estudiantes principiantes.
+
+### ¿Qué tipo de dB ves en el mezclador? dBFS
+
+    Cuando abrís la DAW (Pro Tools, Logic, Ableton), los **faders y medidores usan dBFS**, no dB SPL. La escala funciona **al revés** de lo que uno espera:
+
+    | Valor | Significado en dBFS |
+    |---|---|
+    | **0 dBFS** | Techo digital — si lo pasás, la señal se recorta (*clipping*) |
+    | −6 dBFS | Nivel alto, con poco margen |
+    | −12 dBFS | Nivel cómodo |
+    | −18 dBFS | **≈ 0 VU en consola analógica** — referencia clásica de trabajo |
+    | −60 dBFS | Señal muy tenue, cerca del ruido de fondo |
+    | −∞ dBFS | Silencio digital absoluto |
+
+    En dB SPL, "0" es el silencio y subís hacia 120 (dolor). En dBFS, "0" es el **techo** y bajás hacia −∞ (silencio). Son referencias opuestas.
+
+    ### El headroom: la regla de oro del digital
+
+    En digital hay que **alejarse del 0 dBFS**. Se deja margen (*headroom*):
+
+    - Grabación: picos alrededor de **−18 dBFS** (equivale a 0 VU)
+    - Mezcla: picos alrededor de **−6 dBFS**, dejando espacio al mastering
+    - Streaming: las plataformas normalizan a unos **−14 LUFS**
+
+    !!! warning "El error del principiante"
+        Muchos estudiantes suben el fader hasta que el meter toca 0 dBFS "para que suene fuerte". Eso solo genera distorsión digital (clipping) sin aportar calidad. En digital, el volumen final se controla en la **escucha** (bajando/subiendo el volumen del monitor en dB SPL), no pegando la señal al techo de dBFS.
+
+    ### De la sala al DAW: el camino completo
+
+    ```
+    Monitor emite potencia (SWL)
+         ↓
+    La sala recibe intensidad (SIL)
+         ↓
+    Mi oído percibe presión (SPL)  ← medido con sonómetro
+         ↓
+    El micrófono convierte a voltaje (dBu)
+         ↓
+    La DAW lo digitaliza (dBFS)    ← lo que ves en el mezclador
+    ```
+
+    | Magnitud | Referencia | ¿Dónde aparece? |
+    |---|---|---|
+    | **SWL** | 10⁻¹² W | Ficha técnica del monitor |
+    | **SIL** | 10⁻¹² W/m² | Cálculo de energía |
+    | **SPL** | 20 µPa | Sonómetro, protección auditiva |
+    | **dBu/dBV** | Voltaje | Consola, outboard |
+    | **dBFS** | Full scale digital | Faders y meters de la DAW |
+    | **LUFS** | Sonoridad | Plataformas de streaming |
 
 
 ---
