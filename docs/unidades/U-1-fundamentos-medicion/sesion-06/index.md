@@ -55,7 +55,10 @@
     | \(p_0 = 20\ \mu\text{Pa}\) | 0.00002 Pa | 0 dB SPL | Umbral de audición — silencio absoluto en cámara anecoica |
     | Presión atmosférica | 101,325 Pa | ~194 dB SPL | La presión del aire en reposo al nivel del mar |
 
-    > Insertar **Fig. 2-1** del Everest: escala logarítmica — la relación entre 20 µPa y 20 Pa (1,000,000:1) se comprime a tan solo 120 dB en la escala logarítmica. Sin la compresión del dB, una gráfica de presiones sonoras sería ilegible.
+    <figure markdown="span">
+      ![Fig. 2-1: Presión sonora RMS y nivel de presión sonora](../../../img/presion_rms_y_nivel_sonoro.svg)
+      <figcaption>**Fig. 2-1** — Presión sonora RMS en escala logarítmica y nivel de presión sonora en decibelios, referido a 20 micropascales. La relación entre 20 µPa y 20 Pa (1,000,000:1) se comprime a tan solo 120 dB en la escala logarítmica.</figcaption>
+    </figure>
 
 ???+ note "El sonómetro y la medición en campo"
 
