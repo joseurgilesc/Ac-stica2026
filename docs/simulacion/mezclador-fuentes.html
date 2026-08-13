@@ -228,8 +228,15 @@ function update() {
     : 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
 
   valDiff.html(diff.toFixed(1) + ' dB');
-  valCorr.html('+' + corr.toFixed(1) + ' dB');
-  valApprox.html(approx.toFixed(1) + ' dB');
+
+  if (coherent) {
+    // The sum table applies only to incoherent (energy) addition
+    valCorr.html('N/A (presión)');
+    valApprox.html('N/A (tabla incoherente)');
+  } else {
+    valCorr.html('+' + corr.toFixed(1) + ' dB');
+    valApprox.html(approx.toFixed(1) + ' dB');
+  }
   valExact.html(exact.toFixed(2) + ' dB');
 }
 
