@@ -29,6 +29,10 @@
       <figcaption>**Fig. 2-5** — Nomograma de suma de niveles. La curva indica cuánto sumar al nivel mayor según la diferencia ΔL entre dos fuentes. Con fuentes iguales (ΔL = 0) se suman 3 dB; a mayor diferencia, menos aporta la fuente débil.</figcaption>
     </figure>
 
+    [🎛️ **Abrir simulación interactiva — Mezclador de fuentes**](../../../simulacion/mezclador-fuentes.html){ .md-button }
+
+    Mueve los deslizadores de la Fuente A y B para ver la diferencia, la corrección de la tabla, el resultado aproximado, el exacto y la energía lineal de cada fuente.
+
     ### La regla general de suma de niveles
 
     Para sumar dos niveles de presión sonora \(L_1\) y \(L_2\) (en dB SPL):

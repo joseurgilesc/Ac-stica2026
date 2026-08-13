@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mezclador de fuentes — Suma de niveles sonoros</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #mixer { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 90px; font-weight: 600; }
+    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
+    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
+    .stat .val { font-weight: 700; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+    .highlight { background: #e6f7f3; border-left: 4px solid #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+  </style>
+</head>
+<body>
+<div id="mixer">
+<script>
+const TEAL = [36, 157, 143];
+const TEAL_DARK = [26, 122, 111];
+const CORAL = [224, 90, 71];
+
+const TABLE = [
+  { d: 0, c: 3.0 }, { d: 1, c: 2.5 }, { d: 2, c: 2.1 }, { d: 3, c: 1.8 },
+  { d: 4, c: 1.5 }, { d: 5, c: 1.2 }, { d: 6, c: 1.0 }, { d: 7, c: 0.8 },
+  { d: 8, c: 0.6 }, { d: 9, c: 0.5 }, { d: 10, c: 0.4 }, { d: 11, c: 0.3 },
+  { d: 12, c: 0.2 },
+];
+
+let sliderA, sliderB;
+let valDiff, valCorr, valApprox, valExact, valError;
+
+function setup() {
+  const root = select('#mixer');
+
+  const heading = createElement('h2', 'Suma de dos fuentes sonoras');
+  heading.parent(root);
+
+  const lead = createP('Mueve los deslizadores para combinar dos fuentes y observar la suma logarítmica. La barra muestra la energía lineal real de cada fuente.');
+  lead.parent(root);
+  lead.style('color', '#526079');
+
+  // Source A
+  const rowA = createDiv('');
+  rowA.parent(root); rowA.addClass('row');
+  createElement('label', 'Fuente A:').parent(rowA);
+  sliderA = createSlider(40, 100, 70, 0.1);
+  sliderA.parent(rowA); sliderA.style('flex', '1 1 300px');
+  const valA = createSpan('70 dB'); valA.parent(rowA); valA.style('font-weight', '700');
+  sliderA.input(() => { valA.html(sliderA.value() + ' dB'); update(); });
+
+  // Source B
+  const rowB = createDiv('');
+  rowB.parent(root); rowB.addClass('row');
+  createElement('label', 'Fuente B:').parent(rowB);
+  sliderB = createSlider(40, 100, 70, 0.1);
+  sliderB.parent(rowB); sliderB.style('flex', '1 1 300px');
+  const valB = createSpan('70 dB'); valB.parent(rowB); valB.style('font-weight', '700');
+  sliderB.input(() => { valB.html(sliderB.value() + ' dB'); update(); });
+
+  // Stats
+  const stats = createDiv('');
+  stats.parent(root); stats.addClass('stats');
+  valDiff = createStat(stats, 'Diferencia ΔL');
+  valCorr = createStat(stats, 'Corrección (tabla)');
+  valApprox = createStat(stats, 'Resultado aproximado');
+  valExact = createStat(stats, 'Resultado exacto');
+  valError = createStat(stats, 'Error de la tabla');
+  valExact.parent().addClass('highlight');
+
+  // Canvas for energy visualization
+  const cw = min(860, windowWidth - 40);
+  createCanvas(cw, 280).parent(root);
+
+  textFont('system-ui');
+  update();
+}
+
+function draw() {
+  background(255);
+
+  const L1 = Number(sliderA.value());
+  const L2 = Number(sliderB.value());
+  const total = 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
+
+  // Linear energies (relative, normalized to the larger one)
+  const e1 = Math.pow(10, L1/10);
+  const e2 = Math.pow(10, L2/10);
+  const eTotal = e1 + e2;
+  const maxE = eTotal;
+
+  const barW = 70;
+  const yTop = 50;
+  const yBottom = 230;
+  const maxH = yBottom - yTop;
+
+  // Title
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(15);
+  textStyle(BOLD);
+  text('Energía lineal de cada fuente (proporcional a la intensidad)', width / 2, 12);
+  textStyle(NORMAL);
+
+  // Bar A
+  const xA = width * 0.25 - barW / 2;
+  const hA = (e1 / maxE) * maxH;
+  fill(TEAL[0], TEAL[1], TEAL[2], 180);
+  rect(xA, yBottom - hA, barW, hA, 6);
+
+  // Bar B
+  const xB = width * 0.5 - barW / 2;
+  const hB = (e2 / maxE) * maxH;
+  fill(CORAL[0], CORAL[1], CORAL[2], 180);
+  rect(xB, yBottom - hB, barW, hB, 6);
+
+  // Bar total (outline showing sum)
+  const xT = width * 0.75 - barW / 2;
+  const hT = (eTotal / maxE) * maxH;
+  noFill();
+  stroke(TEAL_DARK[0], TEAL_DARK[1], TEAL_DARK[2]);
+  strokeWeight(2);
+  rect(xT, yBottom - hT, barW, hT, 6);
+
+  // Labels
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(13);
+  text('Fuente A\n' + L1.toFixed(1) + ' dB', xA + barW/2, yBottom + 8);
+  text('Fuente B\n' + L2.toFixed(1) + ' dB', xB + barW/2, yBottom + 8);
+  text('Total\n' + total.toFixed(1) + ' dB', xT + barW/2, yBottom + 8);
+
+  // Note about linear sum
+  fill(82, 96, 121);
+  textSize(12);
+  textAlign(CENTER, TOP);
+  text('Las barras muestran que la energía se suma linealmente, pero el resultado en dB es logarítmico.', width / 2, yBottom + 48);
+}
+
+function update() {
+  if (!sliderA) return;
+  const L1 = Number(sliderA.value());
+  const L2 = Number(sliderB.value());
+  const higher = Math.max(L1, L2);
+  const lower = Math.min(L1, L2);
+  const diff = higher - lower;
+
+  let corr = 0;
+  for (const t of TABLE) {
+    if (diff >= t.d) corr = t.c;
+    else break;
+  }
+  if (diff > 12) corr = 0.1;
+
+  const approx = higher + corr;
+  const exact = 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
+
+  valDiff.html(diff.toFixed(1) + ' dB');
+  valCorr.html('+' + corr.toFixed(1) + ' dB');
+  valApprox.html(approx.toFixed(1) + ' dB');
+  valExact.html(exact.toFixed(2) + ' dB');
+  valError.html((approx - exact).toFixed(2) + ' dB');
+}
+
+function createStat(parent, label) {
+  const card = createDiv('');
+  card.parent(parent); card.addClass('stat');
+  const lbl = createDiv(label); lbl.parent(card); lbl.addClass('lbl');
+  const val = createDiv(''); val.parent(card); val.addClass('val');
+  return val;
+}
+
+function windowResized() {
+  const cw = min(860, windowWidth - 40);
+  resizeCanvas(cw, 280);
+}
+</script>
+</div>
+</body>
+</html>
