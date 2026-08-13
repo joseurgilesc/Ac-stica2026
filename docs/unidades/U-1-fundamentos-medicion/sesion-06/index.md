@@ -46,6 +46,25 @@
     | \(p\) | Presión sonora medida | Variable — depende de la fuente y la distancia | La presión instantánea o RMS en el punto de medición |
     | \(p_0\) | Presión de referencia | \(20\ \mu\text{Pa}\) = 0.00002 Pa | Umbral de audición humana a 1 kHz — el sonido más tenue detectable |
 
+    ???+ note "¿Qué es la presión RMS?"
+
+        **RMS = *Root Mean Square*** (raíz cuadrada de la media de los cuadrados). El sonido es una onda: la presión sube y baja rapidísimo alrededor de la presión atmosférica, con valores positivos y negativos. El promedio simple de una onda sinusoidal es **cero** (la mitad arriba y la mitad abajo se cancelan), así que no sirve para describir el sonido.
+
+        El RMS resuelve esto en tres pasos:
+
+        | Paso | Operación | Por qué |
+        |---|---|---|
+        | 1. **S**quare | Elevar cada valor al cuadrado | Elimina el signo (todo positivo) |
+        | 2. **M**ean | Promediar los cuadrados | Obtiene la energía promedio |
+        | 3. **R**oot | Sacar raíz cuadrada | Vuelve a la unidad original (Pa) |
+
+        El resultado es el valor **efectivo** de la presión — el que tiene la misma energía que la onda real.
+
+        !!! tip "Relación con el pico"
+            Para un tono puro (sinusoidal): \(\text{RMS} = \text{pico} / \sqrt{2} \approx \text{pico} \times 0.707\). Una onda que pica a 1 Pa tiene RMS ≈ 0.707 Pa.
+
+        El SPL se calcula con **presión RMS** porque el RMS es proporcional a la **energía** del sonido. Un sonómetro no dice "la presión picó a X", dice "la presión efectiva promedio fue Y" — que es lo que el oído y la salud auditiva realmente perciben.
+
     ### ¿Por qué 20 µPa?
 
     El valor de 20 µPa no es arbitrario: es la presión sonora mínima que un oído humano sano puede detectar a 1,000 Hz en condiciones ideales. Equivale a un desplazamiento de las partículas de aire de aproximadamente \(10^{-11}\) metros — menor que el diámetro de un átomo. El oído humano es un instrumento de medición extraordinario:
