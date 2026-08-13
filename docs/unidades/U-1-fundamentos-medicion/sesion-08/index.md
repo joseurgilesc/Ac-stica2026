@@ -32,7 +32,10 @@
     | **Lineal** (*line source*) | Una línea continua de fuentes — el sonido se expande en 2D (cilindro) | Columna de altavoces (*line array*), tráfico en una autopista, un tren pasando | **−3 dB por duplicación** de distancia (1/r) |
     | **Plana** (*plane source*) | Una superficie vibrante que emite ondas planas — sin divergencia | Grandes paneles radiantes, un pistón en un tubo, campo cercano de un altavoz grande | **~0 dB** (sin atenuación por distancia en campo cercano) |
 
-    > Insertar **Fig. 3-1** del Everest: fuente puntual y divergencia esférica — mostrando cómo la energía sonora de una fuente puntual se distribuye sobre una superficie esférica cada vez mayor. Al duplicar la distancia (\(r \to 2r\)), el área de la esfera se cuadruplica (\(4\pi r^2 \to 16\pi r^2\)), por lo que la intensidad se divide entre 4 → −6 dB.
+    <figure markdown="span">
+      ![Fig. 3-1: Propagación esférica y ley del inverso del cuadrado](../../../img/propagacion_esferica_inverso_cuadrado.svg)
+      <figcaption>**Fig. 3-1** — Fuente puntual y divergencia esférica. La energía se distribuye sobre una superficie esférica cada vez mayor. Al duplicar la distancia, el área se cuadruplica, por lo que la intensidad se divide entre 4 → −6 dB.</figcaption>
+    </figure>
 
     [🎛️ **Abrir simulación interactiva — Tres maneras de expandirse**](../../../simulacion/tipos-fuente.html){ .md-button }
 
