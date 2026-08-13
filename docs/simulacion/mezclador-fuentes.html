@@ -16,6 +16,8 @@
     .stat .val { font-weight: 700; font-size: 16px; }
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
     .highlight { background: #e6f7f3; border-left: 4px solid #249D8F; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
     canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
   </style>
 </head>
@@ -23,8 +25,8 @@
 <div id="mixer">
 <script>
 const TEAL = [36, 157, 143];
-const TEAL_DARK = [26, 122, 111];
 const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
 
 const TABLE = [
   { d: 0, c: 3.0 }, { d: 1, c: 2.5 }, { d: 2, c: 2.1 }, { d: 3, c: 1.8 },
@@ -34,7 +36,15 @@ const TABLE = [
 ];
 
 let sliderA, sliderB;
-let valDiff, valCorr, valApprox, valExact, valError;
+let valDiff, valCorr, valApprox, valExact;
+let coherent = false;
+let btnMode;
+let time = 0;
+
+// Display frequencies (low for clarity)
+const F_A = 1.0;       // cycles across screen for source A
+const F_B_COHERENT = 1.0;   // same freq when coherent
+const F_B_INCOHERENT = 1.8; // different freq when incoherent
 
 function setup() {
   const root = select('#mixer');
@@ -42,7 +52,7 @@ function setup() {
   const heading = createElement('h2', 'Suma de dos fuentes sonoras');
   heading.parent(root);
 
-  const lead = createP('Mueve los deslizadores para combinar dos fuentes y observar la suma logarítmica. La barra muestra la energía lineal real de cada fuente.');
+  const lead = createP('Observa cómo se superponen las ondas. Dos ondas en fase duplican la amplitud (+6 dB); dos ondas distintas suman energía (+3 dB).');
   lead.parent(root);
   lead.style('color', '#526079');
 
@@ -64,6 +74,19 @@ function setup() {
   const valB = createSpan('70 dB'); valB.parent(rowB); valB.style('font-weight', '700');
   sliderB.input(() => { valB.html(sliderB.value() + ' dB'); update(); });
 
+  // Mode toggle
+  const rowMode = createDiv('');
+  rowMode.parent(root); rowMode.addClass('row');
+  createElement('label', 'Modo:').parent(rowMode);
+  btnMode = createButton('Incoherente (frecuencias distintas)');
+  btnMode.parent(rowMode);
+  btnMode.mousePressed(() => {
+    coherent = !coherent;
+    btnMode.html(coherent ? 'Coherente (en fase)' : 'Incoherente (frecuencias distintas)');
+    btnMode.toggleClass('active', coherent);
+    update();
+  });
+
   // Stats
   const stats = createDiv('');
   stats.parent(root); stats.addClass('stats');
@@ -71,12 +94,11 @@ function setup() {
   valCorr = createStat(stats, 'Corrección (tabla)');
   valApprox = createStat(stats, 'Resultado aproximado');
   valExact = createStat(stats, 'Resultado exacto');
-  valError = createStat(stats, 'Error de la tabla');
   valExact.parent().addClass('highlight');
 
-  // Canvas for energy visualization
+  // Canvas
   const cw = min(860, windowWidth - 40);
-  createCanvas(cw, 280).parent(root);
+  createCanvas(cw, 420).parent(root);
 
   textFont('system-ui');
   update();
@@ -84,65 +106,105 @@ function setup() {
 
 function draw() {
   background(255);
+  time += deltaTime * 0.001;
 
-  const L1 = Number(sliderA.value());
-  const L2 = Number(sliderB.value());
-  const total = 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
+  const LA = Number(sliderA.value());
+  const LB = Number(sliderB.value());
+  // Exact sum depends on mode: coherent (pressure sum) vs incoherent (energy sum)
+  const Lsum = coherent
+    ? 20 * Math.log10(Math.pow(10, LA/20) + Math.pow(10, LB/20))
+    : 10 * Math.log10(Math.pow(10, LA/10) + Math.pow(10, LB/10));
 
-  // Linear energies (relative, normalized to the larger one)
-  const e1 = Math.pow(10, L1/10);
-  const e2 = Math.pow(10, L2/10);
-  const eTotal = e1 + e2;
-  const maxE = eTotal;
+  // Amplitudes (pressure, proportional to 10^(L/20)), normalized to 70 dB = 1.0
+  const ampA = Math.pow(10, (LA - 70) / 20);
+  const ampB = Math.pow(10, (LB - 70) / 20);
 
-  const barW = 70;
-  const yTop = 50;
-  const yBottom = 230;
-  const maxH = yBottom - yTop;
+  const fB = coherent ? F_B_COHERENT : F_B_INCOHERENT;
 
-  // Title
+  // Normalize display scale to the max amplitude present
+  const maxAmp = Math.max(ampA, ampB, ampA + ampB, 0.5);
+
+  const GX = 40;
+  const GW = width - 80;
+  const panelH = 110;
+  const top1 = 20;
+
+  // ── Panel 1: Fuente A ──
+  drawWavePanel(GX, top1, GW, panelH, 'Fuente A (' + LA.toFixed(1) + ' dB)', ampA / maxAmp, F_A, 0, TEAL);
+
+  // ── Panel 2: Fuente B ──
+  drawWavePanel(GX, top1 + panelH + 5, GW, panelH, 'Fuente B (' + LB.toFixed(1) + ' dB)', ampB / maxAmp, fB, 0, coherent ? INDIGO : CORAL);
+
+  // ── Panel 3: Suma ──
+  drawSumPanel(GX, top1 + 2 * (panelH + 5), GW, panelH, 'Suma (' + Lsum.toFixed(1) + ' dB)', ampA, ampB, fB, maxAmp);
+}
+
+function drawWavePanel(x, y, w, h, label, amp, freq, phase, color) {
+  // Panel background
+  noStroke();
+  fill(248, 250, 255);
+  rect(x, y, w, h, 8);
+
+  // Center line
+  stroke(0, 0, 0, 20);
+  strokeWeight(1);
+  line(x + 10, y + h / 2, x + w - 10, y + h / 2);
+
+  // Label
   noStroke();
   fill(23, 32, 51);
-  textAlign(CENTER, TOP);
-  textSize(15);
+  textAlign(LEFT, TOP);
+  textSize(12);
   textStyle(BOLD);
-  text('Energía lineal de cada fuente (proporcional a la intensidad)', width / 2, 12);
+  text(label, x + 12, y + 6);
   textStyle(NORMAL);
 
-  // Bar A
-  const xA = width * 0.25 - barW / 2;
-  const hA = (e1 / maxE) * maxH;
-  fill(TEAL[0], TEAL[1], TEAL[2], 180);
-  rect(xA, yBottom - hA, barW, hA, 6);
-
-  // Bar B
-  const xB = width * 0.5 - barW / 2;
-  const hB = (e2 / maxE) * maxH;
-  fill(CORAL[0], CORAL[1], CORAL[2], 180);
-  rect(xB, yBottom - hB, barW, hB, 6);
-
-  // Bar total (outline showing sum)
-  const xT = width * 0.75 - barW / 2;
-  const hT = (eTotal / maxE) * maxH;
+  // Wave
   noFill();
-  stroke(TEAL_DARK[0], TEAL_DARK[1], TEAL_DARK[2]);
+  stroke(color[0], color[1], color[2]);
   strokeWeight(2);
-  rect(xT, yBottom - hT, barW, hT, 6);
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let wx = x + 10 + (i / 200) * (w - 20);
+    let val = amp * Math.sin(i / 200 * TWO_PI * freq + time * 2 * freq + phase);
+    vertex(wx, y + h / 2 - val * (h / 2 - 10));
+  }
+  endShape();
+}
 
-  // Labels
+function drawSumPanel(x, y, w, h, label, ampA, ampB, fB, maxAmp) {
+  // Panel background
+  noStroke();
+  fill(230, 247, 243);
+  rect(x, y, w, h, 8);
+
+  // Center line
+  stroke(0, 0, 0, 20);
+  strokeWeight(1);
+  line(x + 10, y + h / 2, x + w - 10, y + h / 2);
+
+  // Label
   noStroke();
   fill(23, 32, 51);
-  textAlign(CENTER, TOP);
-  textSize(13);
-  text('Fuente A\n' + L1.toFixed(1) + ' dB', xA + barW/2, yBottom + 8);
-  text('Fuente B\n' + L2.toFixed(1) + ' dB', xB + barW/2, yBottom + 8);
-  text('Total\n' + total.toFixed(1) + ' dB', xT + barW/2, yBottom + 8);
-
-  // Note about linear sum
-  fill(82, 96, 121);
+  textAlign(LEFT, TOP);
   textSize(12);
-  textAlign(CENTER, TOP);
-  text('Las barras muestran que la energía se suma linealmente, pero el resultado en dB es logarítmico.', width / 2, yBottom + 48);
+  textStyle(BOLD);
+  text(label, x + 12, y + 6);
+  textStyle(NORMAL);
+
+  // Sum wave (algebraic sum of A and B)
+  noFill();
+  stroke(26, 122, 111);
+  strokeWeight(2.5);
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let wx = x + 10 + (i / 200) * (w - 20);
+    let valA = ampA * Math.sin(i / 200 * TWO_PI * F_A + time * 2 * F_A);
+    let valB = ampB * Math.sin(i / 200 * TWO_PI * fB + time * 2 * fB);
+    let sum = (valA + valB) / maxAmp;
+    vertex(wx, y + h / 2 - sum * (h / 2 - 10));
+  }
+  endShape();
 }
 
 function update() {
@@ -161,13 +223,14 @@ function update() {
   if (diff > 12) corr = 0.1;
 
   const approx = higher + corr;
-  const exact = 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
+  const exact = coherent
+    ? 20 * Math.log10(Math.pow(10, L1/20) + Math.pow(10, L2/20))
+    : 10 * Math.log10(Math.pow(10, L1/10) + Math.pow(10, L2/10));
 
   valDiff.html(diff.toFixed(1) + ' dB');
   valCorr.html('+' + corr.toFixed(1) + ' dB');
   valApprox.html(approx.toFixed(1) + ' dB');
   valExact.html(exact.toFixed(2) + ' dB');
-  valError.html((approx - exact).toFixed(2) + ' dB');
 }
 
 function createStat(parent, label) {
@@ -180,7 +243,7 @@ function createStat(parent, label) {
 
 function windowResized() {
   const cw = min(860, windowWidth - 40);
-  resizeCanvas(cw, 280);
+  resizeCanvas(cw, 420);
 }
 </script>
 </div>
