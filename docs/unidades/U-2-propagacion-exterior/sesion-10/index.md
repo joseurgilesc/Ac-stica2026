@@ -62,8 +62,12 @@
 
     <figure markdown="span">
       ![Fig. 3-4: Absorción atmosférica del sonido](../../../img/absorcion_atmosferica.svg)
-      <figcaption>**Fig. 3-4** — Atenuación atmosférica en dB/100 m para frecuencias de 125 Hz a 8 kHz según la humedad relativa (10% a 90%). En agudos, el aire seco atenúa mucho más que el húmedo; por debajo de 500 Hz la absorción es despreciable.</figcaption>
+       <figcaption>**Fig. 3-4** — Atenuación atmosférica en dB/100 m para frecuencias de 125 Hz a 8 kHz según la humedad relativa (10% a 90%). En agudos, el aire seco atenúa mucho más que el húmedo; por debajo de 500 Hz la absorción es despreciable.</figcaption>
     </figure>
+
+    [🎛️ **Abrir simulación interactiva — ¿Qué queda del sonido?**](../../../simulacion/absorcion-atmosferica.html){ .md-button }
+
+    Mueve la distancia (1–2000 m), alterna la humedad y activa/desactiva la divergencia geométrica y la absorción atmosférica. Observa cómo el espectro se transforma: los agudos se "oscurecen" con la distancia.
 
 ???+ note "Tabla de absorción atmosférica (dB/100 m, 20°C)"
 
