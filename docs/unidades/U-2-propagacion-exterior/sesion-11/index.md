@@ -57,7 +57,7 @@
 
     ### Efecto sobre las trayectorias del sonido
 
-    > Insertar **Fig. 8-1** del Everest: refracción de rayos sonoros por gradiente de temperatura — un rayo sonoro que viaja horizontalmente encuentra capas con distinta velocidad y se curva. El principio es: **el sonido siempre se curva hacia la capa donde viaja más lento**.
+    > [Everest & Pohlmann (2009), Cap. 8, *Refraction*] — refracción de rayos sonoros por gradiente de temperatura: un rayo que viaja horizontalmente encuentra capas con distinta velocidad y se curva. El principio es: **el sonido siempre se curva hacia la capa donde viaja más lento**.
 
     | Condición | ¿Hacia dónde se curva el sonido? | Consecuencia audible | Ejemplo |
     |---|---|---|---|
@@ -68,7 +68,7 @@
     !!! warning "La zona de sombra acústica NO la predice la ley del inverso del cuadrado"
         En condiciones de gradiente negativo fuerte (día soleado), una persona a 300 m puede recibir 20-30 dB MENOS de lo que predice la divergencia geométrica. No es que la energía desaparezca — es que el sonido se curvó hacia arriba y literalmente «pasó por encima» del receptor. Es como si el sonido tuviera un «techo invisible» que lo desvía.
 
-    > Insertar **Fig. 8-4** del Everest: zona de sombra acústica — diagrama mostrando la fuente, la trayectoria curvada hacia arriba y la región en el suelo donde el nivel cae abruptamente. La sombra acústica no es una línea nítida — hay una transición gradual — pero la caída de nivel puede ser dramática.
+    > [Everest & Pohlmann (2009), Cap. 8] — zona de sombra acústica: diagrama con la fuente, la trayectoria curvada hacia arriba y la región en el suelo donde el nivel cae abruptamente. La sombra no es una línea nítida — hay una transición gradual — pero la caída de nivel puede ser dramática.
 
 ???+ note "El efecto del viento: el sonido viaja mejor a favor que en contra"
 
@@ -88,7 +88,7 @@
 
     Una diferencia de velocidad de viento de 5 m/s entre suelo y 10 m de altura puede desviar un rayo sonoro varios metros verticalmente a 500 m de distancia. Con viento en contra fuerte, la atenuación adicional puede ser de 10-20 dB respecto a la predicción de campo libre.
 
-    > Insertar **Fig. 8-5** del Everest: efecto del viento en la propagación — comparación entre propagación a favor del viento (curvatura hacia abajo, nivel más alto en el receptor) y en contra (curvatura hacia arriba, zona de sombra).
+    > [Everest & Pohlmann (2009), Cap. 8] — efecto del viento en la propagación: comparación entre propagación a favor del viento (curvatura hacia abajo, nivel más alto en el receptor) y en contra (curvatura hacia arriba, zona de sombra).
 
 ???+ note "Efecto del suelo: reflexión e interferencia"
 
@@ -134,7 +134,7 @@
 
     El resultado neto: el sonido puede viajar 2-5 veces más lejos de noche que de día, y con mayor fidelidad espectral (los agudos no se pierden tanto).
 
-    > Insertar **Fig. 8-3** del Everest: gradientes de temperatura diurnos y nocturnos — un mismo paisaje sonoro (autopista, fábrica, concierto) medido de día y de noche muestra diferencias de 15-25 dB a 1 km de distancia.
+    > [Everest & Pohlmann (2009), Cap. 8] — gradientes de temperatura diurnos y nocturnos: un mismo paisaje sonoro (autopista, fábrica, concierto) medido de día y de noche muestra diferencias apreciables a gran distancia. La magnitud exacta depende de la intensidad de la inversión térmica y de la topografía; no hay una cifra única.
 
 ???+ note "Resumen: el modelo completo de propagación exterior"
 
