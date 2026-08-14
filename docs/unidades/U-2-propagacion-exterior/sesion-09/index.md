@@ -148,7 +148,10 @@
     | **Obstáculos y barreras** | Atenúan por difracción (el sonido «dobla» parcialmente las esquinas) | El SPL real es MENOR que el predicho |
     | **Directividad de la fuente** | La fuente no emite igual en todas direcciones — Q > 1 concentra energía | El SPL en el eje principal es MAYOR que el predicho para fuente omnidireccional |
 
-    > Insertar **Fig. 3-3** del Everest: comparación entre atenuación teórica (campo libre) y mediciones reales en exteriores — se observa cómo a distancias cortas (<10 m) la ley del inverso del cuadrado domina, pero a distancias largas (>50 m) la absorción atmosférica y otros efectos se vuelven significativos.
+    <figure markdown="span">
+      ![Fig. 3-3: Campos sonoros y distancia crítica](../../../img/campos_sonoros_distancia_critica.svg)
+      <figcaption>**Fig. 3-3** — Campos sonoros y distancia crítica. Comparación entre el campo directo (domina a distancias cortas, −6 dB por duplicación) y el campo reverberante (domina a distancias largas). La distancia crítica es donde ambos campos se igualan.</figcaption>
+    </figure>
 
     !!! info "En producción musical al aire libre"
         Cuando diseñás un sistema de sonido para un festival al aire libre, la ley del inverso del cuadrado es tu primer cálculo. Pero necesitás corregir por: (1) absorción atmosférica en agudos (los tweeters pierden más), (2) dirección del viento (el sonido viaja mejor a favor del viento), (3) temperatura (de noche el sonido «rebota» en capas de aire caliente y llega más lejos), (4) humedad (el aire seco atenúa más los agudos). Son correcciones que veremos en las próximas sesiones.
