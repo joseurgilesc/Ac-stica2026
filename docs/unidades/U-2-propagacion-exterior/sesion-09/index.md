@@ -70,6 +70,10 @@
       <figcaption>**Fig. 3-1** — Fuente puntual con divergencia esférica. La energía se distribuye sobre superficies esféricas concéntricas. Al duplicar la distancia, el área se cuadruplica y la intensidad cae a ¼ → −6 dB.</figcaption>
     </figure>
 
+    [🎛️ **Abrir simulación interactiva — Festival al aire libre**](../../../simulacion/festival-campo-libre.html){ .md-button }
+
+    Mueve al espectador entre 1 y 32 metros, ajusta el nivel inicial y el factor de directividad Q. Observa el nivel recibido, la pérdida por distancia y la potencia necesaria para compensar.
+
     !!! warning "Esto asume campo libre y fuente puntual"
         Si hay superficies reflectantes cerca (suelo, paredes), la caída real será menor porque las reflexiones suman energía. Si la fuente no es puntual (line array, fuente plana), la caída también es distinta (−3 dB para lineal, ~0 dB para plana en campo cercano). La ley del inverso del cuadrado es un **límite teórico máximo de atenuación** por distancia en campo libre.
 
