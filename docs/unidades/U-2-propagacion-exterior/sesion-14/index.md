@@ -77,6 +77,10 @@
 
     > Insertar **Fig. 3-6** del Everest: efecto Doppler con fuente en movimiento — diagrama mostrando frentes de onda comprimidos delante de la fuente (f' > f₀) y expandidos detrás (f' < f₀). Incluir la notación de la fórmula.
 
+    [🎛️ **Abrir simulación interactiva — Persiguiendo las ondas**](../../../simulacion/doppler.html){ .md-button }
+
+    Observa cómo los frentes de onda se comprimen delante de la fuente y se expanden detrás. Ajusta la frecuencia, la velocidad y la distancia lateral, y escucha el cambio de tono.
+
 ???+ note "Receptor en movimiento y caso general"
 
     ### Caso 2: Receptor en movimiento, fuente estática
