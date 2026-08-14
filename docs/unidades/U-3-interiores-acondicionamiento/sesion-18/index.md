@@ -74,6 +74,10 @@
 
     > Insertar **Fig. 12-3** del Everest: gráfico de coeficientes de absorción por frecuencia para varios materiales, mostrando las curvas ascendentes de los materiales porosos y el pico resonante de los paneles perforados.
 
+    [🎛️ **Abrir simulación interactiva — 100 partículas sonoras**](../../../simulacion/absorcion.html){ .md-button }
+
+    Elige un material y una frecuencia. Observa cuántas partículas se absorben (α×100), calcula A = α×S y compara la curva de α por bandas entre dos materiales.
+
 ???+ note "Absorción total de un recinto: A = Σ αᵢ · Sᵢ"
 
     Conocer α de cada material no alcanza. Lo que importa es la **absorción total** del recinto, que combina el coeficiente de CADA superficie con su ÁREA. Una pared enorme de concreto (α ≈ 0.02) puede aportar más absorción total que un panel pequeño de lana mineral (α ≈ 0.90).
