@@ -79,6 +79,10 @@
 
     > Insertar **Fig. 11-3** del Everest: curva de decaimiento sonoro — gráfico de nivel (dB) vs. tiempo (s). Mostrar el estado estacionario (nivel constante mientras la fuente está encendida), el momento en que se apaga la fuente, y la caída gradual del nivel. Señalar el punto de −60 dB y la definición de RT60.
 
+    [🎛️ **Abrir simulación interactiva — Llena y vacía la sala**](../../../simulacion/reverberacion.html){ .md-button }
+
+    Enciende la fuente y observa el crecimiento hasta el estado estacionario. Apágala y mira cómo el nivel decae 60 dB en un tiempo RT60 = 0,161 × V/A. Cambia volumen y absorción.
+
 ???+ note "RT60: la medida universal de la reverberación"
 
     El **tiempo de reverberación RT60** (o T60) es el parámetro más importante en acústica de salas. Se define como:

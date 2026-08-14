@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Llena y vacía la sala — Reverberación</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .hint { font-size: 12px; color: #587086; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Llena y vacía la sala</h2>
+  <p class="lead">Enciende la fuente y observa cómo la energía crece hasta el estado estacionario. Al apagarla, decae 60 dB en un tiempo RT60.</p>
+
+  <div class="row">
+    <label>Volumen V:</label>
+    <input type="range" id="vol" min="20" max="500" value="80" step="5" style="flex:1 1 200px">
+    <span id="volVal" style="font-weight:700">80 m³</span>
+  </div>
+
+  <div class="row">
+    <label>Absorción A:</label>
+    <input type="range" id="abs" min="5" max="200" value="40" step="1" style="flex:1 1 200px">
+    <span id="absVal" style="font-weight:700">40 sabins</span>
+  </div>
+
+  <div class="row">
+    <label>Control:</label>
+    <button id="btnSource">🔊 Encender fuente</button>
+    <button id="btnReset">↺ Reiniciar</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">RT60 (Sabine)</div><div class="val" id="sRt60">—</div></div>
+    <div class="stat"><div class="lbl">Nivel actual</div><div class="val" id="sLevel">—</div></div>
+    <div class="stat"><div class="lbl">Estado</div><div class="val" id="sState">—</div></div>
+  </div>
+
+  <p class="hint">RT60 = 0,161 × V/A. Mayor volumen = más reverberación. Mayor absorción = menos.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+
+let sourceOn = false;
+let energy = 1e-9; // linear energy (0..1)
+let history = [];
+let volSlider, absSlider;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 440);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  volSlider = select('#vol');
+  absSlider = select('#abs');
+  volSlider.input(() => select('#volVal').html(volSlider.value() + ' m³'));
+  absSlider.input(() => select('#absVal').html(absSlider.value() + ' sabins'));
+
+  select('#btnSource').mousePressed(() => {
+    sourceOn = !sourceOn;
+    select('#btnSource').html(sourceOn ? '🔇 Apagar fuente' : '🔊 Encender fuente');
+    select('#btnSource').toggleClass('active', sourceOn);
+  });
+  select('#btnReset').mousePressed(() => {
+    energy = 1e-9;
+    history = [];
+  });
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+
+  const V = Number(volSlider.value());
+  const A = Number(absSlider.value());
+  const RT60 = 0.161 * V / A;
+  const tau = RT60 / 13.82; // time constant (60 dB = 13.82 nepers)
+
+  // Update energy
+  const dt = deltaTime / 1000; // seconds
+  if (sourceOn) {
+    energy += (1 - energy) * dt / tau; // grow toward steady state
+  } else {
+    energy *= Math.exp(-dt / tau); // decay
+  }
+  energy = constrain(energy, 1e-9, 1);
+
+  const levelDb = 10 * Math.log10(energy); // 0 dB = steady state, -60 dB = silence
+
+  // Update stats
+  select('#sRt60').html(RT60.toFixed(2) + ' s');
+  select('#sLevel').html(levelDb.toFixed(1) + ' dB');
+  select('#sState').html(sourceOn ? (energy > 0.98 ? 'Estacionario' : 'Crecimiento') : 'Decaimiento');
+
+  // Record history
+  history.push(levelDb);
+  if (history.length > 400) history.shift();
+
+  // ── Room visualization ──
+  const roomX = 30;
+  const roomY = 30;
+  const roomW = width - 60;
+  const roomH = 160;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(roomX, roomY, roomW, roomH, 8);
+  stroke(180);
+  strokeWeight(1.5);
+  noFill();
+  rect(roomX, roomY, roomW, roomH, 8);
+
+  // Source (speaker)
+  const sx = roomX + 50;
+  const sy = roomY + roomH / 2;
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  noStroke();
+  rect(sx - 6, sy - 18, 12, 36, 3);
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(11);
+  text('Fuente', sx, sy + 22);
+
+  // Reflection dots (count proportional to energy)
+  const numDots = Math.round(energy * 60);
+  for (let i = 0; i < numDots; i++) {
+    // Pseudo-random positions based on seed
+    let px = roomX + 20 + ((i * 37) % (roomW - 40));
+    let py = roomY + 15 + ((i * 53) % (roomH - 30));
+    fill(INDIGO[0], INDIGO[1], INDIGO[2], map(energy, 0, 1, 60, 200));
+    noStroke();
+    circle(px, py, 6);
+  }
+
+  // ── Level vs time graph ──
+  const gx = 30;
+  const gy = 240;
+  const gw = width - 60;
+  const gh = 150;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 10, gy - 20, gw + 20, gh + 40, 8);
+
+  // Grid: 0, -10, -20, ... -60 dB
+  stroke(210);
+  strokeWeight(0.5);
+  for (let L = 0; L >= -60; L -= 10) {
+    let y = map(L, 0, -60, gy, gy + gh);
+    line(gx, y, gx + gw, y);
+    fill(130); noStroke();
+    textAlign(RIGHT, CENTER); textSize(9);
+    text(L + ' dB', gx - 6, y);
+  }
+
+  // -60 dB reference line (RT60)
+  stroke(CORAL[0], CORAL[1], CORAL[2], 120);
+  strokeWeight(1);
+  drawingContext.setLineDash([5, 4]);
+  line(gx, gy + gh, gx + gw, gy + gh);
+  drawingContext.setLineDash([]);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  textAlign(LEFT, CENTER); textSize(9);
+  text('−60 dB (RT60)', gx + 4, gy + gh - 8);
+
+  // Curve
+  stroke(INDIGO[0], INDIGO[1], INDIGO[2]);
+  strokeWeight(2);
+  noFill();
+  beginShape();
+  for (let i = 0; i < history.length; i++) {
+    let x = map(i, 0, history.length - 1, gx, gx + gw);
+    let y = map(constrain(history[i], -60, 0), -60, 0, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  // Title
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('Nivel (dB) vs tiempo  ·  RT60 = ' + RT60.toFixed(2) + ' s', gx, gy - 16);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 440);
+}
+</script>
+</body>
+</html>
