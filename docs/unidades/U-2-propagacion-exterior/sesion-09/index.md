@@ -93,7 +93,10 @@
     | \(r\) | Distancia desde el centro acústico | En metros |
     | \(+10.8\ \text{dB}\) | Constante de conversión | Diferencia entre presión e intensidad en condiciones atmosféricas estándar (ρc = 400 rayls) |
 
-    > Insertar **Fig. 3-2** del Everest: nivel de presión sonora vs. distancia — curvas de SPL en función de la distancia para diferentes niveles de potencia sonora (SWL). Nótese que todas las curvas tienen la misma pendiente (−6 dB por duplicación), solo están desplazadas verticalmente según el SWL de cada fuente.
+    <figure markdown="span">
+      ![Fig. 3-2: Caída de 6 dB por duplicación de distancia](../../../img/caida_6db_por_duplicar_distancia.svg)
+      <figcaption>**Fig. 3-2** — Nivel de presión sonora vs. distancia para una fuente puntual. Todas las curvas tienen la misma pendiente (−6 dB por duplicación de distancia), solo están desplazadas verticalmente según el SWL de cada fuente.</figcaption>
+    </figure>
 
     ### Ejemplo práctico
 
