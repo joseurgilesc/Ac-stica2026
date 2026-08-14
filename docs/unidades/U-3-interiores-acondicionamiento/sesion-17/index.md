@@ -71,6 +71,10 @@
 
     > Insertar **Fig. 11-2** del Everest: diagrama de balance energético mostrando una onda incidente dividiéndose en reflejada, absorbida y transmitida al llegar a una pared. Incluir los coeficientes α, τ y ρ con sus definiciones.
 
+    [🎛️ **Abrir simulación interactiva — ¿A dónde va la energía?**](../../../simulacion/energia-sonora.html){ .md-button }
+
+    Ajusta α y τ (la reflexión ρ se calcula sola) y observa cómo 100 partículas se reparten entre absorción, transmisión y reflexión (especular o difusa según la rugosidad).
+
 ???+ note "Acondicionamiento vs. aislamiento: dos objetivos distintos"
 
     Uno de los errores conceptuales más frecuentes — incluso entre músicos con experiencia — es confundir acondicionamiento acústico con aislamiento acústico. Son dos problemas DIFERENTES que requieren soluciones DIFERENTES.
