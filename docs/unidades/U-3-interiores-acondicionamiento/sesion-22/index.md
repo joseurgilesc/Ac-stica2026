@@ -65,6 +65,10 @@
 
     > Insertar **Fig. 3-8** del Everest: gráfico de SPL vs. distancia logarítmica desde la fuente. Mostrar la curva del campo directo (recta con pendiente −6 dB/doble distancia), la línea horizontal del campo reverberante (constante), y la suma total (directo + reverberante). Señalar el punto de cruce: la distancia crítica Dc.
 
+    [🎛️ **Abrir simulación interactiva — Distancia crítica**](../../../simulacion/distancia-critica.html){ .md-button }
+
+    Ajusta L_w, Q y A. Observa las curvas del campo directo, reverberante y total, con la línea vertical en D_c y el indicador del campo dominante según la distancia.
+
 ???+ note "La distancia crítica (Dc): donde chocan dos mundos"
 
     La **distancia crítica** (Dc, también llamada \(r_c\)) es la distancia desde la fuente donde el NIVEL del campo directo IGUALA al nivel del campo reverberante:
