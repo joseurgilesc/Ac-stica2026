@@ -33,6 +33,8 @@
     !!! info "La cámara anecoica"
         Es el laboratorio que más se aproxima al campo libre ideal. Las paredes, techo y suelo están cubiertos con cuñas de material absorbente (fibra de vidrio, espuma acústica) que eliminan prácticamente todas las reflexiones por encima de una frecuencia de corte (típicamente 100 Hz). El suelo suele ser una rejilla metálica para caminar sin reflejar. Dentro de una cámara anecoica, el silencio es tan absoluto que la gente escucha su propia circulación sanguínea.
 
+        **Para profundizar:** [¿Sabes qué es una cámara anecoica? — Blog de Panasonic](https://blog.panasonic.es/tecnologia/sabes-que-es-una-camara-anecoica-tecnologia-punta-para-el-panasonic-toughbook/){:target="_blank"} — un ejemplo real de cómo la industria usa cámaras anecoicas (en este caso, electromagnéticas) para probar dispositivos inalámbricos.
+
 ???+ note "Divergencia esférica y la ley del inverso del cuadrado"
 
     Cuando una **fuente puntual** (una fuente pequeña comparada con la longitud de onda que emite) radia sonido, la energía se expande en todas direcciones formando un frente de onda esférico. A medida que el radio de la esfera crece, la misma energía se distribuye sobre un área mayor.
