@@ -65,7 +65,10 @@
     \text{SPL}(2r) = \text{SPL}(r) + 20 \cdot \log_{10}(1/2) = \text{SPL}(r) + 20 \cdot (-0.301) \approx \text{SPL}(r) - 6\ \text{dB}
     \]
 
-    > Insertar **Fig. 3-1** del Everest: fuente puntual con divergencia esférica — la energía sonora se distribuye sobre superficies esféricas concéntricas. Al duplicar la distancia, el área se cuadruplica y la intensidad cae a ¼. En dB, esto es una pérdida de \(10 \cdot \log_{10}(1/4) = -6\ \text{dB}\).
+    <figure markdown="span">
+      ![Fig. 3-1: Propagación esférica y ley del inverso del cuadrado](../../../img/propagacion_esferica_inverso_cuadrado.svg)
+      <figcaption>**Fig. 3-1** — Fuente puntual con divergencia esférica. La energía se distribuye sobre superficies esféricas concéntricas. Al duplicar la distancia, el área se cuadruplica y la intensidad cae a ¼ → −6 dB.</figcaption>
+    </figure>
 
     !!! warning "Esto asume campo libre y fuente puntual"
         Si hay superficies reflectantes cerca (suelo, paredes), la caída real será menor porque las reflexiones suman energía. Si la fuente no es puntual (line array, fuente plana), la caída también es distinta (−3 dB para lineal, ~0 dB para plana en campo cercano). La ley del inverso del cuadrado es un **límite teórico máximo de atenuación** por distancia en campo libre.
