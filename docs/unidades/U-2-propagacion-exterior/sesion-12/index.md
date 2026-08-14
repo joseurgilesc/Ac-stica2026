@@ -50,7 +50,14 @@
     | Superficie pequeña vs. λ (objeto del tamaño de una pelota, λ = 1.7 m a 200 Hz) | **Dispersión** o **difracción**: el sonido se «esparce» en muchas direcciones, no en una sola | Un poste de 10 cm dispersa un sonido grave de 100 Hz (λ = 3.4 m) |
     | Superficie rugosa (irregularidades comparables a λ) | **Reflexión difusa**: el sonido se refleja en múltiples direcciones, no en una sola | Una pared de ladrillo visto o una superficie con paneles difusores |
 
-    > Insertar **Fig. 6-1** del Everest: ley de reflexión — diagrama mostrando el rayo incidente, el rayo reflejado, la normal a la superficie, y los ángulos θᵢ = θᵣ. Incluir también un ejemplo con varios rayos incidiendo en distintos ángulos para mostrar la simetría.
+    <figure markdown="span">
+      ![Fig. 6-1: Ley de reflexión especular y fuente imagen](../../../img/ley_reflexion_especular_fuente_imagen.svg)
+      <figcaption>**Fig. 6-1** — Ley de la reflexión: el rayo incidente, el rayo reflejado, la normal y los ángulos θᵢ = θᵣ. La fuente imagen S' permite trazar la reflexión sin medir ángulos.</figcaption>
+    </figure>
+
+    [🎛️ **Abrir simulación interactiva — El espejo acústico**](../../../simulacion/espejo-acustico.html){ .md-button }
+
+    Arrastra la fuente S y el receptor R para ver la reflexión, los ángulos, la fuente imagen y el retardo. Observa que θᵢ = θᵣ y que la distancia S'→R es igual al camino reflejado.
 
     > Insertar **Fig. 6-3** del Everest: reflexión especular vs. difusa — una superficie plana lisa produce un único rayo reflejado (especular); una superficie rugosa dispersa la energía en múltiples direcciones (difusa).
 
@@ -115,7 +122,10 @@
 
     En un cuarto de control de estudio de grabación, las **primeras reflexiones** (las que llegan dentro de los primeros 20-30 ms después del sonido directo) son críticas porque el oído las integra con el sonido directo y colorean la percepción. Trazar estas reflexiones permite identificar qué superficies necesitan tratamiento absorbente.
 
-    > Insertar **Fig. 6-4** del Everest: diagrama de rayos en una sala de control — fuente (monitor de estudio), receptor (posición del ingeniero), y los rayos reflejados de primer orden en paredes laterales, techo, suelo y pared trasera. Cada rayo se traza con el método de la imagen.
+    <figure markdown="span">
+      ![Fig. 6-4: Fuentes imagen en paredes paralelas](../../../img/fuentes_imagen_paredes_paralelas.svg)
+      <figcaption>**Fig. 6-4** — Método de la fuente imagen en una sala de control. Cada superficie reflectante (paredes laterales, techo, suelo) genera una fuente imagen; los rayos de primer orden se trazan uniendo S' con el receptor.</figcaption>
+    </figure>
 
     | Superficie | Distancia típica del camino reflejado | Δt aproximado | ¿Problemática? |
     |---|---|---|---|
@@ -152,13 +162,10 @@
 
     ### Diagrama de rayos para un escenario exterior con fachada
 
-    > Insertar **Fig. 8-3** del Everest (contexto de exteriores): perfil de un escenario exterior con una fuente puntual, el suelo reflectante, una fachada posterior y un receptor a distancia. Trazar al menos los siguientes rayos:
-    > 1. Rayo directo: fuente → receptor.
-    > 2. Reflexión en el suelo: fuente → suelo → receptor.
-    > 3. Reflexión en la fachada trasera: fuente → fachada → receptor.
-    > 4. Doble reflexión: fuente → fachada → suelo → receptor.
-
-    Cada rayo reflejado se puede modelar con el método de la fuente imagen correspondiente (S' en el suelo, S'' en la fachada, S''' en ambas).
+    <figure markdown="span">
+      ![Fig. 8-3: Reflexión de una fuente puntual en una pared plana](../../../img/reflexion_fuente_puntual_pared_plana.svg)
+      <figcaption>**Fig. 8-3** — Reflexión de una fuente puntual en una pared plana (exterior). La fuente S, su imagen S', el rayo directo y el rayo reflejado hacia el receptor. Cada reflexión se modela con la fuente imagen correspondiente.</figcaption>
+    </figure>
 
 ???+ note "Reflexión, absorción y el coeficiente de reflexión"
 
