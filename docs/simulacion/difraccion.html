@@ -181,30 +181,43 @@ function draw() {
     text('Abertura', wallX, gapTop - 8);
   }
 
-  // ── Shadow zone (obstacle mode) ──
+  // ── Shadow zone + diffraction (obstacle mode) ──
   if (mode === 'obstacle') {
     const topEdge = cy - sizePx / 2;
     const bottomEdge = cy + sizePx / 2;
-    fill(150, 160, 175, 35);
+
+    // Diffraction strength: 1 = strong (λ ≫ obstacle), 0 = weak (λ ≪ obstacle)
+    const strength = constrain(map(ratio, 0.3, 3, 0.15, 1), 0.15, 1);
+
+    // Shadow zone (shaded)
+    fill(150, 160, 175, 25);
     noStroke();
     rect(wallX, topEdge, width - wallX, bottomEdge - topEdge);
-    // Shadow label
     fill(150);
     textSize(11);
     textAlign(LEFT, CENTER);
     text('zona de sombra', wallX + 12, cy);
-  }
 
-  // ── Diffracted wavelets at barrier edge (Huygens) ──
-  if (mode === 'obstacle') {
-    const edgeY = cy - sizePx / 2; // top edge
+    // Diffracted wavelets from BOTH edges (Huygens principle)
     noFill();
-    stroke(INDIGO[0], INDIGO[1], INDIGO[2], 120);
-    strokeWeight(1);
-    for (let r = lambdaPx * 0.5; r < 150; r += lambdaPx * 0.5) {
-      // Arc on the right side of the edge (diffracted)
-      arc(wallX, edgeY, r * 2, r * 2, -HALF_PI, HALF_PI);
+    stroke(INDIGO[0], INDIGO[1], INDIGO[2], 150 * strength);
+    strokeWeight(1.5);
+    const reach = 60 + 260 * strength; // how far the diffraction bends into the shadow
+
+    // Top edge: wavelets bend DOWN into the shadow
+    for (let r = lambdaPx; r < reach; r += lambdaPx) {
+      arc(wallX, topEdge, r * 2, r * 2, 0, HALF_PI);
     }
+    // Bottom edge: wavelets bend UP into the shadow
+    for (let r = lambdaPx; r < reach; r += lambdaPx) {
+      arc(wallX, bottomEdge, r * 2, r * 2, -HALF_PI, 0);
+    }
+
+    // Edge markers (Huygens secondary sources)
+    fill(INDIGO[0], INDIGO[1], INDIGO[2]);
+    noStroke();
+    circle(wallX, topEdge, 8);
+    circle(wallX, bottomEdge, 8);
   }
 
   // ── Source S ──
