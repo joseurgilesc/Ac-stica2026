@@ -27,6 +27,10 @@
 
     > Insertar **Fig. 7-1** del Everest: difracción en un borde — un frente de onda plano incide sobre un borde rígido (media pantalla). Los frentes de onda detrás del borde se curvan y penetran en la zona que geométricamente debería ser «sombra». El borde actúa como una nueva fuente lineal.
 
+    [🎛️ **Abrir simulación interactiva — El sonido dobla la esquina**](../../../simulacion/difraccion.html){ .md-button }
+
+    Arrastra la fuente y el receptor, cambia la frecuencia y el tamaño del obstáculo o abertura. Observa cómo la difracción depende de la relación λ/tamaño.
+
     ### La regla fundamental: λ vs. tamaño del obstáculo
 
     La magnitud de la difracción depende de la relación entre la longitud de onda λ y el tamaño del obstáculo o abertura:
