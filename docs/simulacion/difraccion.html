@@ -122,7 +122,7 @@ function draw() {
 
   // Wavelength in meters and display spacing
   const lambdaM = V / freq;
-  const lambdaPx = map(log10(freq), log10(50), log10(8000), 90, 7);
+  const lambdaPx = map(Math.log10(freq), Math.log10(50), Math.log10(8000), 90, 7);
 
   // Display wavelength in a readable unit
   let lambdaStr;
