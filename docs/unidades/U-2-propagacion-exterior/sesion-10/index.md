@@ -60,7 +60,10 @@
 
     La temperatura modifica la viscosidad del aire y la velocidad molecular. A mayor temperatura, ligeramente menor absorción a frecuencias medias, pero el efecto es secundario comparado con frecuencia y humedad.
 
-    > Insertar **Fig. 3-4** del Everest: tablas de absorción atmosférica — curvas de atenuación en dB/100 m para frecuencias de 125 Hz a 8 kHz en función de la humedad relativa (10%, 30%, 50%, 70%, 90%). Nótese que a 10% HR, la absorción a 8 kHz puede ser 10 veces mayor que a 70% HR.
+    <figure markdown="span">
+      ![Fig. 3-4: Absorción atmosférica del sonido](../../../img/absorcion_atmosferica.svg)
+      <figcaption>**Fig. 3-4** — Atenuación atmosférica en dB/100 m para frecuencias de 125 Hz a 8 kHz según la humedad relativa (10% a 90%). En agudos, el aire seco atenúa mucho más que el húmedo; por debajo de 500 Hz la absorción es despreciable.</figcaption>
+    </figure>
 
 ???+ note "Tabla de absorción atmosférica (dB/100 m, 20°C)"
 
@@ -98,7 +101,10 @@
     | **Refuerzo sonoro en estadios** | A 200 m de las torres de PA, los agudos perdieron mucho más que los medios. Los sistemas modernos usan line arrays con elementos configurados individualmente (delay + EQ) para compensar la absorción diferencial por distancia |
     | **Estudio de grabación** | La absorción atmosférica es completamente despreciable (0.0001 dB a 3 m). No afecta ninguna decisión de mezcla ni de diseño de sala |
 
-    > Insertar **Fig. 3-5** del Everest: efecto combinado de divergencia geométrica + absorción atmosférica a diferentes frecuencias — comparación visual de las curvas de SPL vs. distancia para 125 Hz, 1 kHz, 4 kHz y 8 kHz. A 50 m las curvas empiezan a separarse; a 200 m la diferencia entre 125 Hz y 8 kHz puede ser de más de 15 dB.
+    <figure markdown="span">
+      ![Fig. 3-5: Divergencia geométrica y absorción atmosférica](../../../img/divergencia_absorcion_atmosferica.svg)
+      <figcaption>**Fig. 3-5** — Nivel sonoro vs. distancia para 125 Hz, 1 kHz, 4 kHz y 8 kHz. Todas las curvas comparten la caída de −6 dB por duplicación; en agudos la absorción atmosférica agrega pérdida extra. A 50 m empiezan a separarse; a 200 m, 125 Hz y 8 kHz difieren ~16 dB.</figcaption>
+    </figure>
 
 ???+ note "Ejemplo de cálculo: diseñando el refuerzo sonoro de un evento exterior"
 
