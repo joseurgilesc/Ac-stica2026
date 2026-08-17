@@ -67,6 +67,10 @@
 
     > Insertar **Fig. 10-2** del Everest: dos ondas sinusoidales de igual frecuencia. Panel superior: ondas EN FASE → suma constructiva (amplitud doble). Panel inferior: ondas EN CONTRAFASE → suma destructiva (cancelación total si A₁ = A₂). Panel intermedio: diferencia de fase arbitraria → suma parcial.
 
+    [🎛️ **Abrir simulación interactiva — Laboratorio de interferencia**](../../../simulacion/interferencia.html){ .md-button }
+
+    Cambia la fase, el retardo, la amplitud o la polaridad de dos ondas y observa la onda resultante, su amplitud y el cambio en dB. Escucha el resultado.
+
 ???+ note "Ondas estacionarias: cuando la interferencia «se queda quieta»"
 
     Una **onda estacionaria** (standing wave) es un caso ESPECIAL de interferencia que ocurre cuando dos ondas de IGUAL frecuencia y amplitud viajan en DIRECCIONES OPUESTAS. En una sala, esto sucede cuando una onda incidente y su reflexión desde una pared se superponen.
