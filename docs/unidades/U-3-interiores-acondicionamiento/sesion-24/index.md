@@ -43,6 +43,10 @@
 
     > Insertar **Fig. 13-1** del Everest: representación tridimensional de los tres tipos de modos — axial (entre dos paredes), tangencial (entre cuatro paredes), oblicuo (entre las seis superficies). Incluir las trayectorias del rayo sonoro para cada tipo.
 
+    [🎛️ **Abrir simulación interactiva — Explorador de modos de sala**](../../../simulacion/modos-sala.html){ .md-button }
+
+    Cambia las dimensiones y el modo (nₓ, n_y, n_z). Observa el mapa de presión con sus nodos y antinodos, mueve la fuente y el oyente, y escucha el tono correspondiente.
+
 ???+ note "La fórmula de los modos de sala"
 
     La frecuencia de cualquier modo (axial, tangencial u oblicuo) en una sala rectangular está dada por:
