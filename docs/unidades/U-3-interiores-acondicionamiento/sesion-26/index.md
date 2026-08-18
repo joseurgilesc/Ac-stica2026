@@ -25,9 +25,9 @@
 
     | Destino | ¿Qué le pasa al sonido? | ¿Cuánta energía se conserva? | ¿Se usa para…? |
     |---|---|---|---|
-    | **Reflexión especular** | Rebota como un espejo (ángulo de incidencia = ángulo de reflexión) | ~95-99% (si la superficie es rígida y lisa) | NADA — es lo que QUERÉS EVITAR porque produce ecos flutter, focalizaciones y comb filtering |
+    | **Reflexión especular** | Rebota como un espejo (ángulo de incidencia = ángulo de reflexión) | ~95-99% (si la superficie es rígida y lisa) | No es **siempre** perjudicial: depende de su nivel, dirección y tiempo de llegada. Puede causar ecos flutter, focalizaciones y comb filtering cuando es intensa y llega tarde, pero las reflexiones especulares de los laterales también son las que dan amplitud estéreo en una sala de control |
     | **Absorción** | La energía sonora se convierte en calor (fricción en material poroso o resonancia) | 0% (idealmente). En la práctica: α·E_incidente donde α está entre 0 y 1 | Reducir RT60 y eliminar reflexiones indeseadas. El riesgo: «matar» la sala (demasiado seca, sin vida) |
-    | **Difusión** | El sonido se REDISTRIBUYE uniformemente en muchas direcciones, sin pérdida significativa de energía | ~90-98% | Romper reflexiones especulares y flutter echo SIN reducir la energía total de la sala |
+    | **Difusión** | Redistribución angular de la energía reflejada; también puede existir absorción y transmisión | ~90-98% (parte puede absorberse o transmitirse) | Romper reflexiones especulares y flutter echo manteniendo la mayor parte de la energía en la sala |
 
     !!! tip "La analogía de la linterna"
         Una reflexión especular es como un ESPEJO: la luz rebota en UNA dirección predecible. La absorción es como una pared PINTADA DE NEGRO MATE: la luz «desaparece». La difusión es como una pared de METAL MATE MARTILLADO: la luz se dispersa en TODAS direcciones, iluminando uniformemente, sin perderse. Una sala sin difusión tiene «zonas brillantes» (donde las reflexiones se focalizan) y «zonas oscuras» (donde no llegan). Una sala CON difusión tiene una iluminación sonora UNIFORME.
@@ -105,19 +105,20 @@
     **Paso 1: calcular longitudes de onda relevantes**
 
     - λ_diseño = c / f_diseño = 343 / 500 = 0.686 m = 68.6 cm
-    - Profundidad máxima (cuando n² mod p = p−1 = 6): d_max = (343 × 6) / (2 × 500 × 7) = 2058 / 7000 = 0.294 m = 29.4 cm
+    - Secuencia de residuos cuadráticos para p = 7: **0, 1, 4, 2, 2, 4, 1**. El residuo máximo presente es **4** (el residuo 6 no aparece porque 6 no es residuo cuadrático módulo 7).
+    - Profundidad máxima (residuo = 4): d_max = (343 × 4) / (2 × 500 × 7) = 1372 / 7000 = 0.196 m = 19.6 cm
 
     **Paso 2: calcular residuos cuadráticos para n = 0, 1, 2, …, 6**
 
     | n | n² | n² mod 7 (residuo) | d_n (cm) | Altura del pozo (cm) = d_max − d_n |
     |---|---|---|---|---|
-    | 0 | 0 | 0 | 0.0 | 29.4 |
-    | 1 | 1 | 1 | 4.9 | 24.5 |
-    | 2 | 4 | 4 | 19.6 | 9.8 |
-    | 3 | 9 | 2 | 9.8 | 19.6 |
-    | 4 | 16 | 2 | 9.8 | 19.6 |
-    | 5 | 25 | 4 | 19.6 | 9.8 |
-    | 6 | 36 | 1 | 4.9 | 24.5 |
+    | 0 | 0 | 0 | 0.0 | 19.6 |
+    | 1 | 1 | 1 | 4.9 | 14.7 |
+    | 2 | 4 | 4 | 19.6 | 0.0 |
+    | 3 | 9 | 2 | 9.8 | 9.8 |
+    | 4 | 16 | 2 | 9.8 | 9.8 |
+    | 5 | 25 | 4 | 19.6 | 0.0 |
+    | 6 | 36 | 1 | 4.9 | 14.7 |
 
     **Paso 3: dimensiones físicas**
 
@@ -169,16 +170,16 @@
 
     donde \(L_i\) es el nivel de presión sonora en dB medido en cada dirección i.
 
-    **En la práctica**: un QRD bien diseñado tiene d_c ≈ 0.8-0.95 en su rango de diseño. Una superficie plana tiene d_c ≈ 0.05-0.15 (no es exactamente 0 por difracción en los bordes).
+    **En la práctica**: un QRD bien diseñado suele alcanzar d_c ≈ 0.8-0.95 en su rango de diseño, pero **la geometría por sí sola no garantiza estos valores**: el coeficiente de difusión debe comprobarse mediante mediciones angulares (ISO 17497-2). Una superficie plana tiene d_c ≈ 0.05-0.15 (no es exactamente 0 por difracción en los bordes).
 
     ### Distancia mínima del oyente al difusor
 
     Un difusor necesita DISTANCIA para que el patrón de interferencia se «forme» completamente. Si estás demasiado cerca, los frentes de onda de los distintos pozos no tuvieron tiempo de recombinarse → escuchás el sonido de pozos individuales (como un peine), no difusión.
 
-    **Regla práctica**: la distancia mínima entre el difusor y el oyente debe ser al menos 3 VECES la longitud de onda de la frecuencia más baja de diseño:
+    **Regla práctica** (recomendación conservadora, no una frontera universal): como criterio orientativo, conviene que la distancia entre el difusor y el oyente sea al menos 3 VECES la longitud de onda de la frecuencia más baja de diseño:
 
     \[
-    d_{\text{mín}} \geq 3 \cdot \lambda_{\text{diseño}} = \frac{3c}{f_{\text{diseño}}}
+    d_{\text{mín}} \gtrsim 3 \cdot \lambda_{\text{diseño}} = \frac{3c}{f_{\text{diseño}}}
     \]
 
     **Ejemplo**: difusor diseñado para f_diseño = 500 Hz:
@@ -190,7 +191,7 @@
     Esto es CRÍTICO para estudios pequeños. Si tu sala tiene 3 m de profundidad y ponés un difusor en la pared trasera diseñado para 500 Hz, necesitás estar al menos a 2 m. Si tu posición de escucha está a 1.5 m del difusor: **ese difusor NO está funcionando como tal** — estás escuchando los pozos individualmente. Para salas pequeñas: subir f_diseño (ej. 1 kHz → d_mín = 1.03 m) o usar difusores geométricos (menos precisos pero funcionan a menor distancia relativa).
 
     !!! warning "El error clásico del estudio casero"
-        «Compré un difusor RPG QRD de 60×60 cm para la pared de atrás de mi estudio de 2.5 × 3 m. Se ve increíble.» Medición REW: el difusor agregó COMB FILTERING adicional. Razón: la distancia del oyente al difusor es 1.2 m, pero λ_diseño es 1.37 m (f_diseño = 250 Hz). d_mín requerida = 3 × 1.37 = 4.1 m. Estás sentado a MENOS DE UN TERCIO de la distancia mínima. No es un difusor — es un generador de interferencia. La solución: (a) subir f_diseño a 800-1000 Hz para esa sala, o (b) usar absorción en lugar de difusión en la pared trasera, o (c) usar un difusor geométrico (policilíndrico) que no requiere distancia mínima de formación de frente de onda.
+        «Compré un difusor RPG QRD de 60×60 cm para la pared de atrás de mi estudio de 2.5 × 3 m. Se ve increíble.» Medición REW: el difusor agregó COMB FILTERING adicional. Razón: la distancia del oyente al difusor es 1.2 m, pero λ_diseño es 1.37 m (f_diseño = 250 Hz). El criterio conservador sugiere d_mín ≈ 3 × 1.37 = 4.1 m. Estás sentado a MENOS DE UN TERCIO de esa distancia. No funciona como difusor — genera interferencia. La solución: (a) subir f_diseño a 800-1000 Hz para esa sala, o (b) usar absorción en lugar de difusión en la pared trasera, o (c) usar un difusor geométrico (policilíndrico) que no requiere la misma distancia de formación de frente de onda.
 
 ???+ note "¿Absorción o difusión? Una guía para decidir"
 
