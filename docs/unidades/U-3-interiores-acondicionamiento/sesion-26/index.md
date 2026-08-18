@@ -132,6 +132,10 @@
 
     > Insertar **Fig. 14-3** del Everest: diagrama de un difusor QRD 1D. Sección transversal mostrando los 7 pozos con profundidades d_n según la secuencia de residuos cuadráticos. Incluir la notación de w (ancho del pozo), d_n (profundidad), y los separadores entre pozos.
 
+    [🎛️ **Abrir simulación interactiva — Simulador de difusores QRD**](../../../simulacion/qrd.html){ .md-button }
+
+    Cambia el número primo p, la frecuencia de diseño, el ancho de pozo y los periodos. Observa la secuencia, la geometría lateral, la profundidad máxima y la distancia mínima.
+
 ???+ note "Otras secuencias: PRD y MLS"
 
     ### PRD (Primitive Root Diffuser)
