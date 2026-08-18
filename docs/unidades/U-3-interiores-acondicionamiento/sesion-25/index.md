@@ -143,6 +143,10 @@
 
     > Insertar **Fig. 14-3** del Everest: esquema de un resonador de Helmholtz. Mostrar cuello (S, L), cavidad (V), y la analogía masa-resorte (masa = aire en el cuello, resorte = aire en la cavidad). Incluir la curva de absorción vs. frecuencia mostrando el pico estrecho en f₀.
 
+    [🎛️ **Abrir simulación interactiva — Resonador de Helmholtz**](../../../simulacion/helmholtz.html){ .md-button }
+
+    Cambia el volumen, el radio y la longitud del cuello. Observa la frecuencia f₀ calculada, la analogía masa-resorte y la curva de resonancia.
+
 ???+ note "¿Dónde pongo las trampas? La geometría de la absorción"
 
     La ubicación determina la EFECTIVIDAD tanto o más que el diseño de la trampa en sí.
