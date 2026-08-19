@@ -94,6 +94,10 @@
 
     > Insertar **Fig. 16-5** del Everest: gráfico de TL vs. frecuencia para una partición simple. Eje X logarítmico de 50 Hz a 10 kHz, eje Y de 0 a 70 dB. Mostrar TRES regiones: (a) región controlada por rigidez (stiffness-controlled, bajas frecuencias, TL decreciente), (b) región controlada por masa (mass-controlled, TL crece 6 dB/octava siguiendo la línea recta de la ley de masa), (c) región de coincidencia (coincidence dip — caída abrupta en la frecuencia crítica f_c). Señalar que la ley de masa solo describe la región (b).
 
+    [🎛️ **Abrir simulación interactiva — Ley de la masa**](../../../simulacion/ley-masa.html){ .md-button }
+
+    Cambia la masa superficial y la frecuencia. Observa la TL teórica, el coeficiente de transmisión τ, la energía transmitida y la curva de TL vs. frecuencia. Duplica la masa o la frecuencia y comprueba la regla de 6 dB.
+
 ???+ note "Sound Transmission Class (STC) — el número único"
 
     La TL varía con la frecuencia — una pared puede aislar 25 dB a 125 Hz y 45 dB a 2 kHz. Para comparar materiales se necesita un NÚMERO ÚNICO. El STC (Sound Transmission Class) según ASTM E413 es ese número.
