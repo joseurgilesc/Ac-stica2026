@@ -53,7 +53,7 @@
     Ese f₀ ≈ 85 Hz es demasiado alto para un estudio de grabación. Si aumentamos la cavidad a 20 cm:
 
     \[
-    f_0 = 60\sqrt{\frac{20}{10 \cdot 0.2}} = 60\sqrt{10} \approx 60\ \text{Hz}
+    f_0 = 60\sqrt{\frac{10 + 10}{10 \cdot 10 \cdot 0.2}} = 60\sqrt{\frac{20}{20}} = 60\sqrt{1} = 60\ \text{Hz}
     \]
 
     Sigue siendo alto. Para bajar f₀ de verdad necesitamos más masa por hoja o una cavidad mucho mayor.
