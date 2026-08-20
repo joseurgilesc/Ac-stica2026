@@ -46,6 +46,7 @@
     <label>Tipo de aislador:</label>
     <button id="btnNeo" class="active">Neopreno</button>
     <button id="btnSpring">Resorte</button>
+    <span id="typeHint" style="color:#526079;font-size:12px">Deflexión típica 1–5 mm</span>
   </div>
 
   <div class="row">
@@ -84,8 +85,16 @@ function setup() {
   select('#rpm').input(() => select('#rpmVal').html(select('#rpm').value() + ' RPM'));
   select('#def').input(() => select('#defVal').html(Number(select('#def').value()).toFixed(1) + ' mm'));
 
-  select('#btnNeo').mousePressed(() => { select('#btnNeo').addClass('active'); select('#btnSpring').removeClass('active'); });
-  select('#btnSpring').mousePressed(() => { select('#btnSpring').addClass('active'); select('#btnNeo').removeClass('active'); });
+  select('#btnNeo').mousePressed(() => {
+    select('#btnNeo').addClass('active');
+    select('#btnSpring').removeClass('active');
+    select('#typeHint').html('Deflexión típica 1–5 mm · f_n ≈ 7–16 Hz · para equipos livianos y frecuencias altas');
+  });
+  select('#btnSpring').mousePressed(() => {
+    select('#btnSpring').addClass('active');
+    select('#btnNeo').removeClass('active');
+    select('#typeHint').html('Deflexión típica 10–50 mm · f_n ≈ 2–5 Hz · para bajas frecuencias y máximo aislamiento');
+  });
 
   select('#btnRigid').mousePressed(() => {
     rigid = !rigid;
