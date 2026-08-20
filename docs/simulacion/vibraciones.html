@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aislamiento de vibraciones</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 160px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.toggle { background: #e6f7f3; border-color: #249D8F; color: #1A7A6F; }
+    button.toggle.off { background: #eee; border-color: #aaa; color: #888; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .warn { color: #C0392B; font-weight: 700; font-size: 13px; }
+    .zone { font-weight: 700; font-size: 15px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Aislamiento de vibraciones</h2>
+  <p class="lead">f = RPM/60 · fn ≈ 15.8/√δ · r = f/fn · η = 1/|r²−1|. Modelo simplificado sin amortiguamiento.</p>
+
+  <div class="row">
+    <label>Velocidad (RPM):</label>
+    <input type="range" id="rpm" min="300" max="3600" value="900" step="10" style="flex:1 1 200px">
+    <span id="rpmVal" style="font-weight:700">900 RPM</span>
+  </div>
+
+  <div class="row">
+    <label>Deflexión estática δ:</label>
+    <input type="range" id="def" min="0.5" max="25" value="5" step="0.1" style="flex:1 1 200px">
+    <span id="defVal" style="font-weight:700">5.0 mm</span>
+  </div>
+
+  <div class="row">
+    <label>Tipo de aislador:</label>
+    <button id="btnNeo" class="active">Neopreno</button>
+    <button id="btnSpring">Resorte</button>
+  </div>
+
+  <div class="row">
+    <label>Conexión rígida (puente):</label>
+    <button id="btnRigid" class="toggle">No</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">f (excitación)</div><div class="val" id="sF">—</div></div>
+    <div class="stat"><div class="lbl">fn (natural)</div><div class="val" id="sFn">—</div></div>
+    <div class="stat"><div class="lbl">r = f/fn</div><div class="val" id="sR">—</div></div>
+    <div class="stat"><div class="lbl">Transmisión η</div><div class="val" id="sEta">—</div></div>
+    <div class="stat"><div class="lbl">Aislamiento</div><div class="val" id="sIso">—</div></div>
+  </div>
+
+  <p class="zone" id="zoneMsg"></p>
+  <p class="warn" id="warnMsg"></p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const ORANGE = [243, 156, 18];
+
+let rigid = false;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 260);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  select('#rpm').input(() => select('#rpmVal').html(select('#rpm').value() + ' RPM'));
+  select('#def').input(() => select('#defVal').html(Number(select('#def').value()).toFixed(1) + ' mm'));
+
+  select('#btnNeo').mousePressed(() => { select('#btnNeo').addClass('active'); select('#btnSpring').removeClass('active'); });
+  select('#btnSpring').mousePressed(() => { select('#btnSpring').addClass('active'); select('#btnNeo').removeClass('active'); });
+
+  select('#btnRigid').mousePressed(() => {
+    rigid = !rigid;
+    select('#btnRigid').html(rigid ? 'Sí (puente)' : 'No');
+    select('#btnRigid').toggleClass('off', !rigid);
+  });
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+
+  const rpm = Number(select('#rpm').value());
+  const delta = Number(select('#def').value()); // mm
+
+  const f = rpm / 60;
+  const fn = 15.8 / Math.sqrt(delta);
+  const r = f / fn;
+  const eta = 1 / Math.abs(r * r - 1);
+  const isoPct = (1 - eta) * 100;
+
+  select('#sF').html(f.toFixed(1) + ' Hz');
+  select('#sFn').html(fn.toFixed(2) + ' Hz');
+  select('#sR').html(r.toFixed(2));
+  select('#sEta').html((eta * 100).toFixed(1) + ' %');
+  select('#sIso').html(isoPct >= 0 ? isoPct.toFixed(1) + ' %' : '— (amplifica)');
+
+  // Zone determination
+  let zoneMsg, zoneColor;
+  if (r < Math.sqrt(2)) {
+    zoneMsg = '⚠️ ZONA DE AMPLIFICACIÓN (r < √2): el sistema amplifica la vibración.';
+    zoneColor = CORAL;
+  } else if (r < 3.32) {
+    zoneMsg = 'Zona sin aislamiento efectivo (√2 < r < 3.32): aislamiento parcial.';
+    zoneColor = ORANGE;
+  } else {
+    zoneMsg = '✅ ZONA FAVORABLE (r > 3.32): aislamiento efectivo (> 90 %).';
+    zoneColor = TEAL;
+  }
+  const zoneEl = select('#zoneMsg');
+  zoneEl.html(zoneMsg);
+  zoneEl.style('color', 'rgb(' + zoneColor[0] + ',' + zoneColor[1] + ',' + zoneColor[2] + ')');
+
+  // Warnings
+  let warnings = [];
+  if (eta > 1) warnings.push('⚠️ η > 1: hay AMPLIFICACIÓN, no aislamiento. Aumenta la deflexión o reduce la velocidad.');
+  if (rigid) warnings.push('⚠️ Conexión rígida presente: puede funcionar como puente de vibración y anular los aisladores.');
+  select('#warnMsg').html(warnings.join(' '));
+
+  // ── Graph: transmisibilidad vs r ──
+  const gx = 60, gy = 25;
+  const gw = width - 80, gh = 160;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 10, gy - 10, gw + 20, gh + 20, 8);
+
+  // Axes
+  stroke(150); strokeWeight(1);
+  line(gx, gy + gh, gx + gw, gy + gh);
+  line(gx, gy, gx, gy + gh);
+
+  // Vertical reference lines
+  for (let rr of [1, Math.sqrt(2), 3.32]) {
+    let x = map(rr, 0, 6, gx, gx + gw);
+    stroke(rr === Math.sqrt(2) ? 'rgba(192,57,43,0.5)' : rr === 3.32 ? 'rgba(39,174,96,0.5)' : 'rgba(150,150,150,0.5)');
+    strokeWeight(1);
+    drawingContext.setLineDash([4, 4]);
+    line(x, gy, x, gy + gh);
+    drawingContext.setLineDash([]);
+    noStroke();
+    fill(120); textAlign(CENTER, BOTTOM); textSize(8);
+    text(rr === 1 ? 'r=1' : rr === Math.sqrt(2) ? 'r=√2' : 'r=3.32', x, gy + gh - 2);
+  }
+
+  // η curve
+  stroke(TEAL[0], TEAL[1], TEAL[2]);
+  strokeWeight(2.5);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 300; i++) {
+    let rr = 0.3 + (i / 300) * 5.7; // 0.3 to 6
+    let etaVal = 1 / Math.abs(rr * rr - 1);
+    let x = map(rr, 0, 6, gx, gx + gw);
+    let y = map(constrain(etaVal, 0, 4), 0, 4, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  // Current point
+  let cx = map(constrain(r, 0, 6), 0, 6, gx, gx + gw);
+  let cy = map(constrain(eta, 0, 4), 0, 4, gy + gh, gy);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(cx, cy, 9);
+
+  // Labels
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP); textSize(11);
+  textStyle(BOLD);
+  text('Transmisibilidad η vs r (línea punteada roja = r=√2, verde = r=3.32)', width / 2, 12);
+  textStyle(NORMAL);
+  fill(130);
+  textAlign(CENTER, TOP); textSize(9);
+  text('r (relación de frecuencias)', gx + gw / 2, gy + gh + 8);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 260);
+}
+</script>
+</body>
+</html>

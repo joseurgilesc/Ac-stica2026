@@ -197,6 +197,10 @@
 
     Para que un aislador de vibraciones sea efectivo, la frecuencia natural del sistema \(f_n\) debe ser AL MENOS 3× menor que la frecuencia de excitación más baja de la máquina (típicamente la velocidad de rotación del motor). Para una máquina que gira a 1750 RPM (≈29 Hz), necesitamos \(f_n < 9.7\) Hz → deflexión estática > (15.8/9.7)² ≈ 2.7 mm. Para un ventilador a 900 RPM (15 Hz), necesitamos \(f_n < 5\) Hz → deflexión > 10 mm → necesitamos resortes helicoidales, no almohadillas de neopreno (que típicamente dan deflexiones de 1-3 mm).
 
+    [🎛️ **Abrir simulación interactiva — Aislamiento de vibraciones**](../../../simulacion/vibraciones.html){ .md-button }
+
+    Cambia la velocidad (RPM) y la deflexión δ. Observa f, f_n, r = f/f_n, la transmisibilidad η y las zonas de amplificación o aislamiento. Activa la conexión rígida para ver el puente de vibración.
+
     ### Tipos de aisladores de vibración
 
     | Tipo | Deflexión típica | f_n típica | Aplicación |
