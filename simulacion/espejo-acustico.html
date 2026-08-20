@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El espejo acústico — Ley de reflexión</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 900px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 120px; flex: 1; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.toggle { background: #e6f7f3; border-color: #249D8F; color: #1A7A6F; }
+    button.toggle.off { background: #eee; border-color: #aaa; color: #888; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .hint { font-size: 12px; color: #587086; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>El espejo acústico</h2>
+  <p class="lead">Arrastra la fuente <b>S</b> y el receptor <b>R</b>. La reflexión, los ángulos y el retardo se calculan automáticamente.</p>
+
+  <div class="row">
+    <button id="btnNormal" class="toggle">✓ Línea normal</button>
+    <button id="btnImage" class="toggle">✓ Fuente imagen S'</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">θi (incidencia)</div><div class="val" id="thetaI">—</div></div>
+    <div class="stat"><div class="lbl">θr (reflexión)</div><div class="val" id="thetaR">—</div></div>
+    <div class="stat"><div class="lbl">Camino directo</div><div class="val" id="dirDist">—</div></div>
+    <div class="stat"><div class="lbl">Camino reflejado</div><div class="val" id="reflDist">—</div></div>
+    <div class="stat"><div class="lbl">Diferencia Δd</div><div class="val" id="deltaD">—</div></div>
+    <div class="stat"><div class="lbl">Retardo Δt</div><div class="val" id="deltaT">—</div></div>
+  </div>
+
+  <p class="hint">Los ángulos se miden respecto a la NORMAL (línea perpendicular a la pared), no respecto a la pared.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+const V_SOUND = 343; // m/s
+
+let S, R;        // {x, y} positions in meters (scaled)
+let wallX = 1.5; // wall position in meters
+let scale = 120; // px per meter
+let showNormal = true;
+let showImage = true;
+let dragging = null; // 'S' | 'R' | null
+
+function setup() {
+  const cw = min(880, windowWidth - 40);
+  const cnv = createCanvas(cw, 480);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  // Initial positions (meters)
+  S = { x: 3.5, y: 2.5 };
+  R = { x: 5.5, y: 1.8 };
+
+  select('#btnNormal').mousePressed(() => { showNormal = !showNormal; select('#btnNormal').toggleClass('off', !showNormal); });
+  select('#btnImage').mousePressed(() => { showImage = !showImage; select('#btnImage').toggleClass('off', !showImage); });
+
+  textFont('system-ui');
+}
+
+function wallXpx() { return 60 + wallX * scale; }
+
+function toPx(p) { return { x: 60 + p.x * scale, y: p.y * scale }; }
+
+function toMeters(px, py) {
+  return { x: (px - 60) / scale, y: py / scale };
+}
+
+function mousePressed() {
+  const spx = toPx(S), rpx = toPx(R);
+  if (dist(mouseX, mouseY, spx.x, spx.y) < 20) dragging = 'S';
+  else if (dist(mouseX, mouseY, rpx.x, rpx.y) < 20) dragging = 'R';
+}
+
+function mouseReleased() {
+  dragging = null;
+}
+
+function draw() {
+  background(255);
+
+  if (dragging) {
+    const m = toMeters(mouseX, mouseY);
+    // Keep to the right of the wall
+    if (m.x < wallX + 0.3) m.x = wallX + 0.3;
+    if (m.x > 7.5) m.x = 7.5;
+    if (m.y < 0.3) m.y = 0.3;
+    if (m.y > 4.2) m.y = 4.2;
+    if (dragging === 'S') S = m;
+    if (dragging === 'R') R = m;
+  }
+
+  const spx = toPx(S), rpx = toPx(R);
+  const wx = wallXpx();
+
+  // Image source S' = mirror of S across wall
+  const Sprime = { x: 2 * wallX - S.x, y: S.y };
+  const spxP = toPx(Sprime);
+
+  // Reflection point P = intersection of S'→R with wall
+  const t = (wallX - Sprime.x) / (R.x - Sprime.x);
+  const Py = Sprime.y + t * (R.y - Sprime.y);
+  const P = { x: wallX, y: Py };
+  const Ppx = { x: wx, y: Py * scale };
+
+  // Distances
+  const directD = dist(S.x, S.y, R.x, R.y);
+  const reflD = dist(Sprime.x, Sprime.y, R.x, R.y); // = S→P + P→R
+  const deltaD = reflD - directD;
+  const deltaT = deltaD / V_SOUND * 1000; // ms
+
+  // Angles (measured from normal, which is horizontal for a vertical wall)
+  // Incident angle: angle between incident ray (S→P) and normal (horizontal)
+  const incAngle = abs(atan2(P.y - S.y, P.x - S.x)); // angle from horizontal (normal)
+  const reflAngle = abs(atan2(R.y - P.y, R.x - P.x));
+  const thetaIdeg = degrees(incAngle);
+  const thetaRdeg = degrees(reflAngle);
+
+  // Update stats
+  select('#thetaI').html(thetaIdeg.toFixed(1) + '°');
+  select('#thetaR').html(thetaRdeg.toFixed(1) + '°');
+  select('#dirDist').html(directD.toFixed(2) + ' m');
+  select('#reflDist').html(reflD.toFixed(2) + ' m');
+  select('#deltaD').html(deltaD.toFixed(2) + ' m');
+  select('#deltaT').html(deltaT.toFixed(1) + ' ms');
+
+  // ── Draw wall ──
+  fill(200, 210, 220);
+  noStroke();
+  rect(wx - 8, 20, 16, height - 40, 3);
+  // Hatch marks on wall
+  stroke(150);
+  strokeWeight(1);
+  for (let y = 30; y < height - 20; y += 16) {
+    line(wx - 8, y, wx + 8, y + 4);
+    line(wx - 8, y + 8, wx + 8, y + 12);
+  }
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(11);
+  text('Pared reflectante', wx, height - 18);
+
+  // ── Normal line (horizontal through P) ──
+  if (showNormal) {
+    stroke(150);
+    strokeWeight(1);
+    drawingContext.setLineDash([6, 4]);
+    line(Ppx.x - 60, Ppx.y, Ppx.x + 60, Ppx.y);
+    drawingContext.setLineDash([]);
+    noStroke();
+    fill(120);
+    textSize(10);
+    textAlign(LEFT, CENTER);
+    text('normal', Ppx.x + 62, Ppx.y);
+  }
+
+  // ── Incident ray (S → P) ──
+  stroke(TEAL[0], TEAL[1], TEAL[2]);
+  strokeWeight(2.5);
+  line(spx.x, spx.y, Ppx.x, Ppx.y);
+
+  // ── Reflected ray (P → R) ──
+  stroke(INDIGO[0], INDIGO[1], INDIGO[2]);
+  strokeWeight(2.5);
+  line(Ppx.x, Ppx.y, rpx.x, rpx.y);
+
+  // ── Direct ray (S → R, dashed) ──
+  stroke(180);
+  strokeWeight(1.5);
+  drawingContext.setLineDash([5, 4]);
+  line(spx.x, spx.y, rpx.x, rpx.y);
+  drawingContext.setLineDash([]);
+
+  // ── Image source S' and its ray to R (dashed) ──
+  if (showImage) {
+    stroke(TEAL[0], TEAL[1], TEAL[2], 90);
+    strokeWeight(1.5);
+    drawingContext.setLineDash([5, 4]);
+    line(spxP.x, spxP.y, rpx.x, rpx.y);
+    drawingContext.setLineDash([]);
+
+    // S' marker (hollow)
+    noFill();
+    stroke(TEAL[0], TEAL[1], TEAL[2]);
+    strokeWeight(2);
+    circle(spxP.x, spxP.y, 20);
+    fill(TEAL[0], TEAL[1], TEAL[2]);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(12);
+    textStyle(BOLD);
+    text("S'", spxP.x, spxP.y);
+    textStyle(NORMAL);
+  }
+
+  // ── Reflection point P marker ──
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(Ppx.x, Ppx.y, 10);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  textAlign(CENTER, BOTTOM);
+  textSize(11);
+  text('P', Ppx.x, Ppx.y - 8);
+
+  // ── Source S marker (draggable) ──
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  noStroke();
+  circle(spx.x, spx.y, 22);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(13);
+  textStyle(BOLD);
+  text('S', spx.x, spx.y);
+  textStyle(NORMAL);
+
+  // ── Receiver R marker (draggable) ──
+  fill(INDIGO[0], INDIGO[1], INDIGO[2]);
+  noStroke();
+  circle(rpx.x, rpx.y, 22);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(13);
+  textStyle(BOLD);
+  text('R', rpx.x, rpx.y);
+  textStyle(NORMAL);
+
+  // ── Angle arcs ──
+  noFill();
+  stroke(TEAL[0], TEAL[1], TEAL[2], 160);
+  strokeWeight(1.5);
+  arc(Ppx.x, Ppx.y, 44, 44, -incAngle, 0);
+  stroke(INDIGO[0], INDIGO[1], INDIGO[2], 160);
+  arc(Ppx.x, Ppx.y, 56, 56, 0, reflAngle);
+
+  // ── Title ──
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(13);
+  textStyle(BOLD);
+  text('θi = ' + thetaIdeg.toFixed(1) + '°  |  θr = ' + thetaRdeg.toFixed(1) + '°  (medidos desde la normal)', width / 2, 10);
+  textStyle(NORMAL);
+
+  // Drag hint
+  fill(150);
+  textSize(10);
+  textAlign(LEFT, TOP);
+  text('Arrastra S y R para moverlos', 70, height - 18);
+}
+
+function windowResized() {
+  const cw = min(880, windowWidth - 40);
+  resizeCanvas(cw, 480);
+}
+</script>
+</body>
+</html>

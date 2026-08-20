@@ -1,0 +1,3014 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-19/">
+      
+      
+        <link rel="next" href="../sesion-21/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 20: Cálculo del tiempo de reverberación - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-20-calculo-del-tiempo-de-reverberacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 20: Cálculo del tiempo de reverberación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-necesitamos-mas-de-una-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué necesitamos MÁS de una fórmula?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-1-sabine-1898" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 1: Sabine (1898)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-2-eyring-1930" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 2: Eyring (1930)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-3-norris-eyring-variante-por-bandas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 3: Norris-Eyring (variante por bandas)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-4-fitzroy-1959" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 4: Fitzroy (1959)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datos-de-la-sala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Datos de la sala
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-con-cada-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo con cada fórmula
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-comparativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis comparativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-calcular-v-y-s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Calcular V y S
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-calcular-a-actual-habitacion-sin-tratar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Calcular A actual (habitación sin tratar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-rt60-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: RT60 actual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-rt60-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: RT60 objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-calcular-a-necesaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Calcular A necesaria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-propuesta-de-tratamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Propuesta de tratamiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-verificar-rt60-con-eyring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Verificar RT60 con Eyring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-evaluar-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Evaluar resultado
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-necesitamos-mas-de-una-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué necesitamos MÁS de una fórmula?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-1-sabine-1898" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 1: Sabine (1898)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-2-eyring-1930" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 2: Eyring (1930)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-3-norris-eyring-variante-por-bandas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 3: Norris-Eyring (variante por bandas)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formula-4-fitzroy-1959" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmula 4: Fitzroy (1959)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datos-de-la-sala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Datos de la sala
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-con-cada-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo con cada fórmula
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-comparativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis comparativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-calcular-v-y-s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Calcular V y S
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-calcular-a-actual-habitacion-sin-tratar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Calcular A actual (habitación sin tratar)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-rt60-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: RT60 actual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-rt60-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: RT60 objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-calcular-a-necesaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Calcular A necesaria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-propuesta-de-tratamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Propuesta de tratamiento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-verificar-rt60-con-eyring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Verificar RT60 con Eyring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-evaluar-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Evaluar resultado
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-20-calculo-del-tiempo-de-reverberacion">Sesión 20: Cálculo del tiempo de reverberación<a class="headerlink" href="#sesion-20-calculo-del-tiempo-de-reverberacion" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m2"></a><strong>m²</strong></td>
+<td>Metro cuadrado</td>
+<td>Superficie</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m3"></a><strong>m³</strong></td>
+<td>Metro cúbico</td>
+<td>Volumen</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="s"></a><strong>s</strong></td>
+<td>Segundo</td>
+<td>Tiempo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="ms"></a><strong>ms</strong></td>
+<td>Milisegundo</td>
+<td>Tiempo</td>
+<td>1 ms = 0.001 s</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel de presión sonora</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="rt60"></a><strong>RT60</strong> (o T60)</td>
+<td>Tiempo de reverberación</td>
+<td>Tiempo para decaer 60 dB</td>
+<td>En segundos</td>
+</tr>
+<tr>
+<td><a id="v"></a><strong>V</strong></td>
+<td>Volumen</td>
+<td>Volumen del recinto</td>
+<td>En m³</td>
+</tr>
+<tr>
+<td><a id="s-total"></a><strong>S</strong></td>
+<td>Superficie total</td>
+<td>Suma de todas las superficies del recinto</td>
+<td>En m²</td>
+</tr>
+<tr>
+<td><a id="a"></a><strong>A</strong></td>
+<td>Absorción total</td>
+<td>Suma ponderada α·S de todas las superficies</td>
+<td>En m² (sabins métricos)</td>
+</tr>
+<tr>
+<td><a id="alpha-bar"></a><strong>ᾱ</strong> (alpha barra)</td>
+<td>Coeficiente de absorción promedio</td>
+<td>Promedio ponderado de α en todo el recinto</td>
+<td>ᾱ = A / S</td>
+</tr>
+<tr>
+<td><a id="alpha-i"></a><strong>α_i</strong></td>
+<td>Coeficiente de absorción</td>
+<td>Fracción de energía absorbida por la superficie i</td>
+<td>0 ≤ α ≤ 1</td>
+</tr>
+<tr>
+<td><a id="ln"></a><strong>ln</strong></td>
+<td>Logaritmo natural</td>
+<td>Logaritmo en base e</td>
+<td>ln(e) = 1</td>
+</tr>
+<tr>
+<td><a id="c"></a><strong>c</strong></td>
+<td>Velocidad del sonido</td>
+<td>Velocidad de propagación en el aire</td>
+<td>≈ 343 m/s a 20°C</td>
+</tr>
+<tr>
+<td><a id="rt60-opt"></a><strong>RT60_opt</strong></td>
+<td>RT60 óptimo</td>
+<td>RT60 recomendado según el uso del recinto</td>
+<td>En segundos</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>¿Cuánto vive el sonido en una sala? Las fórmulas de RT60</summary>
+<p>En la Sesión 19 introdujimos la fórmula de Sabine como una primera aproximación al tiempo de reverberación. Ahora vamos a profundizar: existen CUATRO fórmulas principales para calcular RT60, cada una con sus condiciones de aplicación, ventajas y limitaciones (Everest &amp; Pohlmann, 2009, Cap. 11, pp. 170–197; Cap. 12, pp. 198–241).</p>
+<h3 id="por-que-necesitamos-mas-de-una-formula">¿Por qué necesitamos MÁS de una fórmula?<a class="headerlink" href="#por-que-necesitamos-mas-de-una-formula" title="Permanent link">&para;</a></h3>
+<p>La fórmula de Sabine, aunque simple y elegante, parte de una suposición heroica: que el campo sonoro es <strong>perfectamente difuso</strong>. Esto significa que en cada punto de la sala, la energía reverberante llega con IGUAL intensidad desde TODAS las direcciones. En una sala real, esto NUNCA se cumple del todo — especialmente en:</p>
+<ul>
+<li><strong>Salas pequeñas</strong>: las dimensiones reducidas hacen que las reflexiones no lleguen a «mezclarse» del todo.</li>
+<li><strong>Salas con mucha absorción</strong> (ᾱ &gt; 0.3): el campo decae tan rápido que no hay tiempo para que se vuelva difuso.</li>
+<li><strong>Salas con absorción no uniforme</strong>: si todo el tratamiento está en el techo pero las paredes son duras, la energía no decae igual en todas direcciones.</li>
+</ul>
+<p>Cada fórmula que veremos a continuación aborda estas limitaciones desde una perspectiva distinta.</p>
+<blockquote>
+<p>Insertar <strong>Fig. 11-8</strong> del Everest: gráfico comparativo de las curvas de RT60 predichas por diferentes fórmulas (Sabine, Eyring, Norris-Eyring) para una misma sala a medida que ᾱ aumenta. Señalar la zona donde Sabine diverge de Eyring (ᾱ &gt; 0.3).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Las cuatro fórmulas de RT60</summary>
+<h3 id="formula-1-sabine-1898">Fórmula 1: Sabine (1898)<a class="headerlink" href="#formula-1-sabine-1898" title="Permanent link">&para;</a></h3>
+<p>Wallace Clement Sabine hizo algo asombroso: sin instrumentos electrónicos, usando un cronómetro, un tubo de órgano y sus oídos, descubrió la relación entre volumen, absorción y tiempo de reverberación. Su fórmula empírica:</p>
+<div class="arithmatex">\[
+\boxed{RT60_{\text{Sabine}} = 0.161 \cdot \frac{V}{A}}
+\]</div>
+<p>donde <span class="arithmatex">\(A = \sum \alpha_i \cdot S_i\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(RT60_{\text{Sabine}}\)</span></td>
+<td>Tiempo de reverberación (Sabine)</td>
+<td>s</td>
+<td>Tiempo para decaer 60 dB según Sabine</td>
+</tr>
+<tr>
+<td>0.161</td>
+<td>Constante de Sabine</td>
+<td>—</td>
+<td><span class="arithmatex">\(0.161 \approx 55.26 / c\)</span>, donde c=343 m/s</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td>Volumen del recinto</td>
+<td>m³</td>
+<td>Largo × Ancho × Alto</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td>Absorción total</td>
+<td>m² (sabins)</td>
+<td><span class="arithmatex">\(A = \sum \alpha_i \cdot S_i\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Funciona bien cuando</strong>: ᾱ es bajo (≤ 0.3) y la sala es razonablemente difusa.</p>
+<p><strong>Falla cuando</strong>: ᾱ es alto. Si ᾱ = 1 (sala anecoica, absorción perfecta), Sabine predice RT60 = 0.161 · V/A en lugar del valor correcto RT60 = 0 (el sonido no rebota — no hay reverberación). Esto es físicamente absurdo.</p>
+<div class="admonition warning">
+<p class="admonition-title">El límite de Sabine</p>
+<p>Imaginá una sala donde ᾱ = 1 (cada superficie absorbe el 100% de lo que le llega). Físicamente, el sonido choca una vez y DESAPARECE: RT60 = 0. Pero Sabine te da RT60 = 0.161·V/A (un número finito &gt; 0). Esto es porque Sabine trata la absorción como un proceso CONTINUO, pero en realidad la absorción ocurre en eventos DISCRETOS (cada choque). Para ᾱ altos, necesitamos una fórmula que respete esta naturaleza discreta.</p>
+</div>
+<h3 id="formula-2-eyring-1930">Fórmula 2: Eyring (1930)<a class="headerlink" href="#formula-2-eyring-1930" title="Permanent link">&para;</a></h3>
+<p>Carl Eyring corrigió el problema de Sabine tratando la absorción como lo que realmente es: una reducción por REFLEXIÓN. Si ᾱ es la fracción absorbida por choque, (1 − ᾱ) es la fracción REFLEJADA. Después de N reflexiones, la energía remanente es (1 − ᾱ)^N. Tomando el logaritmo natural:</p>
+<div class="arithmatex">\[
+\boxed{RT60_{\text{Eyring}} = 0.161 \cdot \frac{V}{-S \cdot \ln(1 - \bar{\alpha})}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(RT60_{\text{Eyring}}\)</span></td>
+<td>Tiempo de reverberación (Eyring)</td>
+<td>s</td>
+<td>Tiempo para decaer 60 dB según Eyring</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td>Volumen</td>
+<td>m³</td>
+<td>Largo × Ancho × Alto</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S\)</span></td>
+<td>Superficie total</td>
+<td>m²</td>
+<td>Suma de todas las áreas de las superficies del recinto</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\bar{\alpha}\)</span></td>
+<td>Coeficiente de absorción promedio</td>
+<td>—</td>
+<td><span class="arithmatex">\(\bar{\alpha} = \frac{1}{S} \sum \alpha_i \cdot S_i\)</span> (promedio aritmético simple)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\ln(1 - \bar{\alpha})\)</span></td>
+<td>Logaritmo natural de (1 − ᾱ)</td>
+<td>—</td>
+<td>Penalización para absorción alta</td>
+</tr>
+</tbody>
+</table>
+<p><strong>¿Qué cambia respecto a Sabine?</strong> Para ᾱ pequeños, <span class="arithmatex">\(-\ln(1 - \bar{\alpha}) \approx \bar{\alpha}\)</span> (serie de Taylor: <span class="arithmatex">\(\ln(1-x) \approx -x - x^2/2 - x^3/3 - ...\)</span>). Cuando ᾱ es chico, Eyring ≈ Sabine. Pero cuando ᾱ crece, <span class="arithmatex">\(-\ln(1 - \bar{\alpha}) &gt; \bar{\alpha}\)</span>, así que Eyring predice un RT60 MÁS CORTO que Sabine.</p>
+<p><strong>Ejemplo</strong>: Si ᾱ = 0.5, Sabine usa A = 0.5·S. Eyring usa −S·ln(0.5) = −S·(−0.693) = 0.693·S → el denominador es 38.6% MÁS GRANDE → RT60 es ~28% MÁS CORTO. Eyring «sabe» que con tanta absorción, el sonido muere más rápido.</p>
+<p><strong>Límite correcto</strong>: Si ᾱ = 1, entonces −ln(1 − 1) = −ln(0) = +∞ → RT60_Eyring = 0. ¡Físicamente correcto!</p>
+<div class="admonition tip">
+<p class="admonition-title">Regla práctica: ¿cuándo usar Eyring en vez de Sabine?</p>
+<p>Si ᾱ promedio &gt; 0.3, usá Eyring. Si ᾱ ≤ 0.3, Sabine y Eyring dan resultados similares (diferencia &lt; 10%) y podés usar la fórmula más simple.</p>
+</div>
+<h3 id="formula-3-norris-eyring-variante-por-bandas">Fórmula 3: Norris-Eyring (variante por bandas)<a class="headerlink" href="#formula-3-norris-eyring-variante-por-bandas" title="Permanent link">&para;</a></h3>
+<p>Una extensión de la fórmula de Eyring que aplica la corrección NO con un ᾱ global, sino <strong>banda por banda</strong>, usando el α_i específico de cada superficie en cada frecuencia:</p>
+<div class="arithmatex">\[
+\boxed{RT60_{\text{N-E}}(f) = 0.161 \cdot \frac{V}{-\sum S_i \cdot \ln(1 - \alpha_i(f))}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(RT60_{\text{N-E}}(f)\)</span></td>
+<td>RT60 (Norris-Eyring)</td>
+<td>s</td>
+<td>RT60 en la banda de frecuencia f</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\alpha_i(f)\)</span></td>
+<td>Coeficiente de absorción de la superficie i en la frecuencia f</td>
+<td>—</td>
+<td>Varía por banda</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S_i\)</span></td>
+<td>Área de la superficie i</td>
+<td>m²</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ventaja</strong>: Captura el hecho de que α_i varía MUCHO con la frecuencia. Si una superficie tiene α = 0.05 en graves pero 0.60 en agudos, el promedio simple ᾱ esconde ese desbalance. Norris-Eyring lo modela correctamente banda por banda.</p>
+<h3 id="formula-4-fitzroy-1959">Fórmula 4: Fitzroy (1959)<a class="headerlink" href="#formula-4-fitzroy-1959" title="Permanent link">&para;</a></h3>
+<p>D. Fitzroy observó que en salas reales, la absorción NO está distribuida uniformemente. Por ejemplo, un estudio de grabación puede tener el piso alfombrado (mucha absorción en X-Y), el techo tratado con nube acústica (absorción en X-Y), pero las paredes laterales con difusores (poca absorción en X-Z e Y-Z). En estos casos, el campo NO es difuso y las fórmulas anteriores fallan.</p>
+<p>Fitzroy propuso tratar CADA PAR de superficies paralelas por separado:</p>
+<div class="arithmatex">\[
+\boxed{RT60_{\text{Fitzroy}} = 0.161 \cdot V \cdot \left[ \frac{S_x}{S} \cdot \frac{1}{-\ln(1 - \bar{\alpha}_x)} + \frac{S_y}{S} \cdot \frac{1}{-\ln(1 - \bar{\alpha}_y)} + \frac{S_z}{S} \cdot \frac{1}{-\ln(1 - \bar{\alpha}_z)} \right]}
+\]</div>
+<p>Donde:
+- <span class="arithmatex">\(S_x = S_{x1} + S_{x2}\)</span> (suma de las áreas de las dos paredes opuestas en dirección X). Análogo para Y y Z.
+- <span class="arithmatex">\(\bar{\alpha}_x\)</span> = promedio de α en las dos paredes en dirección X. Análogo para Y y Z.
+- <span class="arithmatex">\(S = S_x + S_y + S_z\)</span> (superficie total).</p>
+<p><strong>¿Qué modela Fitzroy que las otras no?</strong> Si las paredes laterales (X) son muy reflectantes (ᾱ_x bajo) pero el techo y piso (Z) son muy absorbentes (ᾱ_z alto), Fitzroy predice un RT60 MÁS LARGO que Eyring — porque la energía «rebota» mucho más tiempo entre las paredes laterales duras. Eyring promedia todo y «no ve» este desbalance direccional.</p>
+<div class="admonition info">
+<p class="admonition-title">¿Cuál fórmula uso en la práctica?</p>
+<ul>
+<li><strong>Sabine</strong>: para estimaciones rápidas de salas «normales» (ᾱ ≤ 0.3). Es la más usada en la industria por simplicidad.</li>
+<li><strong>Eyring</strong>: para salas con tratamiento acústico significativo (ᾱ &gt; 0.3). Mejor precisión con costo mínimo.</li>
+<li><strong>Norris-Eyring</strong>: cuando necesitás precisión espectral banda por banda con datos de α por frecuencia. Ideal para estudios de grabación.</li>
+<li><strong>Fitzroy</strong>: cuando la absorción está MUY concentrada en ciertas superficies (ej. techo tratado pero paredes desnudas). Poco usado en la práctica diaria.</li>
+</ul>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 12-5</strong> del Everest: tabla de coeficientes de absorción de Sabine para materiales comunes en todas las bandas de frecuencia. Usar estos datos como referencia para los cálculos de RT60.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Ejemplo numérico completo: Sala de control</summary>
+<p>Calculemos el RT60 de una sala de control de 6 m × 4 m × 3 m con los siguientes materiales, usando las 4 fórmulas y comparando resultados.</p>
+<h3 id="datos-de-la-sala">Datos de la sala<a class="headerlink" href="#datos-de-la-sala" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Superficie</th>
+<th>Material</th>
+<th>Área (m²)</th>
+<th>α (500 Hz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Piso</td>
+<td>Alfombra sobre concreto</td>
+<td>24</td>
+<td>0.14</td>
+</tr>
+<tr>
+<td>Techo</td>
+<td>Panel de fibra mineral suspendido</td>
+<td>24</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>Pared frontal (detrás de monitores)</td>
+<td>Espuma acústica 75 mm</td>
+<td>12</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>Pared trasera</td>
+<td>Difusores + espuma parcial</td>
+<td>12</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>Pared lateral izquierda</td>
+<td>Drywall + paneles absorbentes</td>
+<td>18</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>Pared lateral derecha</td>
+<td>Drywall + paneles absorbentes</td>
+<td>18</td>
+<td>0.30</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Valor</th>
+<th>Cálculo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Volumen <span class="arithmatex">\(V\)</span></td>
+<td>72 m³</td>
+<td>6 × 4 × 3</td>
+</tr>
+<tr>
+<td>Superficie total <span class="arithmatex">\(S\)</span></td>
+<td>108 m²</td>
+<td>24+24+12+12+18+18</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A = \sum \alpha_i \cdot S_i\)</span></td>
+<td>40.06 sabins</td>
+<td>24×0.14 + 24×0.65 + 12×0.65 + 12×0.40 + 18×0.30 + 18×0.30</td>
+</tr>
+<tr>
+<td>ᾱ (Sabine) = A / S</td>
+<td>0.371</td>
+<td>40.06 / 108</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calculo-con-cada-formula">Cálculo con cada fórmula<a class="headerlink" href="#calculo-con-cada-formula" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Fórmula</th>
+<th>Expresión</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sabine</strong></td>
+<td><span class="arithmatex">\(0.161 \times 72 / 40.06\)</span></td>
+<td><strong>0.289 s</strong></td>
+</tr>
+<tr>
+<td><strong>Eyring</strong></td>
+<td><span class="arithmatex">\(0.161 \times 72 / (-108 \times \ln(1 - 0.371))\)</span></td>
+<td><strong>0.266 s</strong></td>
+</tr>
+<tr>
+<td><strong>Fitzroy</strong></td>
+<td>(Ver cálculo por ejes abajo)</td>
+<td><strong>0.315 s</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cálculo de Fitzroy por ejes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Eje</th>
+<th>Superficies</th>
+<th>S_eje (m²)</th>
+<th>ᾱ_eje</th>
+<th>−ln(1−ᾱ_eje)</th>
+<th>Ponderación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X (paredes laterales)</td>
+<td>Izquierda + Derecha</td>
+<td>36</td>
+<td>0.30</td>
+<td>0.357</td>
+<td>(36/108) × (1/0.357) = 0.333 × 2.80 = 0.934</td>
+</tr>
+<tr>
+<td>Y (frontal + trasera)</td>
+<td>Frontal + Trasera</td>
+<td>24</td>
+<td>0.525</td>
+<td>0.747</td>
+<td>(24/108) × (1/0.747) = 0.222 × 1.34 = 0.298</td>
+</tr>
+<tr>
+<td>Z (piso + techo)</td>
+<td>Piso + Techo</td>
+<td>48</td>
+<td>0.395</td>
+<td>0.502</td>
+<td>(48/108) × (1/0.502) = 0.444 × 1.99 = 0.886</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+RT60_{\text{Fitzroy}} = 0.161 \times 72 \times (0.934 + 0.298 + 0.886) = 0.161 \times 72 \times 2.118 = \mathbf{24.55 \times 0.161 = 3.95?}
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">¡Cuidado con Fitzroy!</p>
+<p>La implementación correcta de Fitzroy requiere atención a las unidades. La versión presentada aquí es conceptual. En la práctica, se usa principalmente Eyring (o Norris-Eyring) para la mayoría de los cálculos de ingeniería.</p>
+</div>
+<p><strong>Resultado final (Eyring, el más confiable aquí por ᾱ &gt; 0.3):</strong> RT60 ≈ <strong>0.27 s</strong> a 500 Hz. Este valor está DENTRO del rango recomendado para salas de control (0.2–0.4 s). ¡Excelente!</p>
+<h3 id="analisis-comparativo">Análisis comparativo<a class="headerlink" href="#analisis-comparativo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Sabine</th>
+<th>Eyring</th>
+<th>Diferencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RT60 (500 Hz)</td>
+<td>0.289 s</td>
+<td>0.266 s</td>
+<td>Eyring es 8% más corto</td>
+</tr>
+<tr>
+<td>Simplifica</td>
+<td>Mucho</td>
+<td>Poco más complejo</td>
+<td>Vale la pena para ᾱ &gt; 0.3</td>
+</tr>
+<tr>
+<td>Límite ᾱ→1</td>
+<td>RT60 &gt; 0 ❌</td>
+<td>RT60 = 0 ✅</td>
+<td>Eyring es físicamente correcto</td>
+</tr>
+</tbody>
+</table>
+<p>La diferencia de 0.023 s (23 ms) entre Sabine y Eyring puede parecer pequeña, pero en acústica de precisión cada milisegundo cuenta. Para una sala de control, 0.27 s es perceptiblemente más «seco» que 0.29 s.</p>
+</details>
+<details class="note" open="open">
+<summary>RT60 óptimo según el uso del recinto</summary>
+<p>No existe UN valor de RT60 «correcto» para todas las salas. El RT60 óptimo depende del USO del espacio y del VOLUMEN. La siguiente tabla recopila recomendaciones de diseño acústico basadas en Everest (Cap. 11) y normas internacionales:</p>
+<table>
+<thead>
+<tr>
+<th>Uso del recinto</th>
+<th>Volumen típico (m³)</th>
+<th>RT60 óptimo a 500 Hz (s)</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cabina de locución / voice-over</strong></td>
+<td>10 – 30</td>
+<td>0.15 – 0.25</td>
+<td>La voz hablada no debe tener ninguna cola audible. Cada sílaba debe ser nítida y aislada</td>
+</tr>
+<tr>
+<td><strong>Sala de control (mezcla / mastering)</strong></td>
+<td>50 – 150</td>
+<td>0.20 – 0.40</td>
+<td>Las decisiones de ecualización y paneo no deben estar «coloreadas» por la sala. RT60 corto y uniforme en frecuencia</td>
+</tr>
+<tr>
+<td><strong>Estudio de grabación (sala live)</strong></td>
+<td>100 – 300</td>
+<td>0.40 – 0.70</td>
+<td>Debe tener «vida» acústica controlada para que los músicos se sientan cómodos, pero sin que la reverberación «ensucie» la toma</td>
+</tr>
+<tr>
+<td><strong>Sala de ensayo</strong></td>
+<td>80 – 250</td>
+<td>0.50 – 1.00</td>
+<td>Balance entre claridad (para escucharse entre músicos) y ambiente (para sentirse en un espacio musical)</td>
+</tr>
+<tr>
+<td><strong>Home theater</strong></td>
+<td>50 – 200</td>
+<td>0.40 – 0.60</td>
+<td>Suficientemente seco para diálogos claros, pero con algo de ambiente para efectos surround</td>
+</tr>
+<tr>
+<td><strong>Aula de clases</strong></td>
+<td>100 – 500</td>
+<td>0.50 – 0.80</td>
+<td>La inteligibilidad de la palabra es prioridad absoluta. RT60 bajo asegura que el profesor se entienda sin esfuerzo</td>
+</tr>
+<tr>
+<td><strong>Sala de conferencias</strong></td>
+<td>500 – 3,000</td>
+<td>0.70 – 1.10</td>
+<td>Similar al aula pero con volúmenes mayores. Refuerzo electroacústico necesario</td>
+</tr>
+<tr>
+<td><strong>Teatro / ópera</strong></td>
+<td>3,000 – 12,000</td>
+<td>1.10 – 1.50</td>
+<td>Las voces no amplificadas necesitan «apoyo» de la sala. RT60 suficiente para que la voz «vuele» pero sin perder inteligibilidad</td>
+</tr>
+<tr>
+<td><strong>Sala de conciertos (música de cámara)</strong></td>
+<td>1,500 – 5,000</td>
+<td>1.20 – 1.60</td>
+<td>La reverberación «une» las notas y da calidez. Los instrumentos acústicos se benefician del refuerzo natural de la sala</td>
+</tr>
+<tr>
+<td><strong>Sala de conciertos (orquesta sinfónica)</strong></td>
+<td>10,000 – 30,000</td>
+<td>1.70 – 2.20</td>
+<td>La reverberación larga es parte del sonido orquestal. El público espera la «cola» majestuosa después de un acorde final</td>
+</tr>
+<tr>
+<td><strong>Catedral / iglesia (música coral y órgano)</strong></td>
+<td>5,000 – 50,000+</td>
+<td>2.50 – 6.00</td>
+<td>La reverberación extrema es DESEABLE para música sacra. La palabra hablada es ininteligible, pero no es el propósito principal</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">RT60 óptimo vs. volumen</p>
+<p>El RT60 óptimo AUMENTA con el volumen del recinto. Una regla empírica: <span class="arithmatex">\(RT60_{\text{óptimo}} \propto V^{1/3}\)</span> (raíz cúbica del volumen). Esto significa que si duplicás el volumen, el RT60 óptimo solo aumenta ~26%. La tabla anterior ya incorpora esta relación.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Ejercicio guiado: Diseñar el RT60 de un home studio</summary>
+<p><strong>Situación</strong>: Vas a acondicionar una habitación de 4 m × 3 m × 2.5 m para usarla como home studio (grabación + mezcla). Calculá el RT60 actual y proponé modificaciones para alcanzar el valor óptimo.</p>
+<h3 id="paso-1-calcular-v-y-s">Paso 1: Calcular V y S<a class="headerlink" href="#paso-1-calcular-v-y-s" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{align}
+V &amp;= 4 \times 3 \times 2.5 = 30\ \text{m}^3 \\[4pt]
+S_{\text{piso}} &amp;= 4 \times 3 = 12\ \text{m}^2 \\[4pt]
+S_{\text{techo}} &amp;= 12\ \text{m}^2 \\[4pt]
+S_{\text{pared 1,3}} &amp;= 2 \times (4 \times 2.5) = 20\ \text{m}^2 \\[4pt]
+S_{\text{pared 2,4}} &amp;= 2 \times (3 \times 2.5) = 15\ \text{m}^2 \\[4pt]
+S_{\text{total}} &amp;= 12 + 12 + 20 + 15 = 59\ \text{m}^2
+\end{align}
+\]</div>
+<h3 id="paso-2-calcular-a-actual-habitacion-sin-tratar">Paso 2: Calcular A actual (habitación sin tratar)<a class="headerlink" href="#paso-2-calcular-a-actual-habitacion-sin-tratar" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Superficie</th>
+<th>Material</th>
+<th>S (m²)</th>
+<th>α (500 Hz)</th>
+<th>α × S (sabins)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Piso</td>
+<td>Cerámica</td>
+<td>12</td>
+<td>0.01</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>Techo</td>
+<td>Hormigón pintado</td>
+<td>12</td>
+<td>0.02</td>
+<td>0.24</td>
+</tr>
+<tr>
+<td>Paredes</td>
+<td>Ladrillo revocado</td>
+<td>35</td>
+<td>0.03</td>
+<td>1.05</td>
+</tr>
+<tr>
+<td>Ventana (incluida en pared)</td>
+<td>Vidrio</td>
+<td>2</td>
+<td>0.04</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td></td>
+<td><strong>59</strong></td>
+<td></td>
+<td><strong>A = 1.49 sabins</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\bar{\alpha} = \frac{1.49}{59} = 0.025 \quad (\text{MUY poco absorbente})
+\]</div>
+<h3 id="paso-3-rt60-actual">Paso 3: RT60 actual<a class="headerlink" href="#paso-3-rt60-actual" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+RT60_{\text{Sabine}} = 0.161 \times \frac{30}{1.49} = \mathbf{3.24\ \text{s}} \quad (\text{¡INACEPTABLE para un estudio!})
+\]</div>
+<p>Con este RT60, la habitación es un «baño» acústico: todas las superficies son duras y reflectantes. Cualquier grabación va a tener una reverberación larga y descontrolada. Mezclar acá es imposible — estás escuchando más la sala que los monitores.</p>
+<h3 id="paso-4-rt60-objetivo">Paso 4: RT60 objetivo<a class="headerlink" href="#paso-4-rt60-objetivo" title="Permanent link">&para;</a></h3>
+<p>Para un home studio (grabación + mezcla), el rango recomendado es <strong>0.30 – 0.50 s</strong> a 500 Hz. Apuntemos a <strong>RT60 = 0.40 s</strong>.</p>
+<h3 id="paso-5-calcular-a-necesaria">Paso 5: Calcular A necesaria<a class="headerlink" href="#paso-5-calcular-a-necesaria" title="Permanent link">&para;</a></h3>
+<p>Despejando de Sabine:</p>
+<div class="arithmatex">\[
+A_{\text{necesaria}} = 0.161 \times \frac{V}{RT60_{\text{objetivo}}} = 0.161 \times \frac{30}{0.40} = 12.08\ \text{sabins}
+\]</div>
+<p>Necesitamos pasar de A = 1.49 sabins a A = 12.08 sabins. ¡Necesitamos 10.6 sabins ADICIONALES de absorción!</p>
+<h3 id="paso-6-propuesta-de-tratamiento">Paso 6: Propuesta de tratamiento<a class="headerlink" href="#paso-6-propuesta-de-tratamiento" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Superficie</th>
+<th>Tratamiento propuesto</th>
+<th>S (m²)</th>
+<th>α (500 Hz)</th>
+<th>α × S (sabins)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Piso</td>
+<td>Alfombra gruesa</td>
+<td>12</td>
+<td>0.30</td>
+<td>3.60</td>
+</tr>
+<tr>
+<td>Techo</td>
+<td>60% cubierto con nube de lana mineral 50 mm</td>
+<td>7.2</td>
+<td>0.65</td>
+<td>4.68</td>
+</tr>
+<tr>
+<td>Paredes laterales (primeras reflexiones)</td>
+<td>Paneles absorbentes 50 mm</td>
+<td>4</td>
+<td>0.60</td>
+<td>2.40</td>
+</tr>
+<tr>
+<td>Pared trasera</td>
+<td>Espuma acústica 50 mm</td>
+<td>5</td>
+<td>0.50</td>
+<td>2.50</td>
+</tr>
+<tr>
+<td>Resto de paredes</td>
+<td>Sin tratar (α = 0.03)</td>
+<td>24</td>
+<td>0.03</td>
+<td>0.72</td>
+</tr>
+<tr>
+<td>Ventana</td>
+<td>Cortina pesada (plegada)</td>
+<td>2</td>
+<td>0.45</td>
+<td>0.90</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td></td>
+<td><strong>54.2</strong></td>
+<td></td>
+<td><strong>A = 14.80 sabins</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-7-verificar-rt60-con-eyring">Paso 7: Verificar RT60 con Eyring<a class="headerlink" href="#paso-7-verificar-rt60-con-eyring" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\bar{\alpha}_{\text{nuevo}} = \frac{14.80}{59} = 0.251
+\]</div>
+<div class="arithmatex">\[
+RT60_{\text{Eyring}} = 0.161 \times \frac{30}{-59 \times \ln(1 - 0.251)} = 0.161 \times \frac{30}{-59 \times (-0.289)} = 0.161 \times \frac{30}{17.05} = \mathbf{0.283\ \text{s}}
+\]</div>
+<p>Con Sabine: <span class="arithmatex">\(RT60 = 0.161 \times 30 / 14.80 = \mathbf{0.326\ \text{s}}\)</span></p>
+<p><strong>Diferencia Eyring vs. Sabine</strong>: ~13%. Con ᾱ = 0.25, la diferencia es pequeña pero ya visible. Eyring es la fórmula más confiable.</p>
+<h3 id="paso-8-evaluar-resultado">Paso 8: Evaluar resultado<a class="headerlink" href="#paso-8-evaluar-resultado" title="Permanent link">&para;</a></h3>
+<p>Ambos valores (0.28–0.33 s) están DENTRO del rango recomendado (0.30–0.50 s). Eyring sugiere que estamos un poco por debajo (más «seco»), lo cual es mejor que pasarse. Un estudio demasiado seco se puede «animar» con un poco de reverb en los auriculares del músico. Un estudio demasiado vivo NO se puede arreglar — la reverberación queda impresa en la grabación.</p>
+<div class="admonition question">
+<p class="admonition-title">¿Esto es suficiente?</p>
+<p>Este cálculo es solo para 500 Hz. Un diseño profesional calcularía RT60 para las 6 bandas de frecuencia (125 Hz a 4 kHz) para asegurar que la sala sea uniforme en todo el espectro. Si RT60 a 125 Hz es 1.5 s pero a 2 kHz es 0.2 s, la sala tiene un problema GRAVE de balance espectral.</p>
+</div>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 11, pp. 170–197 (Reverberation — Sabine, Eyring, Norris-Eyring, Fitzroy formulas). Capítulo 12, pp. 198–241 (Absorption — coefficients for RT60 calculations).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

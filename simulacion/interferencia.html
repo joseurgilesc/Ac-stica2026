@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio de interferencia — Fase y polaridad</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    button.toggle { background: #e6f7f3; border-color: #249D8F; color: #1A7A6F; }
+    button.toggle.off { background: #eee; border-color: #aaa; color: #888; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; margin: 8px 0; }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Laboratorio de interferencia</h2>
+  <p class="lead">Dos ondas se suman. Cambia la fase, el retardo, la amplitud o la polaridad y observa la onda resultante.</p>
+
+  <div class="row">
+    <label>Frecuencia:</label>
+    <input type="range" id="freq" min="100" max="1000" value="250" step="10" style="flex:1 1 200px">
+    <span id="freqVal" style="font-weight:700">250 Hz</span>
+  </div>
+
+  <div class="row">
+    <label>Amplitud Onda 1:</label>
+    <input type="range" id="a1" min="0" max="1" value="1" step="0.05" style="flex:1 1 200px">
+    <span id="a1Val" style="font-weight:700">1.00</span>
+  </div>
+
+  <div class="row">
+    <label>Amplitud Onda 2:</label>
+    <input type="range" id="a2" min="0" max="1" value="1" step="0.05" style="flex:1 1 200px">
+    <span id="a2Val" style="font-weight:700">1.00</span>
+  </div>
+
+  <div class="row">
+    <label>Control:</label>
+    <button id="btnPhase" class="active">Fase (°)</button>
+    <button id="btnDelay">Retardo (ms)</button>
+  </div>
+
+  <div class="row">
+    <label id="ctrlLabel">Fase:</label>
+    <input type="range" id="ctrl" min="0" max="360" value="0" step="1" style="flex:1 1 200px">
+    <span id="ctrlVal" style="font-weight:700">0°</span>
+  </div>
+
+  <div class="row">
+    <label>Polaridad Onda 2:</label>
+    <button id="btnPol" class="toggle">Normal</button>
+  </div>
+
+  <div class="row">
+    <button id="btnAudio">🔇 Audio OFF</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Amplitud resultante</div><div class="val" id="sAmp">—</div></div>
+    <div class="stat"><div class="lbl">Cambio de nivel</div><div class="val" id="sDb">—</div></div>
+    <div class="stat"><div class="lbl">Fase efectiva</div><div class="val" id="sPhase">—</div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#2471A3"></span> Onda 1</span>
+    <span><span class="dot" style="background:#C0392B"></span> Onda 2</span>
+    <span><span class="dot" style="background:#27AE60"></span> Resultante</span>
+  </div>
+</div>
+
+<script>
+const BLUE = [36, 113, 163];
+const RED = [192, 57, 43];
+const GREEN = [39, 174, 96];
+
+let mode = 'phase'; // 'phase' | 'delay'
+let polarityInverted = false;
+let audioOn = false;
+let synth;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 360);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  select('#freq').input(() => select('#freqVal').html(select('#freq').value() + ' Hz'));
+  select('#a1').input(() => select('#a1Val').html(Number(select('#a1').value()).toFixed(2)));
+  select('#a2').input(() => select('#a2Val').html(Number(select('#a2').value()).toFixed(2)));
+
+  select('#btnPhase').mousePressed(() => setMode('phase'));
+  select('#btnDelay').mousePressed(() => setMode('delay'));
+  select('#ctrl').input(() => {
+    select('#ctrlVal').html(select('#ctrl').value() + (mode === 'phase' ? '°' : ' ms'));
+  });
+
+  select('#btnPol').mousePressed(() => {
+    polarityInverted = !polarityInverted;
+    select('#btnPol').html(polarityInverted ? 'Invertida (Ø)' : 'Normal');
+    select('#btnPol').toggleClass('off', !polarityInverted);
+  });
+
+  select('#btnAudio').mousePressed(() => {
+    audioOn = !audioOn;
+    select('#btnAudio').html(audioOn ? '🔊 Audio ON' : '🔇 Audio OFF');
+    if (audioOn) {
+      if (Tone.context.state !== 'running') Tone.start();
+      if (!synth) synth = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.05, decay: 0.1, sustain: 0.5, release: 0.1 }, volume: -24 }).toDestination();
+      synth.triggerAttack(Number(select('#freq').value()));
+    } else if (synth) {
+      synth.triggerRelease();
+    }
+  });
+
+  textFont('system-ui');
+}
+
+function setMode(m) {
+  mode = m;
+  select('#btnPhase').toggleClass('active', mode === 'phase');
+  select('#btnDelay').toggleClass('active', mode === 'delay');
+  select('#ctrlLabel').html(mode === 'phase' ? 'Fase:' : 'Retardo:');
+  if (mode === 'phase') {
+    select('#ctrl').attribute('min', '0');
+    select('#ctrl').attribute('max', '360');
+    select('#ctrl').value(0);
+    select('#ctrlVal').html('0°');
+  } else {
+    select('#ctrl').attribute('min', '0');
+    select('#ctrl').attribute('max', '5');
+    select('#ctrl').value(1);
+    select('#ctrlVal').html('1 ms');
+  }
+}
+
+function draw() {
+  background(255);
+
+  const freq = Number(select('#freq').value());
+  const A1 = Number(select('#a1').value());
+  const A2 = Number(select('#a2').value());
+  const ctrl = Number(select('#ctrl').value());
+
+  // Phase in radians
+  let phaseDeg;
+  if (mode === 'phase') {
+    phaseDeg = ctrl;
+  } else {
+    phaseDeg = 360 * freq * (ctrl / 1000); // φ = 360 × f × Δt
+    phaseDeg = phaseDeg % 360;
+  }
+  if (polarityInverted) phaseDeg = (phaseDeg + 180) % 360;
+
+  const phaseRad = phaseDeg * PI / 180;
+
+  // Result amplitude
+  const resultAmp = Math.sqrt(A1*A1 + A2*A2 + 2 * A1 * A2 * Math.cos(phaseRad));
+  const dbChange = 20 * Math.log10(resultAmp / Math.max(A1, 0.001));
+
+  select('#sAmp').html(resultAmp.toFixed(3));
+  select('#sDb').html((dbChange >= 0 ? '+' : '') + dbChange.toFixed(1) + ' dB');
+  select('#sPhase').html(phaseDeg.toFixed(0) + '°');
+
+  // Update audio volume (result amplitude)
+  if (audioOn && synth) {
+    synth.frequency.value = freq;
+    // Map result amplitude to volume
+    const vol = Tone.gainToDb(Math.max(resultAmp / 2, 0.001));
+    synth.volume.value = -24 + vol;
+  }
+
+  const GX = 50;
+  const GW = width - 100;
+  const cy1 = 70, cy2 = 160, cy3 = 260;
+  const ampH = 40;
+
+  // Wave functions
+  function wave(y, amp, phaseOffset, color, weight) {
+    stroke(color[0], color[1], color[2]);
+    strokeWeight(weight);
+    noFill();
+    beginShape();
+    for (let i = 0; i <= 300; i++) {
+      let x = GX + (i / 300) * GW;
+      let v = amp * Math.sin(i / 300 * TWO_PI * 3 + phaseOffset);
+      vertex(x, y - v * ampH);
+    }
+    endShape();
+  }
+
+  // Center lines
+  for (let cy of [cy1, cy2, cy3]) {
+    stroke(200);
+    strokeWeight(0.5);
+    line(GX, cy, GX + GW, cy);
+  }
+
+  // Wave 1
+  wave(cy1, A1, 0, BLUE, 2);
+  // Wave 2 (with phase)
+  wave(cy2, A2, phaseRad, RED, 2);
+  // Result
+  noFill();
+  stroke(GREEN[0], GREEN[1], GREEN[2]);
+  strokeWeight(3);
+  beginShape();
+  for (let i = 0; i <= 300; i++) {
+    let x = GX + (i / 300) * GW;
+    let theta = i / 300 * TWO_PI * 3;
+    let v1 = A1 * Math.sin(theta);
+    let v2 = A2 * Math.sin(theta + phaseRad);
+    vertex(x, cy3 - (v1 + v2) * ampH);
+  }
+  endShape();
+
+  // Labels
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(LEFT, CENTER);
+  textSize(11);
+  textStyle(BOLD);
+  fill(BLUE[0], BLUE[1], BLUE[2]);
+  text('Onda 1 (A=' + A1.toFixed(2) + ')', GX, cy1 - 50);
+  fill(RED[0], RED[1], RED[2]);
+  text('Onda 2 (A=' + A2.toFixed(2) + (polarityInverted ? ', Ø' : '') + ')', GX, cy2 - 50);
+  fill(GREEN[0], GREEN[1], GREEN[2]);
+  text('Resultante (A=' + resultAmp.toFixed(3) + ')', GX, cy3 - 50);
+  textStyle(NORMAL);
+
+  // Title
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  text('f = ' + freq + ' Hz  |  fase efectiva = ' + phaseDeg.toFixed(0) + '°  |  cambio = ' + (dbChange >= 0 ? '+' : '') + dbChange.toFixed(1) + ' dB', width / 2, 10);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 360);
+}
+</script>
+</body>
+</html>

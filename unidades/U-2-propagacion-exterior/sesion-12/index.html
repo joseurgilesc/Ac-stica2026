@@ -1,0 +1,2556 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-11/">
+      
+      
+        <link rel="next" href="../sesion-13/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 12: Diagramas de rayo - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-12-diagramas-de-rayo-y-reflexion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 12: Diagramas de rayo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-especular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión especular
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condiciones-para-reflexion-especular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Condiciones para reflexión especular
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-modelar-el-sonido-como-rayos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué modelar el sonido como rayos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-un-diagrama-de-rayos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de un diagrama de rayos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-metodo-de-la-imagen-image-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El método de la imagen (image method)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacion-trazado-de-reflexiones-tempranas-en-un-cuarto-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación: trazado de reflexiones tempranas en un cuarto de control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-en-una-fachada-plana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión en una fachada plana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagrama-de-rayos-para-un-escenario-exterior-con-fachada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagrama de rayos para un escenario exterior con fachada
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-especular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión especular
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condiciones-para-reflexion-especular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Condiciones para reflexión especular
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-modelar-el-sonido-como-rayos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué modelar el sonido como rayos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-un-diagrama-de-rayos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de un diagrama de rayos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-metodo-de-la-imagen-image-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El método de la imagen (image method)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacion-trazado-de-reflexiones-tempranas-en-un-cuarto-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación: trazado de reflexiones tempranas en un cuarto de control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reflexion-en-una-fachada-plana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión en una fachada plana
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagrama-de-rayos-para-un-escenario-exterior-con-fachada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagrama de rayos para un escenario exterior con fachada
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 2: Propagación del sonido en exteriores
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-12-diagramas-de-rayo-y-reflexion">Sesión 12: Diagramas de rayo y reflexión<a class="headerlink" href="#sesion-12-diagramas-de-rayo-y-reflexion" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel relativo (escala logarítmica)</td>
+<td><span class="arithmatex">\( \text{dB} = 10\log_{10}(P/P_0) \)</span></td>
+</tr>
+<tr>
+<td><a id="spl"></a><strong>dB SPL</strong></td>
+<td>Sound Pressure Level</td>
+<td>Nivel de presión sonora</td>
+<td>Referencia: <span class="arithmatex">\(p_0 = 20\ \mu\text{Pa}\)</span></td>
+</tr>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud, distancia</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="lambda"></a><strong>λ</strong> (lambda)</td>
+<td>Longitud de onda</td>
+<td>Distancia por ciclo</td>
+<td>λ = c / f</td>
+</tr>
+<tr>
+<td><a id="theta_i"></a><strong>θᵢ</strong> (theta i)</td>
+<td>Ángulo de incidencia</td>
+<td>Ángulo entre el rayo incidente y la normal a la superficie</td>
+<td>En grados (°) o radianes (rad)</td>
+</tr>
+<tr>
+<td><a id="theta_r"></a><strong>θᵣ</strong> (theta r)</td>
+<td>Ángulo de reflexión</td>
+<td>Ángulo entre el rayo reflejado y la normal a la superficie</td>
+<td>En grados (°) o radianes (rad)</td>
+</tr>
+<tr>
+<td><a id="c"></a><strong>c</strong></td>
+<td>Velocidad del sonido</td>
+<td>Velocidad de propagación en el medio</td>
+<td>~343 m/s a 20°C</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>La ley de la reflexión: el sonido rebota como la luz en un espejo</summary>
+<h3 id="reflexion-especular">Reflexión especular<a class="headerlink" href="#reflexion-especular" title="Permanent link">&para;</a></h3>
+<p>Cuando una onda sonora incide sobre una superficie plana y rígida (pared, vidrio, concreto, agua), se refleja siguiendo la misma ley geométrica que la luz:</p>
+<div class="arithmatex">\[
+\boxed{\theta_i = \theta_r}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\theta_i\)</span></td>
+<td>Ángulo de incidencia</td>
+<td>Ángulo entre el rayo incidente y la <strong>normal</strong> (línea perpendicular a la superficie en el punto de impacto)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\theta_r\)</span></td>
+<td>Ángulo de reflexión</td>
+<td>Ángulo entre el rayo reflejado y la normal</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>Línea perpendicular a la superficie</td>
+<td>Es la referencia para medir ambos ángulos</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Error común: medir respecto a la superficie</p>
+<p>Los ángulos de incidencia y reflexión NO se miden respecto a la superficie (pared), sino respecto a la NORMAL (línea perpendicular a la superficie). Si un rayo llega perpendicular a una pared, θᵢ = 0° (no 90°). Si llega «casi paralelo» a la pared, θᵢ ≈ 90°.</p>
+</div>
+<h3 id="condiciones-para-reflexion-especular">Condiciones para reflexión especular<a class="headerlink" href="#condiciones-para-reflexion-especular" title="Permanent link">&para;</a></h3>
+<p>La reflexión especular («de espejo») ocurre cuando la superficie es <strong>grande comparada con la longitud de onda</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\text{Superficie} \gg \lambda \implies \text{Reflexión especular}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Condición</th>
+<th>¿Qué pasa?</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Superficie grande vs. λ (pared de concreto, λ = 10 cm a 3.4 kHz)</td>
+<td>Reflexión especular: el sonido rebota como un rayo, en un solo ángulo definido</td>
+<td>Una pared de 3 m × 2.5 m refleja frecuencias &gt; 100 Hz de forma especular</td>
+</tr>
+<tr>
+<td>Superficie pequeña vs. λ (objeto del tamaño de una pelota, λ = 1.7 m a 200 Hz)</td>
+<td><strong>Dispersión</strong> o <strong>difracción</strong>: el sonido se «esparce» en muchas direcciones, no en una sola</td>
+<td>Un poste de 10 cm dispersa un sonido grave de 100 Hz (λ = 3.4 m)</td>
+</tr>
+<tr>
+<td>Superficie rugosa (irregularidades comparables a λ)</td>
+<td><strong>Reflexión difusa</strong>: el sonido se refleja en múltiples direcciones, no en una sola</td>
+<td>Una pared de ladrillo visto o una superficie con paneles difusores</td>
+</tr>
+</tbody>
+</table>
+<p><figure markdown="span">
+  <img alt="Fig. 6-1: Ley de reflexión especular y fuente imagen" src="../../../img/ley_reflexion_especular_fuente_imagen.svg" />
+  <figcaption><strong>Fig. 6-1</strong> — Ley de la reflexión: el rayo incidente, el rayo reflejado, la normal y los ángulos θᵢ = θᵣ. La fuente imagen S' permite trazar la reflexión sin medir ángulos.</figcaption>
+</figure></p>
+<p><a class="md-button" href="../../../simulacion/espejo-acustico.html">🎛️ <strong>Abrir simulación interactiva — El espejo acústico</strong></a></p>
+<p>Arrastra la fuente S y el receptor R para ver la reflexión, los ángulos, la fuente imagen y el retardo. Observa que θᵢ = θᵣ y que la distancia S'→R es igual al camino reflejado.</p>
+<blockquote>
+<p>Insertar <strong>Fig. 6-3</strong> del Everest: reflexión especular vs. difusa — una superficie plana lisa produce un único rayo reflejado (especular); una superficie rugosa dispersa la energía en múltiples direcciones (difusa).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Diagramas de rayos: trayectorias sonoras en un espacio</summary>
+<p>Un <strong>diagrama de rayos</strong> (<em>ray diagram</em>) es una representación geométrica donde el sonido se modela como rayos rectilíneos que viajan desde la fuente y se reflejan en las superficies. Es una herramienta fundamental para predecir trayectorias sonoras en recintos y exteriores.</p>
+<h3 id="por-que-modelar-el-sonido-como-rayos">¿Por qué modelar el sonido como rayos?<a class="headerlink" href="#por-que-modelar-el-sonido-como-rayos" title="Permanent link">&para;</a></h3>
+<p>El modelo de rayos es válido cuando la longitud de onda es mucho menor que las dimensiones de los objetos y superficies del entorno (λ ≪ dimensiones del espacio). Esto equivale a decir que funciona para frecuencias medias y altas (&gt; 500 Hz en una sala típica). A frecuencias bajas (graves), el comportamiento ondulatorio (difracción, modos) domina y el modelo de rayos pierde precisión.</p>
+<table>
+<thead>
+<tr>
+<th>Frecuencia</th>
+<th>λ (a 20°C)</th>
+<th>¿Modelo de rayos funciona?</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 Hz</td>
+<td>3.43 m</td>
+<td>❌ No fiable</td>
+<td>λ es comparable al tamaño de una sala — el sonido se comporta como onda, no como rayo</td>
+</tr>
+<tr>
+<td>500 Hz</td>
+<td>0.69 m</td>
+<td>⚠️ Transición</td>
+<td>Empieza a ser válido en salas grandes</td>
+</tr>
+<tr>
+<td>1 kHz</td>
+<td>0.34 m</td>
+<td>✅ Válido</td>
+<td>λ es pequeña comparada con paredes, suelo, techo</td>
+</tr>
+<tr>
+<td>4 kHz</td>
+<td>0.086 m (8.6 cm)</td>
+<td>✅ Muy preciso</td>
+<td>λ es minúscula — el sonido se comporta casi como luz</td>
+</tr>
+</tbody>
+</table>
+<h3 id="construccion-de-un-diagrama-de-rayos">Construcción de un diagrama de rayos<a class="headerlink" href="#construccion-de-un-diagrama-de-rayos" title="Permanent link">&para;</a></h3>
+<p>Para trazar la trayectoria de un rayo sonoro desde una fuente S hasta un receptor R con una reflexión en una pared:</p>
+<ol>
+<li><strong>Identificá la superficie reflectante</strong> (pared, suelo, techo, fachada).</li>
+<li><strong>Aplicá la ley de reflexión</strong>: θᵢ = θᵣ respecto a la normal.</li>
+<li><strong>Trazá el camino completo</strong>: S → punto de impacto en la superficie → R.</li>
+<li><strong>Medí la distancia total</strong> del camino reflejado: <span class="arithmatex">\(d_{\text{reflejado}} = d_1 + d_2\)</span>.</li>
+<li><strong>Compará con el camino directo</strong>: <span class="arithmatex">\(d_{\text{directo}}\)</span> (línea recta S → R).</li>
+</ol>
+<p>La diferencia de camino <span class="arithmatex">\(\Delta d = d_{\text{reflejado}} - d_{\text{directo}}\)</span> determina el retardo temporal de la reflexión respecto al sonido directo:</p>
+<div class="arithmatex">\[
+\boxed{\Delta t = \frac{\Delta d}{c}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\Delta d\)</span></td>
+<td>Diferencia de camino</td>
+<td>Diferencia entre la distancia del camino reflejado y la del camino directo, en metros</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Delta t\)</span></td>
+<td>Retardo temporal</td>
+<td>Tiempo que tarda el sonido reflejado en llegar DESPUÉS del sonido directo, en segundos</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>Velocidad del sonido</td>
+<td>~343 m/s a 20°C</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d_1\)</span></td>
+<td>Distancia fuente → punto de reflexión</td>
+<td>En metros</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d_2\)</span></td>
+<td>Distancia punto de reflexión → receptor</td>
+<td>En metros</td>
+</tr>
+</tbody>
+</table>
+<h3 id="el-metodo-de-la-imagen-image-method">El método de la imagen (<em>image method</em>)<a class="headerlink" href="#el-metodo-de-la-imagen-image-method" title="Permanent link">&para;</a></h3>
+<p>Existe un truco geométrico para trazar reflexiones sin medir ángulos: el <strong>método de la fuente imagen</strong>.</p>
+<ol>
+<li>Reflejá la fuente S respecto a la superficie reflectante, como si fuera un espejo. Llamá S' a esa fuente «imagen».</li>
+<li>Trazá una línea recta desde S' hasta el receptor R.</li>
+<li>Donde esa línea cruza la superficie reflectante, está el punto de impacto real.</li>
+<li>La distancia S' → R es exactamente igual a la distancia total del camino reflejado S → punto de impacto → R.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Paso</th>
+<th>Acción</th>
+<th>Ventaja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Reflejar S simétricamente respecto a la pared → S'</td>
+<td>Elimina la necesidad de resolver θᵢ = θᵣ gráficamente</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Unir S' con R con línea recta</td>
+<td>La intersección con la pared da el punto de impacto exacto</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Medir S' → R</td>
+<td>Esa distancia ES la longitud del camino reflejado</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">El método de la imagen para varias reflexiones</p>
+<p>Para reflexiones de segundo orden (el sonido rebota en DOS paredes antes de llegar al receptor), reflejás la fuente imagen a su vez respecto a la segunda pared. Para N reflexiones, creás una fuente imagen de orden N. Los estudios de grabación y salas de concierto usan este método computacionalmente para predecir todas las reflexiones tempranas.</p>
+</div>
+<h3 id="aplicacion-trazado-de-reflexiones-tempranas-en-un-cuarto-de-control">Aplicación: trazado de reflexiones tempranas en un cuarto de control<a class="headerlink" href="#aplicacion-trazado-de-reflexiones-tempranas-en-un-cuarto-de-control" title="Permanent link">&para;</a></h3>
+<p>En un cuarto de control de estudio de grabación, las <strong>primeras reflexiones</strong> (las que llegan dentro de los primeros 20-30 ms después del sonido directo) son críticas porque el oído las integra con el sonido directo y colorean la percepción. Trazar estas reflexiones permite identificar qué superficies necesitan tratamiento absorbente.</p>
+<p><figure markdown="span">
+  <img alt="Fig. 6-4: Fuentes imagen en paredes paralelas" src="../../../img/fuentes_imagen_paredes_paralelas.svg" />
+  <figcaption><strong>Fig. 6-4</strong> — Método de la fuente imagen en una sala de control. Cada superficie reflectante (paredes laterales, techo, suelo) genera una fuente imagen; los rayos de primer orden se trazan uniendo S' con el receptor.</figcaption>
+</figure></p>
+<table>
+<thead>
+<tr>
+<th>Superficie</th>
+<th>Distancia típica del camino reflejado</th>
+<th>Δt aproximado</th>
+<th>¿Problemática?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paredes laterales</td>
+<td>2-3 m más que el directo</td>
+<td>6-9 ms</td>
+<td><strong>Sí</strong> — las más críticas, ensanchan la imagen estéreo</td>
+</tr>
+<tr>
+<td>Techo</td>
+<td>1.5-2.5 m más que el directo</td>
+<td>4-7 ms</td>
+<td><strong>Sí</strong> — produce coloración en medios-agudos</td>
+</tr>
+<tr>
+<td>Pared trasera</td>
+<td>3-5 m más que el directo</td>
+<td>9-15 ms</td>
+<td>Depende: si &gt;20 ms puede ser beneficio (sensación de amplitud)</td>
+</tr>
+<tr>
+<td>Consola/escritorio</td>
+<td>0.5-1 m más que el directo</td>
+<td>1.5-3 ms</td>
+<td><strong>Muy problemática</strong> — filtro comb en agudos</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>Reflexión en exteriores: fachadas, barreras y superficies naturales</summary>
+<p>En exteriores, la reflexión en superficies grandes modifica significativamente el nivel sonoro que llega a un receptor. Una fuente cercana a una fachada reflectante puede aumentar el SPL en el receptor por la suma coherente del camino directo y el reflejado.</p>
+<h3 id="reflexion-en-una-fachada-plana">Reflexión en una fachada plana<a class="headerlink" href="#reflexion-en-una-fachada-plana" title="Permanent link">&para;</a></h3>
+<p>Cuando una fuente está frente a una fachada reflectante (edificio, muro, talud), el receptor recibe dos contribuciones: el sonido directo y el reflejado en la fachada. Si la fachada es perfectamente reflectante y las distancias son comparables, el refuerzo puede ser de hasta <strong>+3 dB</strong> (duplicación de presión por suma coherente).</p>
+<p>En exteriores, la situación más común es una fuente sonora (parlante de PA, escenario) con una fachada detrás o un muro de contención. El modelo de la fuente imagen permite calcular el nivel resultante:</p>
+<div class="arithmatex">\[
+\boxed{L_p = L_W + 10\log_{10}\left(\frac{Q}{4\pi r^2}\right) - \alpha \cdot r \quad[\text{dB}]}
+\]</div>
+<p>Donde <span class="arithmatex">\(Q\)</span> (factor de directividad) incluye el efecto de las superficies reflectantes cercanas a la fuente:</p>
+<table>
+<thead>
+<tr>
+<th>Posición de la fuente</th>
+<th>Q</th>
+<th>Δ SPL respecto a fuente en espacio libre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Espacio libre (sin superficies cerca)</td>
+<td>1</td>
+<td>0 dB (referencia)</td>
+</tr>
+<tr>
+<td>Sobre un plano reflectante (suelo)</td>
+<td>2</td>
+<td>+3 dB</td>
+</tr>
+<tr>
+<td>Junto a dos planos (suelo + pared)</td>
+<td>4</td>
+<td>+6 dB</td>
+</tr>
+<tr>
+<td>En una esquina (suelo + dos paredes)</td>
+<td>8</td>
+<td>+9 dB</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Esto ya lo viste en la Sesión 8 — ahora con diagramas de rayos</p>
+<p>El factor Q que estudiaste en tipos de fuentes (Sesión 8) es exactamente el mismo concepto, pero ahora podés TRAZAR los rayos para entender POR QUÉ una fuente en el suelo irradia el doble de energía hacia el hemiespacio superior: el rayo que iría hacia abajo se refleja en el suelo y se suma al que va hacia arriba.</p>
+</div>
+<h3 id="diagrama-de-rayos-para-un-escenario-exterior-con-fachada">Diagrama de rayos para un escenario exterior con fachada<a class="headerlink" href="#diagrama-de-rayos-para-un-escenario-exterior-con-fachada" title="Permanent link">&para;</a></h3>
+<p><figure markdown="span">
+  <img alt="Fig. 8-3: Reflexión de una fuente puntual en una pared plana" src="../../../img/reflexion_fuente_puntual_pared_plana.svg" />
+  <figcaption><strong>Fig. 8-3</strong> — Reflexión de una fuente puntual en una pared plana (exterior). La fuente S, su imagen S', el rayo directo y el rayo reflejado hacia el receptor. Cada reflexión se modela con la fuente imagen correspondiente.</figcaption>
+</figure></p>
+</details>
+<details class="note" open="open">
+<summary>Reflexión, absorción y el coeficiente de reflexión</summary>
+<p>No toda la energía que incide en una superficie se refleja. Una parte se <strong>absorbe</strong> (se convierte en calor dentro del material) y otra se <strong>transmite</strong> (atraviesa la superficie hacia el otro lado). El <strong>coeficiente de reflexión</strong> <span class="arithmatex">\(R\)</span> cuantifica qué fracción de la presión sonora incidente se refleja:</p>
+<div class="arithmatex">\[
+\boxed{R = \frac{p_r}{p_i}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(R\)</span></td>
+<td>Coeficiente de reflexión en presión</td>
+<td>Varía entre 0 (absorción total) y 1 (reflexión total) — adimensional</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(p_i\)</span></td>
+<td>Presión sonora incidente</td>
+<td>Amplitud de la onda que llega a la superficie [Pa]</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(p_r\)</span></td>
+<td>Presión sonora reflejada</td>
+<td>Amplitud de la onda que se refleja [Pa]</td>
+</tr>
+</tbody>
+</table>
+<p>En la práctica, el coeficiente de absorción α (que veremos en detalle en la Unidad 3) está relacionado con R:</p>
+<div class="arithmatex">\[
+\alpha = 1 - |R|^2
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>R (aprox. a 1 kHz)</th>
+<th>α (aprox. a 1 kHz)</th>
+<th>¿Cómo suena la reflexión?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concreto pintado</td>
+<td>~0.98</td>
+<td>~0.04</td>
+<td>Reflexión casi total — como un espejo acústico</td>
+</tr>
+<tr>
+<td>Vidrio</td>
+<td>~0.97</td>
+<td>~0.06</td>
+<td>Muy reflectante</td>
+</tr>
+<tr>
+<td>Madera (panel)</td>
+<td>~0.85</td>
+<td>~0.28</td>
+<td>Reflexión con algo de absorción</td>
+</tr>
+<tr>
+<td>Cortina pesada</td>
+<td>~0.60</td>
+<td>~0.64</td>
+<td>Reflexión atenuada — los agudos se absorben más que los graves</td>
+</tr>
+<tr>
+<td>Espuma acústica (5 cm)</td>
+<td>~0.20</td>
+<td>~0.96</td>
+<td>Casi sin reflexión a frecuencias medias-altas</td>
+</tr>
+</tbody>
+</table>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 6, pp. 79–95 (Reflection — Specular Reflection, Ray Diagrams, Image Method, Reflection Coefficients) y Capítulo 8, pp. 105–115 (Refraction and Outdoor Ray Tracing).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

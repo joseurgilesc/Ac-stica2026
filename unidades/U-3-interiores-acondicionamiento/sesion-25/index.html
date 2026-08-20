@@ -1,0 +1,2596 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-24/">
+      
+      
+        <link rel="next" href="../sesion-26/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 25: Tratamiento de bajas frecuencias - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-25-tratamiento-de-bajas-frecuencias" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 25: Tratamiento de bajas frecuencias
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#las-dos-caras-de-una-onda-sonora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las dos caras de una onda sonora
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-esto-importa-para-el-diseno-de-trampas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué esto importa para el diseño de trampas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-absorbentes-porosos-de-gran-espesor-velocity-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Absorbentes porosos de gran espesor (velocity absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-absorbentes-de-membrana-o-panel-pressure-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Absorbentes de membrana o panel (pressure absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-resonadores-de-helmholtz-pressure-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resonadores de Helmholtz (pressure absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquinas-el-lugar-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquinas: el lugar #1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrategia-de-colocacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategia de colocación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-de-acustica-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos de acústica variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#las-dos-caras-de-una-onda-sonora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las dos caras de una onda sonora
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-esto-importa-para-el-diseno-de-trampas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por qué esto importa para el diseño de trampas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-absorbentes-porosos-de-gran-espesor-velocity-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Absorbentes porosos de gran espesor (velocity absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-absorbentes-de-membrana-o-panel-pressure-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Absorbentes de membrana o panel (pressure absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-resonadores-de-helmholtz-pressure-absorbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resonadores de Helmholtz (pressure absorbers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquinas-el-lugar-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquinas: el lugar #1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrategia-de-colocacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategia de colocación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-de-acustica-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos de acústica variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-25-tratamiento-de-bajas-frecuencias">Sesión 25: Tratamiento de bajas frecuencias<a class="headerlink" href="#sesion-25-tratamiento-de-bajas-frecuencias" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="m"></a><strong>m</strong></td>
+<td>Metro</td>
+<td>Longitud</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="mm"></a><strong>mm</strong></td>
+<td>Milímetro</td>
+<td>Longitud</td>
+<td>1 mm = 0.001 m</td>
+</tr>
+<tr>
+<td><a id="m2"></a><strong>m²</strong></td>
+<td>Metro cuadrado</td>
+<td>Superficie</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="m3"></a><strong>m³</strong></td>
+<td>Metro cúbico</td>
+<td>Volumen</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="s"></a><strong>s</strong></td>
+<td>Segundo</td>
+<td>Tiempo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a id="ms"></a><strong>ms</strong></td>
+<td>Milisegundo</td>
+<td>Tiempo</td>
+<td>1 ms = 0.001 s</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel de presión sonora</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="c"></a><strong>c</strong></td>
+<td>Velocidad del sonido</td>
+<td>Velocidad de propagación</td>
+<td>~343 m/s (20°C)</td>
+</tr>
+<tr>
+<td><a id="l"></a><strong>λ</strong> (lambda)</td>
+<td>Longitud de onda</td>
+<td>Distancia que recorre un ciclo</td>
+<td>λ = c/f, en m</td>
+</tr>
+<tr>
+<td><a id="pa"></a><strong>Pa</strong></td>
+<td>Pascal</td>
+<td>Presión sonora</td>
+<td>1 Pa = 94 dB SPL</td>
+</tr>
+<tr>
+<td><a id="f-s"></a><strong>f_S</strong></td>
+<td>Frecuencia de Schroeder</td>
+<td>Transición modal/difuso</td>
+<td><span class="arithmatex">\(f_S \approx 2000 \cdot \sqrt{RT60 / V}\)</span></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>¿Por qué el tratamiento de graves es DISTINTO?</summary>
+<p>En las Sesiones 23 y 24 aprendiste que por debajo de la frecuencia de Schroeder (<span class="arithmatex">\(f_S\)</span>), la respuesta de una sala está dominada por MODOS individuales — picos y valles discretos en el espectro. Por encima de <span class="arithmatex">\(f_S\)</span>, el comportamiento es difuso: los modos se funden y el tratamiento puede ser ESTADÍSTICO (absorción porosa generalizada).</p>
+<p>Esto tiene una consecuencia práctica radical: <strong>el tratamiento acústico en graves (&lt; 150-200 Hz) debe ser cualitativamente DISTINTO al tratamiento en medios y agudos.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Tratamiento en graves</th>
+<th>Tratamiento en medios/agudos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fenómeno dominante</strong></td>
+<td>Modos individuales (resonancias discretas)</td>
+<td>Campo difuso (comportamiento estadístico)</td>
+</tr>
+<tr>
+<td><strong>Estrategia</strong></td>
+<td>Sintonizar dispositivos específicos a las frecuencias modales problemáticas</td>
+<td>Absorción porosa de banda ancha, difusión</td>
+</tr>
+<tr>
+<td><strong>Dispositivo típico</strong></td>
+<td>Resonador de Helmholtz, panel de membrana, trampa diafragmática</td>
+<td>Panel de lana mineral, espuma acústica, difusor QRD</td>
+</tr>
+<tr>
+<td><strong>Ubicación crítica</strong></td>
+<td>Esquinas y superficies donde los modos tienen ANTINODOS de presión</td>
+<td>Primeras reflexiones (puntos especulares)</td>
+</tr>
+<tr>
+<td><strong>¿Funciona la espuma acústica de 5 cm?</strong></td>
+<td>❌ Casi nula absorción por debajo de 500 Hz</td>
+<td>✅ Buena absorción por encima de 1 kHz</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">La espuma acústica NO es un tratamiento de graves</p>
+<p>La espuma acústica de 5 cm de espesor tiene un coeficiente de absorción α ≈ 0.15 a 125 Hz. Eso significa que absorbe solo el 15% de la energía incidente en graves. Para que un absorbente poroso sea efectivo en 100 Hz necesitarías un espesor de ~86 cm (λ/4 a 100 Hz). NADIE forra su estudio con bloques de lana de roca de casi un metro. Por eso existen las trampas de graves: dispositivos diseñados ESPECÍFICAMENTE para absorber en el rango donde la absorción porosa convencional FALLA.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 13-8</strong> del Everest: gráfico comparativo de coeficientes de absorción (α) vs. frecuencia para tres tipos de tratamiento — absorbente poroso de 50 mm, trampa de membrana, y resonador de Helmholtz. Señalar la enorme diferencia en el rango 50-250 Hz.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Presión vs. velocidad: la clave física del tratamiento de graves</summary>
+<p>Para entender POR QUÉ funcionan (o no) los distintos tipos de trampas, necesitás distinguir dos magnitudes acústicas en una onda estacionaria:</p>
+<h3 id="las-dos-caras-de-una-onda-sonora">Las dos caras de una onda sonora<a class="headerlink" href="#las-dos-caras-de-una-onda-sonora" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Magnitud</th>
+<th>Símbolo</th>
+<th>¿Qué es?</th>
+<th>¿Dónde es máxima en una onda estacionaria?</th>
+<th>¿Dónde es mínima?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Presión sonora</strong></td>
+<td><span class="arithmatex">\(p\)</span> (Pa)</td>
+<td>Variación de presión respecto a la atmosférica. Lo que mide UN micrófono</td>
+<td>En los <strong>antinodos de presión</strong> (paredes rígidas y puntos fijos a λ/2)</td>
+<td>En los <strong>nodos de presión</strong> (a λ/4, 3λ/4, 5λ/4… de la pared)</td>
+</tr>
+<tr>
+<td><strong>Velocidad de partícula</strong></td>
+<td><span class="arithmatex">\(u\)</span> (m/s)</td>
+<td>Velocidad con la que las moléculas de aire oscilan alrededor de su posición de equilibrio. NO es la velocidad de propagación c</td>
+<td>En los <strong>nodos de presión</strong> (justo donde la presión es mínima)</td>
+<td>En los <strong>antinodos de presión</strong> (justo donde la presión es máxima)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Analogía: un columpio</p>
+<p>Imaginá un columpio. En los extremos del arco (puntos más altos), la velocidad es CERO pero la energía potencial (altura) es MÁXIMA. En el punto más bajo, la velocidad es MÁXIMA pero la altura es CERO. En una onda sonora: la presión es como la altura (energía potencial), y la velocidad de partícula es como la velocidad del columpio (energía cinética). Donde una es máxima, la otra es mínima. Están desfasadas 90° en el espacio (λ/4).</p>
+</div>
+<h3 id="por-que-esto-importa-para-el-diseno-de-trampas">Por qué esto importa para el diseño de trampas<a class="headerlink" href="#por-que-esto-importa-para-el-diseno-de-trampas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Los absorbentes POROSOS (lana mineral, espuma) disipan energía por FRICCIÓN: las moléculas de aire se mueven a través de las fibras y pierden energía. Por eso necesitan estar donde la VELOCIDAD DE PARTÍCULA es alta → a λ/4 de la pared. Pero a 50 Hz, λ/4 = 1.72 m. Imposible en la práctica.</p>
+</li>
+<li>
+<p>Los absorbentes RESONANTES (membrana, Helmholtz) funcionan por RESONANCIA MECÁNICA: una masa (membrana, aire en el cuello) oscila contra un resorte (aire en la cavidad). La máxima absorción ocurre donde la PRESIÓN es máxima → pegados a la pared. Y en graves, la pared está AHÍ MISMO, a 0 cm. Por eso las trampas resonantes pueden ser delgadas y aún así funcionar en graves.</p>
+</li>
+</ul>
+<blockquote>
+<p>Insertar <strong>Fig. 12-10</strong> del Everest: perfil de presión y velocidad de partícula para una onda estacionaria entre dos paredes. Mostrar que el máximo de presión está en la pared (x = 0) y el máximo de velocidad a λ/4 de la pared. Señalar: «trampa resonante aquí» (x = 0) y «absorbente poroso aquí» (x = λ/4).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Tipos de trampas de graves</summary>
+<p>Hay tres familias principales. Cada una tiene su principio físico, sus ventajas y sus limitaciones.</p>
+<h3 id="1-absorbentes-porosos-de-gran-espesor-velocity-absorbers">1. Absorbentes porosos de gran espesor (velocity absorbers)<a class="headerlink" href="#1-absorbentes-porosos-de-gran-espesor-velocity-absorbers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Principio</strong></td>
+<td>Fricción viscosa del aire moviéndose a través de material fibroso</td>
+</tr>
+<tr>
+<td><strong>Material típico</strong></td>
+<td>Lana de roca, lana de vidrio, fibra de poliéster reciclado, espuma de celda abierta</td>
+</tr>
+<tr>
+<td><strong>Dónde funciona mejor</strong></td>
+<td>A λ/4 de la pared (máxima velocidad de partícula)</td>
+</tr>
+<tr>
+<td><strong>Rango efectivo</strong></td>
+<td>Frecuencias donde λ/4 ≤ espesor del panel. Ej: panel de 30 cm → efectivo desde ~286 Hz hacia arriba</td>
+</tr>
+<tr>
+<td><strong>Ancho de banda</strong></td>
+<td>AMPLIO (varias octavas) — es la principal ventaja</td>
+</tr>
+<tr>
+<td><strong>¿Funciona en esquinas?</strong></td>
+<td>Sí. En una esquina la distancia a la pared varía de 0 a λ/4 en diagonal → absorción de banda más ancha</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Estrategia práctica</strong>: paneles de 15-30 cm de lana mineral de alta densidad (40-60 kg/m³) montados con un espacio de aire (air gap) de otros 10-30 cm detrás. El air gap desplaza el pico de velocidad hacia frecuencias más bajas sin agregar material. Un panel de 30 cm con air gap de 30 cm puede ser efectivo hasta ~70-80 Hz.</p>
+<h3 id="2-absorbentes-de-membrana-o-panel-pressure-absorbers">2. Absorbentes de membrana o panel (pressure absorbers)<a class="headerlink" href="#2-absorbentes-de-membrana-o-panel-pressure-absorbers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Principio</strong></td>
+<td>Una membrana flexible (madera contrachapada, vinilo, metal) montada sobre un marco sellado con una cavidad de aire detrás. La membrana vibra por la presión sonora y disipa energía por amortiguamiento interno + fricción en la cavidad</td>
+</tr>
+<tr>
+<td><strong>Frecuencia de resonancia</strong></td>
+<td><span class="arithmatex">\(f_0 \approx \frac{60}{\sqrt{m \cdot d}}\)</span> donde m = masa superficial (kg/m²) y d = profundidad de la cavidad (m)</td>
+</tr>
+<tr>
+<td><strong>Dónde funciona mejor</strong></td>
+<td>Pegado a la pared (máxima presión)</td>
+</tr>
+<tr>
+<td><strong>Rango efectivo</strong></td>
+<td>BANDA ESTRECHA alrededor de f₀ (~1/3 a 1 octava)</td>
+</tr>
+<tr>
+<td><strong>Ancho de banda</strong></td>
+<td>Se puede ensanchar agregando material absorbente dentro de la cavidad (aumenta el amortiguamiento → menor Q → más ancho de banda)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo</strong>: panel de madera contrachapada de 6 mm (m ≈ 4 kg/m²), cavidad de 10 cm (d = 0.1 m):</p>
+<div class="arithmatex">\[
+f_0 = \frac{60}{\sqrt{4 \times 0.1}} = \frac{60}{\sqrt{0.4}} = \frac{60}{0.632} = \mathbf{95\ \text{Hz}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>m (kg/m²)</th>
+<th>d (m)</th>
+<th>f₀ (Hz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>0.05</td>
+<td>134</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.10</td>
+<td>95</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.20</td>
+<td>67</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0.10</td>
+<td>67</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0.10</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">¿Cómo elijo m y d?</p>
+<ul>
+<li>Aumentar <strong>m</strong> (panel más pesado) → baja f₀ pero también reduce la amplitud de vibración → menos absorción. Compromiso.</li>
+<li>Aumentar <strong>d</strong> (cavidad más profunda) → baja f₀ sin reducir eficiencia. Pero ocupa MÁS espacio en la sala.</li>
+<li>Si necesitás cubrir UN modo problemático específico (ej. 57 Hz en tu sala), calculás m × d = (60/57)² = 1.11, y elegís combinaciones viables: m=4 → d=0.28 m (28 cm), m=8 → d=0.14 m (14 cm), m=12 → d=0.09 m (9 cm).</li>
+</ul>
+</div>
+<h3 id="3-resonadores-de-helmholtz-pressure-absorbers">3. Resonadores de Helmholtz (pressure absorbers)<a class="headerlink" href="#3-resonadores-de-helmholtz-pressure-absorbers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Principio</strong></td>
+<td>Una cavidad de volumen V conectada al exterior por un cuello de área S y longitud L. El aire en el cuello actúa como MASA que oscila contra el RESORTE que es el aire en la cavidad. Máxima absorción en resonancia</td>
+</tr>
+<tr>
+<td><strong>Frecuencia de resonancia</strong></td>
+<td><span class="arithmatex">\(f_0 = \frac{c}{2\pi} \cdot \sqrt{\frac{S}{V \cdot L_{\text{ef}}}}\)</span></td>
+</tr>
+<tr>
+<td><strong>Dónde funciona mejor</strong></td>
+<td>Pegado a la pared, con el cuello expuesto a la sala (máxima presión)</td>
+</tr>
+<tr>
+<td><strong>Rango efectivo</strong></td>
+<td>MUY ESTRECHA (alto Q). Ideal para sintonizar modos muy específicos</td>
+</tr>
+<tr>
+<td><strong>Ancho de banda</strong></td>
+<td>Se puede ensanchar agregando material absorbente en el cuello o la cavidad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nomenclatura de la fórmula de Helmholtz</strong>:</p>
+<div class="arithmatex">\[
+\boxed{f_0 = \frac{c}{2\pi} \cdot \sqrt{\frac{S}{V \cdot L_{\text{ef}}}}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Unidad</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f_0\)</span></td>
+<td>Frecuencia de resonancia</td>
+<td>Hz</td>
+<td>Frecuencia a la que la absorción es máxima</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>Velocidad del sonido</td>
+<td>m/s</td>
+<td>~343 m/s a 20°C</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S\)</span></td>
+<td>Área de la sección transversal del cuello</td>
+<td>m²</td>
+<td><span class="arithmatex">\(\pi r^2\)</span> para cuello circular de radio r</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td>Volumen de la cavidad</td>
+<td>m³</td>
+<td>Volumen interno del resonador</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L_{\text{ef}}\)</span></td>
+<td>Longitud efectiva del cuello</td>
+<td>m</td>
+<td>Longitud física + corrección de boca (<span class="arithmatex">\(L_{\text{ef}} = L_{\text{física}} + 1.7r\)</span> para cuello circular con brida exterior, <span class="arithmatex">\(L_{\text{física}} + 0.85r\)</span> sin brida)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo</strong>: resonador con cavidad V = 0.05 m³ (50 litros, como una caja de 40×35×35 cm), cuello circular de radio r = 2 cm (S = π × 0.02² = 0.001257 m²), longitud física del cuello L = 5 cm (0.05 m), con brida → L_ef = 0.05 + 1.7 × 0.02 = 0.084 m:</p>
+<div class="arithmatex">\[
+f_0 = \frac{343}{2\pi} \cdot \sqrt{\frac{0.001257}{0.05 \times 0.084}} = 54.6 \cdot \sqrt{0.299} = 54.6 \times 0.547 = \mathbf{29.9\ \text{Hz}}
+\]</div>
+<div class="admonition info">
+<p class="admonition-title">Helmholtz perforado (perforated panel)</p>
+<p>Una variante MUY usada en estudios es el panel perforado: múltiples agujeros distribuidos en una placa montada sobre una cavidad. Cada agujero actúa como un cuello individual. La frecuencia de resonancia es la misma fórmula pero con S = área total de TODOS los agujeros y un factor de porosidad. Los paneles perforados combinan la estética (parecen un revestimiento normal) con absorción sintonizada en graves — son ideales para salas donde no querés que «se vea» el tratamiento.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 14-3</strong> del Everest: esquema de un resonador de Helmholtz. Mostrar cuello (S, L), cavidad (V), y la analogía masa-resorte (masa = aire en el cuello, resorte = aire en la cavidad). Incluir la curva de absorción vs. frecuencia mostrando el pico estrecho en f₀.</p>
+</blockquote>
+<p><a class="md-button" href="../../../simulacion/helmholtz.html">🎛️ <strong>Abrir simulación interactiva — Resonador de Helmholtz</strong></a></p>
+<p>Cambia el volumen, el radio y la longitud del cuello. Observa la frecuencia f₀ calculada, la analogía masa-resorte y la curva de resonancia.</p>
+</details>
+<details class="note" open="open">
+<summary>¿Dónde pongo las trampas? La geometría de la absorción</summary>
+<p>La ubicación determina la EFECTIVIDAD tanto o más que el diseño de la trampa en sí.</p>
+<h3 id="esquinas-el-lugar-1">Esquinas: el lugar #1<a class="headerlink" href="#esquinas-el-lugar-1" title="Permanent link">&para;</a></h3>
+<p>TODOS los modos axiales (sin excepción) tienen ANTINODOS de presión en las esquinas de la sala. Una trampa de presión (membrana, Helmholtz) en una esquina «ve» MÁXIMA presión para TODOS los modos — es el punto más eficiente. Además, las esquinas tienen MÁS modos superpuestos que cualquier otra ubicación → una trampa en una esquina absorbe MÚLTIPLES modos simultáneamente.</p>
+<table>
+<thead>
+<tr>
+<th>Ubicación</th>
+<th>¿Cuántos modos «ve»?</th>
+<th>Eficiencia relativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Esquina triedro</strong> (3 paredes)</td>
+<td>TODOS los modos (axiales + tangenciales + oblicuos)</td>
+<td><strong>Máxima</strong> (100%)</td>
+</tr>
+<tr>
+<td><strong>Arista</strong> (2 paredes)</td>
+<td>Todos los axiales de esos 2 ejes + tangenciales asociados</td>
+<td>Alta (~70%)</td>
+</tr>
+<tr>
+<td><strong>Pared plana (centro)</strong></td>
+<td>Solo modos que tienen antinodo en ESE punto específico</td>
+<td>Baja (~30%)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estrategia-de-colocacion">Estrategia de colocación<a class="headerlink" href="#estrategia-de-colocacion" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Esquinas triedro primero</strong> (donde se juntan 3 superficies: las 4 esquinas del piso y las 4 del techo). Ahí ponés trampas de BANDA ANCHA (superchunks de lana mineral, trampas de membrana de gran superficie).</li>
+<li><strong>Aristas verticales</strong> (esquinas entre paredes, de piso a techo). Trampas de membrana o Helmholtz sintonizados si tenés modos problemáticos específicos que no resolvieron los superchunks.</li>
+<li><strong>Pared trasera</strong> (la que está detrás del oyente, generalmente opuesta a los monitores). Combinación de absorción y difusión: absorción para los modos longitudinales, difusión para romper la reflexión especular sin «matar» la sala.</li>
+<li><strong>Techo</strong> si hay altura suficiente. Los modos verticales (eje z) tienen antinodos en piso y techo.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">La regla del «paseo acústico» antes de comprar trampas</p>
+<p>Antes de gastar dinero en trampas:
+1. Medí tu sala con REW (barrido de 20-500 Hz, ambos canales).
+2. Identificá los 3-5 picos modales más problemáticos (los de mayor amplitud y menor frecuencia).
+3. Caminá por la sala con un sonómetro reproduciendo un tono en CADA una de esas frecuencias. Mapeá dónde están los antinodos (máximo SPL).
+4. Poné las trampas DONDE LOS ANTINODOS DE ESOS MODOS están más concentrados. No donde «queda lindo». La acústica no es decoración.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Acústica variable: salas que cambian de carácter</summary>
+<p>No todas las trampas tienen que ser fijas. La acústica variable (Everest &amp; Pohlmann, 2009, Cap. 15) permite modificar el tiempo de reverberación y la respuesta modal de una sala SEGÚN EL USO.</p>
+<h3 id="metodos-de-acustica-variable">Métodos de acústica variable<a class="headerlink" href="#metodos-de-acustica-variable" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>¿Cómo funciona?</th>
+<th>Aplicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Paneles giratorios</strong></td>
+<td>Una cara es reflectante (madera, yeso), la otra absorbente (tela + lana mineral). Girando el panel 180° cambiás α de ~0.05 a ~0.80</td>
+<td>Salas de ensayo/concierto que necesitan cambiar RT entre formatos</td>
+</tr>
+<tr>
+<td><strong>Cortinas pesadas</strong></td>
+<td>Telas de gran masa superficial (500-1000 g/m²) que se despliegan/recogen. Absorción selectiva en medios/agudos</td>
+<td>Salas polivalentes, teatros</td>
+</tr>
+<tr>
+<td><strong>Resonadores sintonizables</strong></td>
+<td>Helmholtz con volumen de cavidad variable (pistón móvil) o cuello de longitud regulable → f₀ ajustable</td>
+<td>Estudios donde el RT óptimo depende del género musical</td>
+</tr>
+<tr>
+<td><strong>Difusores rotativos</strong></td>
+<td>Secuencias de pozos que giran para exponer distintas profundidades</td>
+<td>Salas de escucha crítica, mastering</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué querrías acústica variable?</p>
+<p>Un estudio de grabación para música clásica necesita RT60 ≈ 1.8-2.2 s (cálido, envolvente). El mismo estudio para grabar batería de rock necesita RT60 ≈ 0.3-0.5 s (seco, controlado, sin emborronamiento). Con acústica variable, AMBOS usos son posibles en el MISMO espacio. No es magia — es ingeniería acústica.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 15-1</strong> del Everest: esquema de un sistema de acústica variable con paneles giratorios. Mostrar la diferencia de absorción entre la cara reflectante y la cara absorbente a distintas frecuencias.</p>
+</blockquote>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 12, pp. 198–241 (Absorption of Sound — Porous Absorbers, Membrane/Panel Absorbers, Helmholtz Resonators). Capítulo 13, pp. 242–275 (Modal Resonances — Room Proportions and Modal Treatment, Corner Absorber Placement). Capítulo 14, pp. 211–230 (Schroeder Diffusers — Perforated Panel Absorbers, Tuned Absorbers). Capítulo 15 (Adjustable Acoustics — Variable Acoustics, Rotating Panels, Adjustable Resonators).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

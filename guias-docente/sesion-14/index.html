@@ -1,0 +1,2324 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Guía Docente — Sesión 14: Efecto Doppler - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-docente-sesion-14-efecto-doppler" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía Docente — Sesión 14: Efecto Doppler
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../unidades/U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidades/U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquema-de-la-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquema de la clase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-apertura-por-que-cambia-el-sonido-cuando-pasa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Apertura — «¿Por qué cambia el sonido cuando pasa?»
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Apertura — «¿Por qué cambia el sonido cuando pasa?»">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dinámica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preguntas-disparadoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preguntas disparadoras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-desarrollo-teoria-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Desarrollo — Teoría guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Desarrollo — Teoría guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secuencia-sugerida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secuencia sugerida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-practica-simulacion-ejercicios-y-produccion-audiovisual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Práctica — Simulación, ejercicios y producción audiovisual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Práctica — Simulación, ejercicios y producción audiovisual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividad-en-classroom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividad en Classroom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rubrica-formativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rúbrica formativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cierre-discusion-y-bitacora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cierre — Discusión y bitácora
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cierre — Discusión y bitácora">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discusion-guiada-10-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discusión guiada (10 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registro-en-bitacora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registro en bitácora
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-adicionales-para-el-docente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos adicionales para el docente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posibles-dificultades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Posibles dificultades
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-docente-sesion-14-efecto-doppler">Guía Docente — Sesión 14: Efecto Doppler<a class="headerlink" href="#guia-docente-sesion-14-efecto-doppler" title="Permanent link">&para;</a></h1>
+<p><strong>Duración estimada:</strong> 1 sesión presencial (≈ 2-3 horas)<br />
+<strong>Herramientas:</strong> Google Classroom, p5.js, parlante Bluetooth, celular con app de generador de frecuencias (opcional: grabadora de audio para análisis espectral), videos de ejemplos Doppler (YouTube)<br />
+<strong>Referencia:</strong> Everest &amp; Pohlmann, Capítulo 3, pp. 52–57 (Free Field — Doppler Effect, Moving Sources and Receivers)</p>
+<hr />
+<h2 id="objetivo-de-la-sesion">Objetivo de la sesión<a class="headerlink" href="#objetivo-de-la-sesion" title="Permanent link">&para;</a></h2>
+<p>Que el estudiante calcule el desplazamiento de frecuencia por efecto Doppler para fuentes y receptores en movimiento, relacione la compresión/expansión de frentes de onda con el cambio de frecuencia percibida, y analice aplicaciones del efecto Doppler en producción musical, audio para videojuegos y efectos de modulación.</p>
+<hr />
+<h2 id="esquema-de-la-clase">Esquema de la clase<a class="headerlink" href="#esquema-de-la-clase" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Duración</th>
+<th>Actividad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apertura</strong></td>
+<td>10 min</td>
+<td>Escucha de ejemplos reales: ambulancia, F1, tren (audio + video)</td>
+</tr>
+<tr>
+<td><strong>Desarrollo</strong></td>
+<td>40 min</td>
+<td>Teoría guiada: compresión de frentes de onda, fórmula Doppler (3 casos), ejemplos numéricos</td>
+</tr>
+<tr>
+<td><strong>Práctica</strong></td>
+<td>50 min</td>
+<td>Simulación p5.js + ejercicios de cálculo + explicación audiovisual</td>
+</tr>
+<tr>
+<td><strong>Cierre</strong></td>
+<td>20 min</td>
+<td>Discusión: Doppler en tu DAW y en audio para videojuegos + bitácora</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-apertura-por-que-cambia-el-sonido-cuando-pasa">1. Apertura — «¿Por qué cambia el sonido cuando pasa?»<a class="headerlink" href="#1-apertura-por-que-cambia-el-sonido-cuando-pasa" title="Permanent link">&para;</a></h2>
+<h3 id="dinamica">Dinámica<a class="headerlink" href="#dinamica" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Reproducir (sin video, solo audio) tres grabaciones:</li>
+<li>Una sirena de ambulancia acercándose y alejándose.</li>
+<li>Un auto de Fórmula 1 pasando frente a cámara a 300 km/h.</li>
+<li>Un tren haciendo sonar la bocina al cruzar una estación.</li>
+<li>Preguntar: «¿Qué tienen en común estos tres sonidos?» → Todos cambian de tono: más agudo al acercarse, más grave al alejarse.</li>
+<li>Preguntar: «¿La frecuencia que emite la sirena realmente cambia? ¿O es una ilusión de nuestros oídos?» → La frecuencia EMITIDA es constante (f₀ fija). La frecuencia PERCIBIDA cambia por el movimiento relativo. No es ilusión: el tímpano recibe físicamente más ciclos por segundo cuando la fuente se acerca.</li>
+<li>Reproducir el video de la F1 con espectrograma en tiempo real (hay varios en YouTube). Mostrar cómo la frecuencia del motor «se desliza» hacia abajo en el momento exacto en que el auto pasa frente a la cámara.</li>
+<li>Decir: «Hoy calculamos exactamente cuánto cambia la frecuencia. Y después vemos cómo este mismo principio está presente en el Leslie rotativo de un Hammond y en los motores de audio 3D de los videojuegos.»</li>
+</ol>
+<h3 id="preguntas-disparadoras">Preguntas disparadoras<a class="headerlink" href="#preguntas-disparadoras" title="Permanent link">&para;</a></h3>
+<ul>
+<li>«Si un auto toca la bocina a 440 Hz y viene hacia vos a 100 km/h, ¿escuchás un La o un Si?»</li>
+<li>«¿Qué pasa en el instante EXACTO en que la fuente pasa frente a vos? ¿Qué frecuencia escuchás en ese momento?»</li>
+<li>«¿Un murciélago usa el efecto Doppler para cazar? ¿Cómo?»</li>
+</ul>
+<hr />
+<h2 id="2-desarrollo-teoria-guiada">2. Desarrollo — Teoría guiada<a class="headerlink" href="#2-desarrollo-teoria-guiada" title="Permanent link">&para;</a></h2>
+<h3 id="secuencia-sugerida">Secuencia sugerida<a class="headerlink" href="#secuencia-sugerida" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Compresión y expansión de frentes de onda</strong> (10 min). Dibujar en la pizarra:</li>
+<li>Fuente estática emitiendo pulsos circulares concéntricos equidistantes. λ = c/f₀.</li>
+<li>Misma fuente, pero avanzando hacia la derecha. Cada pulso se emite desde una posición más adelantada. Los círculos se «amontonan» delante (λ efectiva menor → f' mayor) y se «estiran» detrás (λ efectiva mayor → f' menor).</li>
+</ol>
+<p>Preguntar: «¿Qué pasa si la fuente viaja EXACTAMENTE a la velocidad del sonido?» → f' delante tiende a infinito. Todos los frentes de onda se acumulan en un solo punto — es la <strong>barrera del sonido</strong> (onda de choque, <em>sonic boom</em>). Esto NO pasa con ambulancias (v_s ≪ c).</p>
+<blockquote>
+<p>Insertar <strong>Fig. 3-6</strong> del Everest: efecto Doppler — frentes de onda comprimidos/expandidos.</p>
+</blockquote>
+<ol>
+<li><strong>Caso 1: fuente en movimiento</strong> (10 min). Escribir la fórmula en la pizarra:</li>
+</ol>
+<p>[
+   f' = f_0 \cdot \frac{c}{c \mp v_s}
+   ]</p>
+<p>Resolver en vivo el ejemplo de la ambulancia (800 Hz, 30 m/s):
+   - Acercándose: f' = 800 × 343/(343−30) = 800 × 343/313 ≈ 876 Hz.
+   - Alejándose: f' = 800 × 343/(343+30) = 800 × 343/373 ≈ 735 Hz.</p>
+<p>Preguntar: «¿Por qué el cambio no es simétrico?» (+76 Hz al acercarse, −65 Hz al alejarse). Porque la fórmula es un cociente, no una suma. La compresión es más pronunciada que la expansión para la misma velocidad.</p>
+<ol>
+<li><strong>Caso 2: receptor en movimiento</strong> (5 min). Escribir:</li>
+</ol>
+<p>[
+   f' = f_0 \cdot \frac{c \pm v_r}{c}
+   ]</p>
+<p>Preguntar: «Si camino hacia un parlante a 1.5 m/s, ¿noto el Doppler?» Calcular: f' = f₀ × (343+1.5)/343 ≈ f₀ × 1.0044 → para 1,000 Hz, solo 4.4 Hz de diferencia. Imperceptible. El Doppler es NOTORIO cuando v_s es una fracción apreciable de c.</p>
+<ol>
+<li><strong>Caso general: ambos en movimiento</strong> (5 min). Escribir:</li>
+</ol>
+<p>[
+   f' = f_0 \cdot \frac{c \pm v_r}{c \mp v_s}
+   ]</p>
+<p>Dar la regla nemotécnica: «Numerador: + si el receptor se acerca. Denominador: − si la fuente se acerca. Ambos movimientos que REDUCEN distancia AUMENTAN f'.»</p>
+<ol>
+<li><strong>Doppler en el mundo real del audio</strong> (10 min). Transición a aplicaciones:</li>
+<li><strong>Leslie rotativo</strong>: parlante físico girando. Mostrar video de un Leslie abierto. Calcular el Δf para un giro típico: parlante a 0.3 m del eje, girando a 6 rev/s → v_tangencial = 2π × 0.3 × 6 ≈ 11.3 m/s → Δf ≈ ±3.3% (para 1,000 Hz, ±33 Hz). Es un vibrato + trémolo combinados.</li>
+<li><strong>Audio 3D para videojuegos</strong>: motores como Wwise o FMOD calculan Doppler en tiempo real. El programador define la velocidad del objeto, el motor aplica pitch shifting proporcional.</li>
+<li><strong>Grabación de SFX</strong>: si grabás un auto pasando, ¿dónde ponés el micrófono? → No en la trayectoria directa (el Doppler es muy extremo). Mejor a 10-20 m de distancia lateral para una transición más suave.</li>
+</ol>
+<hr />
+<h2 id="3-practica-simulacion-ejercicios-y-produccion-audiovisual">3. Práctica — Simulación, ejercicios y producción audiovisual<a class="headerlink" href="#3-practica-simulacion-ejercicios-y-produccion-audiovisual" title="Permanent link">&para;</a></h2>
+<h3 id="actividad-en-classroom">Actividad en Classroom<a class="headerlink" href="#actividad-en-classroom" title="Permanent link">&para;</a></h3>
+<p>Publicar como <strong>Tarea</strong> en Google Classroom:</p>
+<p><strong>Título:</strong> Sesión 14 — Efecto Doppler</p>
+<p><strong>Instrucciones:</strong></p>
+<p><strong>Parte A — Simulación p5.js de efecto Doppler (individual)</strong></p>
+<ol>
+<li>Abrí el simulador p5.js de efecto Doppler (provisto por el docente). La simulación muestra una fuente que se mueve horizontalmente, los frentes de onda que emite, y un receptor estático que mide la frecuencia instantánea.</li>
+<li>
+<p>Configurá los siguientes escenarios y completá la tabla:</p>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>f₀ (Hz)</th>
+<th>v_s (m/s)</th>
+<th>f' calculada (acercándose)</th>
+<th>f' calculada (alejándose)</th>
+<th>f' medida en simulación</th>
+<th>Δf total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ambulancia</td>
+<td>800</td>
+<td>30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Auto deportivo</td>
+<td>400</td>
+<td>20</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Avión comercial (pasando bajo)</td>
+<td>200</td>
+<td>80</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Persona en bicicleta con parlante</td>
+<td>1,000</td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Ajustá la velocidad de la fuente al máximo permitido por la simulación y observá los frentes de onda. Respondé:</p>
+</li>
+<li>¿Qué pasa con la separación entre frentes de onda DELANTE de la fuente cuando v_s se aproxima a c?</li>
+<li>¿Qué escucharía un receptor justo DELANTE de la fuente si v_s = c? ¿Es físicamente posible que una fuente viaje a la velocidad del sonido?</li>
+</ol>
+<p><strong>Parte B — Ejercicios de cálculo (individual)</strong></p>
+<p>Resolvé estos 4 ejercicios mostrando el desarrollo completo (fórmula, sustitución, resultado, interpretación):</p>
+<ol>
+<li>
+<p><strong>Bocina de tren</strong>: Un tren viaja a 25 m/s y hace sonar su bocina a 300 Hz. Calculá f' para un observador en el andén cuando el tren: a) se acerca, b) se aleja. ¿El cambio es perceptible?</p>
+</li>
+<li>
+<p><strong>Corriendo hacia la música</strong>: Estás trotando a 3 m/s hacia un parlante que emite 2,000 Hz. ¿Qué frecuencia escuchás? ¿Y si trotás alejándote?</p>
+</li>
+<li>
+<p><strong>Doble desplazamiento (ecolocalización)</strong>: Un murciélago vuela a 6 m/s hacia una pared y emite un pulso de 50,000 Hz. Calculá:
+   a) La frecuencia con que el pulso llega a la pared.
+   b) La frecuencia del eco que recibe el murciélago (la pared actúa como fuente estacionaria que «reemite» a la frecuencia que recibe, y el murciélago es ahora el receptor en movimiento).</p>
+</li>
+<li>
+<p><strong>Leslie rotativo</strong>: El parlante de un Leslie gira a 6 revoluciones por segundo, con un radio de giro de 0.25 m. Si emite un tono de 880 Hz (La₅), ¿cuál es el rango de frecuencias que escucha un micrófono estacionario cercano? Calculá f'_max y f'_min.</p>
+</li>
+</ol>
+<p><strong>Parte C — Explicación audiovisual breve (individual o en parejas)</strong></p>
+<p>Creá un video o una animación de máximo 2 minutos que explique el efecto Doppler de forma creativa. Opciones:
+- Grabarte con el celular explicando con dibujos o un pizarrón.
+- Usar la simulación p5.js para narrar el fenómeno.
+- Hacer una animación simple con PowerPoint, Canva o similar.
+- Grabar un ejemplo real (auto, moto, tren) y analizarlo con un espectrograma (app como Spectroid o Audacity).</p>
+<p>Tu explicación debe incluir:
+1. Por qué cambia la frecuencia (compresión/expansión de frentes de onda).
+2. La fórmula para fuente en movimiento (mostrarla y explicar los signos).
+3. Un ejemplo numérico con cálculo (el que elijas).
+4. Una aplicación en audio/música (Leslie, audio 3D, SFX).</p>
+<p><strong>Fecha de entrega:</strong> [definir según calendario]</p>
+<h3 id="rubrica-formativa">Rúbrica formativa<a class="headerlink" href="#rubrica-formativa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>✅ Logrado</th>
+<th>⚠️ En proceso</th>
+<th>❌ No logrado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulación (Parte A)</td>
+<td>4 escenarios con f' calculadas correctamente, medidas de simulación, responde ambas preguntas</td>
+<td>2-3 escenarios o cálculos con errores menores</td>
+<td>Sin cálculos o datos incorrectos</td>
+</tr>
+<tr>
+<td>Ejercicios (Parte B)</td>
+<td>4 ejercicios con desarrollo completo (fórmula, sustitución, resultado, interpretación)</td>
+<td>3 ejercicios o falta interpretación en alguno</td>
+<td>&lt; 3 ejercicios o resultados incorrectos</td>
+</tr>
+<tr>
+<td>Explicación audiovisual (Parte C)</td>
+<td>≤ 2 min, incluye los 4 elementos requeridos, explica con claridad y creatividad</td>
+<td>Falta 1 elemento o la explicación es confusa</td>
+<td>No entrega o faltan ≥ 2 elementos</td>
+</tr>
+<tr>
+<td>Terminología</td>
+<td>Usa correctamente: efecto Doppler, f₀, f', v_s, v_r, compresión de frentes de onda, desplazamiento de frecuencia</td>
+<td>Algunos términos imprecisos</td>
+<td>Sin terminología técnica</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-cierre-discusion-y-bitacora">4. Cierre — Discusión y bitácora<a class="headerlink" href="#4-cierre-discusion-y-bitacora" title="Permanent link">&para;</a></h2>
+<h3 id="discusion-guiada-10-min">Discusión guiada (10 min)<a class="headerlink" href="#discusion-guiada-10-min" title="Permanent link">&para;</a></h3>
+<ul>
+<li>«¿Por qué en Star Wars el sonido de las naves cambia al pasar? ¿Hay sonido en el espacio?» (En el espacio no hay medio — el sonido no se propaga. Pero en el universo de Star Wars, el diseño de sonido usa Doppler intensamente para dar sensación de velocidad. Ben Burtt, el diseñador de sonido original, creó el sonido del Halcón Milenario mezclando aviones, motores y efectos Doppler.)</li>
+<li>«Si un auto toca la bocina a 440 Hz y pasa frente a vos a 30 m/s, la frecuencia 'baja' de ~480 Hz a ~405 Hz. ¿Cómo sonaría eso musicalmente?» (Como un glissando/portamento de casi un tono y medio hacia abajo. Si quisieras recrearlo en un sintetizador, usarías un pitch bend de ~300 cents.)</li>
+<li>«¿Por qué los sonidistas de Fórmula 1 ponen el micrófono lejos de la pista?» (Para que la velocidad radial — la componente hacia el micrófono — sea menor y el Doppler no produzca un cambio tan extremo que suene antinatural. Un auto de F1 a 300 km/h (83 m/s) pasando a 5 m del micrófono produce un Doppler violento que en grabación suena exagerado.)</li>
+</ul>
+<h3 id="registro-en-bitacora">Registro en bitácora<a class="headerlink" href="#registro-en-bitacora" title="Permanent link">&para;</a></h3>
+<p>Cada estudiante debe escribir en su bitácora digital:</p>
+<blockquote>
+<p><em>"El efecto Doppler es el cambio en la frecuencia percibida de una onda cuando hay movimiento relativo entre la fuente y el receptor. No es una ilusión auditiva: el movimiento comprime los frentes de onda delante de la fuente (aumentando la frecuencia) y los expande detrás (reduciéndola). La fórmula para fuente en movimiento es f' = f₀ · c/(c ∓ v_s), donde el signo − aplica cuando la fuente se acerca (f' &gt; f₀) y el signo + cuando se aleja (f' &lt; f₀). El efecto es más notorio cuanto mayor es la velocidad de la fuente en relación a la velocidad del sonido. En producción musical, el efecto Doppler aparece físicamente en el parlante giratorio Leslie y se simula digitalmente en motores de audio 3D para videojuegos (Wwise, FMOD) y en plugins de efectos. Entender el Doppler permite diseñar sonidos verosímiles para medios audiovisuales y evita errores en grabaciones de campo con fuentes en movimiento."</em></p>
+</blockquote>
+<hr />
+<h2 id="recursos-adicionales-para-el-docente">Recursos adicionales para el docente<a class="headerlink" href="#recursos-adicionales-para-el-docente" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://editor.p5js.org/">Simulador p5.js de efecto Doppler</a> — sketch interactivo con fuente móvil, frentes de onda y display de frecuencia</li>
+<li><a href="https://www.youtube.com/watch?v=Kg9F5pU5F6c">Video: Doppler Effect Demonstration (MIT Physics)</a> — demostración con fuente giratoria y micrófono + espectrograma</li>
+<li><a href="https://www.youtube.com/watch?v=8vZu4E3QRGM">Video: F1 Car Doppler Effect (espectrograma)</a> — auto de Fórmula 1 pasando con análisis espectral en tiempo real</li>
+<li><a href="https://www.youtube.com/watch?v=5a2S4I1kHhI">Video: How a Leslie Speaker Works</a> — interior de un parlante Leslie, mostrando los rotores físicos</li>
+<li><a href="https://www.audiokinetic.com/library/">Audio Programming: Doppler in Wwise</a> — documentación del motor de audio sobre cómo se implementa Doppler en videojuegos</li>
+<li><a href="https://play.google.com/">App: Spectroid (Android) / Spectrum Analyzer (iOS)</a> — analizador de espectro en tiempo real para capturar Doppler en grabaciones de campo</li>
+<li><a href="https://www.waves.com/plugins/doppler">Waves Doppler Plugin</a> — plugin profesional que simula efecto Doppler para postproducción de audio</li>
+</ul>
+<hr />
+<h2 id="posibles-dificultades">Posibles dificultades<a class="headerlink" href="#posibles-dificultades" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«¿Por qué la fórmula usa c − v_s en el denominador y no c + v_s cuando se acerca?»</td>
+<td>Porque al restar v_s en el denominador, el cociente se hace MAYOR (f' &gt; f₀). Si te acercás, la frecuencia aumenta. La intuición es: el denominador se reduce porque los frentes de onda están más juntos. La velocidad relativa EFECTIVA entre cada frente de onda y el receptor es menor porque la fuente «persigue» sus propias ondas</td>
+</tr>
+<tr>
+<td>«¿No es lo mismo que la fuente se mueva hacia el receptor que el receptor hacia la fuente?»</td>
+<td><strong>No</strong>. Las fórmulas son distintas (caso 1 vs. caso 2) y los resultados NO son idénticos para la misma velocidad relativa. La razón es que el medio (aire) es el marco de referencia. Cuando la fuente se mueve, los frentes de onda se comprimen FÍSICAMENTE en el medio. Cuando el receptor se mueve, los frentes de onda están inalterados — simplemente el receptor los «atraviesa» más rápido. La compresión de frentes de onda (fuente móvil) produce un efecto más pronunciado</td>
+</tr>
+<tr>
+<td>«¿Qué pasa si v_s &gt; c?»</td>
+<td>La fórmula «se rompe» (f' se vuelve negativa o infinita). Físicamente, la fuente supera la velocidad del sonido y genera una <strong>onda de choque</strong> (<em>sonic boom</em>). Los frentes de onda se acumulan en un cono (cono de Mach) detrás de la fuente. El receptor escucha un «estampido» cuando el cono lo atraviesa, no un tono continuo</td>
+</tr>
+<tr>
+<td>«¿El efecto Doppler afecta la afinación musical?»</td>
+<td>En condiciones normales, no (las velocidades relativas en un escenario o estudio son insignificantes comparadas con c). Pero si grabás desde un vehículo en movimiento o con la fuente moviéndose rápido, SÍ. De ahí la importancia de mantener distancias fijas durante la grabación</td>
+</tr>
+<tr>
+<td>«¿Por qué un Leslie suena tan distinto a un chorus normal?»</td>
+<td>Porque el Leslie combina TRES efectos simultáneos: (1) Doppler real por el parlante giratorio (modulación de frecuencia), (2) modulación de amplitud (el parlante apunta hacia vos y después hacia otro lado — trémolo), y (3) reflexiones cambiantes dentro de la caja. Un chorus solo hace (1) electrónicamente, sin los otros dos</td>
+</tr>
+<tr>
+<td>«En el ejercicio del murciélago, ¿por qué hay dos desplazamientos Doppler?»</td>
+<td>Porque el sonido hace un viaje de ida y vuelta: murciélago → pared (Doppler 1: fuente móvil) y pared → murciélago (Doppler 2: receptor móvil). Es el mismo principio del radar Doppler: el doble desplazamiento codifica la velocidad del objeto. El murciélago «escucha» la velocidad de la pared en el cambio de frecuencia del eco</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Guía docente — Acústica Aplicada a la Producción Musical</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

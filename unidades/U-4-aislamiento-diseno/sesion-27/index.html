@@ -1,0 +1,2606 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../sesion-28/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 27: Ruido de fondo - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-27-ruido-de-fondo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 27: Ruido de fondo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-1-fundamentos-medicion/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-1-fundamentos-medicion/sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#las-dos-caras-del-ruido-de-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las dos caras del ruido de fondo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacion-senal-ruido-snr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relación señal-ruido (SNR)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-por-origen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación por origen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-por-mecanismo-de-transmision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación por mecanismo de transmisión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nc-noise-criteria-ansi-s122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NC (Noise Criteria) — ANSI S12.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nr-noise-rating-iso-1996" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NR (Noise Rating) — ISO 1996
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rc-room-criteria-ansi-s122-2008" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RC (Room Criteria) — ANSI S12.2-2008
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocolo-de-medicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocolo de medición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapa-de-ruido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapa de ruido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-de-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas de diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#las-dos-caras-del-ruido-de-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las dos caras del ruido de fondo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacion-senal-ruido-snr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relación señal-ruido (SNR)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-por-origen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación por origen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-por-mecanismo-de-transmision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación por mecanismo de transmisión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nc-noise-criteria-ansi-s122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NC (Noise Criteria) — ANSI S12.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nr-noise-rating-iso-1996" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NR (Noise Rating) — ISO 1996
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rc-room-criteria-ansi-s122-2008" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RC (Room Criteria) — ANSI S12.2-2008
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocolo-de-medicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocolo de medición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapa-de-ruido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapa de ruido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-de-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas de diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-27-ruido-de-fondo">Sesión 27: Ruido de fondo<a class="headerlink" href="#sesion-27-ruido-de-fondo" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="khz"></a><strong>kHz</strong></td>
+<td>Kilohertz</td>
+<td>Frecuencia</td>
+<td>1 kHz = 1,000 Hz</td>
+</tr>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel de presión sonora</td>
+<td>Escala logarítmica</td>
+</tr>
+<tr>
+<td><a id="dba"></a><strong>dBA</strong></td>
+<td>Decibel A-ponderado</td>
+<td>Nivel sonoro con filtro que simula la sensibilidad del oído humano</td>
+<td>Atenúa graves (&lt; 1 kHz) y agudos extremos (&gt; 8 kHz)</td>
+</tr>
+<tr>
+<td><a id="dbc"></a><strong>dBC</strong></td>
+<td>Decibel C-ponderado</td>
+<td>Nivel sonoro con filtro casi plano (solo atenúa extremos)</td>
+<td>Usado para mediciones de pico y graves</td>
+</tr>
+<tr>
+<td><a id="spl"></a><strong>SPL</strong></td>
+<td>Sound Pressure Level</td>
+<td>Nivel de presión sonora</td>
+<td>Medido en dB re 20 µPa</td>
+</tr>
+<tr>
+<td><a id="leq"></a><strong>Leq</strong></td>
+<td>Nivel continuo equivalente</td>
+<td>Promedio energético del nivel sonoro en un período</td>
+<td><span class="arithmatex">\(L_{eq} = 10 \log\left(\frac{1}{T}\int_0^T \frac{p^2(t)}{p_0^2} dt\right)\)</span></td>
+</tr>
+<tr>
+<td><a id="l10"></a><strong>L₁₀</strong></td>
+<td>Nivel excedido el 10% del tiempo</td>
+<td>Nivel de pico estadístico — representa el ruido «alto» típico</td>
+<td>Medido en dB</td>
+</tr>
+<tr>
+<td><a id="l90"></a><strong>L₉₀</strong></td>
+<td>Nivel excedido el 90% del tiempo</td>
+<td>Nivel de fondo estadístico — representa el ruido «base»</td>
+<td>Medido en dB</td>
+</tr>
+<tr>
+<td><a id="nc"></a><strong>NC</strong></td>
+<td>Noise Criteria</td>
+<td>Curva de criterio de ruido (estándar americano)</td>
+<td>ANSI S12.2</td>
+</tr>
+<tr>
+<td><a id="nr"></a><strong>NR</strong></td>
+<td>Noise Rating</td>
+<td>Curva de criterio de ruido (estándar ISO)</td>
+<td>ISO 1996</td>
+</tr>
+<tr>
+<td><a id="rc"></a><strong>RC</strong></td>
+<td>Room Criteria</td>
+<td>Curva de criterio de ruido moderna (incluye balance espectral)</td>
+<td>ANSI S12.2-2008</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>¿Qué es el ruido de fondo y por qué importa?</summary>
+<p>El ruido de fondo es el nivel sonoro presente en un espacio cuando NO hay fuentes sonoras intencionales activas (Everest &amp; Pohlmann, 2009, Cap. 16, pp. 231–250). Es el «piso» acústico del recinto: el nivel por debajo del cual ningún sonido útil puede ser percibido.</p>
+<h3 id="las-dos-caras-del-ruido-de-fondo">Las dos caras del ruido de fondo<a class="headerlink" href="#las-dos-caras-del-ruido-de-fondo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Descripción</th>
+<th>Relevancia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enmascaramiento</strong></td>
+<td>El ruido de fondo tapa sonidos de bajo nivel. Si tu ruido de fondo es 40 dBA, cualquier detalle musical por debajo de ese nivel es INAUDIBLE</td>
+<td>Crítico para grabación, mezcla y escucha crítica</td>
+</tr>
+<tr>
+<td><strong>Molestia (annoyance)</strong></td>
+<td>El ruido puede ser audible sin enmascarar — pero DISTRAE, fatiga y reduce la concentración</td>
+<td>Crítico para espacios de trabajo, estudio y descanso</td>
+</tr>
+</tbody>
+</table>
+<h3 id="relacion-senal-ruido-snr">Relación señal-ruido (SNR)<a class="headerlink" href="#relacion-senal-ruido-snr" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boxed{SNR = L_{\text{señal}} - L_{\text{ruido}}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>SNR (dB)</th>
+<th>Percepción</th>
+<th>¿Suficiente para…?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 0</td>
+<td>Señal enterrada en ruido. Ininteligible</td>
+<td>Nada útil</td>
+</tr>
+<tr>
+<td>0 – 10</td>
+<td>Señal apenas perceptible sobre el ruido. Comprensión difícil</td>
+<td>Conversación forzada</td>
+</tr>
+<tr>
+<td>10 – 20</td>
+<td>Clara pero con esfuerzo. Detalles finos perdidos</td>
+<td>Reuniones, clases</td>
+</tr>
+<tr>
+<td>20 – 30</td>
+<td>Buena. Detalles audibles pero los pianissimo pueden perderse</td>
+<td>Escucha casual, oficina</td>
+</tr>
+<tr>
+<td>30 – 40</td>
+<td>Muy buena. Rango dinámico amplio</td>
+<td>Grabación profesional, mezcla</td>
+</tr>
+<tr>
+<td>&gt; 40</td>
+<td>Excelente. El ruido de fondo es irrelevante</td>
+<td>Mastering, escucha crítica, mediciones de laboratorio</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">El enemigo silencioso</p>
+<p>Un estudio de grabación casero en un departamento típico tiene ruido de fondo de 35-45 dBA (refrigerador, tránsito lejano, ventilación, vecinos). Una grabación de guitarra acústica tocada suavemente produce 55-65 dBA a 30 cm. SNR = 20 dB → la mitad del rango dinámico está PERDIDO antes de empezar. No importa qué micrófono compres, qué preamp uses, qué plugin de noise reduction tengas: si tu SNR es 20 dB, estás grabando RUIDO con un poco de guitarra. La primera inversión en un estudio NO es un micrófono caro — es SILENCIO.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-1</strong> del Everest: diagrama del balance energético en un recinto mostrando la señal deseada, el ruido de fondo (interno + externo), y la SNR resultante. Señalar el umbral de percepción y el umbral de molestia.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Fuentes de ruido: el mapa de los enemigos</summary>
+<p>El ruido de fondo no es una entidad única — es la SUMA de múltiples fuentes, cada una con su propio mecanismo de generación y transmisión.</p>
+<h3 id="clasificacion-por-origen">Clasificación por origen<a class="headerlink" href="#clasificacion-por-origen" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Origen</th>
+<th>Fuente</th>
+<th>Rango típico (dBA)</th>
+<th>Característica espectral</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Externo — Tránsito</strong></td>
+<td>Vehículos, motos, buses, trenes</td>
+<td>55-85 (en fachada)</td>
+<td>Picos en 63-250 Hz. Intermitente, impulsivo</td>
+</tr>
+<tr>
+<td><strong>Externo — Aéreo</strong></td>
+<td>Aviones, helicópteros</td>
+<td>60-90 (en fachada)</td>
+<td>Banda ancha con picos en 125-500 Hz. Eventos breves (&lt; 1 min) pero intensos</td>
+</tr>
+<tr>
+<td><strong>Externo — Urbano</strong></td>
+<td>Obras, sirenas, comercio, peatones</td>
+<td>45-70</td>
+<td>Variable. Picos diurnos</td>
+</tr>
+<tr>
+<td><strong>Externo — Natural</strong></td>
+<td>Lluvia, viento, truenos, animales</td>
+<td>30-70</td>
+<td>Lluvia: banda ancha en agudos. Viento: graves (&lt; 200 Hz)</td>
+</tr>
+<tr>
+<td><strong>Interno — HVAC</strong></td>
+<td>Aire acondicionado, calefacción, ventiladores, ductos</td>
+<td>25-55</td>
+<td>Dominante en 63-500 Hz. Tono puro de ventilador + banda ancha de flujo de aire. A menudo CONTINUO — el más molesto</td>
+</tr>
+<tr>
+<td><strong>Interno — Equipos</strong></td>
+<td>Computadoras, discos duros, fuentes de poder, amplificadores, consolas, convertidores</td>
+<td>20-45</td>
+<td>Abanicos de computadoras: tono puro en 200-800 Hz. Fuentes: zumbido de 50/60 Hz + armónicos</td>
+</tr>
+<tr>
+<td><strong>Interno — Plomería</strong></td>
+<td>Tuberías de agua, descargas de inodoro, bombas</td>
+<td>40-70</td>
+<td>Impulsivo + vibración estructural. Las tuberías transmiten sonido a TODA la estructura</td>
+</tr>
+<tr>
+<td><strong>Interno — Eléctrico</strong></td>
+<td>Transformadores, balastros de luces fluorescentes, dimmers, UPS</td>
+<td>25-45</td>
+<td>Zumbido 50/60 Hz + armónicos impares (150, 250, 350 Hz…). Continuo, penetrante</td>
+</tr>
+<tr>
+<td><strong>Interno — Ocupantes</strong></td>
+<td>Pasos, voces, puertas, movimiento de muebles</td>
+<td>35-65</td>
+<td>Impacto (pasos) + aéreo (voces). Irregular, horario</td>
+</tr>
+<tr>
+<td><strong>Estructural</strong></td>
+<td>Ascensores, vibración de maquinaria en pisos inferiores, expansión térmica</td>
+<td>30-55</td>
+<td>Muy baja frecuencia (&lt; 100 Hz). Transmitido por la estructura del edificio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clasificacion-por-mecanismo-de-transmision">Clasificación por mecanismo de transmisión<a class="headerlink" href="#clasificacion-por-mecanismo-de-transmision" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>¿Cómo llega?</th>
+<th>¿Cómo se controla?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aéreo (airborne)</strong></td>
+<td>El sonido viaja por el aire desde la fuente hasta el receptor</td>
+<td>Barreras acústicas (paredes, ventanas con TL adecuado), absorción en el camino, distancia</td>
+</tr>
+<tr>
+<td><strong>Estructural (structure-borne)</strong></td>
+<td>La fuente vibra MECÁNICAMENTE contra una superficie sólida (pared, piso, tubería) y esa vibración viaja por la estructura RE-IRRADIANDO sonido en otro punto</td>
+<td>DESACOPLAMIENTO (resortes, neopreno, bases elásticas). La clave: romper el camino sólido. La absorción aérea NO sirve para ruido estructural</td>
+</tr>
+<tr>
+<td><strong>Flanqueo (flanking)</strong></td>
+<td>El sonido «rodea» una barrera acústica viajando por caminos alternativos (ductos de ventilación, falsos plafones, pisos flotantes, paredes adyacentes)</td>
+<td>Sellar TODOS los caminos alternativos. La barrera es tan débil como su punto más débil</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">El ruido de los aires acondicionados: el villano #1 en estudios</p>
+<p>En estudios de grabación, el sistema de climatización (HVAC) es la fuente de ruido interno MÁS IMPORTANTE y la MÁS DIFÍCIL de eliminar. ¿Por qué? Porque NO PODÉS APAGARLO — necesitás ventilación para respirar y refrigeración para los equipos. Un split de aire acondicionado doméstico produce 35-50 dBA en el punto de escucha. Un estudio profesional necesita ≤20 dBA (NC-15). La diferencia se logra con: (a) velocidad de aire MUY baja en los ductos (&lt; 2.5 m/s), (b) silenciadores (duct silencers) en la entrada y salida, (c) conductos sobredimensionados (más sección = menos velocidad = menos ruido), (d) rejillas de difusión de gran área (no las típicas de 15×15 cm que silban), (e) ubicar la unidad condensadora LEJOS y con aislamiento de vibración. Un HVAC silencioso puede costar MÁS que todo el tratamiento acústico de la sala. Pero si no lo hacés, tu ruido de fondo va a ser 30 dB más alto que tu nivel objetivo — y nada de lo que hagas con paneles acústicos va a arreglarlo.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-4</strong> del Everest: esquema de un sistema HVAC en un estudio mostrando la unidad manejadora de aire (AHU), los ductos de suministro y retorno, los silenciadores (duct silencers), las rejillas de difusión, y los puntos de vibración a aislar. Señalar los tres mecanismos de transmisión: ruido del ventilador (aéreo por los ductos + estructural por la carcasa), ruido de flujo (turbulencia en codos y rejillas), y breakout noise (ruido que «escapa» a través de las paredes del ducto).</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Curvas de criterio de ruido: ¿cuánto silencio es suficiente?</summary>
+<p>Medir el ruido de fondo en dBA da un solo número. Pero el ruido tiene ESPECTRO — puede ser grave (molesto aunque no muy intenso) o agudo (menos molesto pero más penetrante). Las curvas de criterio evalúan el ruido en bandas de octava y lo comparan con curvas normalizadas que definen el nivel MÁXIMO permitido en cada banda para un determinado uso del espacio.</p>
+<h3 id="nc-noise-criteria-ansi-s122">NC (Noise Criteria) — ANSI S12.2<a class="headerlink" href="#nc-noise-criteria-ansi-s122" title="Permanent link">&para;</a></h3>
+<p>Las curvas NC fueron desarrolladas por Beranek en 1957 y son el estándar más usado en América. Cada curva NC-N define un nivel máximo en 8 bandas de octava (63 Hz – 8 kHz). El criterio NC de un espacio es la curva MÁS BAJA que no es excedida por el ruido medido en NINGUNA banda.</p>
+<p><strong>Interpretación de las curvas NC</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>NC</th>
+<th>Nivel subjetivo</th>
+<th>Aplicación típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15-20</td>
+<td>Muy silencioso. El oído percibe el «silencio» como un leve siseo en agudos</td>
+<td>Estudios de grabación profesional, salas de concierto, estudios de mastering</td>
+</tr>
+<tr>
+<td>20-25</td>
+<td>Silencioso. Conversación en susurro audible a 3 m</td>
+<td>Salas de control, estudios de mezcla, teatros, auditorios</td>
+</tr>
+<tr>
+<td>25-30</td>
+<td>Tranquilo. Conversación normal audible sin esfuerzo</td>
+<td>Salas de conferencia, aulas, salas de ensayo, cines</td>
+</tr>
+<tr>
+<td>30-35</td>
+<td>Moderadamente tranquilo. Conversación a 3-5 m requiere voz normal</td>
+<td>Oficinas privadas, bibliotecas, salas de estar</td>
+</tr>
+<tr>
+<td>35-40</td>
+<td>Ruido de fondo perceptible. Conversación requiere elevar un poco la voz</td>
+<td>Oficinas abiertas, restaurantes tranquilos, vestíbulos</td>
+</tr>
+<tr>
+<td>40-50</td>
+<td>Ruidoso. Conversación difícil a más de 2 m</td>
+<td>Restaurantes, comercios, gimnasios</td>
+</tr>
+<tr>
+<td>&gt; 50</td>
+<td>Muy ruidoso. Conversación a gritos a 1 m</td>
+<td>Fábricas, talleres, cocinas industriales</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nr-noise-rating-iso-1996">NR (Noise Rating) — ISO 1996<a class="headerlink" href="#nr-noise-rating-iso-1996" title="Permanent link">&para;</a></h3>
+<p>Las curvas NR son el equivalente ISO de las NC. Difieren ligeramente en las bandas de baja frecuencia (NR es más permisivo en 63-125 Hz que NC). En la práctica, NC ≈ NR para la mayoría de aplicaciones en medios y agudos.</p>
+<h3 id="rc-room-criteria-ansi-s122-2008">RC (Room Criteria) — ANSI S12.2-2008<a class="headerlink" href="#rc-room-criteria-ansi-s122-2008" title="Permanent link">&para;</a></h3>
+<p>Las curvas RC son una EVOLUCIÓN de las NC que corrige su principal defecto: las NC no distinguen entre ruido con balance espectral neutral y ruido con exceso de graves o agudos. Las RC introducen un clasificador de «calidad» del ruido:</p>
+<table>
+<thead>
+<tr>
+<th>Clasificador</th>
+<th>Significado</th>
+<th>Percepción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(N)</strong></td>
+<td>Neutral — el espectro sigue la forma de la curva RC sin desviaciones</td>
+<td>Sonido «limpio», sin zumbido ni siseo dominante</td>
+</tr>
+<tr>
+<td><strong>(R)</strong></td>
+<td>Rumble — exceso de graves (bajas frecuencias &gt; 5 dB sobre la curva)</td>
+<td>Zumbido, sensación de «pesadez». Molesto aunque el nivel total sea bajo</td>
+</tr>
+<tr>
+<td><strong>(H)</strong></td>
+<td>Hiss — exceso de agudos (altas frecuencias &gt; 3 dB sobre la curva)</td>
+<td>Siseo, sensación de «presión» en los oídos. Fatigante en exposiciones prolongadas</td>
+</tr>
+<tr>
+<td><strong>(RV)</strong></td>
+<td>Rumble + Vibration — exceso de graves con vibración táctil perceptible</td>
+<td>Vibración en pisos y paredes. Estructural, no solo aéreo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo</strong>: un espacio con RC-30(N) tiene un ruido de fondo con nivel RC-30 y balance espectral NEUTRAL. RC-25(R) significa nivel RC-25 pero con exceso de graves (zumbido). RC-35(H) significa nivel RC-35 con exceso de agudos (siseo). El clasificador es tan importante como el número.</p>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué RC es más útil que NC para estudios?</p>
+<p>Imaginá dos estudios, ambos con NC-25. El primero tiene un zumbido de 50 Hz del transformador de la consola. El segundo tiene un siseo de alta frecuencia del ventilador del rack. Ambos son «NC-25», pero el PRIMERO es MUCHO más molesto (el zumbido en graves es más difícil de ignorar y se cuela en todas las grabaciones). Las curvas RC-25(R) vs. RC-25(H) capturan esa diferencia. Para un estudio, querés RC-20(N) o mejor: no solo bajo nivel, sino balance espectral NEUTRAL.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-2</strong> del Everest: gráfico de las curvas NC (NC-15 a NC-65) en bandas de octava de 63 Hz a 8 kHz. Superponer las curvas RC equivalentes para mostrar las diferencias en bajas frecuencias. Incluir el espectro de un ruido HVAC típico y mostrar cómo se determina su NC: la curva más baja que NO es excedida en NINGUNA banda.</p>
+</blockquote>
+</details>
+<details class="note" open="open">
+<summary>Medición y diagnóstico: ¿cómo saber contra qué estoy luchando?</summary>
+<p>Antes de diseñar CUALQUIER solución de aislamiento, necesitás un DIAGNÓSTICO CUANTITATIVO del ruido de fondo. Adivinar es la receta para gastar dinero en soluciones que no atacan el problema real.</p>
+<h3 id="protocolo-de-medicion">Protocolo de medición<a class="headerlink" href="#protocolo-de-medicion" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Equipo</strong>: Sonómetro Clase 2 como mínimo (apps de celular calibradas pueden servir para un diagnóstico preliminar, pero NO para mediciones profesionales). Idealmente, un micrófono de medición + interface de audio + software (REW, Smaart, ARTA).</p>
+</li>
+<li>
+<p><strong>Condiciones</strong>: Medir en el peor escenario REALISTA (horario de mayor ruido externo, equipos de ventilación encendidos como estarían en una sesión de grabación). Si medís a las 3 AM con todo apagado, tu diagnóstico NO representa la realidad de uso.</p>
+</li>
+<li>
+<p><strong>Puntos de medición</strong>:</p>
+<ul>
+<li>Posición de escucha / posición del micrófono (donde se graba)</li>
+<li>Puntos de posible entrada de ruido: ventanas, puertas, ductos de ventilación, paredes colindantes con fuentes de ruido conocidas</li>
+<li>Al menos 3 puntos por recinto para detectar variaciones espaciales</li>
+</ul>
+</li>
+<li>
+<p><strong>Parámetros a registrar</strong> (por banda de octava de 31.5 Hz a 8 kHz, o al menos 63 Hz – 4 kHz):</p>
+<ul>
+<li><strong>Leq</strong> (1 minuto): nivel continuo equivalente — el promedio energético</li>
+<li><strong>L₁₀</strong>: nivel excedido el 10% del tiempo — representa los PICO típicos (paso de vehículos, golpes)</li>
+<li><strong>L₉₀</strong>: nivel excedido el 90% del tiempo — representa el RUIDO DE FONDO estadístico (el «piso»)</li>
+<li><strong>L_max</strong> y <strong>L_min</strong>: los extremos absolutos</li>
+</ul>
+</li>
+<li>
+<p><strong>Identificación de fuentes</strong>: Durante la medición, anotar CADA evento sonoro identificable (paso de camión a las 14:23, arranque del compresor del AC a las 14:25, vecino moviendo muebles a las 14:27). Esto es CLAVE para correlacionar picos en la medición con fuentes específicas.</p>
+</li>
+</ol>
+<h3 id="mapa-de-ruido">Mapa de ruido<a class="headerlink" href="#mapa-de-ruido" title="Permanent link">&para;</a></h3>
+<p>Un mapa de ruido es un plano del espacio con el nivel sonoro anotado en cada punto de medición. Permite identificar:
+- <strong>Puntos calientes</strong>: zonas donde el ruido es significativamente mayor que el promedio
+- <strong>Puntos de entrada</strong>: ventanas, puertas, paredes donde el ruido externo se cuela
+- <strong>Zonas muertas</strong>: rincones donde el ruido de fondo puede ser menor (útil para posicionar micrófonos)</p>
+<h3 id="herramientas-de-diagnostico">Herramientas de diagnóstico<a class="headerlink" href="#herramientas-de-diagnostico" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>¿Qué mide?</th>
+<th>¿Para qué sirve?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sonómetro</strong> (dBA, dBC, Leq)</td>
+<td>Nivel sonoro global</td>
+<td>Diagnóstico rápido, verificación de cumplimiento de normativa</td>
+</tr>
+<tr>
+<td><strong>Analizador de espectro en tiempo real (RTA)</strong></td>
+<td>Nivel por banda de octava o tercio de octava</td>
+<td>Identificar en QUÉ frecuencias está el ruido (grave vs. agudo) → definir qué tipo de aislamiento necesitás</td>
+</tr>
+<tr>
+<td><strong>Waterfall / espectrograma</strong></td>
+<td>Evolución temporal del espectro</td>
+<td>Distinguir ruido CONTINUO (HVAC) de EVENTOS (tránsito, golpes) → estrategias de control distintas</td>
+</tr>
+<tr>
+<td><strong>Acelerómetro</strong></td>
+<td>Vibración estructural (m/s² o mm/s)</td>
+<td>Diagnosticar ruido ESTRUCTURAL (pasos, maquinaria) vs. aéreo → si el piso vibra, necesitás desacoplamiento, no más masa en las paredes</td>
+</tr>
+<tr>
+<td><strong>Estetoscopio de contacto</strong></td>
+<td>Ruido en tuberías, paredes, estructuras</td>
+<td>Localizar fuentes específicas de ruido estructural: una bomba en el sótano que se transmite por una columna hasta el piso 5</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">El experimento de «apagar todo»</p>
+<p>La técnica más simple y reveladora: apagar TODO — equipos, luces, ventilación, refrigerador, TODO lo que produzca ruido en el espacio Y en espacios adyacentes. Medir el ruido residual. Esa es tu LÍNEA BASE. Ahora encender UN equipo a la vez, medir, anotar la contribución. Así construís un «presupuesto de ruido»: HVAC aporta 33 dBA, computadora 28 dBA, tránsito por la ventana 35 dBA, nevera en la cocina adyacente 25 dBA. La suma logarítmica te da el total. Ahora SABÉS exactamente qué atacar y en qué orden de prioridad.</p>
+</div>
+<blockquote>
+<p>Insertar <strong>Fig. 16-3</strong> del Everest: espectro de ruido de fondo típico en un estudio mostrando la contribución de cada fuente (HVAC en 63-250 Hz, computadora en 200-800 Hz, tránsito externo en 63-500 Hz). Señalar la curva NC-20 como objetivo y las bandas donde el ruido la excede.</p>
+</blockquote>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 16, pp. 231–250 (Control of Interfering Noise — Background Noise, Noise Criteria Curves, RC/NC/NR Standards, HVAC Noise, Noise Measurement Methodology, Source Identification).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

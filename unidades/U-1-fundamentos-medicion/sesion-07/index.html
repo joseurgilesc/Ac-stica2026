@@ -1,0 +1,2465 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de clase — Acústica Aplicada a la Producción Musical">
+      
+      
+        <meta name="author" content="José Urgilés">
+      
+      
+      
+        <link rel="prev" href="../sesion-06/">
+      
+      
+        <link rel="next" href="../sesion-08/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesión 7: Suma y resta de niveles sonoros - Acústica Aplicada a la Producción Musical</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-7-suma-y-resta-de-niveles-sonoros" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-header__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acústica Aplicada a la Producción Musical
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesión 7: Suma y resta de niveles sonoros
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Acústica Aplicada a la Producción Musical" class="md-nav__button md-logo" aria-label="Acústica Aplicada a la Producción Musical" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    Acústica Aplicada a la Producción Musical
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/joseurgilesc/Ac-stica2026" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    joseurgilesc/Ac-stica2026
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../objetivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objetivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../logros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logros de Aprendizaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../calendario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1: Fundamentos del sonido y medición
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 1: Introducción a la acústica aplicada a la producción musical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 2: Naturaleza física del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 3: Velocidad de propagación del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 4: Señales periódicas y aperiódicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 5: Introducción a los logaritmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 6: Nivel de presión sonora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 7: Suma y resta de niveles sonoros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-regla-general-de-suma-de-niveles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La regla general de suma de niveles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-la-formula-usa-10-y-no-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué la fórmula usa 10 y no 20?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-de-suma-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de suma rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-con-tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo con tabla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-resta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de resta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-de-resta-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de resta rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 8: Tipos de fuentes sonoras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-2-propagacion-exterior/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2: Propagación del sonido en exteriores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 9: Propagación en campo libre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 10: Absorción atmosférica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 11: Efecto del suelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 12: Diagramas de rayo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 13: Difracción del sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 14: Efecto Doppler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-2-propagacion-exterior/sesion-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 15: Integración de fundamentos y propagación exterior
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-3-interiores-acondicionamiento/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3: Sonido en interiores y acondicionamiento acústico
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 17: Introducción al sonido en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 18: Coeficiente de absorción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 19: Reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 20: Cálculo del tiempo de reverberación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 21: Reflexiones tempranas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 22: Campo directo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 23: Interferencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 24: Modos de sala
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 25: Tratamiento de bajas frecuencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-3-interiores-acondicionamiento/sesion-26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 26: Difusión acústica en interiores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../U-4-aislamiento-diseno/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4: Aislamiento acústico y diseño de espacios de producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 27: Ruido de fondo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 28: Transmisión de sonido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 29: Estructuras compuestas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 30: Privacidad acústica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../U-4-aislamiento-diseno/sesion-31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesión 31: Aplicación integral al diseño de estudios de grabación, cuartos de control, salas de ensayo y salas de concierto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exámenes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exámenes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-interciclo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Interciclo (Sesión 16)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examen-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen Final (Sesión 32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-regla-general-de-suma-de-niveles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La regla general de suma de niveles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-la-formula-usa-10-y-no-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué la fórmula usa 10 y no 20?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-de-suma-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de suma rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-con-tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo con tabla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-resta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de resta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla-de-resta-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de resta rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Unidad 1: Fundamentos del sonido y medición
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sesion-7-suma-y-resta-de-niveles-sonoros">Sesión 7: Suma y resta de niveles sonoros<a class="headerlink" href="#sesion-7-suma-y-resta-de-niveles-sonoros" title="Permanent link">&para;</a></h1>
+<hr />
+<details class="info">
+<summary>Unidades y símbolos (glosario de referencia)</summary>
+<p>Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>¿Qué mide?</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="db"></a><strong>dB</strong></td>
+<td>Decibel</td>
+<td>Nivel relativo (escala logarítmica)</td>
+<td><span class="arithmatex">\( \text{dB} = 10\log_{10}(P/P_0) \)</span></td>
+</tr>
+<tr>
+<td><a id="spl"></a><strong>dB SPL</strong></td>
+<td>Sound Pressure Level</td>
+<td>Nivel de presión sonora</td>
+<td>Referencia: <span class="arithmatex">\(p_0 = 20\ \mu\text{Pa}\)</span></td>
+</tr>
+<tr>
+<td><a id="upa"></a><strong>µPa</strong></td>
+<td>Micropascal</td>
+<td>Presión sonora</td>
+<td>1 µPa = 10⁻⁶ Pa</td>
+</tr>
+<tr>
+<td><a id="pa"></a><strong>Pa</strong></td>
+<td>Pascal</td>
+<td>Presión</td>
+<td>1 Pa = 1 N/m²</td>
+</tr>
+<tr>
+<td><a id="hz"></a><strong>Hz</strong></td>
+<td>Hertz</td>
+<td>Frecuencia</td>
+<td>1 Hz = 1/s</td>
+</tr>
+<tr>
+<td><a id="log"></a><strong>log₁₀</strong></td>
+<td>Logaritmo en base 10</td>
+<td>Exponente al que hay que elevar 10 para obtener el número</td>
+<td>log₁₀(100) = 2</td>
+</tr>
+<tr>
+<td><a id="s"></a><strong>s</strong></td>
+<td>Segundo</td>
+<td>Tiempo</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note" open="open">
+<summary>El error más común en acústica: sumar dB directamente</summary>
+<p>Dos parlantes idénticos, cada uno produciendo 70 dB SPL en un punto. Si encendemos ambos... ¿cuánto marca el sonómetro?</p>
+<p>Casi todos los estudiantes (y muchos músicos experimentados) responden: <strong>140 dB SPL</strong>. Es una respuesta intuitiva, lógica... y completamente equivocada.</p>
+<div class="admonition danger">
+<p class="admonition-title">70 dB + 70 dB ≠ 140 dB</p>
+<p>Los decibeles <strong>no se suman linealmente</strong> porque representan relaciones logarítmicas, no cantidades absolutas. Sumar dB directamente es como sumar los exponentes: <span class="arithmatex">\(10^3 + 10^3 = 2,000\)</span>, no <span class="arithmatex">\(10^6\)</span>. En dB: 70 dB SPL + 70 dB SPL = <strong>73 dB SPL</strong>, no 140 dB SPL.</p>
+</div>
+<p><figure markdown="span">
+  <img alt="Fig. 2-5: Nomograma de suma de decibeles" src="../../../img/suma_de_decibeles.svg" />
+  <figcaption><strong>Fig. 2-5</strong> — Nomograma de suma de niveles. La curva indica cuánto sumar al nivel mayor según la diferencia ΔL entre dos fuentes. Con fuentes iguales (ΔL = 0) se suman 3 dB; a mayor diferencia, menos aporta la fuente débil.</figcaption>
+</figure></p>
+<p><a class="md-button" href="../../../simulacion/mezclador-fuentes.html">🎛️ <strong>Abrir simulación interactiva — Mezclador de fuentes</strong></a></p>
+<p>Mueve los deslizadores de la Fuente A y B para ver la diferencia, la corrección de la tabla, el resultado aproximado, el exacto y la energía lineal de cada fuente.</p>
+<h3 id="la-regla-general-de-suma-de-niveles">La regla general de suma de niveles<a class="headerlink" href="#la-regla-general-de-suma-de-niveles" title="Permanent link">&para;</a></h3>
+<p>Para sumar dos niveles de presión sonora <span class="arithmatex">\(L_1\)</span> y <span class="arithmatex">\(L_2\)</span> (en dB SPL):</p>
+<div class="arithmatex">\[
+\boxed{L_{\text{total}} = 10 \cdot \log_{10}\left(10^{L_1/10} + 10^{L_2/10}\right)}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nombre</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(L_1, L_2\)</span></td>
+<td>Niveles individuales (dB SPL)</td>
+<td>Los valores que queremos sumar</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L_{\text{total}}\)</span></td>
+<td>Nivel combinado (dB SPL)</td>
+<td>El resultado de la suma logarítmica</td>
+</tr>
+</tbody>
+</table>
+<h3 id="por-que-la-formula-usa-10-y-no-20">¿Por qué la fórmula usa 10 y no 20?<a class="headerlink" href="#por-que-la-formula-usa-10-y-no-20" title="Permanent link">&para;</a></h3>
+<p>Porque estamos sumando <strong>intensidades</strong> (energía), no presiones. La intensidad es proporcional a <span class="arithmatex">\(p^2\)</span>. Al convertir dB SPL a intensidad lineal:</p>
+<div class="arithmatex">\[
+10^{L/10} \propto p^2 \propto I
+\]</div>
+<p>Al sumar intensidades linealmente y luego convertir de vuelta a dB, el factor es 10 log, no 20 log. El factor 20 solo aparece cuando relacionamos presiones directamente — no cuando sumamos energías.</p>
+</details>
+<details class="note" open="open">
+<summary>Suma de fuentes iguales: la regla de +3 dB</summary>
+<p>El caso más simple y más frecuente: dos fuentes <strong>idénticas</strong> (mismo nivel, misma frecuencia, misma fase aleatoria — fuentes incoherentes).</p>
+<div class="arithmatex">\[
+\begin{aligned}
+L_1 &amp;= L_2 = L \\[4pt]
+L_{\text{total}} &amp;= 10 \cdot \log_{10}\left(10^{L/10} + 10^{L/10}\right) \\[4pt]
+&amp;= 10 \cdot \log_{10}\left(2 \cdot 10^{L/10}\right) \\[4pt]
+&amp;= 10 \cdot \left[\log_{10}(2) + \log_{10}\left(10^{L/10}\right)\right] \\[4pt]
+&amp;= 10 \cdot (0.301 + L/10) \\[4pt]
+&amp;= L + 3.01 \approx \mathbf{L + 3\ \text{dB}}
+\end{aligned}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Número de fuentes iguales</th>
+<th>Aumento respecto a una fuente</th>
+<th>Nivel total (si cada fuente = 70 dB SPL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>+0 dB</td>
+<td>70 dB SPL</td>
+</tr>
+<tr>
+<td>2</td>
+<td>+3 dB</td>
+<td>73 dB SPL</td>
+</tr>
+<tr>
+<td>3</td>
+<td>+4.8 dB</td>
+<td>74.8 dB SPL</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+6 dB</td>
+<td>76 dB SPL</td>
+</tr>
+<tr>
+<td>5</td>
+<td>+7 dB</td>
+<td>77 dB SPL</td>
+</tr>
+<tr>
+<td>10</td>
+<td>+10 dB</td>
+<td>80 dB SPL</td>
+</tr>
+<tr>
+<td>100</td>
+<td>+20 dB</td>
+<td>90 dB SPL</td>
+</tr>
+<tr>
+<td>1,000</td>
+<td>+30 dB</td>
+<td>100 dB SPL</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Cada duplicación = +3 dB</p>
+<p>La regla más importante que vas a usar en toda la carrera: <strong>duplicar la cantidad de fuentes iguales (o duplicar la potencia de una fuente) suma 3 dB al nivel total</strong>. Diez fuentes iguales suman 10 dB. Cien fuentes, 20 dB.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Suma de fuentes diferentes: tabla y método rápido</summary>
+<p>Cuando las fuentes no son iguales, la fuente más débil aporta menos al total. Cuanto mayor es la diferencia entre ambas, menos contribuye la más baja.</p>
+<h3 id="tabla-de-suma-rapida">Tabla de suma rápida<a class="headerlink" href="#tabla-de-suma-rapida" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Diferencia ∆L = <span class="arithmatex">\(L_{\text{mayor}} - L_{\text{menor}}\)</span></th>
+<th>Sumar al nivel mayor</th>
+<th>Nivel total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 dB</td>
+<td>+3.0 dB</td>
+<td><span class="arithmatex">\(L + 3.0\)</span></td>
+</tr>
+<tr>
+<td>1 dB</td>
+<td>+2.5 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 2.5\)</span></td>
+</tr>
+<tr>
+<td>2 dB</td>
+<td>+2.1 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 2.1\)</span></td>
+</tr>
+<tr>
+<td>3 dB</td>
+<td>+1.8 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 1.8\)</span></td>
+</tr>
+<tr>
+<td>4 dB</td>
+<td>+1.5 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 1.5\)</span></td>
+</tr>
+<tr>
+<td>5 dB</td>
+<td>+1.2 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 1.2\)</span></td>
+</tr>
+<tr>
+<td>6 dB</td>
+<td>+1.0 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 1.0\)</span></td>
+</tr>
+<tr>
+<td>7 dB</td>
+<td>+0.8 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 0.8\)</span></td>
+</tr>
+<tr>
+<td>8 dB</td>
+<td>+0.6 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 0.6\)</span></td>
+</tr>
+<tr>
+<td>9 dB</td>
+<td>+0.5 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 0.5\)</span></td>
+</tr>
+<tr>
+<td>10 dB</td>
+<td>+0.4 dB</td>
+<td><span class="arithmatex">\(L_{\text{mayor}} + 0.4\)</span></td>
+</tr>
+<tr>
+<td>≥12 dB</td>
+<td>+0.2 dB o menos</td>
+<td>La fuente débil es prácticamente inaudible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-con-tabla">Ejemplo con tabla<a class="headerlink" href="#ejemplo-con-tabla" title="Permanent link">&para;</a></h3>
+<p>Un parlante produce 80 dB SPL. Otro produce 75 dB SPL en el mismo punto. Diferencia: 5 dB → sumar 1.2 al mayor → <strong>81.2 dB SPL</strong>.</p>
+<p>Comprobación con la fórmula exacta:</p>
+<div class="arithmatex">\[
+L_{\text{total}} = 10 \cdot \log_{10}\left(10^{8.0} + 10^{7.5}\right) = 10 \cdot \log_{10}(1 \times 10^8 + 3.16 \times 10^7) = 10 \cdot \log_{10}(1.316 \times 10^8) = 10 \cdot 8.119 = \mathbf{81.2\ \text{dB SPL}}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Ahorrá tiempo en el parcial</p>
+<p>Si la diferencia entre dos fuentes es ≥10 dB, la contribución de la fuente más débil es ≤0.4 dB — <strong>insignificante a efectos prácticos</strong>. Sumar 80 dB + 70 dB ≈ 80.4 dB. En un examen, eso se redondea a 80 dB. No pierdas tiempo calculando lo que no suma.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Resta de niveles sonoros: extraer una fuente del ruido de fondo</summary>
+<p>En mediciones reales, casi siempre hay <strong>ruido de fondo</strong>. Si medimos una máquina encendida y obtenemos 85 dB SPL, pero al apagarla el ruido de fondo es de 80 dB SPL... ¿cuál es el nivel real de la máquina sola?</p>
+<div class="arithmatex">\[
+\boxed{L_{\text{fuente}} = 10 \cdot \log_{10}\left(10^{L_{\text{total}}/10} - 10^{L_{\text{fondo}}/10}\right)}
+\]</div>
+<h3 id="ejemplo-de-resta">Ejemplo de resta<a class="headerlink" href="#ejemplo-de-resta" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{aligned}
+L_{\text{total}} &amp;= 85\ \text{dB SPL} \quad \text{(máquina + fondo)} \\[4pt]
+L_{\text{fondo}} &amp;= 80\ \text{dB SPL} \quad \text{(solo fondo)} \\[4pt]
+L_{\text{fuente}} &amp;= 10 \cdot \log_{10}\left(10^{8.5} - 10^{8.0}\right) \\[4pt]
+&amp;= 10 \cdot \log_{10}(3.162 \times 10^8 - 1 \times 10^8) \\[4pt]
+&amp;= 10 \cdot \log_{10}(2.162 \times 10^8) \\[4pt]
+&amp;= 10 \cdot 8.335 = \mathbf{83.35 \approx 83.4\ \text{dB SPL}}
+\end{aligned}
+\]</div>
+<h3 id="tabla-de-resta-rapida">Tabla de resta rápida<a class="headerlink" href="#tabla-de-resta-rapida" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Diferencia ∆L = <span class="arithmatex">\(L_{\text{total}} - L_{\text{fondo}}\)</span></th>
+<th>Restar del nivel total</th>
+<th>Nivel de la fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≥10 dB</td>
+<td>~0 dB (corrección despreciable)</td>
+<td><span class="arithmatex">\(L_{\text{total}}\)</span></td>
+</tr>
+<tr>
+<td>6-9 dB</td>
+<td>−1 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 1\)</span></td>
+</tr>
+<tr>
+<td>5 dB</td>
+<td>−1.6 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 1.6\)</span></td>
+</tr>
+<tr>
+<td>4 dB</td>
+<td>−2.2 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 2.2\)</span></td>
+</tr>
+<tr>
+<td>3 dB</td>
+<td>−3.0 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 3.0\)</span></td>
+</tr>
+<tr>
+<td>2 dB</td>
+<td>−4.3 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 4.3\)</span></td>
+</tr>
+<tr>
+<td>1 dB</td>
+<td>−6.9 dB</td>
+<td><span class="arithmatex">\(L_{\text{total}} - 6.9\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">No podés restar si la diferencia es muy chica</p>
+<p>Si la diferencia entre total y fondo es menor a 3 dB, la resta es muy incierta. Si es menor a 1 dB, la medición <strong>no es válida</strong> — el ruido de fondo enmascara completamente a la fuente. Necesitás un entorno más silencioso o acercar el micrófono a la fuente.</p>
+</div>
+</details>
+<details class="note" open="open">
+<summary>Suma de múltiples fuentes: método paso a paso</summary>
+<p>Para sumar más de dos fuentes, se suma de a pares, siempre combinando las dos más altas primero:</p>
+<p><strong>Ejemplo:</strong> Tres fuentes con niveles 80, 77 y 72 dB SPL en un punto.</p>
+<table>
+<thead>
+<tr>
+<th>Paso</th>
+<th>Operación</th>
+<th>Resultado parcial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sumar las dos más altas: 80 + 77. ∆ = 3 → sumar 1.8 al mayor</td>
+<td>81.8 dB SPL</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Sumar el resultado con la tercera: 81.8 + 72. ∆ = 9.8 → sumar ~0.4 al mayor</td>
+<td><strong>82.2 dB SPL</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Comprobación con fórmula exacta:
+[
+10 \cdot \log_{10}\left(10^{8.0} + 10^{7.7} + 10^{7.2}\right) = 10 \cdot \log_{10}(10^8 + 5.01 \times 10^7 + 1.58 \times 10^7) = 10 \cdot \log_{10}(1.659 \times 10^8) = \mathbf{82.2\ \text{dB SPL}}
+]</p>
+</details>
+<details class="note" open="open">
+<summary>Suma coherente vs. incoherente: cuándo +6 dB en vez de +3 dB</summary>
+<p>Hasta ahora asumimos fuentes <strong>incoherentes</strong>: señales de audio aleatorias donde las fases no están correlacionadas. En ese caso, las intensidades se suman linealmente → +3 dB al duplicar.</p>
+<p>Pero si dos fuentes emiten la <strong>misma señal, en fase</strong> (coherentes), las presiones se suman directamente:</p>
+<div class="arithmatex">\[
+p_{\text{total}} = p_1 + p_2
+\]</div>
+<p>El nivel resultante es:</p>
+<div class="arithmatex">\[
+L_{\text{total}} = 20 \cdot \log_{10}\left(\frac{2p}{p_0}\right) = 20 \cdot \log_{10}\left(\frac{p}{p_0}\right) + 20 \cdot \log_{10}(2) = L + 6\ \text{dB}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Tipo de suma</th>
+<th>¿Qué se suma?</th>
+<th>Resultado al duplicar fuentes iguales</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Incoherente</strong></td>
+<td>Intensidades (<span class="arithmatex">\(I_1 + I_2\)</span>)</td>
+<td><strong>+3 dB</strong></td>
+<td>Dos parlantes con música diferente, dos instrumentos distintos, dos personas hablando</td>
+</tr>
+<tr>
+<td><strong>Coherente</strong></td>
+<td>Presiones (<span class="arithmatex">\(p_1 + p_2\)</span>)</td>
+<td><strong>+6 dB</strong></td>
+<td>Dos parlantes reproduciendo la misma señal mono, dos micrófonos captando la misma fuente en fase perfecta</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Insertar <strong>Fig. 10-1</strong> del Everest: respuesta de filtro comb — cuando dos señales coherentes se combinan con una diferencia de tiempo (no están perfectamente en fase), se produce un <strong>filtro comb</strong>: algunas frecuencias se refuerzan (+6 dB en los picos) y otras se cancelan (−∞ dB en los valles). Esto es lo que ocurre cuando grabás una fuente con dos micrófonos a distancias diferentes.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">En la práctica, casi siempre es incoherente</p>
+<p>En el mundo real — mezclas musicales, ruido ambiental, múltiples instrumentos — las fuentes son incoherentes: +3 dB por duplicación. La suma coherente es un caso muy específico (electrónica, DSP, señales idénticas en fase). No asumas +6 dB a menos que estés seguro de que las señales son exactamente iguales y están alineadas en fase.</p>
+</div>
+</details>
+<hr />
+<p><em>Basado en: Everest, F. A. &amp; Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 2, pp. 25–30 (Addition of Sound Levels, Combining Sources) y Capítulo 10, pp. 154–169 (Comb-Filter Effects, Interference).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "navigation.path", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
