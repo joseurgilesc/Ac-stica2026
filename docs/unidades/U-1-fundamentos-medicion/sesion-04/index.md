@@ -254,8 +254,8 @@ Dos sonidos pueden tener la misma fundamental y sonar completamente distintos.
   </div>
 
   <div class="volume-control">
-    <label for="timbre-volume"><strong>Volumen</strong> <span data-timbre-volume-label>63%</span></label>
-    <input id="timbre-volume" type="range" min="0" max="100" value="63" step="1" data-timbre-volume aria-label="Volumen de los ejemplos de timbre">
+    <label for="timbre-volume"><strong>Volumen</strong> <span data-timbre-volume-label>30%</span></label>
+    <input id="timbre-volume" type="range" min="0" max="100" value="30" step="1" data-timbre-volume aria-label="Volumen de los ejemplos de timbre">
   </div>
   <div class="spectrum-wrap">
     <canvas data-spectrum-canvas aria-label="Analizador espectral en tiempo real"></canvas>
