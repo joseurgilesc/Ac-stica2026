@@ -5,117 +5,108 @@
 ---
 
 ??? info "Unidades y símbolos (glosario de referencia)"
-    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas.
-
     | Símbolo | Nombre | ¿Qué mide? | Equivalencia |
     |---|---|---|---|
-    | <a id="hz"></a>**Hz** | Hertz | Frecuencia (ciclos por segundo) | 1 Hz = 1/s |
-    | <a id="khz"></a>**kHz** | Kilohertz | Frecuencia | 1 kHz = 1,000 Hz |
-    | <a id="s"></a>**s** | Segundo | Tiempo | — |
-    | <a id="ms"></a>**ms** | Milisegundo | Tiempo | 1 ms = 0.001 s |
-    | <a id="f"></a>**f** | Frecuencia | Ciclos por segundo | f = 1 / T |
-    | <a id="f0"></a>**f₀** | Frecuencia fundamental | Primera componente de una serie armónica | La más grave; suele definir la altura percibida |
-    | <a id="T"></a>**T** | Período | Duración de un ciclo | T = 1 / f |
-    | <a id="A"></a>**A** | Amplitud | Magnitud de una oscilación | — |
-    | <a id="phi"></a>**φ** | Fase inicial | Posición dentro del ciclo | En radianes o grados |
+    | **Hz** | Hertz | Frecuencia | 1 Hz = 1 ciclo/s |
+    | **kHz** | Kilohertz | Frecuencia | 1 kHz = 1000 Hz |
+    | **s** | Segundo | Tiempo | — |
+    | **ms** | Milisegundo | Tiempo | 1 ms = 0.001 s |
+    | **\(f\)** | Frecuencia | Ciclos por segundo | \(f=1/T\) |
+    | **\(f_0\)** | Frecuencia fundamental | Primera componente de una serie | Suele definir la altura percibida |
+    | **\(T\)** | Período | Duración de un ciclo | \(T=1/f\) |
 
 !!! abstract "Objetivos de la sesión"
-    Al finalizar, deberías poder responder cuatro preguntas:
+    Al finalizar, deberías poder responder:
 
     1. ¿Qué diferencia un **tono puro** de un **sonido complejo**?
-    2. ¿Qué es un **armónico** y cómo se relaciona con la frecuencia fundamental?
-    3. ¿Por qué dos instrumentos que tocan la misma nota pueden sonar diferentes?
-    4. ¿Qué diferencia una señal **periódica** de una señal **aperiódica** o de ruido?
+    2. ¿Qué es un **armónico** y cómo se relaciona con la fundamental?
+    3. ¿Por qué dos instrumentos tocando la misma nota pueden sonar diferentes?
+    4. ¿Qué diferencia una señal **periódica** de una señal **aperiódica**?
 
 ---
 
-## 1. Primero escuchamos: ¿un sonido o muchas frecuencias?
+## 1. Primero escuchamos: ¿una frecuencia o muchas?
 
-Un **tono puro** contiene una sola frecuencia. En acústica se representa con una onda sinusoidal.
-
-La mayoría de los sonidos musicales, en cambio, son **complejos**: contienen muchas frecuencias simultáneas. Aun así, el oído puede percibirlas como una sola nota con un timbre particular.
+Un **tono puro** contiene una sola frecuencia. La mayoría de los sonidos musicales son **complejos**: contienen muchas frecuencias simultáneas.
 
 <div class="audio-lab" data-session04-audio>
   <h4>🎧 Experimento 1 — Construye un sonido</h4>
-  <p>Usamos como fundamental un Do3 ≈ 130.8 Hz. Escucha cómo cambia el timbre al añadir componentes.</p>
+  <p>Fundamental: Do3 ≈ 130.8 Hz. Escucha cómo cambia el sonido al añadir armónicos.</p>
   <div class="audio-controls">
-    <button class="audio-btn" data-play-harmonics="1">▶ Solo fundamental</button>
-    <button class="audio-btn" data-play-harmonics="1,2">▶ + octava</button>
-    <button class="audio-btn" data-play-harmonics="1,2,3">▶ + quinta</button>
-    <button class="audio-btn" data-play-harmonics="1,2,3,4,5,6,7,8">▶ Primeros 8 armónicos</button>
+    <button type="button" class="audio-btn" data-play-harmonics="1">▶ Solo fundamental</button>
+    <button type="button" class="audio-btn" data-play-harmonics="1,2">▶ + octava</button>
+    <button type="button" class="audio-btn" data-play-harmonics="1,2,3">▶ + quinta</button>
+    <button type="button" class="audio-btn" data-play-harmonics="1,2,3,4,5,6,7,8">▶ Primeros 8 armónicos</button>
   </div>
+  <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
 
-!!! question "Escucha antes de leer la explicación"
+!!! question "Escucha antes de leer"
     - ¿Sigues percibiendo aproximadamente una sola altura?
     - ¿Qué cambia más: la **altura** o el **timbre**?
-    - ¿El sonido se vuelve más simple o más rico?
+    - ¿Qué ocurre cuando agregamos más componentes?
 
-Joseph Fourier demostró que una onda periódica compleja puede representarse como una suma de ondas sinusoidales de diferentes frecuencias, amplitudes y fases.
+Joseph Fourier mostró que una onda periódica compleja puede representarse como suma de ondas sinusoidales.
 
-> **Idea clave:** una forma de onda compleja puede entenderse como la suma de componentes simples.
-
-| Concepto | Definición | Ejemplo |
-|---|---|---|
-| **Tono puro** | Una sola frecuencia sinusoidal | Tono de prueba |
-| **Onda compleja periódica** | Suma de componentes que mantienen una relación periódica | Nota sostenida de un instrumento |
-| **Onda compleja aperiódica** | No presenta un ciclo estable que se repita | Ruido, algunos ataques, platillos |
-
-!!! info "Síntesis aditiva"
-    Construir un sonido sumando sinusoides se denomina **síntesis aditiva**. El experimento anterior es una forma básica de síntesis aditiva.
+> **Idea clave:** un sonido complejo puede analizarse como una combinación de componentes simples.
 
 ---
 
 ## 2. Fundamental, armónicos y parciales
 
-Cuando una fuente musical vibra, puede hacerlo en varios modos simultáneamente. La frecuencia más baja suele llamarse **frecuencia fundamental** ((f_0)).
+La frecuencia fundamental se representa como \(f_0\).
 
-Si las demás componentes son múltiplos enteros exactos de esa fundamental, hablamos de **armónicos**:
+Los armónicos son múltiplos enteros de esa frecuencia:
 
-[
-f_n = n cdot f_0
-]
+\[
+f_n = n \cdot f_0
+\]
 
-Por ejemplo, si:
+Si:
 
-[
-f_0 = 100	ext{ Hz}
-]
+\[
+f_0 = 100\ \text{Hz}
+\]
 
 entonces:
 
-[
-2f_0 = 200	ext{ Hz},quad 3f_0 = 300	ext{ Hz},quad 4f_0 = 400	ext{ Hz}
-]
+\[
+2f_0 = 200\ \text{Hz},\qquad
+3f_0 = 300\ \text{Hz},\qquad
+4f_0 = 400\ \text{Hz}
+\]
 
-| Término | Qué significa | Ejemplo si (f_0=100) Hz |
+| Término | Significado | Ejemplo |
 |---|---|---:|
-| **Fundamental** | Primer componente de la serie | 100 Hz |
-| **2.º armónico** | Dos veces la fundamental | 200 Hz |
-| **3.º armónico** | Tres veces la fundamental | 300 Hz |
-| **Parcial** | Cualquier componente frecuencial presente | 100, 215, 300 Hz… |
+| **Fundamental** | Primer componente | 100 Hz |
+| **2.º armónico** | \(2f_0\) | 200 Hz |
+| **3.º armónico** | \(3f_0\) | 300 Hz |
+| **Parcial** | Cualquier componente presente | 100, 215, 300 Hz… |
 
-!!! warning "Armónico y parcial no son sinónimos"
-    Todo armónico es un parcial, pero no todo parcial es armónico. Campanas, platillos y membranas pueden presentar parciales **inarmónicos**, es decir, componentes que no son múltiplos enteros exactos de una sola fundamental.
+!!! warning "Armónico y parcial no son lo mismo"
+    Todo armónico es un parcial, pero no todo parcial es armónico. Un parcial inarmónico no es un múltiplo entero exacto de una sola fundamental.
 
 ---
 
 ## 3. La serie armónica como mapa de intervalos
 
-Tomemos como fundamental **Do2 ≈ 65.4 Hz**.
+Tomemos como fundamental:
 
-En lugar de memorizar dieciséis números, vamos a buscar **familias** dentro de la serie.
+\[
+C2 \approx 65.4\ \text{Hz}
+\]
+
+En lugar de memorizar dieciséis números, vamos a buscar **familias**.
 
 <div class="harmonic-lab" data-session04-audio>
   <h4>🎨 Explora la serie armónica</h4>
-  <p>Selecciona una familia para ver qué armónicos generan octavas, quintas, terceras y la séptima natural.</p>
 
   <div class="harmonic-filters">
-    <button class="harmonic-filter active" data-harmonic-filter="all">Todos</button>
-    <button class="harmonic-filter" data-harmonic-filter="octaves">🔵 Octavas</button>
-    <button class="harmonic-filter" data-harmonic-filter="fifths">🟠 Quintas</button>
-    <button class="harmonic-filter" data-harmonic-filter="thirds">🟢 Terceras</button>
-    <button class="harmonic-filter" data-harmonic-filter="sevenths">🟣 Séptima natural</button>
+    <button type="button" class="harmonic-filter active" data-harmonic-filter="all">Todos</button>
+    <button type="button" class="harmonic-filter" data-harmonic-filter="octaves">🔵 Octavas</button>
+    <button type="button" class="harmonic-filter" data-harmonic-filter="fifths">🟠 Quintas</button>
+    <button type="button" class="harmonic-filter" data-harmonic-filter="thirds">🟢 Terceras</button>
+    <button type="button" class="harmonic-filter" data-harmonic-filter="sevenths">🟣 Séptima natural</button>
   </div>
 
   <div class="harmonic-legend">
@@ -145,274 +136,271 @@ En lugar de memorizar dieciséis números, vamos a buscar **familias** dentro de
   </div>
 
   <div class="audio-controls">
-    <button class="audio-btn" data-play-family="octaves">▶ Escuchar octavas</button>
-    <button class="audio-btn" data-play-family="fifths">▶ Escuchar familia de quinta</button>
-    <button class="audio-btn" data-play-family="thirds">▶ Escuchar familia de tercera</button>
-    <button class="audio-btn" data-play-family="sevenths">▶ Escuchar séptima natural</button>
+    <button type="button" class="audio-btn" data-play-family="octaves">▶ Escuchar octavas</button>
+    <button type="button" class="audio-btn" data-play-family="fifths">▶ Escuchar quintas</button>
+    <button type="button" class="audio-btn" data-play-family="thirds">▶ Escuchar terceras</button>
+    <button type="button" class="audio-btn" data-play-family="sevenths">▶ Escuchar séptima natural</button>
   </div>
+  <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
 
-### 3.1 Primero: las octavas
-
-Observa los armónicos:
-
-[
-1,;2,;4,;8,;16
-]
-
-Sus frecuencias se duplican:
-
-[
-65.4 ightarrow 130.8 ightarrow 261.6 ightarrow 523.2 ightarrow 1046.4
-]
-
-Por eso aparecen como la misma clase de nota —Do— en registros cada vez más agudos.
-
-[
-	ext{Octava} = 2:1
-]
-
-### 3.2 Luego: las quintas
+### 3.1 Octavas
 
 Los armónicos:
 
-[
-3,;6,;12
-]
+\[
+1,\ 2,\ 4,\ 8,\ 16
+\]
 
-producen la familia de Sol:
+corresponden a:
 
-[
-G3 ightarrow G4 ightarrow G5
-]
+\[
+C2 \rightarrow C3 \rightarrow C4 \rightarrow C5 \rightarrow C6
+\]
 
-Cada aparición vuelve a duplicarse, por lo que sigue siendo la misma clase de altura en otra octava.
+Cada salto duplica la frecuencia:
 
-La relación entre el armónico 3 y el armónico 2 es:
+\[
+65.4 \rightarrow 130.8 \rightarrow 261.6 \rightarrow 523.2 \rightarrow 1046.4\ \text{Hz}
+\]
 
-[
-rac{3}{2}
-]
+Por eso la relación de octava es:
 
-que corresponde a una **quinta justa**.
+\[
+\boxed{2:1}
+\]
 
-### 3.3 Después: la tercera mayor
+### 3.2 Quintas
 
-Los armónicos:
+La familia:
 
-[
-5,;10
-]
+\[
+3,\ 6,\ 12
+\]
 
-forman la familia de Mi.
+produce:
+
+\[
+G3 \rightarrow G4 \rightarrow G5
+\]
+
+La quinta aparece al comparar los armónicos 3 y 2:
+
+\[
+\boxed{\frac{3}{2}}
+\]
+
+### 3.3 Tercera mayor
+
+La familia:
+
+\[
+5,\ 10
+\]
+
+produce la clase de altura Mi.
 
 La relación entre los armónicos 5 y 4 es:
 
-[
-rac{5}{4}
-]
+\[
+\boxed{\frac{5}{4}}
+\]
 
-que se aproxima a una **tercera mayor**.
+!!! note "Afinación natural y temperamento igual"
+    Algunos armónicos no coinciden exactamente con las notas del piano afinado en temperamento igual. Por eso aparecen símbolos como **↓** o la indicación **aprox.**
 
-!!! note "Afinación natural vs. temperamento igual"
-    Algunos armónicos no coinciden exactamente con las notas de un piano afinado en temperamento igual. Por eso aparecen símbolos como **↓** o la palabra “aprox.”. La serie armónica surge de relaciones físicas exactas; el temperamento igual reparte la octava en doce semitonos iguales.
+### 3.4 Una idea visual útil
 
-### 3.4 ¿Por qué estos intervalos suelen sonar estables?
+Podemos pensar la serie como varias familias superpuestas:
 
-Relaciones simples como (2:1), (3:2) o (5:4) producen una coincidencia importante entre componentes espectrales cuando dos tonos complejos suenan juntos. Esa coincidencia contribuye a la percepción de consonancia.
+\[
+\text{Octavas: } 1,2,4,8,16
+\]
 
-!!! info "Importante"
-    La consonancia no depende de una sola causa. También influyen el timbre, el registro, el nivel, el sistema de afinación, el contexto musical y factores perceptivos y culturales. La serie armónica ayuda a explicar una parte física importante del fenómeno, pero no lo explica todo por sí sola.
+\[
+\text{Quintas: } 3,6,12
+\]
+
+\[
+\text{Terceras: } 5,10
+\]
+
+\[
+\text{Séptima natural: } 7,14
+\]
+
+!!! info "Consonancia"
+    Relaciones sencillas como \(2:1\), \(3:2\) y \(5:4\) producen coincidencias importantes entre componentes espectrales. Esto contribuye a la percepción de consonancia, aunque también influyen el timbre, el registro, la afinación y el contexto musical.
 
 <figure markdown="span">
   ![Serie armónica en notación musical](../../../img/serie_armonica.svg)
-  <figcaption>**Primeros 16 armónicos de Do2.** La serie se comprime progresivamente en el registro agudo.</figcaption>
+  <figcaption>Primeros 16 armónicos de Do2. Los intervalos se van comprimiendo a medida que aumenta el número de armónico.</figcaption>
 </figure>
 
 ---
 
-## 4. El timbre: misma fundamental, distinta mezcla de armónicos
+## 4. El timbre: misma fundamental, diferente espectro
 
-Dos sonidos pueden compartir la misma frecuencia fundamental y, sin embargo, sonar muy diferentes.
+Dos sonidos pueden tener la misma fundamental y sonar completamente distintos.
 
 <div class="audio-lab" data-session04-audio>
-  <h4>🎧 Experimento 2 — Misma altura, diferente espectro</h4>
-  <p>Todos estos sonidos tienen una fundamental de aproximadamente 130.8 Hz.</p>
+  <h4>🎧 Experimento 2 — Misma altura, diferente timbre</h4>
+  <p>Todos tienen una fundamental cercana a 130.8 Hz.</p>
   <div class="audio-controls">
-    <button class="audio-btn" data-play-wave="sine">▶ Seno</button>
-    <button class="audio-btn" data-play-wave="triangle">▶ Triangular</button>
-    <button class="audio-btn" data-play-wave="square">▶ Cuadrada</button>
-    <button class="audio-btn" data-play-wave="sawtooth">▶ Diente de sierra</button>
+    <button type="button" class="audio-btn" data-play-wave="sine">▶ Seno</button>
+    <button type="button" class="audio-btn" data-play-wave="triangle">▶ Triangular</button>
+    <button type="button" class="audio-btn" data-play-wave="square">▶ Cuadrada</button>
+    <button type="button" class="audio-btn" data-play-wave="sawtooth">▶ Diente de sierra</button>
   </div>
+  <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
 
-| Forma de onda | Contenido armónico idealizado | Impresión general |
-|---|---|---|
-| **Seno** | Solo la fundamental | Muy puro |
-| **Triangular** | Armónicos impares, con caída rápida | Suave, algo hueco |
-| **Cuadrada** | Armónicos impares | Brillante, hueca |
-| **Diente de sierra** | Armónicos pares e impares | Muy brillante |
+| Forma de onda | Contenido armónico idealizado |
+|---|---|
+| **Seno** | Solo \(f_0\) |
+| **Triangular** | Armónicos impares con caída rápida |
+| **Cuadrada** | Armónicos impares |
+| **Diente de sierra** | Armónicos pares e impares |
 
-Para una onda cuadrada ideal:
+Para la onda cuadrada:
 
-[
-y(t)=rac{4}{pi}sum_{n=1,3,5,ldots}^{infty}rac{1}{n}sin(2pi n f_0t)
-]
+\[
+y(t)=\frac{4}{\pi}
+\sum_{n=1,3,5,\ldots}^{\infty}
+\frac{1}{n}\sin(2\pi n f_0t)
+\]
 
-Para una onda diente de sierra ideal:
+Para la onda diente de sierra:
 
-[
-y(t)=rac{2}{pi}sum_{n=1}^{infty}rac{(-1)^{n+1}}{n}sin(2pi n f_0t)
-]
+\[
+y(t)=\frac{2}{\pi}
+\sum_{n=1}^{\infty}
+\frac{(-1)^{n+1}}{n}\sin(2\pi n f_0t)
+\]
 
-> **Idea clave:** el timbre depende en gran medida de **qué componentes frecuenciales están presentes y con qué amplitud evolucionan en el tiempo**.
+> **Idea clave:** el timbre depende mucho de qué componentes frecuenciales están presentes y de sus amplitudes relativas.
 
 ---
 
 ## 5. Dominio temporal y dominio frecuencial
 
-Una señal puede observarse desde dos perspectivas complementarias:
-
-| Dominio | Eje X | Eje Y | ¿Qué observamos? |
+| Dominio | Eje X | Eje Y | Muestra |
 |---|---|---|---|
-| **Temporal** | Tiempo | Amplitud | La forma de onda |
-| **Frecuencial** | Frecuencia | Amplitud o nivel | El contenido espectral |
+| **Temporal** | Tiempo | Amplitud | Forma de onda |
+| **Frecuencial** | Frecuencia | Amplitud o nivel | Espectro |
 
-<div class="sound-sequence">
-  <div class="sound-step"><strong>Seno</strong><br>Una frecuencia → una línea espectral.</div>
-  <div class="sound-step"><strong>Sonido armónico</strong><br>Varias líneas en (f_0, 2f_0, 3f_0...)</div>
-  <div class="sound-step"><strong>Sonido inarmónico</strong><br>Parciales sin una única relación entera común.</div>
-  <div class="sound-step"><strong>Ruido</strong><br>Energía distribuida de forma continua en un rango amplio.</div>
-</div>
+Una sinusoide ideal produce una sola línea espectral. Un sonido armónico produce líneas en:
 
-!!! tip "Pregunta guía"
-    Cuando veas una forma de onda complicada en el tiempo, pregúntate: **¿de qué frecuencias está construida?**
+\[
+f_0,\ 2f_0,\ 3f_0,\ 4f_0,\ldots
+\]
+
+Un ruido de banda ancha presenta energía distribuida de forma más continua.
 
 ---
 
 ## 6. Fase y forma de onda
 
-La fase de cada componente determina cómo se alinean las sinusoides en el tiempo.
+La fase indica cómo se alinean las componentes en el tiempo:
 
-[
-y(t)=A_1sin(2pi f_0t+phi_1)+A_2sin(4pi f_0t+phi_2)+A_3sin(6pi f_0t+phi_3)+ldots
-]
+\[
+y(t)=
+A_1\sin(2\pi f_0t+\phi_1)
++
+A_2\sin(4\pi f_0t+\phi_2)
++
+A_3\sin(6\pi f_0t+\phi_3)
++\ldots
+\]
 
 | Símbolo | Significado |
 |---|---|
-| (f_0) | Frecuencia fundamental |
-| (n f_0) | Armónico n |
-| (A_n) | Amplitud del armónico |
-| (phi_n) | Fase del armónico |
+| \(f_0\) | Fundamental |
+| \(nf_0\) | Armónico \(n\) |
+| \(A_n\) | Amplitud |
+| \(\phi_n\) | Fase |
 
 <figure markdown="span">
-  ![Fig. 1-9: combinación de ondas sinusoidales](../../../img/combinacion_de_ondas_senoidales.svg)
-  <figcaption>**Suma de armónicos en fase.** La combinación produce una nueva forma de onda.</figcaption>
+  ![Combinación de ondas sinusoidales](../../../img/combinacion_de_ondas_senoidales.svg)
+  <figcaption>Suma de armónicos en fase.</figcaption>
 </figure>
 
 <figure markdown="span">
   ![Armónicos fuera de fase](../../../img/figura_1_11.png)
-  <figcaption>Con las mismas frecuencias y amplitudes, cambiar la fase modifica la forma temporal de la señal.</figcaption>
+  <figcaption>Las mismas frecuencias y amplitudes pueden producir otra forma temporal si cambia la fase.</figcaption>
 </figure>
 
-!!! tip "Fase y audición"
-    En señales estacionarias el oído suele ser menos sensible a ciertas diferencias de fase entre armónicos que a cambios de amplitud espectral. Sin embargo, la fase es crítica en cancelaciones, suma entre micrófonos, reflexiones y localización espacial.
-
 ---
 
-## 7. De lo periódico a lo aperiódico
+## 7. Señales periódicas y aperiódicas
 
-Una señal **periódica** repite su patrón después de un tiempo (T):
+Una señal periódica cumple:
 
-[
+\[
 x(t)=x(t+T)
-]
+\]
 
-Una señal **aperiódica** no posee un período único estable que permita repetir exactamente el patrón.
+donde \(T\) es el período.
 
-| Tipo | Comportamiento temporal | Espectro típico | Ejemplos |
+| Tipo | Comportamiento | Espectro típico | Ejemplo |
 |---|---|---|---|
-| **Periódica** | Repite un ciclo | Líneas discretas | Oscilador, nota estable idealizada |
-| **Cuasiperiódica** | Repite con pequeñas variaciones | Líneas con variaciones | Voz sostenida, instrumento real |
-| **Aperiódica** | Sin ciclo estable | Más continuo | Ruido, muchos transitorios |
-
-!!! question "¿Tiene altura?"
-    Compara mentalmente una vocal sostenida, un tono de sintetizador, un hi-hat y un ruido continuo. ¿En cuáles puedes cantar con facilidad una nota correspondiente?
+| **Periódica** | Repite un ciclo | Líneas discretas | Oscilador |
+| **Cuasiperiódica** | Repite con pequeñas variaciones | Líneas variables | Voz sostenida |
+| **Aperiódica** | Sin ciclo estable | Más continuo | Ruido, transitorios |
 
 ---
 
-## 8. Ruido: blanco, rosa y marrón
-
-El ruido es aperiódico y distribuye energía a lo largo de un rango amplio de frecuencias.
+## 8. Ruido blanco, rosa y marrón
 
 <div class="audio-lab" data-session04-audio>
   <h4>🎧 Experimento 3 — Colores de ruido</h4>
-  <p>Escucha con volumen moderado. Fíjate en cómo cambia el peso relativo entre graves y agudos.</p>
+  <p>Escucha a volumen moderado y compara el balance entre graves y agudos.</p>
   <div class="audio-controls">
-    <button class="audio-btn" data-play-noise="white">▶ Ruido blanco</button>
-    <button class="audio-btn" data-play-noise="pink">▶ Ruido rosa</button>
-    <button class="audio-btn" data-play-noise="brown">▶ Ruido marrón</button>
+    <button type="button" class="audio-btn" data-play-noise="white">▶ Ruido blanco</button>
+    <button type="button" class="audio-btn" data-play-noise="pink">▶ Ruido rosa</button>
+    <button type="button" class="audio-btn" data-play-noise="brown">▶ Ruido marrón</button>
   </div>
+  <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
 
-| Color | Densidad espectral de potencia | Energía integrada por octava | Percepción aproximada |
-|---|---|---|---|
-| **Blanco** | Constante por Hz | Aumenta ≈ +3 dB/octava | Más brillante |
-| **Rosa** | (1/f) | Aproximadamente constante | Más equilibrado |
-| **Marrón** | (1/f^2) | Disminuye ≈ −3 dB/octava | Mucho más grave |
-
-!!! info "Dos pendientes distintas que no conviene confundir"
-    Para el ruido marrón, la **densidad espectral de potencia** (1/f^2) cae aproximadamente **−6 dB por octava** en una gráfica de PSD. Pero como una octava superior contiene el doble de ancho de banda, la **energía total integrada dentro de cada octava** cae aproximadamente **−3 dB por octava**.
-
-### ¿Por qué “colores”?
-
-La analogía proviene de la luz. El término “blanco” sugiere una distribución amplia de energía. En audio, el ruido blanco posee igual densidad de potencia por Hz; el ruido rosa redistribuye esa energía para que cada octava contenga aproximadamente la misma potencia.
-
-!!! tip "Aplicación en producción y acústica"
-    El ruido rosa es muy utilizado para observar balances por bandas de octava y para ejercicios de escucha crítica porque no concentra tanta energía relativa en las frecuencias altas como el ruido blanco.
-
----
-
-## 9. Señales del mundo real
-
-| Categoría | Rasgos frecuentes | Aplicación |
+| Color | Densidad espectral de potencia | Energía por octava |
 |---|---|---|
-| **Voz** | Fundamental, armónicos, formantes, ruido consonántico | Inteligibilidad, ecualización |
-| **Música** | Armónicos, parciales, ataques, envolventes | Timbre y mezcla |
-| **Percusión** | Transitorios + componentes armónicos e inarmónicos | Ataque, textura |
-| **Ruido ambiental** | Espectro continuo y cambiante | Medición y control de ruido |
+| **Blanco** | Constante por Hz | Aumenta ≈ \(+3\) dB/octava |
+| **Rosa** | Proporcional a \(1/f\) | Aproximadamente constante |
+| **Marrón** | Proporcional a \(1/f^2\) | Disminuye ≈ \(-3\) dB/octava |
 
-En una mezcla, diferentes fuentes ocupan regiones distintas del espectro. Sin embargo, ningún instrumento “vive” exclusivamente en una sola banda: su fundamental, armónicos, transitorios y resonancias pueden extenderse por una región muy amplia.
+!!! info "Atención con las pendientes"
+    En una gráfica de **densidad espectral de potencia**, el ruido marrón \(1/f^2\) cae aproximadamente \(-6\) dB por octava. Al integrar la energía dentro de cada octava, la caída es aproximadamente \(-3\) dB por octava.
 
 ---
 
-## 10. Cierre: del oído a la matemática
+## 9. Cierre
 
-La secuencia conceptual de esta sesión puede resumirse así:
+La secuencia conceptual de la sesión es:
 
-[
-	ext{tono puro}
-ightarrow
-	ext{suma de frecuencias}
-ightarrow
-	ext{armónicos}
-ightarrow
-	ext{espectro}
-ightarrow
-	ext{timbre}
-ightarrow
-	ext{aperiodicidad y ruido}
-]
+\[
+\boxed{
+\text{tono puro}
+\rightarrow
+\text{armónicos}
+\rightarrow
+\text{espectro}
+\rightarrow
+\text{timbre}
+\rightarrow
+\text{aperiodicidad}
+\rightarrow
+\text{ruido}
+}
+\]
 
 !!! success "Comprueba si lo entendiste"
-    Sin mirar las secciones anteriores, intenta responder:
-
-    1. Si (f_0=100) Hz, ¿cuáles son los primeros cinco armónicos?
-    2. ¿Por qué los armónicos 1, 2, 4, 8 y 16 pertenecen a la misma familia de nota?
-    3. ¿Qué relación de frecuencias define una quinta justa en la serie armónica?
-    4. ¿Qué diferencia espectral básica existe entre una onda sinusoidal y una onda diente de sierra?
-    5. ¿Por qué el ruido rosa suele percibirse menos brillante que el ruido blanco?
+    1. Si \(f_0=100\) Hz, ¿cuáles son los primeros cinco armónicos?
+    2. ¿Por qué \(1,2,4,8,16\) forman una familia de octavas?
+    3. ¿Qué relación define una quinta justa en la serie armónica?
+    4. ¿Qué diferencia espectral hay entre una sinusoide y una diente de sierra?
+    5. ¿Por qué el ruido rosa suele sonar menos brillante que el blanco?
 
 ---
 
-*Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill; principios de análisis de Fourier, serie armónica y acústica musical.*
+*Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill.*
