@@ -6,7 +6,7 @@
   let analyser = null;
   let analyserSource = null;
   let analyserFrame = null;
-  let timbreVolume = 0.22;
+  let timbreVolume = 0.105;
 
   async function getAudioCtx() {
     const Ctx = window.AudioContext || window.webkitAudioContext;
