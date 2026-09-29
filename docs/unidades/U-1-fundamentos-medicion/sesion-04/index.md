@@ -373,16 +373,31 @@ donde \(T\) es el período.
 
 ## 8. Ruido blanco, rosa y marrón
 
-<div class="audio-lab" data-session04-audio>
+<div class="audio-lab spectrum-lab" data-session04-audio>
   <h4>🎧 Experimento 3 — Colores de ruido</h4>
-  <p>Escucha a volumen moderado y compara el balance entre graves y agudos.</p>
+  <p>Escucha a volumen moderado y observa cómo cambia la distribución espectral entre graves y agudos.</p>
   <div class="audio-controls">
     <button type="button" class="audio-btn" data-play-noise="white">▶ Ruido blanco</button>
     <button type="button" class="audio-btn" data-play-noise="pink">▶ Ruido rosa</button>
     <button type="button" class="audio-btn" data-play-noise="brown">▶ Ruido marrón</button>
   </div>
+  <div class="spectrum-wrap">
+    <canvas data-noise-spectrum-canvas aria-label="Analizador espectral de ruido en tiempo real"></canvas>
+  </div>
+  <div class="spectrum-key">
+    <span>Blanco: más energía relativa en agudos</span>
+    <span>Rosa: caída más equilibrada</span>
+    <span>Marrón: predominio de graves</span>
+  </div>
   <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
+
+!!! tip "Qué deberías observar"
+    - **Ruido blanco:** el espectro se mantiene relativamente alto a lo largo del rango mostrado.
+    - **Ruido rosa:** la curva desciende progresivamente hacia las frecuencias altas.
+    - **Ruido marrón:** la caída es más pronunciada y la energía se concentra mucho más en graves.
+
+    Aquí no aparecen líneas armónicas discretas como en una onda periódica: la energía se distribuye de manera continua en un rango amplio de frecuencias.
 
 | Color | Densidad espectral de potencia | Energía por octava |
 |---|---|---|
