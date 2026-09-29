@@ -241,3 +241,30 @@
   font-size: .82rem;
   font-weight: 600;
 }
+
+
+/* Volume control — Sesión 04 */
+.volume-control {
+  display: grid;
+  grid-template-columns: auto minmax(160px, 1fr);
+  gap: .75rem;
+  align-items: center;
+  margin: .8rem 0 .4rem;
+}
+
+.volume-control label {
+  font-size: .9rem;
+  white-space: nowrap;
+}
+
+.volume-control input[type="range"] {
+  width: 100%;
+  accent-color: #249D8F;
+}
+
+@media (max-width: 520px) {
+  .volume-control {
+    grid-template-columns: 1fr;
+    gap: .35rem;
+  }
+}
