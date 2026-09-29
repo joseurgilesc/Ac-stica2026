@@ -6,6 +6,7 @@
   let analyser = null;
   let analyserSource = null;
   let analyserFrame = null;
+  let timbreVolume = 0.22;
 
   async function getAudioCtx() {
     const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -55,14 +56,15 @@
     return analyser;
   }
 
-  function makeMaster(ctx, duration, useAnalyser) {
+  function makeMaster(ctx, duration, useAnalyser, targetVolume) {
     const gain = ctx.createGain();
     const now = ctx.currentTime;
 
     gain.gain.cancelScheduledValues(now);
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.22, now + 0.03);
-    gain.gain.setValueAtTime(0.22, now + Math.max(0.08, duration - 0.08));
+    const level = typeof targetVolume === "number" ? targetVolume : 0.22;
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, level), now + 0.03);
+    gain.gain.setValueAtTime(Math.max(0.0001, level), now + Math.max(0.08, duration - 0.08));
     gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
     if (useAnalyser && document.querySelector("[data-spectrum-canvas]")) {
@@ -260,7 +262,7 @@
 
     duration = duration || 1.5;
 
-    const master = makeMaster(ctx, duration, true);
+    const master = makeMaster(ctx, duration, true, timbreVolume);
     const osc = ctx.createOscillator();
 
     osc.type = type;
@@ -383,6 +385,15 @@
       if (map[family]) playHarmonics(map[family], 65.41, 1.8);
     }
   }
+
+  document.addEventListener("input", function (event) {
+    const slider = event.target.closest("[data-timbre-volume]");
+    if (!slider) return;
+    const value = Number(slider.value);
+    timbreVolume = Math.max(0, Math.min(1, value / 100)) * 0.35;
+    const label = document.querySelector("[data-timbre-volume-label]");
+    if (label) label.textContent = value + "%";
+  });
 
   if (!window.__session04AudioBound) {
     document.addEventListener("click", handleClick);
