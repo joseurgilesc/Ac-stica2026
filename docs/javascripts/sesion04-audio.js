@@ -3,6 +3,9 @@
 
   let audioCtx = null;
   let activeNodes = [];
+  let analyser = null;
+  let analyserSource = null;
+  let analyserFrame = null;
 
   async function getAudioCtx() {
     const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -41,7 +44,18 @@
     activeNodes = [];
   }
 
-  function makeMaster(ctx, duration) {
+  function getAnalyser(ctx) {
+    if (!analyser) {
+      analyser = ctx.createAnalyser();
+      analyser.fftSize = 8192;
+      analyser.smoothingTimeConstant = 0.72;
+      analyser.minDecibels = -100;
+      analyser.maxDecibels = -10;
+    }
+    return analyser;
+  }
+
+  function makeMaster(ctx, duration, useAnalyser) {
     const gain = ctx.createGain();
     const now = ctx.currentTime;
 
@@ -51,9 +65,155 @@
     gain.gain.setValueAtTime(0.22, now + Math.max(0.08, duration - 0.08));
     gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
-    gain.connect(ctx.destination);
+    if (useAnalyser && document.querySelector("[data-spectrum-canvas]")) {
+      const a = getAnalyser(ctx);
+      try { a.disconnect(); } catch (e) {}
+      gain.connect(a);
+      a.connect(ctx.destination);
+      analyserSource = gain;
+      startSpectrumDrawing(ctx, a);
+    } else {
+      gain.connect(ctx.destination);
+    }
+
     activeNodes.push(gain);
     return gain;
+  }
+
+  function startSpectrumDrawing(ctx, a) {
+    const canvas = document.querySelector("[data-spectrum-canvas]");
+    if (!canvas) return;
+
+    const ratio = window.devicePixelRatio || 1;
+    const cssWidth = canvas.clientWidth || 760;
+    const cssHeight = 300;
+
+    if (canvas.width !== Math.floor(cssWidth * ratio) || canvas.height !== Math.floor(cssHeight * ratio)) {
+      canvas.width = Math.floor(cssWidth * ratio);
+      canvas.height = Math.floor(cssHeight * ratio);
+    }
+
+    const g = canvas.getContext("2d");
+    g.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const data = new Float32Array(a.frequencyBinCount);
+    const maxFreq = 5000;
+    const nyquist = ctx.sampleRate / 2;
+    const maxBin = Math.min(data.length - 1, Math.floor((maxFreq / nyquist) * data.length));
+
+    function draw() {
+      a.getFloatFrequencyData(data);
+
+      const w = cssWidth;
+      const h = cssHeight;
+      const padL = 48;
+      const padR = 14;
+      const padT = 16;
+      const padB = 34;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      const styles = getComputedStyle(document.documentElement);
+      const fg = styles.getPropertyValue("--md-default-fg-color").trim() || "#222";
+      const bg = styles.getPropertyValue("--md-default-bg-color").trim() || "#fff";
+      const teal = styles.getPropertyValue("--md-primary-fg-color").trim() || "#249D8F";
+      const grid = "rgba(127,127,127,.22)";
+
+      g.clearRect(0, 0, w, h);
+      g.fillStyle = bg;
+      g.fillRect(0, 0, w, h);
+
+      g.font = "12px system-ui, sans-serif";
+      g.textAlign = "center";
+      g.textBaseline = "top";
+
+      // Vertical frequency grid: 0–5 kHz
+      for (let khz = 0; khz <= 5; khz++) {
+        const x = padL + (khz / 5) * plotW;
+        g.strokeStyle = grid;
+        g.lineWidth = 1;
+        g.beginPath();
+        g.moveTo(x, padT);
+        g.lineTo(x, padT + plotH);
+        g.stroke();
+
+        g.fillStyle = fg;
+        g.fillText(khz === 0 ? "0" : khz + " kHz", x, padT + plotH + 8);
+      }
+
+      // Horizontal dB grid
+      g.textAlign = "right";
+      g.textBaseline = "middle";
+      [-20, -40, -60, -80, -100].forEach(function (db) {
+        const y = padT + ((-10 - db) / 90) * plotH;
+        g.strokeStyle = grid;
+        g.beginPath();
+        g.moveTo(padL, y);
+        g.lineTo(padL + plotW, y);
+        g.stroke();
+
+        g.fillStyle = fg;
+        g.fillText(db + " dB", padL - 7, y);
+      });
+
+      // Fundamental marker
+      const f0 = 130.81;
+      const fx = padL + (f0 / maxFreq) * plotW;
+      g.strokeStyle = "rgba(245,158,11,.8)";
+      g.lineWidth = 1.5;
+      g.setLineDash([5, 4]);
+      g.beginPath();
+      g.moveTo(fx, padT);
+      g.lineTo(fx, padT + plotH);
+      g.stroke();
+      g.setLineDash([]);
+      g.textAlign = "left";
+      g.textBaseline = "top";
+      g.fillStyle = fg;
+      g.fillText("f₀ = 130,8 Hz", Math.min(fx + 5, w - 100), padT + 3);
+
+      // Spectrum
+      g.strokeStyle = teal;
+      g.lineWidth = 2;
+      g.beginPath();
+
+      for (let i = 0; i <= maxBin; i++) {
+        const freq = (i / data.length) * nyquist;
+        const x = padL + (freq / maxFreq) * plotW;
+        const db = Math.max(-100, Math.min(-10, data[i]));
+        const y = padT + ((-10 - db) / 90) * plotH;
+
+        if (i === 0) g.moveTo(x, y);
+        else g.lineTo(x, y);
+      }
+      g.stroke();
+
+      analyserFrame = requestAnimationFrame(draw);
+    }
+
+    if (analyserFrame) cancelAnimationFrame(analyserFrame);
+    draw();
+  }
+
+  function clearSpectrumAfter(duration) {
+    window.setTimeout(function () {
+      if (analyserFrame) {
+        cancelAnimationFrame(analyserFrame);
+        analyserFrame = null;
+      }
+      const canvas = document.querySelector("[data-spectrum-canvas]");
+      if (!canvas) return;
+      const g = canvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      g.setTransform(1, 0, 0, 1, 0, 0);
+      g.clearRect(0, 0, canvas.width, canvas.height);
+      g.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const styles = getComputedStyle(document.documentElement);
+      g.fillStyle = styles.getPropertyValue("--md-default-fg-color").trim() || "#222";
+      g.font = "14px system-ui, sans-serif";
+      g.textAlign = "center";
+      g.fillText("Pulsa una forma de onda para ver su espectro.", (canvas.clientWidth || 760) / 2, 145);
+    }, Math.round(duration * 1000) + 120);
   }
 
   async function playHarmonics(harmonics, baseFreq, duration) {
@@ -100,7 +260,7 @@
 
     duration = duration || 1.5;
 
-    const master = makeMaster(ctx, duration);
+    const master = makeMaster(ctx, duration, true);
     const osc = ctx.createOscillator();
 
     osc.type = type;
@@ -113,6 +273,7 @@
     activeNodes.push(osc);
 
     window.setTimeout(function () { setStatus(""); }, Math.round(duration * 1000) + 150);
+    clearSpectrumAfter(duration);
   }
 
   function noiseBuffer(ctx, color, duration) {
@@ -155,7 +316,7 @@
 
     duration = duration || 1.8;
 
-    const master = makeMaster(ctx, duration);
+    const master = makeMaster(ctx, duration, false);
     const src = ctx.createBufferSource();
 
     src.buffer = noiseBuffer(ctx, color, duration);
