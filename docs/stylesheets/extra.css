@@ -63,3 +63,144 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #1A7A6F;
 }
+
+
+/* ===== Sesión 04: armónicos y audio interactivo ===== */
+.audio-lab,
+.harmonic-lab {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 14px;
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
+  background: var(--md-default-bg-color);
+}
+
+.audio-lab h4,
+.harmonic-lab h4 {
+  margin-top: 0;
+}
+
+.audio-controls,
+.harmonic-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: .75rem 0;
+}
+
+.audio-btn,
+.harmonic-filter {
+  appearance: none;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  border-radius: 999px;
+  padding: .55rem .85rem;
+  font: inherit;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.audio-btn:hover,
+.harmonic-filter:hover {
+  transform: translateY(-1px);
+  border-color: #249D8F;
+}
+
+.harmonic-filter.active {
+  background: #249D8F;
+  color: #fff;
+  border-color: #249D8F;
+}
+
+.harmonic-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(78px, 1fr));
+  gap: .55rem;
+  margin-top: 1rem;
+}
+
+.harmonic-card {
+  position: relative;
+  min-height: 108px;
+  border-radius: 12px;
+  padding: .65rem .55rem;
+  border: 2px solid var(--md-default-fg-color--lightest);
+  text-align: center;
+  transition: opacity .15s ease, transform .15s ease, filter .15s ease;
+}
+
+.harmonic-card strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.harmonic-card .note {
+  display: block;
+  font-size: 1.15rem;
+  margin: .15rem 0;
+}
+
+.harmonic-card .freq {
+  display: block;
+  font-size: .72rem;
+  opacity: .75;
+}
+
+.harmonic-card.dimmed {
+  opacity: .18;
+  filter: grayscale(1);
+  transform: scale(.97);
+}
+
+.family-octaves { border-color: #3b82f6; background: rgba(59,130,246,.10); }
+.family-fifths { border-color: #f59e0b; background: rgba(245,158,11,.12); }
+.family-thirds { border-color: #22c55e; background: rgba(34,197,94,.11); }
+.family-sevenths { border-color: #a855f7; background: rgba(168,85,247,.11); }
+
+.harmonic-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem 1rem;
+  font-size: .85rem;
+  margin: .7rem 0;
+}
+
+.harmonic-legend span::before {
+  content: "";
+  display: inline-block;
+  width: .72rem;
+  height: .72rem;
+  border-radius: 50%;
+  margin-right: .35rem;
+  vertical-align: -.05rem;
+}
+
+.legend-octaves::before { background: #3b82f6; }
+.legend-fifths::before { background: #f59e0b; }
+.legend-thirds::before { background: #22c55e; }
+.legend-sevenths::before { background: #a855f7; }
+
+.sound-sequence {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  gap: .7rem;
+  margin: 1rem 0;
+}
+
+.sound-step {
+  border-left: 4px solid #249D8F;
+  background: rgba(36,157,143,.08);
+  padding: .7rem .8rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .harmonic-grid { grid-template-columns: repeat(4, minmax(72px, 1fr)); }
+  .sound-sequence { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .harmonic-grid { grid-template-columns: repeat(2, minmax(72px, 1fr)); }
+  .sound-sequence { grid-template-columns: 1fr; }
+}
