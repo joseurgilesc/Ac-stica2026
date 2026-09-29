@@ -243,17 +243,33 @@ Podemos pensar la serie como varias familias superpuestas:
 
 Dos sonidos pueden tener la misma fundamental y sonar completamente distintos.
 
-<div class="audio-lab" data-session04-audio>
+<div class="audio-lab spectrum-lab" data-session04-audio>
   <h4>🎧 Experimento 2 — Misma altura, diferente timbre</h4>
-  <p>Todos tienen una fundamental cercana a 130.8 Hz.</p>
+  <p>Todos tienen una fundamental cercana a 130.8 Hz. Escucha y observa qué armónicos aparecen en cada forma de onda.</p>
   <div class="audio-controls">
     <button type="button" class="audio-btn" data-play-wave="sine">▶ Seno</button>
     <button type="button" class="audio-btn" data-play-wave="triangle">▶ Triangular</button>
     <button type="button" class="audio-btn" data-play-wave="square">▶ Cuadrada</button>
     <button type="button" class="audio-btn" data-play-wave="sawtooth">▶ Diente de sierra</button>
   </div>
+  <div class="spectrum-wrap">
+    <canvas data-spectrum-canvas aria-label="Analizador espectral en tiempo real"></canvas>
+  </div>
+  <div class="spectrum-key">
+    <span><strong>f₀</strong> = 130,8 Hz</span>
+    <span>Eje X: frecuencia</span>
+    <span>Eje Y: nivel relativo en dB</span>
+  </div>
   <p class="audio-status" data-audio-status aria-live="polite"></p>
 </div>
+
+!!! tip "Qué deberías ver"
+    - **Seno:** prácticamente un solo pico en (f_0).
+    - **Triangular:** armónicos impares (f_0, 3f_0, 5f_0,ldots), pero los superiores caen muy rápido.
+    - **Cuadrada:** armónicos impares (f_0, 3f_0, 5f_0,ldots) con mayor presencia relativa.
+    - **Diente de sierra:** aparecen armónicos pares e impares (f_0, 2f_0, 3f_0,ldots).
+
+    La **fundamental no cambia**; cambia la distribución de energía entre sus armónicos. Eso es una parte central del timbre.
 
 | Forma de onda | Contenido armónico idealizado |
 |---|---|
