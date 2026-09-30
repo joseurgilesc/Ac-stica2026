@@ -228,7 +228,7 @@
 
     | dB SPL | Ejemplo cotidiano | Sensación subjetiva |
     |---|---|---|
-    | 0 | Umbral de audición (1 kHz) | Silencio absoluto (cámara anecoica) |
+    | 0 | Nivel de referencia: 20 µPa; cercano al umbral de audición a 1 kHz | Apenas audible en condiciones ideales |
     | 10 | Respiración normal, hojas movidas por brisa | Apenas audible |
     | 20 | Estudio de grabación vacío, susurro | Muy silencioso |
     | 30 | Biblioteca silenciosa, dormitorio nocturno | Silencioso |
