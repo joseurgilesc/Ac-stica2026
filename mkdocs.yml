@@ -38,6 +38,7 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - javascripts/sesion04-audio.js
+  - javascripts/sesion05-db.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
