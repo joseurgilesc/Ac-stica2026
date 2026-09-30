@@ -8,7 +8,7 @@
 ---
 
 ??? info "Unidades y símbolos (glosario de referencia)"
-    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
+    Consulta esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
 
     | Símbolo | Nombre | ¿Qué mide? | Equivalencia |
     |---|---|---|---|
@@ -50,6 +50,13 @@
 
         La presión se multiplica por **10** en cada paso, pero el nivel solo aumenta **20 dB**.
 
+    <figure markdown="span">
+      ![Escalera logarítmica de presión sonora y decibeles](../../../img/db_escalera_logaritmica.svg)
+      <figcaption>**Escalera logarítmica.** Cada salto de ×10 en presión ocupa un “escalón” y suma +20 dB SPL.</figcaption>
+    </figure>
+
+    > **Analogía útil:** un logaritmo no pregunta “¿cuánto sumé?”, sino **“¿cuántas veces multipliqué?”**.
+
     [🎛️ **Abrir laboratorio interactivo — La regla que se comprime**](../../../simulacion/logaritmos-decibeles.html){ .md-button }
 
     Mueve el deslizador para comparar la escala lineal con la logarítmica y ver cómo el logaritmo cuenta saltos de ×10. Observa la relación p/p₀, la presión sonora y el nivel en dB SPL.
@@ -75,7 +82,7 @@
     \log_{10}(x) = y \quad \Longleftrightarrow \quad 10^y = x
     \]
 
-    ### Logaritmos comunes que debés memorizar
+    ### Logaritmos comunes que debes memorizar
 
     | \(x\) | \(\log_{10}(x)\) | Porque |
     |---|---|---|
@@ -169,7 +176,12 @@
     !!! warning "¡Cuidado con la confusión más común!"
         ×2 en **presión sonora** = +6 dB (factor 20). ×2 en **potencia/intensidad** = +3 dB (factor 10). ×2 en **sonoridad percibida** ≈ +10 dB (aproximadamente). Son tres conceptos distintos que usan la misma palabra: «el doble».
 
-### Reglas prácticas de dB que debés saber
+### Reglas prácticas de dB que debes saber
+
+<figure markdown="span">
+  ![Reglas visuales de +3, +6 y +10 dB](../../../img/db_reglas_3_6_10.svg)
+  <figcaption>**Tres reglas que conviene memorizar visualmente.** +3 dB duplica potencia, +6 dB duplica presión y +10 dB multiplica ×10 la potencia.</figcaption>
+</figure>
 
 <div class="db-rule-grid">
   <div class="db-rule-card">
@@ -261,15 +273,22 @@
     | **LUFS** | Sonoridad percibida | Streaming (Spotify, YouTube) |
 
     !!! tip "No mezcles las referencias"
-        0 dB SPL es el umbral de audición (silencio casi absoluto). 0 dBFS es el máximo nivel digital posible antes de distorsión (lo más fuerte que permite el sistema). Son escalas completamente distintas — la confusión es una fuente frecuente de errores en estudiantes principiantes.
+        0 dB SPL corresponde al nivel de referencia de 20 µPa, cercano al umbral de audición en condiciones ideales. 0 dBFS, en cambio, es el **techo digital**. Son escalas completamente distintas.
+
+    <figure markdown="span">
+      ![Comparación visual entre dB SPL y dBFS](../../../img/db_spl_vs_dbfs.svg)
+      <figcaption>**Dos escalas con referencias opuestas.** En dB SPL partimos de una referencia física baja; en dBFS, 0 está en el techo digital.</figcaption>
+    </figure>
+
+    > **Analogía útil:** imagina dos ascensores. En **dB SPL** subes desde una referencia baja; en **dBFS** bajas desde el techo digital hacia −∞.
 
     **¿Qué tipo de dB ves en el mezclador? dBFS**
 
-    Cuando abrís la DAW (Pro Tools, Logic, Ableton), los **faders y medidores usan dBFS**, no dB SPL. La escala funciona **al revés** de lo que uno espera:
+    Cuando abres la DAW (Pro Tools, Logic, Ableton), los **faders y medidores usan dBFS**, no dB SPL. La escala funciona **al revés** de lo que uno espera:
 
     | Valor | Significado en dBFS |
     |---|---|
-    | **0 dBFS** | Techo digital — si lo pasás, la señal se recorta (*clipping*) |
+    | **0 dBFS** | Techo digital — si lo superas, la señal se recorta (*clipping*) |
     | −6 dBFS | Nivel alto, con poco margen |
     | −12 dBFS | Nivel cómodo |
     | −18 dBFS | **≈ 0 VU en consola analógica** — referencia clásica de trabajo |
@@ -315,6 +334,13 @@
     **El fader: ¿por qué +6 dB arriba y −∞ abajo?**
 
     El fader es un **multiplicador**, no un generador de sonido. Su posición en dB indica el factor por el que multiplica la señal:
+
+    <figure markdown="span">
+      ![Fader en dB y factor lineal](../../../img/db_fader_factores.svg)
+      <figcaption>**El fader como multiplicador.** 0 dB = ×1, −6 dB ≈ ×0.5, −12 dB ≈ ×0.25 y −∞ dB = ×0.</figcaption>
+    </figure>
+
+    > **Analogía útil:** mover el fader no “añade decibeles” como si fueran objetos; cambia el **factor de multiplicación** aplicado a la señal.
 
     | Posición | Factor | Efecto |
     |---|---|---|
