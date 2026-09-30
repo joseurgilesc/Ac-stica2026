@@ -1,5 +1,10 @@
 # Sesión 5: Logaritmos y decibeles
 
+**Cómo transformar relaciones enormes en una escala útil para audio y acústica**
+
+!!! abstract "Idea central de la sesión"
+    No empezaremos memorizando fórmulas. Primero veremos **por qué necesitamos una escala logarítmica**, después qué significa multiplicar por ×2, ×10 o ×100 y, finalmente, cómo esas relaciones se convierten en decibeles.
+
 ---
 
 ??? info "Unidades y símbolos (glosario de referencia)"
@@ -27,12 +32,23 @@
 
     El oído humano tiene un rango dinámico extraordinario. La presión sonora más tenue que podemos detectar (umbral de audición) es de aproximadamente **20 µPa**. El sonido más fuerte que podemos tolerar sin dolor (umbral de dolor) ronda los **20,000,000 µPa** (20 Pa). 
 
-    Eso es una relación de **1,000,000 a 1** — seis órdenes de magnitud. Si intentáramos graficar esto en una escala lineal, el umbral de audición sería invisible. Peor aún: el oído no percibe los cambios de presión de forma lineal, sino **logarítmica**.
+    Eso es una relación de **1,000,000 a 1**. En una escala lineal, el valor pequeño prácticamente desaparecería frente al grande. El decibel resuelve justamente ese problema: convierte **razones multiplicativas** en una escala compacta.
 
     <figure markdown="span">
-      ![Fig. 2-1: Presión sonora RMS y nivel de presión sonora](../../../img/presion_rms_y_nivel_sonoro.svg)
-      <figcaption>**Fig. 2-1** — Presión sonora RMS en escala logarítmica y nivel de presión sonora en decibelios, referido a 20 micropascales. La escala logarítmica comprime un rango enorme de presiones en valores manejables.</figcaption>
+      ![Fig. 2-1: Presión sonora y nivel de presión sonora](../../../img/presion_rms_y_nivel_sonoro.svg)
+      <figcaption>**Fig. 2-1 — De presión a dB SPL.** Cada vez que la presión aumenta ×10, el nivel aumenta +20 dB. Así, un rango físico gigantesco puede representarse de forma manejable.</figcaption>
     </figure>
+
+    !!! tip "Mira primero el patrón"
+        Antes de pensar en logaritmos, observa esto:
+
+        - 20 µPa → 0 dB SPL
+        - 200 µPa → 20 dB SPL
+        - 2 mPa → 40 dB SPL
+        - 20 mPa → 60 dB SPL
+        - 0.2 Pa → 80 dB SPL
+
+        La presión se multiplica por **10** en cada paso, pero el nivel solo aumenta **20 dB**.
 
     [🎛️ **Abrir laboratorio interactivo — La regla que se comprime**](../../../simulacion/logaritmos-decibeles.html){ .md-button }
 
@@ -40,16 +56,16 @@
 
     ### La intuición logarítmica
 
-    El oído percibe **razones**, no diferencias:
+    Para entender los dB conviene pensar en **razones**, no en diferencias absolutas:
 
-    | Cambio físico | Percibido como | Relación |
-    |---|---|---|
-    | De 20 a 40 µPa | «El doble de fuerte» (aproximadamente) | ×2 en presión |
-    | De 20 a 200 µPa | «Como 10 veces más» | ×10 en presión |
-    | De 20 a 2,000 µPa | «Muchísimo más fuerte» | ×100 |
-    | De 20 a 20,000,000 µPa | Dolor | ×1,000,000 |
+    | Cambio físico | Relación |
+    |---|---:|
+    | 20 → 40 µPa | ×2 en presión |
+    | 20 → 200 µPa | ×10 en presión |
+    | 20 → 2,000 µPa | ×100 en presión |
+    | 20 → 20,000,000 µPa | ×1,000,000 |
 
-    Esto significa que un incremento de 100 µPa suena muy distinto si partimos del umbral (20 → 120 µPa, ×6) que si partimos de un nivel alto (20,000 → 20,100 µPa, ×1.005). **El contexto importa — como en la música.**
+    Un aumento fijo de 100 µPa no representa el mismo cambio relativo en todos los niveles. Por eso una escala basada en **proporciones** resulta mucho más útil que una escala puramente lineal.
 
 ???+ note "Repaso rápido de logaritmos"
 
@@ -155,6 +171,48 @@
 
 ### Reglas prácticas de dB que debés saber
 
+<div class="db-rule-grid">
+  <div class="db-rule-card">
+    <strong>+3 dB</strong>
+    <span class="db-rule-main">×2 potencia</span>
+    <span>×1.41 presión</span>
+  </div>
+  <div class="db-rule-card">
+    <strong>+6 dB</strong>
+    <span class="db-rule-main">×2 presión</span>
+    <span>×4 potencia</span>
+  </div>
+  <div class="db-rule-card">
+    <strong>+10 dB</strong>
+    <span class="db-rule-main">×10 potencia</span>
+    <span>×3.16 presión</span>
+  </div>
+</div>
+
+!!! danger "La confusión que debes evitar"
+    **+3 dB, +6 dB y +10 dB no significan lo mismo.**
+
+    - **+3 dB** → duplica la **potencia/intensidad**.
+    - **+6 dB** → duplica la **presión/amplitud**.
+    - **+10 dB** → multiplica ×10 la potencia y suele representar un cambio perceptivo importante, pero la percepción depende del contenido, frecuencia y contexto.
+
+<div class="db-listen-lab">
+  <h4>🎧 Escucha una atenuación en dB</h4>
+  <p>Todos los botones reproducen el mismo tono de 440 Hz. El nivel inicial está limitado para que la demostración sea cómoda.</p>
+  <div class="audio-controls">
+    <button type="button" class="audio-btn" data-db-demo="0">▶ 0 dB</button>
+    <button type="button" class="audio-btn" data-db-demo="-3">▶ −3 dB</button>
+    <button type="button" class="audio-btn" data-db-demo="-6">▶ −6 dB</button>
+    <button type="button" class="audio-btn" data-db-demo="-12">▶ −12 dB</button>
+  </div>
+  <p><strong>Nivel seleccionado:</strong> <span data-db-demo-readout>0 dB (referencia)</span></p>
+</div>
+
+!!! tip "Qué escuchar"
+    - **−3 dB:** cambio pequeño.
+    - **−6 dB:** la amplitud queda aproximadamente a la mitad.
+    - **−12 dB:** la amplitud queda aproximadamente a una cuarta parte.
+
 | Cambio en dB | ¿Qué significa en potencia/intensidad? | ¿Qué significa en presión? | Percepción aproximada |
 |---|---|---|---|
 | +3 dB | ×2 | ×1.41 | Apenas perceptible |
@@ -179,7 +237,7 @@
     | 60 | Conversación normal a 1 m | Cómodo |
     | 70 | Aspiradora, tráfico urbano, TV con volumen normal | Ruidoso pero tolerable |
     | 80 | Calle con mucho tráfico, despertador, restaurante lleno | Muy ruidoso |
-    | 85 | **Límite de exposición laboral (8 h/día)** — fábrica, cortadora de césped | Riesgo de daño |
+    | 85 | Nivel donde la exposición prolongada requiere atención al tiempo de exposición | Riesgo acumulativo |
     | 90 | Tráfico de camión, sierra eléctrica | Daño acumulativo |
     | 100 | Concierto de rock, discoteca, martillo neumático | Incómodo, daño en <30 min |
     | 110 | Concierto en primera fila, taladro pesado | Muy incómodo, daño en <2 min |
@@ -188,7 +246,7 @@
     | 140+ | Arma de fuego, explosión | Daño inmediato e irreversible |
 
     !!! warning "Escucha segura"
-        La exposición a 85 dB SPL durante más de 8 horas diarias produce daño auditivo acumulativo. Por cada +3 dB, el tiempo de exposición segura se reduce a la **mitad**: a 88 dB → 4 horas, a 91 dB → 2 horas, a 100 dB → ~15 minutos. Los conciertos pueden superar los 110 dB — usá protección.
+        El riesgo auditivo depende tanto del **nivel** como del **tiempo de exposición**. Como regla conservadora, cada aumento de 3 dB reduce aproximadamente a la mitad el tiempo de exposición permitido en criterios ocupacionales que usan una tasa de intercambio de 3 dB. En entornos muy ruidosos conviene reducir el tiempo de exposición y utilizar protección auditiva.
 
 ???+ note "Niveles de referencia en producción musical"
 
@@ -226,7 +284,7 @@
 
     - Grabación: picos alrededor de **−18 dBFS** (equivale a 0 VU)
     - Mezcla: picos alrededor de **−6 dBFS**, dejando espacio al mastering
-    - Streaming: las plataformas normalizan a unos **−14 LUFS**
+    - Streaming: muchas plataformas aplican normalización de sonoridad; el objetivo exacto depende de la plataforma y del modo de reproducción
 
     !!! warning "El error del principiante"
         Muchos estudiantes suben el fader hasta que el meter toca 0 dBFS "para que suene fuerte". Eso solo genera distorsión digital (clipping) sin aportar calidad. En digital, el volumen final se controla en la **escucha** (bajando/subiendo el volumen del monitor en dB SPL), no pegando la señal al techo de dBFS.
