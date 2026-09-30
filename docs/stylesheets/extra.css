@@ -268,3 +268,62 @@
     gap: .35rem;
   }
 }
+
+
+/* Sesión 05: dB didáctico */
+.db-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: .8rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.db-rule-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 14px;
+  padding: 1rem;
+  background: var(--md-default-bg-color);
+  text-align: center;
+}
+
+.db-rule-card strong {
+  display: block;
+  font-size: 1.55rem;
+  color: #249D8F;
+  margin-bottom: .35rem;
+}
+
+.db-rule-card span {
+  display: block;
+}
+
+.db-rule-main {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: .2rem;
+}
+
+.db-listen-lab {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 4px solid #249D8F;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0 1.3rem;
+  background: rgba(36,157,143,.06);
+}
+
+.db-listen-lab h4 {
+  margin-top: 0;
+}
+
+.db-listen-lab .audio-btn.active {
+  background: #249D8F;
+  color: white;
+  border-color: #249D8F;
+}
+
+@media (max-width: 700px) {
+  .db-rule-grid {
+    grid-template-columns: 1fr;
+  }
+}
