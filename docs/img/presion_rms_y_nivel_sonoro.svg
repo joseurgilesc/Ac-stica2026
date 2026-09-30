@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Presión sonora y nivel en decibelios</title>
+<desc id="desc">Comparación entre presión sonora en pascales y nivel de presión sonora en dB SPL desde el umbral de audición hasta niveles muy altos.</desc>
+<style>
+  .bg{fill:#f8fbfa}.axis{stroke:#263238;stroke-width:2}.grid{stroke:#cfd8dc;stroke-width:1}.teal{fill:#249D8F}.dark{fill:#263238}.muted{fill:#607d8b}.lab{font:22px system-ui,sans-serif}.small{font:18px system-ui,sans-serif}.big{font:700 30px system-ui,sans-serif}.title{font:700 34px system-ui,sans-serif}
+</style>
+<rect class="bg" width="1200" height="620" rx="24"/>
+<text x="60" y="62" class="title dark">De una escala enorme a una escala manejable</text>
+<text x="60" y="100" class="lab muted">Cada aumento de ×10 en presión añade +20 dB SPL.</text>
+
+<text x="80" y="162" class="big dark">Presión sonora</text>
+<text x="80" y="194" class="small muted">(escala logarítmica)</text>
+<text x="760" y="162" class="big dark">Nivel</text>
+<text x="760" y="194" class="small muted">dB SPL</text>
+
+<line x1="250" y1="220" x2="250" y2="545" class="axis"/>
+<line x1="790" y1="220" x2="790" y2="545" class="axis"/>
+
+<g class="small dark">
+  <text x="92" y="244">20 µPa</text><text x="822" y="244">0 dB</text>
+  <text x="92" y="294">200 µPa</text><text x="822" y="294">20 dB</text>
+  <text x="92" y="344">2 mPa</text><text x="822" y="344">40 dB</text>
+  <text x="92" y="394">20 mPa</text><text x="822" y="394">60 dB</text>
+  <text x="92" y="444">0.2 Pa</text><text x="822" y="444">80 dB</text>
+  <text x="92" y="494">2 Pa</text><text x="822" y="494">100 dB</text>
+  <text x="92" y="544">20 Pa</text><text x="822" y="544">120 dB</text>
+</g>
+
+<g>
+  <line x1="250" y1="238" x2="790" y2="238" class="grid"/>
+  <line x1="250" y1="288" x2="790" y2="288" class="grid"/>
+  <line x1="250" y1="338" x2="790" y2="338" class="grid"/>
+  <line x1="250" y1="388" x2="790" y2="388" class="grid"/>
+  <line x1="250" y1="438" x2="790" y2="438" class="grid"/>
+  <line x1="250" y1="488" x2="790" y2="488" class="grid"/>
+  <line x1="250" y1="538" x2="790" y2="538" class="grid"/>
+</g>
+
+<g class="teal">
+  <circle cx="250" cy="238" r="8"/><circle cx="790" cy="238" r="8"/>
+  <circle cx="250" cy="288" r="8"/><circle cx="790" cy="288" r="8"/>
+  <circle cx="250" cy="338" r="8"/><circle cx="790" cy="338" r="8"/>
+  <circle cx="250" cy="388" r="8"/><circle cx="790" cy="388" r="8"/>
+  <circle cx="250" cy="438" r="8"/><circle cx="790" cy="438" r="8"/>
+  <circle cx="250" cy="488" r="8"/><circle cx="790" cy="488" r="8"/>
+  <circle cx="250" cy="538" r="8"/><circle cx="790" cy="538" r="8"/>
+</g>
+
+<g class="small">
+  <rect x="340" y="248" width="360" height="46" rx="23" fill="#e0f2ef"/>
+  <text x="520" y="278" text-anchor="middle" class="dark">×10 presión = +20 dB</text>
+  <rect x="340" y="348" width="360" height="46" rx="23" fill="#e0f2ef"/>
+  <text x="520" y="378" text-anchor="middle" class="dark">×100 presión = +40 dB</text>
+  <rect x="340" y="448" width="360" height="46" rx="23" fill="#e0f2ef"/>
+  <text x="520" y="478" text-anchor="middle" class="dark">×1000 presión = +60 dB</text>
+</g>
+
+<text x="60" y="590" class="small muted">0 dB SPL no significa ausencia de sonido: significa que la presión es igual a la referencia de 20 µPa.</text>
+</svg>
