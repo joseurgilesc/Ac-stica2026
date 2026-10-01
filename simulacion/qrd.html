@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de difusores QRD</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    select { padding: 6px 10px; border: 1px solid #aab5c8; border-radius: 6px; font-size: 13px; font-family: inherit; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 12px 0; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .warn { color: #C0392B; font-weight: 700; font-size: 13px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Simulador de difusores QRD</h2>
+  <p class="lead">Secuencia s_n = n² mod p. Profundidad d_n = c·(n² mod p)/(2·f_diseño·p).</p>
+
+  <div class="row">
+    <label>Número primo p:</label>
+    <select id="pSel" style="min-width:100px">
+      <option value="7" selected>7</option>
+      <option value="11">11</option>
+      <option value="13">13</option>
+      <option value="17">17</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label>Frecuencia de diseño:</label>
+    <input type="range" id="fdesign" min="200" max="2000" value="500" step="10" style="flex:1 1 200px">
+    <span id="fdesignVal" style="font-weight:700">500 Hz</span>
+  </div>
+
+  <div class="row">
+    <label>Ancho de pozo:</label>
+    <input type="range" id="wwidth" min="1" max="10" value="3" step="0.1" style="flex:1 1 200px">
+    <span id="wwidthVal" style="font-weight:700">3.0 cm</span>
+  </div>
+
+  <div class="row">
+    <label>Número de periodos:</label>
+    <input type="range" id="periods" min="1" max="8" value="3" step="1" style="flex:1 1 200px">
+    <span id="periodsVal" style="font-weight:700">3</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Secuencia</div><div class="val" id="sSeq">—</div></div>
+    <div class="stat"><div class="lbl">Profundidad máxima</div><div class="val" id="sMaxDepth">—</div></div>
+    <div class="stat"><div class="lbl">Ancho del panel</div><div class="val" id="sWidth">—</div></div>
+    <div class="stat"><div class="lbl">d_mín (conservadora)</div><div class="val" id="sMinDist">—</div></div>
+  </div>
+
+  <p id="warnMsg" class="warn"></p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const c = 343;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 380);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  select('#fdesign').input(() => select('#fdesignVal').html(select('#fdesign').value() + ' Hz'));
+  select('#wwidth').input(() => select('#wwidthVal').html(Number(select('#wwidth').value()).toFixed(1) + ' cm'));
+  select('#periods').input(() => select('#periodsVal').html(select('#periods').value()));
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+
+  const p = Number(select('#pSel').value());
+  const fdesign = Number(select('#fdesign').value());
+  const wellW = Number(select('#wwidth').value()); // cm
+  const periods = Number(select('#periods').value());
+
+  // Sequence
+  const seq = [];
+  for (let n = 0; n < p; n++) seq.push((n * n) % p);
+  const maxResidue = Math.max(...seq);
+
+  // Depths
+  const depths = seq.map(s => c * s / (2 * fdesign * p)); // meters
+  const maxDepth = Math.max(...depths); // meters
+
+  const panelWidth = p * periods * (wellW / 100); // meters (no separators)
+  const minDist = 3 * c / fdesign; // meters
+
+  select('#sSeq').html(seq.join(', '));
+  select('#sMaxDepth').html((maxDepth * 100).toFixed(1) + ' cm');
+  select('#sWidth').html(panelWidth.toFixed(2) + ' m');
+  select('#sMinDist').html(minDist.toFixed(2) + ' m');
+
+  // Warnings
+  let warnings = [];
+  if (maxDepth > 0.30) warnings.push('⚠️ Profundidad máxima > 30 cm: difícil de construir.');
+  if (panelWidth > 2.0) warnings.push('⚠️ Panel muy ancho (> 2 m).');
+  if (wellW > 4.3) warnings.push('⚠️ Ancho de pozo > 4.3 cm: pierde difusión por encima de ~4 kHz.');
+  if (maxDepth * 100 > 25) warnings.push('⚠️ Profundidad > 25 cm: verifica la restricción de tu pared.');
+  select('#warnMsg').html(warnings.join(' '));
+
+  // ── Draw QRD lateral geometry ──
+  const baseY = height * 0.75;
+  const scale = Math.min(250 / (maxDepth * 100), 200); // px per meter of depth
+  const wellPx = map(wellW, 1, 10, 12, 70); // px per well
+  const totalWells = p * periods;
+  const totalPx = totalWells * wellPx;
+  const startX = Math.max(20, (width - totalPx) / 2);
+
+  // Base plate
+  fill(60, 70, 85);
+  noStroke();
+  rect(startX - 6, baseY - 4, totalPx + 12, 10, 3);
+
+  // Wells (drawn as vertical blocks; depth shown downward)
+  for (let i = 0; i < totalWells; i++) {
+    const s = seq[i % p];
+    const d = c * s / (2 * fdesign * p); // meters
+    const depthPx = d * scale;
+    const x = startX + i * wellPx;
+
+    // Well depth (dark, going down)
+    fill(36, 157, 143, 180);
+    noStroke();
+    rect(x, baseY + 4, wellPx - 1, depthPx, 2);
+
+    // Well divider (thin line)
+    stroke(120);
+    strokeWeight(1);
+    line(x, baseY - 4, x, baseY + 4 + depthPx);
+  }
+
+  // Labels
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(11);
+  text('Geometría lateral del QRD (profundidad hacia abajo)', width / 2, baseY + 40);
+
+  // Sequence labels under the first period
+  fill(90);
+  textSize(9);
+  for (let i = 0; i < p; i++) {
+    const x = startX + i * wellPx + wellPx / 2;
+    text(seq[i], x, baseY - 12);
+  }
+
+  // ── Title ──
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(13);
+  textStyle(BOLD);
+  text('p = ' + p + '  ·  f_diseño = ' + fdesign + ' Hz  ·  profundidad máxima = ' + (maxDepth * 100).toFixed(1) + ' cm  ·  d_mín ≈ ' + minDist.toFixed(2) + ' m', width / 2, 12);
+  textStyle(NORMAL);
+
+  // Depth scale note
+  fill(90);
+  textSize(9);
+  textAlign(LEFT, TOP);
+  text('Escala vertical: ' + (100 / scale).toFixed(0) + ' cm por píxel (aprox.)', 20, 20);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 380);
+}
+</script>
+</body>
+</html>

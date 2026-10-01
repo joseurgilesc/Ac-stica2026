@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ley de la masa — Pérdida por transmisión</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    select { padding: 6px 10px; border: 1px solid #aab5c8; border-radius: 6px; font-size: 13px; font-family: inherit; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .warn { color: #C0392B; font-size: 12px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Ley de la masa</h2>
+  <p class="lead">TL = 20·log₁₀(m_s·f) − 47. Aproximación teórica para una partición simple ideal.</p>
+
+  <div class="row">
+    <label>Material de referencia:</label>
+    <select id="matSel" style="min-width:180px">
+      <option value="9">Placa liviana (9 kg/m²)</option>
+      <option value="18" selected>Doble placa (18 kg/m²)</option>
+      <option value="15">Vidrio (15 kg/m²)</option>
+      <option value="25">Puerta pesada (25 kg/m²)</option>
+      <option value="180">Muro masivo (180 kg/m²)</option>
+      <option value="0">Personalizado</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label>Masa superficial m_s:</label>
+    <input type="range" id="mass" min="1" max="400" value="18" step="1" style="flex:1 1 200px">
+    <span id="massVal" style="font-weight:700">18 kg/m²</span>
+  </div>
+
+  <div class="row">
+    <label>Frecuencia:</label>
+    <input type="range" id="freq" min="0" max="100" value="50" step="1" style="flex:1 1 200px">
+    <span id="freqVal" style="font-weight:700">—</span>
+  </div>
+
+  <div class="row">
+    <label>Nivel fuente:</label>
+    <input type="range" id="lvl" min="70" max="110" value="90" step="1" style="flex:1 1 200px">
+    <span id="lvlVal" style="font-weight:700">90 dB</span>
+  </div>
+
+  <div class="row">
+    <button id="btnDoubleMass">✕2 Masa</button>
+    <button id="btnDoubleFreq">✕2 Frecuencia</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">TL teórica</div><div class="val" id="sTL">—</div></div>
+    <div class="stat"><div class="lbl">τ (transmisión)</div><div class="val" id="sTau">—</div></div>
+    <div class="stat"><div class="lbl">Energía transmitida</div><div class="val" id="sPct">—</div></div>
+    <div class="stat"><div class="lbl">Nivel al otro lado</div><div class="val" id="sOther">—</div></div>
+  </div>
+
+  <p class="warn">⚠️ No considera resonancias, coincidencia, rigidez ni flanqueo. Es TL teórica por banda, no STC certificado.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 320);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  select('#mass').input(() => { select('#massVal').html(select('#mass').value() + ' kg/m²'); select('#matSel').value('0'); });
+  select('#freq').input(() => select('#freqVal').html(freqDisplay() + ' Hz'));
+  select('#lvl').input(() => select('#lvlVal').html(select('#lvl').value() + ' dB'));
+
+  select('#matSel').changed(() => {
+    const v = Number(select('#matSel').value());
+    if (v > 0) { select('#mass').value(v); select('#massVal').html(v + ' kg/m²'); }
+  });
+
+  select('#btnDoubleMass').mousePressed(() => {
+    select('#mass').value(Math.min(400, Number(select('#mass').value()) * 2));
+    select('#massVal').html(select('#mass').value() + ' kg/m²');
+    select('#matSel').value('0');
+  });
+  select('#btnDoubleFreq').mousePressed(() => {
+    select('#freq').value(Math.min(100, Number(select('#freq').value()) + 16.6));
+    select('#freqVal').html(freqDisplay() + ' Hz');
+  });
+
+  select('#freqVal').html(freqDisplay() + ' Hz');
+  textFont('system-ui');
+}
+
+function freqDisplay() {
+  const f = 31.5 * Math.pow(8000 / 31.5, select('#freq').value() / 100);
+  return Math.round(f);
+}
+
+function draw() {
+  background(255);
+
+  const ms = Number(select('#mass').value());
+  const f = 31.5 * Math.pow(8000 / 31.5, select('#freq').value() / 100);
+  const Lsrc = Number(select('#lvl').value());
+
+  const TL = 20 * Math.log10(ms * f) - 47;
+  const tau = Math.pow(10, -TL / 10);
+  const pct = tau * 100;
+  const Lother = Lsrc - TL;
+
+  select('#sTL').html(TL.toFixed(1) + ' dB');
+  select('#sTau').html(tau.toExponential(2));
+  select('#sPct').html((pct >= 0.01 ? pct.toFixed(2) : pct.toExponential(1)) + ' %');
+  select('#sOther').html(Lother.toFixed(1) + ' dB');
+
+  const gx = 55, gy = 30;
+  const gw = width - 70, gh = 220;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 10, gy - 10, gw + 20, gh + 20, 8);
+
+  stroke(210); strokeWeight(0.5);
+  for (let tl = 0; tl <= 80; tl += 10) {
+    let y = map(tl, 0, 80, gy + gh, gy);
+    line(gx, y, gx + gw, y);
+    fill(130); noStroke();
+    textAlign(RIGHT, CENTER); textSize(9);
+    text(tl + ' dB', gx - 6, y);
+  }
+  const freqs = [31.5, 63, 125, 250, 500, 1000, 2000, 4000, 8000];
+  fill(130); textAlign(CENTER, TOP); textSize(9);
+  for (let ff of freqs) {
+    let x = map(Math.log10(ff), Math.log10(31.5), Math.log10(8000), gx, gx + gw);
+    stroke(210); strokeWeight(0.5);
+    line(x, gy + gh, x, gy + gh + 4);
+    noStroke();
+    text(ff >= 1000 ? (ff/1000) + 'k' : ff, x, gy + gh + 6);
+  }
+
+  stroke(TEAL[0], TEAL[1], TEAL[2]);
+  strokeWeight(2.5);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let ff = 31.5 * Math.pow(8000 / 31.5, i / 200);
+    let tl = 20 * Math.log10(ms * ff) - 47;
+    let x = map(Math.log10(ff), Math.log10(31.5), Math.log10(8000), gx, gx + gw);
+    let y = map(constrain(tl, 0, 80), 0, 80, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  let cx = map(Math.log10(f), Math.log10(31.5), Math.log10(8000), gx, gx + gw);
+  let cy = map(constrain(TL, 0, 80), 0, 80, gy + gh, gy);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(cx, cy, 9);
+
+  for (let rm of [9, 18, 25, 180]) {
+    if (rm === ms) continue;
+    stroke(150, 150, 150, 60);
+    strokeWeight(1);
+    noFill();
+    beginShape();
+    for (let i = 0; i <= 200; i++) {
+      let ff = 31.5 * Math.pow(8000 / 31.5, i / 200);
+      let tl = 20 * Math.log10(rm * ff) - 47;
+      let x = map(Math.log10(ff), Math.log10(31.5), Math.log10(8000), gx, gx + gw);
+      let y = map(constrain(tl, 0, 80), 0, 80, gy + gh, gy);
+      vertex(x, y);
+    }
+    endShape();
+  }
+
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  text('TL vs frecuencia (m_s = ' + ms + ' kg/m², f = ' + Math.round(f) + ' Hz)', 20, 16);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 320);
+}
+</script>
+</body>
+</html>
