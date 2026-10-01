@@ -124,23 +124,113 @@
 
     ### ¿Por qué 10 log para potencia y 20 log para presión?
 
-    La potencia es proporcional al **cuadrado** de la presión (\(P \propto p^2\)). Por propiedad de logaritmos:
+    La idea más importante es esta:
+
+    > **La potencia sonora depende del cuadrado de la presión sonora.**
 
     \[
-    10 \cdot \log_{10}\left(\frac{p^2}{p_0^2}\right) = 10 \cdot \log_{10}\left(\left[\frac{p}{p_0}\right]^2\right) = 20 \cdot \log_{10}\left(\frac{p}{p_0}\right)
+    \boxed{P \propto p^2}
     \]
 
-    Por eso la fórmula para presión sonora usa el factor 20:
+    Eso significa que, si la **presión se duplica**, la potencia no se duplica:
 
     \[
-    \boxed{\text{dB SPL} = 20 \cdot \log_{10}\left(\frac{p}{p_0}\right) \quad \text{donde } p_0 = 20\ \mu\text{Pa}}
+    \text{presión} \times 2
+    \quad\Longrightarrow\quad
+    \text{potencia} \times 4
     \]
 
-    | Tipo de nivel | Fórmula | Referencia (\(P_0\) o \(p_0\)) |
+    porque:
+
+    \[
+    2^2 = 4
+    \]
+
+    #### Paso 1 — Potencia: usamos 10 log
+
+    Cuando comparamos directamente **potencias o intensidades**, usamos:
+
+    \[
+    \boxed{10\log_{10}}
+    \]
+
+    #### Paso 2 — Presión: aparece el cuadrado
+
+    La presión está relacionada con la potencia mediante \(p^2\). Por eso:
+
+    \[
+    10\log_{10}(p^2)
+    \]
+
+    El exponente 2 sale delante del logaritmo:
+
+    \[
+    10 \times 2 = 20
+    \]
+
+    y obtenemos:
+
+    \[
+    \boxed{20\log_{10}}
+    \]
+
+    !!! success "La regla para recordar"
+        **Potencia o intensidad → 10 log**
+
+        **Presión o amplitud → 20 log**
+
+        El **20** aparece porque la potencia depende del **cuadrado de la presión**.
+
+    #### El ejemplo maestro
+
+    Si duplicamos la presión:
+
+    \[
+    \text{presión} \times 2
+    \]
+
+    la potencia se hace cuatro veces mayor:
+
+    \[
+    \text{potencia} \times 4
+    \]
+
+    Ambas formas deben dar el mismo cambio en dB:
+
+    \[
+    20\log_{10}(2) \approx 6\ \text{dB}
+    \]
+
+    \[
+    10\log_{10}(4) \approx 6\ \text{dB}
+    \]
+
+    Por eso:
+
+    \[
+    \boxed{\text{presión} \times 2
+    \;=\;
+    \text{potencia} \times 4
+    \;=\;
+    +6\ \text{dB}}
+    \]
+
+    ### ¿Dónde se usa cada medición en la práctica?
+
+    | Qué medimos | Escala habitual | ¿Con qué? | Aplicaciones comunes |
+    |---|---|---|---|
+    | **Presión sonora** | **dB SPL** — \(20\log\) | Sonómetro o micrófono calibrado | Medir el nivel en una sala, aula, concierto, estudio, calle o puesto de trabajo; ajustar monitores y evaluar exposición al ruido |
+    | **Intensidad sonora** | **dB SIL** — \(10\log\) | Sonda de intensidad | Estudiar hacia dónde fluye la energía sonora, localizar fuentes de ruido y analizar maquinaria |
+    | **Potencia sonora** | **dB SWL** — \(10\log\) | Se obtiene mediante procedimientos acústicos normalizados | Comparar cuánto sonido emite una máquina, ventilador, altavoz u otra fuente, independientemente del punto concreto de escucha |
+
+    !!! tip "En la vida cotidiana, ¿qué medirás más?"
+        Lo más habitual es medir **presión sonora en dB SPL** con un sonómetro. La **potencia sonora** se usa más en ingeniería, laboratorios y fichas técnicas de fuentes acústicas.
+
+    | Tipo de nivel | Fórmula | Referencia |
     |---|---|---|
-    | **SPL** (presión sonora) | \(20\log_{10}(p / p_0)\) | \(p_0 = 20\) µPa |
-    | **SIL** (intensidad sonora) | \(10\log_{10}(I / I_0)\) | \(I_0 = 10^{-12}\) W/m² |
-    | **SWL** (potencia sonora) | \(10\log_{10}(W / W_0)\) | \(W_0 = 10^{-12}\) W |
+    | **SPL** — presión sonora | \(20\log_{10}(p / p_0)\) | \(p_0 = 20\) µPa |
+    | **SIL** — intensidad sonora | \(10\log_{10}(I / I_0)\) | \(I_0 = 10^{-12}\) W/m² |
+    | **SWL** — potencia sonora | \(10\log_{10}(W / W_0)\) | \(W_0 = 10^{-12}\) W |
 
 ???+ note "Ejemplos numéricos paso a paso"
 
