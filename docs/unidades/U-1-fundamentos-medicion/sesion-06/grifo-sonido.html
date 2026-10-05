@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grifo y medición sonora</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+<style>
+  *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0f172a;color:#e5e7eb}
+  .wrap{padding:14px}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  label{font-size:14px}.value{font-weight:700;min-width:48px;display:inline-block}
+  input[type=range]{width:220px}.modes{display:flex;gap:6px;flex-wrap:wrap}
+  button{border:1px solid #475569;background:#1e293b;color:#e5e7eb;border-radius:7px;padding:7px 10px;cursor:pointer}
+  button.active{background:#e2e8f0;color:#0f172a}.note{font-size:12px;color:#94a3b8;margin-top:8px}
+  #canvas-holder canvas{display:block;width:100%!important;height:auto!important;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="controls">
+    <label>Apertura del grifo: <span id="v" class="value">60%</span>
+      <input id="open" type="range" min="0" max="100" value="60">
+    </label>
+    <div class="modes" aria-label="Tipo de lectura">
+      <button data-mode="RMS" class="active">RMS</button>
+      <button data-mode="Peak">Peak</button>
+      <button data-mode="Fast">Fast</button>
+      <button data-mode="Slow">Slow</button>
+    </div>
+  </div>
+  <div id="canvas-holder"></div>
+  <div class="note">Analogía visual: el agua ayuda a diferenciar magnitudes, pero el sonido no transporta partículas desde la fuente hasta el oyente.</div>
+</div>
+<script>
+let openness=0.6, mode='RMS', displayLevel=0.6, phase=0;
+const slider=document.getElementById('open'), out=document.getElementById('v');
+slider.addEventListener('input',()=>{openness=slider.value/100;out.textContent=slider.value+'%';});
+document.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); mode=b.dataset.mode;
+}));
+function setup(){
+  const c=createCanvas(900,430); c.parent('canvas-holder'); pixelDensity(1);
+  textFont('system-ui'); strokeCap(ROUND);
+}
+function windowResized(){
+  const w=Math.min(900,document.getElementById('canvas-holder').clientWidth);
+  resizeCanvas(w,Math.max(330,w*0.478));
+}
+function draw(){
+  const sx=width/900, sy=height/430;
+  push(); scale(sx,sy);
+  background(15,23,42); phase+=0.05;
+
+  // faucet / source
+  noStroke(); fill(148,163,184);
+  rect(55,75,120,28,10); rect(145,75,30,80,10); rect(145,135,85,24,9);
+  fill(203,213,225); rect(85,48,60,14,7); rect(111,55,10,28,4);
+  fill(226,232,240); textSize(18); textStyle(BOLD); text('FUENTE',55,35);
+  textSize(14); textStyle(NORMAL); fill(148,163,184); text('SWL · potencia emitida',55,190);
+
+  // water jet / acoustic energy
+  const jet=10+42*openness;
+  noStroke();
+  for(let i=0;i<22;i++){
+    const x=230+i*22, spread=8+i*1.7, wobble=Math.sin(phase+i*.55)*3;
+    fill(56,189,248,120);
+    ellipse(x,147+wobble,18,Math.max(3,jet*(1-i/45)+spread*.25));
+  }
+
+  // intensity section
+  stroke(34,211,238); strokeWeight(3); noFill(); rect(430,85,8,125);
+  noStroke(); fill(226,232,240); textSize(16); textStyle(BOLD); text('SIL',395,235);
+  textSize(13); textStyle(NORMAL); fill(148,163,184); text('energía / área',370,255);
+
+  // microphone / pressure point
+  stroke(226,232,240); strokeWeight(5); fill(30,41,59); ellipse(700,145,34,50);
+  line(700,170,700,213); line(675,214,725,214);
+  noStroke(); fill(226,232,240); textSize(16); textStyle(BOLD); text('SPL',680,240);
+  textSize(13); textStyle(NORMAL); fill(148,163,184); text('presión en este punto',640,260);
+
+  // wave rings around mic
+  noFill(); stroke(125,211,252,90); strokeWeight(2);
+  for(let r=1;r<=3;r++){arc(700,145,55+r*28,55+r*28,-HALF_PI,HALF_PI);}
+
+  // temporal meter
+  const instant=openness*(0.55+0.45*Math.abs(Math.sin(phase*1.7)));
+  if(mode==='Peak') displayLevel=Math.max(displayLevel*.96,instant);
+  else if(mode==='Fast') displayLevel=lerp(displayLevel,instant,.25);
+  else if(mode==='Slow') displayLevel=lerp(displayLevel,instant,.045);
+  else displayLevel=lerp(displayLevel,openness*.707,.10);
+
+  fill(30,41,59); stroke(71,85,105); strokeWeight(1); rect(60,305,780,75,10);
+  noStroke(); fill(148,163,184); textSize(13); text(mode,72,328);
+  fill(51,65,85); rect(72,342,650,16,8);
+  fill(74,222,128); rect(72,342,650*constrain(displayLevel,0,1),16,8);
+  fill(226,232,240); textSize(22); textStyle(BOLD); text(Math.round(displayLevel*100)+'',748,360);
+  textSize(12); textStyle(NORMAL); fill(148,163,184); text('respuesta temporal',72,398);
+
+  // top relation labels
+  fill(125,211,252); textSize(13); textStyle(BOLD);
+  text('lo que emite',95,285); text('lo que atraviesa',380,285); text('lo que medimos',650,285);
+  pop();
+}
+</script>
+</body>
+</html>
