@@ -20,18 +20,20 @@
     | <a id="s"></a>**s** | Segundo | Tiempo | — |
     | <a id="log"></a>**log₁₀** | Logaritmo en base 10 | Exponente al que hay que elevar 10 para obtener el número | log₁₀(100) = 2 |
 
-???+ note "SPL, SIL y SWL: tres formas de medir el sonido"
+???+ note "El grifo: tres formas de medir el sonido"
 
-    En la sesión anterior aprendimos que el decibel es una relación logarítmica. Pero relaciona **dos cantidades del mismo tipo** — y hay tres magnitudes físicas distintas que podemos medir en un campo sonoro:
+    Imaginá un **grifo abierto**. La misma situación puede describirse desde tres preguntas distintas:
 
-    | Nivel | Símbolo | ¿Qué mide? | Analogía |
-    |---|---|---|---|
-    | **Presión sonora** | dB SPL | La presión que ejerce la onda sobre una superficie (el tímpano, un micrófono) | Voltaje en un circuito — lo que «sentís» en un punto |
-    | **Intensidad sonora** | dB SIL | La energía que atraviesa un metro cuadrado por segundo | Corriente — cuánta energía fluye |
-    | **Potencia sonora** | dB SWL | La energía total que emite la fuente por segundo | La potencia nominal de un amplificador — independiente de la distancia |
+    | Acústica | Grifo | Pregunta |
+    |---|---|---|
+    | **SWL · Potencia sonora** | Capacidad total del grifo para entregar agua | ¿Cuánta energía emite la fuente? |
+    | **SIL · Intensidad sonora** | Agua que atraviesa una superficie | ¿Cuánta energía pasa por aquí? |
+    | **SPL · Presión sonora** | Fuerza del agua sobre la mano en un punto | ¿Qué presión llega a este punto? |
 
-    !!! info "La presión es lo que medimos, la potencia es lo que emite la fuente"
-        En la práctica, casi siempre trabajamos con dB SPL porque los micrófonos y sonómetros miden presión. La intensidad (SIL) se usa en aplicaciones especializadas (mapeo acústico, arrays de intensidad). La potencia (SWL) es una propiedad de la fuente — no cambia con la distancia ni con la sala. Si un altavoz emite 100 dB SWL, emite esa potencia esté a 1 m o a 100 m.
+    **Idea clave:** **fuente → energía que se distribuye → punto de medición**.
+
+    !!! tip "En la práctica"
+        El sonómetro mide principalmente **SPL**, porque su micrófono responde a la presión sonora en el lugar donde está colocado. La potencia (**SWL**) pertenece a la fuente; la intensidad (**SIL**) describe el flujo de energía por unidad de área.
 
 ???+ note "El Nivel de Presión Sonora (SPL) en detalle"
 
@@ -63,7 +65,7 @@
         !!! tip "Relación con el pico"
             Para un tono puro (sinusoidal): \(\text{RMS} = \text{pico} / \sqrt{2} \approx \text{pico} \times 0.707\). Una onda que pica a 1 Pa tiene RMS ≈ 0.707 Pa.
 
-        El SPL se calcula con **presión RMS** porque el RMS es proporcional a la **energía** del sonido. Un sonómetro no dice "la presión picó a X", dice "la presión efectiva promedio fue Y" — que es lo que el oído y la salud auditiva realmente perciben.
+        Para calcular el SPL continuo se usa normalmente **presión RMS**, porque representa el valor efectivo de una señal variable. Un sonómetro también puede mostrar **Peak** cuando interesa detectar el máximo instantáneo.
 
     ### ¿Por qué 20 µPa?
 
@@ -204,16 +206,16 @@
 
 ---
 
-## Simulación interactiva
+## Simulación interactiva: el grifo y el sonido
 
-Modificá los parámetros y activá/desactivá capas para analizar cada fenómeno:
+Abrí y cerrá el grifo y observá cómo cambia la lectura:
 
-- **Desplazamiento** — movimiento sinusoidal de las partículas (línea continua)
-- **Presión** — derivada de la posición, máxima en los cruces por cero (línea punteada)
-- **Partículas** — puntos coloreados por zona de compresión o rarefacción
-- **Densidad** — fondo graduado según concentración molecular
+- **SWL** → lo que emite la fuente.
+- **SIL** → lo que atraviesa una superficie.
+- **SPL** → lo que medimos en un punto.
+- **RMS / Peak / Fast / Slow** → distintas formas de observar una señal que cambia en el tiempo.
 
-<iframe src="../sesion-02/simulacion.html" width="100%" height="400" style="border: none; border-radius: 8px;"></iframe>
+<iframe src="grifo-sonido.html" width="100%" height="470" style="border:none;border-radius:8px;"></iframe>
 
 ---
 
