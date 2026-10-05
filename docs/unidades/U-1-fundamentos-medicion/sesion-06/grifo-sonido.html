@@ -68,10 +68,22 @@ function draw(){
     ellipse(x,147+wobble,18,Math.max(3,jet*(1-i/45)+spread*.25));
   }
 
-  // intensity section
-  stroke(34,211,238); strokeWeight(3); noFill(); rect(430,85,8,125);
-  noStroke(); fill(226,232,240); textSize(16); textStyle(BOLD); text('SIL',395,235);
-  textSize(13); textStyle(NORMAL); fill(148,163,184); text('energía / área',370,255);
+  // intensity section: measurement window crossed by energy flow
+  const gateX=438, gateY=88, gateH=118;
+  noStroke(); fill(34,211,238,25); rect(gateX-12,gateY,24,gateH,5);
+  stroke(34,211,238); strokeWeight(3); noFill(); rect(gateX-12,gateY,24,gateH,5);
+  stroke(125,211,252); strokeWeight(2);
+  for(let a=0;a<4;a++){
+    const yy=108+a*26;
+    line(gateX-42,yy,gateX+42,yy);
+    line(gateX+42,yy,gateX+31,yy-6);
+    line(gateX+42,yy,gateX+31,yy+6);
+  }
+  noStroke(); fill(226,232,240); textSize(16); textStyle(BOLD); text('SIL · INTENSIDAD',350,232);
+  textSize(13); textStyle(NORMAL); fill(148,163,184);
+  text('energía que atraviesa una superficie',326,252);
+  fill(125,211,252); textStyle(BOLD); text('W/m²',416,273);
+  textStyle(NORMAL); fill(148,163,184); text('misma área: más flujo = mayor intensidad',330,292);
 
   // microphone / pressure point
   stroke(226,232,240); strokeWeight(5); fill(30,41,59); ellipse(700,145,34,50);
@@ -97,9 +109,19 @@ function draw(){
   fill(226,232,240); textSize(22); textStyle(BOLD); text(Math.round(displayLevel*100)+'',748,360);
   textSize(12); textStyle(NORMAL); fill(148,163,184); text('respuesta temporal',72,398);
 
-  // top relation labels
+  // moving energy markers crossing the SIL window
+  noStroke();
+  const dots=Math.max(2,Math.round(4+openness*10));
+  for(let i=0;i<dots;i++){
+    const px=230+((phase*55+i*53)%450);
+    const py=147+Math.sin(i*1.7+phase*.8)*(8+20*openness);
+    fill(125,211,252,210);
+    circle(px,py,5+openness*3);
+  }
+
+  // relation labels
   fill(125,211,252); textSize(13); textStyle(BOLD);
-  text('lo que emite',95,285); text('lo que atraviesa',380,285); text('lo que medimos',650,285);
+  text('lo que emite',95,285); text('flujo por superficie',370,312); text('lo que medimos',650,285);
   pop();
 }
 </script>
