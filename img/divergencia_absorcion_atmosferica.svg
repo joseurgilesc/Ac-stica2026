@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title description">
+  <title id="title">Divergencia geométrica y absorción atmosférica</title>
+  <desc id="description">Nivel de presión sonora en función de la distancia para distintas frecuencias, mostrando el efecto combinado de la divergencia geométrica y la absorción atmosférica.</desc>
+  <defs>
+    <style>
+      .title { font-family: Inter, Arial, sans-serif; font-size: 30px; font-weight: 700; fill: #173B63; }
+      .subtitle { font-family: Inter, Arial, sans-serif; font-size: 17px; fill: #587086; }
+      .axis-label { font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 600; fill: #173B63; }
+      .tick { font-family: Inter, Arial, sans-serif; font-size: 15px; fill: #445B70; }
+      .legend { font-family: Inter, Arial, sans-serif; font-size: 16px; font-weight: 600; }
+      .note { font-family: Inter, Arial, sans-serif; font-size: 15px; fill: #587086; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#173B63"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="700" fill="#FFFFFF"/>
+
+  <text x="600" y="52" class="title" text-anchor="middle">Nivel sonoro vs. distancia a diferentes frecuencias</text>
+  <text x="600" y="84" class="subtitle" text-anchor="middle">Efecto combinado de divergencia geométrica (−6 dB/duplicación) y absorción atmosférica · 20 °C, HR 40 %</text>
+
+  <!-- Plot: x = log10(d) 1..200 m, y = 30..100 dB -->
+  <!-- Horizontal grid every 10 dB -->
+  <g stroke="#D8E1E9" stroke-width="1">
+    <line x1="150" y1="120" x2="1050" y2="120"/>  <!-- 100 -->
+    <line x1="150" y1="177" x2="1050" y2="177"/>  <!-- 90 -->
+    <line x1="150" y1="234" x2="1050" y2="234"/>  <!-- 80 -->
+    <line x1="150" y1="291" x2="1050" y2="291"/>  <!-- 70 -->
+    <line x1="150" y1="349" x2="1050" y2="349"/>  <!-- 60 -->
+    <line x1="150" y1="406" x2="1050" y2="406"/>  <!-- 50 -->
+    <line x1="150" y1="463" x2="1050" y2="463"/>  <!-- 40 -->
+    <line x1="150" y1="520" x2="1050" y2="520"/>  <!-- 30 -->
+  </g>
+
+  <!-- Vertical grid: 1, 2, 5, 10, 20, 50, 100, 200 -->
+  <g stroke="#D8E1E9" stroke-width="1">
+    <line x1="150" y1="120" x2="150" y2="520"/>
+    <line x1="268" y1="120" x2="268" y2="520"/>
+    <line x1="424" y1="120" x2="424" y2="520"/>
+    <line x1="541" y1="120" x2="541" y2="520"/>
+    <line x1="659" y1="120" x2="659" y2="520"/>
+    <line x1="815" y1="120" x2="815" y2="520"/>
+    <line x1="933" y1="120" x2="933" y2="520"/>
+    <line x1="1050" y1="120" x2="1050" y2="520"/>
+  </g>
+
+  <!-- Axes -->
+  <g stroke="#173B63" stroke-width="2.5">
+    <line x1="150" y1="520" x2="1050" y2="520" marker-end="url(#arrow)"/>
+    <line x1="150" y1="520" x2="150" y2="120" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- X labels -->
+  <g class="tick" text-anchor="middle">
+    <text x="150" y="550">1</text>
+    <text x="268" y="550">2</text>
+    <text x="424" y="550">5</text>
+    <text x="541" y="550">10</text>
+    <text x="659" y="550">20</text>
+    <text x="815" y="550">50</text>
+    <text x="933" y="550">100</text>
+    <text x="1050" y="550">200</text>
+  </g>
+  <text x="600" y="580" class="axis-label" text-anchor="middle">Distancia (m) — escala logarítmica</text>
+
+  <!-- Y labels -->
+  <g class="tick" text-anchor="end">
+    <text x="138" y="124">100</text>
+    <text x="138" y="177">90</text>
+    <text x="138" y="234">80</text>
+    <text x="138" y="291">70</text>
+    <text x="138" y="349">60</text>
+    <text x="138" y="406">50</text>
+    <text x="138" y="463">40</text>
+    <text x="138" y="524">30</text>
+  </g>
+  <text x="58" y="320" class="axis-label" text-anchor="middle" transform="rotate(-90 58 320)">Nivel de presión sonora (dB SPL)</text>
+
+  <!-- Curves -->
+  <!-- 125 Hz (α=0.04): nearly pure inverse square -->
+  <polyline fill="none" stroke="#1A7A6F" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"
+    points="150,120 268,154 424,200 541,234 659,269 815,314 933,349 1050,383"/>
+  <text x="1058" y="383" class="legend" fill="#1A7A6F">125 Hz</text>
+
+  <!-- 1 kHz (α=0.32) -->
+  <polyline fill="none" stroke="#249D8F" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"
+    points="150,120 268,154 424,200 541,235 659,269 815,315 933,350 1050,387"/>
+  <text x="1058" y="387" class="legend" fill="#249D8F">1 kHz</text>
+
+  <!-- 4 kHz (α=2.7) -->
+  <polyline fill="none" stroke="#F39C12" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"
+    points="150,120 268,154 424,200 541,236 659,272 815,322 933,364 1050,414"/>
+  <text x="1058" y="414" class="legend" fill="#F39C12">4 kHz</text>
+
+  <!-- 8 kHz (α=8.0) -->
+  <polyline fill="none" stroke="#C0392B" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"
+    points="150,120 268,154 424,200 541,239 659,278 815,337 933,394 1050,474"/>
+  <text x="1058" y="474" class="legend" fill="#C0392B">8 kHz</text>
+
+  <!-- Separation zone annotation -->
+  <g stroke="#999" stroke-width="1" stroke-dasharray="5,3" opacity="0.6">
+    <line x1="815" y1="120" x2="815" y2="520"/>
+  </g>
+  <text x="815" y="110" class="note" fill="#999" text-anchor="middle">50 m — las curvas empiezan a separarse</text>
+
+  <!-- Difference bracket at 200 m -->
+  <g stroke="#C0392B" stroke-width="1.5">
+    <line x1="1075" y1="383" x2="1075" y2="474"/>
+    <line x1="1065" y1="383" x2="1085" y2="383"/>
+    <line x1="1065" y1="474" x2="1085" y2="474"/>
+  </g>
+  <text x="1095" y="430" class="note" fill="#C0392B" text-anchor="start">A 200 m,</text>
+  <text x="1095" y="448" class="note" fill="#C0392B" text-anchor="start">125 Hz vs 8 kHz</text>
+  <text x="1095" y="466" class="note" fill="#C0392B" text-anchor="start">difieren ~16 dB</text>
+
+  <text x="600" y="620" class="note" text-anchor="middle">Todas las curvas comparten la caída de −6 dB por duplicación de distancia. En agudos, la absorción atmosférica agrega una pérdida extra que crece con la distancia.</text>
+</svg>

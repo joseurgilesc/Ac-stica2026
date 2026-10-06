@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mezclador de fuentes — Suma de niveles sonoros</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #mixer { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 90px; font-weight: 600; }
+    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
+    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
+    .stat .val { font-weight: 700; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+    .highlight { background: #e6f7f3; border-left: 4px solid #249D8F; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+  </style>
+</head>
+<body>
+<div id="mixer">
+  <h2>Suma de dos fuentes sonoras</h2>
+  <p style="color:#526079">Observa cómo se superponen las ondas sinusoidales. Dos ondas en fase duplican la amplitud (+6 dB); dos ondas distintas suman energía (+3 dB).</p>
+
+  <div class="row">
+    <label>Fuente A:</label>
+    <input type="range" id="sliderA" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valA" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Fuente B:</label>
+    <input type="range" id="sliderB" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valB" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Modo:</label>
+    <button id="btnMode">Incoherente (frecuencias distintas)</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Diferencia ΔL</div><div class="val" id="diff">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Corrección</div><div class="val" id="corr">+3.0 dB</div></div>
+    <div class="stat highlight"><div class="lbl">Resultado</div><div class="val" id="exact">73.01 dB</div></div>
+  </div>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+const TEAL_DARK = [26, 122, 111];
+
+const F_A = 1.0;
+const F_B_COHERENT = 1.0;
+const F_B_INCOHERENT = 1.8;
+
+let sliderA, sliderB, btnMode;
+let coherent = false;
+let time = 0;
+
+function setup() {
+  const cw = min(860, windowWidth - 40);
+  const cnv = createCanvas(cw, 420);
+  cnv.parent('mixer');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  sliderA = select('#sliderA');
+  sliderB = select('#sliderB');
+  btnMode = select('#btnMode');
+
+  sliderA.input(() => { select('#valA').html(sliderA.value() + ' dB'); });
+  sliderB.input(() => { select('#valB').html(sliderB.value() + ' dB'); });
+
+  btnMode.mousePressed(() => {
+    coherent = !coherent;
+    btnMode.html(coherent ? 'Coherente (en fase)' : 'Incoherente (frecuencias distintas)');
+    btnMode.toggleClass('active', coherent);
+  });
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+  time += deltaTime * 0.001;
+
+  const LA = Number(sliderA.value());
+  const LB = Number(sliderB.value());
+
+  // Amplitudes (pressure), 70 dB = 1.0
+  const ampA = Math.pow(10, (LA - 70) / 20);
+  const ampB = Math.pow(10, (LB - 70) / 20);
+  const fB = coherent ? F_B_COHERENT : F_B_INCOHERENT;
+
+  // Resultado
+  const Lsum = coherent
+    ? 20 * Math.log10(Math.pow(10, LA/20) + Math.pow(10, LB/20))
+    : 10 * Math.log10(Math.pow(10, LA/10) + Math.pow(10, LB/10));
+
+  // Update stats
+  const diff = Math.abs(LA - LB);
+  select('#diff').html(diff.toFixed(1) + ' dB');
+  select('#corr').html('+' + (Lsum - Math.max(LA, LB)).toFixed(1) + ' dB' + (coherent ? ' (presión)' : ' (energía)'));
+  select('#exact').html(Lsum.toFixed(2) + ' dB');
+
+  const maxAmp = Math.max(ampA, ampB, ampA + ampB, 0.5);
+
+  const GX = 20;
+  const GW = width - 40;
+  const panelH = 110;
+  const top1 = 10;
+
+  drawWave(GX, top1, GW, panelH, 'Fuente A (' + LA.toFixed(1) + ' dB)', ampA / maxAmp, F_A, TEAL);
+  drawWave(GX, top1 + panelH + 5, GW, panelH, 'Fuente B (' + LB.toFixed(1) + ' dB)', ampB / maxAmp, fB, coherent ? INDIGO : CORAL);
+
+  // Suma
+  noStroke();
+  fill(230, 247, 243);
+  rect(GX, top1 + 2 * (panelH + 5), GW, panelH, 8);
+  stroke(0, 0, 0, 20); strokeWeight(1);
+  line(GX + 10, top1 + 2 * (panelH + 5) + panelH/2, GX + GW - 10, top1 + 2 * (panelH + 5) + panelH/2);
+  noStroke(); fill(23, 32, 51); textAlign(LEFT, TOP); textSize(12);
+  textStyle(BOLD);
+  text('Suma (' + Lsum.toFixed(1) + ' dB)', GX + 12, top1 + 2 * (panelH + 5) + 6);
+  textStyle(NORMAL);
+
+  noFill(); stroke(TEAL_DARK[0], TEAL_DARK[1], TEAL_DARK[2]); strokeWeight(2.5);
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let wx = GX + 10 + (i / 200) * (GW - 20);
+    let vA = ampA * Math.sin(i / 200 * TWO_PI * F_A + time * 2 * F_A);
+    let vB = ampB * Math.sin(i / 200 * TWO_PI * fB + time * 2 * fB);
+    let s = (vA + vB) / maxAmp;
+    vertex(wx, top1 + 2 * (panelH + 5) + panelH/2 - s * (panelH/2 - 10));
+  }
+  endShape();
+}
+
+function drawWave(x, y, w, h, label, amp, freq, col) {
+  noStroke();
+  fill(248, 250, 255);
+  rect(x, y, w, h, 8);
+
+  stroke(0, 0, 0, 20);
+  strokeWeight(1);
+  line(x + 10, y + h / 2, x + w - 10, y + h / 2);
+
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  text(label, x + 12, y + 6);
+  textStyle(NORMAL);
+
+  noFill();
+  stroke(col[0], col[1], col[2]);
+  strokeWeight(2);
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let wx = x + 10 + (i / 200) * (w - 20);
+    let v = amp * Math.sin(i / 200 * TWO_PI * freq + time * 2 * freq);
+    vertex(wx, y + h / 2 - v * (h / 2 - 10));
+  }
+  endShape();
+}
+
+function windowResized() {
+  const cw = min(860, windowWidth - 40);
+  resizeCanvas(cw, 420);
+}
+</script>
+</body>
+</html>

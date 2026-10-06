@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorador de modos de sala</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 110px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 110px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; margin: 8px 0; align-items: center; }
+    .grad { width: 180px; height: 12px; border-radius: 6px; background: linear-gradient(to right, #1a5fb4, #888, #c0392b); }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Explorador de modos de sala</h2>
+  <p class="lead">Mapa de presión de un modo rectangular. P ∝ cos(nx·π·x/L)·cos(ny·π·y/W)·cos(nz·π·z/H).</p>
+
+  <div class="row">
+    <label>Largo L:</label>
+    <input type="range" id="L" min="3" max="8" value="6" step="0.1" style="flex:1 1 150px">
+    <span id="LVal" style="font-weight:700">6.0 m</span>
+    <label style="min-width:auto">W:</label>
+    <input type="range" id="W" min="2" max="6" value="4" step="0.1" style="flex:1 1 150px">
+    <span id="WVal" style="font-weight:700">4.0 m</span>
+    <label style="min-width:auto">H:</label>
+    <input type="range" id="H" min="2" max="5" value="3" step="0.1" style="flex:1 1 150px">
+    <span id="HVal" style="font-weight:700">3.0 m</span>
+  </div>
+
+  <div class="row">
+    <label>Modo (nx, ny, nz):</label>
+    <input type="range" id="nx" min="0" max="3" value="1" step="1" style="flex:1 1 100px">
+    <input type="range" id="ny" min="0" max="3" value="0" step="1" style="flex:1 1 100px">
+    <input type="range" id="nz" min="0" max="3" value="0" step="1" style="flex:1 1 100px">
+    <span id="modeVal" style="font-weight:700">(1,0,0)</span>
+  </div>
+
+  <div class="row">
+    <label>Vista:</label>
+    <button id="btnHoriz" class="active">Horizontal (xy)</button>
+    <button id="btnLong">Longitudinal (xz)</button>
+    <button id="btnVert">Vertical (yz)</button>
+  </div>
+
+  <div class="row">
+    <button id="btnAudio">🔇 Audio OFF</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Frecuencia</div><div class="val" id="sFreq">—</div></div>
+    <div class="stat"><div class="lbl">Presión en S</div><div class="val" id="sPS">—</div></div>
+    <div class="stat"><div class="lbl">Presión en R</div><div class="val" id="sPR">—</div></div>
+  </div>
+
+  <div class="legend">
+    <span class="grad"></span>
+    <span>Azul = −presión · Blanco = nodo · Rojo = +presión</span>
+  </div>
+</div>
+
+<script>
+let view = 'xy'; // 'xy' | 'xz' | 'yz'
+let S, R; // source and listener positions in the 2D view
+let dragging = null;
+let audioOn = false;
+let synth;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 430);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  S = { x: 0.1, y: 0.1 };
+  R = { x: 0.5, y: 0.5 };
+
+  select('#L').input(() => select('#LVal').html(Number(select('#L').value()).toFixed(1) + ' m'));
+  select('#W').input(() => select('#WVal').html(Number(select('#W').value()).toFixed(1) + ' m'));
+  select('#H').input(() => select('#HVal').html(Number(select('#H').value()).toFixed(1) + ' m'));
+
+  select('#nx').input(() => updateMode());
+  select('#ny').input(() => updateMode());
+  select('#nz').input(() => updateMode());
+
+  select('#btnHoriz').mousePressed(() => setView('xy'));
+  select('#btnLong').mousePressed(() => setView('xz'));
+  select('#btnVert').mousePressed(() => setView('yz'));
+
+  select('#btnAudio').mousePressed(() => {
+    audioOn = !audioOn;
+    select('#btnAudio').html(audioOn ? '🔊 Audio ON' : '🔇 Audio OFF');
+    const f = currentFreq();
+    if (audioOn) {
+      if (Tone.context.state !== 'running') Tone.start();
+      if (!synth) synth = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.05, decay: 0.1, sustain: 0.5, release: 0.1 }, volume: -24 }).toDestination();
+      synth.triggerAttack(f);
+    } else if (synth) synth.triggerRelease();
+  });
+
+  updateMode();
+  textFont('system-ui');
+}
+
+function setView(v) {
+  view = v;
+  select('#btnHoriz').toggleClass('active', view === 'xy');
+  select('#btnLong').toggleClass('active', view === 'xz');
+  select('#btnVert').toggleClass('active', view === 'yz');
+}
+
+function updateMode() {
+  const nx = Number(select('#nx').value());
+  const ny = Number(select('#ny').value());
+  const nz = Number(select('#nz').value());
+  select('#modeVal').html('(' + nx + ',' + ny + ',' + nz + ')');
+  if (audioOn && synth) synth.frequency.value = currentFreq();
+}
+
+function currentFreq() {
+  const L = Number(select('#L').value());
+  const W = Number(select('#W').value());
+  const H = Number(select('#H').value());
+  const nx = Number(select('#nx').value());
+  const ny = Number(select('#ny').value());
+  const nz = Number(select('#nz').value());
+  return (343 / 2) * Math.sqrt((nx/L)*(nx/L) + (ny/W)*(ny/W) + (nz/H)*(nz/H));
+}
+
+function pressureAt(u, v) {
+  // u, v are normalized coords (0..1) in the current view
+  const L = Number(select('#L').value());
+  const W = Number(select('#W').value());
+  const H = Number(select('#H').value());
+  const nx = Number(select('#nx').value());
+  const ny = Number(select('#ny').value());
+  const nz = Number(select('#nz').value());
+
+  // Determine which dimension each axis represents
+  let px, py, pz;
+  if (view === 'xy') {
+    px = u * L; py = v * W; pz = 0;
+  } else if (view === 'xz') {
+    px = u * L; py = 0; pz = v * H;
+  } else { // yz
+    px = 0; py = u * W; pz = v * H;
+  }
+
+  return Math.cos(nx * PI * px / L) * Math.cos(ny * PI * py / W) * Math.cos(nz * PI * pz / H);
+}
+
+function mousePressed() {
+  const sx = map(S.x, 0, 1, 40, width - 40);
+  const sy = map(S.y, 0, 1, 40, height - 40);
+  const rx = map(R.x, 0, 1, 40, width - 40);
+  const ry = map(R.y, 0, 1, 40, height - 40);
+  if (dist(mouseX, mouseY, sx, sy) < 22) dragging = 'S';
+  else if (dist(mouseX, mouseY, rx, ry) < 22) dragging = 'R';
+}
+
+function mouseReleased() { dragging = null; }
+
+function draw() {
+  background(255);
+
+  const L = Number(select('#L').value());
+  const W = Number(select('#W').value());
+  const H = Number(select('#H').value());
+
+  if (dragging) {
+    let u = constrain(map(mouseX, 40, width - 40, 0, 1), 0, 1);
+    let v = constrain(map(mouseY, 40, height - 40, 0, 1), 0, 1);
+    if (dragging === 'S') { S.x = u; S.y = v; }
+    if (dragging === 'R') { R.x = u; R.y = v; }
+  }
+
+  const freq = currentFreq();
+  select('#sFreq').html(freq.toFixed(2) + ' Hz');
+
+  const pS = pressureAt(S.x, S.y);
+  const pR = pressureAt(R.x, R.y);
+  select('#sPS').html(pS.toFixed(2));
+  select('#sPR').html(pR.toFixed(2));
+
+  // ── Heatmap ──
+  const mapX = 40, mapY = 40;
+  const mapW = width - 80, mapH = height - 80;
+  const gridN = 60;
+  const cellW = mapW / gridN, cellH = mapH / gridN;
+
+  noStroke();
+  for (let i = 0; i < gridN; i++) {
+    for (let j = 0; j < gridN; j++) {
+      let u = (i + 0.5) / gridN;
+      let v = (j + 0.5) / gridN;
+      let p = pressureAt(u, v);
+      // Color: -1 = blue, 0 = white, +1 = red
+      let r, g, b;
+      if (p > 0) { r = 255; g = lerp(220, 60, p); b = lerp(220, 60, p); }
+      else { r = lerp(220, 40, -p); g = lerp(220, 100, -p); b = 255; }
+      fill(r, g, b);
+      rect(mapX + i * cellW, mapY + j * cellH, cellW + 0.5, cellH + 0.5);
+    }
+  }
+
+  // Room outline
+  stroke(100);
+  strokeWeight(2);
+  noFill();
+  rect(mapX, mapY, mapW, mapH);
+
+  // Axis labels
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(11);
+  if (view === 'xy') { text('Largo (x) = ' + L + ' m', mapX + mapW / 2, mapY + mapH + 8); text('Ancho (y) = ' + W + ' m', mapX - 30, mapY + mapH / 2); }
+  else if (view === 'xz') { text('Largo (x) = ' + L + ' m', mapX + mapW / 2, mapY + mapH + 8); text('Altura (z) = ' + H + ' m', mapX - 30, mapY + mapH / 2); }
+  else { text('Ancho (y) = ' + W + ' m', mapX + mapW / 2, mapY + mapH + 8); text('Altura (z) = ' + H + ' m', mapX - 30, mapY + mapH / 2); }
+
+  // Source marker
+  let sx = map(S.x, 0, 1, mapX, mapX + mapW);
+  let sy = map(S.y, 0, 1, mapY, mapY + mapH);
+  fill(36, 157, 143);
+  noStroke();
+  circle(sx, sy, 20);
+  fill(255);
+  textAlign(CENTER, CENTER); textSize(12); textStyle(BOLD);
+  text('S', sx, sy); textStyle(NORMAL);
+
+  // Listener marker
+  let rx = map(R.x, 0, 1, mapX, mapX + mapW);
+  let ry = map(R.y, 0, 1, mapY, mapY + mapH);
+  fill(224, 90, 71);
+  noStroke();
+  circle(rx, ry, 20);
+  fill(255);
+  textAlign(CENTER, CENTER); textSize(12); textStyle(BOLD);
+  text('R', rx, ry); textStyle(NORMAL);
+
+  // Title
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  const nx = Number(select('#nx').value());
+  const ny = Number(select('#ny').value());
+  const nz = Number(select('#nz').value());
+  let tipo = (nx>0?1:0) + (ny>0?1:0) + (nz>0?1:0);
+  text('Modo (' + nx + ',' + ny + ',' + nz + ') ' + (tipo===1?'axial':tipo===2?'tangencial':'oblicuo') + '  ·  f = ' + freq.toFixed(1) + ' Hz', width / 2, 12);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 430);
+}
+</script>
+</body>
+</html>
