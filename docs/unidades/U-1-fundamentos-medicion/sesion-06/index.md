@@ -50,22 +50,39 @@
 
     ???+ note "¿Qué es la presión RMS?"
 
-        **RMS = *Root Mean Square*** (raíz cuadrada de la media de los cuadrados). El sonido es una onda: la presión sube y baja rapidísimo alrededor de la presión atmosférica, con valores positivos y negativos. El promedio simple de una onda sinusoidal es **cero** (la mitad arriba y la mitad abajo se cancelan), así que no sirve para describir el sonido.
+        La presión sonora cambia continuamente: sube y baja alrededor de cero. Si promediáramos directamente esos valores positivos y negativos, tenderían a cancelarse.
 
-        El RMS resuelve esto en tres pasos:
+        **RMS (*Root Mean Square*)** transforma esa señal variable en un solo valor que representa su **nivel efectivo**.
 
-        | Paso | Operación | Por qué |
-        |---|---|---|
-        | 1. **S**quare | Elevar cada valor al cuadrado | Elimina el signo (todo positivo) |
-        | 2. **M**ean | Promediar los cuadrados | Obtiene la energía promedio |
-        | 3. **R**oot | Sacar raíz cuadrada | Vuelve a la unidad original (Pa) |
+        En términos simples:
 
-        El resultado es el valor **efectivo** de la presión — el que tiene la misma energía que la onda real.
+        1. Se elevan los valores al cuadrado.
+        2. Se calcula su promedio.
+        3. Se obtiene la raíz cuadrada.
 
-        !!! tip "Relación con el pico"
-            Para un tono puro (sinusoidal): \(\text{RMS} = \text{pico} / \sqrt{2} \approx \text{pico} \times 0.707\). Una onda que pica a 1 Pa tiene RMS ≈ 0.707 Pa.
+        \[
+        p_{\mathrm{RMS}}=\sqrt{\frac{1}{N}\sum_{n=1}^{N}p_n^2}
+        \]
 
-        Para calcular el SPL continuo se usa normalmente **presión RMS**, porque representa el valor efectivo de una señal variable. Un sonómetro también puede mostrar **Peak** cuando interesa detectar el máximo instantáneo.
+        <figure markdown="span">
+          ![Comparación entre RMS y Peak](../../../img/rms_vs_peak.svg)
+          <figcaption>**RMS vs. Peak** — Peak indica el valor máximo instantáneo. RMS representa el nivel efectivo de la señal durante un intervalo.</figcaption>
+        </figure>
+
+        !!! tip "Idea clave"
+            **Peak pregunta:** ¿cuál fue el valor máximo?  
+            **RMS pregunta:** ¿qué nivel efectivo tuvo la señal durante este intervalo?
+
+        Para una onda sinusoidal pura:
+
+        \[
+        p_{\mathrm{RMS}}=\frac{p_{\mathrm{pico}}}{\sqrt{2}}\approx0.707\,p_{\mathrm{pico}}
+        \]
+
+        Por ejemplo, si el pico es **1 Pa**, el RMS es aproximadamente **0.707 Pa**.
+
+        !!! info "¿Los sonómetros miden RMS?"
+            Los sonómetros que cumplen normas modernas de medición de nivel sonoro calculan los niveles continuos a partir de la **presión sonora eficaz (RMS)**. Sin embargo, un sonómetro puede tener además detectores y resultados distintos, como **Peak**, **Fast**, **Slow**, **Leq**, **Lmax** o **Lmin**. Por tanto, no es correcto decir que un sonómetro “solo mide RMS”.
 
     ### ¿Por qué 20 µPa?
 
@@ -208,7 +225,7 @@
 
 ## Simulación interactiva: el grifo y el sonido
 
-Abre y cierra el grifo y observá cómo cambia la lectura:
+Abre y cierra el grifo y observa cómo cambia la lectura:
 
 - **SWL** → lo que emite la fuente.
 - **SIL** → lo que atraviesa una superficie.
