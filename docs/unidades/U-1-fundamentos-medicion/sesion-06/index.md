@@ -3,7 +3,7 @@
 ---
 
 ??? info "Unidades y símbolos (glosario de referencia)"
-    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
+    Consulta esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
 
     | Símbolo | Nombre | ¿Qué mide? | Equivalencia |
     |---|---|---|---|
@@ -135,7 +135,7 @@
     | 140+ | Arma de fuego, explosión cercana | Daño irreversible inmediato | Protección obligatoria |
 
     !!! warning "La regla de los 3 dB"
-        Por cada aumento de **3 dB**, el tiempo de exposición segura se reduce a la **mitad**. Esto no es una recomendación — es la ley de exposición ocupacional (OSHA, NIOSH). Si mezclás a 85 dBA podés trabajar 8 horas. Si subís a 88 dBA, solo 4 horas. A 91 dBA, 2 horas. Los monitores de estudio de campo cercano a 1 m suelen entregar entre 85 y 95 dBA según el volumen — **medí tu entorno de trabajo**.
+        Por cada aumento de **3 dB**, el tiempo de exposición segura se reduce a la **mitad**. Esto no es una recomendación — es la ley de exposición ocupacional (OSHA, NIOSH). Si mezclas a 85 dBA puedes trabajar 8 horas. Si subes a 88 dBA, solo 4 horas. A 91 dBA, 2 horas. Los monitores de estudio de campo cercano a 1 m suelen entregar entre 85 y 95 dBA según el volumen — **mide tu entorno de trabajo**.
 
 ???+ note "Relación entre SPL, SIL y SWL"
 
@@ -163,7 +163,7 @@
     | Verificar el cumplimiento de normativa de ruido | **SPL (dBA)** | Las leyes se basan en la presión percibida por el oído |
 
     !!! tip "SPL, SIL y SWL no se pueden sumar directamente"
-        Son magnitudes físicas distintas. Sumar dB SPL con dB SWL no tiene sentido físico, como sumar voltios con vatios. Siempre asegurate de estar trabajando con la misma magnitud antes de operar con niveles.
+        Son magnitudes físicas distintas. Sumar dB SPL con dB SWL no tiene sentido físico, como sumar voltios con vatios. Siempre asegúrate de estar trabajando con la misma magnitud antes de operar con niveles.
 
 ???+ note "Ejemplos de conversión entre presión y SPL"
 
@@ -208,7 +208,7 @@
 
 ## Simulación interactiva: el grifo y el sonido
 
-Abrí y cerrá el grifo y observá cómo cambia la lectura:
+Abre y cierra el grifo y observá cómo cambia la lectura:
 
 - **SWL** → lo que emite la fuente.
 - **SIL** → lo que atraviesa una superficie.
