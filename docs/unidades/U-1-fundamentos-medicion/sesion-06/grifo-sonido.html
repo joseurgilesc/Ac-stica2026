@@ -59,15 +59,7 @@ function draw(){
   fill(226,232,240); textSize(18); textStyle(BOLD); text('FUENTE',55,35);
   textSize(14); textStyle(NORMAL); fill(148,163,184); text('SWL · potencia emitida',55,190);
 
-  // water jet / acoustic energy
-  const jet=10+42*openness;
-  noStroke();
-  for(let i=0;i<22;i++){
-    const x=230+i*22, spread=8+i*1.7, wobble=Math.sin(phase+i*.55)*3;
-    fill(56,189,248,120);
-    ellipse(x,147+wobble,18,Math.max(3,jet*(1-i/45)+spread*.25));
-  }
-
+  // acoustic energy: represented by a single particle system
   // intensity section: measurement window crossed by energy flow
   const gateX=438, gateY=88, gateH=118;
   noStroke(); fill(34,211,238,25); rect(gateX-12,gateY,24,gateH,5);
@@ -109,14 +101,15 @@ function draw(){
   fill(226,232,240); textSize(22); textStyle(BOLD); text(Math.round(displayLevel*100)+'',748,360);
   textSize(12); textStyle(NORMAL); fill(148,163,184); text('respuesta temporal',72,398);
 
-  // moving energy markers crossing the SIL window
+  // single particle system representing the flow of acoustic energy
   noStroke();
-  const dots=Math.max(2,Math.round(4+openness*10));
+  const dots=Math.max(3,Math.round(5+openness*12));
   for(let i=0;i<dots;i++){
-    const px=230+((phase*55+i*53)%450);
-    const py=147+Math.sin(i*1.7+phase*.8)*(8+20*openness);
-    fill(125,211,252,210);
-    circle(px,py,5+openness*3);
+    const px=225+((phase*62+i*47)%480);
+    const spread=6+26*openness;
+    const py=147+Math.sin(i*1.35+phase*.9)*spread;
+    fill(125,211,252,220);
+    circle(px,py,6+openness*3);
   }
 
   // relation labels
