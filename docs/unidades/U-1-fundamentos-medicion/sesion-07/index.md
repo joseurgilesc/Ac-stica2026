@@ -17,7 +17,7 @@
 
 ???+ note "El error más común en acústica: sumar dB directamente"
 
-    Dos fuentes sonoras independientes, cada una produciendo 70 dB SPL en un punto. Si encendemos ambos... ¿cuánto marca el sonómetro?
+    Dos fuentes sonoras independientes, cada una produciendo 70 dB SPL en un punto. Si las reproducimos simultáneamente... ¿cuánto marca el sonómetro?
 
     Casi todos los estudiantes (y muchos músicos experimentados) responden: **140 dB SPL**. Es una respuesta intuitiva, lógica... y completamente equivocada.
 
@@ -25,8 +25,8 @@
         Los decibeles **no se suman linealmente** porque representan relaciones logarítmicas, no cantidades absolutas. Sumar dB directamente es como sumar los exponentes: \(10^3 + 10^3 = 2,000\), no \(10^6\). En dB: dos fuentes independientes de 70 dB SPL producen **aproximadamente 73 dB SPL**, no 140 dB SPL.
 
     <figure markdown="span">
-      ![Fig. 2-5: Nomograma de suma de decibeles](../../../img/suma_de_decibeles.svg)
-      <figcaption>**Fig. 2-5** — Nomograma de suma de niveles. La curva indica cuánto sumar al nivel mayor según la diferencia ΔL entre dos fuentes. Con fuentes iguales (ΔL = 0) se suman 3 dB; a mayor diferencia, menos aporta la fuente débil.</figcaption>
+      ![Dos fuentes independientes de 70 dB SPL producen aproximadamente 73 dB SPL](../../../img/suma_simple_dos_fuentes.svg)
+      <figcaption>**Fig. 2-5** — Dos fuentes independientes de 70 dB SPL producen aproximadamente 73 dB SPL: duplicar fuentes de igual nivel añade +3 dB.</figcaption>
     </figure>
 
     [🎛️ **Abrir simulación interactiva — Mezclador de fuentes**](../../../simulacion/mezclador-fuentes.html){ .md-button }
