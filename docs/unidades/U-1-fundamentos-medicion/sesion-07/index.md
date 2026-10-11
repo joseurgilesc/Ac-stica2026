@@ -3,7 +3,7 @@
 ---
 
 ??? info "Unidades y símbolos (glosario de referencia)"
-    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
+    Consulta esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
 
     | Símbolo | Nombre | ¿Qué mide? | Equivalencia |
     |---|---|---|---|
@@ -17,12 +17,12 @@
 
 ???+ note "El error más común en acústica: sumar dB directamente"
 
-    Dos parlantes idénticos, cada uno produciendo 70 dB SPL en un punto. Si encendemos ambos... ¿cuánto marca el sonómetro?
+    Dos fuentes sonoras independientes, cada una produciendo 70 dB SPL en un punto. Si encendemos ambos... ¿cuánto marca el sonómetro?
 
     Casi todos los estudiantes (y muchos músicos experimentados) responden: **140 dB SPL**. Es una respuesta intuitiva, lógica... y completamente equivocada.
 
     !!! danger "70 dB + 70 dB ≠ 140 dB"
-        Los decibeles **no se suman linealmente** porque representan relaciones logarítmicas, no cantidades absolutas. Sumar dB directamente es como sumar los exponentes: \(10^3 + 10^3 = 2,000\), no \(10^6\). En dB: 70 dB SPL + 70 dB SPL = **73 dB SPL**, no 140 dB SPL.
+        Los decibeles **no se suman linealmente** porque representan relaciones logarítmicas, no cantidades absolutas. Sumar dB directamente es como sumar los exponentes: \(10^3 + 10^3 = 2,000\), no \(10^6\). En dB: dos fuentes independientes de 70 dB SPL producen **aproximadamente 73 dB SPL**, no 140 dB SPL.
 
     <figure markdown="span">
       ![Fig. 2-5: Nomograma de suma de decibeles](../../../img/suma_de_decibeles.svg)
@@ -58,7 +58,7 @@
 
 ???+ note "Suma de fuentes iguales: la regla de +3 dB"
 
-    El caso más simple y más frecuente: dos fuentes **idénticas** (mismo nivel, misma frecuencia, misma fase aleatoria — fuentes incoherentes).
+    El caso más simple y más frecuente: dos fuentes **independientes de igual nivel**, cuyas fases no están correlacionadas.
 
     \[
     \begin{aligned}
@@ -104,7 +104,7 @@
     | 8 dB | +0.6 dB | \(L_{\text{mayor}} + 0.6\) |
     | 9 dB | +0.5 dB | \(L_{\text{mayor}} + 0.5\) |
     | 10 dB | +0.4 dB | \(L_{\text{mayor}} + 0.4\) |
-    | ≥12 dB | +0.2 dB o menos | La fuente débil es prácticamente inaudible |
+    | ≥12 dB | +0.2 dB o menos | La fuente débil apenas modifica el nivel total |
 
     ### Ejemplo con tabla
 
@@ -116,7 +116,7 @@
     L_{\text{total}} = 10 \cdot \log_{10}\left(10^{8.0} + 10^{7.5}\right) = 10 \cdot \log_{10}(1 \times 10^8 + 3.16 \times 10^7) = 10 \cdot \log_{10}(1.316 \times 10^8) = 10 \cdot 8.119 = \mathbf{81.2\ \text{dB SPL}}
     \]
 
-    !!! tip "Ahorrá tiempo en el parcial"
+    !!! tip "Ahorra tiempo en el examen"
         Si la diferencia entre dos fuentes es ≥10 dB, la contribución de la fuente más débil es ≤0.4 dB — **insignificante a efectos prácticos**. Sumar 80 dB + 70 dB ≈ 80.4 dB. En un examen, eso se redondea a 80 dB. No pierdas tiempo calculando lo que no suma.
 
 ???+ note "Resta de niveles sonoros: extraer una fuente del ruido de fondo"
@@ -140,6 +140,10 @@
     \end{aligned}
     \]
 
+    [🔊 **Abrir simulación con sonido — Resta de niveles y ruido de fondo**](../../../simulacion/suma-resta-audio.html#resta){ .md-button }
+
+    Escucha el fondo, la fuente y su combinación. Cambia sus niveles y comprueba el cálculo de la fuente a partir del total.
+
     ### Tabla de resta rápida
 
     | Diferencia ∆L = \(L_{\text{total}} - L_{\text{fondo}}\) | Restar del nivel total | Nivel de la fuente |
@@ -152,8 +156,8 @@
     | 2 dB | −4.3 dB | \(L_{\text{total}} - 4.3\) |
     | 1 dB | −6.9 dB | \(L_{\text{total}} - 6.9\) |
 
-    !!! warning "No podés restar si la diferencia es muy chica"
-        Si la diferencia entre total y fondo es menor a 3 dB, la resta es muy incierta. Si es menor a 1 dB, la medición **no es válida** — el ruido de fondo enmascara completamente a la fuente. Necesitás un entorno más silencioso o acercar el micrófono a la fuente.
+    !!! warning "La resta es incierta cuando la diferencia es pequeña"
+        Si la diferencia entre total y fondo es menor a 3 dB, la resta es muy incierta. Si es menor a 1 dB, el resultado es especialmente sensible a pequeños errores de medición y no conviene confiar en la corrección sin evaluar la incertidumbre. Necesitas un entorno más silencioso o acercar el micrófono a la fuente.
 
 ???+ note "Suma de múltiples fuentes: método paso a paso"
 
@@ -190,12 +194,16 @@
     | Tipo de suma | ¿Qué se suma? | Resultado al duplicar fuentes iguales | Ejemplo |
     |---|---|---|---|
     | **Incoherente** | Intensidades (\(I_1 + I_2\)) | **+3 dB** | Dos parlantes con música diferente, dos instrumentos distintos, dos personas hablando |
-    | **Coherente** | Presiones (\(p_1 + p_2\)) | **+6 dB** | Dos parlantes reproduciendo la misma señal mono, dos micrófonos captando la misma fuente en fase perfecta |
+    | **Coherente** | Presiones (\(p_1 + p_2\)) | **+6 dB** | Dos copias digitales idénticas y alineadas; o dos señales acústicas que llegan en fase al punto de medición |
 
-    > Insertar **Fig. 10-1** del Everest: respuesta de filtro comb — cuando dos señales coherentes se combinan con una diferencia de tiempo (no están perfectamente en fase), se produce un **filtro comb**: algunas frecuencias se refuerzan (+6 dB en los picos) y otras se cancelan (−∞ dB en los valles). Esto es lo que ocurre cuando grabás una fuente con dos micrófonos a distancias diferentes.
+    [🔊 **Abrir simulación con sonido — +3 dB, +6 dB y cancelación**](../../../simulacion/suma-resta-audio.html#coherencia){ .md-button }
 
-    !!! warning "En la práctica, casi siempre es incoherente"
-        En el mundo real — mezclas musicales, ruido ambiental, múltiples instrumentos — las fuentes son incoherentes: +3 dB por duplicación. La suma coherente es un caso muy específico (electrónica, DSP, señales idénticas en fase). No asumas +6 dB a menos que estés seguro de que las señales son exactamente iguales y están alineadas en fase.
+    Escucha una señal sola, dos señales independientes, dos copias idénticas y dos copias con polaridad invertida. Observa sus formas de onda y el incremento esperado.
+
+    **Filtro de peine:** respuesta de filtro comb — cuando dos señales coherentes se combinan con una diferencia de tiempo (no están perfectamente en fase), se produce un **filtro comb**: algunas frecuencias se refuerzan (+6 dB en los picos) y otras se cancelan (−∞ dB en los valles). Esto es lo que ocurre cuando grabas una fuente con dos micrófonos a distancias diferentes.
+
+    !!! warning "Importancia de la correlación y de la fase"
+        Cuando las fuentes son independientes o no están correlacionadas, la duplicación da aproximadamente +3 dB. En grabaciones multipista también pueden existir señales correlacionadas: el resultado depende de la fase y del tiempo de llegada. La suma coherente es un caso muy específico (electrónica, DSP, señales idénticas en fase). No supongas +6 dB a menos que estés seguro de que las señales son exactamente iguales y están alineadas en fase.
 
 ---
 
