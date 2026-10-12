@@ -170,9 +170,16 @@
     | 1 | Sumar las dos más altas: 80 + 77. ∆ = 3 → sumar 1.8 al mayor | 81.8 dB SPL |
     | 2 | Sumar el resultado con la tercera: 81.8 + 72. ∆ = 9.8 → sumar ~0.4 al mayor | **82.2 dB SPL** |
 
-    Comprobación con fórmula exacta:
+    **Comprobación con la fórmula exacta:**
+
     \[
-    10 \cdot \log_{10}\left(10^{8.0} + 10^{7.7} + 10^{7.2}\right) = 10 \cdot \log_{10}(10^8 + 5.01 \times 10^7 + 1.58 \times 10^7) = 10 \cdot \log_{10}(1.659 \times 10^8) = \mathbf{82.2\ \text{dB SPL}}
+    \begin{aligned}
+    L_{\text{total}}
+    &= 10\log_{10}\left(10^{80/10}+10^{77/10}+10^{72/10}\right)\\[4pt]
+    &= 10\log_{10}\left(10^8+5.01\times10^7+1.58\times10^7\right)\\[4pt]
+    &= 10\log_{10}\left(1.659\times10^8\right)\\[4pt]
+    &\approx \boxed{82.2\ \text{dB SPL}}
+    \end{aligned}
     \]
 
 ???+ note "Suma coherente vs. incoherente: cuándo +6 dB en vez de +3 dB"
