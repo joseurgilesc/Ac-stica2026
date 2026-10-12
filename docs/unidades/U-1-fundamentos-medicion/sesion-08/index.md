@@ -23,7 +23,7 @@ Una fuente sonora real puede comportarse de manera diferente según su tamaño, 
 
 [🎛️ **Explorar la simulación: tres tipos de fuentes**](../../../simulacion/tipos-fuente.html){ .md-button }
 
-**Observa:** ¿qué cambia al duplicar la distancia en cada modelo? Estudiaremos con más detalle la propagación y sus fórmulas en la **[sesión 9](../../../U-2-propagacion-exterior/sesion-09/)**.
+**Observa:** ¿qué cambia al duplicar la distancia en cada modelo? Estudiaremos con más detalle la propagación y sus fórmulas en la **[sesión 9](../../U-2-propagacion-exterior/sesion-09/)**.
 
 ## 2. Directividad: ¿hacia dónde se dirige el sonido?
 
