@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Directividad · resultados reales de tres grupos</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#203449;background:#fff}
+*{box-sizing:border-box}body{margin:0}main{max-width:980px;margin:auto;padding:16px 18px 28px}
+h1{font-size:1.42rem;line-height:1.25;margin:0 0 6px}p{line-height:1.5} .intro{color:#4b6278;margin:0 0 17px;font-size:.95rem}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.control{display:flex;gap:5px;align-items:center;flex-wrap:wrap} .label{font-size:.87rem;color:#53697e;margin-right:4px;font-weight:650}
+button{padding:8px 12px;background:#f4f7fa;color:#2b455f;border:1px solid #c8d5e2;border-radius:8px;cursor:pointer;font-weight:600;min-height:38px}
+button[aria-pressed="true"]{background:#235b85;border-color:#235b85;color:white}button:focus-visible{outline:3px solid #77a8dc;outline-offset:2px}
+.chart{border:1px solid #dae3ed;border-radius:12px;background:#fbfdff;padding:10px}
+svg{display:block;width:100%;height:auto;overflow:visible}.legend{display:flex;flex-wrap:wrap;gap:16px;margin:8px 8px 2px;font-size:.88rem}
+.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{display:inline-block;width:13px;height:13px;border-radius:50%}
+.note{color:#52667a;font-size:.84rem;margin:10px 1px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;margin-top:10px}
+th,td{padding:9px 8px;border-bottom:1px solid #e1e8ef;text-align:right}th:first-child,td:first-child{text-align:left}
+th{background:#eff4f8;font-weight:650}.up{color:#a25526}.down{color:#206a68}.table-wrap{overflow-x:auto}
+small{color:#586d80}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:590px){main{padding:12px}h1{font-size:1.25rem}.controls{gap:8px}.label{width:100%}button{padding:7px 10px}.chart{padding:2px}table{font-size:.82rem}th,td{padding:7px 5px}}
+</style>
+</head>
+<body><main>
+<h1>Mediciones reales de directividad · tres grupos</h1>
+<p class="intro">Ruido rosa filtrado · ángulos 0°, 45° y 90° · tres lecturas AVG/Leq por posición. Cada grupo utilizó su propio celular.</p>
+<div class="controls" aria-label="Controles del gráfico">
+  <div class="control"><span class="label">Ángulo:</span>
+    <button type="button" data-angle="90" aria-pressed="true">90° frente a 0°</button>
+    <button type="button" data-angle="45" aria-pressed="false">45° frente a 0°</button>
+  </div>
+  <div class="control"><span class="label">Grupo:</span>
+    <button type="button" data-group="all" aria-pressed="true">Todos</button>
+    <button type="button" data-group="1" aria-pressed="false">Grupo 1</button>
+    <button type="button" data-group="2" aria-pressed="false">Grupo 2</button>
+    <button type="button" data-group="3" aria-pressed="false">Grupo 3</button>
+  </div>
+</div>
+<div class="chart">
+  <svg id="graph" viewBox="0 0 880 430" role="img" aria-labelledby="chart-title chart-desc">
+    <title id="chart-title">Cambios de nivel medidos fuera del eje</title>
+    <desc id="chart-desc">La referencia 0 dB corresponde a la medición frontal de cada grupo y frecuencia. Los valores negativos representan disminución del nivel al desplazarse.</desc>
+  </svg>
+  <div class="legend" aria-label="Leyenda"><span><i style="background:#2577b8"></i>Grupo 1</span><span><i style="background:#cf7c2b"></i>Grupo 2</span><span><i style="background:#7b55aa"></i>Grupo 3</span></div>
+</div>
+<p id="reading" class="note" aria-live="polite"></p>
+<p class="note">Los trazos unen únicamente las frecuencias medidas por cada grupo; <strong>no representan mediciones intermedias</strong>. El eje de frecuencias es logarítmico.</p>
+<div class="table-wrap"><table><thead><tr><th>Grupo</th><th>Frecuencia</th><th>Δ 45°</th><th>Δ 90°</th></tr></thead><tbody id="results"></tbody></table></div>
+<p class="note"><strong>Cómo interpretar:</strong> Δ = promedio en el ángulo − promedio a 0° (para esa misma frecuencia y celular). Un resultado de −4 dB indica 4 dB menos que de frente; uno de +1 dB indica 1 dB más. Es una <strong>comparación de niveles</strong>, no una resta de energías de dos fuentes.</p>
+<p class="note"><strong>Limitaciones:</strong> mediciones académicas en aula, sin calibración común entre celulares. Las reflexiones, las posiciones y el comportamiento de cada micrófono influyen en los resultados. No representan un patrón polar anecoico del fabricante.</p>
+</main>
+<script>
+"use strict";
+// Datos originales: tres lecturas de nivel (dB) en cada ángulo.
+// El código calcula los promedios y las diferencias; no interpola frecuencias no medidas.
+const rows=[
+ {g:1,f:125,m:[[87.2,87.8,88.1],[87.4,87.0,86.9],[87.9,87.7,87.7]]},
+ {g:1,f:500,m:[[87.3,86.8,87.1],[89.1,88.2,88.8],[88.0,88.8,88.2]]},
+ {g:1,f:1000,m:[[88.5,86.1,86.2],[85.7,86.4,85.9],[85.1,85.0,84.9]]},
+ {g:2,f:250,m:[[79.5,80.4,80.3],[76.8,78.3,77.3],[77.8,77.4,77.4]]},
+ {g:2,f:1000,m:[[71.6,70.0,70.2],[70.7,70.4,70.7],[70.2,70.0,70.0]]},
+ {g:2,f:4000,m:[[64.9,65.1,65.2],[65.2,65.2,65.0],[60.4,61.9,60.5]]},
+ {g:3,f:1000,m:[[74.4,74.0,74.6],[72.4,73.1,72.5],[70.3,70.0,70.5]]},
+ {g:3,f:2000,m:[[72.3,72.0,71.9],[71.3,71.6,70.8],[68.7,68.9,68.3]]},
+ {g:3,f:6000,m:[[76.1,75.9,76.6],[74.7,74.9,74.0],[68.5,68.9,69.0]]}
+].map(d=>{const p=d.m.map(a=>a.reduce((x,y)=>x+y,0)/a.length);return {...d,p,d45:p[1]-p[0],d90:p[2]-p[0]};});
+let angle=90,group="all";
+const svg=document.getElementById("graph"),results=document.getElementById("results"),reading=document.getElementById("reading");
+const ns="http://www.w3.org/2000/svg";
+const colors={1:"#2577b8",2:"#cf7c2b",3:"#7b55aa"};
+const ticks=[125,250,500,1000,2000,4000,6000];
+const X=f=>75+760*Math.log(f/125)/Math.log(6000/125);
+const Y=d=>45+(3-d)*29;
+function fmt(n){return (n>0?"+":"")+n.toFixed(2).replace(".",",");}
+function hz(n){return n>=1000?(n/1000).toLocaleString("es-EC")+" kHz":n+" Hz";}
+function el(tag,attrs={},value){const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(value!==undefined)n.textContent=value;svg.append(n);return n;}
+function render(){
+ svg.replaceChildren();
+ el("title",{id:"chart-title"},"Cambio relativo de nivel por frecuencia y grupo");
+ el("desc",{id:"chart-desc"},"Cada punto indica la diferencia frente a 0° al medir a "+angle+"°. Valores negativos: menos nivel.");
+ for(let d=-8;d<=2;d+=2){const y=Y(d);el("line",{x1:75,x2:835,y1:y,y2:y,stroke:d===0?"#627f93":"#e0e7ef","stroke-width":d===0?"2":"1"});el("text",{x:64,y:y+5,"text-anchor":"end","font-size":14,fill:"#4b6278"},d+"");}
+ for(const f of ticks){const x=X(f);el("line",{x1:x,x2:x,y1:45,y2:364,stroke:"#e7edf4"});el("text",{x:x,y:389,"text-anchor":"middle","font-size":13,fill:"#41586f"},f>=1000?f/1000+"k":String(f));}
+ el("text",{x:455,y:420,"text-anchor":"middle","font-size":15,fill:"#334d65"},"Frecuencia (Hz, escala logarítmica)");
+ el("text",{x:23,y:200,transform:"rotate(-90 23 200)","text-anchor":"middle","font-size":15,fill:"#334d65"},"Diferencia frente a 0° (dB)");
+ const relevant=rows.filter(r=>group==="all"||String(r.g)===group);
+ const field=angle===45?"d45":"d90";
+ for(const g of [1,2,3]){
+   const r=relevant.filter(x=>x.g===g).sort((a,b)=>a.f-b.f);
+   if(!r.length)continue;
+   if(r.length>1)el("polyline",{points:r.map(x=>X(x.f)+","+Y(x[field])).join(" "),fill:"none",stroke:colors[g],"stroke-width":2.5,"stroke-dasharray":"6 5","stroke-linecap":"round",opacity:".85"});
+   for(const x of r){const p=el("circle",{cx:X(x.f),cy:Y(x[field]),r:7,fill:colors[g],stroke:"white","stroke-width":2,tabindex:0});const t=document.createElementNS(ns,"title");t.textContent="Grupo "+g+", "+hz(x.f)+": "+fmt(x[field])+" dB a "+angle+"°";p.append(t);}
+ }
+ results.replaceChildren();
+ for(const x of relevant.sort((a,b)=>a.g-b.g||a.f-b.f)){
+   const tr=document.createElement("tr");
+   const values=["Grupo "+x.g,hz(x.f),fmt(x.d45)+" dB",fmt(x.d90)+" dB"];
+   values.forEach((v,i)=>{const td=document.createElement("td");td.textContent=v;if(i>1)td.className=(i===2?x.d45:x.d90)>0.005?"up":"down";tr.append(td);});
+   results.append(tr);
+ }
+ reading.textContent=angle===90?"Vista a 90°: observa la caída de −4,13 dB a 4 kHz (grupo 2) y de −7,40 dB a 6 kHz (grupo 3); a 500 Hz (grupo 1) hubo un aumento de +1,27 dB.":"Vista a 45°: observa que los cambios son generalmente más pequeños, aunque a 500 Hz (grupo 1) aparece un aumento de +1,63 dB.";
+ document.querySelectorAll("[data-angle]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.angle===angle)));
+ document.querySelectorAll("[data-group]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.group===group)));
+}
+document.querySelectorAll("[data-angle]").forEach(b=>b.addEventListener("click",()=>{angle=+b.dataset.angle;render()}));
+document.querySelectorAll("[data-group]").forEach(b=>b.addEventListener("click",()=>{group=b.dataset.group;render()}));
+render();
+</script></body></html>
