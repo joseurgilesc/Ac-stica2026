@@ -101,7 +101,7 @@ En la práctica de clase, tres grupos midieron un mismo monitor a **0°, 45° y 
 
 **Cómo leer los resultados:** para una frecuencia dada, resta el promedio a 0° del promedio a 45° o 90°. Si el resultado es negativo, el nivel disminuyó fuera del eje; si es positivo, aumentó. **Esta resta compara niveles**: no es la resta logarítmica utilizada para separar una fuente del ruido de fondo.
 
-<iframe src="../../../simulacion/resultados-directividad.html" title="Gráfica interactiva de las mediciones de directividad de los tres grupos" loading="lazy" style="width:100%;height:780px;border:1px solid #cdd9e4;border-radius:12px;background:#fff;"></iframe>
+<iframe src="../../../simulacion/resultados-directividad.html" title="Gráfica interactiva de las mediciones de directividad de los tres grupos" loading="lazy" style="width:100%;height:830px;border:1px solid #cdd9e4;border-radius:12px;background:#fff;"></iframe>
 
 [📈 **Abrir el gráfico interactivo en pantalla completa**](../../../simulacion/resultados-directividad.html){ .md-button }
 
