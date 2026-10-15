@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué queda del sonido? — Absorción atmosférica</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 120px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 120px; flex: 1; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 5px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    button.toggle { background: #e6f7f3; border-color: #249D8F; color: #1A7A6F; }
+    button.toggle.off { background: #eee; border-color: #aaa; color: #888; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>¿Qué queda del sonido?</h2>
+  <p style="color:#526079">Observa cómo el espectro se transforma durante la propagación: la divergencia geométrica reduce todo por igual, la absorción atmosférica oscurece los agudos.</p>
+
+  <div class="row">
+    <label>Distancia:</label>
+    <input type="range" id="dist" min="1" max="2000" value="500" step="10" style="flex:1 1 250px">
+    <span id="distVal" style="font-weight:700">500 m</span>
+  </div>
+
+  <div class="row">
+    <label>Nivel inicial a 1 m:</label>
+    <input type="range" id="level" min="70" max="110" value="100" step="1" style="flex:1 1 250px">
+    <span id="levelVal" style="font-weight:700">100 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Humedad relativa:</label>
+    <button id="btnDry" class="active">10% HR (seco)</button>
+    <button id="btnWet">70% HR (húmedo)</button>
+  </div>
+
+  <div class="row">
+    <label>Fenómenos:</label>
+    <button id="btnGeom" class="toggle">✓ Divergencia geométrica</button>
+    <button id="btnAtm" class="toggle">✓ Absorción atmosférica</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Pérdida geométrica</div><div class="val" id="geomLoss">—</div></div>
+    <div class="stat"><div class="lbl">Pérdida atmosférica (8 kHz)</div><div class="val" id="atmLoss">—</div></div>
+    <div class="stat"><div class="lbl">Pérdida total (8 kHz)</div><div class="val" id="totalLoss">—</div></div>
+  </div>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const BANDS = [
+  { name: '125 Hz', freq: 125 },
+  { name: '1 kHz', freq: 1000 },
+  { name: '4 kHz', freq: 4000 },
+  { name: '8 kHz', freq: 8000 },
+];
+
+// Absorption coefficients (dB/100m) at 20°C
+// [10% HR, 70% HR]
+const ALPHA = {
+  125: [0.00, 0.00],
+  1000: [0.05, 0.01],
+  4000: [0.70, 0.18],
+  8000: [2.20, 0.60],
+};
+
+let distSlider, levelSlider;
+let btnDry, btnWet, btnGeom, btnAtm;
+let humidity = 'dry'; // 'dry' | 'wet'
+let geomOn = true;
+let atmOn = true;
+
+function setup() {
+  const cw = min(880, windowWidth - 40);
+  const cnv = createCanvas(cw, 380);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  distSlider = select('#dist');
+  levelSlider = select('#level');
+  btnDry = select('#btnDry');
+  btnWet = select('#btnWet');
+  btnGeom = select('#btnGeom');
+  btnAtm = select('#btnAtm');
+
+  distSlider.input(() => select('#distVal').html(distSlider.value() + ' m'));
+  levelSlider.input(() => select('#levelVal').html(levelSlider.value() + ' dB'));
+
+  btnDry.mousePressed(() => { humidity = 'dry'; refreshHumidity(); });
+  btnWet.mousePressed(() => { humidity = 'wet'; refreshHumidity(); });
+
+  btnGeom.mousePressed(() => { geomOn = !geomOn; refreshToggles(); });
+  btnAtm.mousePressed(() => { atmOn = !atmOn; refreshToggles(); });
+
+  textFont('system-ui');
+}
+
+function refreshHumidity() {
+  btnDry.toggleClass('active', humidity === 'dry');
+  btnWet.toggleClass('active', humidity === 'wet');
+}
+
+function refreshToggles() {
+  btnGeom.toggleClass('off', !geomOn);
+  btnAtm.toggleClass('off', !atmOn);
+}
+
+function alpha(freq) {
+  const idx = humidity === 'dry' ? 0 : 1;
+  return ALPHA[freq][idx];
+}
+
+function draw() {
+  background(255);
+
+  const d = Number(distSlider.value());
+  const L0 = Number(levelSlider.value());
+
+  const geomLoss = geomOn ? 20 * Math.log10(d) : 0;
+  const atm8 = atmOn ? alpha(8000) * (d / 100) : 0;
+
+  select('#geomLoss').html(geomLoss.toFixed(1) + ' dB');
+  select('#atmLoss').html(atm8.toFixed(1) + ' dB');
+  select('#totalLoss').html((geomLoss + atm8).toFixed(1) + ' dB');
+
+  // ── Spectrum visualization: 4 bands before/after ──
+  const left = 60;
+  const right = width - 60;
+  const top = 40;
+  const bottom = 300;
+
+  // Title
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(14);
+  textStyle(BOLD);
+  text('Espectro: antes vs después de la propagación (' + d + ' m)', width / 2, 12);
+  textStyle(NORMAL);
+
+  // Baseline
+  stroke(180);
+  strokeWeight(1);
+  line(left, bottom, right, bottom);
+
+  // 4 bands
+  const bandW = (right - left) / 4;
+  for (let i = 0; i < 4; i++) {
+    const band = BANDS[i];
+    const cx = left + i * bandW + bandW / 2;
+
+    // Initial level (all bands at L0)
+    const initPx = map(L0, 60, 110, bottom, top);
+
+    // Final level for this band
+    const loss = (geomOn ? 20 * Math.log10(d) : 0) + (atmOn ? alpha(band.freq) * (d / 100) : 0);
+    const finalLevel = L0 - loss;
+    const finalPx = map(constrain(finalLevel, 0, 110), 0, 110, bottom, top);
+
+    // "Before" bar (teal, full)
+    fill(TEAL[0], TEAL[1], TEAL[2], 60);
+    noStroke();
+    rect(cx - bandW * 0.3, initPx, bandW * 0.6, bottom - initPx, 4);
+
+    // "After" bar (coral, reduced)
+    fill(CORAL[0], CORAL[1], CORAL[2], 200);
+    rect(cx - bandW * 0.3, finalPx, bandW * 0.6, bottom - finalPx, 4);
+
+    // Band label
+    fill(23, 32, 51);
+    textAlign(CENTER, TOP);
+    textSize(13);
+    text(band.name, cx, bottom + 8);
+
+    // Final level label
+    fill(CORAL[0], CORAL[1], CORAL[2]);
+    textSize(10);
+    text(finalLevel.toFixed(0) + ' dB', cx, finalPx - 14);
+  }
+
+  // Legend
+  let ly = bottom + 34;
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  rect(left, ly, 14, 14, 3);
+  fill(23, 32, 51);
+  textAlign(LEFT, CENTER);
+  textSize(11);
+  text('Nivel a 1 m (inicial)', left + 20, ly + 7);
+
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  rect(left + 180, ly, 14, 14, 3);
+  fill(23, 32, 51);
+  text('Nivel después de propagarse', left + 200, ly + 7);
+
+  // Note
+  fill(82, 96, 121);
+  textSize(10);
+  textAlign(CENTER, TOP);
+  text('Los agudos (4 kHz, 8 kHz) pierden más por absorción atmosférica → el sonido se "oscurece" con la distancia.', width / 2, bottom + 56);
+}
+
+function windowResized() {
+  const cw = min(880, windowWidth - 40);
+  resizeCanvas(cw, 380);
+}
+</script>
+</body>
+</html>

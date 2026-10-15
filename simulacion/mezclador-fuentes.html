@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mezclador de fuentes — Suma de niveles sonoros</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #mixer { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 90px; font-weight: 600; }
+    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
+    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
+    .stat .val { font-weight: 700; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+    .highlight { background: #e6f7f3; border-left: 4px solid #249D8F; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+  </style>
+</head>
+<body>
+<div id="mixer">
+  <h2>Suma de dos fuentes sonoras</h2>
+  <p style="color:#526079">Las tres ondas se dibujan con <strong>la misma escala vertical</strong>. Compara la amplitud de cada fuente con la suma: dos señales idénticas y en fase duplican la amplitud (+6 dB); dos señales de frecuencias diferentes suman sus potencias medias (+3 dB si tienen igual nivel).</p>
+
+  <div class="row">
+    <label>Fuente A:</label>
+    <input type="range" id="sliderA" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valA" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Fuente B:</label>
+    <input type="range" id="sliderB" min="40" max="100" value="70" step="0.1" style="flex:1 1 300px">
+    <span id="valB" style="font-weight:700">70 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Modo:</label>
+    <button id="btnMode">Incoherente (frecuencias distintas)</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Diferencia ΔL</div><div class="val" id="diff">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Corrección</div><div class="val" id="corr">+3.0 dB</div></div>
+    <div class="stat highlight"><div class="lbl">Resultado</div><div class="val" id="exact">73.01 dB</div></div>
+    <div class="stat"><div class="lbl">RMS total / RMS de la fuente mayor</div><div class="val" id="rmsRatio">×1.41</div></div>
+  </div>
+  <p style="color:#526079;font-size:13px">El cociente RMS representa el aumento de nivel medio: ×1,41 equivale a +3 dB y ×2 equivale a +6 dB. En modo incoherente la altura instantánea de los picos puede variar.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+const TEAL_DARK = [26, 122, 111];
+
+const F_A = 1.0;
+const F_B_COHERENT = 1.0;
+const F_B_INCOHERENT = 2.0;
+
+let sliderA, sliderB, btnMode;
+let coherent = false;
+let time = 0;
+
+function setup() {
+  const cw = min(860, windowWidth - 40);
+  const cnv = createCanvas(cw, 510);
+  cnv.parent('mixer');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  sliderA = select('#sliderA');
+  sliderB = select('#sliderB');
+  btnMode = select('#btnMode');
+
+  sliderA.input(() => { select('#valA').html(sliderA.value() + ' dB'); });
+  sliderB.input(() => { select('#valB').html(sliderB.value() + ' dB'); });
+
+  btnMode.mousePressed(() => {
+    coherent = !coherent;
+    btnMode.html(coherent ? 'Coherente (en fase)' : 'Incoherente (frecuencias distintas)');
+    btnMode.toggleClass('active', coherent);
+  });
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+  time += deltaTime * 0.001;
+
+  const LA = Number(sliderA.value());
+  const LB = Number(sliderB.value());
+  // Misma referencia para ambos niveles: 70 dB corresponde a amplitud pico 1.
+  const ampA = Math.pow(10, (LA - 70) / 20);
+  const ampB = Math.pow(10, (LB - 70) / 20);
+  const fB = coherent ? F_B_COHERENT : F_B_INCOHERENT;
+  const Lsum = coherent
+    ? 20 * Math.log10(Math.pow(10, LA / 20) + Math.pow(10, LB / 20))
+    : 10 * Math.log10(Math.pow(10, LA / 10) + Math.pow(10, LB / 10));
+
+  const stronger = Math.max(ampA, ampB);
+  const rmsTotal = coherent ? ampA + ampB : Math.hypot(ampA, ampB);
+  const ratio = rmsTotal / stronger;
+
+  select('#diff').html(Math.abs(LA - LB).toFixed(1) + ' dB');
+  select('#corr').html('+' + (Lsum - Math.max(LA, LB)).toFixed(1) + ' dB' +
+    (coherent ? ' (presión)' : ' (energía)'));
+  select('#exact').html(Lsum.toFixed(2) + ' dB');
+  select('#rmsRatio').html('×' + ratio.toFixed(2));
+
+  const x = 20, w = width - 40, h = 128, gap = 9, top = 12;
+  // Escala compartida: NO se normaliza ninguna onda por separado.
+  // El máximo teórico de dos señales en fase cabe en cada panel.
+  const fullScale = 2 * stronger;
+  const pixelsPerUnit = (h / 2 - 15) / fullScale;
+
+  const waveA = t => ampA * Math.sin(t);
+  const waveB = t => ampB * Math.sin(coherent ? t : 2 * t);
+  const waveSum = t => waveA(t) + waveB(t);
+
+  drawPanel(x, top, w, h, 'Fuente A (' + LA.toFixed(1) + ' dB)',
+    waveA, pixelsPerUnit, TEAL, false);
+  drawPanel(x, top + h + gap, w, h, 'Fuente B (' + LB.toFixed(1) + ' dB)',
+    waveB, pixelsPerUnit, coherent ? INDIGO : CORAL, false);
+  drawPanel(x, top + 2 * (h + gap), w, h, 'Suma (' + Lsum.toFixed(1) + ' dB)',
+    waveSum, pixelsPerUnit, TEAL_DARK, true);
+
+  // Barra de RMS normalizada respecto a la fuente individual más intensa.
+  const by = top + 3 * (h + gap) + 5;
+  noStroke(); fill(23, 32, 51); textAlign(LEFT, TOP); textStyle(BOLD); textSize(13);
+  text('Comparación de nivel RMS (referencia: fuente mayor = 1)', x + 8, by);
+  textStyle(NORMAL);
+  const barX = x + 8, barY = by + 24, maxW = w - 30;
+  const unitW = maxW / 2.25;
+  fill(222, 231, 240); rect(barX, barY, maxW, 17, 6);
+  fill(80, 129, 191); rect(barX, barY, unitW, 17, 6);
+  fill(28, 145, 120); rect(barX, barY + 24, ratio * unitW, 17, 6);
+  fill(23, 32, 51); textSize(11);
+  text('Fuente mayor: ×1', barX + 4, barY + 3);
+  text('Resultado: ×' + ratio.toFixed(2), barX + 4, barY + 27);
+}
+
+function drawPanel(x, y, w, h, label, sample, pixelsPerUnit, col, highlighted) {
+  noStroke();
+  fill(highlighted ? 230 : 248, highlighted ? 247 : 250, highlighted ? 243 : 255);
+  rect(x, y, w, h, 8);
+  stroke(0, 0, 0, 25); strokeWeight(1);
+  line(x + 10, y + h / 2, x + w - 10, y + h / 2);
+  noStroke(); fill(23, 32, 51); textAlign(LEFT, TOP); textSize(12); textStyle(BOLD);
+  text(label, x + 12, y + 6); textStyle(NORMAL);
+  noFill(); stroke(col[0], col[1], col[2]); strokeWeight(highlighted ? 3 : 2);
+  beginShape();
+  for (let i = 0; i <= 300; i++) {
+    const t = i / 300 * TWO_PI * 4 + time * 2;
+    const wx = x + 10 + i / 300 * (w - 20);
+    vertex(wx, y + h / 2 - sample(t) * pixelsPerUnit);
+  }
+  endShape();
+}
+
+function windowResized() {
+  const cw = min(860, windowWidth - 40);
+  resizeCanvas(cw, 510);
+}
+</script>
+</body>
+</html>

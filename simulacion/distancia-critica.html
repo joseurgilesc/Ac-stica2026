@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distancia crítica — Campo directo vs reverberante</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 12px 0; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; margin: 8px 0; }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Distancia crítica</h2>
+  <p class="lead">Dónde el campo directo se iguala con el campo reverberante. D_c = 0.141 × √(Q × A).</p>
+
+  <div class="row">
+    <label>Potencia L_w:</label>
+    <input type="range" id="lw" min="70" max="110" value="90" step="1" style="flex:1 1 200px">
+    <span id="lwVal" style="font-weight:700">90 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Directividad Q:</label>
+    <input type="range" id="q" min="1" max="8" value="2" step="0.5" style="flex:1 1 200px">
+    <span id="qVal" style="font-weight:700">2</span>
+  </div>
+
+  <div class="row">
+    <label>Absorción A:</label>
+    <input type="range" id="a" min="5" max="50" value="10" step="0.5" style="flex:1 1 200px">
+    <span id="aVal" style="font-weight:700">10 sabins</span>
+  </div>
+
+  <div class="row">
+    <label>Distancia del oyente r:</label>
+    <input type="range" id="r" min="0.1" max="5" value="1" step="0.05" style="flex:1 1 200px">
+    <span id="rVal" style="font-weight:700">1.00 m</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Distancia crítica D_c</div><div class="val" id="sDc">—</div></div>
+    <div class="stat"><div class="lbl">Nivel total en r</div><div class="val" id="sTotal">—</div></div>
+    <div class="stat"><div class="lbl">Campo dominante</div><div class="val" id="sField">—</div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#2471A3"></span> Campo directo L_d</span>
+    <span><span class="dot" style="background:#C0392B"></span> Campo reverberante L_r</span>
+    <span><span class="dot" style="background:#27AE60"></span> Total</span>
+    <span><span class="dot" style="background:#F39C12"></span> D_c</span>
+  </div>
+</div>
+
+<script>
+const BLUE = [36, 113, 163];
+const RED = [192, 57, 43];
+const GREEN = [39, 174, 96];
+const ORANGE = [243, 156, 18];
+
+let lwSlider, qSlider, aSlider, rSlider;
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 420);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  lwSlider = select('#lw');
+  qSlider = select('#q');
+  aSlider = select('#a');
+  rSlider = select('#r');
+
+  lwSlider.input(() => select('#lwVal').html(lwSlider.value() + ' dB'));
+  qSlider.input(() => select('#qVal').html(qSlider.value()));
+  aSlider.input(() => select('#aVal').html(aSlider.value() + ' sabins'));
+  rSlider.input(() => select('#rVal').html(Number(rSlider.value()).toFixed(2) + ' m'));
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+
+  const Lw = Number(lwSlider.value());
+  const Q = Number(qSlider.value());
+  const A = Number(aSlider.value());
+  const r = Number(rSlider.value());
+
+  const Dc = 0.141 * Math.sqrt(Q * A);
+  const DI = 10 * Math.log10(Q);
+
+  // Levels at current r
+  const Ld = Lw + 10 * Math.log10(Q / (4 * PI * r * r)) + 0.1;
+  const Lr = Lw + 10 * Math.log10(4 / A) + 0.1;
+  const Ltotal = 10 * Math.log10(Math.pow(10, Ld/10) + Math.pow(10, Lr/10));
+
+  // Field dominance
+  let field;
+  if (r < Dc * 0.9) field = 'Directo (r < D_c)';
+  else if (r > Dc * 1.1) field = 'Reverberante (r > D_c)';
+  else field = 'En D_c (iguales)';
+
+  select('#sDc').html(Dc.toFixed(2) + ' m');
+  select('#sTotal').html(Ltotal.toFixed(1) + ' dB');
+  select('#sField').html(field);
+
+  // ── Graph ──
+  const gx = 55;
+  const gy = 40;
+  const gw = width - 70;
+  const gh = 320;
+
+  // Background
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 10, gy - 10, gw + 20, gh + 20, 8);
+
+  // Y range: Ld and Lr at current settings (dynamic)
+  const Ld_at_Dc = Lw + 10 * Math.log10(Q / (4 * PI * Dc * Dc)) + 0.1;
+  const Lmax = Math.max(Ld_at_Dc, Lr) + 8;
+  const Lmin = Math.min(Ld_at_Dc, Lr) - 28;
+
+  // Grid (every 10 dB)
+  stroke(210);
+  strokeWeight(0.5);
+  for (let L = Math.ceil(Lmin / 10) * 10; L <= Lmax; L += 10) {
+    let y = map(L, Lmin, Lmax, gy + gh, gy);
+    line(gx, y, gx + gw, y);
+    fill(130); noStroke();
+    textAlign(RIGHT, CENTER); textSize(9);
+    text(L + ' dB', gx - 5, y);
+  }
+
+  // X axis (log distance 0.1 to 5 m)
+  const rMin = 0.1, rMax = 5;
+  // Distance ticks
+  fill(130);
+  textAlign(CENTER, TOP); textSize(9);
+  for (let rr of [0.1, 0.2, 0.5, 1, 2, 5]) {
+    let x = map(Math.log10(rr), Math.log10(rMin), Math.log10(rMax), gx, gx + gw);
+    stroke(210); strokeWeight(0.5);
+    line(x, gy + gh, x, gy + gh + 4);
+    noStroke();
+    text(rr + 'm', x, gy + gh + 6);
+  }
+  noStroke();
+  fill(130);
+  textAlign(CENTER, TOP); textSize(10);
+  text('Distancia (escala logarítmica)', gx + gw / 2, gy + gh + 22);
+
+  // L_r curve (constant)
+  stroke(RED[0], RED[1], RED[2]);
+  strokeWeight(2.5);
+  line(gx, map(Lr, Lmin, Lmax, gy + gh, gy), gx + gw, map(Lr, Lmin, Lmax, gy + gh, gy));
+
+  // L_d curve
+  stroke(BLUE[0], BLUE[1], BLUE[2]);
+  strokeWeight(2.5);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let rr = rMin * Math.pow(rMax / rMin, i / 200);
+    let L = Lw + 10 * Math.log10(Q / (4 * PI * rr * rr)) + 0.1;
+    let x = map(Math.log10(rr), Math.log10(rMin), Math.log10(rMax), gx, gx + gw);
+    let y = map(constrain(L, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  // L_total curve
+  stroke(GREEN[0], GREEN[1], GREEN[2]);
+  strokeWeight(2.5);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 200; i++) {
+    let rr = rMin * Math.pow(rMax / rMin, i / 200);
+    let Ld_r = Lw + 10 * Math.log10(Q / (4 * PI * rr * rr)) + 0.1;
+    let Lt = 10 * Math.log10(Math.pow(10, Ld_r/10) + Math.pow(10, Lr/10));
+    let x = map(Math.log10(rr), Math.log10(rMin), Math.log10(rMax), gx, gx + gw);
+    let y = map(constrain(Lt, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  // D_c vertical line
+  let dcx = map(Math.log10(Dc), Math.log10(rMin), Math.log10(rMax), gx, gx + gw);
+  if (Dc >= rMin && Dc <= rMax) {
+    stroke(ORANGE[0], ORANGE[1], ORANGE[2]);
+    strokeWeight(2);
+    drawingContext.setLineDash([6, 4]);
+    line(dcx, gy, dcx, gy + gh);
+    drawingContext.setLineDash([]);
+    noStroke();
+    fill(ORANGE[0], ORANGE[1], ORANGE[2]);
+    textAlign(CENTER, BOTTOM); textSize(10);
+    text('D_c = ' + Dc.toFixed(2) + ' m', dcx, gy - 2);
+  }
+
+  // Current position marker
+  let rx = map(Math.log10(r), Math.log10(rMin), Math.log10(rMax), gx, gx + gw);
+  let rY = map(constrain(Ltotal, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+  fill(0);
+  noStroke();
+  circle(rx, rY, 8);
+
+  // Title
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('Nivel vs distancia  ·  L_w=' + Lw + ' dB, Q=' + Q + ', A=' + A + ' sabins, DI=' + DI.toFixed(1) + ' dB', 20, 16);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 420);
+}
+</script>
+</body>
+</html>

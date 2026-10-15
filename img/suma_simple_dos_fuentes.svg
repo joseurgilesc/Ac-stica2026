@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" role="img" aria-labelledby="titulo descripcion">
+<title id="titulo">Suma de dos fuentes sonoras independientes</title>
+<desc id="descripcion">Una fuente de 70 dB SPL más otra fuente independiente de 70 dB SPL producen aproximadamente 73 dB SPL.</desc>
+<rect width="1000" height="400" rx="16" fill="#f7f9fc"/>
+<text x="500" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#17243a">Suma de dos fuentes sonoras</text>
+<text x="500" y="81" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#536176">Dos fuentes independientes de igual nivel</text>
+<rect x="35" y="121" width="262" height="148" rx="15" fill="#e8f1ff" stroke="#98bbe5" stroke-width="2"/>
+<text x="166" y="170" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#253e60">Fuente A</text>
+<text x="166" y="221" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#183e71">70 dB SPL</text>
+<text x="342" y="213" text-anchor="middle" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#526079">+</text>
+<rect x="391" y="121" width="262" height="148" rx="15" fill="#e8f1ff" stroke="#98bbe5" stroke-width="2"/>
+<text x="522" y="170" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#253e60">Fuente B</text>
+<text x="522" y="221" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#183e71">70 dB SPL</text>
+<text x="698" y="213" text-anchor="middle" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#526079">=</text>
+<rect x="745" y="121" width="220" height="148" rx="15" fill="#e6f7ee" stroke="#7bbb9d" stroke-width="2"/>
+<text x="855" y="167" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#176b50">Resultado</text>
+<text x="855" y="217" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#126c52">73 dB SPL</text>
+<text x="855" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#126c52">+3 dB</text>
+<rect x="110" y="302" width="780" height="62" rx="12" fill="#ffffff" stroke="#d7e0ed" stroke-width="1.5"/>
+<text x="500" y="329" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#193e63">Duplicar fuentes independientes de igual nivel añade +3 dB</text>
+<text x="500" y="352" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#536176">No se suman los valores numéricos en dB: se suman sus potencias medias.</text>
+</svg>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="940" viewBox="0 0 1200 940"
+     role="img" aria-labelledby="title description">
+  <title id="title">Frecuencia y longitud de onda en el aire</title>
+  <desc id="description">Escala logarítmica y gráfico que muestran la relación inversa entre frecuencia y longitud de onda, calculada para una velocidad del sonido de 343 metros por segundo.</desc>
+  <defs>
+    <style>
+      .title { font-family: Inter, Arial, sans-serif; font-size: 32px; font-weight: 700; fill: #173B63; }
+      .subtitle { font-family: Inter, Arial, sans-serif; font-size: 18px; fill: #5B7288; }
+      .head { font-family: Inter, Arial, sans-serif; font-size: 19px; font-weight: 700; fill: #173B63; }
+      .label { font-family: Inter, Arial, sans-serif; font-size: 17px; fill: #304A62; }
+      .tick { font-family: Inter, Arial, sans-serif; font-size: 15px; fill: #415A70; }
+      .small { font-family: Inter, Arial, sans-serif; font-size: 14px; fill: #5B7288; }
+      .badge { font-family: Georgia, serif; font-size: 21px; font-weight: 700; fill: #173B63; }
+      .axis { stroke: #173B63; stroke-width: 2.4; fill: none; }
+      .grid-major { stroke: #A7B7C5; stroke-width: 1.2; }
+      .grid-minor { stroke: #DCE4EA; stroke-width: 0.8; }
+      .curve { stroke: #E05B49; stroke-width: 4.2; fill: none; stroke-linecap: round; }
+    </style>
+  </defs>
+  <rect width="1200" height="940" fill="#F7FAFC"/>
+  <text x="66" y="55" class="title">Frecuencia y longitud de onda en el aire</text>
+  <text x="66" y="83" class="subtitle">Relación inversa calculada con c ≈ 343 m/s</text>
+
+  <rect x="64" y="108" width="1072" height="210" rx="18" fill="#FFFFFF" stroke="#DDE6ED"/>
+  <circle cx="102" cy="151" r="23" fill="#E8F1F8"/>
+  <text x="102" y="159" text-anchor="middle" class="badge">A</text>
+  <text x="180" y="137" class="head">Longitud de onda (m)</text>
+  <text x="180" y="301" class="head">Frecuencia (Hz)</text>
+  <line x1="180" y1="216" x2="1100" y2="216" class="axis"/>
+  <line x1="181.17" y1="186" x2="181.17" y2="216" class="axis"/>
+  <text x="181.17" y="176" text-anchor="middle" class="tick">17</text>
+  <line x1="251.84" y1="186" x2="251.84" y2="216" class="axis"/>
+  <text x="251.84" y="176" text-anchor="middle" class="tick">10</text>
+  <line x1="344.16" y1="186" x2="344.16" y2="216" class="axis"/>
+  <text x="344.16" y="176" text-anchor="middle" class="tick">5</text>
+  <line x1="466.19" y1="186" x2="466.19" y2="216" class="axis"/>
+  <text x="466.19" y="176" text-anchor="middle" class="tick">2</text>
+  <line x1="558.51" y1="186" x2="558.51" y2="216" class="axis"/>
+  <text x="558.51" y="176" text-anchor="middle" class="tick">1</text>
+  <line x1="650.82" y1="186" x2="650.82" y2="216" class="axis"/>
+  <text x="650.82" y="176" text-anchor="middle" class="tick">0.5</text>
+  <line x1="772.86" y1="186" x2="772.86" y2="216" class="axis"/>
+  <text x="772.86" y="176" text-anchor="middle" class="tick">0.2</text>
+  <line x1="865.17" y1="186" x2="865.17" y2="216" class="axis"/>
+  <text x="865.17" y="176" text-anchor="middle" class="tick">0.1</text>
+  <line x1="957.49" y1="186" x2="957.49" y2="216" class="axis"/>
+  <text x="957.49" y="176" text-anchor="middle" class="tick">0.05</text>
+  <line x1="1079.53" y1="186" x2="1079.53" y2="216" class="axis"/>
+  <text x="1079.53" y="176" text-anchor="middle" class="tick">0.02</text>
+  <line x1="180.00" y1="216" x2="180.00" y2="244" class="axis"/>
+  <text x="180.00" y="268" text-anchor="middle" class="tick">20</text>
+  <line x1="302.03" y1="216" x2="302.03" y2="244" class="axis"/>
+  <text x="302.03" y="268" text-anchor="middle" class="tick">50</text>
+  <line x1="394.35" y1="216" x2="394.35" y2="244" class="axis"/>
+  <text x="394.35" y="268" text-anchor="middle" class="tick">100</text>
+  <line x1="486.67" y1="216" x2="486.67" y2="244" class="axis"/>
+  <text x="486.67" y="268" text-anchor="middle" class="tick">200</text>
+  <line x1="608.70" y1="216" x2="608.70" y2="244" class="axis"/>
+  <text x="608.70" y="268" text-anchor="middle" class="tick">500</text>
+  <line x1="701.02" y1="216" x2="701.02" y2="244" class="axis"/>
+  <text x="701.02" y="268" text-anchor="middle" class="tick">1 k</text>
+  <line x1="793.33" y1="216" x2="793.33" y2="244" class="axis"/>
+  <text x="793.33" y="268" text-anchor="middle" class="tick">2 k</text>
+  <line x1="915.37" y1="216" x2="915.37" y2="244" class="axis"/>
+  <text x="915.37" y="268" text-anchor="middle" class="tick">5 k</text>
+  <line x1="1007.68" y1="216" x2="1007.68" y2="244" class="axis"/>
+  <text x="1007.68" y="268" text-anchor="middle" class="tick">10 k</text>
+  <line x1="1100.00" y1="216" x2="1100.00" y2="244" class="axis"/>
+  <text x="1100.00" y="268" text-anchor="middle" class="tick">20 k</text>
+  <rect x="64" y="338" width="1072" height="520" rx="18" fill="#FFFFFF" stroke="#DDE6ED"/>
+  <circle cx="102" cy="381" r="23" fill="#E8F1F8"/>
+  <text x="102" y="389" text-anchor="middle" class="badge">B</text>
+  <line x1="150.00" y1="365.0" x2="150.00" y2="800.0" class="grid-major"/>
+  <line x1="205.76" y1="365.0" x2="205.76" y2="800.0" class="grid-minor"/>
+  <line x1="245.33" y1="365.0" x2="245.33" y2="800.0" class="grid-minor"/>
+  <line x1="276.01" y1="365.0" x2="276.01" y2="800.0" class="grid-major"/>
+  <line x1="301.09" y1="365.0" x2="301.09" y2="800.0" class="grid-minor"/>
+  <line x1="322.29" y1="365.0" x2="322.29" y2="800.0" class="grid-minor"/>
+  <line x1="340.65" y1="365.0" x2="340.65" y2="800.0" class="grid-minor"/>
+  <line x1="356.85" y1="365.0" x2="356.85" y2="800.0" class="grid-minor"/>
+  <line x1="371.34" y1="365.0" x2="371.34" y2="800.0" class="grid-major"/>
+  <line x1="466.67" y1="365.0" x2="466.67" y2="800.0" class="grid-major"/>
+  <line x1="522.43" y1="365.0" x2="522.43" y2="800.0" class="grid-minor"/>
+  <line x1="561.99" y1="365.0" x2="561.99" y2="800.0" class="grid-minor"/>
+  <line x1="592.68" y1="365.0" x2="592.68" y2="800.0" class="grid-major"/>
+  <line x1="617.76" y1="365.0" x2="617.76" y2="800.0" class="grid-minor"/>
+  <line x1="638.95" y1="365.0" x2="638.95" y2="800.0" class="grid-minor"/>
+  <line x1="657.32" y1="365.0" x2="657.32" y2="800.0" class="grid-minor"/>
+  <line x1="673.52" y1="365.0" x2="673.52" y2="800.0" class="grid-minor"/>
+  <line x1="688.01" y1="365.0" x2="688.01" y2="800.0" class="grid-major"/>
+  <line x1="783.33" y1="365.0" x2="783.33" y2="800.0" class="grid-major"/>
+  <line x1="839.10" y1="365.0" x2="839.10" y2="800.0" class="grid-minor"/>
+  <line x1="878.66" y1="365.0" x2="878.66" y2="800.0" class="grid-minor"/>
+  <line x1="909.35" y1="365.0" x2="909.35" y2="800.0" class="grid-major"/>
+  <line x1="934.42" y1="365.0" x2="934.42" y2="800.0" class="grid-minor"/>
+  <line x1="955.62" y1="365.0" x2="955.62" y2="800.0" class="grid-minor"/>
+  <line x1="973.99" y1="365.0" x2="973.99" y2="800.0" class="grid-minor"/>
+  <line x1="990.18" y1="365.0" x2="990.18" y2="800.0" class="grid-minor"/>
+  <line x1="1004.67" y1="365.0" x2="1004.67" y2="800.0" class="grid-major"/>
+  <line x1="1100.00" y1="365.0" x2="1100.00" y2="800.0" class="grid-major"/>
+  <line x1="150.0" y1="800.00" x2="1100.0" y2="800.00" class="grid-major"/>
+  <line x1="150.0" y1="760.33" x2="1100.0" y2="760.33" class="grid-major"/>
+  <line x1="150.0" y1="737.13" x2="1100.0" y2="737.13" class="grid-minor"/>
+  <line x1="150.0" y1="720.66" x2="1100.0" y2="720.66" class="grid-minor"/>
+  <line x1="150.0" y1="707.89" x2="1100.0" y2="707.89" class="grid-major"/>
+  <line x1="150.0" y1="697.46" x2="1100.0" y2="697.46" class="grid-minor"/>
+  <line x1="150.0" y1="688.64" x2="1100.0" y2="688.64" class="grid-minor"/>
+  <line x1="150.0" y1="680.99" x2="1100.0" y2="680.99" class="grid-minor"/>
+  <line x1="150.0" y1="674.25" x2="1100.0" y2="674.25" class="grid-minor"/>
+  <line x1="150.0" y1="668.22" x2="1100.0" y2="668.22" class="grid-major"/>
+  <line x1="150.0" y1="628.55" x2="1100.0" y2="628.55" class="grid-major"/>
+  <line x1="150.0" y1="605.35" x2="1100.0" y2="605.35" class="grid-minor"/>
+  <line x1="150.0" y1="588.89" x2="1100.0" y2="588.89" class="grid-minor"/>
+  <line x1="150.0" y1="576.11" x2="1100.0" y2="576.11" class="grid-major"/>
+  <line x1="150.0" y1="565.68" x2="1100.0" y2="565.68" class="grid-minor"/>
+  <line x1="150.0" y1="556.86" x2="1100.0" y2="556.86" class="grid-minor"/>
+  <line x1="150.0" y1="549.22" x2="1100.0" y2="549.22" class="grid-minor"/>
+  <line x1="150.0" y1="542.48" x2="1100.0" y2="542.48" class="grid-minor"/>
+  <line x1="150.0" y1="536.45" x2="1100.0" y2="536.45" class="grid-major"/>
+  <line x1="150.0" y1="496.78" x2="1100.0" y2="496.78" class="grid-major"/>
+  <line x1="150.0" y1="473.57" x2="1100.0" y2="473.57" class="grid-minor"/>
+  <line x1="150.0" y1="457.11" x2="1100.0" y2="457.11" class="grid-minor"/>
+  <line x1="150.0" y1="444.34" x2="1100.0" y2="444.34" class="grid-major"/>
+  <line x1="150.0" y1="433.90" x2="1100.0" y2="433.90" class="grid-minor"/>
+  <line x1="150.0" y1="425.08" x2="1100.0" y2="425.08" class="grid-minor"/>
+  <line x1="150.0" y1="417.44" x2="1100.0" y2="417.44" class="grid-minor"/>
+  <line x1="150.0" y1="410.70" x2="1100.0" y2="410.70" class="grid-minor"/>
+  <line x1="150.0" y1="404.67" x2="1100.0" y2="404.67" class="grid-major"/>
+  <line x1="150.0" y1="365.00" x2="1100.0" y2="365.00" class="grid-major"/>
+  <rect x="150.0" y="365.0" width="950.0" height="435.0" class="axis"/>
+  <text x="150.00" y="828" text-anchor="middle" class="tick">20</text>
+  <text x="276.01" y="828" text-anchor="middle" class="tick">50</text>
+  <text x="371.34" y="828" text-anchor="middle" class="tick">100</text>
+  <text x="466.67" y="828" text-anchor="middle" class="tick">200</text>
+  <text x="592.68" y="828" text-anchor="middle" class="tick">500</text>
+  <text x="688.01" y="828" text-anchor="middle" class="tick">1 k</text>
+  <text x="783.33" y="828" text-anchor="middle" class="tick">2 k</text>
+  <text x="909.35" y="828" text-anchor="middle" class="tick">5 k</text>
+  <text x="1004.67" y="828" text-anchor="middle" class="tick">10 k</text>
+  <text x="1100.00" y="828" text-anchor="middle" class="tick">20 k</text>
+  <text x="137" y="805.00" text-anchor="end" class="tick">0.01</text>
+  <text x="137" y="765.33" text-anchor="end" class="tick">0.02</text>
+  <text x="137" y="712.89" text-anchor="end" class="tick">0.05</text>
+  <text x="137" y="673.22" text-anchor="end" class="tick">0.1</text>
+  <text x="137" y="633.55" text-anchor="end" class="tick">0.2</text>
+  <text x="137" y="581.11" text-anchor="end" class="tick">0.5</text>
+  <text x="137" y="541.45" text-anchor="end" class="tick">1</text>
+  <text x="137" y="501.78" text-anchor="end" class="tick">2</text>
+  <text x="137" y="449.34" text-anchor="end" class="tick">5</text>
+  <text x="137" y="409.67" text-anchor="end" class="tick">10</text>
+  <text x="137" y="370.00" text-anchor="end" class="tick">20</text>
+  <text x="625" y="853" text-anchor="middle" class="head">Frecuencia (Hz)</text>
+  <text x="89" y="585" text-anchor="middle" class="head" transform="rotate(-90 89 585)">Longitud de onda (m)</text>
+  <path d="M 150.00 373.80 L 153.96 375.45 L 157.92 377.09 L 161.88 378.74 L 165.83 380.39 L 169.79 382.03 L 173.75 383.68 L 177.71 385.33 L 181.67 386.98 L 185.62 388.62 L 189.58 390.27 L 193.54 391.92 L 197.50 393.56 L 201.46 395.21 L 205.42 396.86 L 209.38 398.51 L 213.33 400.15 L 217.29 401.80 L 221.25 403.45 L 225.21 405.10 L 229.17 406.74 L 233.12 408.39 L 237.08 410.04 L 241.04 411.68 L 245.00 413.33 L 248.96 414.98 L 252.92 416.63 L 256.88 418.27 L 260.83 419.92 L 264.79 421.57 L 268.75 423.21 L 272.71 424.86 L 276.67 426.51 L 280.62 428.16 L 284.58 429.80 L 288.54 431.45 L 292.50 433.10 L 296.46 434.75 L 300.42 436.39 L 304.38 438.04 L 308.33 439.69 L 312.29 441.33 L 316.25 442.98 L 320.21 444.63 L 324.17 446.28 L 328.12 447.92 L 332.08 449.57 L 336.04 451.22 L 340.00 452.86 L 343.96 454.51 L 347.92 456.16 L 351.88 457.81 L 355.83 459.45 L 359.79 461.10 L 363.75 462.75 L 367.71 464.39 L 371.67 466.04 L 375.62 467.69 L 379.58 469.34 L 383.54 470.98 L 387.50 472.63 L 391.46 474.28 L 395.42 475.93 L 399.38 477.57 L 403.33 479.22 L 407.29 480.87 L 411.25 482.51 L 415.21 484.16 L 419.17 485.81 L 423.12 487.46 L 427.08 489.10 L 431.04 490.75 L 435.00 492.40 L 438.96 494.04 L 442.92 495.69 L 446.88 497.34 L 450.83 498.99 L 454.79 500.63 L 458.75 502.28 L 462.71 503.93 L 466.67 505.58 L 470.63 507.22 L 474.58 508.87 L 478.54 510.52 L 482.50 512.16 L 486.46 513.81 L 490.42 515.46 L 494.38 517.11 L 498.33 518.75 L 502.29 520.40 L 506.25 522.05 L 510.21 523.69 L 514.17 525.34 L 518.12 526.99 L 522.08 528.64 L 526.04 530.28 L 530.00 531.93 L 533.96 533.58 L 537.92 535.23 L 541.88 536.87 L 545.83 538.52 L 549.79 540.17 L 553.75 541.81 L 557.71 543.46 L 561.67 545.11 L 565.62 546.76 L 569.58 548.40 L 573.54 550.05 L 577.50 551.70 L 581.46 553.34 L 585.42 554.99 L 589.38 556.64 L 593.33 558.29 L 597.29 559.93 L 601.25 561.58 L 605.21 563.23 L 609.17 564.87 L 613.12 566.52 L 617.08 568.17 L 621.04 569.82 L 625.00 571.46 L 628.96 573.11 L 632.92 574.76 L 636.87 576.41 L 640.83 578.05 L 644.79 579.70 L 648.75 581.35 L 652.71 582.99 L 656.67 584.64 L 660.62 586.29 L 664.58 587.94 L 668.54 589.58 L 672.50 591.23 L 676.46 592.88 L 680.42 594.52 L 684.38 596.17 L 688.33 597.82 L 692.29 599.47 L 696.25 601.11 L 700.21 602.76 L 704.17 604.41 L 708.12 606.06 L 712.08 607.70 L 716.04 609.35 L 720.00 611.00 L 723.96 612.64 L 727.92 614.29 L 731.88 615.94 L 735.83 617.59 L 739.79 619.23 L 743.75 620.88 L 747.71 622.53 L 751.67 624.17 L 755.62 625.82 L 759.58 627.47 L 763.54 629.12 L 767.50 630.76 L 771.46 632.41 L 775.42 634.06 L 779.38 635.71 L 783.33 637.35 L 787.29 639.00 L 791.25 640.65 L 795.21 642.29 L 799.17 643.94 L 803.12 645.59 L 807.08 647.24 L 811.04 648.88 L 815.00 650.53 L 818.96 652.18 L 822.92 653.82 L 826.88 655.47 L 830.83 657.12 L 834.79 658.77 L 838.75 660.41 L 842.71 662.06 L 846.67 663.71 L 850.63 665.35 L 854.58 667.00 L 858.54 668.65 L 862.50 670.30 L 866.46 671.94 L 870.42 673.59 L 874.37 675.24 L 878.33 676.89 L 882.29 678.53 L 886.25 680.18 L 890.21 681.83 L 894.17 683.47 L 898.12 685.12 L 902.08 686.77 L 906.04 688.42 L 910.00 690.06 L 913.96 691.71 L 917.92 693.36 L 921.88 695.00 L 925.83 696.65 L 929.79 698.30 L 933.75 699.95 L 937.71 701.59 L 941.67 703.24 L 945.62 704.89 L 949.58 706.54 L 953.54 708.18 L 957.50 709.83 L 961.46 711.48 L 965.42 713.12 L 969.38 714.77 L 973.33 716.42 L 977.29 718.07 L 981.25 719.71 L 985.21 721.36 L 989.17 723.01 L 993.12 724.65 L 997.08 726.30 L 1001.04 727.95 L 1005.00 729.60 L 1008.96 731.24 L 1012.92 732.89 L 1016.88 734.54 L 1020.83 736.19 L 1024.79 737.83 L 1028.75 739.48 L 1032.71 741.13 L 1036.67 742.77 L 1040.62 744.42 L 1044.58 746.07 L 1048.54 747.72 L 1052.50 749.36 L 1056.46 751.01 L 1060.42 752.66 L 1064.38 754.30 L 1068.33 755.95 L 1072.29 757.60 L 1076.25 759.25 L 1080.21 760.89 L 1084.17 762.54 L 1088.12 764.19 L 1092.08 765.83 L 1096.04 767.48 L 1100.00 769.13" class="curve"/>
+  <circle cx="371.34" cy="465.91" r="5.5" fill="#E05B49" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="383.34" y="454.91" class="small">100 Hz → 3.4 m</text>
+  <circle cx="688.01" cy="597.68" r="5.5" fill="#E05B49" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="700.01" y="586.68" class="small">1 k Hz → 0.34 m</text>
+  <circle cx="1004.67" cy="729.46" r="5.5" fill="#E05B49" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="890.67" y="718.46" class="small">10 k Hz → 0.034 m</text>
+  <text x="66" y="903" class="subtitle">Al aumentar la frecuencia, la longitud de onda disminuye: λ = c / f.</text>
+</svg>

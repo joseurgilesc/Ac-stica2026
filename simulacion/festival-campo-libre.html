@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Festival al aire libre — Propagación en campo libre</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
+    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
+    .stat .val { font-weight: 700; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Festival al aire libre</h2>
+  <p style="color:#526079">Explora cómo la distancia, el nivel inicial y la directividad Q afectan el nivel que recibe el público.</p>
+
+  <div class="row">
+    <label>Nivel a 1 metro:</label>
+    <input type="range" id="level" min="80" max="120" value="100" step="1" style="flex:1 1 250px">
+    <span id="levelVal" style="font-weight:700">100 dB</span>
+  </div>
+
+  <div class="row">
+    <label>Distancia del espectador:</label>
+    <input type="range" id="dist" min="1" max="32" value="1" step="0.5" style="flex:1 1 250px">
+    <span id="distVal" style="font-weight:700">1.0 m</span>
+  </div>
+
+  <div class="row">
+    <label>Directividad Q:</label>
+    <button id="btnQ1" class="active">Q=1</button>
+    <button id="btnQ2">Q=2</button>
+    <button id="btnQ4">Q=4</button>
+    <button id="btnQ8">Q=8</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Nivel en el espectador</div><div class="val" id="recvLevel">100.0 dB</div></div>
+    <div class="stat"><div class="lbl">Pérdida por distancia</div><div class="val" id="loss">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Ganancia por Q</div><div class="val" id="qGain">0.0 dB</div></div>
+    <div class="stat"><div class="lbl">Potencia para compensar</div><div class="val" id="power">×1.0</div></div>
+  </div>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+
+let levelSlider, distSlider;
+let btnQ1, btnQ2, btnQ4, btnQ8;
+let Q = 1;
+
+function setup() {
+  const cw = min(880, windowWidth - 40);
+  const cnv = createCanvas(cw, 420);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  levelSlider = select('#level');
+  distSlider = select('#dist');
+  btnQ1 = select('#btnQ1');
+  btnQ2 = select('#btnQ2');
+  btnQ4 = select('#btnQ4');
+  btnQ8 = select('#btnQ8');
+
+  levelSlider.input(() => select('#levelVal').html(levelSlider.value() + ' dB'));
+  distSlider.input(() => select('#distVal').html(Number(distSlider.value()).toFixed(1) + ' m'));
+
+  btnQ1.mousePressed(() => { Q = 1; refreshQ(); });
+  btnQ2.mousePressed(() => { Q = 2; refreshQ(); });
+  btnQ4.mousePressed(() => { Q = 4; refreshQ(); });
+  btnQ8.mousePressed(() => { Q = 8; refreshQ(); });
+
+  textFont('system-ui');
+}
+
+function refreshQ() {
+  btnQ1.toggleClass('active', Q === 1);
+  btnQ2.toggleClass('active', Q === 2);
+  btnQ4.toggleClass('active', Q === 4);
+  btnQ8.toggleClass('active', Q === 8);
+}
+
+function draw() {
+  background(255);
+
+  const L1 = Number(levelSlider.value());
+  const d = Number(distSlider.value());
+
+  const qGain = 10 * Math.log10(Q);          // directivity gain on axis
+  const loss = 20 * Math.log10(d);           // inverse square loss
+  const Lrecv = L1 + qGain - loss;
+
+  const power = Math.pow(10, loss / 10);     // power needed to compensate loss
+
+  // Stats
+  select('#recvLevel').html(Lrecv.toFixed(1) + ' dB');
+  select('#loss').html(loss.toFixed(1) + ' dB');
+  select('#qGain').html('+' + qGain.toFixed(1) + ' dB');
+  select('#power').html('×' + power.toFixed(1));
+
+  // ── Scene ──
+  const sceneX = 30;
+  const sceneW = width - 60;
+  const sceneY = 30;
+  const sceneH = 160;
+
+  const srcX = sceneX + 40;
+  const srcY = sceneY + sceneH / 2;
+
+  // Scale: 1 to 32 m
+  const micX = map(d, 1, 32, srcX + 30, sceneX + sceneW - 30);
+
+  // Ground
+  noStroke();
+  fill(248, 250, 255);
+  rect(sceneX, sceneY, sceneW, sceneH, 10);
+
+  // Ground line
+  stroke(180);
+  strokeWeight(2);
+  line(sceneX, sceneY + sceneH - 8, sceneX + sceneW, sceneY + sceneH - 8);
+
+  // Wave fronts (concentric arcs)
+  noFill();
+  stroke(TEAL[0], TEAL[1], TEAL[2], 110);
+  strokeWeight(1.5);
+  for (let r = 20; r < 400; r += 26) {
+    circle(srcX, srcY, r * 2);
+  }
+
+  // Source (speaker on a stand)
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  noStroke();
+  rect(srcX - 5, srcY - 25, 10, 30, 3);
+  // Stand
+  stroke(100);
+  strokeWeight(2);
+  line(srcX, srcY + 5, srcX, sceneY + sceneH - 8);
+  noStroke();
+
+  // Directivity wedge (visual representation of Q)
+  // Narrower wedge for higher Q
+  const wedgeAngle = map(Q, 1, 8, 90, 25); // half-angle in degrees
+  fill(TEAL[0], TEAL[1], TEAL[2], 40);
+  noStroke();
+  arc(srcX, srcY, 340, 340, -radians(wedgeAngle), radians(wedgeAngle), PIE);
+
+  // Source label
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('Fuente', srcX, sceneY + sceneH + 4);
+  textStyle(NORMAL);
+
+  // Audience (mic/spectator)
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(micX, srcY, 12);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  textAlign(CENTER, BOTTOM);
+  textSize(11);
+  text('espectador', micX, srcY - 16);
+
+  // Distance labels
+  fill(82, 96, 121);
+  textAlign(CENTER, TOP);
+  textSize(9);
+  for (let m = 1; m <= 32; m++) {
+    let tx = map(m, 1, 32, srcX + 30, sceneX + sceneW - 30);
+    if (m === 1 || m === 2 || m === 4 || m === 8 || m === 16 || m === 32) {
+      text(m + 'm', tx, sceneY + sceneH + 20);
+    }
+  }
+
+  // ── Graph: level vs distance ──
+  const gx = 60;
+  const gy = 260;
+  const gw = width - 120;
+  const gh = 140;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 20, gy - 20, gw + 40, gh + 40, 8);
+
+  stroke(100);
+  strokeWeight(1.5);
+  line(gx, gy + gh, gx + gw, gy + gh);
+  line(gx, gy, gx, gy + gh);
+
+  // Grid
+  const Lmin = 50, Lmax = 120;
+  stroke(200);
+  strokeWeight(0.5);
+  for (let L = 60; L <= 120; L += 10) {
+    let gyv = map(L, Lmin, Lmax, gy + gh, gy);
+    line(gx, gyv, gx + gw, gyv);
+    fill(100); noStroke();
+    textAlign(RIGHT, CENTER); textSize(9);
+    text(L + ' dB', gx - 8, gyv);
+  }
+  for (let m = 1; m <= 32; m++) {
+    let tx = map(m, 1, 32, gx, gx + gw);
+    stroke(200); strokeWeight(0.5);
+    line(tx, gy + gh, tx, gy + gh + 4);
+    noStroke(); fill(100);
+    textAlign(CENTER, TOP); textSize(9);
+    if (m === 1 || m === 2 || m === 4 || m === 8 || m === 16 || m === 32) text(m + 'm', tx, gy + gh + 6);
+  }
+
+  // Curve: level vs distance for current Q
+  stroke(TEAL[0], TEAL[1], TEAL[2]);
+  strokeWeight(3);
+  noFill();
+  beginShape();
+  for (let i = 0; i <= 100; i++) {
+    let dd = 1 + (i / 100) * 31;
+    let Lv = L1 + 10 * Math.log10(Q) - 20 * Math.log10(dd);
+    let px = map(dd, 1, 32, gx, gx + gw);
+    let py = map(constrain(Lv, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+    vertex(px, py);
+  }
+  endShape();
+
+  // Current point
+  let mx = map(d, 1, 32, gx, gx + gw);
+  let my = map(constrain(Lrecv, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(mx, my, 10);
+
+  // Graph title
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('Nivel vs distancia (Q=' + Q + ')', gx, gy - 16);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(880, windowWidth - 40);
+  resizeCanvas(cw, 420);
+}
+</script>
+</body>
+</html>
