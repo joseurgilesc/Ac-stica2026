@@ -95,6 +95,27 @@ Son monitores pensados para trabajar a distancias cortas, donde buscamos que pre
 !!! warning "Alcance de la medición"
     Dentro del aula, las **reflexiones**, las dimensiones del monitor y el ruido de fondo pueden modificar los resultados; no esperes un patrón polar de laboratorio. Para obtener comparaciones rigurosas se necesitan equipos adecuados y condiciones controladas. Una aplicación de teléfono sirve como **demostración aproximada**, no como medición calibrada.
 
+## 5. Resultados reales: mediciones de los tres grupos
+
+En la práctica de clase, tres grupos midieron un mismo monitor a **0°, 45° y 90°**, con **tres lecturas AVG/Leq** por posición y bandas de ruido rosa filtrado. Los grupos utilizaron celulares diferentes, por lo que **comparamos cambios respecto a 0°**, no niveles absolutos entre dispositivos.
+
+**Cómo leer los resultados:** para una frecuencia dada, resta el promedio a 0° del promedio a 45° o 90°. Si el resultado es negativo, el nivel disminuyó fuera del eje; si es positivo, aumentó. **Esta resta compara niveles**: no es la resta logarítmica utilizada para separar una fuente del ruido de fondo.
+
+<iframe src="../../../simulacion/resultados-directividad.html" title="Gráfica interactiva de las mediciones de directividad de los tres grupos" loading="lazy" style="width:100%;height:780px;border:1px solid #cdd9e4;border-radius:12px;background:#fff;"></iframe>
+
+[📈 **Abrir el gráfico interactivo en pantalla completa**](../../../simulacion/resultados-directividad.html){ .md-button }
+
+### ¿Qué observamos?
+
+- **125 Hz, Grupo 1:** casi no hubo variación a 90° (**+0,07 dB**).
+- **500 Hz, Grupo 1:** el nivel **aumentó** a 90° (**+1,27 dB**). Las reflexiones, la geometría de medición y el espacio podrían influir.
+- **4.000 Hz, Grupo 2:** el nivel cayó **−4,13 dB** a 90°.
+- **6.000 Hz, Grupo 3:** apareció la mayor caída, **−7,40 dB** a 90°.
+- **1.000 Hz** fue medido por los tres grupos, con diferencias distintas. Esto abre la discusión sobre repetibilidad, teléfonos y posición del micrófono.
+
+!!! info "Interpretación de las mediciones"
+    En conjunto se observa una tendencia compatible con **mayor directividad a frecuencias agudas**, pero **no una caída uniforme** en todas las bandas. Estos son resultados de una práctica en aula, afectados por reflexiones y por distintos micrófonos; **no equivalen al patrón polar calibrado del monitor**. Las líneas que unen los puntos en el gráfico facilitan su lectura y no representan frecuencias adicionales medidas.
+
 ---
 
 **Idea final:** la cantidad de dB en un punto no explica toda la experiencia auditiva. También importa **en qué dirección** se distribuye el sonido y **cómo cambia con la frecuencia**.
