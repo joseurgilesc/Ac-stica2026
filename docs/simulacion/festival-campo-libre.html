@@ -1,263 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Festival al aire libre — Propagación en campo libre</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
-    #app { max-width: 900px; margin: 0 auto; padding: 16px; }
-    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
-    .row label { min-width: 130px; font-weight: 600; }
-    .stat { padding: 12px 14px; background: #eef3ff; border-radius: 12px; min-width: 140px; flex: 1; }
-    .stat .lbl { font-size: 12px; color: #526079; margin-bottom: 4px; }
-    .stat .val { font-weight: 700; font-size: 16px; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
-    button { padding: 8px 14px; border-radius: 9px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
-    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
-    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>¿Qué ocurre al alejarnos del monitor? · Campo libre</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#f5f7fb;color:#1d3045}
+*{box-sizing:border-box}body{margin:0}main{max-width:920px;margin:auto;padding:18px}
+h1{font-size:1.52rem;margin:0 0 7px;line-height:1.28}p{line-height:1.5}.lead{color:#52667c;margin:0 0 14px}.panel{background:white;border:1px solid #d7e1eb;border-radius:14px;padding:17px;margin:13px 0}
+label{display:block;font-weight:650;margin-bottom:8px}input[type=range]{width:100%;accent-color:#277ba3;cursor:pointer}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}.distance{font-size:1.7rem;color:#1d638d;font-weight:750}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}button{background:#f0f5fa;color:#204963;border:1px solid #aabed0;padding:9px 13px;border-radius:9px;cursor:pointer;font-weight:650}button:focus-visible{outline:3px solid #94bde4;outline-offset:2px}button:hover{background:#e3eff9}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.kpi{background:#eef5fb;border-radius:10px;padding:12px}.kpi small{display:block;font-size:.82rem;color:#4c647a}.kpi strong{font-size:1.28rem;display:block;margin-top:5px}
+svg{width:100%;height:auto;display:block} .muted{font-size:.89rem;color:#586e82}.call{border-left:4px solid #267c83;background:#f0f8f8;padding:12px 14px;border-radius:5px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{padding:8px 10px;border-bottom:1px solid #e4ebf3;text-align:right}th:first-child,td:first-child{text-align:left}th{background:#eff4f8}tr.selected{background:#e1f2f4;font-weight:700}
+@media(max-width:600px){main{padding:10px}.panel{padding:12px}h1{font-size:1.25rem}.kpis{gap:6px}.kpi{padding:8px}.kpi strong{font-size:1.06rem}.buttons button{flex:1}}
+</style>
 </head>
-<body>
-<div id="app">
-  <h2>Festival al aire libre</h2>
-  <p style="color:#526079">Explora cómo la distancia, el nivel inicial y la directividad Q afectan el nivel que recibe el público.</p>
-
-  <div class="row">
-    <label>Nivel a 1 metro:</label>
-    <input type="range" id="level" min="80" max="120" value="100" step="1" style="flex:1 1 250px">
-    <span id="levelVal" style="font-weight:700">100 dB</span>
+<body><main>
+<h1>Campo libre: ¿qué pasa cuando nos alejamos?</h1>
+<p class="lead">Una sola pregunta, una sola variable: <strong>mantén la misma dirección y cambia únicamente la distancia al monitor</strong>.</p>
+<section class="panel">
+  <div class="toprow"><label for="distance">Distancia entre monitor y oyente</label><output id="distanceOut" class="distance">1 m</output></div>
+  <input id="distance" type="range" min="1" max="32" value="1" step="0.5" aria-label="Distancia del oyente en metros">
+  <div class="buttons"><button id="double" type="button">×2 Duplicar distancia</button><button id="reset" type="button">↺ Volver a 1 m</button><button id="listen" type="button" aria-pressed="false">▶ Escuchar diferencia</button></div>
+  <div class="kpis" aria-live="polite">
+    <div class="kpi"><small>Nivel ideal en el oyente</small><strong id="level">90,0 dB</strong></div>
+    <div class="kpi"><small>Cambio respecto a 1 m</small><strong id="delta">0,0 dB</strong></div>
+    <div class="kpi"><small>Distancia multiplicada por</small><strong id="factor">×1</strong></div>
   </div>
-
-  <div class="row">
-    <label>Distancia del espectador:</label>
-    <input type="range" id="dist" min="1" max="32" value="1" step="0.5" style="flex:1 1 250px">
-    <span id="distVal" style="font-weight:700">1.0 m</span>
-  </div>
-
-  <div class="row">
-    <label>Directividad Q:</label>
-    <button id="btnQ1" class="active">Q=1</button>
-    <button id="btnQ2">Q=2</button>
-    <button id="btnQ4">Q=4</button>
-    <button id="btnQ8">Q=8</button>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="lbl">Nivel en el espectador</div><div class="val" id="recvLevel">100.0 dB</div></div>
-    <div class="stat"><div class="lbl">Pérdida por distancia</div><div class="val" id="loss">0.0 dB</div></div>
-    <div class="stat"><div class="lbl">Ganancia por Q</div><div class="val" id="qGain">0.0 dB</div></div>
-    <div class="stat"><div class="lbl">Potencia para compensar</div><div class="val" id="power">×1.0</div></div>
-  </div>
-</div>
-
+  <svg id="scene" viewBox="0 0 860 180" role="img" aria-label="Esquema de posiciones del oyente al alejarse del monitor">
+    <rect x="12" y="8" width="836" height="161" fill="#f6f9fc" rx="10"/>
+    <text x="30" y="32" font-size="15" fill="#465e76" font-weight="600">Monitor fijo</text>
+    <rect x="58" y="66" width="38" height="60" rx="5" fill="#48657f"/>
+    <circle cx="77" cy="87" r="6" fill="#a9c6d7"/><circle cx="77" cy="108" r="11" fill="#a9c6d7"/>
+    <line x1="103" y1="101" x2="803" y2="101" stroke="#96b0c5" stroke-width="2"/>
+    <g id="markings"></g><g id="person"></g>
+    <text x="430" y="161" text-anchor="middle" font-size="12" fill="#586e82">Distancias dibujadas en escala logarítmica (esquema, no a escala física)</text>
+  </svg>
+  <p class="muted">Se parte de un nivel <strong>hipotético de 90 dB SPL a 1 m</strong>. El sonido del botón es ilustrativo y <strong>no está calibrado en dB SPL</strong>. Mantén el volumen bajo.</p>
+</section>
+<section class="panel">
+  <strong>Cómo varía el nivel sonoro</strong>
+  <svg id="plot" viewBox="0 0 860 266" role="img" aria-label="Gráfica de disminución del nivel según la distancia en campo libre"></svg>
+  <p class="call"><strong>Regla que debes recordar:</strong> en campo libre, para una fuente aproximadamente puntual, <strong>cada vez que duplicas la distancia, el nivel baja alrededor de 6 dB</strong>.</p>
+  <table><thead><tr><th>Distancia</th><th>Nivel ideal</th><th>Cambio respecto a 1 m</th></tr></thead><tbody id="values"></tbody></table>
+</section>
+<section class="panel">
+<strong>¿Por qué en el aula puede ser diferente?</strong>
+<p>El modelo supone que no llegan reflexiones importantes al oyente. En una sala real, las paredes, el suelo y el techo reflejan sonido: los niveles pueden disminuir más o menos que en el modelo, dependiendo de la frecuencia y la posición. Es una <strong>predicción ideal</strong>, no una medición.</p>
+</section>
+</main>
 <script>
-const TEAL = [36, 157, 143];
-const CORAL = [224, 90, 71];
-
-let levelSlider, distSlider;
-let btnQ1, btnQ2, btnQ4, btnQ8;
-let Q = 1;
-
-function setup() {
-  const cw = min(880, windowWidth - 40);
-  const cnv = createCanvas(cw, 420);
-  cnv.parent('app');
-  cnv.style('display', 'block');
-  cnv.style('margin', '14px 0');
-  cnv.style('border', '1px solid #d8deea');
-  cnv.style('border-radius', '12px');
-
-  levelSlider = select('#level');
-  distSlider = select('#dist');
-  btnQ1 = select('#btnQ1');
-  btnQ2 = select('#btnQ2');
-  btnQ4 = select('#btnQ4');
-  btnQ8 = select('#btnQ8');
-
-  levelSlider.input(() => select('#levelVal').html(levelSlider.value() + ' dB'));
-  distSlider.input(() => select('#distVal').html(Number(distSlider.value()).toFixed(1) + ' m'));
-
-  btnQ1.mousePressed(() => { Q = 1; refreshQ(); });
-  btnQ2.mousePressed(() => { Q = 2; refreshQ(); });
-  btnQ4.mousePressed(() => { Q = 4; refreshQ(); });
-  btnQ8.mousePressed(() => { Q = 8; refreshQ(); });
-
-  textFont('system-ui');
+"use strict";
+const $=id=>document.getElementById(id);
+const slider=$("distance"), svgNS="http://www.w3.org/2000/svg";
+const refs=[1,2,4,8,16,32];
+const val=d=>90-20*Math.log10(d);
+const fnum=n=>n.toFixed(1).replace(".",",");
+const x=d=>139+653*Math.log2(d)/5;
+const y=l=>35+(90-l)*(180/31);
+function element(tag,attrs={},txt){const n=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);if(txt!==undefined)n.textContent=txt;return n}
+let context,source,volume;
+function updateAudio(){if(context&&volume)volume.gain.setTargetAtTime(0.11/Number(slider.value),context.currentTime,.06)}
+function paint(){
+ const d=Number(slider.value), l=val(d), delta=l-90;
+ $("distanceOut").textContent=fnum(d)+" m";
+ $("level").textContent=fnum(l)+" dB";
+ $("delta").textContent=(delta>0?"+":"")+fnum(delta)+" dB";
+ $("factor").textContent="×"+fnum(d);
+ const markings=$("markings"),person=$("person");
+ markings.replaceChildren();person.replaceChildren();
+ for(const r of refs){const a=x(r);markings.append(element("line",{x1:a,y1:92,x2:a,y2:111,stroke:"#98b2c7","stroke-width":2}));markings.append(element("text",{x:a,y:133,"text-anchor":"middle","font-size":13,fill:"#425e79"},r+" m"))}
+ const px=x(d);
+ person.append(element("circle",{cx:px,cy:74,r:12,fill:"#cc7044",stroke:"#fff","stroke-width":2}));
+ person.append(element("path",{d:"M"+px+" 88 V109 M"+px+" 95 l-12 10 M"+px+" 95 l12 10 M"+px+" 109 l-10 12 M"+px+" 109 l10 12",stroke:"#cc7044","stroke-width":4,fill:"none","stroke-linecap":"round"}));
+ person.append(element("text",{x:Math.max(145,Math.min(770,px)),y:53,"text-anchor":"middle","font-size":14,fill:"#9e4a29","font-weight":"700"},fnum(d)+" m"));
+ const plot=$("plot");plot.replaceChildren();
+ for(let n=60;n<=90;n+=6){plot.append(element("line",{x1:64,y1:y(n),x2:819,y2:y(n),stroke:n===90?"#9ab2c5":"#e1e9f1","stroke-width":1}));plot.append(element("text",{x:54,y:y(n)+4,"text-anchor":"end","font-size":12,fill:"#456075"},n+" dB"))}
+ for(const r of refs){const a=x(r);plot.append(element("line",{x1:a,y1:28,x2:a,y2:222,stroke:"#e8eef4"}));plot.append(element("text",{x:a,y:244,"text-anchor":"middle","font-size":13,fill:"#456075"},r+" m"))}
+ let path="";for(let i=0;i<=150;i++){const dist=Math.pow(2,5*i/150);path+=(i===0?"M":"L")+x(dist).toFixed(2)+" "+y(val(dist)).toFixed(2)+" ";}
+ plot.append(element("path",{d:path,stroke:"#257c94","stroke-width":3.5,fill:"none","stroke-linecap":"round"}));
+ plot.append(element("circle",{cx:x(d),cy:y(l),r:8,fill:"#cc7044",stroke:"white","stroke-width":2.5}));
+ plot.append(element("text",{x:70,y:16,"font-size":13,fill:"#456075"},"Nivel SPL (modelo ideal)"));
+ const values=$("values");values.replaceChildren();
+ for(const r of refs){const tr=document.createElement("tr");if(Math.abs(d-r)<.01)tr.className="selected";for(const value of [r+" m",fnum(val(r))+" dB",fnum(val(r)-90)+" dB"]){const td=document.createElement("td");td.textContent=value;tr.append(td)}values.append(tr)}
+ updateAudio();
 }
-
-function refreshQ() {
-  btnQ1.toggleClass('active', Q === 1);
-  btnQ2.toggleClass('active', Q === 2);
-  btnQ4.toggleClass('active', Q === 4);
-  btnQ8.toggleClass('active', Q === 8);
+function stopAudio(){if(source){try{source.stop()}catch(e){}source.disconnect();source=null}if(volume){volume.disconnect();volume=null}$("listen").textContent="▶ Escuchar diferencia";$("listen").setAttribute("aria-pressed","false")}
+async function toggleAudio(){
+ if(source){stopAudio();return}
+ const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
+ context=context||new Ctx();await context.resume();
+ const size=context.sampleRate*2, buffer=context.createBuffer(1,size,context.sampleRate),out=buffer.getChannelData(0);
+ let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+ for(let i=0;i<size;i++){
+   const white=Math.random()*2-1;
+   b0=.99886*b0+white*.0555179;b1=.99332*b1+white*.0750759;
+   b2=.969*b2+white*.153852;b3=.8665*b3+white*.3104856;
+   b4=.55*b4+white*.5329522;b5=-.7616*b5-white*.016898;
+   out[i]=(b0+b1+b2+b3+b4+b5+b6+white*.5362)*.11;
+   b6=white*.115926;
+ }
+ source=context.createBufferSource();source.buffer=buffer;source.loop=true;
+ const filter=context.createBiquadFilter();filter.type="bandpass";filter.frequency.value=1000;filter.Q.value=.8;
+ volume=context.createGain();volume.gain.value=0;
+ source.connect(filter);filter.connect(volume);volume.connect(context.destination);
+ source.start();updateAudio();$("listen").textContent="■ Detener sonido";$("listen").setAttribute("aria-pressed","true");
 }
-
-function draw() {
-  background(255);
-
-  const L1 = Number(levelSlider.value());
-  const d = Number(distSlider.value());
-
-  const qGain = 10 * Math.log10(Q);          // directivity gain on axis
-  const loss = 20 * Math.log10(d);           // inverse square loss
-  const Lrecv = L1 + qGain - loss;
-
-  const power = Math.pow(10, loss / 10);     // power needed to compensate loss
-
-  // Stats
-  select('#recvLevel').html(Lrecv.toFixed(1) + ' dB');
-  select('#loss').html(loss.toFixed(1) + ' dB');
-  select('#qGain').html('+' + qGain.toFixed(1) + ' dB');
-  select('#power').html('×' + power.toFixed(1));
-
-  // ── Scene ──
-  const sceneX = 30;
-  const sceneW = width - 60;
-  const sceneY = 30;
-  const sceneH = 160;
-
-  const srcX = sceneX + 40;
-  const srcY = sceneY + sceneH / 2;
-
-  // Scale: 1 to 32 m
-  const micX = map(d, 1, 32, srcX + 30, sceneX + sceneW - 30);
-
-  // Ground
-  noStroke();
-  fill(248, 250, 255);
-  rect(sceneX, sceneY, sceneW, sceneH, 10);
-
-  // Ground line
-  stroke(180);
-  strokeWeight(2);
-  line(sceneX, sceneY + sceneH - 8, sceneX + sceneW, sceneY + sceneH - 8);
-
-  // Wave fronts (concentric arcs)
-  noFill();
-  stroke(TEAL[0], TEAL[1], TEAL[2], 110);
-  strokeWeight(1.5);
-  for (let r = 20; r < 400; r += 26) {
-    circle(srcX, srcY, r * 2);
-  }
-
-  // Source (speaker on a stand)
-  fill(TEAL[0], TEAL[1], TEAL[2]);
-  noStroke();
-  rect(srcX - 5, srcY - 25, 10, 30, 3);
-  // Stand
-  stroke(100);
-  strokeWeight(2);
-  line(srcX, srcY + 5, srcX, sceneY + sceneH - 8);
-  noStroke();
-
-  // Directivity wedge (visual representation of Q)
-  // Narrower wedge for higher Q
-  const wedgeAngle = map(Q, 1, 8, 90, 25); // half-angle in degrees
-  fill(TEAL[0], TEAL[1], TEAL[2], 40);
-  noStroke();
-  arc(srcX, srcY, 340, 340, -radians(wedgeAngle), radians(wedgeAngle), PIE);
-
-  // Source label
-  noStroke();
-  fill(23, 32, 51);
-  textAlign(CENTER, TOP);
-  textSize(11);
-  textStyle(BOLD);
-  text('Fuente', srcX, sceneY + sceneH + 4);
-  textStyle(NORMAL);
-
-  // Audience (mic/spectator)
-  fill(CORAL[0], CORAL[1], CORAL[2]);
-  noStroke();
-  circle(micX, srcY, 12);
-  fill(CORAL[0], CORAL[1], CORAL[2]);
-  textAlign(CENTER, BOTTOM);
-  textSize(11);
-  text('espectador', micX, srcY - 16);
-
-  // Distance labels
-  fill(82, 96, 121);
-  textAlign(CENTER, TOP);
-  textSize(9);
-  for (let m = 1; m <= 32; m++) {
-    let tx = map(m, 1, 32, srcX + 30, sceneX + sceneW - 30);
-    if (m === 1 || m === 2 || m === 4 || m === 8 || m === 16 || m === 32) {
-      text(m + 'm', tx, sceneY + sceneH + 20);
-    }
-  }
-
-  // ── Graph: level vs distance ──
-  const gx = 60;
-  const gy = 260;
-  const gw = width - 120;
-  const gh = 140;
-
-  noStroke();
-  fill(248, 250, 255);
-  rect(gx - 20, gy - 20, gw + 40, gh + 40, 8);
-
-  stroke(100);
-  strokeWeight(1.5);
-  line(gx, gy + gh, gx + gw, gy + gh);
-  line(gx, gy, gx, gy + gh);
-
-  // Grid
-  const Lmin = 50, Lmax = 120;
-  stroke(200);
-  strokeWeight(0.5);
-  for (let L = 60; L <= 120; L += 10) {
-    let gyv = map(L, Lmin, Lmax, gy + gh, gy);
-    line(gx, gyv, gx + gw, gyv);
-    fill(100); noStroke();
-    textAlign(RIGHT, CENTER); textSize(9);
-    text(L + ' dB', gx - 8, gyv);
-  }
-  for (let m = 1; m <= 32; m++) {
-    let tx = map(m, 1, 32, gx, gx + gw);
-    stroke(200); strokeWeight(0.5);
-    line(tx, gy + gh, tx, gy + gh + 4);
-    noStroke(); fill(100);
-    textAlign(CENTER, TOP); textSize(9);
-    if (m === 1 || m === 2 || m === 4 || m === 8 || m === 16 || m === 32) text(m + 'm', tx, gy + gh + 6);
-  }
-
-  // Curve: level vs distance for current Q
-  stroke(TEAL[0], TEAL[1], TEAL[2]);
-  strokeWeight(3);
-  noFill();
-  beginShape();
-  for (let i = 0; i <= 100; i++) {
-    let dd = 1 + (i / 100) * 31;
-    let Lv = L1 + 10 * Math.log10(Q) - 20 * Math.log10(dd);
-    let px = map(dd, 1, 32, gx, gx + gw);
-    let py = map(constrain(Lv, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
-    vertex(px, py);
-  }
-  endShape();
-
-  // Current point
-  let mx = map(d, 1, 32, gx, gx + gw);
-  let my = map(constrain(Lrecv, Lmin, Lmax), Lmin, Lmax, gy + gh, gy);
-  fill(CORAL[0], CORAL[1], CORAL[2]);
-  noStroke();
-  circle(mx, my, 10);
-
-  // Graph title
-  fill(23, 32, 51);
-  textAlign(LEFT, TOP);
-  textSize(11);
-  textStyle(BOLD);
-  text('Nivel vs distancia (Q=' + Q + ')', gx, gy - 16);
-  textStyle(NORMAL);
-}
-
-function windowResized() {
-  const cw = min(880, windowWidth - 40);
-  resizeCanvas(cw, 420);
-}
+slider.addEventListener("input",paint);
+$("double").addEventListener("click",()=>{slider.value=Math.min(32,Number(slider.value)*2);paint()});
+$("reset").addEventListener("click",()=>{slider.value=1;paint()});
+$("listen").addEventListener("click",()=>{toggleAudio().catch(()=>stopAudio())});
+window.addEventListener("pagehide",stopAudio);
+paint();
 </script>
-</body>
-</html>
+</body></html>
