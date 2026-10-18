@@ -1,161 +1,164 @@
-# Sesión 9: Propagación en campo libre
+# Sesión 9: ¿Por qué disminuye el sonido al alejarnos?
+
+**Pregunta central:** si un monitor reproduce el mismo sonido al mismo volumen, ¿por qué lo escuchamos más débil cuando nos alejamos?
+
+**Al terminar la clase podrás:** explicar qué es el campo libre, aplicar la regla aproximada de **−6 dB por duplicación de distancia** e interpretar una medición real.
+
+!!! tip "Conexión con la sesión 8"
+    En la [sesión 8 estudiamos la directividad](../../U-1-fundamentos-medicion/sesion-08/index.md): **cambiamos el ángulo manteniendo la distancia**. Ahora hacemos lo contrario: **cambiamos la distancia manteniendo la dirección**.
+
+## 1. Primero observamos: la energía se reparte
+
+Imagina un monitor en un espacio abierto. Al alejarnos, **la fuente no deja de producir la misma energía acústica**; esa energía se distribuye sobre una superficie cada vez mayor.
+
+![La energía de una fuente puntual se reparte sobre superficies esféricas cada vez mayores](../../../img/propagacion_esferica_inverso_cuadrado.svg)
+
+**La idea esencial:** al duplicar la distancia a una fuente aproximadamente puntual, la energía sonora se distribuye sobre un área cuatro veces mayor. En condiciones ideales, la **intensidad** se reduce a una cuarta parte y el **nivel sonoro** disminuye aproximadamente **6 dB**.
+
+### ¿Qué significa «campo libre»?
+
+El **campo libre** es un modelo en el que el sonido llega desde la fuente sin reflexiones importantes del entorno. Para esta primera explicación también dejamos de lado la absorción del aire.
+
+- **Aproximación práctica:** un espacio abierto y despejado, suficientemente lejos de superficies reflectantes.
+- **Condición de laboratorio:** una cámara anecoica acústica, dentro de su rango útil.
+- **En el aula:** el suelo, las paredes y el techo reflejan sonido. Por eso las mediciones no siempre coinciden con el modelo.
+
+!!! info "No confundir"
+    **Campo libre** significa que estudiamos la propagación sin reflexiones relevantes. **Campo cercano y campo lejano** describen regiones alrededor de la fuente. No son sinónimos.
+
+## 2. La regla práctica: duplicar distancia = −6 dB
+
+Supongamos que un monitor produce **90 dB SPL a un metro** en condiciones ideales, en una dirección fija.
+
+| Distancia | Nivel esperado | Diferencia respecto a 1 m |
+|---|---:|---:|
+| **1 m** | **90 dB** | 0 dB |
+| **2 m** | **84 dB** | −6 dB |
+| **4 m** | **78 dB** | −12 dB |
+| **8 m** | **72 dB** | −18 dB |
+
+**Observa:** duplicar dos veces la distancia (de 1 a 4 m) supone dos caídas de 6 dB, es decir, una disminución total aproximada de **12 dB**.
+
+La fórmula que resume la relación es:
+
+\[
+\boxed{L_2=L_1-20\log_{10}\left(\frac{r_2}{r_1}\right)}
+\]
+
+- \(L_1\): nivel conocido en la distancia inicial \(r_1\).
+- \(L_2\): nivel estimado en la nueva distancia \(r_2\).
+
+**Ejemplo sencillo:** de 1 a 2 metros, \(r_2/r_1=2\); como \(20\log_{10}(2)\approx6\), el nivel baja aproximadamente 6 dB. No necesitas memorizar el desarrollo algebraico para comprender la regla.
+
+!!! warning "Cuándo funciona esta aproximación"
+    La disminución de −6 dB por duplicación corresponde a la **divergencia geométrica de una fuente aproximadamente puntual**, en una dirección fija, en condiciones semejantes al campo libre y suficientemente lejos para aplicar este modelo. No es una ley que describa cualquier sala o cualquier sistema de altavoces a todas las distancias.
+
+## 3. Simulación: mueve al oyente, no al monitor
+
+En esta simulación el nivel inicial de **90 dB a 1 m es hipotético**. Mueve al espectador o presiona **«Duplicar distancia»** y observa el nivel calculado. También puedes escuchar una disminución **ilustrativa** de volumen, que no representa una medición calibrada.
+
+<iframe src="../../../simulacion/festival-campo-libre.html" title="Simulación interactiva de la disminución del nivel sonoro con la distancia" loading="lazy" style="width:100%;height:920px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
+
+[🎛️ **Abrir la simulación en pantalla completa**](../../../simulacion/festival-campo-libre.html){ .md-button }
+
+**Dos preguntas:** ¿qué ocurre al pasar de 2 a 4 metros? ¿Y al pasar de 4 a 8 metros?
+
+## 4. Práctica: ¿se cumplen los −6 dB en nuestra medición?
+
+**Objetivo:** comparar una predicción de campo libre con mediciones reales hechas por los estudiantes.
+
+### Materiales
+
+- Un monitor de estudio conectado a la computadora.
+- Un archivo de **ruido rosa filtrado alrededor de 1.000 Hz**, proporcionado por el docente (o ruido rosa de banda ancha).
+- Un celular con Decibel X o una aplicación que muestre **Leq/AVG**.
+- Trípode, cinta métrica y hojas de registro.
+
+### Condiciones de medición
+
+- Si es posible, trabaja en un **espacio abierto y despejado**; dentro del aula las reflexiones pueden ser importantes.
+- Mantén el monitor y su volumen **fijos** durante toda la práctica, a nivel moderado.
+- Coloca el micrófono a la **misma altura**, con **idéntica orientación**, siempre **frente al monitor (0°)**.
+- Mide las distancias desde un **mismo punto de referencia de la caja** hasta el **micrófono del celular**.
+- Utiliza **el mismo celular dentro de cada serie**. Mantén constante la ponderación (preferentemente Z, si está disponible).
+- Reinicia el intervalo de **Leq/AVG** antes de cada medición; registra **15 segundos**.
+- Comprueba que el sonido de prueba se encuentre claramente por encima del ruido de fondo. Si el entorno es muy ruidoso, los datos serán menos fiables.
+
+### Procedimiento
+
+1. Coloca el micrófono a **1 metro**, frente al monitor. Reproduce el audio y registra **tres mediciones**.
+2. Sin cambiar el volumen, mueve el trípode a **2 metros** y realiza otras tres mediciones.
+3. Repite a **4 metros**, si el espacio lo permite.
+4. Calcula el **promedio de cada posición** y réstale el promedio obtenido a **1 metro**.
+5. Compara la diferencia obtenida con el valor **ideal** de −6 dB a 2 m y −12 dB a 4 m.
+
+| Distancia | AVG 1 | AVG 2 | AVG 3 | Promedio | Cambio respecto a 1 m | Cambio ideal |
+|---|---|---|---|---|---|---|
+| 1 m | | | | | **0 dB** | **0 dB** |
+| 2 m | | | | | | **−6 dB** |
+| 4 m | | | | | | **−12 dB** |
+
+**Cómo hacer la resta:** si el promedio a 1 m es 82 dB y el promedio a 2 m es 77 dB, el cambio es **77 − 82 = −5 dB**. Es correcto restar directamente los dB aquí porque **estamos comparando dos niveles**, no separando dos fuentes de sonido.
+
+!!! tip "Si no hay espacio para 4 metros"
+    Realiza la comparación **1 m → 2 m** y discute su diferencia frente a los −6 dB ideales. No es necesario acercarse tanto al altavoz que el campo de sus distintos transductores complique la medición.
+
+### Preguntas para interpretar
+
+1. ¿Cuántos dB cambió realmente el nivel entre 1 y 2 metros?
+2. ¿El resultado coincide con la disminución ideal de aproximadamente −6 dB? ¿Por qué podría ser distinto?
+3. ¿Qué cambiaría si hiciéramos la medición al aire libre, lejos de paredes?
+4. **Aplicación musical:** ¿por qué importa la distancia entre un altavoz de PA y los espectadores?
+
+**Entrega:** tabla completa y **una conclusión breve** de 4 a 6 líneas. Se evalúa la calidad de la observación y la explicación, **no obtener exactamente −6 dB**.
+
+## 5. Lo ideal frente a lo real
+
+| Modelo ideal | Lo que puede ocurrir en un espacio real |
+|---|---|
+| No hay reflexiones relevantes | Las reflexiones pueden **reforzar o cancelar** ciertas frecuencias |
+| Solo cambia la distancia | Puede variar ligeramente el ángulo, la altura o la orientación |
+| La fuente se aproxima a un punto | Un monitor real tiene varios transductores y directividad |
+| El ruido de fondo no interfiere | A mayor distancia, el ruido de fondo puede afectar más la lectura |
+| Se ignora la absorción del aire | En exteriores y a distancias grandes pueden influir el aire, el viento y la temperatura |
+
+**Conclusión de la sesión:** la regla de **−6 dB por duplicación** es nuestro punto de partida para comprender la propagación. Las mediciones nos ayudan a reconocer cuándo el modelo representa bien la realidad y cuándo intervienen otros factores.
+
+??? info "Para profundizar: ¿de dónde sale la regla de −6 dB?"
+    En una fuente puntual ideal que radia en todas direcciones, el área de la esfera aumenta como \(4\pi r^2\). Por tanto, la intensidad disminuye aproximadamente como:
+
+    \[
+    I\propto\frac{1}{r^2}
+    \]
+
+    Duplicar \(r\) divide la intensidad entre cuatro. La diferencia expresada en decibelios es:
+
+    \[
+    10\log_{10}(1/4)\approx-6,02\ \mathrm{dB}
+    \]
+
+    La presión sonora disminuye aproximadamente como \(1/r\) en el campo radiado de este modelo.
+
+??? info "Ampliación técnica: potencia sonora (SWL), presión sonora (SPL) y directividad Q"
+    La **potencia acústica** de la fuente (SWL) no es lo mismo que la **potencia eléctrica del amplificador**. Una relación aproximada en campo libre es:
+
+    \[
+    \boxed{L_p(r)\approx L_W+10\log_{10}\left(\frac{Q}{4\pi r^2}\right)}
+    \]
+
+    donde \(L_W\) es el nivel de potencia sonora relativo a \(10^{-12}\) W, \(L_p\) el nivel de presión sonora relativo a 20 µPa, \(r\) la distancia en metros y \(Q\) el factor de directividad en la dirección estudiada. Esta expresión utiliza las referencias habituales y una impedancia característica del aire cercana a 400 rayls; **no debe añadirse una constante de +10,8 dB**.
+
+    Por ejemplo, con \(L_W=120\) dB, \(Q=2\) y \(r=20\) m, el cálculo ideal da **aproximadamente 86 dB SPL**. \(Q=2\) puede representar radiación hemisférica ideal sobre un plano perfectamente reflectante; no describe automáticamente cualquier altavoz colocado en un escenario.
+
+    En un arreglo lineal ideal, la caída geométrica puede aproximarse a **−3 dB por duplicación**, pero un *line array* real no se comporta de ese modo a todas las distancias ni frecuencias.
+
+??? info "Glosario mínimo"
+    - **SPL:** nivel de presión sonora en un punto, expresado en dB SPL.
+    - **dB:** unidad logarítmica para expresar relaciones de nivel.
+    - **Leq / AVG:** nivel equivalente medido durante un intervalo.
+    - **Campo libre:** modelo sin reflexiones relevantes.
+    - **Divergencia geométrica:** distribución de la energía sobre superficies cada vez mayores.
 
 ---
 
-??? info "Unidades y símbolos (glosario de referencia)"
-    Consultá esta tabla cuando encuentres una unidad o símbolo que no conozcas. Cada término en el texto está vinculado a esta tabla.
-
-    | Símbolo | Nombre | ¿Qué mide? | Equivalencia |
-    |---|---|---|---|
-    | <a id="db"></a>**dB** | Decibel | Nivel relativo (escala logarítmica) | \( \text{dB} = 10\log_{10}(P/P_0) \) |
-    | <a id="spl"></a>**dB SPL** | Sound Pressure Level | Nivel de presión sonora | Referencia: \(p_0 = 20\ \mu\text{Pa}\) |
-    | <a id="swl"></a>**dB SWL** | Sound Power Level | Nivel de potencia sonora de la fuente | Referencia: \(W_0 = 10^{-12}\ \text{W}\) |
-    | <a id="hz"></a>**Hz** | Hertz | Frecuencia | 1 Hz = 1/s |
-    | <a id="khz"></a>**kHz** | Kilohertz | Frecuencia | 1 kHz = 1,000 Hz |
-    | <a id="m"></a>**m** | Metro | Longitud, distancia | — |
-    | <a id="cm"></a>**cm** | Centímetro | Longitud | 1 cm = 0.01 m |
-    | <a id="r"></a>**r** | Distancia desde la fuente | Distancia entre centro acústico de la fuente y punto de medición | En metros (m) |
-    | <a id="W"></a>**W** | Watt (Vatio) | Potencia acústica | 1 W = 1 J/s |
-    | <a id="wm2"></a>**W/m²** | Watt por metro cuadrado | Intensidad sonora | Potencia por unidad de área |
-    | <a id="pa"></a>**Pa** | Pascal | Presión | 1 Pa = 1 N/m² |
-
-???+ note "¿Qué es el campo libre?"
-
-    Un **campo libre** (*free field*) es un espacio ideal donde el sonido se propaga sin obstáculos, reflexiones ni absorción del entorno. En un campo libre perfecto, la única atenuación que sufre el sonido al alejarse de la fuente es la **divergencia geométrica**: la energía se reparte sobre una superficie cada vez mayor.
-
-    | Condición | Campo libre ideal | Realidad |
-    |---|---|---|
-    | Reflexiones | Ninguna (cero) | Existen, pero se minimizan — paredes absorbentes, techos altos |
-    | Obstáculos | Ninguno | Ninguno o muy lejanos |
-    | Medio | Aire homogéneo, sin viento, sin gradientes de temperatura | Aire real: hay viento, temperatura varía con altura |
-    | Ejemplos | Cámara anecoica | Campo abierto (lejos de edificios), concierto al aire libre, medición en cámara semianecoica |
-
-    !!! info "La cámara anecoica"
-        Es el laboratorio que más se aproxima al campo libre ideal. Las paredes, techo y suelo están cubiertos con cuñas de material absorbente (fibra de vidrio, espuma acústica) que eliminan prácticamente todas las reflexiones por encima de una frecuencia de corte (típicamente 100 Hz). El suelo suele ser una rejilla metálica para caminar sin reflejar. Dentro de una cámara anecoica, el silencio es tan absoluto que la gente escucha su propia circulación sanguínea.
-
-        **Para profundizar:** [¿Sabes qué es una cámara anecoica? — Blog de Panasonic](https://blog.panasonic.es/tecnologia/sabes-que-es-una-camara-anecoica-tecnologia-punta-para-el-panasonic-toughbook/){:target="_blank"} — un ejemplo real de cómo la industria usa cámaras anecoicas (en este caso, electromagnéticas) para probar dispositivos inalámbricos.
-
-???+ note "Divergencia esférica y la ley del inverso del cuadrado"
-
-    Cuando una **fuente puntual** (una fuente pequeña comparada con la longitud de onda que emite) radia sonido, la energía se expande en todas direcciones formando un frente de onda esférico. A medida que el radio de la esfera crece, la misma energía se distribuye sobre un área mayor.
-
-    | Distancia \(r\) | Área de la esfera \(4\pi r^2\) | Intensidad \(I = W / 4\pi r^2\) | ¿Qué pasó con la intensidad? |
-    |---|---|---|---|
-    | 1 m | \(4\pi \approx 12.57\ \text{m}^2\) | \(W / 12.57\) | Referencia |
-    | 2 m | \(16\pi \approx 50.27\ \text{m}^2\) | \(W / 50.27\) | Se dividió entre 4 (×¼) |
-    | 4 m | \(64\pi \approx 201.06\ \text{m}^2\) | \(W / 201.06\) | Se dividió entre 16 (×1/16) |
-
-    La intensidad cae como \(1/r^2\). En decibeles:
-
-    \[
-    \boxed{\text{SPL}(r_2) = \text{SPL}(r_1) + 20 \cdot \log_{10}\left(\frac{r_1}{r_2}\right)}
-    \]
-
-    | Símbolo | Nombre | Significado |
-    |---|---|---|
-    | \(\text{SPL}(r_1)\) | Nivel de presión sonora a distancia \(r_1\) | Nivel conocido en un punto de referencia (ej: sensibilidad del altavoz a 1 m) |
-    | \(\text{SPL}(r_2)\) | Nivel de presión sonora a distancia \(r_2\) | El nivel que queremos predecir |
-    | \(r_1\) | Distancia de referencia | Generalmente 1 m |
-    | \(r_2\) | Distancia al punto de interés | Siempre mayor que \(r_1\) para predicción de pérdidas |
-
-    ### Consecuencia directa: −6 dB por duplicación
-
-    Si \(r_2 = 2 \cdot r_1\):
-    \[
-    \text{SPL}(2r) = \text{SPL}(r) + 20 \cdot \log_{10}(1/2) = \text{SPL}(r) + 20 \cdot (-0.301) \approx \text{SPL}(r) - 6\ \text{dB}
-    \]
-
-    <figure markdown="span">
-      ![Fig. 3-1: Propagación esférica y ley del inverso del cuadrado](../../../img/propagacion_esferica_inverso_cuadrado.svg)
-      <figcaption>**Fig. 3-1** — Fuente puntual con divergencia esférica. La energía se distribuye sobre superficies esféricas concéntricas. Al duplicar la distancia, el área se cuadruplica y la intensidad cae a ¼ → −6 dB.</figcaption>
-    </figure>
-
-    [🎛️ **Abrir simulación interactiva — Festival al aire libre**](../../../simulacion/festival-campo-libre.html){ .md-button }
-
-    Mueve al espectador entre 1 y 32 metros, ajusta el nivel inicial y el factor de directividad Q. Observa el nivel recibido, la pérdida por distancia y la potencia necesaria para compensar.
-
-    !!! warning "Esto asume campo libre y fuente puntual"
-        Si hay superficies reflectantes cerca (suelo, paredes), la caída real será menor porque las reflexiones suman energía. Si la fuente no es puntual (line array, fuente plana), la caída también es distinta (−3 dB para lineal, ~0 dB para plana en campo cercano). La ley del inverso del cuadrado es un **límite teórico máximo de atenuación** por distancia en campo libre.
-
-???+ note "Relación entre SWL y SPL en campo libre"
-
-    Conociendo la potencia sonora de una fuente (dB SWL) y sabiendo que estamos en campo libre, podemos predecir el SPL a cualquier distancia:
-
-    \[
-    \boxed{\text{SPL}(r) = \text{SWL} + 10 \cdot \log_{10}\left(\frac{Q}{4\pi r^2}\right) + 10.8\ \text{dB}}
-    \]
-
-    | Símbolo | Nombre | Significado |
-    |---|---|---|
-    | \(\text{SPL}(r)\) | Nivel de presión sonora a distancia \(r\) | Predicción en dB SPL |
-    | \(\text{SWL}\) | Nivel de potencia sonora de la fuente | En dB SWL (re: 10⁻¹² W) |
-    | \(Q\) | Factor de directividad | Q = 1 (omnidireccional), Q = 2 (sobre suelo), Q = 4 (esquina), Q = 8 (rincón) |
-    | \(r\) | Distancia desde el centro acústico | En metros |
-    | \(+10.8\ \text{dB}\) | Constante de conversión | Diferencia entre presión e intensidad en condiciones atmosféricas estándar (ρc = 400 rayls) |
-
-    <figure markdown="span">
-      ![Fig. 3-2: Caída de 6 dB por duplicación de distancia](../../../img/caida_6db_por_duplicar_distancia.svg)
-      <figcaption>**Fig. 3-2** — Nivel de presión sonora vs. distancia para una fuente puntual. Todas las curvas tienen la misma pendiente (−6 dB por duplicación de distancia), solo están desplazadas verticalmente según el SWL de cada fuente.</figcaption>
-    </figure>
-
-    ### Ejemplo práctico
-
-    Un parlante de PA tiene SWL = 120 dB, Q = 2 (montado sobre el escenario, emite en hemiesfera). ¿Qué SPL llega a un espectador a 20 m?
-
-    \[
-    \begin{aligned}
-    \text{SPL}(20) &= 120 + 10 \cdot \log_{10}\left(\frac{2}{4\pi \cdot 400}\right) + 10.8 \\[4pt]
-    &= 120 + 10 \cdot \log_{10}\left(\frac{2}{5026.5}\right) + 10.8 \\[4pt]
-    &= 120 + 10 \cdot \log_{10}(0.000398) + 10.8 \\[4pt]
-    &= 120 + 10 \cdot (-3.4) + 10.8 \\[4pt]
-    &= 120 - 34 + 10.8 = \mathbf{96.8\ \text{dB SPL}}
-    \end{aligned}
-    \]
-
-    A 20 m, con un parlante de 120 dB SWL, el espectador recibe unos 97 dB SPL — un nivel adecuado para un concierto.
-
-???+ note "Atenuación con la distancia: tabla rápida para trabajo en campo"
-
-    Para una fuente puntual omnidireccional (Q = 1) en campo libre:
-
-    | Distancia | Pérdida respecto a 1 m | Factor de pérdida de presión | ¿Qué significa? |
-    |---|---|---|---|
-    | 1 m | 0 dB | ×1.0 | Referencia |
-    | 2 m | −6 dB | ×0.5 | La presión se redujo a la mitad |
-    | 3 m | −9.5 dB | ×0.33 | Un tercio de la presión |
-    | 4 m | −12 dB | ×0.25 | Un cuarto de la presión |
-    | 5 m | −14 dB | ×0.20 | |
-    | 8 m | −18 dB | ×0.125 | |
-    | 10 m | −20 dB | ×0.10 | Un décimo de la presión original |
-    | 16 m | −24 dB | ×0.0625 | |
-    | 20 m | −26 dB | ×0.05 | |
-    | 32 m | −30 dB | ×0.031 | |
-    | 50 m | −34 dB | ×0.02 | |
-    | 100 m | −40 dB | ×0.01 | 1% de la presión original |
-
-    !!! tip "Regla de compensación de potencia"
-        Para compensar una duplicación de distancia y mantener el mismo SPL, necesitás **cuadruplicar la potencia del amplificador** (+6 dB = ×4 en potencia). Para compensar una distancia 10× mayor (−20 dB), necesitás **100 veces más potencia**. Por eso llenar un estadio requiere decenas de miles de vatios.
-
-???+ note "Campo libre vs. campo real: ¿qué cambia en la práctica?"
-
-    En el mundo real, el campo libre perfecto no existe. Cada desviación modifica la atenuación predicha:
-
-    | Fenómeno | Efecto sobre la atenuación | Dirección del error |
-    |---|---|---|
-    | **Reflexión del suelo** | Suma energía al receptor (puede sumar hasta +6 dB si está en fase) | El SPL real es MAYOR que el predicho por campo libre |
-    | **Absorción atmosférica** | Atenúa más los agudos (depende de humedad, temperatura y frecuencia) | El SPL real es MENOR que el predicho (especialmente en agudos y a larga distancia) |
-    | **Viento y gradientes de temperatura** | Curvan las trayectorias del sonido hacia arriba (contra el viento/día) o hacia abajo (a favor del viento/noche) | El SPL real puede ser MUCHO menor (zona de sombra) o mayor de lo esperado |
-    | **Obstáculos y barreras** | Atenúan por difracción (el sonido «dobla» parcialmente las esquinas) | El SPL real es MENOR que el predicho |
-    | **Directividad de la fuente** | La fuente no emite igual en todas direcciones — Q > 1 concentra energía | El SPL en el eje principal es MAYOR que el predicho para fuente omnidireccional |
-
-    <figure markdown="span">
-      ![Fig. 3-3: Campos sonoros y distancia crítica](../../../img/campos_sonoros_distancia_critica.svg)
-      <figcaption>**Fig. 3-3** — Campos sonoros y distancia crítica. Comparación entre el campo directo (domina a distancias cortas, −6 dB por duplicación) y el campo reverberante (domina a distancias largas). La distancia crítica es donde ambos campos se igualan.</figcaption>
-    </figure>
-
-    !!! info "En producción musical al aire libre"
-        Cuando diseñás un sistema de sonido para un festival al aire libre, la ley del inverso del cuadrado es tu primer cálculo. Pero necesitás corregir por: (1) absorción atmosférica en agudos (los tweeters pierden más), (2) dirección del viento (el sonido viaja mejor a favor del viento), (3) temperatura (de noche el sonido «rebota» en capas de aire caliente y llega más lejos), (4) humedad (el aire seco atenúa más los agudos). Son correcciones que veremos en las próximas sesiones.
-
----
-
-*Basado en: Everest, F. A. & Pohlmann, K. C. (2009). Master Handbook of Acoustics (5th ed.). McGraw-Hill. Capítulo 3, pp. 31–45 (Sound in the Free Field — Spherical Divergence, Inverse Square Law, Free Field vs. Real Conditions).*
+*Referencia de consulta: Everest, F. A. y Pohlmann, K. C. (2009). Master Handbook of Acoustics, 5.ª ed., cap. 3.*
