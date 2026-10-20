@@ -17,7 +17,7 @@ button.selected{background:#216d88;color:white;border-color:#216d88}button:focus
 .legend{display:flex;gap:9px 17px;flex-wrap:wrap;align-items:center;margin:7px 0;font-size:.87rem}
 .legend-item{display:inline-flex;align-items:center;gap:6px}
 .line{display:inline-block;width:22px;border-top:3px solid var(--c,#315a78)}.line.dashed{border-top-style:dashed}
-.plot{width:100%;height:auto;display:block;overflow:visible;touch-action:pan-y}
+.plot-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.plot{min-width:680px;width:100%;height:auto;display:block;overflow:visible;touch-action:pan-y}
 .tab-wrap{overflow-x:auto;margin-top:13px}table{border-collapse:collapse;width:100%;font-size:.89rem;min-width:510px}
 th,td{padding:10px 9px;text-align:right;border-bottom:1px solid #e5ecf2;font-variant-numeric:tabular-nums}
 th:first-child,td:first-child{text-align:left}th{color:#2e4b62;background:#edf3f6}
@@ -54,7 +54,7 @@ output{font-weight:750;font-size:1.03rem;color:#205d7c;font-variant-numeric:tabu
     <span class="legend-item"><span class="line" style="--c:#b27a27"></span> Grupo 2</span>
     <span class="legend-item"><span class="line" style="--c:#8254a6"></span> Grupo 3</span>
   </div>
-  <svg id="chart" class="plot" viewBox="0 0 940 365" role="img" aria-label="Gráfica de pérdida relativa del sonido frente a la distancia para tres grupos y el modelo puntual ideal"></svg>
+  <div class="plot-wrap"><svg id="chart" class="plot" viewBox="0 0 940 365" role="img" aria-label="Gráfica de pérdida relativa del sonido frente a la distancia para tres grupos y el modelo puntual ideal"></svg></div>
   <p class="focus" id="focus" aria-live="polite">Selecciona un grupo o un punto de la gráfica para consultar sus lecturas.</p>
   <div class="row" style="margin-top:13px">
     <label for="tableGroup"><strong>Datos medidos:</strong></label>
@@ -81,7 +81,7 @@ output{font-weight:750;font-size:1.03rem;color:#205d7c;font-variant-numeric:tabu
     <input type="range" id="background" min="60" max="95" step="1" value="79" aria-label="Nivel hipotético del ruido de fondo en decibelios">
     <output id="backgroundOut" for="background">79 dB</output>
   </div>
-  <svg id="noiseChart" class="plot" viewBox="0 0 940 305" role="img" aria-label="Comparación entre nivel de un parlante puntual ideal y suma de ese nivel con ruido de fondo"></svg>
+  <div class="plot-wrap"><svg id="noiseChart" class="plot" viewBox="0 0 940 305" role="img" aria-label="Comparación entre nivel de un parlante puntual ideal y suma de ese nivel con ruido de fondo"></svg></div>
   <div class="metric-row" aria-live="polite">
     <div class="metric"><span>Cambio con solo altavoz (×4)</span><strong>−12,0 dB</strong></div>
     <div class="metric"><span>Cambio con ruido (×4)</span><strong id="noiseDelta">−8,0 dB</strong></div>
