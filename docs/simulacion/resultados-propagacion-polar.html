@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resultados reales: propagación con HK Audio POLAR · Sesión 9</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#f7f9fb;color:#1c3347}
+*{box-sizing:border-box}body{margin:0}main{max-width:1010px;margin:auto;padding:18px}
+h1{font-size:1.5rem;margin:0 0 7px;line-height:1.25}h2{font-size:1.12rem;margin:4px 0 9px}p{line-height:1.5}
+.lead{color:#4a6275;margin:6px 0 16px}
+.card{border:1px solid #d9e2e8;background:#fff;border-radius:13px;padding:18px;margin:13px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px}
+button{min-height:40px;border-radius:8px;border:1px solid #afc1cf;padding:9px 13px;color:#234c62;background:#f2f6f9;cursor:pointer;font-weight:650;font:inherit}
+button.selected{background:#216d88;color:white;border-color:#216d88}button:focus-visible,input:focus-visible{outline:3px solid #6ba6ce;outline-offset:2px}
+.call{background:#eff7f8;border-left:4px solid #3b8797;padding:11px 14px;border-radius:4px;color:#234c60;margin:12px 0}
+.note{font-size:.88rem;color:#526a7b;line-height:1.48}
+.legend{display:flex;gap:9px 17px;flex-wrap:wrap;align-items:center;margin:7px 0;font-size:.87rem}
+.legend-item{display:inline-flex;align-items:center;gap:6px}
+.line{display:inline-block;width:22px;border-top:3px solid var(--c,#315a78)}.line.dashed{border-top-style:dashed}
+.plot{width:100%;height:auto;display:block;overflow:visible;touch-action:pan-y}
+.tab-wrap{overflow-x:auto;margin-top:13px}table{border-collapse:collapse;width:100%;font-size:.89rem;min-width:510px}
+th,td{padding:10px 9px;text-align:right;border-bottom:1px solid #e5ecf2;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}th{color:#2e4b62;background:#edf3f6}
+tr.emph{background:#eff9f7;font-weight:700}
+.sub{font-size:.82rem;color:#587084;margin-top:5px}
+select{border:1px solid #b3c6d2;padding:9px;border-radius:8px;min-height:42px;background:#fff;color:inherit;font-size:1rem}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.metric-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.metric{padding:12px;background:#f1f5f8;border-radius:9px}.metric span{display:block;color:#536b7d;font-size:.82rem}.metric strong{display:block;font-size:1.4rem;margin:5px 0 0}
+.range-row{display:flex;align-items:center;gap:12px;margin:10px 0;flex-wrap:wrap}
+input[type=range]{flex:1 1 240px;min-height:42px;accent-color:#26768f;cursor:pointer}
+output{font-weight:750;font-size:1.03rem;color:#205d7c;font-variant-numeric:tabular-nums;min-width:70px}
+.focus{font-size:.9rem;margin:7px 0 0;padding:9px 11px;border-radius:8px;background:#f3f7fa;color:#31576e}
+.small{font-size:.83rem;color:#5d7182}
+@media(max-width:580px){main{padding:10px}.card{padding:12px}h1{font-size:1.3rem}.metric-row{gap:6px}.metric{padding:8px}.metric strong{font-size:1.07rem}.metric span{font-size:.75rem}button{flex:1 1 auto}}
+</style>
+</head>
+<body><main>
+<h1>¿Qué pasó al alejarnos de la POLAR?</h1>
+<p class="lead">Mediciones reales de los <strong>tres grupos</strong> · 20 de octubre de 2026 · exteriores, Universidad de Cuenca · ruido rosa filtrado alrededor de 1 kHz.</p>
+
+<section class="card">
+  <h2>1. Compara los resultados con la ley ideal</h2>
+  <p class="note">Cada grupo empezó a una distancia diferente. Por eso esta gráfica muestra el <strong>cambio respecto a su propia primera medición</strong>: ×1, ×2 y ×4. La curva discontinua indica el comportamiento de una <strong>fuente puntual ideal</strong>, no una predicción específica de la POLAR.</p>
+  <div class="filters" role="group" aria-label="Filtrar grupo">
+    <button type="button" class="selected" data-group="all" aria-pressed="true">Todos</button>
+    <button type="button" data-group="1" aria-pressed="false">Grupo 1</button>
+    <button type="button" data-group="2" aria-pressed="false">Grupo 2</button>
+    <button type="button" data-group="3" aria-pressed="false">Grupo 3</button>
+  </div>
+  <div class="legend" id="legend">
+    <span class="legend-item"><span class="line dashed" style="--c:#53677a"></span> Modelo ideal (−6 dB/duplicación)</span>
+    <span class="legend-item"><span class="line" style="--c:#187b87"></span> Grupo 1</span>
+    <span class="legend-item"><span class="line" style="--c:#b27a27"></span> Grupo 2</span>
+    <span class="legend-item"><span class="line" style="--c:#8254a6"></span> Grupo 3</span>
+  </div>
+  <svg id="chart" class="plot" viewBox="0 0 940 365" role="img" aria-label="Gráfica de pérdida relativa del sonido frente a la distancia para tres grupos y el modelo puntual ideal"></svg>
+  <p class="focus" id="focus" aria-live="polite">Selecciona un grupo o un punto de la gráfica para consultar sus lecturas.</p>
+  <div class="row" style="margin-top:13px">
+    <label for="tableGroup"><strong>Datos medidos:</strong></label>
+    <select id="tableGroup" aria-label="Seleccionar grupo para ver la tabla de lecturas">
+      <option value="1">Grupo 1 · 2, 4 y 8 m</option>
+      <option value="2">Grupo 2 · 3, 6 y 12 m</option>
+      <option value="3">Grupo 3 · 4, 8 y 16 m</option>
+    </select>
+  </div>
+  <div class="tab-wrap"><table>
+    <thead><tr><th>Distancia</th><th>Lectura 1</th><th>Lectura 2</th><th>Lectura 3</th><th>Promedio</th><th>Cambio medido</th><th>Modelo ideal</th></tr></thead>
+    <tbody id="measurements"></tbody>
+  </table></div>
+  <p class="note" id="tableNote"></p>
+  <p class="call"><strong>Resultado observado:</strong> los tres grupos registraron una disminución, pero la caída acumulada entre ×1 y ×4 fue <strong>−5,1 dB</strong> (Grupo 1), <strong>−3,6 dB</strong> (Grupo 2) y <strong>−6,8 dB</strong> (Grupo 3), frente a los <strong>−12,0 dB</strong> del modelo puntual ideal.</p>
+  <p class="note"><strong>Importante:</strong> los niveles absolutos de teléfonos diferentes <em>no deben compararse directamente</em> sin verificar calibración y ajustes. En especial, el Grupo 3 reportó lecturas superiores a 100 dB; son valores de la aplicación, no niveles confirmados con sonómetro calibrado. Las curvas son promedios de tres lecturas por posición, y no se midió sistemáticamente el ruido de fondo con la POLAR apagada.</p>
+</section>
+
+<section class="card">
+  <h2>2. Experimenta: ¿qué hace el ruido de fondo?</h2>
+  <p>Este segundo modelo es <strong>hipotético</strong>; no ajusta ni reconstruye los datos de los estudiantes. Supone que un altavoz puntual tiene <strong>90 dB a la primera posición</strong> y pierde 6 dB en cada duplicación. Mezcla esa señal con un ruido de fondo constante usando suma energética de niveles.</p>
+  <div class="range-row">
+    <label for="background"><strong>Ruido ambiental supuesto:</strong></label>
+    <input type="range" id="background" min="60" max="95" step="1" value="79" aria-label="Nivel hipotético del ruido de fondo en decibelios">
+    <output id="backgroundOut" for="background">79 dB</output>
+  </div>
+  <svg id="noiseChart" class="plot" viewBox="0 0 940 305" role="img" aria-label="Comparación entre nivel de un parlante puntual ideal y suma de ese nivel con ruido de fondo"></svg>
+  <div class="metric-row" aria-live="polite">
+    <div class="metric"><span>Cambio con solo altavoz (×4)</span><strong>−12,0 dB</strong></div>
+    <div class="metric"><span>Cambio con ruido (×4)</span><strong id="noiseDelta">−8,0 dB</strong></div>
+    <div class="metric"><span>Nivel total en ×4</span><strong id="noiseLast">—</strong></div>
+  </div>
+  <p class="note">Si el ruido de fondo es alto, el sonómetro puede registrar una caída menor que la de la fuente por sí sola. Pero <strong>estos datos no permiten determinar cuánto correspondió al ruido, a las reflexiones o a la directividad de la columna</strong>.</p>
+</section>
+
+<section class="card">
+  <h2>3. ¿Qué podemos concluir de nuestra práctica?</h2>
+  <p>La POLAR es un sistema PA de columna, no una fuente puntual ideal. Además, durante las mediciones existían fuentes sonoras externas. El <strong>Grupo 3 registró viento y un clarinete</strong> en la última posición. Todos esos factores pueden alterar las lecturas.</p>
+  <p><strong>Discusión:</strong> si repitiéramos el experimento, ¿qué mediríamos primero con la POLAR apagada? ¿Por qué deberíamos controlar la altura del teléfono y usar un solo dispositivo para toda la serie?</p>
+  <p class="small">Fuentes: archivos de medición entregados por los grupos 1 y 2 (.xlsm) y el grupo 3 (PDF). Promedios aritméticos de las tres lecturas de Leq informadas en cada posición, como en las hojas de los grupos. Modelo ideal: ΔL = −20 log₁₀(r/r₀). La simulación no sustituye una medición electroacústica calibrada.</p>
+</section>
+</main>
+<script>
+"use strict";
+(function(){
+  const $=id=>document.getElementById(id),ns="http://www.w3.org/2000/svg";
+  const sets=[
+    {id:"1",color:"#187b87",dist:[2,4,8],raw:[[90.5,91.3,90.3],[88.4,89,91.4],[84.7,86.9,85.2]],note:"En 4 m, las tres lecturas variaron entre 88,4 y 91,4 dB. El grupo mencionó ruido ambiental y reflexiones."},
+    {id:"2",color:"#b27a27",dist:[3,6,12],raw:[[86.8,86.3,86.7],[85.7,87.4,86.5],[83,82.7,83.2]],note:"Las lecturas a 3 y 6 m resultaron casi iguales. El grupo anotó ruido ambiente."},
+    {id:"3",color:"#8254a6",dist:[4,8,16],raw:[[104.6,103.3,101.8],[98.9,101.0,102.6],[95.6,97.5,96.2]],note:"El grupo registró otros estudiantes, viento y una persona tocando clarinete en la posición de 16 m."}
+  ];
+  for(const s of sets){s.avg=s.raw.map(row=>row.reduce((a,b)=>a+b,0)/3);s.delta=s.avg.map(v=>v-s.avg[0]);}
+  const number=n=>Number(n).toFixed(1).replace(".",",");
+  const signed=n=>(n>0?"+":"")+number(n);
+  const node=(tag,attrs={},text)=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n;};
+  const show=(parent,tag,attrs,text)=>parent.appendChild(node(tag,attrs,text));
+  let group="all",selection=null;
+  const chart=$("chart");
+  const cx=i=>160+i*330,cy=d=>30+(0-d)*21;
+  function draw(){
+    chart.replaceChildren();
+    for(let db=0;db>=-14;db-=2){
+      const yy=cy(db);show(chart,"line",{x1:119,y1:yy,x2:865,y2:yy,stroke:db===0?"#9baebe":"#e3eaf0","stroke-width":1});
+      show(chart,"text",{x:105,y:yy+5,"text-anchor":"end",fill:"#516879","font-size":14},(db===0?"0":String(db))+" dB");
+    }
+    for(let i=0;i<3;i++){
+      const xx=cx(i);
+      show(chart,"line",{x1:xx,y1:27,x2:xx,y2:324,stroke:"#e6edf2"});
+      show(chart,"text",{x:xx,y:342,"text-anchor":"middle","font-size":14,fill:"#344f63"},["×1 · inicio","×2 · doble","×4 · cuádruple"][i]);
+    }
+    show(chart,"text",{x:18,y:18,"font-size":13,fill:"#4b6378"},"Cambio relativo en dB");
+    const ideal=[0,-20*Math.log10(2),-20*Math.log10(4)];
+    let p="";for(let i=0;i<3;i++)p+=(i?" L":"M")+cx(i)+" "+cy(ideal[i]);
+    show(chart,"path",{d:p,stroke:"#53677a","stroke-width":3,"stroke-dasharray":"9 6",fill:"none"});
+    for(const s of sets){
+      const inactive=group!=="all"&&group!==s.id;
+      if(inactive)continue;
+      let line="";for(let i=0;i<3;i++)line+=(i?" L":"M")+cx(i)+" "+cy(s.delta[i]);
+      show(chart,"path",{d:line,stroke:s.color,"stroke-width":4,fill:"none","stroke-linejoin":"round"});
+      for(let i=0;i<3;i++){
+        const active=selection&&selection.g===s.id&&selection.i===i;
+        show(chart,"circle",{cx:cx(i),cy:cy(s.delta[i]),r:active?10:7,fill:s.color,stroke:"#fff","stroke-width":2});
+        const hit=node("circle",{cx:cx(i),cy:cy(s.delta[i]),r:19,fill:"transparent",role:"button",tabindex:"0","aria-label":"Grupo "+s.id+" a "+s.dist[i]+" metros, cambio "+signed(s.delta[i])+" dB"});
+        const inspect=()=>{selection={g:s.id,i};$("tableGroup").value=s.id;renderTable();setFocus();draw();};
+        hit.addEventListener("click",inspect);
+        hit.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();inspect();}});
+        chart.append(hit);
+      }
+    }
+  }
+  function setFocus(){
+    if(!selection){$("focus").textContent="Selecciona un grupo o un punto de la gráfica para consultar sus lecturas.";return;}
+    const s=sets.find(x=>x.id===selection.g);const i=selection.i;
+    $("focus").textContent="Grupo "+s.id+" · "+s.dist[i]+" m: promedio "+number(s.avg[i])+" dB; cambio relativo "+signed(s.delta[i])+" dB; modelo ideal "+signed(-20*Math.log10(Math.pow(2,i)))+" dB.";
+  }
+  function renderTable(){
+    const s=sets.find(x=>x.id===$("tableGroup").value),body=$("measurements");
+    body.replaceChildren();
+    for(let i=0;i<3;i++){
+      const tr=document.createElement("tr");if(selection&&selection.g===s.id&&selection.i===i)tr.className="emph";
+      const vals=[s.dist[i]+" m",...s.raw[i].map(v=>number(v)),number(s.avg[i]),signed(s.delta[i]),signed(-20*Math.log10(Math.pow(2,i)))];
+      for(const v of vals){const td=document.createElement("td");td.textContent=v;tr.append(td);}
+      body.append(tr);
+    }
+    $("tableNote").textContent=s.note+" Los niveles indicados son los reportados por el grupo; no están verificados mediante calibración independiente.";
+  }
+  function setGroup(next){
+    group=next;
+    document.querySelectorAll("[data-group]").forEach(b=>{const active=b.dataset.group===group;b.classList.toggle("selected",active);b.setAttribute("aria-pressed",String(active));});
+    if(group!=="all"){$("tableGroup").value=group;selection={g:group,i:2};}
+    else selection=null;
+    renderTable();setFocus();draw();
+  }
+  document.querySelectorAll("[data-group]").forEach(btn=>btn.addEventListener("click",()=>setGroup(btn.dataset.group)));
+  $("tableGroup").addEventListener("change",()=>{const s=$("tableGroup").value;selection={g:s,i:2};setFocus();renderTable();draw();});
+  const noiseSvg=$("noiseChart"),nx=i=>155+i*330,ny=l=>35+(98-l)*7.1;
+  function mix(a,b){const top=Math.max(a,b),bottom=Math.min(a,b);return top+10*Math.log10(1+Math.pow(10,(bottom-top)/10));}
+  function noisePaint(){
+    const ambient=Number($("background").value);$("backgroundOut").textContent=ambient+" dB";
+    noiseSvg.replaceChildren();
+    const src=[90,90-20*Math.log10(2),90-20*Math.log10(4)];
+    const total=src.map(x=>mix(x,ambient));
+    for(let lvl=60;lvl<=100;lvl+=10){
+      const yy=ny(lvl);show(noiseSvg,"line",{x1:115,y1:yy,x2:862,y2:yy,stroke:"#e5edf3"});
+      show(noiseSvg,"text",{x:102,y:yy+4,"text-anchor":"end",fill:"#526b7c","font-size":13},lvl+" dB");
+    }
+    for(let i=0;i<3;i++){show(noiseSvg,"text",{x:nx(i),y:284,"text-anchor":"middle",fill:"#405f74","font-size":13},["×1","×2","×4"][i]);}
+    for(const [values,color] of [[src,"#4e6a82"],[total,"#c47c29"]]){
+      let path="";for(let i=0;i<3;i++)path+=(i?" L":"M")+nx(i)+" "+ny(values[i]);
+      show(noiseSvg,"path",{d:path,stroke:color,"stroke-width":4,fill:"none"});
+      for(let i=0;i<3;i++){show(noiseSvg,"circle",{cx:nx(i),cy:ny(values[i]),r:6,fill:color,stroke:"#fff","stroke-width":2});}
+    }
+    show(noiseSvg,"text",{x:124,y:16,"font-size":13,fill:"#536879"},"Nivel total supuesto (dB)");
+    show(noiseSvg,"line",{x1:555,y1:17,x2:588,y2:17,stroke:"#4e6a82","stroke-width":3});
+    show(noiseSvg,"text",{x:596,y:21,"font-size":13,fill:"#4b6275"},"Solo altavoz");
+    show(noiseSvg,"line",{x1:740,y1:17,x2:773,y2:17,stroke:"#c47c29","stroke-width":3});
+    show(noiseSvg,"text",{x:781,y:21,"font-size":13,fill:"#4b6275"},"Con ruido");
+    $("noiseDelta").textContent=signed(total[2]-total[0])+" dB";
+    $("noiseLast").textContent=number(total[2])+" dB";
+  }
+  $("background").addEventListener("input",noisePaint);
+  renderTable();draw();noisePaint();
+})();
+</script>
+</body></html>
