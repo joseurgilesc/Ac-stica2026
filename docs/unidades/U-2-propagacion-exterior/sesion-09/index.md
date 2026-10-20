@@ -63,56 +63,64 @@ En esta simulación el nivel inicial de **90 dB a 1 m es hipotético**. Mueve al
 
 **Dos preguntas:** ¿qué ocurre al pasar de 2 a 4 metros? ¿Y al pasar de 4 a 8 metros?
 
-## 4. Práctica: ¿se cumplen los −6 dB en nuestra medición?
+## 4. Práctica: propagación con la HK Audio POLAR 10/12 MK2
 
-**Objetivo:** comparar una predicción de campo libre con mediciones reales hechas por los estudiantes.
+**Objetivo:** comparar cómo varía el nivel registrado al alejarnos de **una sola POLAR**, manteniendo la dirección frontal, con la caída de una fuente puntual ideal en campo libre.
 
-### Materiales
+**Materiales:** HK Audio POLAR 10/12 MK2, ruido rosa filtrado alrededor de 1 kHz, cinta métrica y celulares con Decibel X (medición **Leq/AVG**).
 
-- Un monitor de estudio conectado a la computadora.
-- Un archivo de **ruido rosa filtrado alrededor de 1.000 Hz**, proporcionado por el docente (o ruido rosa de banda ancha).
-- Un celular con Decibel X o una aplicación que muestre **Leq/AVG**.
-- Trípode, cinta métrica y hojas de registro.
+### Organización de la medición
 
-### Condiciones de medición
+| Grupo | Primera distancia | Segunda distancia | Tercera distancia |
+|---|---:|---:|---:|
+| **1** | 2 m | 4 m | 8 m |
+| **2** | 3 m | 6 m | 12 m |
+| **3** | 4 m | 8 m | 16 m |
 
-- Si es posible, trabaja en un **espacio abierto y despejado**; dentro del aula las reflexiones pueden ser importantes.
-- Mantén el monitor y su volumen **fijos** durante toda la práctica, a nivel moderado.
-- Coloca el micrófono a la **misma altura**, con **idéntica orientación**, siempre **frente al monitor (0°)**.
-- Mide las distancias desde un **mismo punto de referencia de la caja** hasta el **micrófono del celular**.
-- Utiliza **el mismo celular dentro de cada serie**. Mantén constante la ponderación (preferentemente Z, si está disponible).
-- Reinicia el intervalo de **Leq/AVG** antes de cada medición; registra **15 segundos**.
-- Comprueba que el sonido de prueba se encuentre claramente por encima del ruido de fondo. Si el entorno es muy ruidoso, los datos serán menos fiables.
+1. Colocar una sola POLAR **fija**, en un lugar despejado, y reproducir el sonido de prueba a **nivel moderado**. Mantener la ganancia, el preset DSP y la ecualización sin cambios.
+2. Medir sobre el **eje frontal** de la columna; mantener constante la altura y orientación del celular. Utilizar **el mismo teléfono para las tres distancias dentro de cada grupo**.
+3. Registrar **tres lecturas Leq/AVG de 15 segundos** por posición, reiniciando cada medición.
+4. Calcular el promedio de las tres lecturas en cada posición y la diferencia respecto a la **primera distancia del propio grupo**.
+5. Comparar con el modelo ideal: **0 dB** en la primera distancia, **−6 dB** en la segunda y **−12 dB** en la tercera.
 
-### Procedimiento
+!!! warning "La medición real tiene limitaciones"
+    - **Medir también el ruido ambiental con la POLAR apagada** permitiría saber si interfiere significativamente, especialmente lejos de la fuente. Ese registro no se obtuvo sistemáticamente en la práctica del 20 de octubre.
+    - No comparar los **niveles absolutos** de grupos que utilizaron teléfonos diferentes sin verificar su calibración, ponderación y ajustes.
+    - La POLAR es un **sistema de columna**, no una fuente puntual ideal; el suelo, la geometría del sistema, la orientación y otras fuentes sonoras pueden modificar las lecturas.
+    - Si la aplicación indica niveles muy elevados, **reducir el volumen y verificar la seguridad de la exposición**; una aplicación sin calibración no confirma el SPL real.
 
-1. Coloca el micrófono a **1 metro**, frente al monitor. Reproduce el audio y registra **tres mediciones**.
-2. Sin cambiar el volumen, mueve el trípode a **2 metros** y realiza otras tres mediciones.
-3. Repite a **4 metros**, si el espacio lo permite.
-4. Calcula el **promedio de cada posición** y réstale el promedio obtenido a **1 metro**.
-5. Compara la diferencia obtenida con el valor **ideal** de −6 dB a 2 m y −12 dB a 4 m.
+**Entrega:** registro de las mediciones, gráfica comparativa y conclusión de 4 a 6 líneas. **No se califica conseguir exactamente −6 dB**.
 
-| Distancia | AVG 1 | AVG 2 | AVG 3 | Promedio | Cambio respecto a 1 m | Cambio ideal |
-|---|---|---|---|---|---|---|
-| 1 m | | | | | **0 dB** | **0 dB** |
-| 2 m | | | | | | **−6 dB** |
-| 4 m | | | | | | **−12 dB** |
+## 5. Resultados reales de los tres grupos · 20 de octubre de 2026
 
-**Cómo hacer la resta:** si el promedio a 1 m es 82 dB y el promedio a 2 m es 77 dB, el cambio es **77 − 82 = −5 dB**. Es correcto restar directamente los dB aquí porque **estamos comparando dos niveles**, no separando dos fuentes de sonido.
+Los grupos trabajaron en exteriores con la POLAR y entregaron **27 lecturas en total** (tres lecturas por distancia, tres distancias por grupo).
 
-!!! tip "Si no hay espacio para 4 metros"
-    Realiza la comparación **1 m → 2 m** y discute su diferencia frente a los −6 dB ideales. No es necesario acercarse tanto al altavoz que el campo de sus distintos transductores complique la medición.
+| Grupo | Primera distancia (promedio) | Segunda distancia (promedio) | Tercera distancia (promedio) | Caída total medida | Caída total ideal |
+|---|---|---|---|---:|---:|
+| **1** | 2 m · 90,7 dB | 4 m · 89,6 dB | 8 m · 85,6 dB | **−5,1 dB** | −12,0 dB |
+| **2** | 3 m · 86,6 dB | 6 m · 86,5 dB | 12 m · 83,0 dB | **−3,6 dB** | −12,0 dB |
+| **3** | 4 m · 103,2 dB | 8 m · 100,8 dB | 16 m · 96,4 dB | **−6,8 dB** | −12,0 dB |
 
-### Preguntas para interpretar
+Los valores son los **promedios aritméticos de las tres lecturas Leq** anotadas en cada hoja, siguiendo el procedimiento de registro de la actividad. No son un Leq integrado de toda la serie ni niveles validados mediante sonómetro calibrado.
 
-1. ¿Cuántos dB cambió realmente el nivel entre 1 y 2 metros?
-2. ¿El resultado coincide con la disminución ideal de aproximadamente −6 dB? ¿Por qué podría ser distinto?
-3. ¿Qué cambiaría si hiciéramos la medición al aire libre, lejos de paredes?
-4. **Aplicación musical:** ¿por qué importa la distancia entre un altavoz de PA y los espectadores?
+### Simulación interactiva: mediciones vs. modelo ideal
 
-**Entrega:** tabla completa y **una conclusión breve** de 4 a 6 líneas. Se evalúa la calidad de la observación y la explicación, **no obtener exactamente −6 dB**.
+**Explora los tres grupos**, selecciona puntos de la gráfica para ver las lecturas y mueve el control de **ruido ambiental hipotético** para comprender por qué una medición puede bajar menos de lo esperado.
 
-## 5. Lo ideal frente a lo real
+<iframe src="../../../simulacion/resultados-propagacion-polar.html" title="Simulación interactiva con los resultados reales de propagación de los tres grupos" loading="lazy" style="width:100%;height:1860px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
+
+[📈 **Abrir la simulación de resultados en pantalla completa**](../../../simulacion/resultados-propagacion-polar.html){ .md-button }
+
+**Lo que encontramos:** las tres series disminuyen con la distancia, pero menos que la predicción puntual ideal. En los registros aparecen **ruido de estudiantes, viento y un clarinete**. No tenemos suficientes medidas de control para separar cuantitativamente el efecto del ruido de fondo del de la directividad, el suelo o los dispositivos.
+
+**Para discutir en clase:**
+
+1. ¿En cuál de los tres grupos disminuyó **menos** el nivel al duplicar por primera vez la distancia?
+2. ¿Por qué comparamos la **pérdida relativa** de cada grupo en lugar del nivel absoluto entre teléfonos?
+3. ¿Qué lectura adicional realizaríamos con la POLAR apagada para evaluar el ruido de fondo?
+4. ¿La experiencia permite concluir que la POLAR siempre pierde menos de 6 dB por duplicación? ¿Por qué no?
+
+## 6. Lo ideal frente a lo real
 
 | Modelo ideal | Lo que puede ocurrir en un espacio real |
 |---|---|
