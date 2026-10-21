@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratorio sonoro — Suma coherente y resta de niveles</title>
+<style>
+:root{font-family:system-ui,Arial,sans-serif;color:#18243a;background:#f5f7fb}*{box-sizing:border-box}body{margin:0}main{max-width:920px;margin:auto;padding:22px}h1{font-size:1.8rem}h2{font-size:1.3rem}.card{background:white;border:1px solid #dae2ef;border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 2px 7px #10203010}p{line-height:1.5}.muted{color:#526178}.controls{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}button{border:1px solid #7f91a9;background:#f7faff;color:#17243a;border-radius:9px;padding:9px 13px;cursor:pointer;font-weight:600}button:focus-visible,input:focus-visible{outline:3px solid #3c84ea}button.selected{background:#235b9f;color:white}button.stop{border-color:#c36b6b}label{display:block;margin:12px 0 4px;font-weight:600}input[type=range]{width:100%;accent-color:#235b9f}.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:14px 0}.val{background:#edf3fd;padding:13px;border-radius:10px}.val small{display:block;color:#526178}.val strong{display:block;font-size:1.32rem;margin-top:4px}.waves{width:100%;height:205px;border:1px solid #dae2ef;border-radius:10px;background:#f8fbff}.note{border-left:4px solid #3979b6;padding:8px 13px;background:#eef5ff}.warning{border-left-color:#be873a;background:#fff7e8}output{font-variant-numeric:tabular-nums}footer{margin:28px 0;color:#526178;font-size:.9rem}@media(max-width:600px){main{padding:12px}.card{padding:14px}}
+</style></head><body><main>
+<h1>Laboratorio sonoro: suma y resta de niveles</h1>
+<p class="muted">Dos demostraciones para escuchar y visualizar los cálculos. Usa audífonos, comienza con un volumen bajo y ajusta gradualmente. Los niveles que aparecen son <b>relativos en dB</b>, no mediciones de dB SPL de la habitación.</p>
+<section class="card" id="coherencia">
+<h2>1. ¿Por qué a veces obtenemos +6 dB?</h2>
+<p>Se comparan dos señales de igual nivel. Escucha una sola fuente, dos fuentes independientes, dos copias idénticas y dos copias con polaridad opuesta.</p>
+<div class="controls" id="phaseModes">
+<button data-mode="one">Una fuente (referencia)</button><button data-mode="independent">Dos independientes (+3 dB)</button><button data-mode="same" class="selected">Dos idénticas (+6 dB)</button><button data-mode="inverse">Polaridad opuesta (cancelación)</button>
+</div>
+<div class="values"><div class="val"><small>Incremento teórico respecto a una fuente</small><strong id="phaseDelta">+6,02 dB</strong></div><div class="val"><small>Amplitud RMS relativa</small><strong id="phaseAmp">×2,00</strong></div></div>
+<canvas id="wave" class="waves" width="850" height="205" aria-label="Ondas de las fuentes y su suma"></canvas>
+<p class="muted">Azul: señal A. Violeta: señal B. Verde: resultado de la suma. En modo independiente son señales diferentes sin correlación; el valor de +3 dB es estadístico (promedio temporal).</p>
+<div class="controls"><button id="phasePlay">▶ Escuchar resultado</button><button id="phaseStop" class="stop">■ Detener</button></div>
+<div class="note">Con señales idénticas y perfectamente alineadas, las amplitudes se duplican: 20 log₁₀(2) = <b>+6,02 dB</b>. Si una copia se invierte, las señales se cancelan idealmente. Para señales independientes se suman las potencias medias: 10 log₁₀(2) = <b>+3,01 dB</b>.</div>
+</section>
+<section class="card" id="resta">
+<h2>2. Separar una fuente del ruido de fondo</h2>
+<p>Elige el nivel del ruido ambiental y de la fuente. Escucha el fondo, la fuente sola y la mezcla; después compara la estimación obtenida mediante la resta logarítmica.</p>
+<label for="background">Ruido de fondo: <output id="backgroundValue">60</output> dB (nivel ilustrativo)</label><input id="background" type="range" min="40" max="80" value="60">
+<label for="source">Fuente de interés: <output id="sourceValue">65</output> dB (nivel ilustrativo)</label><input id="source" type="range" min="40" max="90" value="65">
+<div class="values"><div class="val"><small>Fondo</small><strong id="bgRead">60,0 dB</strong></div><div class="val"><small>Total (fondo + fuente)</small><strong id="totalRead">66,2 dB</strong></div><div class="val"><small>Fuente recuperada por resta</small><strong id="sourceRead">65,0 dB</strong></div><div class="val"><small>Diferencia total − fondo</small><strong id="differenceRead">6,2 dB</strong></div></div>
+<div class="controls" id="noiseModes"><button data-noise="background">▶ Solo fondo</button><button data-noise="source">▶ Solo fuente</button><button data-noise="both">▶ Fondo + fuente</button><button id="noiseStop" class="stop">■ Detener</button></div>
+<p class="note" id="confidence">Con una diferencia superior a 3 dB, la estimación es menos sensible a pequeños errores de medición.</p>
+<p><b>Fórmula:</b> L<sub>fuente</sub> = 10 log₁₀(10<sup>Ltotal/10</sup> − 10<sup>Lfondo/10</sup>).</p>
+<div class="note warning">Los sonidos se generan digitalmente como dos ruidos independientes; los números son datos de un modelo, no lecturas de un sonómetro. Si la diferencia entre total y fondo es pequeña, la estimación con mediciones reales resulta muy incierta. En esta simulación se conocen los valores exactos.</div>
+</section><footer>Audio generado localmente en el navegador mediante Web Audio API. No utiliza el micrófono. Para detener todo el sonido, utiliza los botones «Detener».</footer>
+</main><script>
+let ctx,active=[],phaseMode='same',noiseMode=null;
+const $=id=>document.getElementById(id);
+function setup(){if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();ctx.resume()}
+function stop(){active.forEach(n=>{try{n.stop()}catch(e){}try{n.disconnect()}catch(e){}});active=[]}
+function randBuffer(seed=1){const length=44100*2,b=ctx.createBuffer(1,length,ctx.sampleRate),v=b.getChannelData(0);let x=seed;for(let i=0;i<length;i++){x=(1664525*x+1013904223)>>>0;v[i]=((x/4294967296)*2-1)}return b}
+function playBuffer(buffer,gain){const src=ctx.createBufferSource(),g=ctx.createGain();src.buffer=buffer;src.loop=true;g.gain.value=gain;src.connect(g);g.connect(ctx.destination);src.start();active.push(src,g)}
+function setMode(m){phaseMode=m;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===m));let d=m==='one'?0:m==='independent'?10*Math.log10(2):m==='same'?20*Math.log10(2):-Infinity; $('phaseDelta').textContent=Number.isFinite(d)?'+'+d.toFixed(2).replace('.',',')+' dB':'−∞ dB (ideal)';$('phaseAmp').textContent='×'+(m==='one'?1:m==='independent'?Math.sqrt(2):m==='same'?2:0).toFixed(2).replace('.',',');draw();if(active.length&&noiseMode===null)playPhase()}
+function playPhase(){setup();stop();noiseMode=null;const a=randBuffer(12345),b=phaseMode==='independent'?randBuffer(98765):a;const gain=0.07;playBuffer(a,gain);if(phaseMode!=='one')playBuffer(b,phaseMode==='inverse'?-gain:gain)}
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+$('phasePlay').onclick=playPhase;$('phaseStop').onclick=()=>{stop();noiseMode=null};
+function draw(){const c=$('wave'),g=c.getContext('2d'),w=c.width,h=c.height;g.clearRect(0,0,w,h);g.strokeStyle='#e3e9f2';g.beginPath();g.moveTo(0,h/2);g.lineTo(w,h/2);g.stroke();const series=[{color:'#2963b2',fn:t=>Math.sin(t)},{color:'#9554af',fn:t=>phaseMode==='one'?0:phaseMode==='independent'?Math.sin(1.37*t+0.8):phaseMode==='inverse'?-Math.sin(t):Math.sin(t)},{color:'#16856f',fn:t=>Math.sin(t)+(phaseMode==='one'?0:phaseMode==='independent'?Math.sin(1.37*t+0.8):phaseMode==='inverse'?-Math.sin(t):Math.sin(t))}];for(const s of series){g.strokeStyle=s.color;g.lineWidth=s.color==='#16856f'?2.8:1.5;g.beginPath();for(let i=0;i<w;i++){const y=h/2-s.fn((i/w)*Math.PI*10)*37;i?g.lineTo(i,y):g.moveTo(i,y)}g.stroke()}}
+function getLevels(){const bg=+$('background').value,src=+$('source').value,total=10*Math.log10(10**(bg/10)+10**(src/10)),restored=10*Math.log10(10**(total/10)-10**(bg/10));return{bg,src,total,restored,diff:total-bg}}
+function updateNoise(){const z=getLevels(),f=n=>n.toFixed(1).replace('.',',')+' dB';$('backgroundValue').textContent=z.bg;$('sourceValue').textContent=z.src;$('bgRead').textContent=f(z.bg);$('totalRead').textContent=f(z.total);$('sourceRead').textContent=f(z.restored);$('differenceRead').textContent=f(z.diff);$('confidence').textContent=z.diff<3?'La diferencia es menor de 3 dB: en una medición real, pequeños errores del sonómetro afectan mucho a la resta.':'La diferencia supera 3 dB. Recuerda que la incertidumbre real depende del instrumento y de la estabilidad del ruido de fondo.';if(noiseMode)playNoise(noiseMode)}
+function playNoise(mode){setup();stop();noiseMode=mode;document.querySelectorAll('[data-noise]').forEach(b=>b.classList.toggle('selected',b.dataset.noise===mode));const z=getLevels(),gain=n=>0.065*10**((n-90)/20);if(mode!=='source')playBuffer(randBuffer(701),gain(z.bg));if(mode!=='background')playBuffer(randBuffer(32021),gain(z.src))}
+document.querySelectorAll('[data-noise]').forEach(b=>b.onclick=()=>playNoise(b.dataset.noise));$('noiseStop').onclick=()=>{stop();noiseMode=null;document.querySelectorAll('[data-noise]').forEach(b=>b.classList.remove('selected'))};['background','source'].forEach(id=>$(id).oninput=updateNoise);window.addEventListener('pagehide',stop);setMode('same');updateNoise();
+</script></body></html>

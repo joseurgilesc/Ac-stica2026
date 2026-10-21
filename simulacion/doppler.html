@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persiguiendo las ondas — Efecto Doppler</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 120px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 120px; flex: 1; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .hint { font-size: 12px; color: #587086; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>Persiguiendo las ondas</h2>
+  <p class="lead">La fuente se mueve horizontalmente. Observa cómo los frentes de onda se comprimen delante y se expanden detrás, cambiando la frecuencia percibida.</p>
+
+  <div class="row">
+    <label>Frecuencia f0:</label>
+    <input type="range" id="f0" min="200" max="800" value="440" step="10" style="flex:1 1 220px">
+    <span id="f0Val" style="font-weight:700">440 Hz</span>
+  </div>
+
+  <div class="row">
+    <label>Velocidad fuente:</label>
+    <input type="range" id="vs" min="0" max="40" value="15" step="1" style="flex:1 1 220px">
+    <span id="vsVal" style="font-weight:700">15 m/s</span>
+  </div>
+
+  <div class="row">
+    <label>Distancia lateral receptor:</label>
+    <input type="range" id="offset" min="10" max="200" value="60" step="5" style="flex:1 1 220px">
+    <span id="offsetVal" style="font-weight:700">—</span>
+  </div>
+
+  <div class="row">
+    <label>Control:</label>
+    <button id="btnPlay">▶ Movimiento</button>
+    <button id="btnReset">↺ Reiniciar</button>
+    <button id="btnAudio">🔊 Audio</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Frecuencia percibida f'</div><div class="val" id="fp">—</div></div>
+    <div class="stat"><div class="lbl">Desplazamiento Δf</div><div class="val" id="df">—</div></div>
+    <div class="stat"><div class="lbl">Cambio en cents</div><div class="val" id="cents">—</div></div>
+    <div class="stat"><div class="lbl">Estado</div><div class="val" id="state">—</div></div>
+  </div>
+
+  <p class="hint">Al acercarse: f' sube (agudo). Al alejarse: f' baja (grave). En el punto más cercano: f' ≈ f0.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+const C = 343; // m/s
+
+let S;         // source {x, y} in px
+let Rx, Ry;    // receiver position (px)
+let wavefronts = []; // {x, y, r}
+let moving = true;
+let audioOn = false;
+let synth;
+let f0Slider, vsSlider, offsetSlider;
+let emissionCounter = 0;
+let history = []; // f' history for graph
+
+// Display scale: px per meter
+const PX_PER_M = 2.2;
+const sourceY = 0; // will be set to height*0.45
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 460);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  S = { x: width * 0.2, y: height * 0.4 };
+  Rx = width * 0.7;
+  Ry = height * 0.4;
+
+  f0Slider = select('#f0');
+  vsSlider = select('#vs');
+  offsetSlider = select('#offset');
+
+  f0Slider.input(() => select('#f0Val').html(f0Slider.value() + ' Hz'));
+  vsSlider.input(() => select('#vsVal').html(vsSlider.value() + ' m/s'));
+  offsetSlider.input(() => {
+    select('#offsetVal').html(offsetSlider.value() + ' px');
+    Ry = height * 0.4 + Number(offsetSlider.value());
+  });
+
+  select('#btnPlay').mousePressed(() => {
+    moving = !moving;
+    select('#btnPlay').html(moving ? '⏸ Pausa' : '▶ Movimiento');
+  });
+  select('#btnReset').mousePressed(() => {
+    S.x = width * 0.2;
+    wavefronts = [];
+    history = [];
+  });
+  select('#btnAudio').mousePressed(() => {
+    audioOn = !audioOn;
+    select('#btnAudio').html(audioOn ? '🔊 Audio ON' : '🔇 Audio OFF');
+    if (audioOn && !synth) {
+      synth = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.05, decay: 0.1, sustain: 0.5, release: 0.1 }, volume: -18 }).toDestination();
+    }
+    if (audioOn) {
+      if (Tone.context.state !== 'running') Tone.start();
+      synth.triggerAttack(Number(f0Slider.value()));
+    } else if (synth) {
+      synth.triggerRelease();
+    }
+  });
+
+  select('#offsetVal').html(offsetSlider.value() + ' px');
+  Ry = height * 0.4 + Number(offsetSlider.value());
+
+  textFont('system-ui');
+}
+
+function draw() {
+  background(255);
+
+  const f0 = Number(f0Slider.value());
+  const vs = Number(vsSlider.value()); // m/s
+
+  if (moving) {
+    // Source moves right (in meters then to px)
+    S.x += vs * PX_PER_M / 60; // 60 fps scaling
+    if (S.x > width * 0.95) S.x = width * 0.2; // wrap
+
+    // Emit wavefronts periodically
+    emissionCounter++;
+    const emitEvery = Math.max(4, Math.round(45 * (300 / f0))); // fewer for low f0
+    if (emissionCounter >= emitEvery) {
+      wavefronts.push({ x: S.x, y: S.y, r: 5 });
+      emissionCounter = 0;
+    }
+  }
+
+  // Grow wavefronts (speed of sound in px/frame)
+  const c_px_per_frame = C * PX_PER_M / 60;
+  for (let w of wavefronts) {
+    w.r += c_px_per_frame;
+  }
+  // Remove old wavefronts
+  wavefronts = wavefronts.filter(w => w.r < 800);
+
+  // Compute radial velocity and f'
+  const dx = Rx - S.x;
+  const dy = Ry - S.y;
+  const distPx = Math.sqrt(dx*dx + dy*dy);
+  // Radial component of source velocity (toward receiver)
+  const vRadial = distPx > 1 ? vs * (dx / distPx) : 0;
+  const fp = f0 * C / (C - vRadial);
+  const df = fp - f0;
+  const cents = 1200 * Math.log2(fp / f0);
+
+  // State
+  let stateText;
+  if (vRadial > 1) stateText = 'Acercándose';
+  else if (vRadial < -1) stateText = 'Alejándose';
+  else stateText = 'Punto cercano';
+
+  select('#fp').html(fp.toFixed(1) + ' Hz');
+  select('#df').html((df >= 0 ? '+' : '') + df.toFixed(1) + ' Hz');
+  select('#cents').html((cents >= 0 ? '+' : '') + cents.toFixed(0) + ' cents');
+  select('#state').html(stateText);
+
+  // Update audio pitch
+  if (audioOn && synth) {
+    synth.frequency.value = fp;
+  }
+
+  // ── Draw wavefronts ──
+  noFill();
+  stroke(TEAL[0], TEAL[1], TEAL[2], 110);
+  strokeWeight(1.5);
+  for (let w of wavefronts) {
+    circle(w.x, w.y, w.r * 2);
+  }
+
+  // ── Trajectory line ──
+  stroke(180);
+  strokeWeight(1);
+  drawingContext.setLineDash([4, 4]);
+  line(20, S.y, width - 20, S.y);
+  drawingContext.setLineDash([]);
+
+  // ── Source S ──
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  noStroke();
+  circle(S.x, S.y, 22);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  textStyle(BOLD);
+  text('S', S.x, S.y);
+  textStyle(NORMAL);
+
+  // ── Receiver R ──
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(Rx, Ry, 18);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  textStyle(BOLD);
+  text('R', Rx, Ry);
+  textStyle(NORMAL);
+
+  // ── Radial velocity indicator ──
+  if (distPx > 1) {
+    stroke(CORAL[0], CORAL[1], CORAL[2], 150);
+    strokeWeight(1);
+    drawingContext.setLineDash([3, 3]);
+    line(S.x, S.y, Rx, Ry);
+    drawingContext.setLineDash([]);
+  }
+
+  // ── Graph of f' vs time (bottom) ──
+  history.push(fp);
+  if (history.length > 200) history.shift();
+  const gx = 20;
+  const gy = height - 60;
+  const gw = width - 40;
+  const gh = 50;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx, gy - 10, gw, gh + 20, 6);
+
+  // Center line (f0)
+  const fmin = Math.min(f0 * 0.9, Math.min(...history));
+  const fmax = Math.max(f0 * 1.1, Math.max(...history));
+  stroke(150);
+  strokeWeight(1);
+  const f0y = map(f0, fmin, fmax, gy + gh, gy);
+  line(gx, f0y, gx + gw, f0y);
+
+  // Curve
+  stroke(INDIGO[0], INDIGO[1], INDIGO[2]);
+  strokeWeight(2);
+  noFill();
+  beginShape();
+  for (let i = 0; i < history.length; i++) {
+    let x = map(i, 0, history.length - 1, gx, gx + gw);
+    let y = map(history[i], fmin, fmax, gy + gh, gy);
+    vertex(x, y);
+  }
+  endShape();
+
+  fill(82, 96, 121);
+  textSize(10);
+  textAlign(LEFT, TOP);
+  text('f\' vs tiempo (línea = f0)', gx + 4, gy - 6);
+
+  // ── Title ──
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(13);
+  textStyle(BOLD);
+  text('f0 = ' + f0 + ' Hz  |  vs = ' + vs + ' m/s  |  f\' = ' + fp.toFixed(1) + ' Hz', width / 2, 10);
+  textStyle(NORMAL);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 460);
+  Rx = width * 0.7;
+}
+</script>
+</body>
+</html>

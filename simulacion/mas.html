@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movimiento Armónico Simple — Trazado de onda sinusoidal</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: #f5f5f0; font-family: Georgia, serif; }
+    canvas { display: block; }
+    #panel {
+      position: absolute; top: 0; left: 0; width: 200px; height: 100vh;
+      background: rgba(36, 157, 143, 0.04); color: #1a1a1a; padding: 12px;
+      font-size: 11px; z-index: 5; overflow-y: auto;
+      border-right: 1px solid rgba(36, 157, 143, 0.15);
+    }
+    #panel h3 { margin: 0 0 6px; font-size: 13px; color: #1A7A6F; }
+    #panel button { width: 100%; margin: 3px 0; padding: 5px 8px; border: 1px solid rgba(36, 157, 143, 0.3); border-radius: 3px; cursor: pointer; background: rgba(36, 157, 143, 0.05); font-size: 11px; font-family: Georgia, serif; }
+    #panel button:hover { background: rgba(36, 157, 143, 0.12); }
+    #panel input[type=range] { width: 100%; accent-color: #249D8F; margin: 3px 0; }
+    #panel label { display: block; margin: 6px 0 2px; color: #333; font-size: 10px; }
+    #panel .val { font-weight: bold; color: #1A7A6F; }
+    #panel .section { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(36,157,143,0.12); }
+    #panel .info { font-size: 10px; color: #555; line-height: 1.5; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<div id="panel">
+  <h3>Movimiento Armónico Simple</h3>
+  <div class="section">
+    <label>Rigidez del resorte: <span class="val" id="kv">media</span></label>
+    <input type="range" id="stiffness" min="0.3" max="2.0" step="0.1" value="1.0">
+  </div>
+  <div class="section">
+    <label>Amplitud inicial: <span class="val" id="av">1.0</span></label>
+    <input type="range" id="amplitude" min="0.3" max="1.5" step="0.1" value="1.0">
+  </div>
+  <div class="section">
+    <label>Velocidad del papel: <span class="val" id="sv">1.0</span></label>
+    <input type="range" id="speed" min="0.5" max="2.5" step="0.1" value="1.0">
+  </div>
+  <div class="section">
+    <button id="btn-reset">🔄 Reiniciar</button>
+    <button id="btn-pause">⏯ Pausar</button>
+  </div>
+  <div class="info">
+    <b>Figura 1-1 y 1-2 del Everest</b><br>
+    Masa + resorte → MAS. Lápiz traza onda sinusoidal sobre papel en movimiento.
+  </div>
+</div>
+
+<script>
+let stiffness = 1.0, amplitude = 1.0, paperSpeed = 1.0;
+let position = 0, velocity = 0;
+let paused = false;
+let waveHistory = [];  // stores {x, y} of pen tip on paper
+let MAX_HISTORY = 1500;
+let paperOffset = 0;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textFont('Georgia');
+  position = 0.8 * amplitude;
+  velocity = 0;
+
+  let st = select('#stiffness'), am = select('#amplitude'), sp = select('#speed');
+  st.input(() => { stiffness = parseFloat(st.value()); select('#kv').html(stiffness < 0.7 ? 'baja' : stiffness < 1.3 ? 'media' : 'alta'); });
+  am.input(() => { amplitude = parseFloat(am.value()); select('#av').html(amplitude.toFixed(1)); });
+  sp.input(() => { paperSpeed = parseFloat(sp.value()); select('#sv').html(paperSpeed.toFixed(1)); });
+  select('#btn-reset').mousePressed(() => { position = 0.8 * amplitude; velocity = 0; waveHistory = []; });
+  select('#btn-pause').mousePressed(() => { paused = !paused; select('#btn-pause').html(paused ? '▶ Reanudar' : '⏯ Pausar'); });
+}
+
+function draw() {
+  background(245, 245, 240);
+
+  let GX = 220, GW = width - GX - 30;
+
+  // Layout
+  let supportY = 80;
+  let massRestY = 260;    // equilibrium position of mass
+  let maxDisp = 80 * amplitude;
+  let paperTop = massRestY - maxDisp - 20;
+  let paperBottom = massRestY + maxDisp + 20;
+
+  // ── Physics ──
+  if (!paused) {
+    let dt = 0.016;
+    let omega = TWO_PI * stiffness;
+    let k = omega * omega;
+    let damping = 0.001;
+    let accel = -k * position - damping * velocity;
+    velocity += accel * dt;
+    position += velocity * dt;
+  }
+
+  let massY = massRestY + position * maxDisp;
+  let penX = GX + GW * 0.65;
+
+  // Pen tip is horizontally aligned with the mass center
+  let penTipX = penX - 95;
+  // Pen tip Y = same as mass Y (rigid horizontal arm)
+  let penTipY = massY;
+
+  // ── Record wave history ──
+  if (!paused && frameCount % 2 === 0) {
+    waveHistory.push({ x: penTipX, y: penTipY });
+    if (waveHistory.length > MAX_HISTORY) waveHistory.shift();
+  }
+
+  // Shift history left (paper moves)
+  if (!paused) {
+    let shift = paperSpeed * 1.5;
+    for (let p of waveHistory) p.x -= shift;
+    paperOffset = (paperOffset + shift) % 30;
+  }
+
+  // ═══ DRAWING ═══
+
+  // --- Paper strip ---
+  fill(255);
+  stroke(180, 180, 180);
+  strokeWeight(1);
+  rect(GX, paperTop, GW - 60, paperBottom - paperTop);
+
+  // Paper top/bottom lines
+  stroke(120);
+  strokeWeight(1);
+  line(GX, paperTop, GX + GW - 60, paperTop);
+  line(GX, paperBottom, GX + GW - 60, paperBottom);
+
+  // --- Moving paper texture (vertical grid lines) ---
+  stroke(200, 200, 200);
+  strokeWeight(0.5);
+  let lineSpacing = 30;
+  let startX = GX - (paperOffset % lineSpacing);
+  for (let lx = startX; lx < GX + GW - 60; lx += lineSpacing) {
+    line(lx, paperTop, lx, paperBottom);
+  }
+
+  // --- Torn/curled right edge of paper ---
+  noFill();
+  stroke(180, 180, 180);
+  strokeWeight(1);
+  let rightX = GX + GW - 60;
+  // Small jagged edge on the right side
+  beginShape();
+  vertex(rightX, paperTop);
+  let segH = (paperBottom - paperTop) / 12;
+  for (let i = 0; i < 12; i++) {
+    let jx = rightX + (i % 3 === 0 ? -4 : i % 3 === 1 ? -2 : -6) + sin(frameCount * 0.05 + i) * 1;
+    vertex(jx, paperTop + i * segH);
+  }
+  vertex(rightX, paperBottom);
+  endShape();
+
+  // Paper roll curl at right
+  stroke(190, 190, 190);
+  strokeWeight(1);
+  fill(250, 250, 250);
+  beginShape();
+  vertex(rightX, paperTop);
+  vertex(rightX + 8, paperTop - 3);
+  vertex(rightX + 8, paperBottom + 3);
+  vertex(rightX, paperBottom);
+  endShape(CLOSE);
+
+  // --- Traced sine wave on paper ---
+  noFill();
+  stroke(36, 157, 143);
+  strokeWeight(2.5);
+  let visiblePoints = waveHistory.filter(p => p.x > GX && p.x < GX + GW - 60);
+  if (visiblePoints.length > 1) {
+    beginShape();
+    for (let p of visiblePoints) vertex(p.x, p.y);
+    endShape();
+  }
+
+  // --- Fixed support ---
+  stroke(36, 157, 143);
+  strokeWeight(3);
+  line(penX - 50, supportY, penX + 50, supportY);
+  strokeWeight(1.5);
+  for (let i = 0; i < 7; i++) {
+    let sx = penX - 25 + i * 8;
+    line(sx, supportY, sx - 3, supportY - 15);
+  }
+
+  // --- Spring ---
+  let springLen = massY - supportY;
+  let coils = 14, coilW = 12;
+  noFill();
+  stroke(36, 157, 143);
+  strokeWeight(2);
+  beginShape();
+  for (let i = 0; i <= coils * 2; i++) {
+    let ty = supportY + (i / (coils * 2)) * springLen;
+    let tx = penX + (i % 2 === 0 ? -coilW : coilW);
+    vertex(tx, ty);
+  }
+  endShape();
+
+  // --- Mass (weight W) ---
+  let mw = 50, mh = 40;
+  fill(255);
+  stroke(36, 157, 143);
+  strokeWeight(2);
+  rectMode(CENTER);
+  rect(penX, massY + mh / 2, mw, mh, 4);
+  rectMode(CORNER);
+  noStroke();
+  fill(26, 122, 111);
+  textAlign(CENTER, CENTER);
+  textSize(16);
+  textStyle(BOLD);
+  text('W', penX, massY + mh / 2);
+
+  // Connection ring at bottom of mass
+  stroke(36, 157, 143);
+  strokeWeight(2);
+  noFill();
+  circle(penX, massY, 14);
+  circle(penX, massY, 6);
+
+  // --- Connecting arm (rigid horizontal bar: mass → pen tip) ---
+  stroke(36, 157, 143, 180);
+  strokeWeight(2.5);
+  // Small vertical drop from mass center, then horizontal to pen
+  line(penX, massY, penX, massY + 10);
+  line(penX, massY + 10, penTipX, massY + 10);
+  line(penTipX, massY + 10, penTipX, penTipY);
+
+  // --- Pen ---
+  fill(26, 122, 111);
+  noStroke();
+  let penBaseX = penTipX + 10;
+  triangle(penTipX, penTipY - 12, penTipX - 8, penTipY, penTipX, penTipY + 4);
+
+  // --- Equilibrium dashed line ---
+  stroke(36, 157, 143, 60);
+  strokeWeight(1);
+  drawingContext.setLineDash([5, 5]);
+  line(penX - 40, massRestY, penX + 40, massRestY);
+  drawingContext.setLineDash([]);
+  noStroke();
+
+  // --- Equilibrium label ---
+  fill(26, 122, 143, 120);
+  textSize(10);
+  textAlign(LEFT, CENTER);
+  text('posición de equilibrio', penX + 45, massRestY);
+
+  // --- Paper motion arrow ---
+  stroke(36, 157, 143, 180);
+  strokeWeight(1.5);
+  let arrY = paperTop - 15;
+  line(GX + 80, arrY, GX + 15, arrY);
+  line(GX + 15, arrY, GX + 25, arrY - 5);
+  line(GX + 15, arrY, GX + 25, arrY + 5);
+  noStroke();
+  fill(26, 122, 111);
+  textSize(11);
+  textAlign(LEFT, CENTER);
+  text('Movimiento del papel', GX + 85, arrY);
+
+  // --- Time arrow ---
+  stroke(36, 157, 143, 180);
+  strokeWeight(1.5);
+  let tay = paperBottom + 15;
+  line(penX - 80 + 80, tay, penX - 80 - 80, tay);
+  line(penX - 80 - 80, tay, penX - 80 - 70, tay - 5);
+  line(penX - 80 - 80, tay, penX - 80 - 70, tay + 5);
+  noStroke();
+  fill(26, 122, 111);
+  textSize(11);
+  textAlign(CENTER, TOP);
+  text('Tiempo', penX - 80, tay + 5);
+
+  // --- Title ---
+  noStroke();
+  fill(26, 122, 111);
+  textSize(14);
+  textAlign(CENTER, TOP);
+  text('Figura 1-2: Movimiento armónico simple → onda sinusoidal', width / 2, 14);
+  fill(120);
+  textSize(10);
+  text('Elasticidad del resorte + inercia de la masa = oscilación. El lápiz la traza sobre papel en movimiento.', width / 2, 32);
+
+  // --- Frequency display ---
+  let freq = stiffness;
+  fill(26, 122, 111);
+  textSize(11);
+  textAlign(LEFT, TOP);
+  text(`Frecuencia angular: ${freq.toFixed(1)} Hz`, GX + 10, supportY + 5);
+}
+
+function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
+</body>
+</html>
