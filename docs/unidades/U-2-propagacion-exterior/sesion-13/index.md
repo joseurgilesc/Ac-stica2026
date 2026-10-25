@@ -42,10 +42,8 @@ La difracción depende de la **longitud de onda** (\(\lambda\)) comparada con el
 
 Una **barrera acústica** es un obstáculo colocado entre una fuente sonora y un receptor para reducir el sonido que llega al oyente.
 
-<figure markdown="span">
-  ![Diagrama de una barrera acústica y el recorrido del sonido](../../../img/reflexion_fuente_puntual_pared_plana.svg)
-  <figcaption>Una superficie entre la fuente y el oyente puede bloquear el camino directo. En la simulación siguiente veremos cómo una onda puede llegar por encima del borde.</figcaption>
-</figure>
+**Observa en la simulación** cómo la barrera interrumpe la línea directa entre fuente y oyente, mientras el sonido todavía puede rodear su borde superior.
+
 
 Si la barrera bloquea la **línea de visión directa**, el sonido todavía puede llegar difractándose por su borde superior o por los laterales.
 
