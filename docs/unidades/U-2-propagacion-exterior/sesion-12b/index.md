@@ -28,7 +28,7 @@ Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbr
 
 **Procedimiento breve:**
 
-1. Baja el volumen físico del equipo casi al mínimo. Selecciona **1.000 Hz** y pulsa «Tono de 1,5 s»; ajusta el volumen solo hasta una escucha **suave y cómoda**.
+1. Baja el volumen físico del equipo casi al mínimo y pulsa **«🔊 Probar sonido a 1.000 Hz»**. Si no se oye, revisa la salida de audio, el volumen del sistema y si la pestaña del navegador está silenciada. Después ajusta el volumen físico solo hasta una escucha **suave y cómoda**.
 2. Utiliza el control **Volumen del oscilador** para disminuir el nivel si lo necesitas y pulsa **«Fijar volumen para comparar»**.
 3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. Luego pulsa **«Explorar deslizando · 5 s»** y mueve el **deslizador continuo**: el tono cambiará de frecuencia mientras suena. Selecciona también **10, 15, 22.000 y 25.000 Hz** para intentar generar infra y ultrasonidos; en muchos sistemas no se escucharán o no podrán generarse, y **no debes subir el volumen para buscarlos**.
 4. Para las ocho frecuencias centrales de la práctica (125–12.000 Hz), registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**. Los infrasonidos y ultrasonidos son una demostración de generación de señales, **no deben registrarse ni interpretarse como una prueba de audición**.
@@ -36,6 +36,8 @@ Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbr
 <iframe src="../../../simulacion/rango-audible-oscilador.html" title="Exploración auditiva con oscilador sinusoidal, control de volumen limitado y mapa del rango de frecuencias" loading="lazy" style="width:100%;height:1540px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
 [🎹 **Abrir el oscilador en pantalla completa**](../../../simulacion/rango-audible-oscilador.html){ .md-button }
+
+**Si el oscilador no suena:** prueba primero **1.000 Hz** con el botón de comprobación; abre el enlace en pantalla completa, confirma que la pestaña no esté silenciada y que el sistema utilice la salida de audio correcta. No intentes arreglarlo subiendo al máximo el volumen.
 
 !!! warning "Escucha responsable y límites de la demostración"
     **No es una audiometría ni una prueba para decidir «hasta qué frecuencia oye cada estudiante».** Si un tono no se distingue, pueden influir el nivel fijo utilizado, la respuesta de los auriculares, el parlante, la sala y otros factores. El control de volumen de la herramienta es **digital**, no mide los dB SPL que llegan al oído.
