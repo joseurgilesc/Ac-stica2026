@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explora las frecuencias · Oscilador sinusoidal · Sesión 12B</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#213a4c;background:#f8fafc}
+*{box-sizing:border-box}body{margin:0}main{max-width:940px;margin:auto;padding:16px}
+h1{font-size:1.35rem;line-height:1.3;margin:0 0 7px}h2{font-size:1.08rem;margin:4px 0 8px}
+p{line-height:1.5;margin:7px 0 11px}
+.muted{color:#526a7d}.small{font-size:.88rem}
+.notice{background:#fff5e8;border-left:4px solid #b98a46;border-radius:5px;padding:10px 13px;line-height:1.46;margin:12px 0}
+.info{background:#eff7f9;border-left:4px solid #2d8294;border-radius:5px;padding:10px 13px;line-height:1.45;margin:11px 0}
+.card{border:1px solid #dae6ed;border-radius:12px;background:#fff;padding:16px;margin:12px 0}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{font-weight:700;display:block}
+input[type=range]{width:100%;min-height:45px;accent-color:#247a90;cursor:pointer}
+output{font-size:1.18rem;color:#246c84;font-weight:800}
+button{font:inherit;min-height:44px;padding:10px 13px;border-radius:9px;border:1px solid #b5c9d4;background:#eff7fa;color:#245b74;font-weight:700;cursor:pointer}
+button.main{background:#266f88;color:white;border-color:#266f88}
+button.active{background:#266f88;color:#fff;border-color:#266f88}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid #93c8d5;outline-offset:2px}
+.preset{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.preset button{flex:1 1 84px}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:10px 0}
+.row button{flex:1 1 145px}
+svg{display:block;width:100%;height:auto}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.kpi{border-radius:9px;background:#edf5f8;padding:12px}
+.kpi small{display:block;color:#536a7d}
+.kpi strong{font-size:1.12rem}
+.track{height:10px;background:#e7eff3;border-radius:20px;margin:8px 0}
+.track>div{height:100%;background:#2b8497;border-radius:20px;width:0}
+table{width:100%;border-collapse:collapse;font-size:.89rem}
+th,td{padding:8px 10px;border-bottom:1px solid #e1ebf0;text-align:left}
+th{background:#eef4f8}
+td:last-child{text-align:right}
+.caption{font-size:.81rem;color:#526c80}
+@media(max-width:570px){main{padding:9px}h1{font-size:1.19rem}.card{padding:12px}.controls{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.preset button{flex:1 1 75px}.row button{flex:1 1 115px}}
+</style>
+</head>
+<body><main>
+<h1>Oscilador sinusoidal: explora graves y agudos</h1>
+<p class="muted">La audición humana suele describirse con un rango aproximado de <strong>20 a 20.000 Hz</strong> en personas jóvenes con audición normal. Ese rango varía según la edad, cada persona y el nivel del sonido. No es un límite fijo para todos.</p>
+<div class="card">
+<h2>El mapa de frecuencias</h2>
+<svg id="map" viewBox="0 0 880 126" role="img" aria-label="Escala logarítmica desde 20 hasta 20000 hercios, con un indicador de la frecuencia seleccionada">
+ <defs><linearGradient id="grad" x1="0" x2="1"><stop offset="0" stop-color="#90b5c4"/><stop offset=".33" stop-color="#3393a0"/><stop offset=".65" stop-color="#6482af"/><stop offset="1" stop-color="#bc9a68"/></linearGradient></defs>
+ <rect x="44" y="39" width="782" height="27" rx="9" fill="url(#grad)"/>
+ <g fill="#4a6277" font-size="17" font-family="system-ui,Arial,sans-serif">
+ <text x="44" y="94" text-anchor="middle">20 Hz</text><text x="226" y="94" text-anchor="middle">100 Hz</text>
+ <text x="487" y="94" text-anchor="middle">1 kHz</text>
+ <text x="748" y="94" text-anchor="middle">10 kHz</text><text x="826" y="94" text-anchor="middle">20 kHz</text>
+ <text x="44" y="17" font-size="15">Graves</text><text x="435" y="17" font-size="15">Medios</text><text x="826" y="17" font-size="15" text-anchor="end">Agudos</text>
+ </g>
+ <line id="indicator" x1="487" y1="26" x2="487" y2="76" stroke="#183848" stroke-width="4"/>
+ <circle id="dot" cx="487" cy="53" r="7" fill="#fff" stroke="#183848" stroke-width="3"/>
+</svg>
+<p class="caption">Mapa conceptual, no una prueba diagnóstica. Este oscilador permite explorar <strong>125 a 12.000 Hz</strong>; no reproduce los extremos teóricos porque muchos dispositivos no los emiten de forma fiable.</p>
+</div>
+<div class="card">
+<h2>1. Elige una frecuencia</h2>
+<div class="preset" id="presets" role="group" aria-label="Frecuencias rápidas">
+<button type="button" data-hz="125">125 Hz</button>
+<button type="button" data-hz="250">250 Hz</button>
+<button type="button" data-hz="500">500 Hz</button>
+<button type="button" data-hz="1000" class="active">1 kHz</button>
+<button type="button" data-hz="2000">2 kHz</button>
+<button type="button" data-hz="4000">4 kHz</button>
+<button type="button" data-hz="8000">8 kHz</button>
+<button type="button" data-hz="12000">12 kHz</button>
+</div>
+<div class="controls">
+<div>
+<label for="frequency">Frecuencia sinusoidal: <output for="frequency" id="freqValue">1.000 Hz</output></label>
+<input type="range" min="0" max="1000" step="1" value="454" id="frequency" aria-label="Frecuencia sinusoidal de 125 a 12000 hercios, escala logarítmica">
+</div>
+<div>
+<label for="volume">Volumen del oscilador: <output for="volume" id="volValue">30 %</output></label>
+<input type="range" min="0" max="100" step="5" value="30" id="volume" aria-label="Volumen digital interno del oscilador, limitado">
+</div>
+</div>
+<div class="kpis">
+<div class="kpi"><small>Tipo de señal</small><strong>Sinusoidal</strong></div>
+<div class="kpi"><small>Duración</small><strong>0,7 segundos</strong></div>
+<div class="kpi"><small>Nivel de salida</small><strong>Limitado digitalmente*</strong></div>
+</div>
+<div class="row">
+<button class="main" id="play" type="button">▶ Escuchar tono</button>
+<button type="button" id="lock">Fijar volumen para comparar</button>
+<button type="button" id="stop">■ Detener</button>
+</div>
+<p class="info" role="status" id="status">Primero prueba 1.000 Hz a volumen cómodo. Después fija el volumen y cambia la frecuencia sin aumentarlo.</p>
+<p class="caption">* El volumen interno tiene una amplitud máxima digital deliberadamente baja (aprox. −40 dBFS pico), pero **no controla ni mide los dB SPL de tus auriculares o altavoces**: también debes mantener bajo el volumen físico del equipo.</p>
+</div>
+<div class="card">
+<h2>2. ¿Lo distinguiste?</h2>
+<p class="small">Con el mismo volumen, marca tu percepción. Si no oyes un tono, <strong>no aumentes el volumen para buscar el límite</strong>; puede deberse al dispositivo, al ambiente o al nivel de la señal.</p>
+<div class="row">
+<button type="button" id="yes">Lo distinguí</button>
+<button type="button" id="no">No lo distinguí</button>
+<button type="button" id="clear">Borrar registros</button>
+</div>
+<div class="track"><div id="progress"></div></div>
+<p class="small" id="count">0 de 8 frecuencias rápidas registradas</p>
+<table><thead><tr><th>Frecuencia</th><th>Observación</th></tr></thead><tbody id="results"></tbody></table>
+<p class="caption">Estos registros son observaciones personales con el equipo usado; no representan el rango auditivo individual ni un audiograma. Los datos se mantienen solo en esta página hasta que la recargues.</p>
+</div>
+<p class="notice"><strong>Escucha responsable:</strong> utiliza volumen físico bajo, tonos breves y pausas. Detente si notas molestia, presión o zumbido. No utilices este ejercicio para detectar umbrales auditivos, comparar capacidades personales ni intentar escuchar frecuencias que no distingues.</p>
+</main>
+<script>
+"use strict";
+(()=>{
+ const $=id=>document.getElementById(id);
+ const MIN=125,MAX=12000,PRESETS=[125,250,500,1000,2000,4000,8000,12000];
+ const AudioType=window.AudioContext||window.webkitAudioContext;
+ let ac=null,osc=null,gain=null,playingUntil=0,locked=false,frequency=1000;
+ const observations={};
+ const human=n=>Math.round(n).toLocaleString("es-EC")+" Hz";
+ const pos=f=>Math.round(1000*Math.log(f/MIN)/Math.log(MAX/MIN));
+ const fromPos=t=>MIN*Math.pow(MAX/MIN,t/1000);
+ $("frequency").value=pos(1000);
+ function update(){
+  $("freqValue").textContent=human(frequency);
+  $("volValue").textContent=$("volume").value+" %";
+  const px=44+782*Math.log10(frequency/20)/Math.log10(20000/20);
+  $("indicator").setAttribute("x1",px.toFixed(2));
+  $("indicator").setAttribute("x2",px.toFixed(2));
+  $("dot").setAttribute("cx",px.toFixed(2));
+  document.querySelectorAll("[data-hz]").forEach(b=>b.classList.toggle("active",Number(b.dataset.hz)===Math.round(frequency)));
+ }
+ function stop(){
+  if(gain&&ac){
+   try{const now=ac.currentTime;gain.gain.cancelScheduledValues(now);gain.gain.setTargetAtTime(0,now,.018);if(osc)osc.stop(now+.09);}catch(_){}
+  }
+  osc=null;gain=null;playingUntil=0;
+ }
+ async function play(){
+  try{
+   if(!AudioType){$("status").textContent="Este navegador no admite Web Audio.";return;}
+   if(!ac)ac=new AudioType();
+   if(ac.state==="suspended")await ac.resume();
+   if(ac.state!=="running")throw Error("No se pudo iniciar el audio");
+   if(ac.currentTime<playingUntil-.01){$("status").textContent="Espera a que termine el tono anterior.";return;}
+   const now=ac.currentTime+.045,d=.70,oscillator=ac.createOscillator(),env=ac.createGain();
+   oscillator.type="sine";oscillator.frequency.setValueAtTime(frequency,now);
+   const amplitude=Math.pow(10,-40/20)*Number($("volume").value)/100;
+   env.gain.setValueAtTime(0,now);
+   env.gain.linearRampToValueAtTime(amplitude,now+.035);
+   env.gain.setValueAtTime(amplitude,now+d-.045);
+   env.gain.linearRampToValueAtTime(0,now+d);
+   oscillator.connect(env);env.connect(ac.destination);
+   oscillator.start(now);oscillator.stop(now+d+.02);
+   osc=oscillator;gain=env;playingUntil=now+d+.03;
+   oscillator.onended=()=>{try{oscillator.disconnect();env.disconnect()}catch(_){}if(osc===oscillator){osc=null;gain=null;}};
+   $("status").textContent="Reproducción breve de "+human(frequency)+". Marca tu observación o cambia la frecuencia, manteniendo el volumen fijo.";
+  }catch(e){$("status").textContent="No se pudo reproducir el tono. Revisa la salida de audio y los permisos del navegador."; }
+ }
+ function setFrequency(f){frequency=f;$("frequency").value=pos(f);update();}
+ $("frequency").addEventListener("input",()=>{frequency=fromPos(Number($("frequency").value));update();});
+ $("volume").addEventListener("input",update);
+ document.querySelectorAll("[data-hz]").forEach(btn=>btn.addEventListener("click",()=>setFrequency(Number(btn.dataset.hz))));
+ $("play").addEventListener("click",play);
+ $("stop").addEventListener("click",()=>{stop();$("status").textContent="Audio detenido.";});
+ $("lock").addEventListener("click",()=>{
+  locked=!locked;$("volume").disabled=locked;
+  $("lock").textContent=locked?"Volumen fijado ✓ · Desbloquear":"Fijar volumen para comparar";
+  $("lock").classList.toggle("active",locked);
+  $("status").textContent=locked?"Ahora cambia la frecuencia manteniendo el mismo volumen interno. No cambies el volumen físico del equipo.":"Volumen interno desbloqueado. Mantén siempre el nivel físico bajo.";
+ });
+ function render(){
+  const tbody=$("results");tbody.replaceChildren();let total=0;
+  for(const f of PRESETS){
+   const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
+   a.textContent=human(f);b.textContent=observations[f]||"Sin registrar";
+   if(observations[f])total++;
+   tr.append(a,b);tbody.append(tr);
+  }
+  $("count").textContent=total+" de 8 frecuencias rápidas registradas";
+  $("progress").style.width=(total/8*100)+"%";
+ }
+ function register(value){
+  const target=PRESETS.find(f=>f===Math.round(frequency));
+  if(target===undefined){
+   $("status").textContent="Para registrar una observación, elige primero una de las ocho frecuencias rápidas.";
+   return;
+  }
+  observations[target]=value;render();
+  $("status").textContent="Registrado "+human(target)+": "+value+". No es una medición del límite auditivo.";
+ }
+ $("yes").addEventListener("click",()=>register("Lo distinguí"));
+ $("no").addEventListener("click",()=>register("No lo distinguí"));
+ $("clear").addEventListener("click",()=>{for(const f of PRESETS)delete observations[f];render();});
+ update();render();
+})();
+</script>
+</body>
+</html>
