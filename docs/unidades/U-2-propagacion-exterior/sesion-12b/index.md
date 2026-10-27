@@ -24,14 +24,14 @@ En personas jóvenes con audición normal, se suele utilizar como referencia un 
 
 Una **onda sinusoidal** tiene una sola frecuencia y nos permite relacionar directamente los **Hz** con la altura que percibimos: al aumentar la frecuencia, el tono tiende a percibirse más agudo.
 
-Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbral auditivo individual. La escala superior muestra todo el rango teórico de 20 Hz a 20 kHz; la herramienta reproduce solo de **125 a 12.000 Hz**, donde los dispositivos de clase suelen responder con mayor previsibilidad.
+Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbral auditivo individual. La escala muestra ahora desde **10 hasta 25.000 Hz**: incluye **infrasonidos (10 y 15 Hz)**, el límite de referencia de 20 Hz, la región audible y **ultrasonidos (22.000 y 25.000 Hz)**. Las zonas por debajo de 20 Hz y por encima de 20.000 Hz son **visuales, sin audio**. La herramienta reproduce tonos de **125 a 12.000 Hz**, donde los dispositivos de clase suelen responder con mayor previsibilidad.
 
 **Procedimiento breve:**
 
 1. Baja el volumen físico del equipo casi al mínimo. Selecciona **1.000 Hz** y pulsa «Escuchar tono»; ajusta el volumen solo hasta una escucha **suave y cómoda**.
 2. Utiliza el control **Volumen del oscilador** para disminuir el nivel si lo necesitas y pulsa **«Fijar volumen para comparar»**.
-3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. También puedes explorar frecuencias intermedias con el deslizador.
-4. Para las frecuencias rápidas, registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**.
+3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. También puedes explorar frecuencias intermedias con el deslizador. Selecciona **10, 15, 22.000 y 25.000 Hz** para ver los ejemplos de infrasonido y ultrasonido en el mapa: **no se reproducen por los parlantes**.
+4. Para las ocho frecuencias reproducibles de la práctica, registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**. Los ejemplos de infrasonidos y ultrasonidos no deben registrarse como pruebas de audición.
 
 <iframe src="../../../simulacion/rango-audible-oscilador.html" title="Exploración auditiva con oscilador sinusoidal, control de volumen limitado y mapa del rango de frecuencias" loading="lazy" style="width:100%;height:1540px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
