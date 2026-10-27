@@ -24,14 +24,14 @@ En personas jóvenes con audición normal, se suele utilizar como referencia un 
 
 Una **onda sinusoidal** tiene una sola frecuencia y nos permite relacionar directamente los **Hz** con la altura que percibimos: al aumentar la frecuencia, el tono tiende a percibirse más agudo.
 
-Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbral auditivo individual. La escala muestra ahora desde **10 hasta 25.000 Hz**: incluye **infrasonidos (10 y 15 Hz)**, el límite de referencia de 20 Hz, la región audible y **ultrasonidos (22.000 y 25.000 Hz)**. Las zonas por debajo de 20 Hz y por encima de 20.000 Hz son **visuales, sin audio**. La herramienta reproduce tonos de **125 a 12.000 Hz**, donde los dispositivos de clase suelen responder con mayor previsibilidad.
+Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbral auditivo individual. El **deslizador continuo** abarca de **10 a 25.000 Hz** e incluye **infrasonidos (10 y 15 Hz)** y **ultrasonidos (22.000 y 25.000 Hz)**. Ahora el navegador **intenta generar también los tonos de estas regiones**, pero muchos equipos no pueden reproducirlos físicamente y algunos navegadores limitan las frecuencias más altas. **No significa que esos tonos deban ser audibles** ni sirve para determinar los límites auditivos de una persona.
 
 **Procedimiento breve:**
 
-1. Baja el volumen físico del equipo casi al mínimo. Selecciona **1.000 Hz** y pulsa «Escuchar tono»; ajusta el volumen solo hasta una escucha **suave y cómoda**.
+1. Baja el volumen físico del equipo casi al mínimo. Selecciona **1.000 Hz** y pulsa «Tono de 1,5 s»; ajusta el volumen solo hasta una escucha **suave y cómoda**.
 2. Utiliza el control **Volumen del oscilador** para disminuir el nivel si lo necesitas y pulsa **«Fijar volumen para comparar»**.
-3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. También puedes explorar frecuencias intermedias con el deslizador. Selecciona **10, 15, 22.000 y 25.000 Hz** para ver los ejemplos de infrasonido y ultrasonido en el mapa: **no se reproducen por los parlantes**.
-4. Para las ocho frecuencias reproducibles de la práctica, registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**. Los ejemplos de infrasonidos y ultrasonidos no deben registrarse como pruebas de audición.
+3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. Luego pulsa **«Explorar deslizando · 5 s»** y mueve el **deslizador continuo**: el tono cambiará de frecuencia mientras suena. Selecciona también **10, 15, 22.000 y 25.000 Hz** para intentar generar infra y ultrasonidos; en muchos sistemas no se escucharán o no podrán generarse, y **no debes subir el volumen para buscarlos**.
+4. Para las ocho frecuencias centrales de la práctica (125–12.000 Hz), registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**. Los infrasonidos y ultrasonidos son una demostración de generación de señales, **no deben registrarse ni interpretarse como una prueba de audición**.
 
 <iframe src="../../../simulacion/rango-audible-oscilador.html" title="Exploración auditiva con oscilador sinusoidal, control de volumen limitado y mapa del rango de frecuencias" loading="lazy" style="width:100%;height:1540px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
@@ -40,7 +40,7 @@ Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbr
 !!! warning "Escucha responsable y límites de la demostración"
     **No es una audiometría ni una prueba para decidir «hasta qué frecuencia oye cada estudiante».** Si un tono no se distingue, pueden influir el nivel fijo utilizado, la respuesta de los auriculares, el parlante, la sala y otros factores. El control de volumen de la herramienta es **digital**, no mide los dB SPL que llegan al oído.
 
-    Mantén un **volumen físico bajo**, evita escuchas largas y detente si hay molestias o zumbidos. Consulta las [recomendaciones de escucha segura de la OMS](https://www.who.int/es/news-room/questions-and-answers/item/deafness-and-hearing-loss-safe-listening).
+    En frecuencias **inferiores a 20 Hz**, los parlantes convencionales pueden emitir distorsión o vibraciones en lugar de reproducir fielmente el seno; en frecuencias **superiores a 20.000 Hz**, puede no haber salida acústica o el navegador puede bloquearla según su frecuencia de muestreo. El motor intenta 96 kHz para ampliar el margen digital, pero **eso no garantiza una reproducción ultrasónica real**. Mantén un **volumen físico bajo**, evita escuchas largas, **no lo eleves para buscar tonos inaudibles** y detente si hay molestias o zumbidos. Consulta las [recomendaciones de escucha segura de la OMS](https://www.who.int/es/news-room/questions-and-answers/item/deafness-and-hearing-loss-safe-listening).
 
 **Para conversar:** ¿qué cambió principalmente al subir la frecuencia: la altura o la sonoridad? ¿Podemos afirmar que un estudiante tiene un límite auditivo determinado solo por este experimento?
 
