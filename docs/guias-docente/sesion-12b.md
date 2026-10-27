@@ -11,7 +11,7 @@ Reconocer la diferencia entre **frecuencia física, nivel de presión sonora y s
 | Momento | Duración | Actividad |
 |---|---:|---|
 | Repaso inicial del rango audible | 10 min | ¿Qué significa el intervalo aproximado de 20 Hz a 20 kHz? ¿Es igual para todos? |
-| Exploración con oscilador sinusoidal | 15 min | Mostrar **10 y 15 Hz como infrasonidos** y **22 y 25 kHz como ultrasonidos** en el mapa (solo visuales); escuchar tonos de 125 a 12.000 Hz, con volumen bajo y fijo, sin buscar umbrales auditivos |
+| Exploración con oscilador sinusoidal | 15 min | Usar el **deslizador continuo durante una exploración de 5 s** y tonos de 1,5 s; intentar generar **10–15 Hz** y **22–25 kHz** sin asumir que el equipo los reproduce; escuchar tonos centrales con volumen bajo y fijo, sin buscar umbrales auditivos |
 | Introducción conceptual | 15 min | Frecuencia vs. altura; dB SPL vs. sonoridad percibida |
 | Curvas de igual sonoridad | 15 min | Leer contornos ISO 226:2023 y explicar qué son los fones |
 | Práctica de igualación A/B | 35 min | Comparar 1.000 Hz con 250, 500, 2.000 y 4.000 Hz; conservar ajustes digitales |
@@ -33,17 +33,17 @@ Reconocer la diferencia entre **frecuencia física, nivel de presión sonora y s
 
 [Oscilador de la sesión 12B](../simulacion/rango-audible-oscilador.html)
 
-**Punto de partida:** el rango humano aproximado de **20 Hz a 20 kHz** describe la capacidad típica de personas jóvenes con audición normal; **no debe presentarse como un umbral personal rígido**. El mapa ahora abarca **10 Hz a 25 kHz** e incluye ejemplos de **infrasonidos por debajo de 20 Hz** (10 y 15 Hz) y **ultrasonidos por encima de 20 kHz** (22 y 25 kHz). Esas regiones son **solo visuales**: no se reproducen ni forman parte del registro de percepción. El oscilador reproduce únicamente de **125 Hz a 12 kHz** para la práctica, ya que los equipos convencionales no permiten evaluar adecuadamente los extremos.
+**Punto de partida:** el rango humano aproximado de **20 Hz a 20 kHz** describe la capacidad típica de personas jóvenes con audición normal; **no debe presentarse como un umbral personal rígido**. El mapa y el deslizador abarcan **10 Hz a 25 kHz**, con infrasonidos (10 y 15 Hz) y ultrasonidos (22 y 25 kHz). El navegador **intenta generar las frecuencias extremas cuando la frecuencia de muestreo lo admite**, pero los altavoces pueden filtrarlas, distorsionarlas o no reproducirlas. El registro de percepción se mantiene limitado a los ocho tonos centrales (125 Hz–12 kHz).
 
 **Consigna de exploración:**
 
 1. Bajar casi al mínimo el volumen físico del equipo; seleccionar **1 kHz** e iniciar con una escucha suave y cómoda.
 2. Ajustar el volumen digital interno hacia abajo, si hace falta, y pulsar **«Fijar volumen para comparar»**.
-3. Reproducir tonos breves de **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz**, dejando pausas.
-4. Registrar «Lo distinguí» / «No lo distinguí» para las **ocho frecuencias reproducibles**, sin aumentar el volumen si no se perciben. Señalar que los botones de 10, 15, 22.000 y 25.000 Hz son demostraciones visuales y no una prueba del oído.
+3. Reproducir tonos de **1,5 segundos** en 125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz. Pulsar después **«Explorar deslizando · 5 s»** y arrastrar el control para oír la transición entre frecuencias, manteniendo el volumen fijo.
+4. Seleccionar 10, 15, 22.000 y 25.000 Hz y observar si el navegador permite **generar el tono**: no garantizar que sea acústicamente emitido o audible. **No aumentar el volumen** cuando no se escucha, ya que el equipo puede producir distorsión o artefactos. Registrar «Lo distinguí» / «No lo distinguí» **solo para los ocho tonos centrales**; los extremos no son una prueba del oído.
 5. Conversar sobre la diferencia entre **altura** y **sonoridad**, sin clasificar la audición de los estudiantes.
 
-**Nota crítica de seguridad:** el oscilador tiene una amplitud digital máxima limitada, **pero no conocemos el SPL real que generará cada dispositivo**. Vigilar el volumen físico, especialmente con audífonos, y no pedir que se determine la máxima frecuencia audible de nadie. Los registros no equivalen a audiogramas ni resultados clínicos.
+**Nota crítica de seguridad:** el oscilador tiene una amplitud digital máxima limitada, **pero no conocemos el SPL real que generará cada dispositivo**. Intenta abrir el motor a 96 kHz para que algunas frecuencias ultrasónicas puedan representarse digitalmente; si el navegador utiliza una frecuencia de muestreo inferior, **bloquea las frecuencias demasiado próximas al límite digital (Nyquist)**. Esto **no garantiza** salida ultrasónica física: el hardware puede filtrar la señal o generar productos de distorsión. Vigilar el volumen físico, especialmente con audífonos; **nunca aumentarlo para escuchar un tono infrasonoro o ultrasónico**. No usar esta actividad para obtener umbrales de audición, audiogramas ni resultados clínicos.
 
 ## Cómo usar el laboratorio
 
