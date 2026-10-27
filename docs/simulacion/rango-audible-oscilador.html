@@ -83,7 +83,7 @@ td:last-child{text-align:right}
 </div>
 <div class="kpis">
 <div class="kpi"><small>Tipo de señal</small><strong>Sinusoidal</strong></div>
-<div class="kpi"><small>Duración</small><strong>0,7 segundos</strong></div>
+<div class="kpi"><small>Duración</small><strong>1,5 segundos</strong></div>
 <div class="kpi"><small>Nivel de salida</small><strong>Limitado digitalmente*</strong></div>
 </div>
 <div class="row">
@@ -143,12 +143,12 @@ td:last-child{text-align:right}
    if(ac.state==="suspended")await ac.resume();
    if(ac.state!=="running")throw Error("No se pudo iniciar el audio");
    if(ac.currentTime<playingUntil-.01){$("status").textContent="Espera a que termine el tono anterior.";return;}
-   const now=ac.currentTime+.045,d=.70,oscillator=ac.createOscillator(),env=ac.createGain();
+   const now=ac.currentTime+.045,d=1.5,oscillator=ac.createOscillator(),env=ac.createGain();
    oscillator.type="sine";oscillator.frequency.setValueAtTime(frequency,now);
    const amplitude=Math.pow(10,-40/20)*Number($("volume").value)/100;
    env.gain.setValueAtTime(0,now);
-   env.gain.linearRampToValueAtTime(amplitude,now+.035);
-   env.gain.setValueAtTime(amplitude,now+d-.045);
+   env.gain.linearRampToValueAtTime(amplitude,now+.055);
+   env.gain.setValueAtTime(amplitude,now+d-.065);
    env.gain.linearRampToValueAtTime(0,now+d);
    oscillator.connect(env);env.connect(ac.destination);
    oscillator.start(now);oscillator.stop(now+d+.02);
