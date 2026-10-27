@@ -77,6 +77,9 @@ La parte principal de esta sesión se dedica a una **evaluación individual de l
 
 Las preguntas se entregarán **durante la evaluación** y no se publican en esta página.
 
+!!! tip "Continuación: clase 12B — Psicoacústica"
+    Después de estudiar cómo se propaga el sonido, exploraremos **cómo lo percibimos**: [Sesión 12B — ¿Escuchamos igual todas las frecuencias?](../sesion-12b/index.md). Incluye una práctica auditiva interactiva sin micrófono de medición.
+
 ---
 
 **Para cerrar:** un modelo nos ayuda a entender el sonido, pero las mediciones reales también dependen del ambiente, de la fuente y del instrumento utilizado.
