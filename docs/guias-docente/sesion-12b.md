@@ -11,7 +11,7 @@ Reconocer la diferencia entre **frecuencia física, nivel de presión sonora y s
 | Momento | Duración | Actividad |
 |---|---:|---|
 | Repaso inicial del rango audible | 10 min | ¿Qué significa el intervalo aproximado de 20 Hz a 20 kHz? ¿Es igual para todos? |
-| Exploración con oscilador sinusoidal | 15 min | Escuchar tonos breves de 125 a 12.000 Hz, con volumen bajo y fijo; registrar si se distinguen, **sin buscar umbrales auditivos** |
+| Exploración con oscilador sinusoidal | 15 min | Mostrar **10 y 15 Hz como infrasonidos** y **22 y 25 kHz como ultrasonidos** en el mapa (solo visuales); escuchar tonos de 125 a 12.000 Hz, con volumen bajo y fijo, sin buscar umbrales auditivos |
 | Introducción conceptual | 15 min | Frecuencia vs. altura; dB SPL vs. sonoridad percibida |
 | Curvas de igual sonoridad | 15 min | Leer contornos ISO 226:2023 y explicar qué son los fones |
 | Práctica de igualación A/B | 35 min | Comparar 1.000 Hz con 250, 500, 2.000 y 4.000 Hz; conservar ajustes digitales |
@@ -33,14 +33,14 @@ Reconocer la diferencia entre **frecuencia física, nivel de presión sonora y s
 
 [Oscilador de la sesión 12B](../simulacion/rango-audible-oscilador.html)
 
-**Punto de partida:** el rango humano aproximado de **20 Hz a 20 kHz** describe la capacidad típica de personas jóvenes con audición normal; **no debe presentarse como un umbral personal rígido**. El oscilador reproduce únicamente de **125 Hz a 12 kHz** para reducir interpretaciones erróneas de los extremos, que muchos dispositivos no reproducen de manera fiable.
+**Punto de partida:** el rango humano aproximado de **20 Hz a 20 kHz** describe la capacidad típica de personas jóvenes con audición normal; **no debe presentarse como un umbral personal rígido**. El mapa ahora abarca **10 Hz a 25 kHz** e incluye ejemplos de **infrasonidos por debajo de 20 Hz** (10 y 15 Hz) y **ultrasonidos por encima de 20 kHz** (22 y 25 kHz). Esas regiones son **solo visuales**: no se reproducen ni forman parte del registro de percepción. El oscilador reproduce únicamente de **125 Hz a 12 kHz** para la práctica, ya que los equipos convencionales no permiten evaluar adecuadamente los extremos.
 
 **Consigna de exploración:**
 
 1. Bajar casi al mínimo el volumen físico del equipo; seleccionar **1 kHz** e iniciar con una escucha suave y cómoda.
 2. Ajustar el volumen digital interno hacia abajo, si hace falta, y pulsar **«Fijar volumen para comparar»**.
 3. Reproducir tonos breves de **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz**, dejando pausas.
-4. Registrar «Lo distinguí» / «No lo distinguí», **sin aumentar el volumen** para detectar frecuencias que no se perciben.
+4. Registrar «Lo distinguí» / «No lo distinguí» para las **ocho frecuencias reproducibles**, sin aumentar el volumen si no se perciben. Señalar que los botones de 10, 15, 22.000 y 25.000 Hz son demostraciones visuales y no una prueba del oído.
 5. Conversar sobre la diferencia entre **altura** y **sonoridad**, sin clasificar la audición de los estudiantes.
 
 **Nota crítica de seguridad:** el oscilador tiene una amplitud digital máxima limitada, **pero no conocemos el SPL real que generará cada dispositivo**. Vigilar el volumen físico, especialmente con audífonos, y no pedir que se determine la máxima frecuencia audible de nadie. Los registros no equivalen a audiogramas ni resultados clínicos.
