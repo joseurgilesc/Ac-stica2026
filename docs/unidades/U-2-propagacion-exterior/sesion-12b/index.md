@@ -4,7 +4,47 @@
 
 **Pregunta central:** ¿por qué un tono grave puede parecer más débil que otro de frecuencia media aunque ambos tengan el mismo nivel físico?
 
-**Al terminar podrás:** distinguir frecuencia de sonoridad, explicar de manera sencilla la sensibilidad del oído según la frecuencia y realizar una **comparación auditiva** sin micrófono de medición.
+**Al terminar podrás:** reconocer el rango audible humano aproximado, explorar cómo cambia la percepción al variar la frecuencia de un oscilador sinusoidal, distinguir frecuencia de sonoridad e interpretar las **curvas de igual sonoridad** mediante una práctica auditiva sin micrófono de medición.
+
+## Antes de empezar: ¿qué frecuencias puede escuchar el ser humano?
+
+En personas jóvenes con audición normal, se suele utilizar como referencia un rango aproximado de **20 Hz a 20.000 Hz (20 kHz)**. Este **no es un límite idéntico para todas las personas**: la sensibilidad auditiva varía con la edad, la frecuencia y el nivel del sonido. [Fuente: *The Audible Spectrum*, NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/NBK10924/).
+
+| Región aproximada | Frecuencias | Sensación habitual |
+|---|---|---|
+| **Infrasonidos** | Por debajo de 20 Hz | Fuera del rango tonal audible humano típico. |
+| **Graves** | 20–250 Hz | Bombo, bajo, sensación de profundidad. |
+| **Medios** | 250–4.000 Hz | Gran parte de la información de voces e instrumentos. |
+| **Agudos** | 4.000–20.000 Hz | Brillo, detalles y componentes de alta frecuencia. |
+| **Ultrasonidos** | Por encima de 20.000 Hz | Fuera del rango tonal audible humano típico. |
+
+*Estos límites entre graves, medios y agudos son orientativos, no divisiones fisiológicas exactas.*
+
+### Demostración con un oscilador sinusoidal
+
+Una **onda sinusoidal** tiene una sola frecuencia y nos permite relacionar directamente los **Hz** con la altura que percibimos: al aumentar la frecuencia, el tono tiende a percibirse más agudo.
+
+Utiliza este oscilador para **explorar frecuencias**, no para establecer un umbral auditivo individual. La escala superior muestra todo el rango teórico de 20 Hz a 20 kHz; la herramienta reproduce solo de **125 a 12.000 Hz**, donde los dispositivos de clase suelen responder con mayor previsibilidad.
+
+**Procedimiento breve:**
+
+1. Baja el volumen físico del equipo casi al mínimo. Selecciona **1.000 Hz** y pulsa «Escuchar tono»; ajusta el volumen solo hasta una escucha **suave y cómoda**.
+2. Utiliza el control **Volumen del oscilador** para disminuir el nivel si lo necesitas y pulsa **«Fijar volumen para comparar»**.
+3. Escucha brevemente **125, 250, 500, 1.000, 2.000, 4.000, 8.000 y 12.000 Hz** sin volver a aumentar el volumen. También puedes explorar frecuencias intermedias con el deslizador.
+4. Para las frecuencias rápidas, registra **«Lo distinguí»** o **«No lo distinguí»**. **Si no escuchas una frecuencia, no subas el volumen para forzar su detección**.
+
+<iframe src="../../../simulacion/rango-audible-oscilador.html" title="Exploración auditiva con oscilador sinusoidal, control de volumen limitado y mapa del rango de frecuencias" loading="lazy" style="width:100%;height:1540px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
+
+[🎹 **Abrir el oscilador en pantalla completa**](../../../simulacion/rango-audible-oscilador.html){ .md-button }
+
+!!! warning "Escucha responsable y límites de la demostración"
+    **No es una audiometría ni una prueba para decidir «hasta qué frecuencia oye cada estudiante».** Si un tono no se distingue, pueden influir el nivel fijo utilizado, la respuesta de los auriculares, el parlante, la sala y otros factores. El control de volumen de la herramienta es **digital**, no mide los dB SPL que llegan al oído.
+
+    Mantén un **volumen físico bajo**, evita escuchas largas y detente si hay molestias o zumbidos. Consulta las [recomendaciones de escucha segura de la OMS](https://www.who.int/es/news-room/questions-and-answers/item/deafness-and-hearing-loss-safe-listening).
+
+**Para conversar:** ¿qué cambió principalmente al subir la frecuencia: la altura o la sonoridad? ¿Podemos afirmar que un estudiante tiene un límite auditivo determinado solo por este experimento?
+
+---
 
 ## 1. De la acústica a la percepción
 
@@ -98,6 +138,27 @@ La respuesta del sistema auditivo depende del nivel de escucha. Por eso, en prod
 <iframe src="../../../simulacion/sonoridad-frecuencias.html" title="Práctica interactiva de comparación de sonoridad entre frecuencias" loading="lazy" style="width:100%;height:1550px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
 [🎧 **Abrir el laboratorio de escucha en pantalla completa**](../../../simulacion/sonoridad-frecuencias.html){ .md-button }
+
+### Ejemplo: sigue la curva estándar de 40 fones
+
+**Después de realizar y registrar tu comparación**, vuelve al gráfico de 40 fones y observa esta tabla:
+
+| Frecuencia | Nivel físico requerido en ISO 226:2023 | Sonoridad de referencia |
+|---|---:|---:|
+| **250 Hz** | **50,3 dB SPL** | **40 fones** |
+| **1.000 Hz** | **40,0 dB SPL** | **40 fones** |
+| **4.000 Hz** | **36,7 dB SPL** | **40 fones** |
+
+**¿Qué significa?** Para que los tres tonos parezcan igual de fuertes bajo las condiciones normalizadas de ISO 226, el grave de 250 Hz necesita **más nivel físico** que el tono de 1.000 Hz, mientras que el de 4.000 Hz necesita **menos**.
+
+**Dos preguntas para relacionar teoría y práctica:**
+
+1. Si los tres tonos están en la misma curva de **40 fones**, ¿por qué no tienen el mismo valor de **dB SPL**?
+2. Compara esta tendencia con tus ajustes digitales al escuchar: ¿coinciden o son diferentes? Explica por qué **no debemos esperar resultados idénticos** sin equipo ni niveles físicos calibrados.
+
+!!! info "Dos tipos de datos: no los confundas"
+    Los **50,3 / 40,0 / 36,7 dB SPL** de la tabla son **valores de referencia normalizados**. Tus resultados del laboratorio son **ajustes digitales relativos (dB)**, afectados por el equipo, el volumen de escucha y cada persona. **No representan un audiograma, fones medidos ni curvas de igual sonoridad obtenidas en clase.**
+
 
 ### Hoja de registro
 
