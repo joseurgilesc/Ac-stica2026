@@ -37,7 +37,25 @@ Son curvas que muestran qué **niveles de presión sonora** deben tener diferent
 
 Se conocen históricamente como *curvas de Fletcher y Munson*. La referencia normativa actual para condiciones específicas de escucha es la **[ISO 226:2023](https://www.iso.org/standard/83117.html)**.
 
-**Mira aquí el gráfico y su explicación:** [Audio Engineering Society — Equal-loudness contours](https://aes.org/resources/audio-topics/loudness-project/learn-more/).
+### Gráficos estándar de referencia
+
+**Gráfico 1. Curvas de igual sonoridad** (recreación didáctica basada en los valores tabulados de [ISO 226:2023](https://www.iso.org/standard/83117.html)).
+
+![Contornos de igual sonoridad de 20, 40, 60 y 80 fones; frecuencia en eje horizontal logarítmico y nivel físico en dB SPL en el eje vertical](../../../img/iso226_2023_curvas_igual_sonoridad.svg)
+
+**¿Cómo leerlo?** Sigue una sola curva —por ejemplo, la de **40 fones**— de izquierda a derecha. Aunque la **sonoridad percibida se mantiene aproximadamente igual**, los **dB SPL necesarios cambian** con la frecuencia. Por eso las curvas no son horizontales. Observa también que los contornos cambian de forma cuando varía el nivel de sonoridad.
+
+**Gráfico 2. Una misma sonoridad de 40 fones, comparada con 1.000 Hz.**
+
+![Gráfico de barras con la diferencia de dB SPL necesarios a 125, 250, 500, 1000, 2000 y 4000 Hz para alcanzar 40 fones](../../../img/iso226_2023_comparacion_40fones.svg)
+
+Por ejemplo, dentro de ese contorno normalizado, un tono de **250 Hz requiere aproximadamente 10,3 dB SPL adicionales** respecto a uno de 1.000 Hz para percibirse igual de fuerte. Esto **no significa que debas obtener +10,3 dB en la práctica del navegador**: allí comparas ajustes digitales con auriculares o parlantes sin calibración.
+
+!!! info "¿Bajo qué condiciones se obtienen los gráficos estándar?"
+    [ISO 226:2023](https://www.iso.org/standard/83117.html) describe contornos medios para **tonos puros**, en condiciones normalizadas de **campo libre, incidencia frontal y escucha binaural**, con participantes adultos jóvenes de audición normal. Las gráficas son referencias científicas: **no son audiogramas individuales ni curvas medidas con nuestros dispositivos**.
+
+**Referencia histórica:** la [Audio Engineering Society explica las curvas originales de Fletcher y Munson](https://aes.org/resources/audio-topics/loudness-project/learn-more/) y su importancia para la reproducción musical.
+
 
 !!! info "¿Qué significa «fon» (*phon*)?"
     El **fon** es una unidad de **nivel de sonoridad**. Por definición, su valor numérico coincide con los dB SPL de un tono de **1.000 Hz** que se percibe igual de fuerte, bajo las condiciones de referencia.
