@@ -41,27 +41,40 @@ td:last-child{text-align:right}
 </style>
 </head>
 <body><main>
-<h1>Oscilador sinusoidal: explora graves y agudos</h1>
+<h1>Explora infrasonidos, sonidos audibles y ultrasonidos</h1>
 <p class="muted">La audición humana suele describirse con un rango aproximado de <strong>20 a 20.000 Hz</strong> en personas jóvenes con audición normal. Ese rango varía según la edad, cada persona y el nivel del sonido. No es un límite fijo para todos.</p>
 <div class="card">
-<h2>El mapa de frecuencias</h2>
-<svg id="map" viewBox="0 0 880 126" role="img" aria-label="Escala logarítmica desde 20 hasta 20000 hercios, con un indicador de la frecuencia seleccionada">
- <defs><linearGradient id="grad" x1="0" x2="1"><stop offset="0" stop-color="#90b5c4"/><stop offset=".33" stop-color="#3393a0"/><stop offset=".65" stop-color="#6482af"/><stop offset="1" stop-color="#bc9a68"/></linearGradient></defs>
- <rect x="44" y="39" width="782" height="27" rx="9" fill="url(#grad)"/>
- <g fill="#4a6277" font-size="17" font-family="system-ui,Arial,sans-serif">
- <text x="44" y="94" text-anchor="middle">20 Hz</text><text x="226" y="94" text-anchor="middle">100 Hz</text>
- <text x="487" y="94" text-anchor="middle">1 kHz</text>
- <text x="748" y="94" text-anchor="middle">10 kHz</text><text x="826" y="94" text-anchor="middle">20 kHz</text>
- <text x="44" y="17" font-size="15">Graves</text><text x="435" y="17" font-size="15">Medios</text><text x="826" y="17" font-size="15" text-anchor="end">Agudos</text>
+<h2>Mapa extendido: 10 a 25.000 Hz</h2>
+<svg id="map" viewBox="0 0 880 146" role="img" aria-label="Mapa de frecuencias desde 10 hasta 25000 hercios en escala logarítmica, con regiones de infrasonido, audición humana típica y ultrasonido">
+ <rect x="44" y="41" width="782" height="27" rx="8" fill="#e6edf3"/>
+ <rect x="44" y="41" width="69.2" height="27" rx="4" fill="#aec6d4"/>
+ <rect x="113.2" y="41" width="691.6" height="27" fill="#57a2a6"/>
+ <rect x="804.8" y="41" width="21.2" height="27" rx="4" fill="#d6a772"/>
+ <line x1="113.2" y1="31" x2="113.2" y2="75" stroke="#4c7385" stroke-width="1.5"/>
+ <line x1="804.8" y1="31" x2="804.8" y2="75" stroke="#b8824e" stroke-width="1.5"/>
+ <g font-family="system-ui,Arial,sans-serif" fill="#405c72" font-size="15">
+ <text x="44" y="106" text-anchor="middle">10 Hz</text>
+ <text x="113.2" y="127" text-anchor="middle">20 Hz</text>
+ <text x="254" y="106" text-anchor="middle">100 Hz</text>
+ <text x="484" y="106" text-anchor="middle">1 kHz</text>
+ <text x="714" y="106" text-anchor="middle">10 kHz</text>
+ <text x="804.8" y="127" text-anchor="middle">20 kHz</text>
+ <text x="858" y="106" text-anchor="end">25 kHz</text>
+ <text x="44" y="20" font-size="13">Infra</text>
+ <text x="420" y="20" font-size="15">Rango audible típico</text>
+ <text x="826" y="20" text-anchor="end" font-size="13">Ultra</text>
  </g>
- <line id="indicator" x1="487" y1="26" x2="487" y2="76" stroke="#183848" stroke-width="4"/>
- <circle id="dot" cx="487" cy="53" r="7" fill="#fff" stroke="#183848" stroke-width="3"/>
+ <line id="indicator" x1="484" y1="30" x2="484" y2="79" stroke="#173649" stroke-width="3.5"/>
+ <circle id="dot" cx="484" cy="55" r="7" fill="white" stroke="#173649" stroke-width="3"/>
 </svg>
-<p class="caption">Mapa conceptual, no una prueba diagnóstica. Este oscilador permite explorar <strong>125 a 12.000 Hz</strong>; no reproduce los extremos teóricos porque muchos dispositivos no los emiten de forma fiable.</p>
+<p class="caption">El mapa permite seleccionar frecuencias <strong>por debajo de 20 Hz (infrasonido)</strong> y <strong>por encima de 20.000 Hz (ultrasonido)</strong>. Esas zonas son <strong>solo visuales</strong>, sin reproducción de audio. La herramienta reproduce únicamente entre <strong>125 y 12.000 Hz</strong> para la escucha comparativa con equipos convencionales.</p>
 </div>
 <div class="card">
 <h2>1. Elige una frecuencia</h2>
 <div class="preset" id="presets" role="group" aria-label="Frecuencias rápidas">
+<button type="button" data-hz="10" title="Infrasonido: demostración visual">10 Hz · infra</button>
+<button type="button" data-hz="15" title="Infrasonido: demostración visual">15 Hz · infra</button>
+<button type="button" data-hz="20" title="Límite orientativo inferior: demostración visual">20 Hz · límite</button>
 <button type="button" data-hz="125">125 Hz</button>
 <button type="button" data-hz="250">250 Hz</button>
 <button type="button" data-hz="500">500 Hz</button>
@@ -70,11 +83,14 @@ td:last-child{text-align:right}
 <button type="button" data-hz="4000">4 kHz</button>
 <button type="button" data-hz="8000">8 kHz</button>
 <button type="button" data-hz="12000">12 kHz</button>
+<button type="button" data-hz="20000" title="Límite orientativo superior: demostración visual">20 kHz · límite</button>
+<button type="button" data-hz="22000" title="Ultrasonido: demostración visual">22 kHz · ultra</button>
+<button type="button" data-hz="25000" title="Ultrasonido: demostración visual">25 kHz · ultra</button>
 </div>
 <div class="controls">
 <div>
 <label for="frequency">Frecuencia sinusoidal: <output for="frequency" id="freqValue">1.000 Hz</output></label>
-<input type="range" min="0" max="1000" step="1" value="454" id="frequency" aria-label="Frecuencia sinusoidal de 125 a 12000 hercios, escala logarítmica">
+<input type="range" min="0" max="1000" step="1" value="454" id="frequency" aria-label="Frecuencia seleccionada de 10 a 25000 hercios. Solo se reproduce audio entre 125 y 12000 hercios">
 </div>
 <div>
 <label for="volume">Volumen del oscilador: <output for="volume" id="volValue">30 %</output></label>
@@ -83,20 +99,21 @@ td:last-child{text-align:right}
 </div>
 <div class="kpis">
 <div class="kpi"><small>Tipo de señal</small><strong>Sinusoidal</strong></div>
-<div class="kpi"><small>Duración</small><strong>1,5 segundos</strong></div>
+<div class="kpi"><small>Duración de los tonos audibles</small><strong>1,5 segundos</strong></div>
 <div class="kpi"><small>Nivel de salida</small><strong>Limitado digitalmente*</strong></div>
 </div>
+<p class="info" id="bandLabel" style="font-weight:700">Rango de demostración auditiva</p>
 <div class="row">
 <button class="main" id="play" type="button">▶ Escuchar tono</button>
 <button type="button" id="lock">Fijar volumen para comparar</button>
 <button type="button" id="stop">■ Detener</button>
 </div>
-<p class="info" role="status" id="status">Primero prueba 1.000 Hz a volumen cómodo. Después fija el volumen y cambia la frecuencia sin aumentarlo.</p>
-<p class="caption">* El volumen interno tiene una amplitud máxima digital deliberadamente baja (aprox. −40 dBFS pico), pero **no controla ni mide los dB SPL de tus auriculares o altavoces**: también debes mantener bajo el volumen físico del equipo.</p>
+<p class="info" role="status" id="status">Primero prueba 1.000 Hz a volumen cómodo. Después fija el volumen y cambia la frecuencia sin aumentarlo. Los infrasonidos y ultrasonidos se muestran sin reproducirse.</p>
+<p class="caption">En regiones visuales el botón de audio se desactiva. * El volumen interno tiene una amplitud máxima digital deliberadamente baja (aprox. −40 dBFS pico), pero **no controla ni mide los dB SPL de tus auriculares o altavoces**: también debes mantener bajo el volumen físico del equipo.</p>
 </div>
 <div class="card">
 <h2>2. ¿Lo distinguiste?</h2>
-<p class="small">Con el mismo volumen, marca tu percepción. Si no oyes un tono, <strong>no aumentes el volumen para buscar el límite</strong>; puede deberse al dispositivo, al ambiente o al nivel de la señal.</p>
+<p class="small">Registra únicamente las ocho frecuencias de escucha (125–12.000 Hz); los ejemplos de infrasonidos y ultrasonidos son visuales. Con el mismo volumen, marca tu percepción. Si no oyes un tono, <strong>no aumentes el volumen para buscar el límite</strong>; puede deberse al dispositivo, al ambiente o al nivel de la señal.</p>
 <div class="row">
 <button type="button" id="yes">Lo distinguí</button>
 <button type="button" id="no">No lo distinguí</button>
@@ -107,13 +124,13 @@ td:last-child{text-align:right}
 <table><thead><tr><th>Frecuencia</th><th>Observación</th></tr></thead><tbody id="results"></tbody></table>
 <p class="caption">Estos registros son observaciones personales con el equipo usado; no representan el rango auditivo individual ni un audiograma. Los datos se mantienen solo en esta página hasta que la recargues.</p>
 </div>
-<p class="notice"><strong>Escucha responsable:</strong> utiliza volumen físico bajo, tonos breves y pausas. Detente si notas molestia, presión o zumbido. No utilices este ejercicio para detectar umbrales auditivos, comparar capacidades personales ni intentar escuchar frecuencias que no distingues.</p>
+<p class="notice"><strong>Por qué no reproducimos las frecuencias extremas:</strong> ni un tono de 10 Hz ni uno de 22 kHz serían una comprobación fiable de la audición con altavoces comunes. Por encima del límite de muestreo, algunos sistemas pueden producir aliasing u otros artefactos. Los ejemplos fuera de 20–20.000 Hz son <strong>solo gráficos</strong>.<br><br><strong>Escucha responsable:</strong> utiliza volumen físico bajo, tonos breves y pausas. Detente si notas molestia, presión o zumbido. No utilices este ejercicio para detectar umbrales auditivos, comparar capacidades personales ni intentar escuchar frecuencias que no distingues.</p>
 </main>
 <script>
 "use strict";
 (()=>{
  const $=id=>document.getElementById(id);
- const MIN=125,MAX=12000,PRESETS=[125,250,500,1000,2000,4000,8000,12000];
+ const MIN=10,MAX=25000,AUDIO_MIN=125,AUDIO_MAX=12000,PRESETS=[125,250,500,1000,2000,4000,8000,12000];
  const AudioType=window.AudioContext||window.webkitAudioContext;
  let ac=null,osc=null,gain=null,playingUntil=0,locked=false,frequency=1000;
  const observations={};
@@ -124,11 +141,16 @@ td:last-child{text-align:right}
  function update(){
   $("freqValue").textContent=human(frequency);
   $("volValue").textContent=$("volume").value+" %";
-  const px=44+782*Math.log10(frequency/20)/Math.log10(20000/20);
+  const px=44+782*Math.log10(frequency/MIN)/Math.log10(MAX/MIN);
   $("indicator").setAttribute("x1",px.toFixed(2));
   $("indicator").setAttribute("x2",px.toFixed(2));
   $("dot").setAttribute("cx",px.toFixed(2));
+  const playable=frequency>=AUDIO_MIN&&frequency<=AUDIO_MAX;
+  $("play").disabled=!playable;
+  $("play").textContent=playable?"▶ Escuchar tono":"◌ Solo visual (sin audio)";
   document.querySelectorAll("[data-hz]").forEach(b=>b.classList.toggle("active",Number(b.dataset.hz)===Math.round(frequency)));
+  const label=frequency<20?"INFRASONIDO":frequency>20000?"ULTRASONIDO":frequency<AUDIO_MIN||frequency>AUDIO_MAX?"Límite / extremo audible":"Rango de demostración auditiva";
+  $("bandLabel").textContent=label;
  }
  function stop(){
   if(gain&&ac){
@@ -138,6 +160,7 @@ td:last-child{text-align:right}
  }
  async function play(){
   try{
+   if(frequency<AUDIO_MIN||frequency>AUDIO_MAX){$("status").textContent="Frecuencia seleccionada solo para visualización: no se envía ningún tono a los altavoces.";return;}
    if(!AudioType){$("status").textContent="Este navegador no admite Web Audio.";return;}
    if(!ac)ac=new AudioType();
    if(ac.state==="suspended")await ac.resume();
@@ -157,8 +180,8 @@ td:last-child{text-align:right}
    $("status").textContent="Reproducción breve de "+human(frequency)+". Marca tu observación o cambia la frecuencia, manteniendo el volumen fijo.";
   }catch(e){$("status").textContent="No se pudo reproducir el tono. Revisa la salida de audio y los permisos del navegador."; }
  }
- function setFrequency(f){frequency=f;$("frequency").value=pos(f);update();}
- $("frequency").addEventListener("input",()=>{frequency=fromPos(Number($("frequency").value));update();});
+ function setFrequency(f){stop();frequency=f;$("frequency").value=pos(f);update();}
+ $("frequency").addEventListener("input",()=>{stop();frequency=fromPos(Number($("frequency").value));update();});
  $("volume").addEventListener("input",update);
  document.querySelectorAll("[data-hz]").forEach(btn=>btn.addEventListener("click",()=>setFrequency(Number(btn.dataset.hz))));
  $("play").addEventListener("click",play);
@@ -183,7 +206,7 @@ td:last-child{text-align:right}
  function register(value){
   const target=PRESETS.find(f=>f===Math.round(frequency));
   if(target===undefined){
-   $("status").textContent="Para registrar una observación, elige primero una de las ocho frecuencias rápidas.";
+   $("status").textContent="Esta frecuencia es solo visual o no está entre los ocho tonos de la práctica. Selecciona una frecuencia audible de la tabla para registrar.";
    return;
   }
   observations[target]=value;render();
