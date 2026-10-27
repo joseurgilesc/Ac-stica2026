@@ -102,8 +102,8 @@ td:last-child{text-align:right}
 </div>
 <div class="controls">
 <div class="volume-control">
-<label for="volume">Volumen digital del oscilador: <output for="volume" id="volValue">30 %</output></label>
-<input type="range" min="0" max="100" step="5" value="30" id="volume" aria-label="Volumen digital interno del oscilador, limitado. No expresa dB SPL.">
+<label for="volume">Volumen digital del oscilador: <output for="volume" id="volValue">50 %</output></label>
+<input type="range" min="0" max="100" step="5" value="50" id="volume" aria-label="Volumen digital interno del oscilador, limitado. No expresa dB SPL.">
 </div>
 </div>
 <div class="kpis">
@@ -113,13 +113,14 @@ td:last-child{text-align:right}
 </div>
 <p class="info" id="bandLabel" style="font-weight:700">Rango de demostración auditiva</p>
 <div class="row">
+<button type="button" id="testAudio">🔊 Probar sonido a 1.000 Hz</button>
 <button class="main" id="play" type="button">▶ Tono de 1,5 s</button>
 <button class="main" id="explore" type="button">▶ Explorar deslizando · 5 s</button>
 <button type="button" id="lock">Fijar volumen para comparar</button>
 <button type="button" id="stop">■ Detener</button>
 </div>
-<p class="info" role="status" id="status">Empieza por 1.000 Hz con el volumen físico bajo. Después puedes escuchar tonos sueltos o pulsar «Explorar deslizando» y cambiar la frecuencia mientras suena. Los extremos pueden no reproducirse realmente.</p>
-<p class="caption">El programa intenta inicializar el motor de audio a 96 kHz para generar hasta 25 kHz. Si el navegador no admite esa frecuencia de muestreo, algunas frecuencias altas se bloquearán para evitar aliasing. Incluso si las genera digitalmente, <strong>el equipo puede filtrarlas o producir artefactos</strong>. La amplitud digital máxima está deliberadamente limitada (aprox. −40 dBFS pico), pero <strong>esto no garantiza un SPL seguro</strong>: mantén bajo también el volumen físico del equipo. No lo aumentes si un tono no se escucha.</p>
+<p class="info" role="status" id="status">Empieza bajando el volumen físico del equipo y pulsa «Probar sonido a 1.000 Hz». Si escuchas el tono, puedes utilizar el deslizador y «Explorar deslizando». Si no suena, comprueba la pestaña, el volumen y el dispositivo de salida de audio.</p>
+<p class="caption">El oscilador utiliza la <strong>configuración de audio predeterminada del navegador</strong> para mejorar la compatibilidad. Los tonos por encima del límite digital del dispositivo se bloquean para evitar aliasing; aunque pueda generar algunos agudos extremos, <strong>el equipo podría filtrarlos o distorsionarlos</strong>. La amplitud digital máxima sigue limitada (aprox. −26 dBFS pico), pero <strong>esto no garantiza un SPL seguro</strong>: comienza con el volumen físico bajo. Si no oyes el tono de prueba de 1.000 Hz, revisa el dispositivo de salida, el volumen del sistema y el permiso de audio del navegador antes de cambiar los controles.</p>
 </div>
 <div class="card">
 <h2>2. ¿Lo distinguiste?</h2>
@@ -142,7 +143,7 @@ td:last-child{text-align:right}
  const $=id=>document.getElementById(id);
  const MIN=10,MAX=25000,PRESETS=[125,250,500,1000,2000,4000,8000,12000];
  const AudioType=window.AudioContext||window.webkitAudioContext;
- const PEAK_AMPLITUDE=Math.pow(10,-40/20);
+ const PEAK_AMPLITUDE=Math.pow(10,-26/20);
  const fmt=n=>Math.round(n).toLocaleString("es-EC")+" Hz";
  const pos=f=>Math.round(1000*Math.log(f/MIN)/Math.log(MAX/MIN));
  const fromPos=t=>MIN*Math.pow(MAX/MIN,t/1000);
@@ -197,8 +198,7 @@ td:last-child{text-align:right}
  async function getContext(){
    if(!AudioType)throw Error("Este navegador no admite Web Audio.");
    if(!ac){
-     try{ac=new AudioType({sampleRate:96000});}
-     catch(_){ac=new AudioType();}
+     ac=new AudioType();
    }
    if(ac.state==="suspended")await ac.resume();
    if(ac.state!=="running")throw Error("No se pudo iniciar el dispositivo de audio.");
@@ -232,9 +232,9 @@ td:last-child{text-align:right}
          if(isExplore)status("Exploración terminada. Pulsa de nuevo para repetir.");
        }
      };
-     status(isExplore?"Exploración de 5 segundos: desliza para cambiar la frecuencia durante la reproducción.":"Tono generado a "+fmt(frequency)+" (1,5 segundos). Si no lo oyes, no subas el volumen.");
+     status(isExplore?"Exploración de 5 segundos: desliza para cambiar la frecuencia durante la reproducción.":"Tono activado a "+fmt(frequency)+" (1,5 segundos). Si no lo oyes, verifica que la pestaña no esté silenciada y que la salida de audio esté bien seleccionada.");
      render();
-   }catch(e){status("No se pudo iniciar el sonido: "+(e&&e.message?e.message:"comprueba la salida de audio y los permisos"));}
+   }catch(e){status("No se pudo iniciar el sonido: "+(e&&e.message?e.message:"comprueba la salida de audio y los permisos")+". Revisa si la pestaña está silenciada y la salida de audio del equipo.");}
  }
  $("frequency").addEventListener("input",()=>setFrequency(fromPos(Number($("frequency").value))));
  $("volume").addEventListener("input",()=>{render();if(mode==="explore"&&ac&&env){
@@ -242,6 +242,12 @@ td:last-child{text-align:right}
    status("El cambio de volumen digital se aplicará en la siguiente reproducción.");
  }});
  document.querySelectorAll("[data-hz]").forEach(b=>b.addEventListener("click",()=>setFrequency(Number(b.dataset.hz))));
+ $("testAudio").addEventListener("click",()=>{
+   stop();
+   setFrequency(1000);
+   if(Number($("volume").value)<30&&!locked){$("volume").value=50;render();}
+   play(false);
+ });
  $("play").addEventListener("click",()=>play(false));
  $("explore").addEventListener("click",()=>play(true));
  $("stop").addEventListener("click",()=>{stop();status("Audio detenido.");});
