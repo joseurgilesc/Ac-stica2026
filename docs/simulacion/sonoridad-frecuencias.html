@@ -63,7 +63,7 @@ td{font-variant-numeric:tabular-nums}
 <input id="gain" type="range" min="-15" max="15" step="1" value="0" aria-label="Ajuste digital del tono B en decibelios respecto a la referencia">
 <div class="row"><button type="button" id="equal" class="main">Registrar igualación</button><button type="button" id="uncertain">No logré igualarlo</button></div>
 <p class="note" id="feedback" role="status" aria-live="polite">Prueba primero ambos tonos con el ajuste en 0 dB. Después modifica solo B y vuelve a comparar.</p>
-<p class="small">Cada tono dura aproximadamente 0,65 s y aparece con entrada y salida suavizadas. El audio se activa solamente al pulsar los botones. El ajuste corresponde a <strong>dB digitales de amplitud relativa</strong>, no a dB SPL ni a fones. Incluso a 0 dB de ajuste, auriculares, altavoces y oídos pueden responder de manera diferente a cada frecuencia.</p>
+<p class="small">Cada tono dura aproximadamente 1,3 s y aparece con entrada y salida suavizadas. El audio se activa solamente al pulsar los botones. El ajuste corresponde a <strong>dB digitales de amplitud relativa</strong>, no a dB SPL ni a fones. Incluso a 0 dB de ajuste, auriculares, altavoces y oídos pueden responder de manera diferente a cada frecuencia.</p>
 </section>
 <section class="card">
 <h2>2. Resultados personales</h2>
@@ -123,7 +123,7 @@ td{font-variant-numeric:tabular-nums}
  function tone(ac,f,db,time){
   const oscillator=ac.createOscillator(),envelope=ac.createGain();
   oscillator.type="sine";oscillator.frequency.setValueAtTime(f,time);
-  const base=Math.pow(10,-36/20), amplitude=base*Math.pow(10,db/20),fade=.035,duration=.65;
+  const base=Math.pow(10,-36/20), amplitude=base*Math.pow(10,db/20),fade=.055,duration=1.3;
   envelope.gain.setValueAtTime(.000001,time);
   envelope.gain.linearRampToValueAtTime(amplitude,time+fade);
   envelope.gain.setValueAtTime(amplitude,time+duration-fade);
@@ -138,9 +138,9 @@ td{font-variant-numeric:tabular-nums}
    const ac=await getContext();
    if(ac.currentTime<playingUntil-.015){$("feedback").textContent="Espera a que termine la escucha anterior.";return;}
    const when=ac.currentTime+.06,db=Number($("gain").value),f=Number($("target").value);
-   if(which==="A"){tone(ac,1000,0,when);playingUntil=when+.72;}
-   else if(which==="B"){tone(ac,f,db,when);playingUntil=when+.72;}
-   else {tone(ac,1000,0,when);tone(ac,f,db,when+.96);playingUntil=when+1.68;}
+   if(which==="A"){tone(ac,1000,0,when);playingUntil=when+1.35;}
+   else if(which==="B"){tone(ac,f,db,when);playingUntil=when+1.35;}
+   else {tone(ac,1000,0,when);tone(ac,f,db,when+1.62);playingUntil=when+2.97;}
    $("feedback").textContent=which==="pair"?"Comparación: A (1.000 Hz), pausa y B ("+f.toLocaleString("es-EC")+" Hz).":"Escucha "+which+": "+(which==="A"?"referencia de 1.000 Hz":"prueba de "+f.toLocaleString("es-EC")+" Hz")+".";
   }catch(e){$("feedback").textContent="No se pudo reproducir el sonido: "+(e&&e.message?e.message:"Comprueba tu navegador y salida de audio");}
  }
