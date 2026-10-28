@@ -153,6 +153,55 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
+## 7. Video y práctica breve: del nivel digital al sonido en la sala
+
+### Observación del video
+
+Reproduce el siguiente video y toma nota de **una idea importante**, **un ejemplo concreto** y **una pregunta que te haya surgido**. Al terminar, discutiremos qué parte de la explicación se relaciona con los conceptos acústicos revisados en clase.
+
+<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Video de referencia para la sesión 12 de Acústica Aplicada" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
+
+[▶️ **Abrir video directamente en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+
+**Para comentar después de verlo:**
+
+1. ¿Qué fenómeno o concepto te pareció más importante y por qué?
+2. ¿Qué ejemplo del video podrías relacionar con alguna medición o situación de producción musical?
+
+### Práctica sencilla: ¿por qué dBFS no es dBA?
+
+**Objetivo:** observar que el nivel digital de una señal y el nivel acústico de su reproducción son mediciones diferentes, y recordar cómo se calcula un valor RMS.
+
+**Materiales:** computador con un DAW (por ejemplo, Ableton Live), altavoz o monitor y, si está disponible, un teléfono con aplicación de sonómetro que muestre **dBA**. La medición con teléfono será **solo orientativa**.
+
+**1. Observa el nivel digital (dBFS).** Reproduce una señal o fragmento musical a **volumen bajo**. Mira el medidor de pico del DAW y anota un valor aproximado en **dBFS**. **No modifiques la ganancia de la pista ni del máster** durante la siguiente comparación.
+
+**2. Compara lo que sale del altavoz (dBA).** Sitúa el teléfono siempre en el mismo punto, frente al altavoz, y observa el nivel aproximado en **dBA**. Luego modifica **solo el volumen físico del altavoz o de la interfaz**, manteniendo una escucha moderada. Observa de nuevo ambos medidores.
+
+| Observación | Antes | Después de cambiar solo el volumen físico |
+|---|---|---|
+| **Pico digital (dBFS)** | Anota el valor | ¿Cambió? |
+| **Nivel acústico (dBA)** | Anota el valor aproximado | ¿Cambió? |
+
+!!! warning "Importante"
+    **No busques niveles sonoros altos.** Una aplicación de teléfono no reemplaza un sonómetro calibrado y puede ser imprecisa, especialmente según la frecuencia. Esta comparación demuestra el comportamiento **relativo** de las lecturas; **no sirve para convertir dBFS a dBA ni para realizar una evaluación normativa de ruido**. Si no hay sonómetro, realiza la comparación auditiva sin asignar números de dBA.
+
+**3. Comprueba el RMS con una sinusoide.** Supón que una onda sinusoidal tiene una **amplitud pico de 1 unidad**. Calcula su valor eficaz:
+
+\[
+X_{\mathrm{RMS}} = \frac{1}{\sqrt{2}} \approx 0{,}707
+\]
+
+Si reducimos la amplitud pico a **0,5**, ¿cuál sería su RMS? **Respuesta para contrastar:** aproximadamente **0,354** unidades. Tanto el valor pico como el RMS se reducen a la mitad.
+
+**Cierre: tres conclusiones para escribir en una frase cada una.**
+
+- ¿Por qué el valor en **dBFS** del DAW puede mantenerse aunque el sonido reproducido cambie de nivel?
+- ¿Por qué una lectura en **dBA** depende del sonido que llega al micrófono y de su ponderación frecuencial?
+- ¿Por qué **RMS** no significa lo mismo que **pico**?
+
+---
+
 !!! tip "Continuación: clase 12B — Psicoacústica"
     Después de estudiar cómo se propaga el sonido, exploraremos **cómo lo percibimos**: [Sesión 12B — ¿Escuchamos igual todas las frecuencias?](../sesion-12b/index.md). Incluye una práctica auditiva interactiva sin micrófono de medición.
 
