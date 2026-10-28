@@ -153,41 +153,63 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
-## 7. Video y práctica: recrear una idea del video
+## 7. Video y práctica: localizar las primeras reflexiones
 
-### 1. Observar y seleccionar un ejemplo
+### Ver el video: *Acoustic Treatment for Beginners: Studio Sound Optimization*
 
-<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Video de referencia de la sesión 12 de Acústica Aplicada" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
+**Audio University · 6 min 58 s · Audio en inglés**
 
-[▶️ **Abrir el video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+El video muestra por qué las **reflexiones tempranas** afectan a la escucha en un estudio y cómo identificar los puntos donde conviene considerar tratamiento acústico.
 
-**Mientras observas**, identifica **un fenómeno, ejemplo o demostración que aparezca realmente en el video**. Anota el minuto y segundo en que se muestra, qué ocurre y qué explicación ofrece el video.
+<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: Acoustic Treatment for Beginners — primeras reflexiones acústicas y técnica del espejo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
 
-| Momento del video | ¿Qué muestra o explica? | ¿Qué cambia o se compara? |
+[▶️ **Abrir video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+
+**Guía para observar:**
+
+| Momento | Qué observar |
+|---|---|
+| **0:15** | Diferencia entre **sonido directo** y **sonido reflejado**. |
+| **0:46** | Interferencia constructiva y destructiva al superponerse dos ondas. |
+| **2:20** | Por qué las **primeras reflexiones** pueden alterar la respuesta en frecuencia. |
+| **4:10** | **Técnica del espejo** para localizar puntos de reflexión en las paredes laterales. |
+| **5:32** | Cómo también puede reflejar sonido la mesa del estudio. |
+| **6:20** | Comparación auditiva con y sin tratamiento acústico: escuchar los cambios de coloración del sonido. |
+
+**Dos preguntas después del video:**
+
+1. ¿Por qué una reflexión puede **reforzar unas frecuencias y cancelar otras**, aunque el sonido provenga del mismo altavoz?
+2. ¿Qué relación tiene la **posición del altavoz y del oyente** con el lugar donde colocaríamos un panel acústico?
+
+### Práctica: encontrar los puntos de primera reflexión con un espejo
+
+**Objetivo:** localizar en un espacio real los puntos donde una reflexión especular de las paredes podría llegar desde los altavoces a la posición de escucha, siguiendo el procedimiento mostrado en el video (desde **4:10**).
+
+**Materiales:** uno o dos altavoces o monitores, un **espejo pequeño**, cinta de pintor o notas adhesivas, papel y lápiz. **No hace falta reproducir sonido**.
+
+**Procedimiento:**
+
+1. Ubica los altavoces y fija una **posición de escucha**. Una persona se sienta allí y **no cambia de lugar** durante la actividad.
+2. Otra persona desplaza lentamente el espejo, apoyado **plano contra una pared lateral**, a la altura adecuada. Desde el asiento, el oyente indica cuándo puede ver en el espejo **uno de los altavoces**.
+3. Marca ese punto en la pared. Repite el recorrido hasta localizar el reflejo del **otro altavoz** y marca también su punto.
+4. Repite el procedimiento en la pared lateral opuesta, si el espacio lo permite.
+5. Dibuja un plano muy sencillo: **altavoces, oyente, paredes y puntos marcados**. Traza con flechas un posible camino **altavoz → pared → oyente** y compáralo con el **camino directo**.
+
+| Pared | Altavoz que se ve en el espejo | Lugar marcado |
 |---|---|---|
-| Minuto:segundo | Descripción breve | Dos situaciones o una variable |
+| Lateral izquierda | Izquierdo / derecho | |
+| Lateral derecha | Izquierdo / derecho | |
 
-### 2. Práctica sencilla: ¿podemos observar lo mismo?
+**Para analizar el resultado:**
 
-**Objetivo:** pasar de una idea mostrada en el video a una observación propia, sin cambiar de tema.
+- ¿Por qué los puntos encontrados dependen de dónde se sienta el oyente?
+- ¿Qué cambiaría si el oyente o los altavoces se desplazaran?
+- Según el video, ¿**dónde** considerarías colocar un panel absorbente para reducir las primeras reflexiones?
 
-**Materiales:** objetos cotidianos disponibles en el aula y, solo si el ejemplo lo requiere, la voz, las palmas, un teléfono o un altavoz a volumen moderado.
+**Entrega breve:** un **croquis con los puntos de reflexión** y una conclusión de **3–4 líneas** que explique el vínculo entre la práctica y el video.
 
-1. **Elige un ejemplo del video** que pueda comprobarse de manera sencilla en clase. Si no se puede reproducir literalmente, construye una representación simple de ese mismo ejemplo e indica qué parte es una analogía.
-2. **Prepara dos situaciones (A y B)** que permitan apreciar una diferencia relacionada con el ejemplo elegido. Cambia **solo un factor**; procura mantener los demás lo más constantes posible.
-3. **Realiza la comparación:** escucha, observa o registra lo que ocurra. Si utilizas un teléfono, trátalo como apoyo orientativo, no como instrumento calibrado.
-4. **Contrasta con el video:** ¿el resultado coincide con lo que se muestra o explica? ¿Qué condición de tu experimento podría justificar una diferencia?
-
-| Registro | Situación A | Situación B |
-|---|---|---|
-| ¿Qué cambiaste? | | |
-| ¿Qué observaste o escuchaste? | | |
-| Relación con el ejemplo del video | | |
-
-**Cierre:** explica en **tres o cuatro líneas** (a) qué ejemplo elegiste y en qué minuto aparece, (b) qué comparaste y (c) qué concluiste. La conclusión debe referirse al **fenómeno del video**, no a RMS, dBA o dBFS salvo que alguno de ellos sea efectivamente el tema del ejemplo seleccionado.
-
-!!! note "Criterio de la actividad"
-    No se trata de inventar un experimento acústico distinto. La práctica debe conservar una **relación explícita y verificable con un momento concreto del video**. No hace falta obtener mediciones numéricas si el fenómeno puede analizarse mediante una observación cualitativa.
+!!! note "Alcance de la práctica"
+    La técnica del espejo sirve para estimar la trayectoria de **reflexiones especulares** y orientar la ubicación del tratamiento acústico, especialmente cuando el comportamiento del sonido puede aproximarse al modelo de rayos. **No mide** el nivel reflejado ni garantiza por sí sola una mejora audible. La eficacia de un panel depende de sus características y de la frecuencia, como también advierte el video.
 
 ---
 
