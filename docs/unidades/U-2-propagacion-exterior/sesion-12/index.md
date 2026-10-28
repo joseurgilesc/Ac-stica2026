@@ -153,63 +153,46 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
-## 7. Video y práctica: localizar las primeras reflexiones
+## 7. Video y práctica autónoma: primeras reflexiones e interferencia
 
-### Ver el video: *Acoustic Treatment for Beginners: Studio Sound Optimization*
+**Modalidad:** actividad individual para realizar desde casa. No necesitas estar en un estudio, utilizar altavoces ni disponer de instrumentos de medición. Observa el video y realiza la práctica con la simulación interactiva.
 
-**Audio University · 6 min 58 s · Audio en inglés**
+### 7.1. Video: ¿por qué tratar las primeras reflexiones?
 
-El video muestra por qué las **reflexiones tempranas** afectan a la escucha en un estudio y cómo identificar los puntos donde conviene considerar tratamiento acústico.
+**Audio University — *Acoustic Treatment for Beginners: Studio Sound Optimization* (6 min 58 s).** El video muestra el sonido directo y reflejado, la interferencia entre ondas y el uso de absorción acústica en las primeras reflexiones.
 
-<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: Acoustic Treatment for Beginners — primeras reflexiones acústicas y técnica del espejo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: primeras reflexiones e interferencia en estudios" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
 
-[▶️ **Abrir video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+[▶️ **Abrir el video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
 
-**Guía para observar:**
+**Momentos clave:** 0:15 (sonido directo y reflejado); 0:46 (interferencia constructiva y destructiva); 2:20 (primeras reflexiones); 4:10 (técnica del espejo); 6:20 (comparación auditiva con y sin tratamiento).
 
-| Momento | Qué observar |
-|---|---|
-| **0:15** | Diferencia entre **sonido directo** y **sonido reflejado**. |
-| **0:46** | Interferencia constructiva y destructiva al superponerse dos ondas. |
-| **2:20** | Por qué las **primeras reflexiones** pueden alterar la respuesta en frecuencia. |
-| **4:10** | **Técnica del espejo** para localizar puntos de reflexión en las paredes laterales. |
-| **5:32** | Cómo también puede reflejar sonido la mesa del estudio. |
-| **6:20** | Comparación auditiva con y sin tratamiento acústico: escuchar los cambios de coloración del sonido. |
+### 7.2. Simulación interactiva con p5.js
 
-**Dos preguntas después del video:**
+La simulación representa un altavoz y un oyente en una sala. Se observa un **camino directo** y otro que **rebota en una pared**. Al cambiar la frecuencia, la fuerza de la reflexión y la posición de escucha, se pueden visualizar **refuerzos y cancelaciones** de las ondas.
 
-1. ¿Por qué una reflexión puede **reforzar unas frecuencias y cancelar otras**, aunque el sonido provenga del mismo altavoz?
-2. ¿Qué relación tiene la **posición del altavoz y del oyente** con el lugar donde colocaríamos un panel acústico?
+<iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Laboratorio virtual p5.js: primeras reflexiones, interferencia y filtrado de peine" loading="lazy" style="width:100%;height:1920px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
-### Práctica: encontrar los puntos de primera reflexión con un espejo
+[🎛️ **Abrir simulación en pantalla completa**](../../../simulacion/primeras-reflexiones-interferencia-p5.html){ .md-button }
 
-**Objetivo:** localizar en un espacio real los puntos donde una reflexión especular de las paredes podría llegar desde los altavoces a la posición de escucha, siguiendo el procedimiento mostrado en el video (desde **4:10**).
+!!! note "Qué representa la simulación"
+    Se trata de un **modelo teórico de una reflexión especular**. No es una medición de una sala real. Las diferencias de nivel se expresan con relación a la vía directa; **no representan dBA ni dBFS**. El factor de reflexión es una simplificación para comparar situaciones y no corresponde a una especificación real de un panel.
 
-**Materiales:** uno o dos altavoces o monitores, un **espejo pequeño**, cinta de pintor o notas adhesivas, papel y lápiz. **No hace falta reproducir sonido**.
+### 7.3. Práctica teórica para Classroom
 
-**Procedimiento:**
+**Objetivo:** explicar cómo las primeras reflexiones provocan interferencias y por qué un tratamiento absorbente puede reducirlas.
 
-1. Ubica los altavoces y fija una **posición de escucha**. Una persona se sienta allí y **no cambia de lugar** durante la actividad.
-2. Otra persona desplaza lentamente el espejo, apoyado **plano contra una pared lateral**, a la altura adecuada. Desde el asiento, el oyente indica cuándo puede ver en el espejo **uno de los altavoces**.
-3. Marca ese punto en la pared. Repite el recorrido hasta localizar el reflejo del **otro altavoz** y marca también su punto.
-4. Repite el procedimiento en la pared lateral opuesta, si el espacio lo permite.
-5. Dibuja un plano muy sencillo: **altavoces, oyente, paredes y puntos marcados**. Traza con flechas un posible camino **altavoz → pared → oyente** y compáralo con el **camino directo**.
+**Instrucciones:** observa el video, utiliza la simulación y responde estas **cinco preguntas**. Debes basarte en los cambios que aparecen en la pantalla.
 
-| Pared | Altavoz que se ve en el espejo | Lugar marcado |
-|---|---|---|
-| Lateral izquierda | Izquierdo / derecho | |
-| Lateral derecha | Izquierdo / derecho | |
+1. **Sonido directo y reflejado.** En el esquema de la simulación, ¿cuál de los dos recorridos es más largo? ¿Por qué aparece un **retardo** entre ellos?
+2. **Interferencia.** Coloca la distancia del oyente a la pared en **2,0 m**, el factor de reflexión en **0,85** y mueve la frecuencia entre **100 y 300 Hz**. Encuentra una frecuencia aproximada donde aparezca una **cancelación**. Anota esa frecuencia y el cambio de nivel mostrado en dB. ¿Qué sucede con la onda resultante?
+3. **Tratamiento acústico.** Mantén esa frecuencia y esa posición del oyente; reduce el factor de reflexión de **0,85 a 0,25**. ¿Qué ocurre con la atenuación? Explica por qué esto se relaciona con la colocación de paneles absorbentes que propone el video.
+4. **Posición de escucha.** Regresa al factor **0,85** y cambia la distancia del oyente a la pared. ¿Qué sucede con el recorrido reflejado, el retardo y la posición de los valles en la curva de respuesta?
+5. **Aplicación al estudio.** Según la **técnica del espejo** mostrada desde el minuto **4:10**, ¿en qué puntos convendría ubicar tratamiento absorbente y por qué no es suficiente colocar paneles en cualquier sitio?
 
-**Para analizar el resultado:**
+**Entrega:** una captura de pantalla de la simulación mostrando una frecuencia donde aparezca una cancelación, más las respuestas a las cinco preguntas (breves, pero justificadas).
 
-- ¿Por qué los puntos encontrados dependen de dónde se sienta el oyente?
-- ¿Qué cambiaría si el oyente o los altavoces se desplazaran?
-- Según el video, ¿**dónde** considerarías colocar un panel absorbente para reducir las primeras reflexiones?
-
-**Entrega breve:** un **croquis con los puntos de reflexión** y una conclusión de **3–4 líneas** que explique el vínculo entre la práctica y el video.
-
-!!! note "Alcance de la práctica"
-    La técnica del espejo sirve para estimar la trayectoria de **reflexiones especulares** y orientar la ubicación del tratamiento acústico, especialmente cuando el comportamiento del sonido puede aproximarse al modelo de rayos. **No mide** el nivel reflejado ni garantiza por sí sola una mejora audible. La eficacia de un panel depende de sus características y de la frecuencia, como también advierte el video.
+**Para recordar:** una reflexión no siempre aumenta el sonido. Según el desfase, puede **reforzar unas frecuencias y atenuar otras**. Atenuar la reflexión tiende a reducir la profundidad de esos cambios.
 
 ---
 
