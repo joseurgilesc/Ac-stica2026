@@ -153,46 +153,54 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
-## 7. Video y práctica autónoma: primeras reflexiones e interferencia
+## 7. Video y práctica autónoma: diseño de paneles acústicos
 
-**Modalidad:** actividad individual para realizar desde casa. No necesitas estar en un estudio, utilizar altavoces ni disponer de instrumentos de medición. Observa el video y realiza la práctica con la simulación interactiva.
+**Modalidad:** individual, desde casa o cualquier computador. No es necesario acudir al estudio ni contar con monitores físicos. Se puede utilizar una sala hipotética con las medidas de ejemplo.
 
-### 7.1. Video: ¿por qué tratar las primeras reflexiones?
+### 7.1. Video: primeras reflexiones y técnica del espejo
 
-**Audio University — *Acoustic Treatment for Beginners: Studio Sound Optimization* (6 min 58 s).** El video muestra el sonido directo y reflejado, la interferencia entre ondas y el uso de absorción acústica en las primeras reflexiones.
+**Audio University — *Acoustic Treatment for Beginners: Studio Sound Optimization* (6 min 58 s).** Observa el fenómeno de sonido directo y reflejado, cómo las primeras reflexiones pueden alterar la escucha y la técnica del espejo que permite localizar puntos de tratamiento.
 
 <iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: primeras reflexiones e interferencia en estudios" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
 
-[▶️ **Abrir el video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+[▶️ **Abrir video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
 
-**Momentos clave:** 0:15 (sonido directo y reflejado); 0:46 (interferencia constructiva y destructiva); 2:20 (primeras reflexiones); 4:10 (técnica del espejo); 6:20 (comparación auditiva con y sin tratamiento).
+**Momentos principales:** 0:15 (sonido directo y reflejado); 0:46 (interferencia); 2:20 (por qué importan las primeras reflexiones); **4:10 (técnica del espejo)**; 5:32 (reflexión en la mesa); 6:20 (escucha con y sin tratamiento).
 
-### 7.2. Simulación interactiva con p5.js
+### 7.2. Diseñador virtual de primeras reflexiones (p5.js)
 
-La simulación representa un altavoz y un oyente en una sala. Se observa un **camino directo** y otro que **rebota en una pared**. Al cambiar la frecuencia, la fuerza de la reflexión y la posición de escucha, se pueden visualizar **refuerzos y cancelaciones** de las ondas.
+En el simulador puedes **introducir el ancho, largo y altura de una sala rectangular**, así como el **tamaño y la ubicación de dos monitores** y la **posición de los oídos del oyente**.
 
-<iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Laboratorio virtual p5.js: primeras reflexiones, interferencia y filtrado de peine" loading="lazy" style="width:100%;height:1920px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
+El programa dibuja un **plano** y una **vista lateral**, calcula los puntos donde rebotaría una primera reflexión especular y muestra **coordenadas orientativas para ubicar paneles en las dos paredes laterales y en el techo**.
 
-[🎛️ **Abrir simulación en pantalla completa**](../../../simulacion/primeras-reflexiones-interferencia-p5.html){ .md-button }
+<iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Diseñador virtual con p5.js: medidas de sala y ubicación estimada de paneles absorbentes" loading="lazy" style="width:100%;height:2600px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
-!!! note "Qué representa la simulación"
-    Se trata de un **modelo teórico de una reflexión especular**. No es una medición de una sala real. Las diferencias de nivel se expresan con relación a la vía directa; **no representan dBA ni dBFS**. El factor de reflexión es una simplificación para comparar situaciones y no corresponde a una especificación real de un panel.
+[🎛️ **Abrir diseñador en pantalla completa**](../../../simulacion/primeras-reflexiones-interferencia-p5.html){ .md-button }
 
-### 7.3. Práctica teórica para Classroom
+**Cómo leer los resultados:**
 
-**Objetivo:** explicar cómo las primeras reflexiones provocan interferencias y por qué un tratamiento absorbente puede reducirlas.
+- **X:** distancia desde la pared izquierda.
+- **Y:** distancia desde la pared frontal, detrás de los monitores.
+- **Z:** altura sobre el suelo.
+- El **tamaño del monitor** se usa para situar su cara frontal y estimar su centro de emisión, pero no permite determinar por sí solo el tamaño o la eficacia de un panel acústico.
+- Las zonas para paneles son **propuestas geométricas**, no una garantía de mejora ni una medición de aislamiento, reverberación o respuesta en frecuencia.
 
-**Instrucciones:** observa el video, utiliza la simulación y responde estas **cinco preguntas**. Debes basarte en los cambios que aparecen en la pantalla.
+### 7.3. Práctica teórica para Classroom: diseñar un estudio
 
-1. **Sonido directo y reflejado.** En el esquema de la simulación, ¿cuál de los dos recorridos es más largo? ¿Por qué aparece un **retardo** entre ellos?
-2. **Interferencia.** Coloca la distancia del oyente a la pared en **2,0 m**, el factor de reflexión en **0,85** y mueve la frecuencia entre **100 y 300 Hz**. Encuentra una frecuencia aproximada donde aparezca una **cancelación**. Anota esa frecuencia y el cambio de nivel mostrado en dB. ¿Qué sucede con la onda resultante?
-3. **Tratamiento acústico.** Mantén esa frecuencia y esa posición del oyente; reduce el factor de reflexión de **0,85 a 0,25**. ¿Qué ocurre con la atenuación? Explica por qué esto se relaciona con la colocación de paneles absorbentes que propone el video.
-4. **Posición de escucha.** Regresa al factor **0,85** y cambia la distancia del oyente a la pared. ¿Qué sucede con el recorrido reflejado, el retardo y la posición de los valles en la curva de respuesta?
-5. **Aplicación al estudio.** Según la **técnica del espejo** mostrada desde el minuto **4:10**, ¿en qué puntos convendría ubicar tratamiento absorbente y por qué no es suficiente colocar paneles en cualquier sitio?
+**Objetivo:** aplicar el principio de reflexión especular del sonido para ubicar de manera razonada el tratamiento de primeras reflexiones.
 
-**Entrega:** una captura de pantalla de la simulación mostrando una frecuencia donde aparezca una cancelación, más las respuestas a las cinco preguntas (breves, pero justificadas).
+**Instrucciones:** observa el video y abre el simulador. Puedes trabajar con las medidas del ejemplo incluido o introducir las de un espacio que conozcas; **no hace falta medir físicamente una sala**.
 
-**Para recordar:** una reflexión no siempre aumenta el sonido. Según el desfase, puede **reforzar unas frecuencias y atenuar otras**. Atenuar la reflexión tiende a reducir la profundidad de esos cambios.
+1. **Definir la sala.** Registra el ancho, largo y alto; las posiciones de los monitores; sus dimensiones; y la posición de escucha.
+2. **Localizar los puntos.** Utiliza el plano y la tabla para identificar **dónde ubicarías tratamiento en pared izquierda, pared derecha y techo**. Anota al menos una coordenada de cada superficie (y su altura, si corresponde).
+3. **Cambiar la posición de escucha.** Desplaza al oyente hacia el fondo de la sala manteniendo los monitores fijos. ¿Cómo cambian los puntos de reflexión? Explica por qué.
+4. **Cambiar la altura de los monitores.** Devuelve al oyente a su posición original, aumenta la altura de la base de los monitores aproximadamente **0,20 m**, sin superar el techo, y compara los puntos obtenidos. ¿Qué cambia?
+5. **Argumentar el diseño.** En relación con la **técnica del espejo del minuto 4:10**, ¿por qué es preferible ubicar un panel en la zona de primera reflexión en lugar de elegir una pared al azar? ¿Qué otros datos necesitarías antes de comprar los paneles?
+
+**Entrega:** **dos capturas** de la simulación (configuración original y una modificada) y las respuestas a las preguntas 2–5 en un documento breve. Incluye las dimensiones de la sala.
+
+!!! note "Alcance del ejercicio"
+    El simulador utiliza un **modelo especular idealizado** y propone áreas orientativas de cobertura; **no calcula automáticamente el rendimiento real de paneles ni su espesor óptimo**. En una instalación real se comprobarían además la directividad, las superficies, las propiedades acústicas de los materiales y la posición exacta de emisión de los monitores.
 
 ---
 
