@@ -251,6 +251,27 @@ new p5(p=>{
    p.stroke("#258199");p.strokeWeight(2.2);p.line(X(s.x),Y(s.y),X(e.x),Y(e.y));
   }
   const faces=selection==="all"?["left","right","ceiling"]:[selection];
+  // Coloured areas are illustrative panel coverage, not physical panel specifications.
+  for(const face of faces){
+   const pp=m.rays[face].map(r=>r.point),g=planGroup(face,m.rays[face]);
+   if(face==="ceiling"){
+    const points=g.single?[{x:(pp[0].x+pp[1].x)/2,y:(pp[0].y+pp[1].y)/2}]:pp;
+    for(const q of points){
+     const dx=Math.abs(pp[0].x-pp[1].x),dy=Math.abs(pp[0].y-pp[1].y);
+     const rw=dx>=dy?1.2:.6,rh=dx>=dy?.6:1.2;
+     p.fill(118,92,179,45);p.stroke("#765cb3");p.strokeWeight(1.4);
+     p.rect(X(Math.max(0,Math.min(W-rw,q.x-rw/2))),Y(Math.max(0,Math.min(L-rh,q.y-rh/2))),rw*sc,rh*sc,3);
+    }
+   }else{
+    const wallX=face==="left"?0:W;
+    const locations=g.single?[(pp[0].y+pp[1].y)/2]:pp.map(q=>q.y);
+    for(const loc of locations){
+     const ylo=Math.max(0,Math.min(L-.6,loc-.3));
+     p.stroke("#d27843");p.strokeWeight(9);p.strokeCap(p.ROUND);
+     p.line(X(wallX),Y(ylo),X(wallX),Y(ylo+.6));
+    }
+   }
+  }
   for(const face of faces){
    const color=face==="ceiling"?"#765cb3":"#d27843";
    for(let i=0;i<m.speaker.length;i++){
