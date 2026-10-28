@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratorio virtual · Primeras reflexiones e interferencia | Acústica</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#223c50;background:#f6f9fc;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:930px;margin:0 auto;padding:16px}
+h1{font-size:1.53rem;line-height:1.25;margin:0 0 9px}h2{font-size:1.15rem;margin:0 0 10px}h3{font-size:1rem;margin:12px 0 4px}
+p{line-height:1.52;margin:6px 0 11px}.intro,.quiet{color:#506879}
+.card{background:#fff;border:1px solid #d9e5ec;border-radius:15px;padding:18px;margin:14px 0}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.control{padding:13px;border-radius:10px;background:#f1f7fa}
+label{display:block;font-size:.93rem;font-weight:700;line-height:1.4}
+output{font-weight:800;color:#126681}input[type=range]{width:100%;min-height:43px;accent-color:#187d93;cursor:pointer}
+.presets{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 2px}
+button{font:inherit;border:1px solid #b6ced9;color:#20566c;background:#eaf5f7;font-weight:700;border-radius:10px;padding:10px 14px;min-height:44px;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #7ec1ce;outline-offset:3px}
+button.active{background:#176e83;border-color:#176e83;color:white}
+canvas{display:block;max-width:100%;width:100%!important;height:auto!important;margin:6px auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;color:#4d6475;margin:0 0 8px}
+.legend span::before{content:"";display:inline-block;width:16px;height:4px;border-radius:4px;background:var(--ink);vertical-align:3px;margin-right:6px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.stat{padding:12px;background:#ecf5f7;border-radius:9px}
+.stat small{display:block;color:#4b6975;font-size:.75rem}.stat strong{font-size:1.05rem;color:#1b5a70}
+.note{background:#eef7f8;border-left:4px solid #2b7e8f;border-radius:6px;padding:12px 14px}
+.caution{background:#fff8ed;border-left:4px solid #be8b45;border-radius:6px;padding:12px 14px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{padding:9px;border-bottom:1px solid #e0e9ef;text-align:left}th{background:#eef5f8}
+.number{font-variant-numeric:tabular-nums}
+small{font-size:.82rem}.foot{font-size:.81rem;color:#526879}
+@media(max-width:680px){main{padding:9px}.card{padding:13px}.controls{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:1.28rem}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js" defer></script>
+</head>
+<body>
+<main>
+<h1>Primeras reflexiones: de la pared a la interferencia</h1>
+<p class="intro">Simulación para trabajar desde casa después del video de <strong>Audio University</strong>. Cambia la posición del oyente, la frecuencia y la fuerza de la reflexión; observa cómo cambia la trayectoria y la suma de ondas. <strong>No necesitas parlantes ni micrófono.</strong></p>
+<section class="card">
+<h2>1. Configura la situación</h2>
+<div class="controls">
+  <div class="control"><label for="listener">Distancia del oyente a la pared: <output id="listener-o">2,0 m</output></label><input id="listener" type="range" min="0.5" max="3.5" step="0.1" value="2.0"></div>
+  <div class="control"><label for="frequency">Frecuencia del tono: <output id="frequency-o">180 Hz</output></label><input id="frequency" type="range" min="100" max="1500" step="10" value="180"></div>
+  <div class="control"><label for="reflect">Factor de amplitud reflejada: <output id="reflect-o">0,85</output></label><input id="reflect" type="range" min="0.05" max="0.95" step="0.05" value="0.85"></div>
+</div>
+<div class="presets">
+<button id="hard" type="button" class="active">Pared reflectante · 0,85</button>
+<button id="soft" type="button">Reflexión reducida · 0,25</button>
+<button id="reset" type="button">Reiniciar</button>
+</div>
+<p class="quiet"><small>El factor de reflexión es <strong>un parámetro idealizado de amplitud</strong>, no un coeficiente de absorción medido. Se aplica por igual a todas las frecuencias solo para aislar su efecto sobre la interferencia.</small></p>
+</section>
+<section class="card">
+<h2>2. Dos recorridos hasta el oyente</h2>
+<div class="legend">
+<span style="--ink:#237f88">Camino directo</span>
+<span style="--ink:#ce7753">Camino reflejado</span>
+</div>
+<div id="room-canvas" aria-label="Plano de sala con camino directo y reflexión especular sobre la pared superior"></div>
+<div class="stats">
+<div class="stat"><small>Directo</small><strong id="direct-dist" class="number">—</strong></div>
+<div class="stat"><small>Reflejado</small><strong id="ref-dist" class="number">—</strong></div>
+<div class="stat"><small>Recorrido extra</small><strong id="extra-dist" class="number">—</strong></div>
+<div class="stat"><small>Retardo</small><strong id="delay" class="number">—</strong></div>
+</div>
+<p class="foot">Vista en planta simplificada de una sala de 6 × 4 m. Se modela una fuente puntual, un oyente y <strong>una sola reflexión especular</strong> en la pared superior. El punto de rebote corresponde a la técnica del espejo (minuto 4:10 del video).</p>
+</section>
+<section class="card">
+<h2>3. ¿Las ondas se suman o se cancelan?</h2>
+<div class="legend">
+<span style="--ink:#237f88">Directa</span>
+<span style="--ink:#ce7753">Reflejada</span>
+<span style="--ink:#254b9a">Suma resultante</span>
+</div>
+<div id="wave-canvas" aria-label="Gráfico de dos ondas sinusoidales y su suma"></div>
+<p class="note" id="interference" aria-live="polite">Calculando interferencia…</p>
+<p class="foot">La onda reflejada llega más tarde y con menor amplitud. El dibujo muestra <strong>cuatro ciclos</strong> a la frecuencia seleccionada; las señales se representan con amplitudes relativas, no en pascales ni dB SPL reales.</p>
+</section>
+<section class="card">
+<h2>4. Filtrado de peine: varias frecuencias, una misma sala</h2>
+<div id="response-canvas" aria-label="Respuesta relativa de la suma de sonido directo y reflejado según la frecuencia"></div>
+<p class="foot">Curva ideal de la <strong>amplitud relativa a la vía directa</strong> para 80–4.000 Hz. Los valles representan cancelaciones parciales y los picos, refuerzos; la línea vertical marca la frecuencia elegida. No es una medición de una sala real.</p>
+</section>
+<section class="card">
+<h2>5. Tu práctica</h2>
+<p>Realiza las tres comparaciones. <strong>Conserva la misma posición del oyente</strong> mientras cambias un parámetro; luego cambia solo la posición.</p>
+<table>
+<tr><th>Prueba</th><th>Qué hacer</th><th>Qué registrar</th></tr>
+<tr><td>A · Frecuencia</td><td>Con oyente a 2,0 m y factor 0,85, mueve la frecuencia y busca un valle y un pico de la curva.</td><td>Dos frecuencias aproximadas y qué le ocurre a la amplitud sumada.</td></tr>
+<tr><td>B · Tratamiento</td><td>Conserva la posición y la frecuencia de un valle. Cambia 0,85 por 0,25.</td><td>Qué ocurre con la profundidad de la cancelación y por qué.</td></tr>
+<tr><td>C · Posición</td><td>Vuelve a 0,85. Cambia la distancia del oyente a la pared.</td><td>Cómo se desplazan los valles y el punto de reflexión.</td></tr>
+</table>
+<p><strong>Explica:</strong> (1) ¿Por qué un retardo puede reforzar unas frecuencias y atenuar otras? (2) ¿Por qué el panel absorbente reduce el problema sin eliminar el camino geométrico? (3) ¿Por qué la técnica del espejo ayuda a elegir el lugar del tratamiento?</p>
+<p class="note">Entrega en Classroom <strong>una captura</strong> de la simulación y <strong>tres respuestas breves</strong>. Puedes escoger tu propia frecuencia: justifica tus observaciones con lo que muestra la curva.</p>
+</section>
+<p class="caution"><strong>Límite del modelo:</strong> es una simulación conceptual inspirada en el video. Omite difracción, dispersión, reverberación, directividad real, absorción dependiente de frecuencia y otras reflexiones. Se utiliza una aproximación de caída de amplitud <em>1/distancia</em> para ambos caminos, con velocidad del sonido de <strong>344 m/s</strong>. La pérdida por tratamiento se idealiza con un solo factor de amplitud, no corresponde a la especificación de un panel comercial.</p>
+</main>
+<script>
+window.addEventListener("load",function(){
+"use strict";
+if(typeof window.p5!=="function"){
+ const d=document.getElementById("room-canvas");
+ d.textContent="No se pudo cargar p5.js. Comprueba tu conexión a Internet y vuelve a abrir la simulación.";
+ return;
+}
+const $=id=>document.getElementById(id);
+const inputs={listener:$("listener"),frequency:$("frequency"),reflect:$("reflect")};
+const fixed={speaker:{x:1.1,y:1.1},xListener:4.75,c:344,roomW:6,roomH:4};
+const fmt=(x,d=2)=>x.toLocaleString("es-EC",{minimumFractionDigits:d,maximumFractionDigits:d});
+function getModel(){
+ const l={x:fixed.xListener,y:+inputs.listener.value}, s=fixed.speaker;
+ const d=Math.hypot(l.x-s.x,l.y-s.y);
+ const dr=Math.hypot(l.x-s.x,l.y+s.y);
+ const extra=dr-d, delay=extra/fixed.c;
+ const coeff=+inputs.reflect.value;
+ const amplitude=coeff*d/dr;
+ const f=+inputs.frequency.value;
+ const phase=2*Math.PI*f*delay;
+ const wallX=s.x+(l.x-s.x)*s.y/(s.y+l.y);
+ function level(hz){
+   const v=Math.hypot(1+amplitude*Math.cos(2*Math.PI*hz*delay),amplitude*Math.sin(2*Math.PI*hz*delay));
+   return 20*Math.log10(Math.max(v,1e-10));
+ }
+ return {s,l,d,dr,extra,delay,coeff,amplitude,f,phase,wallX,level};
+}
+function updateFields(){
+ const m=getModel();
+ $("listener-o").textContent=fmt(m.l.y,1)+" m";
+ $("frequency-o").textContent=Math.round(m.f)+" Hz";
+ $("reflect-o").textContent=fmt(m.coeff,2);
+ $("direct-dist").textContent=fmt(m.d)+" m";
+ $("ref-dist").textContent=fmt(m.dr)+" m";
+ $("extra-dist").textContent=fmt(m.extra)+" m";
+ $("delay").textContent=fmt(m.delay*1000)+" ms";
+ const db=m.level(m.f);
+ let word=db>0.5?"refuerzo":db< -0.5?"atenuación":"variación pequeña";
+ $("interference").innerHTML="A <strong>"+Math.round(m.f)+" Hz</strong> hay <strong>"+word+"</strong> de <strong>"+(db>0?"+":"")+fmt(db,1)+" dB</strong> respecto al camino directo <strong>en este modelo</strong>.";
+ $("hard").classList.toggle("active",Math.abs(m.coeff-0.85)<0.01);
+ $("soft").classList.toggle("active",Math.abs(m.coeff-0.25)<0.01);
+ for(const redraw of drawings)redraw();
+}
+const drawings=[];
+const sketch=(id,width,height,drawer)=>{
+ new p5(p=>{
+   p.setup=function(){
+     const canvas=p.createCanvas(width,height);
+     canvas.parent(id);
+     p.pixelDensity(1);
+     p.noLoop();
+     drawings.push(()=>p.redraw());
+   };
+   p.draw=function(){drawer(p,getModel())};
+ },id);
+};
+const C={blue:"#237f88",orange:"#ce7753",dark:"#254b9a",ink:"#2a4557",light:"#dae5eb",bg:"#ffffff"};
+function txt(p,string,x,y,size=13,fill=C.ink){
+ p.noStroke();p.fill(fill);p.textSize(size);p.text(string,x,y);
+}
+function line(p,x1,y1,x2,y2,color,width=2){
+ p.stroke(color);p.strokeWeight(width);p.line(x1,y1,x2,y2);
+}
+sketch("room-canvas",760,347,(p,m)=>{
+ p.background(255);const ox=61,oy=28,sc=73;
+ const pt=q=>({x:ox+q.x*sc,y:oy+q.y*sc});
+ const s=pt(m.s),l=pt(m.l),b=pt({x:m.wallX,y:0});
+ p.noFill();p.stroke(C.light);p.strokeWeight(3);p.rect(ox,oy,fixed.roomW*sc,fixed.roomH*sc,4);
+ p.stroke(C.ink);p.strokeWeight(6);p.line(ox,oy,ox+fixed.roomW*sc,oy);
+ txt(p,"Pared reflectante / panel",ox+15,oy+19,12);
+ // dotted direct
+ line(p,s.x,s.y,l.x,l.y,C.blue,3);
+ line(p,s.x,s.y,b.x,b.y,C.orange,3);
+ line(p,b.x,b.y,l.x,l.y,C.orange,3);
+ p.noStroke();p.fill(C.orange);p.circle(b.x,b.y,13);
+ p.fill(C.blue);p.circle(s.x,s.y,18);p.fill(C.dark);p.circle(l.x,l.y,18);
+ txt(p,"Altavoz",s.x-23,s.y-14,12);txt(p,"Oyente",l.x-21,l.y+25,12);
+ txt(p,"Punto de",527,84,13);txt(p,"primera reflexión",527,102,13);
+ line(p,511,108,b.x+8,b.y+3,"#9cadb9",1.2);
+ txt(p,"Línea verde: vía directa",527,145,12);
+ txt(p,"Línea naranja: vía reflejada",527,165,12);
+ txt(p,"El rebote cambia",527,210,13);
+ txt(p,"al mover el oyente.",527,228,13);
+ txt(p,"Planta de la sala",527,275,12);
+});
+sketch("wave-canvas",760,258,(p,m)=>{
+ p.background(255);const x0=55,y0=118,w=665,h=93;
+ // axes
+ for(let i=-2;i<=2;i++){
+  const y=y0-i*(h/2)/2;line(p,x0,y,x0+w,y,C.light,1);
+ }
+ for(let i=0;i<=4;i++){
+  const x=x0+w*i/4;line(p,x,y0-70,x,y0+70,"#edf1f4",1);
+ }
+ txt(p,"Amplitud relativa",x0,21,14);
+ txt(p,"Tiempo →",x0+w-68,240,13);
+ const draw=(fn,color,weight)=>{
+  p.noFill();p.stroke(color);p.strokeWeight(weight);p.beginShape();
+  for(let j=0;j<=660;j++){
+    const cycles=j/660*4;
+    const val=fn(cycles);
+    p.vertex(x0+j*w/660,y0-val*38);
+  }
+  p.endShape();
+ };
+ draw(t=>Math.sin(t*2*Math.PI),C.blue,2);
+ draw(t=>m.amplitude*Math.sin(t*2*Math.PI-m.phase),C.orange,2);
+ draw(t=>Math.sin(t*2*Math.PI)+m.amplitude*Math.sin(t*2*Math.PI-m.phase),C.dark,3.2);
+ txt(p,"(modelo de dos sinusoides)",x0,240,12,"#5e7483");
+});
+sketch("response-canvas",760,268,(p,m)=>{
+ p.background(255);const x0=57,y0=25,w=663,h=196,f0=80,f1=4000,hi=6,lo=-24;
+ function xF(f){return x0+Math.log(f/f0)/Math.log(f1/f0)*w}
+ function yDb(db){return y0+(hi-db)/(hi-lo)*h}
+ for(const d of [-24,-18,-12,-6,0,6]){
+  const y=yDb(d);line(p,x0,y,x0+w,y,d===0?"#8096a5":C.light,d===0?1.5:1);
+  txt(p,String(d),17,y+4,12);
+ }
+ for(const f of [100,200,500,1000,2000,4000]){
+  const x=xF(f);line(p,x,y0,x,y0+h,"#edf1f4",1);
+  txt(p,f===1000?"1k":f===2000?"2k":f===4000?"4k":String(f),x-9,246,12);
+ }
+ txt(p,"dB",16,13,12);txt(p,"Hz →",674,263,12);
+ p.noFill();p.stroke(C.dark);p.strokeWeight(2.5);p.beginShape();
+ for(let i=0;i<=660;i++){
+  const f=f0*Math.pow(f1/f0,i/660);
+  p.vertex(xF(f),yDb(Math.max(lo,Math.min(hi,m.level(f)))));
+ }
+ p.endShape();
+ const xf=xF(m.f),yf=yDb(Math.max(lo,Math.min(hi,m.level(m.f))));
+ line(p,xf,y0,xf,y0+h,C.orange,1.6);
+ p.noStroke();p.fill(C.orange);p.circle(xf,yf,10);
+});
+for(const e of Object.values(inputs))e.addEventListener("input",updateFields);
+$("hard").addEventListener("click",()=>{inputs.reflect.value="0.85";updateFields()});
+$("soft").addEventListener("click",()=>{inputs.reflect.value="0.25";updateFields()});
+$("reset").addEventListener("click",()=>{inputs.reflect.value="0.85";inputs.listener.value="2";inputs.frequency.value="180";updateFields()});
+updateFields();
+});
+</script>
+</body>
+</html>
