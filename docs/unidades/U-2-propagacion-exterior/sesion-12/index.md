@@ -153,52 +153,41 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
-## 7. Video y práctica breve: del nivel digital al sonido en la sala
+## 7. Video y práctica: recrear una idea del video
 
-### Observación del video
+### 1. Observar y seleccionar un ejemplo
 
-Reproduce el siguiente video y toma nota de **una idea importante**, **un ejemplo concreto** y **una pregunta que te haya surgido**. Al terminar, discutiremos qué parte de la explicación se relaciona con los conceptos acústicos revisados en clase.
+<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Video de referencia de la sesión 12 de Acústica Aplicada" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
 
-<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Video de referencia para la sesión 12 de Acústica Aplicada" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
+[▶️ **Abrir el video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
 
-[▶️ **Abrir video directamente en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+**Mientras observas**, identifica **un fenómeno, ejemplo o demostración que aparezca realmente en el video**. Anota el minuto y segundo en que se muestra, qué ocurre y qué explicación ofrece el video.
 
-**Para comentar después de verlo:**
-
-1. ¿Qué fenómeno o concepto te pareció más importante y por qué?
-2. ¿Qué ejemplo del video podrías relacionar con alguna medición o situación de producción musical?
-
-### Práctica sencilla: ¿por qué dBFS no es dBA?
-
-**Objetivo:** observar que el nivel digital de una señal y el nivel acústico de su reproducción son mediciones diferentes, y recordar cómo se calcula un valor RMS.
-
-**Materiales:** computador con un DAW (por ejemplo, Ableton Live), altavoz o monitor y, si está disponible, un teléfono con aplicación de sonómetro que muestre **dBA**. La medición con teléfono será **solo orientativa**.
-
-**1. Observa el nivel digital (dBFS).** Reproduce una señal o fragmento musical a **volumen bajo**. Mira el medidor de pico del DAW y anota un valor aproximado en **dBFS**. **No modifiques la ganancia de la pista ni del máster** durante la siguiente comparación.
-
-**2. Compara lo que sale del altavoz (dBA).** Sitúa el teléfono siempre en el mismo punto, frente al altavoz, y observa el nivel aproximado en **dBA**. Luego modifica **solo el volumen físico del altavoz o de la interfaz**, manteniendo una escucha moderada. Observa de nuevo ambos medidores.
-
-| Observación | Antes | Después de cambiar solo el volumen físico |
+| Momento del video | ¿Qué muestra o explica? | ¿Qué cambia o se compara? |
 |---|---|---|
-| **Pico digital (dBFS)** | Anota el valor | ¿Cambió? |
-| **Nivel acústico (dBA)** | Anota el valor aproximado | ¿Cambió? |
+| Minuto:segundo | Descripción breve | Dos situaciones o una variable |
 
-!!! warning "Importante"
-    **No busques niveles sonoros altos.** Una aplicación de teléfono no reemplaza un sonómetro calibrado y puede ser imprecisa, especialmente según la frecuencia. Esta comparación demuestra el comportamiento **relativo** de las lecturas; **no sirve para convertir dBFS a dBA ni para realizar una evaluación normativa de ruido**. Si no hay sonómetro, realiza la comparación auditiva sin asignar números de dBA.
+### 2. Práctica sencilla: ¿podemos observar lo mismo?
 
-**3. Comprueba el RMS con una sinusoide.** Supón que una onda sinusoidal tiene una **amplitud pico de 1 unidad**. Calcula su valor eficaz:
+**Objetivo:** pasar de una idea mostrada en el video a una observación propia, sin cambiar de tema.
 
-\[
-X_{\mathrm{RMS}} = \frac{1}{\sqrt{2}} \approx 0{,}707
-\]
+**Materiales:** objetos cotidianos disponibles en el aula y, solo si el ejemplo lo requiere, la voz, las palmas, un teléfono o un altavoz a volumen moderado.
 
-Si reducimos la amplitud pico a **0,5**, ¿cuál sería su RMS? **Respuesta para contrastar:** aproximadamente **0,354** unidades. Tanto el valor pico como el RMS se reducen a la mitad.
+1. **Elige un ejemplo del video** que pueda comprobarse de manera sencilla en clase. Si no se puede reproducir literalmente, construye una representación simple de ese mismo ejemplo e indica qué parte es una analogía.
+2. **Prepara dos situaciones (A y B)** que permitan apreciar una diferencia relacionada con el ejemplo elegido. Cambia **solo un factor**; procura mantener los demás lo más constantes posible.
+3. **Realiza la comparación:** escucha, observa o registra lo que ocurra. Si utilizas un teléfono, trátalo como apoyo orientativo, no como instrumento calibrado.
+4. **Contrasta con el video:** ¿el resultado coincide con lo que se muestra o explica? ¿Qué condición de tu experimento podría justificar una diferencia?
 
-**Cierre: tres conclusiones para escribir en una frase cada una.**
+| Registro | Situación A | Situación B |
+|---|---|---|
+| ¿Qué cambiaste? | | |
+| ¿Qué observaste o escuchaste? | | |
+| Relación con el ejemplo del video | | |
 
-- ¿Por qué el valor en **dBFS** del DAW puede mantenerse aunque el sonido reproducido cambie de nivel?
-- ¿Por qué una lectura en **dBA** depende del sonido que llega al micrófono y de su ponderación frecuencial?
-- ¿Por qué **RMS** no significa lo mismo que **pico**?
+**Cierre:** explica en **tres o cuatro líneas** (a) qué ejemplo elegiste y en qué minuto aparece, (b) qué comparaste y (c) qué concluiste. La conclusión debe referirse al **fenómeno del video**, no a RMS, dBA o dBFS salvo que alguno de ellos sea efectivamente el tema del ejemplo seleccionado.
+
+!!! note "Criterio de la actividad"
+    No se trata de inventar un experimento acústico distinto. La práctica debe conservar una **relación explícita y verificable con un momento concreto del video**. No hace falta obtener mediciones numéricas si el fenómeno puede analizarse mediante una observación cualitativa.
 
 ---
 
