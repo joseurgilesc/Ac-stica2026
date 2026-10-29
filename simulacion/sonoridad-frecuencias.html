@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratorio auditivo · Sesión 12B</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#f7f9fc;color:#1e3548}
+*{box-sizing:border-box}
+body{margin:0}main{max-width:970px;margin:auto;padding:17px}
+h1{font-size:1.48rem;margin:0 0 6px;line-height:1.3}h2{font-size:1.12rem;margin:0 0 11px}
+p{line-height:1.52;margin:8px 0}.intro{color:#4e667a}
+.card{padding:17px;border:1px solid #d9e4ed;border-radius:13px;background:#fff;margin:14px 0}
+.note{background:#edf6f8;border-left:4px solid #2d8095;border-radius:4px;padding:11px 13px;line-height:1.5}
+.alert{background:#faf4e8;border-left:4px solid #b88c4d;border-radius:4px;padding:11px 13px;font-size:.91rem;line-height:1.5}
+label{font-weight:700}select{font:inherit;min-height:44px;border:1px solid #aebfcb;border-radius:8px;padding:9px;background:#fff;color:inherit}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0}
+.row>*{min-width:0}.row select{flex:1 1 185px}
+input[type=range]{width:100%;min-height:46px;accent-color:#21778d;cursor:pointer}
+input:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #91bfd5;outline-offset:2px}
+button{font:inherit;border-radius:9px;border:1px solid #a7bccb;background:#eef5f8;color:#255a76;padding:10px 15px;min-height:46px;cursor:pointer;font-weight:700}
+button.main{color:#fff;background:#276f89;border-color:#276f89}
+button:disabled{opacity:.55;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}
+output{font-size:1.14rem;font-weight:770;color:#226f84;white-space:nowrap}
+.bar{height:8px;background:#e4edf2;border-radius:5px;overflow:hidden;margin:10px 0}
+.bar>.progress{height:100%;background:#28869b;width:0%;transition:width .2s}
+.small{font-size:.85rem;color:#536b7c}
+.chart-scroll{overflow-x:auto}
+svg{display:block;width:100%;min-width:620px;height:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{border-bottom:1px solid #e1e9ee;padding:10px 8px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#eef3f7;color:#3c586e}
+td{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:10px 0}
+.kpi{padding:12px;border-radius:9px;background:#eff5f8}.kpi small{display:block;color:#506c7d}.kpi strong{display:block;font-size:1.17rem;margin-top:4px}
+@media(max-width:540px){main{padding:10px}.card{padding:12px}h1{font-size:1.25rem}.actions button{flex:1 1 145px}.kpis{gap:6px}.kpi{padding:9px}}
+</style>
+</head>
+<body><main>
+<h1>¿Oímos igual todas las frecuencias?</h1>
+<p class="intro">Comparación auditiva de tonos puros. Escucha un <strong>tono de referencia (1.000 Hz)</strong> y otro de prueba. Ajusta el segundo hasta que ambos parezcan tener una intensidad subjetiva similar.</p>
+<p class="alert"><strong>Antes de empezar:</strong> baja el volumen del sistema casi al mínimo. Reproduce el primer tono y súbelo solo hasta escucharlo cómodamente. Usa el mismo dispositivo y volumen durante toda la actividad; no fuerces el oído para igualar un tono. Si aparece molestia, detén la práctica. <strong>No es una audiometría.</strong></p>
+<section class="card">
+<h2>1. Escucha y ajusta</h2>
+<div class="row"><label for="target">Frecuencia que quieres comparar</label>
+<select id="target" aria-label="Elegir frecuencia de comparación">
+<option value="250">250 Hz · grave</option>
+<option value="500">500 Hz · medio-grave</option>
+<option value="2000">2.000 Hz · medio-agudo</option>
+<option value="4000">4.000 Hz · agudo</option>
+</select></div>
+<div class="kpis">
+<div class="kpi"><small>Referencia A</small><strong>1.000 Hz · nivel fijo</strong></div>
+<div class="kpi"><small>Prueba B</small><strong id="testLabel">250 Hz · ajustable</strong></div>
+</div>
+<div class="actions">
+<button type="button" id="listenA">▶ Escuchar A</button>
+<button type="button" id="listenB">▶ Escuchar B</button>
+<button type="button" id="listenBoth" class="main">▶ Comparar A → B</button>
+</div>
+<div class="row"><label for="gain">Ajuste digital de B respecto a A</label><output id="gainLabel" for="gain">0 dB</output></div>
+<input id="gain" type="range" min="-15" max="15" step="1" value="0" aria-label="Ajuste digital del tono B en decibelios respecto a la referencia">
+<div class="row"><button type="button" id="equal" class="main">Registrar igualación</button><button type="button" id="uncertain">No logré igualarlo</button></div>
+<p class="note" id="feedback" role="status" aria-live="polite">Prueba primero ambos tonos con el ajuste en 0 dB. Después modifica solo B y vuelve a comparar.</p>
+<p class="small">Cada tono dura aproximadamente 1,3 s y aparece con entrada y salida suavizadas. El audio se activa solamente al pulsar los botones. El ajuste corresponde a <strong>dB digitales de amplitud relativa</strong>, no a dB SPL ni a fones. Incluso a 0 dB de ajuste, auriculares, altavoces y oídos pueden responder de manera diferente a cada frecuencia.</p>
+</section>
+<section class="card">
+<h2>2. Resultados personales</h2>
+<p class="small">Registra una igualación por frecuencia. No existe un valor «correcto» para esta práctica no calibrada.</p>
+<div class="bar" aria-label="Progreso"><div class="progress" id="progress"></div></div>
+<p class="small" id="progressLabel">0 de 4 frecuencias registradas</p>
+<div style="overflow-x:auto"><table>
+<thead><tr><th>Frecuencia B</th><th>Ajuste respecto a 1.000 Hz</th><th>Estado</th></tr></thead>
+<tbody id="records"></tbody>
+</table></div>
+<div class="chart-scroll"><svg id="plot" viewBox="0 0 820 265" role="img" aria-label="Gráfica de tus ajustes digitales relativos entre frecuencias; datos personales no calibrados"></svg></div>
+<div class="row"><button type="button" id="reset">↺ Reiniciar resultados</button></div>
+<p class="small">Anota esta tabla en tu informe o toma una captura de pantalla. Los datos no se envían a ningún servidor y desaparecerán al cerrar o recargar la página.</p>
+</section>
+<section class="card">
+<details>
+<summary style="cursor:pointer;font-weight:750;color:#245d75;padding:8px 0">Ver tabla de referencia: una curva de 40 fones (consultar después de escuchar)</summary>
+<p class="small">Valores normalizados de igual sonoridad según ISO 226:2023. Todos los tonos se perciben aproximadamente igual de fuertes bajo condiciones normalizadas, aunque requieren distintos niveles de presión sonora.</p>
+<table>
+<thead><tr><th>Frecuencia</th><th>Nivel físico</th><th>Sonoridad</th></tr></thead>
+<tbody>
+<tr><td>250 Hz</td><td>50,3 dB SPL</td><td>40 fones</td></tr>
+<tr><td>1.000 Hz</td><td>40,0 dB SPL</td><td>40 fones</td></tr>
+<tr><td>4.000 Hz</td><td>36,7 dB SPL</td><td>40 fones</td></tr>
+</tbody></table>
+<p class="small"><strong>Pregunta:</strong> si todos son 40 fones, ¿por qué no tienen los mismos dB SPL? Tus ajustes digitales del laboratorio <strong>no son mediciones de dB SPL</strong> y no tienen por qué coincidir con esta tabla.</p>
+</details>
+</section>
+<section class="card">
+<h2>3. Reflexiona</h2>
+<p><strong>Pregunta:</strong> ¿por qué dos tonos con el mismo ajuste digital pueden percibirse con diferente sonoridad?</p>
+<p class="note">El oído humano no responde con la misma sensibilidad a todas las frecuencias. Además, los auriculares, los altavoces, la sala y la persona que escucha influyen en el resultado. Las <strong>curvas de igual sonoridad</strong> describen, en condiciones normalizadas, qué niveles físicos necesitan distintos tonos para percibirse igual de fuertes.</p>
+<p class="small"><strong>Importante:</strong> estos resultados no permiten reconstruir las curvas ISO 226, medir la sensibilidad auditiva de cada estudiante ni comparar la audición de diferentes personas.</p>
+</section>
+</main>
+<script>
+"use strict";
+(function(){
+ const $=id=>document.getElementById(id);
+ const FREQS=[250,500,2000,4000]; const measures={};
+ let ctx=null,playingUntil=0,audioFailed=false;
+ const AudioContextType=window.AudioContext||window.webkitAudioContext;
+ const signed=n=>(n>0?"+":"")+n+" dB";
+ function selectFrequency(){
+  const f=Number($("target").value);$("testLabel").textContent=f.toLocaleString("es-EC")+" Hz · ajustable";
+  const saved=measures[f];$("gain").value=saved&&Number.isFinite(saved.value)?saved.value:0;
+  refreshGain();$("feedback").textContent="Escucha A y B, ajusta B y registra tu percepción para "+f.toLocaleString("es-EC")+" Hz.";
+ }
+ function refreshGain(){ $("gainLabel").textContent=signed(Number($("gain").value)); }
+ async function getContext(){
+  if(!AudioContextType){audioFailed=true;throw Error("Este navegador no admite Web Audio.");}
+  if(!ctx)ctx=new AudioContextType();
+  if(ctx.state==="suspended")await ctx.resume();
+  if(ctx.state!=="running")throw Error("No se pudo iniciar el audio. Comprueba permisos y salida de sonido.");
+  return ctx;
+ }
+ function tone(ac,f,db,time){
+  const oscillator=ac.createOscillator(),envelope=ac.createGain();
+  oscillator.type="sine";oscillator.frequency.setValueAtTime(f,time);
+  const base=Math.pow(10,-36/20), amplitude=base*Math.pow(10,db/20),fade=.055,duration=1.3;
+  envelope.gain.setValueAtTime(.000001,time);
+  envelope.gain.linearRampToValueAtTime(amplitude,time+fade);
+  envelope.gain.setValueAtTime(amplitude,time+duration-fade);
+  envelope.gain.linearRampToValueAtTime(.000001,time+duration);
+  oscillator.connect(envelope);envelope.connect(ac.destination);
+  oscillator.start(time);oscillator.stop(time+duration+.02);
+  oscillator.onended=()=>{try{oscillator.disconnect();envelope.disconnect()}catch(_){}};
+ }
+ async function play(which){
+  if(audioFailed){$("feedback").textContent="Tu navegador no permite activar el audio; puedes revisar la teoría y la actividad.";return;}
+  try{
+   const ac=await getContext();
+   if(ac.currentTime<playingUntil-.015){$("feedback").textContent="Espera a que termine la escucha anterior.";return;}
+   const when=ac.currentTime+.06,db=Number($("gain").value),f=Number($("target").value);
+   if(which==="A"){tone(ac,1000,0,when);playingUntil=when+1.35;}
+   else if(which==="B"){tone(ac,f,db,when);playingUntil=when+1.35;}
+   else {tone(ac,1000,0,when);tone(ac,f,db,when+1.62);playingUntil=when+2.97;}
+   $("feedback").textContent=which==="pair"?"Comparación: A (1.000 Hz), pausa y B ("+f.toLocaleString("es-EC")+" Hz).":"Escucha "+which+": "+(which==="A"?"referencia de 1.000 Hz":"prueba de "+f.toLocaleString("es-EC")+" Hz")+".";
+  }catch(e){$("feedback").textContent="No se pudo reproducir el sonido: "+(e&&e.message?e.message:"Comprueba tu navegador y salida de audio");}
+ }
+ $("listenA").addEventListener("click",()=>play("A"));
+ $("listenB").addEventListener("click",()=>play("B"));
+ $("listenBoth").addEventListener("click",()=>play("pair"));
+ $("target").addEventListener("change",selectFrequency);
+ $("gain").addEventListener("input",refreshGain);
+ $("equal").addEventListener("click",()=>{const f=Number($("target").value);measures[f]={value:Number($("gain").value),state:"Igualado según mi percepción"};$("feedback").textContent="Registrado "+f.toLocaleString("es-EC")+" Hz: ajuste "+signed(measures[f].value)+". Es un valor digital relativo, no un nivel SPL.";render();});
+ $("uncertain").addEventListener("click",()=>{const f=Number($("target").value);measures[f]={value:null,state:"No se logró igualar"};$("feedback").textContent="Registrado como no igualado. No aumentes el volumen del equipo para forzar el resultado.";render();});
+ $("reset").addEventListener("click",()=>{for(const f of FREQS)delete measures[f];$("target").value="250";selectFrequency();render();});
+ const ns="http://www.w3.org/2000/svg";
+ function node(tag,attrs,txt){const e=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);if(txt!==undefined)e.textContent=txt;return e;}
+ function place(p,tag,attrs,txt){p.appendChild(node(tag,attrs,txt));}
+ function drawPlot(){
+  const svg=$("plot");svg.replaceChildren(); const x=i=>110+i*186,y=db=>30+(15-db)*(185/30);
+  for(const db of [-15,-10,-5,0,5,10,15]){
+   const yy=y(db);place(svg,"line",{x1:70,y1:yy,x2:737,y2:yy,stroke:db===0?"#7c96a7":"#e0e9f0","stroke-width":db===0?2:1});
+   place(svg,"text",{x:60,y:yy+4,"text-anchor":"end","font-size":13,fill:"#4c667a"},(db>0?"+":"")+db+" dB");
+  }
+  place(svg,"text",{x:72,y:15,"font-size":13,fill:"#566f81"},"Ajuste digital relativo (no dB SPL)");
+  for(let i=0;i<FREQS.length;i++){
+   const f=FREQS[i],xx=x(i),m=measures[f];
+   place(svg,"line",{x1:xx,y1:27,x2:xx,y2:216,stroke:"#e9eff4"});
+   place(svg,"text",{x:xx,y:241,"text-anchor":"middle","font-size":14,fill:"#405e73"},f.toLocaleString("es-EC")+" Hz");
+   if(m&&Number.isFinite(m.value)){place(svg,"circle",{cx:xx,cy:y(m.value),r:8,fill:"#257e93",stroke:"#fff","stroke-width":2});place(svg,"text",{x:xx,y:y(m.value)-(m.value>11?12:14),"text-anchor":"middle","font-size":13,fill:"#246b84","font-weight":700},signed(m.value));}
+   else if(m){place(svg,"text",{x:xx,y:121,"text-anchor":"middle","font-size":12,fill:"#6d7780"},"Sin valor");}
+  }
+ }
+ function render(){
+  const body=$("records");body.replaceChildren();let done=0;
+  for(const f of FREQS){
+   const m=measures[f];if(m)done++;
+   const tr=document.createElement("tr"),cols=[f.toLocaleString("es-EC")+" Hz",m&&Number.isFinite(m.value)?signed(m.value):"—",m?m.state:"Pendiente"];
+   for(const col of cols){const td=document.createElement("td");td.textContent=col;tr.append(td);}body.append(tr);
+  }
+  $("progress").style.width=(100*done/4)+"%";
+  $("progressLabel").textContent=done+" de 4 frecuencias registradas";
+  drawPlot();
+ }
+ selectFrequency();render();
+})();
+</script>
+</body>
+</html>

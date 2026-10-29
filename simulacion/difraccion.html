@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El sonido dobla la esquina — Difracción</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 120px; font-weight: 600; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 120px; flex: 1; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0; }
+    button { padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid #aab5c8; background: #fff; margin-right: 6px; }
+    button.active { background: #249D8F; color: #fff; border-color: #249D8F; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .hint { font-size: 12px; color: #587086; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>El sonido dobla la esquina</h2>
+  <p class="lead">Arrastra la fuente <b>S</b> y el receptor <b>R</b>. Cambia la frecuencia y observa cómo la difracción depende de λ frente al tamaño del obstáculo o abertura.</p>
+
+  <div class="row">
+    <label>Modo:</label>
+    <button id="btnObs" class="active">Obstáculo</button>
+    <button id="btnAper">Abertura</button>
+  </div>
+
+  <div class="row">
+    <label>Frecuencia:</label>
+    <input type="range" id="freq" min="50" max="8000" value="500" step="10" style="flex:1 1 250px">
+    <span id="freqVal" style="font-weight:700">500 Hz</span>
+  </div>
+
+  <div class="row">
+    <label id="sizeLabel">Tamaño del obstáculo:</label>
+    <input type="range" id="size" min="20" max="320" value="140" step="5" style="flex:1 1 250px">
+    <span id="sizeVal" style="font-weight:700">—</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">Longitud de onda λ</div><div class="val" id="lambda">—</div></div>
+    <div class="stat"><div class="lbl">Relación λ/tamaño</div><div class="val" id="ratio">—</div></div>
+    <div class="stat"><div class="lbl">Difracción</div><div class="val" id="diffraction">—</div></div>
+    <div class="stat"><div class="lbl">Nivel detrás (aprox.)</div><div class="val" id="level">—</div></div>
+  </div>
+
+  <p class="hint">λ ≫ tamaño → difracción intensa (rodea). λ ≪ tamaño → sombra definida. Los graves rodean, los agudos se bloquean.</p>
+</div>
+
+<script>
+const TEAL = [36, 157, 143];
+const CORAL = [224, 90, 71];
+const INDIGO = [79, 111, 178];
+const V = 343;
+
+let mode = 'obstacle'; // 'obstacle' | 'aperture'
+let S, R; // {x, y} in px
+let dragging = null;
+let wallX; // px position of the barrier/wall
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 500);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  wallX = width * 0.45;
+  S = { x: width * 0.2, y: height * 0.5 };
+  R = { x: width * 0.75, y: height * 0.5 };
+
+  select('#btnObs').mousePressed(() => { mode = 'obstacle'; refreshMode(); });
+  select('#btnAper').mousePressed(() => { mode = 'aperture'; refreshMode(); });
+
+  select('#freq').input(() => {
+    const f = Number(select('#freq').value());
+    select('#freqVal').html(f + ' Hz');
+  });
+
+  textFont('system-ui');
+}
+
+function refreshMode() {
+  select('#btnObs').toggleClass('active', mode === 'obstacle');
+  select('#btnAper').toggleClass('active', mode === 'aperture');
+  select('#sizeLabel').html(mode === 'obstacle' ? 'Tamaño del obstáculo:' : 'Ancho de la abertura:');
+}
+
+function mousePressed() {
+  if (dist(mouseX, mouseY, S.x, S.y) < 22) dragging = 'S';
+  else if (dist(mouseX, mouseY, R.x, R.y) < 22) dragging = 'R';
+}
+
+function mouseReleased() { dragging = null; }
+
+function draw() {
+  background(255);
+
+  if (dragging) {
+    if (dragging === 'S') {
+      S.x = constrain(mouseX, 30, wallX - 15);
+      S.y = constrain(mouseY, 30, height - 30);
+    } else {
+      R.x = constrain(mouseX, wallX + 15, width - 30);
+      R.y = constrain(mouseY, 30, height - 30);
+    }
+  }
+
+  const freq = Number(select('#freq').value());
+  const sizePx = Number(select('#size').value()); // obstacle height or aperture width in px
+
+  // Wavelength in meters and display spacing
+  const lambdaM = V / freq;
+  const lambdaPx = map(Math.log10(freq), Math.log10(50), Math.log10(8000), 90, 7);
+
+  // Display wavelength in a readable unit
+  let lambdaStr;
+  if (lambdaM >= 1) lambdaStr = lambdaM.toFixed(2) + ' m';
+  else if (lambdaM >= 0.01) lambdaStr = (lambdaM * 100).toFixed(1) + ' cm';
+  else lambdaStr = (lambdaM * 1000).toFixed(1) + ' mm';
+
+  // Ratio lambda / size (using meters for size estimate)
+  // sizePx -> approximate meters: scale = lambdaPx / lambdaM (px per meter)
+  const pxPerMeter = lambdaPx / lambdaM;
+  const sizeM = sizePx / pxPerMeter;
+  const ratio = lambdaM / sizeM;
+
+  select('#lambda').html(lambdaStr);
+  select('#sizeVal').html(mode === 'obstacle' ? sizeM.toFixed(2) + ' m' : sizeM.toFixed(2) + ' m');
+  select('#ratio').html(ratio.toFixed(2) + '×');
+
+  let diffractionText, levelDb;
+  if (ratio > 3) { diffractionText = 'Intensa (rodea)'; levelDb = '-3 dB'; }
+  else if (ratio > 1) { diffractionText = 'Moderada'; levelDb = '-10 dB'; }
+  else if (ratio > 0.3) { diffractionText = 'Reducida'; levelDb = '-20 dB'; }
+  else { diffractionText = 'Sombra definida'; levelDb = '-30 dB'; }
+  select('#diffraction').html(diffractionText);
+  select('#level').html(levelDb);
+
+  // ── Draw wavefronts (concentric circles from S) ──
+  noFill();
+  stroke(TEAL[0], TEAL[1], TEAL[2], 110);
+  strokeWeight(1.5);
+  for (let r = lambdaPx; r < 700; r += lambdaPx) {
+    circle(S.x, S.y, r * 2);
+  }
+
+  // ── Barrier / aperture ──
+  const cy = height / 2;
+  if (mode === 'obstacle') {
+    // Barrier: vertical segment of height sizePx, centered
+    fill(60, 70, 85);
+    noStroke();
+    rect(wallX - 6, cy - sizePx / 2, 12, sizePx, 3);
+    fill(23, 32, 51);
+    textAlign(CENTER, TOP);
+    textSize(11);
+    text('Obstáculo', wallX, cy + sizePx / 2 + 6);
+  } else {
+    // Wall with aperture (gap) of width sizePx, centered
+    const gapTop = cy - sizePx / 2;
+    const gapBottom = cy + sizePx / 2;
+    fill(60, 70, 85);
+    noStroke();
+    rect(wallX - 6, 20, 12, gapTop - 20, 3);       // top wall
+    rect(wallX - 6, gapBottom, 12, height - 20 - gapBottom, 3); // bottom wall
+    fill(23, 32, 51);
+    textAlign(CENTER, TOP);
+    textSize(11);
+    text('Abertura', wallX, gapTop - 8);
+  }
+
+  // ── Shadow zone + diffraction (obstacle mode) ──
+  if (mode === 'obstacle') {
+    const topEdge = cy - sizePx / 2;
+    const bottomEdge = cy + sizePx / 2;
+
+    // Diffraction strength: 1 = strong (λ ≫ obstacle), 0 = weak (λ ≪ obstacle)
+    const strength = constrain(map(ratio, 0.3, 3, 0.15, 1), 0.15, 1);
+
+    // Shadow zone (shaded)
+    fill(150, 160, 175, 25);
+    noStroke();
+    rect(wallX, topEdge, width - wallX, bottomEdge - topEdge);
+    fill(150);
+    textSize(11);
+    textAlign(LEFT, CENTER);
+    text('zona de sombra', wallX + 12, cy);
+
+    // Diffracted wavelets from BOTH edges (Huygens principle)
+    noFill();
+    stroke(INDIGO[0], INDIGO[1], INDIGO[2], 150 * strength);
+    strokeWeight(1.5);
+    const reach = 60 + 260 * strength; // how far the diffraction bends into the shadow
+
+    // Top edge: wavelets bend DOWN into the shadow
+    for (let r = lambdaPx; r < reach; r += lambdaPx) {
+      arc(wallX, topEdge, r * 2, r * 2, 0, HALF_PI);
+    }
+    // Bottom edge: wavelets bend UP into the shadow
+    for (let r = lambdaPx; r < reach; r += lambdaPx) {
+      arc(wallX, bottomEdge, r * 2, r * 2, -HALF_PI, 0);
+    }
+
+    // Edge markers (Huygens secondary sources)
+    fill(INDIGO[0], INDIGO[1], INDIGO[2]);
+    noStroke();
+    circle(wallX, topEdge, 8);
+    circle(wallX, bottomEdge, 8);
+  }
+
+  // ── Source S ──
+  fill(TEAL[0], TEAL[1], TEAL[2]);
+  noStroke();
+  circle(S.x, S.y, 24);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(13);
+  textStyle(BOLD);
+  text('S', S.x, S.y);
+  textStyle(NORMAL);
+
+  // ── Receiver R ──
+  fill(CORAL[0], CORAL[1], CORAL[2]);
+  noStroke();
+  circle(R.x, R.y, 24);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(13);
+  textStyle(BOLD);
+  text('R', R.x, R.y);
+  textStyle(NORMAL);
+
+  // ── Title ──
+  noStroke();
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(13);
+  textStyle(BOLD);
+  text('f = ' + freq + ' Hz  |  λ = ' + lambdaStr + '  |  λ/' + (mode === 'obstacle' ? 'obstáculo' : 'abertura') + ' = ' + ratio.toFixed(2), width / 2, 10);
+  textStyle(NORMAL);
+
+  // Drag hint
+  fill(150);
+  textSize(10);
+  textAlign(LEFT, TOP);
+  text('Arrastra S y R', 16, height - 18);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 500);
+  wallX = width * 0.45;
+  S.x = constrain(S.x, 30, wallX - 15);
+  R.x = constrain(R.x, wallX + 15, width - 30);
+}
+</script>
+</body>
+</html>

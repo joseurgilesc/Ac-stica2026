@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">Diferencia de nivel necesario para 40 fones en distintas frecuencias frente a 1000 Hz</title>
+<desc id="desc">Gráfico de barras de la diferencia en dB SPL para producir igual sonoridad de 40 fones: 125 Hz +20.4 dB, 250 Hz +10.3 dB, 500 Hz +3.1 dB, 1000 Hz cero dB, 2000 Hz -0.8 dB y 4000 Hz -3.3 dB.</desc>
+<rect width="1000" height="530" fill="#fff" rx="18"/><rect x="16" y="16" width="968" height="496" rx="16" fill="#f9fbfc" stroke="#d9e5eb"/>
+<text x="47" y="50" font-family="Arial,sans-serif" font-size="24" font-weight="bold" fill="#17384a">La misma sonoridad no exige el mismo nivel físico</text>
+<text x="47" y="78" font-family="Arial,sans-serif" font-size="15" fill="#566e7e">Ejemplo normalizado: 40 fones · Diferencia de dB SPL respecto a 1.000 Hz</text>
+<line x1="108" y1="341.5" x2="944" y2="341.5" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="345.5" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">-5 dB</text>
+<line x1="108" y1="299.0" x2="944" y2="299.0" stroke="#617e90" stroke-width="2"/>
+<text x="92" y="303.0" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">0 dB</text>
+<line x1="108" y1="256.5" x2="944" y2="256.5" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="260.5" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">+5 dB</text>
+<line x1="108" y1="214.0" x2="944" y2="214.0" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="218.0" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">+10 dB</text>
+<line x1="108" y1="171.5" x2="944" y2="171.5" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="175.5" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">+15 dB</text>
+<line x1="108" y1="129.0" x2="944" y2="129.0" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="133.0" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">+20 dB</text>
+<line x1="108" y1="86.5" x2="944" y2="86.5" stroke="#dce7ed" stroke-width="1"/>
+<text x="92" y="90.5" text-anchor="end" fill="#4d6578" font-size="14" font-family="Arial,sans-serif">+25 dB</text>
+<rect x="130" y="125.6" width="70" height="173.4" rx="5" fill="#2a8090"/>
+<text x="165" y="112.6" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">+20.4 dB</text>
+<text x="165" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">125 Hz</text>
+<rect x="273" y="211.5" width="70" height="87.5" rx="5" fill="#2a8090"/>
+<text x="308" y="198.5" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">+10.3 dB</text>
+<text x="308" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">250 Hz</text>
+<rect x="416" y="272.6" width="70" height="26.4" rx="5" fill="#2a8090"/>
+<text x="451" y="259.6" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">+3.1 dB</text>
+<text x="451" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">500 Hz</text>
+<rect x="559" y="299.0" width="70" height="3.0" rx="5" fill="#8299a8"/>
+<text x="594" y="286.0" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">0.0 dB</text>
+<text x="594" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">1k Hz</text>
+<rect x="702" y="299.0" width="70" height="6.8" rx="5" fill="#b67351"/>
+<text x="737" y="327.8" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">-0.8 dB</text>
+<text x="737" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">2k Hz</text>
+<rect x="845" y="299.0" width="70" height="28.0" rx="5" fill="#b67351"/>
+<text x="880" y="349.0" text-anchor="middle" fill="#2f5265" font-family="Arial,sans-serif" font-size="16" font-weight="bold">-3.3 dB</text>
+<text x="880" y="386" text-anchor="middle" fill="#36556b" font-family="Arial,sans-serif" font-size="15">4k Hz</text>
+<text x="519" y="424" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#536c7e">Valores de referencia ISO 226:2023 · 40 fones</text>
+<rect x="52" y="444" width="902" height="41" rx="7" fill="#eaf5f7"/>
+<text x="502" y="470" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#27566b">250 Hz necesita ≈10,3 dB SPL más que 1 kHz para sonar igual de fuerte en este contorno.</text>
+</svg>

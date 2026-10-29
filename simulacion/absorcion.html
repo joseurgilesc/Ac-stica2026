@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 partículas sonoras — Coeficiente de absorción</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f0; font-family: system-ui, sans-serif; color: #172033; }
+    #app { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h2 { margin-bottom: 4px; }
+    p.lead { color: #526079; margin-top: 0; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .row label { min-width: 130px; font-weight: 600; }
+    select { padding: 6px 10px; border: 1px solid #aab5c8; border-radius: 6px; font-size: 13px; font-family: inherit; }
+    .stat { padding: 10px 12px; background: #eef3ff; border-radius: 10px; min-width: 100px; flex: 1; text-align: center; }
+    .stat .lbl { font-size: 11px; color: #526079; margin-bottom: 3px; }
+    .stat .val { font-weight: 700; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 12px 0; }
+    canvas { display: block; margin: 14px 0; border: 1px solid #d8deea; border-radius: 12px; }
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; margin: 8px 0; }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h2>100 partículas sonoras</h2>
+  <p class="lead">100 partículas = 100 % de la energía incidente. El material absorbe una fracción α según la frecuencia.</p>
+
+  <div class="row">
+    <label>Material:</label>
+    <select id="matSel" style="flex:1 1 280px"></select>
+  </div>
+
+  <div class="row">
+    <label>Material de comparación:</label>
+    <select id="matSel2" style="flex:1 1 280px"></select>
+  </div>
+
+  <div class="row">
+    <label>Frecuencia:</label>
+    <select id="freqSel" style="min-width:120px"></select>
+  </div>
+
+  <div class="row">
+    <label>Área cubierta:</label>
+    <input type="range" id="area" min="1" max="50" value="10" step="0.5" style="flex:1 1 200px">
+    <span id="areaVal" style="font-weight:700">10 m²</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="lbl">α (esta frecuencia)</div><div class="val" id="sAlpha">—</div></div>
+    <div class="stat"><div class="lbl">Absorción A = α×S</div><div class="val" id="sA">—</div></div>
+    <div class="stat"><div class="lbl">NRC</div><div class="val" id="sNRC">—</div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#2471A3"></span> Absorbida</span>
+    <span><span class="dot" style="background:#C0392B"></span> Reflejada</span>
+    <span><span class="dot" style="background:#AAB5C8"></span> Incidente</span>
+  </div>
+</div>
+
+<script>
+const MATERIALS = {
+  'Concreto pintado': [0.01, 0.01, 0.02, 0.02, 0.03, 0.03],
+  'Madera': [0.10, 0.08, 0.06, 0.06, 0.06, 0.06],
+  'Alfombra gruesa': [0.08, 0.24, 0.57, 0.69, 0.71, 0.73],
+  'Cortina pesada': [0.14, 0.35, 0.55, 0.72, 0.70, 0.65],
+  'Espuma 25 mm': [0.05, 0.10, 0.25, 0.50, 0.70, 0.80],
+  'Espuma 50 mm': [0.08, 0.20, 0.55, 0.80, 0.90, 0.95],
+  'Espuma 100 mm': [0.15, 0.35, 0.70, 0.90, 0.95, 0.99],
+  'Lana mineral 50 mm': [0.15, 0.35, 0.75, 0.95, 0.95, 0.95],
+  'Lana mineral 100 mm': [0.35, 0.65, 0.95, 0.99, 0.99, 0.99],
+  'Panel perforado': [0.20, 0.55, 0.90, 0.80, 0.55, 0.35],
+};
+const FREQS = [125, 250, 500, 1000, 2000, 4000];
+const FREQ_LABELS = ['125 Hz', '250 Hz', '500 Hz', '1 kHz', '2 kHz', '4 kHz'];
+
+const BLUE = [36, 113, 163];
+const RED = [192, 57, 43];
+const GRAY = [170, 181, 200];
+const TEAL = [36, 157, 143];
+
+let matSel, matSel2, freqSel, areaSlider;
+let particles = [];
+let fired = false;
+
+function NRC(coefs) {
+  return (coefs[1] + coefs[2] + coefs[3] + coefs[4]) / 4;
+}
+
+function setup() {
+  const cw = min(900, windowWidth - 40);
+  const cnv = createCanvas(cw, 430);
+  cnv.parent('app');
+  cnv.style('display', 'block');
+  cnv.style('margin', '14px 0');
+  cnv.style('border', '1px solid #d8deea');
+  cnv.style('border-radius', '12px');
+
+  matSel = select('#matSel');
+  matSel2 = select('#matSel2');
+  freqSel = select('#freqSel');
+  areaSlider = select('#area');
+
+  // Populate selects
+  const names = Object.keys(MATERIALS);
+  for (let n of names) matSel.option(n);
+  matSel2.option('— ninguno —');
+  for (let n of names) matSel2.option(n);
+  for (let i = 0; i < FREQS.length; i++) freqSel.option(FREQ_LABELS[i], i);
+
+  matSel.selected('Espuma 50 mm');
+  freqSel.selected(2); // 500 Hz
+
+  areaSlider.input(() => select('#areaVal').html(areaSlider.value() + ' m²'));
+
+  matSel.changed(() => fire());
+  freqSel.changed(() => fire());
+  matSel2.changed(() => {});
+
+  textFont('system-ui');
+  fire();
+}
+
+function fire() {
+  const name = matSel.value();
+  const freqIdx = Number(freqSel.value());
+  const alpha = MATERIALS[name][freqIdx];
+  particles = [];
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: 30,
+      y: map(i, 0, 99, 30, 210),
+      fate: i < Math.round(alpha * 100) ? 'absorb' : 'reflect',
+      stopped: false,
+    });
+  }
+  fired = true;
+}
+
+function draw() {
+  background(255);
+
+  const name = matSel.value();
+  const freqIdx = Number(freqSel.value());
+  const freq = FREQS[freqIdx];
+  const alpha = MATERIALS[name][freqIdx];
+  const area = Number(areaSlider.value());
+  const A = alpha * area;
+  const nrc = NRC(MATERIALS[name]);
+
+  select('#sAlpha').html(alpha.toFixed(2));
+  select('#sA').html(A.toFixed(1) + ' sabins');
+  select('#sNRC').html(nrc.toFixed(2));
+
+  // ── Particles ──
+  const wallX = width * 0.55;
+  for (let p of particles) {
+    if (p.stopped) continue;
+    if (p.fate === 'absorb') {
+      if (p.x < wallX - 6) p.x += 2;
+      else p.stopped = true;
+    } else {
+      if (p.x < wallX - 6) p.x += 2;
+      else if (p.x > 20) p.x -= 2.5;
+      else p.stopped = true;
+    }
+  }
+
+  // Surface
+  fill(60, 70, 85);
+  noStroke();
+  rect(wallX - 5, 25, 10, 200, 3);
+
+  // Draw particles
+  noStroke();
+  for (let p of particles) {
+    let col = p.fate === 'absorb' ? BLUE : RED;
+    fill(col[0], col[1], col[2], p.stopped ? 140 : 230);
+    circle(p.x, p.y, 8);
+  }
+
+  // Labels
+  fill(23, 32, 51);
+  textAlign(CENTER, TOP);
+  textSize(12);
+  textStyle(BOLD);
+  const absorbed = particles.filter(p => p.fate === 'absorb').length;
+  const reflected = 100 - absorbed;
+  text('Absorbidas: ' + absorbed + '  |  Reflejadas: ' + reflected + '  (' + name + ' a ' + FREQ_LABELS[freqIdx] + ')', width / 2, 10);
+  textStyle(NORMAL);
+
+  // ── Graph: α vs frequency ──
+  const gx = 30;
+  const gy = 270;
+  const gw = width - 60;
+  const gh = 130;
+
+  noStroke();
+  fill(248, 250, 255);
+  rect(gx - 10, gy - 20, gw + 20, gh + 40, 8);
+
+  // Grid
+  stroke(210);
+  strokeWeight(0.5);
+  for (let a = 0; a <= 1; a += 0.25) {
+    let y = map(a, 0, 1, gy + gh, gy);
+    line(gx, y, gx + gw, y);
+    fill(130); noStroke();
+    textAlign(RIGHT, CENTER); textSize(9);
+    text(a.toFixed(2), gx - 6, y);
+  }
+
+  // Bars for material 1
+  const bandW = gw / 6;
+  for (let i = 0; i < 6; i++) {
+    const a = MATERIALS[name][i];
+    const h = map(a, 0, 1, 0, gh);
+    fill(TEAL[0], TEAL[1], TEAL[2], i === freqIdx ? 230 : 140);
+    noStroke();
+    rect(gx + i * bandW + 6, gy + gh - h, bandW - 12, h, 3);
+
+    // Frequency label
+    fill(90);
+    textAlign(CENTER, TOP); textSize(9);
+    text(FREQ_LABELS[i].replace(' Hz', i >= 3 ? ' kHz' : ' Hz'), gx + i * bandW + bandW/2, gy + gh + 6);
+  }
+
+  // Material 2 curve (comparison)
+  const name2 = matSel2.value();
+  if (name2 && name2 !== '— ninguno —') {
+    stroke(RED[0], RED[1], RED[2]);
+    strokeWeight(2);
+    noFill();
+    beginShape();
+    for (let i = 0; i < 6; i++) {
+      const a = MATERIALS[name2][i];
+      const x = gx + i * bandW + bandW / 2;
+      const y = gy + gh - map(a, 0, 1, 0, gh);
+      vertex(x, y);
+    }
+    endShape();
+    // dots
+    fill(RED[0], RED[1], RED[2]);
+    noStroke();
+    for (let i = 0; i < 6; i++) {
+      const a = MATERIALS[name2][i];
+      const x = gx + i * bandW + bandW / 2;
+      const y = gy + gh - map(a, 0, 1, 0, gh);
+      circle(x, y, 7);
+    }
+  }
+
+  // Title
+  fill(23, 32, 51);
+  textAlign(LEFT, TOP);
+  textSize(11);
+  textStyle(BOLD);
+  text('α por bandas de frecuencia (verde = ' + name + ', rojo = ' + (name2 !== '— ninguno —' ? name2 : 'comparación') + ')', gx, gy - 16);
+  textStyle(NORMAL);
+
+  // NRC note
+  fill(90);
+  textSize(9);
+  textAlign(RIGHT, TOP);
+  text('NRC = (250+500+1k+2k)/4 = ' + nrc.toFixed(2), gx + gw, gy - 16);
+}
+
+function windowResized() {
+  const cw = min(900, windowWidth - 40);
+  resizeCanvas(cw, 430);
+}
+</script>
+</body>
+</html>
