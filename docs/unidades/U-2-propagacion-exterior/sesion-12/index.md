@@ -153,54 +153,70 @@ La diferencia aparece porque la ponderación A aplica cerca de **−19 dB a 100 
 
 ---
 
-## 7. Video y práctica autónoma: diseño de paneles acústicos
+## 7. Video y práctica autónoma: diseñar el tratamiento de tres salas
 
-**Modalidad:** individual, desde casa o cualquier computador. No es necesario acudir al estudio ni contar con monitores físicos. Se puede utilizar una sala hipotética con las medidas de ejemplo.
+**Modalidad:** actividad individual o en equipos, desde casa. El objetivo no es medir una sala real sino **calcular, visualizar y justificar** los puntos de primeras reflexiones de un espacio representado en un plano.
 
-### 7.1. Video: primeras reflexiones y técnica del espejo
+### 7.1. Video de referencia
 
-**Audio University — *Acoustic Treatment for Beginners: Studio Sound Optimization* (6 min 58 s).** Observa el fenómeno de sonido directo y reflejado, cómo las primeras reflexiones pueden alterar la escucha y la técnica del espejo que permite localizar puntos de tratamiento.
+**Audio University — *Acoustic Treatment for Beginners: Studio Sound Optimization* (6 min 58 s).** Observa el recorrido directo y reflejado, la interferencia entre ambos y la **técnica del espejo** que permite reconocer las zonas donde situar tratamiento.
 
-<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: primeras reflexiones e interferencia en estudios" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/uCFqMfg7tM4" title="Audio University: reflexiones tempranas y técnica del espejo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#111;"></iframe>
 
-[▶️ **Abrir video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
+[▶️ **Abrir el video en YouTube**](https://www.youtube.com/watch?v=uCFqMfg7tM4){ .md-button }
 
-**Momentos principales:** 0:15 (sonido directo y reflejado); 0:46 (interferencia); 2:20 (por qué importan las primeras reflexiones); **4:10 (técnica del espejo)**; 5:32 (reflexión en la mesa); 6:20 (escucha con y sin tratamiento).
+**Momentos recomendados:** 0:15 (sonido directo y reflejado), 0:46 (interferencia), 2:20 (primeras reflexiones), **4:10 (técnica del espejo)** y 6:20 (comparación auditiva).
 
-### 7.2. Diseñador virtual de primeras reflexiones (p5.js)
+### 7.2. Tres planos para resolver
 
-En el simulador puedes **introducir el ancho, largo y altura de una sala rectangular**, así como el **tamaño y la ubicación de dos monitores** y la **posición de los oídos del oyente**.
+Se han preparado **tres espacios hipotéticos** con dimensiones, alturas y posiciones de monitores y oyente distintas. Cada estudiante puede trabajar con uno; si se organiza por equipos, puede asignarse un plano diferente a cada grupo.
 
-El programa dibuja un **plano** y una **vista lateral**, calcula los puntos donde rebotaría una primera reflexión especular y muestra **coordenadas orientativas para ubicar paneles en las dos paredes laterales y en el techo**.
+| Espacio | Dimensiones (ancho × largo × alto) | Particularidad |
+|---|---|---|
+| **A. Estudio doméstico** | 3,60 × 4,80 × 2,55 m | Escucha centrada y sala pequeña. |
+| **B. Sala de producción** | 6,40 × 8,00 × 3,20 m | Sala más amplia y monitores más separados. |
+| **C. Sala de posproducción** | 4,70 × 6,20 × 2,85 m | Escucha desplazada hacia un lateral. |
 
-<iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Diseñador virtual con p5.js: medidas de sala y ubicación estimada de paneles absorbentes" loading="lazy" style="width:100%;height:2600px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
+[📐 **Ver e imprimir los tres planos completos**](../../../simulacion/planos-tres-espacios.html){ .md-button }
 
-[🎛️ **Abrir diseñador en pantalla completa**](../../../simulacion/primeras-reflexiones-interferencia-p5.html){ .md-button }
+Cada plano presenta el **tamaño de las cajas**, la distancia desde el frente, la altura de montaje y las **coordenadas del oyente**. Los planos no contienen las respuestas: los puntos de los paneles deberán determinarse en la actividad.
 
-**Cómo leer los resultados:**
+### 7.3. Simulador 3D: primeras reflexiones y paneles
 
-- **X:** distancia desde la pared izquierda.
-- **Y:** distancia desde la pared frontal, detrás de los monitores.
-- **Z:** altura sobre el suelo.
-- El **tamaño del monitor** se usa para situar su cara frontal y estimar su centro de emisión, pero no permite determinar por sí solo el tamaño o la eficacia de un panel acústico.
-- Las zonas para paneles son **propuestas geométricas**, no una garantía de mejora ni una medición de aislamiento, reverberación o respuesta en frecuencia.
+Con el diseñador p5.js puedes **introducir medidas**, elegir un caso A/B/C y visualizar en **3D navegable** el espacio, los monitores, el oyente, las rutas del sonido y las zonas estimadas de tratamiento en **pared izquierda, pared derecha y techo**. Arrastra para girar el modelo y acerca o aleja con la rueda.
 
-### 7.3. Práctica teórica para Classroom: diseñar un estudio
+<iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Simulador 3D p5.js de sala de escucha con propuestas geométricas de paneles" loading="lazy" style="width:100%;height:3450px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
-**Objetivo:** aplicar el principio de reflexión especular del sonido para ubicar de manera razonada el tratamiento de primeras reflexiones.
+[🎛️ **Abrir simulador 3D en pantalla completa**](../../../simulacion/primeras-reflexiones-interferencia-p5.html){ .md-button }
 
-**Instrucciones:** observa el video y abre el simulador. Puedes trabajar con las medidas del ejemplo incluido o introducir las de un espacio que conozcas; **no hace falta medir físicamente una sala**.
+**Cómo interpretar el programa:** el plano usa **X = distancia desde pared izquierda**, **Y = distancia desde pared frontal** y **Z = altura sobre el suelo**. El punto de reflexión es donde una trayectoria especular rebota en una superficie antes de llegar al oyente.
 
-1. **Definir la sala.** Registra el ancho, largo y alto; las posiciones de los monitores; sus dimensiones; y la posición de escucha.
-2. **Localizar los puntos.** Utiliza el plano y la tabla para identificar **dónde ubicarías tratamiento en pared izquierda, pared derecha y techo**. Anota al menos una coordenada de cada superficie (y su altura, si corresponde).
-3. **Cambiar la posición de escucha.** Desplaza al oyente hacia el fondo de la sala manteniendo los monitores fijos. ¿Cómo cambian los puntos de reflexión? Explica por qué.
-4. **Cambiar la altura de los monitores.** Devuelve al oyente a su posición original, aumenta la altura de la base de los monitores aproximadamente **0,20 m**, sin superar el techo, y compara los puntos obtenidos. ¿Qué cambia?
-5. **Argumentar el diseño.** En relación con la **técnica del espejo del minuto 4:10**, ¿por qué es preferible ubicar un panel en la zona de primera reflexión en lugar de elegir una pared al azar? ¿Qué otros datos necesitarías antes de comprar los paneles?
+!!! note "Qué permite y qué no permite calcular"
+    El simulador utiliza geometría de reflexión especular, equivalente al **método de la fuente imagen**. La posición y las dimensiones de las cajas ayudan a estimar su centro emisor, pero **no permiten conocer su directividad real**. Las áreas de paneles de 0,60 × 1,20 m son **referencias visuales**, no una recomendación definitiva de tamaño, espesor o materiales. No se calculan RT60, modos de sala ni absorción por frecuencia.
 
-**Entrega:** **dos capturas** de la simulación (configuración original y una modificada) y las respuestas a las preguntas 2–5 en un documento breve. Incluye las dimensiones de la sala.
+### 7.4. Práctica para Classroom: ubicar los paneles
 
-!!! note "Alcance del ejercicio"
-    El simulador utiliza un **modelo especular idealizado** y propone áreas orientativas de cobertura; **no calcula automáticamente el rendimiento real de paneles ni su espesor óptimo**. En una instalación real se comprobarían además la directividad, las superficies, las propiedades acústicas de los materiales y la posición exacta de emisión de los monitores.
+**Objetivo:** determinar puntos de reflexión en tres superficies de una sala, interpretarlos en el modelo 3D y relacionarlos con el video.
+
+**Procedimiento:**
+
+1. **Selecciona un plano:** A, B o C, según la asignación docente. Copia las medidas de la sala, posición y tamaño de ambos monitores y posición del oyente.
+2. **Calcula y registra:** utiliza el simulador para obtener los **seis puntos de primera reflexión**: monitor izquierdo y derecho sobre **pared izquierda**, **pared derecha** y **techo**. Anota las coordenadas en metros.
+3. **Propón el tratamiento:** sobre las tres superficies, identifica dónde ubicarías los paneles. Decide si los dos puntos de una pared pueden cubrirse con un único panel o si hace falta más de uno; justifica con sus distancias.
+4. **Modifica el diseño:** desplaza al oyente **0,50 m hacia la pared posterior** y observa cómo cambian las coordenadas. Restaura el plano y eleva **0,20 m la base de ambos monitores**. Compara la posición de los rebotes, especialmente en altura.
+5. **Relaciona con el video:** explica brevemente por qué la técnica del espejo (4:10) permite estimar puntos adecuados de tratamiento y por qué su ubicación depende de las posiciones del altavoz y del oyente.
+
+**Tabla sugerida:**
+
+| Superficie | Reflexión del monitor izquierdo (m) | Reflexión del monitor derecho (m) | Propuesta de paneles |
+|---|---|---|---|
+| Pared izquierda | Y = …; Z = … | Y = …; Z = … | |
+| Pared derecha | Y = …; Z = … | Y = …; Z = … | |
+| Techo | X = …; Y = … | X = …; Y = … | |
+
+**Entrega:** un documento breve con el **plano asignado**, la tabla completa, **dos capturas de la vista 3D** (situación inicial y una variación) y **una conclusión de 5 a 8 líneas** sobre cómo influye la geometría de la sala en la ubicación de los paneles.
+
+**Pregunta final:** ¿tener las coordenadas geométricas correctas significa que sabemos qué espesor o material absorberá mejor cada frecuencia? Explica qué información adicional sería necesaria.
 
 ---
 
