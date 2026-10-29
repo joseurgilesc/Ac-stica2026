@@ -183,7 +183,7 @@ Cada plano presenta el **tamaño de las cajas**, la distancia desde el frente, l
 
 ### 7.3. Simulador 3D: primeras reflexiones y paneles
 
-Con el diseñador p5.js puedes **introducir medidas**, elegir un caso A/B/C y visualizar en **3D navegable** el espacio, los monitores, el oyente, las rutas del sonido y las zonas estimadas de tratamiento en **pared izquierda, pared derecha y techo**. Arrastra para girar el modelo y acerca o aleja con la rueda.
+Con el diseñador p5.js debes **introducir manualmente las medidas del plano asignado** en un formulario inicialmente vacío. No hay casos precargados: los datos de los planos A, B y C deben transcribirse uno a uno. Después podrás visualizar en **3D navegable** el espacio, los monitores, el oyente, las rutas del sonido y las zonas estimadas de tratamiento en **pared izquierda, pared derecha y techo**. Arrastra para girar el modelo y acerca o aleja con la rueda.
 
 <iframe src="../../../simulacion/primeras-reflexiones-interferencia-p5.html" title="Simulador 3D p5.js de sala de escucha con propuestas geométricas de paneles" loading="lazy" style="width:100%;height:3450px;border:1px solid #d7e1eb;border-radius:12px;background:#fff;"></iframe>
 
@@ -194,29 +194,35 @@ Con el diseñador p5.js puedes **introducir medidas**, elegir un caso A/B/C y vi
 !!! note "Qué permite y qué no permite calcular"
     El simulador utiliza geometría de reflexión especular, equivalente al **método de la fuente imagen**. La posición y las dimensiones de las cajas ayudan a estimar su centro emisor, pero **no permiten conocer su directividad real**. Las áreas de paneles de 0,60 × 1,20 m son **referencias visuales**, no una recomendación definitiva de tamaño, espesor o materiales. No se calculan RT60, modos de sala ni absorción por frecuencia.
 
-### 7.4. Práctica para Classroom: ubicar los paneles
+### 7.4. Práctica para Classroom: introducir los planos y ubicar los paneles
 
-**Objetivo:** determinar puntos de reflexión en tres superficies de una sala, interpretarlos en el modelo 3D y relacionarlos con el video.
+**Objetivo:** interpretar un plano de sala, introducir correctamente sus medidas y proponer la ubicación de paneles para las primeras reflexiones.
 
 **Procedimiento:**
 
-1. **Selecciona un plano:** A, B o C, según la asignación docente. Copia las medidas de la sala, posición y tamaño de ambos monitores y posición del oyente.
-2. **Calcula y registra:** utiliza el simulador para obtener los **seis puntos de primera reflexión**: monitor izquierdo y derecho sobre **pared izquierda**, **pared derecha** y **techo**. Anota las coordenadas en metros.
-3. **Propón el tratamiento:** sobre las tres superficies, identifica dónde ubicarías los paneles. Decide si los dos puntos de una pared pueden cubrirse con un único panel o si hace falta más de uno; justifica con sus distancias.
-4. **Modifica el diseño:** desplaza al oyente **0,50 m hacia la pared posterior** y observa cómo cambian las coordenadas. Restaura el plano y eleva **0,20 m la base de ambos monitores**. Compara la posición de los rebotes, especialmente en altura.
-5. **Relaciona con el video:** explica brevemente por qué la técnica del espejo (4:10) permite estimar puntos adecuados de tratamiento y por qué su ubicación depende de las posiciones del altavoz y del oyente.
+1. **Revisa el plano asignado (A, B o C).** Identifica el ancho, largo y alto de la sala, las posiciones de ambos monitores, las dimensiones y altura de sus cajas y la ubicación de los oídos del oyente.
+2. **Introduce manualmente los valores.** Abre el [simulador 3D](../../../simulacion/primeras-reflexiones-interferencia-p5.html) y **escribe en cada campo los datos que aparecen en tu plano**. No debes utilizar configuraciones precargadas. Revisa que estén correctos y toma la **primera captura de pantalla con los campos completados**.
+3. **Obtén la propuesta de paneles.** Observa la sala 3D y las coordenadas que devuelve la herramienta. Registra los **seis puntos de primera reflexión** (dos monitores × pared izquierda, pared derecha y techo). Toma una **segunda captura** donde se distingan el modelo 3D y las ubicaciones de los paneles; también puedes anexar una captura de la tabla de resultados.
+4. **Comprueba un cambio.** Modifica **manualmente** únicamente la posición Y del oyente, desplazándola **0,50 m hacia la pared posterior**. Explica cómo cambia la ubicación de los puntos de reflexión. Recupera el valor original del plano para la entrega principal.
+5. **Justifica tu diseño.** Explica por qué colocarías paneles en las zonas señaladas por la herramienta. Relaciona su ubicación con la **técnica del espejo del minuto 4:10 del video** e identifica una limitación del modelo.
 
-**Tabla sugerida:**
+**Tabla de resultados:**
 
-| Superficie | Reflexión del monitor izquierdo (m) | Reflexión del monitor derecho (m) | Propuesta de paneles |
+| Superficie | Monitor izquierdo (m) | Monitor derecho (m) | ¿Dónde colocarías paneles? |
 |---|---|---|---|
 | Pared izquierda | Y = …; Z = … | Y = …; Z = … | |
 | Pared derecha | Y = …; Z = … | Y = …; Z = … | |
 | Techo | X = …; Y = … | X = …; Y = … | |
 
-**Entrega:** un documento breve con el **plano asignado**, la tabla completa, **dos capturas de la vista 3D** (situación inicial y una variación) y **una conclusión de 5 a 8 líneas** sobre cómo influye la geometría de la sala en la ubicación de los paneles.
+**Entrega en Classroom:** un solo documento con el **plano asignado** y **dos capturas obligatorias**:
 
-**Pregunta final:** ¿tener las coordenadas geométricas correctas significa que sabemos qué espesor o material absorberá mejor cada frecuencia? Explica qué información adicional sería necesaria.
+- **Captura 1 — Datos ingresados:** debe evidenciar las **dimensiones y posiciones escritas por el estudiante** en el simulador.
+- **Captura 2 — Resultado:** debe mostrar la **sala en 3D con la propuesta de paneles**.
+
+Añade la tabla de coordenadas y una explicación de **5 a 8 líneas** sobre el criterio de ubicación y el efecto de mover al oyente. Si la tabla de coordenadas no resulta legible en la captura 2, incluye una tercera captura.
+
+!!! note "Alcance del ejercicio"
+    El simulador utiliza un **modelo especular idealizado** y propone áreas orientativas de cobertura; **no calcula automáticamente el rendimiento real de paneles ni su espesor óptimo**. Una instalación real requiere evaluar también las superficies y las propiedades acústicas de los materiales.
 
 ---
 
