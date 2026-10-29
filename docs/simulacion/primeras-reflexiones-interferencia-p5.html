@@ -52,42 +52,41 @@ footer{font-size:.85rem;color:#4c6675;margin:19px 0 36px}
 <p class="muted">Laboratorio virtual de <strong>primeras reflexiones</strong> basado en la técnica del espejo del video de Audio University (4:10). Ingresa las medidas de tu sala, los monitores y el punto de escucha. Obtendrás puntos orientativos para tratamiento de <strong>paredes laterales y techo</strong>.</p>
 <section class="card">
 <h2>1. Introduce las medidas (metros)</h2>
-<div class="note"><label for="scenario">Plano de trabajo</label><select id="scenario"><option value="custom">Personalizado (medidas libres)</option><option value="A">A · Estudio doméstico</option><option value="B">B · Sala de producción</option><option value="C">C · Posproducción asimétrica</option></select><p class="small">Los casos A, B y C corresponden a los <a href="planos-tres-espacios.html" target="_blank" rel="noopener">tres planos para Classroom</a>. También puedes ingresar tus propias medidas.</p></div>
+<div class="note"><strong>Actividad:</strong> abre el <a href="planos-tres-espacios.html" target="_blank" rel="noopener">plano A, B o C</a> y <strong>escribe manualmente todas sus medidas</strong> en los campos vacíos. El simulador no carga los casos de forma automática. Antes de calcular, toma una <strong>captura de los datos ingresados</strong> para adjuntarla a Classroom.</div>
 <div class="note"><strong>Sistema de coordenadas:</strong> visto desde arriba, la pared frontal está detrás de los monitores. <strong>X</strong> se mide desde la pared izquierda; <strong>Y</strong>, desde la pared frontal; <strong>Z</strong>, desde el suelo. La sala se considera rectangular.</div>
 <form id="form" novalidate>
 <fieldset class="group">
 <legend>Dimensiones de la sala</legend>
 <div class="field-grid">
-<div class="field"><label for="roomW">Ancho (X)</label><input id="roomW" type="number" min="2" max="15" step=".1" value="4.4" inputmode="decimal"></div>
-<div class="field"><label for="roomL">Largo (Y)</label><input id="roomL" type="number" min="2" max="20" step=".1" value="5.8" inputmode="decimal"></div>
-<div class="field"><label for="roomH">Altura (Z)</label><input id="roomH" type="number" min="1.8" max="8" step=".1" value="2.7" inputmode="decimal"></div>
+<div class="field"><label for="roomW">Ancho (X)</label><input id="roomW" type="number" min="2" max="15" step=".1" inputmode="decimal"></div>
+<div class="field"><label for="roomL">Largo (Y)</label><input id="roomL" type="number" min="2" max="20" step=".1" inputmode="decimal"></div>
+<div class="field"><label for="roomH">Altura (Z)</label><input id="roomH" type="number" min="1.8" max="8" step=".1" inputmode="decimal"></div>
 </div>
 </fieldset>
 <fieldset class="group">
 <legend>Monitores izquierdo y derecho</legend>
 <p class="small muted">Usaremos dos monitores de iguales dimensiones. Indica la posición del <strong>centro horizontal</strong> de cada caja; la altura de la base es la distancia desde el suelo hasta la parte inferior de la caja.</p>
 <div class="field-grid">
-<div class="field"><label for="leftX">Monitor izquierdo · X</label><input id="leftX" type="number" step=".05" min="0" value="1.25" inputmode="decimal"></div>
-<div class="field"><label for="rightX">Monitor derecho · X</label><input id="rightX" type="number" step=".05" min="0" value="3.15" inputmode="decimal"></div>
-<div class="field"><label for="rearGap">Separación trasera de pared frontal (Y)</label><input id="rearGap" type="number" step=".05" min="0" value=".45" inputmode="decimal"></div>
-<div class="field"><label for="boxW">Ancho de cada monitor</label><input id="boxW" type="number" step=".01" min=".05" value=".22" inputmode="decimal"></div>
-<div class="field"><label for="boxH">Alto de cada monitor</label><input id="boxH" type="number" step=".01" min=".05" value=".38" inputmode="decimal"></div>
-<div class="field"><label for="boxD">Profundidad de cada monitor</label><input id="boxD" type="number" step=".01" min=".05" value=".32" inputmode="decimal"></div>
-<div class="field"><label for="bottomZ">Altura de la base del monitor (Z)</label><input id="bottomZ" type="number" step=".05" min="0" value=".95" inputmode="decimal"></div>
+<div class="field"><label for="leftX">Monitor izquierdo · X</label><input id="leftX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="rightX">Monitor derecho · X</label><input id="rightX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="rearGap">Separación trasera de pared frontal (Y)</label><input id="rearGap" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="boxW">Ancho de cada monitor</label><input id="boxW" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="boxH">Alto de cada monitor</label><input id="boxH" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="boxD">Profundidad de cada monitor</label><input id="boxD" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="bottomZ">Altura de la base del monitor (Z)</label><input id="bottomZ" type="number" step=".05" min="0" inputmode="decimal"></div>
 </div>
 </fieldset>
 <fieldset class="group">
 <legend>Posición del oyente</legend>
 <div class="field-grid">
-<div class="field"><label for="earX">Orejas · X desde pared izquierda</label><input id="earX" type="number" step=".05" min="0" value="2.20" inputmode="decimal"></div>
-<div class="field"><label for="earY">Orejas · Y desde pared frontal</label><input id="earY" type="number" step=".05" min="0" value="2.85" inputmode="decimal"></div>
-<div class="field"><label for="earZ">Altura de los oídos (Z)</label><input id="earZ" type="number" step=".05" min="0" value="1.20" inputmode="decimal"></div>
+<div class="field"><label for="earX">Orejas · X desde pared izquierda</label><input id="earX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="earY">Orejas · Y desde pared frontal</label><input id="earY" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="earZ">Altura de los oídos (Z)</label><input id="earZ" type="number" step=".05" min="0" inputmode="decimal"></div>
 </div>
 </fieldset>
 </form>
 <div class="actions">
-<button type="button" id="demo" class="primary">Restaurar ejemplo</button>
-<button type="button" id="move">Probar otra posición de escucha</button>
+<button type="button" id="clear" class="primary">Limpiar campos para un nuevo plano</button>
 <button type="button" id="export">Descargar resultados (.txt)</button>
 </div>
 <div id="errors" class="warn" aria-live="polite"></div>
@@ -95,6 +94,7 @@ footer{font-size:.85rem;color:#4c6675;margin:19px 0 36px}
 <section class="card">
 <h2>2. Sala en 3D y primeras reflexiones</h2>
 <p class="muted">Arrastra para girar el modelo, usa la rueda o el gesto de pellizcar para acercarte. Los paneles de color muestran áreas orientativas; las líneas muestran el camino del sonido.</p>
+<div id="entered-summary" class="note" aria-live="polite"><strong>Medidas:</strong> completa los campos de la sección anterior para ver un resumen aquí.</div>
 <div id="scene3d-canvas" class="canvas-holder" style="min-height:280px;touch-action:none" aria-label="Vista tridimensional interactiva de sala monitores oyente y paneles de primera reflexión"></div>
 <div class="actions"><button type="button" id="reset3d">Reiniciar cámara 3D</button></div>
 <h3>Plano de planta (vista superior)</h3>
@@ -137,12 +137,6 @@ window.addEventListener("load",function(){
 "use strict";
 const ids=["roomW","roomL","roomH","leftX","rightX","rearGap","boxW","boxH","boxD","bottomZ","earX","earY","earZ"];
 const $=id=>document.getElementById(id);
-const cases={
- A:{roomW:3.6,roomL:4.8,roomH:2.55,leftX:1.05,rightX:2.55,rearGap:.35,boxW:.21,boxH:.36,boxD:.30,bottomZ:.95,earX:1.8,earY:2.1,earZ:1.20},
- B:{roomW:6.4,roomL:8.0,roomH:3.2,leftX:1.8,rightX:4.6,rearGap:.65,boxW:.34,boxH:.55,boxD:.40,bottomZ:1.05,earX:3.2,earY:3.55,earZ:1.25},
- C:{roomW:4.7,roomL:6.2,roomH:2.85,leftX:1.1,rightX:3.4,rearGap:.50,boxW:.26,boxH:.42,boxD:.34,bottomZ:1.02,earX:2.0,earY:2.8,earZ:1.20}
-};
-const defaults={...cases.A};
 const fmt=(n,d=2)=>Number(n).toLocaleString("es-EC",{minimumFractionDigits:d,maximumFractionDigits:d});
 let model=null,selection="all",drawPlan=()=>{},drawSide=()=>{},resetCamera=()=>{};
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);}
@@ -218,9 +212,27 @@ function renderText(){
  $("results").innerHTML=html;
 }
 function validateRender(){
- model=getModel();
  const box=$("errors");
- if(model.errs.length){box.style.display="block";box.textContent=model.errs.join(" ");}else{box.style.display="none";box.textContent="";}
+ const summary=$("entered-summary");
+ if(ids.some(id=>$(id).value.trim()==="")){
+  model=null;box.style.display="none";box.textContent="";
+  $("results").textContent="Introduce manualmente todas las medidas de tu plano para visualizar las ubicaciones propuestas.";
+  summary.innerHTML="<strong>Medidas:</strong> completa todos los campos antes de calcular.";
+  $("heightCenter").textContent="—";$("directL").textContent="—";$("directR").textContent="—";
+  drawPlan();drawSide();return;
+ }
+ model=getModel();
+ if(model.errs.length){
+  box.style.display="block";box.textContent=model.errs.join(" ");
+  summary.innerHTML="<strong>Revisa las medidas ingresadas:</strong> el plano no cumple las condiciones geométricas.";
+ }else{
+  box.style.display="none";box.textContent="";
+  const v=model.v;
+  summary.innerHTML="<strong>Datos introducidos manualmente (metros):</strong> Sala: "+fmt(v.roomW)+" × "+fmt(v.roomL)+" × "+fmt(v.roomH)
+   +" · Monitores X: "+fmt(v.leftX)+" / "+fmt(v.rightX)+" · Separación al frente: "+fmt(v.rearGap)
+   +" · Caja: "+fmt(v.boxW)+" × "+fmt(v.boxH)+" × "+fmt(v.boxD)
+   +" · Base Z: "+fmt(v.bottomZ)+" · Oyente X/Y/Z: "+fmt(v.earX)+" / "+fmt(v.earY)+" / "+fmt(v.earZ)+".";
+ }
  renderText();drawPlan();drawSide();
 }
 function exportReport(){
@@ -417,26 +429,16 @@ new p5(p=>{
  };
 },"side-canvas");
 }
-for(const id of ids)$(id).addEventListener("input",()=>{$("scenario").value="custom";validateRender()});
-function loadCase(caseKey){
- const c=cases[caseKey]||defaults;
- for(const id of ids)$(id).value=c[id];
- $("scenario").value=caseKey in cases?caseKey:"custom";
- resetCamera();validateRender();
-}
-$("scenario").addEventListener("change",()=>{const k=$("scenario").value;if(k!=="custom")loadCase(k)});
-$("demo").addEventListener("click",()=>loadCase("A"));
+for(const id of ids)$(id).addEventListener("input",validateRender);
+$("clear").addEventListener("click",()=>{for(const id of ids)$(id).value="";resetCamera();validateRender();});
 $("reset3d").addEventListener("click",()=>resetCamera());
-
-$("move").addEventListener("click",()=>{if(!model||model.errs.length)return;const v=model.v;const target=Math.min(v.roomL-.35,v.earY+.55);$("earY").value=fmt(target,2).replace(",",".");validateRender()});
 $("export").addEventListener("click",exportReport);
 document.querySelectorAll("[data-surface]").forEach(btn=>btn.addEventListener("click",()=>{
  selection=btn.dataset.surface;
  document.querySelectorAll("[data-surface]").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",b===btn?"true":"false")});
  drawPlan();drawSide();
 }));
-const initialCase=new URLSearchParams(location.search).get("caso");
-if(initialCase&&cases[initialCase.toUpperCase()])loadCase(initialCase.toUpperCase());else loadCase("A");
+validateRender();
 });
 </script>
 </body>
