@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doppler · receptor en movimiento</title>
+<style>
+:root{font-family:system-ui,-apple-system,Arial,sans-serif;color:#233d50;background:#f7f9fc}
+*{box-sizing:border-box}body{margin:0}
+main{max-width:980px;margin:auto;padding:17px}
+h1{font-size:1.35rem;margin:0 0 8px}h2{font-size:1.05rem;margin:0}
+p{line-height:1.52;margin:8px 0}
+.card{background:#fff;border:1px solid #d9e5ed;border-radius:13px;padding:16px;margin:12px 0}
+.muted{color:#577084}.small{font-size:.86rem}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.control{background:#f0f6f9;padding:13px;border-radius:10px}
+label{font-weight:700;display:block;margin-bottom:7px}
+input[type=range]{width:100%;min-height:42px;accent-color:#237b90}
+select{font:inherit;min-height:43px;width:100%;padding:7px;border-radius:8px;border:1px solid #9eb5c4;background:#fff}
+button{font:inherit;font-weight:700;color:#285c75;background:#edf6fa;border:1px solid #9bb9c7;border-radius:9px;min-height:43px;padding:9px 13px;cursor:pointer}
+button.primary{color:white;background:#267b92;border-color:#267b92}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #95c9d7;outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.metric{background:#eef5f8;border-radius:8px;padding:12px}
+.metric small{display:block;color:#587286;font-size:.78rem}
+.metric strong{display:block;font-size:1.24rem;margin-top:4px}
+svg{display:block;width:100%;height:auto}
+.note{border-left:4px solid #278496;background:#edf8fa;border-radius:4px;padding:10px 12px}
+.warning{border-left:4px solid #b68749;background:#fff6e8;border-radius:4px;padding:10px 12px}
+@media(max-width:620px){main{padding:9px}.card{padding:12px}.controls,.stats{grid-template-columns:1fr}.row button{flex:1 1 150px}}
+</style>
+</head>
+<body><main>
+<h1>¿Y si se mueve el receptor?</h1>
+<p class="muted">La fuente está quieta. Los frentes de onda viajan por el aire con una separación constante; lo que cambia es la rapidez con que el oyente los encuentra cuando se mueve.</p>
+<section class="card">
+<div class="controls">
+<div class="control">
+<label for="freq">Frecuencia emitida por el parlante</label>
+<select id="freq"><option value="440">440 Hz (La₄)</option><option value="800">800 Hz</option><option value="1000" selected>1.000 Hz</option></select>
+</div>
+<div class="control">
+<label for="velocity">Velocidad del receptor: <output id="speed">+5 m/s · se acerca</output></label>
+<input type="range" id="velocity" min="-30" max="30" step="1" value="5" aria-label="Velocidad del receptor desde 30 metros por segundo alejándose hasta 30 acercándose">
+</div>
+</div>
+<svg id="scene" viewBox="0 0 900 250" role="img" aria-label="Fuente fija a la izquierda, receptor en movimiento a la derecha y frentes de onda que avanzan con separación constante">
+<rect x="8" y="10" width="884" height="232" rx="10" fill="#f7fafc" stroke="#e0eaf0"/>
+<line x1="78" y1="186" x2="828" y2="186" stroke="#b1c2ce" stroke-width="3"/>
+<g id="waves"></g>
+<g transform="translate(76 179)">
+<rect x="-17" y="-39" width="34" height="52" rx="5" fill="#2a627c"/>
+<circle cx="0" cy="-23" r="8" fill="#c7e3ed"/>
+<circle cx="0" cy="-1" r="13" fill="#c7e3ed"/>
+</g>
+<g id="receiver" transform="translate(675 179)">
+<circle cx="0" cy="-22" r="13" fill="#bf7a51"/>
+<rect x="-10" y="-9" width="20" height="23" rx="7" fill="#bf7a51"/>
+<path d="M-9 14 L-14 31 M9 14 L14 31" fill="none" stroke="#bf7a51" stroke-width="5" stroke-linecap="round"/>
+<line id="arrow" x1="-44" y1="-57" x2="-4" y2="-57" stroke="#bf7a51" stroke-width="4" stroke-linecap="round"/>
+<path id="arrowTip" d="M-5 -63 L4 -57 L-5 -51" fill="none" stroke="#bf7a51" stroke-width="3"/>
+</g>
+<g font-family="system-ui,Arial,sans-serif" font-size="17" fill="#3e596c">
+<text x="76" y="221" text-anchor="middle">Fuente fija</text>
+<text x="675" y="221" text-anchor="middle">Receptor</text>
+<text x="457" y="35" text-anchor="middle">Frentes de onda →</text>
+</g>
+</svg>
+<p class="small muted">Esquema 1D ilustrativo (no a escala). Los frentes avanzan con separación uniforme porque la fuente permanece en reposo. Para simplificar, solo se representa la componente del movimiento en la dirección de propagación.</p>
+<div class="stats">
+<div class="metric"><small>Fuente: f₀</small><strong id="f0Label">1.000 Hz</strong></div>
+<div class="metric"><small>Receptor: f′</small><strong id="fpLabel">1.014,6 Hz</strong></div>
+<div class="metric"><small>Cambio: Δf</small><strong id="deltaLabel">+14,6 Hz</strong></div>
+</div>
+<p id="explanation" class="note">Al acercarse, el receptor encuentra más frentes de onda por segundo, aunque su separación en el aire sigue siendo la misma.</p>
+<div class="row"><button type="button" id="playMotion" class="primary">▶ Animar ondas</button><button type="button" id="reset">↺ Reiniciar</button></div>
+</section>
+<section class="card">
+<h2>La fórmula del caso 2</h2>
+<p style="font-size:1.18rem"><strong>f′ = f₀ · (343 + vᵣ) / 343</strong></p>
+<p class="small">Aquí usamos <strong>vᵣ positiva cuando se acerca</strong> y <strong>negativa cuando se aleja</strong>. La fórmula se aplica a un movimiento a lo largo de la línea fuente–receptor y un medio en reposo, con velocidades muy por debajo de la del sonido.</p>
+<p>Prueba: con f₀ = 1.000 Hz y vᵣ = +5 m/s, ¿f′ aumenta o disminuye? Después cambia a −5 m/s. ¿Se modifica la separación entre los frentes de onda?</p>
+<div class="row"><button type="button" id="soundF0">▶ Escuchar f₀</button><button type="button" id="soundFp">▶ Escuchar f′</button></div>
+<p id="audioStatus" class="small muted" role="status">Audio opcional: escucha a volumen físico bajo. Cada tono dura 1 segundo; un cambio de 5 m/s produce una diferencia pequeña.</p>
+<p class="warning"><strong>Importante:</strong> esta comparación de tonos es una <strong>simulación digital</strong>, no el movimiento real de un oyente. Bajar el volumen físico antes de reproducir. No usar como prueba de audición.</p>
+</section>
+</main>
+<script>
+"use strict";
+(()=>{
+const $=id=>document.getElementById(id),C=343;
+let animated=false,phase=0,lastTime=0,audioContext=null,playingUntil=0;
+const full=n=>n.toLocaleString("es-EC",{maximumFractionDigits:1,minimumFractionDigits:1});
+const waveGroup=$("waves"),svgNS="http://www.w3.org/2000/svg";
+const waves=Array.from({length:15},()=>{
+  const line=document.createElementNS(svgNS,"line");
+  for(const [k,v] of Object.entries({x1:0,y1:57,x2:0,y2:184,stroke:"#56a5bb","stroke-width":2,opacity:.7}))line.setAttribute(k,v);
+  waveGroup.appendChild(line);return line;
+});
+function state(){
+ const f0=Number($("freq").value),vr=Number($("velocity").value),fp=f0*(C+vr)/C,df=fp-f0;
+ $("speed").textContent=(vr>0?"+":"")+vr+" m/s · "+(vr>0?"se acerca":vr<0?"se aleja":"en reposo");
+ $("f0Label").textContent=full(f0)+" Hz";$("fpLabel").textContent=full(fp)+" Hz";$("deltaLabel").textContent=(df>0?"+":"")+full(df)+" Hz";
+ $("explanation").textContent=vr>0?"Al acercarse, el receptor encuentra más frentes de onda por segundo. Los frentes siguen estando separados igual en el aire.":vr<0?"Al alejarse, el receptor encuentra menos frentes de onda por segundo. La fuente sigue quieta y el espaciado de los frentes no cambia.":"En reposo, el receptor encuentra los frentes al ritmo original: f′ = f₀.";
+ $("arrow").setAttribute("x1",vr>=0?"-55":"15");$("arrow").setAttribute("x2",vr>=0?"-9":"55");
+ $("arrowTip").setAttribute("d",vr>=0?"M-11 -63 L-2 -57 L-11 -51":"M48 -63 L58 -57 L48 -51");
+ if(vr===0){$("arrow").setAttribute("opacity",0);$("arrowTip").setAttribute("opacity",0)}else{$("arrow").setAttribute("opacity",1);$("arrowTip").setAttribute("opacity",1)}
+ return {f0,vr,fp};
+}
+function frame(now){
+ const dt=Math.min(.04,(now-lastTime)/1000||0);lastTime=now;
+ if(animated){phase=(phase+dt*78)%54;}
+ for(let i=0;i<waves.length;i++){const x=104+((i*54+phase)%770);waves[i].setAttribute("x1",x);waves[i].setAttribute("x2",x);}
+ const v=Number($("velocity").value);
+ const offset=animated?(-Math.sign(v)*Math.min(70,Math.abs(v)*2.25)*Math.sin(now/1500)):0;
+ $("receiver").setAttribute("transform","translate("+(675+offset).toFixed(1)+" 179)");
+ requestAnimationFrame(frame);
+}
+$("freq").addEventListener("change",state);
+$("velocity").addEventListener("input",state);
+$("playMotion").addEventListener("click",()=>{animated=!animated;$("playMotion").textContent=animated?"⏸ Pausar ondas":"▶ Animar ondas";});
+$("reset").addEventListener("click",()=>{$("freq").value="1000";$("velocity").value="5";animated=false;phase=0;$("playMotion").textContent="▶ Animar ondas";state();});
+async function tone(which){
+ try{
+   const Type=window.AudioContext||window.webkitAudioContext;
+   if(!Type)throw Error("Audio no disponible");
+   if(!audioContext)audioContext=new Type();
+   if(audioContext.state==="suspended")await audioContext.resume();
+   const t=audioContext.currentTime;
+   if(t<playingUntil){$("audioStatus").textContent="Espera a que termine el tono anterior.";return;}
+   const d=1.0,osc=audioContext.createOscillator(),amp=audioContext.createGain(),v=state(),f=which==="ref"?v.f0:v.fp;
+   osc.type="sine";osc.frequency.setValueAtTime(f,t+.03);
+   amp.gain.setValueAtTime(.000001,t+.03);
+   amp.gain.linearRampToValueAtTime(.014,t+.09);
+   amp.gain.setValueAtTime(.014,t+.95);
+   amp.gain.linearRampToValueAtTime(.000001,t+1.03);
+   osc.connect(amp);amp.connect(audioContext.destination);
+   osc.start(t+.03);osc.stop(t+1.06);
+   playingUntil=t+1.08;
+   osc.onended=()=>{try{osc.disconnect();amp.disconnect()}catch(_){}};
+   $("audioStatus").textContent="Tono "+(which==="ref"?"emitido":"percibido simulado")+": "+full(f)+" Hz. No subas el volumen si la diferencia no es perceptible.";
+ }catch(e){$("audioStatus").textContent="No se pudo activar el audio. Comprueba el dispositivo de salida del navegador.";}
+}
+$("soundF0").addEventListener("click",()=>tone("ref"));
+$("soundFp").addEventListener("click",()=>tone("heard"));
+state();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
