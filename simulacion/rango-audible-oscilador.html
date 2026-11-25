@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explora las frecuencias · Oscilador sinusoidal · Sesión 12B</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#213a4c;background:#f8fafc}
+*{box-sizing:border-box}body{margin:0}main{max-width:940px;margin:auto;padding:16px}
+h1{font-size:1.35rem;line-height:1.3;margin:0 0 7px}h2{font-size:1.08rem;margin:4px 0 8px}
+p{line-height:1.5;margin:7px 0 11px}
+.muted{color:#526a7d}.small{font-size:.88rem}
+.notice{background:#fff5e8;border-left:4px solid #b98a46;border-radius:5px;padding:10px 13px;line-height:1.46;margin:12px 0}
+.info{background:#eff7f9;border-left:4px solid #2d8294;border-radius:5px;padding:10px 13px;line-height:1.45;margin:11px 0}
+.card{border:1px solid #dae6ed;border-radius:12px;background:#fff;padding:16px;margin:12px 0}
+.controls{display:grid;grid-template-columns:1fr;gap:12px}
+.frequency-control{background:#eef6f8;border:2px solid #7bb0c0;border-radius:13px;padding:14px;margin:15px 0}
+.frequency-control label{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.frequency-control input[type=range]{width:100%;min-height:66px;touch-action:pan-y;cursor:ew-resize}
+.frequency-control input[type=range]::-webkit-slider-thumb{transform:scale(1.12)}
+.freq-ticks{display:flex;justify-content:space-between;color:#4a7082;font-size:.8rem;font-weight:700}
+.volume-control{background:#f3f7f9;border-radius:10px;padding:12px}
+
+label{font-weight:700;display:block}
+input[type=range]{width:100%;min-height:45px;accent-color:#247a90;cursor:pointer}
+output{font-size:1.18rem;color:#246c84;font-weight:800}
+button{font:inherit;min-height:44px;padding:10px 13px;border-radius:9px;border:1px solid #b5c9d4;background:#eff7fa;color:#245b74;font-weight:700;cursor:pointer}
+button.main{background:#266f88;color:white;border-color:#266f88}
+button.active{background:#266f88;color:#fff;border-color:#266f88}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid #93c8d5;outline-offset:2px}
+.preset{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.preset button{flex:1 1 84px}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:10px 0}
+.row button{flex:1 1 145px}
+svg{display:block;width:100%;height:auto}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.kpi{border-radius:9px;background:#edf5f8;padding:12px}
+.kpi small{display:block;color:#536a7d}
+.kpi strong{font-size:1.12rem}
+.track{height:10px;background:#e7eff3;border-radius:20px;margin:8px 0}
+.track>div{height:100%;background:#2b8497;border-radius:20px;width:0}
+table{width:100%;border-collapse:collapse;font-size:.89rem}
+th,td{padding:8px 10px;border-bottom:1px solid #e1ebf0;text-align:left}
+th{background:#eef4f8}
+td:last-child{text-align:right}
+.caption{font-size:.81rem;color:#526c80}
+@media(max-width:570px){main{padding:9px}h1{font-size:1.19rem}.card{padding:12px}.controls{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.preset button{flex:1 1 75px}.row button{flex:1 1 115px}}
+</style>
+</head>
+<body><main>
+<h1>Explora infrasonidos, sonidos audibles y ultrasonidos</h1>
+<p class="muted">La audición humana suele describirse con un rango aproximado de <strong>20 a 20.000 Hz</strong> en personas jóvenes con audición normal. Ese rango varía según la edad, cada persona y el nivel del sonido. No es un límite fijo para todos.</p>
+<div class="card">
+<h2>Mapa extendido: 10 a 25.000 Hz</h2>
+<svg id="map" viewBox="0 0 880 146" role="img" aria-label="Mapa de frecuencias desde 10 hasta 25000 hercios en escala logarítmica, con regiones de infrasonido, audición humana típica y ultrasonido">
+ <rect x="44" y="41" width="782" height="27" rx="8" fill="#e6edf3"/>
+ <rect x="44" y="41" width="69.2" height="27" rx="4" fill="#aec6d4"/>
+ <rect x="113.2" y="41" width="691.6" height="27" fill="#57a2a6"/>
+ <rect x="804.8" y="41" width="21.2" height="27" rx="4" fill="#d6a772"/>
+ <line x1="113.2" y1="31" x2="113.2" y2="75" stroke="#4c7385" stroke-width="1.5"/>
+ <line x1="804.8" y1="31" x2="804.8" y2="75" stroke="#b8824e" stroke-width="1.5"/>
+ <g font-family="system-ui,Arial,sans-serif" fill="#405c72" font-size="15">
+ <text x="44" y="106" text-anchor="middle">10 Hz</text>
+ <text x="113.2" y="127" text-anchor="middle">20 Hz</text>
+ <text x="254" y="106" text-anchor="middle">100 Hz</text>
+ <text x="484" y="106" text-anchor="middle">1 kHz</text>
+ <text x="714" y="106" text-anchor="middle">10 kHz</text>
+ <text x="804.8" y="127" text-anchor="middle">20 kHz</text>
+ <text x="858" y="106" text-anchor="end">25 kHz</text>
+ <text x="44" y="20" font-size="13">Infra</text>
+ <text x="420" y="20" font-size="15">Rango audible típico</text>
+ <text x="826" y="20" text-anchor="end" font-size="13">Ultra</text>
+ </g>
+ <line id="indicator" x1="484" y1="30" x2="484" y2="79" stroke="#173649" stroke-width="3.5"/>
+ <circle id="dot" cx="484" cy="55" r="7" fill="white" stroke="#173649" stroke-width="3"/>
+</svg>
+<p class="caption">El mapa incluye <strong>infrasonidos (&lt;20 Hz)</strong>, el rango audible habitual y <strong>ultrasonidos (&gt;20.000 Hz)</strong>. Ahora el generador intenta producir las frecuencias seleccionadas, incluso las extremas, siempre que la frecuencia de muestreo del navegador lo permita. <strong>No significa que el parlante pueda reproducirlas ni que el oído pueda escucharlas.</strong></p>
+</div>
+<div class="card">
+<h2>1. Elige una frecuencia</h2>
+<div class="preset" id="presets" role="group" aria-label="Frecuencias rápidas">
+<button type="button" data-hz="10" title="Infrasonido: intento de reproducción de baja frecuencia">10 Hz · infra</button>
+<button type="button" data-hz="15" title="Infrasonido: intento de reproducción de baja frecuencia">15 Hz · infra</button>
+<button type="button" data-hz="20" title="Límite orientativo inferior del rango audible típico">20 Hz · límite</button>
+<button type="button" data-hz="125">125 Hz</button>
+<button type="button" data-hz="250">250 Hz</button>
+<button type="button" data-hz="500">500 Hz</button>
+<button type="button" data-hz="1000" class="active">1 kHz</button>
+<button type="button" data-hz="2000">2 kHz</button>
+<button type="button" data-hz="4000">4 kHz</button>
+<button type="button" data-hz="8000">8 kHz</button>
+<button type="button" data-hz="12000">12 kHz</button>
+<button type="button" data-hz="20000" title="Límite orientativo superior del rango audible típico">20 kHz · límite</button>
+<button type="button" data-hz="22000" title="Ultrasonido: intento de generación si lo admite la frecuencia de muestreo">22 kHz · ultra</button>
+<button type="button" data-hz="25000" title="Ultrasonido: intento de generación si lo admite la frecuencia de muestreo">25 kHz · ultra</button>
+</div>
+<div class="frequency-control">
+<label for="frequency">Deslizador continuo de frecuencia <output for="frequency" id="freqValue">1.000 Hz</output></label>
+<input type="range" min="0" max="1000" step="1" value="589" id="frequency" aria-label="Deslizador logarítmico desde 10 hasta 25.000 hercios. Si está activa la exploración sonora, la frecuencia cambia mientras se arrastra.">
+<div class="freq-ticks"><span>10 Hz · infra</span><span>1 kHz</span><span>25 kHz · ultra</span></div>
+<p class="small muted">Desliza para elegir una frecuencia. Pulsa <strong>«Explorar deslizando»</strong> y mueve el control durante la reproducción para escuchar cómo cambia el tono, cuando el sistema pueda generarlo.</p>
+</div>
+<div class="controls">
+<div class="volume-control">
+<label for="volume">Volumen digital del oscilador: <output for="volume" id="volValue">50 %</output></label>
+<input type="range" min="0" max="100" step="5" value="50" id="volume" aria-label="Volumen digital interno del oscilador, limitado. No expresa dB SPL.">
+</div>
+</div>
+<div class="kpis">
+<div class="kpi"><small>Tipo de señal</small><strong>Sinusoidal</strong></div>
+<div class="kpi"><small>Duración</small><strong>1,5 s · tono / 5 s · deslizar</strong></div>
+<div class="kpi"><small>Nivel de salida</small><strong>Limitado digitalmente*</strong></div>
+</div>
+<p class="info" id="bandLabel" style="font-weight:700">Rango de demostración auditiva</p>
+<div class="row">
+<button type="button" id="testAudio">🔊 Probar sonido a 1.000 Hz</button>
+<button class="main" id="play" type="button">▶ Tono de 1,5 s</button>
+<button class="main" id="explore" type="button">▶ Explorar deslizando · 5 s</button>
+<button type="button" id="lock">Fijar volumen para comparar</button>
+<button type="button" id="stop">■ Detener</button>
+</div>
+<p class="info" role="status" id="status">Empieza bajando el volumen físico del equipo y pulsa «Probar sonido a 1.000 Hz». Si escuchas el tono, puedes utilizar el deslizador y «Explorar deslizando». Si no suena, comprueba la pestaña, el volumen y el dispositivo de salida de audio.</p>
+<p class="caption">El oscilador utiliza la <strong>configuración de audio predeterminada del navegador</strong> para mejorar la compatibilidad. Los tonos por encima del límite digital del dispositivo se bloquean para evitar aliasing; aunque pueda generar algunos agudos extremos, <strong>el equipo podría filtrarlos o distorsionarlos</strong>. La amplitud digital máxima sigue limitada (aprox. −26 dBFS pico), pero <strong>esto no garantiza un SPL seguro</strong>: comienza con el volumen físico bajo. Si no oyes el tono de prueba de 1.000 Hz, revisa el dispositivo de salida, el volumen del sistema y el permiso de audio del navegador antes de cambiar los controles.</p>
+</div>
+<div class="card">
+<h2>2. ¿Lo distinguiste?</h2>
+<p class="small">Registra únicamente las ocho frecuencias centrales (125–12.000 Hz). Los extremos infra y ultrasónicos pueden generarse, pero no son mediciones fiables de audición. Con el mismo volumen, marca tu percepción. Si no oyes un tono, <strong>no aumentes el volumen para buscar el límite</strong>; puede deberse al dispositivo, al ambiente o al nivel de la señal.</p>
+<div class="row">
+<button type="button" id="yes">Lo distinguí</button>
+<button type="button" id="no">No lo distinguí</button>
+<button type="button" id="clear">Borrar registros</button>
+</div>
+<div class="track"><div id="progress"></div></div>
+<p class="small" id="count">0 de 8 frecuencias rápidas registradas</p>
+<table><thead><tr><th>Frecuencia</th><th>Observación</th></tr></thead><tbody id="results"></tbody></table>
+<p class="caption">Estos registros son observaciones personales con el equipo usado; no representan el rango auditivo individual ni un audiograma. Los datos se mantienen solo en esta página hasta que la recargues.</p>
+</div>
+<p class="notice"><strong>Sobre infra y ultrasonidos:</strong> un seno de 10–15 Hz puede generar movimiento del transductor sin convertirse en un tono audible; cualquier sonido percibido podría provenir de distorsión. Un seno de 22–25 kHz requiere una cadena digital y física capaz de generarlo. Si el dispositivo no admite esa frecuencia, el oscilador lo advertirá y no emitirá ese tono. <strong>No aumentes el volumen para intentar oírlos.</strong><br><br><strong>Escucha responsable:</strong> utiliza volumen físico bajo, tonos breves y pausas. Detente si notas molestia, presión o zumbido. No utilices este ejercicio para detectar umbrales auditivos, comparar capacidades personales ni intentar escuchar frecuencias que no distingues.</p>
+</main>
+<script>
+"use strict";
+(()=>{
+ const $=id=>document.getElementById(id);
+ const MIN=10,MAX=25000,PRESETS=[125,250,500,1000,2000,4000,8000,12000];
+ const AudioType=window.AudioContext||window.webkitAudioContext;
+ const PEAK_AMPLITUDE=Math.pow(10,-26/20);
+ const fmt=n=>Math.round(n).toLocaleString("es-EC")+" Hz";
+ const pos=f=>Math.round(1000*Math.log(f/MIN)/Math.log(MAX/MIN));
+ const fromPos=t=>MIN*Math.pow(MAX/MIN,t/1000);
+ let ac=null,osc=null,env=null,mode=null,playingUntil=0,locked=false,frequency=1000, requestId=0;
+ const observations={};
+ const sampleThreshold=()=>ac ? ac.sampleRate*0.48 : Infinity;
+ const capable=f=>f<sampleThreshold();
+ const amplitude=()=>PEAK_AMPLITUDE*Number($("volume").value)/100;
+ $("frequency").value=pos(frequency);
+ function category(f){
+   if(f<20)return "INFRASONIDO · generación experimental";
+   if(f>20000)return "ULTRASONIDO · generación experimental";
+   if(f<125||f>12000)return "Extremo del rango audible · equipo no calibrado";
+   return "Frecuencia de la práctica";
+ }
+ function render(){
+   $("freqValue").textContent=fmt(frequency);
+   $("volValue").textContent=$("volume").value+" %";
+   const px=44+782*Math.log10(frequency/MIN)/Math.log10(MAX/MIN);
+   $("indicator").setAttribute("x1",px.toFixed(2));
+   $("indicator").setAttribute("x2",px.toFixed(2));
+   $("dot").setAttribute("cx",px.toFixed(2));
+   $("bandLabel").textContent=category(frequency)+(capable(frequency)?"":" · no disponible por frecuencia de muestreo");
+   $("play").disabled=!capable(frequency);
+   $("play").textContent=capable(frequency)?"▶ Tono de 1,5 s":"No disponible (límite digital)";
+   document.querySelectorAll("[data-hz]").forEach(b=>b.classList.toggle("active",Number(b.dataset.hz)===Math.round(frequency)));
+ }
+ function status(message){$("status").textContent=message;}
+ function stop(){
+   requestId++;
+   if(env&&ac){
+     const now=ac.currentTime;
+     try{env.gain.cancelScheduledValues(now);env.gain.setTargetAtTime(0,now,.014);}catch(_){}
+     if(osc){try{osc.stop(now+.10);}catch(_){}}
+   }
+   osc=null;env=null;mode=null;playingUntil=0;
+ }
+ function setFrequency(f){
+   frequency=Math.min(MAX,Math.max(MIN,f));
+   $("frequency").value=pos(frequency);
+   if(osc&&mode==="explore"&&ac){
+     if(!capable(frequency)){
+       stop();
+       status("La frecuencia "+fmt(frequency)+" supera el límite digital del motor ("+Math.round(sampleThreshold()).toLocaleString("es-EC")+" Hz). Se detuvo el audio para evitar aliasing. El control visual sigue funcionando.");
+     }else{
+       try{osc.frequency.setTargetAtTime(frequency,ac.currentTime,.012);}catch(_){}
+       status("Exploración: "+fmt(frequency)+". Mueve el deslizador; el sonido termina automáticamente a los 5 segundos.");
+     }
+   }
+   render();
+ }
+ async function getContext(){
+   if(!AudioType)throw Error("Este navegador no admite Web Audio.");
+   if(!ac){
+     ac=new AudioType();
+   }
+   if(ac.state==="suspended")await ac.resume();
+   if(ac.state!=="running")throw Error("No se pudo iniciar el dispositivo de audio.");
+   return ac;
+ }
+ async function play(isExplore){
+   const ticket=++requestId;
+   try{
+     const context=await getContext();
+     if(ticket!==requestId)return;
+     if(context.currentTime<playingUntil-.012){status("Espera a que termine el tono actual o pulsa Detener.");return;}
+     if(!capable(frequency)){
+       status("El motor de audio funciona a "+context.sampleRate.toLocaleString("es-EC")+" muestras/s; no puede generar "+fmt(frequency)+" sin superar su límite digital. Selecciona una frecuencia más baja.");
+       render();return;
+     }
+     const now=context.currentTime+.045,d=isExplore?5:1.5,oscillator=context.createOscillator(),gainNode=context.createGain();
+     oscillator.type="sine";oscillator.frequency.setValueAtTime(frequency,now);
+     const gain=amplitude();
+     gainNode.gain.setValueAtTime(0,now);
+     gainNode.gain.linearRampToValueAtTime(gain,now+.06);
+     gainNode.gain.setValueAtTime(gain,now+d-.08);
+     gainNode.gain.linearRampToValueAtTime(0,now+d);
+     oscillator.connect(gainNode);gainNode.connect(context.destination);
+     oscillator.start(now);oscillator.stop(now+d+.03);
+     osc=oscillator;env=gainNode;mode=isExplore?"explore":"single";playingUntil=now+d+.03;
+     oscillator.onended=()=>{
+       try{oscillator.disconnect();gainNode.disconnect();}catch(_){}
+       if(osc===oscillator){
+         osc=null;env=null;mode=null;playingUntil=0;
+         $("play").disabled=!capable(frequency);
+         if(isExplore)status("Exploración terminada. Pulsa de nuevo para repetir.");
+       }
+     };
+     status(isExplore?"Exploración de 5 segundos: desliza para cambiar la frecuencia durante la reproducción.":"Tono activado a "+fmt(frequency)+" (1,5 segundos). Si no lo oyes, verifica que la pestaña no esté silenciada y que la salida de audio esté bien seleccionada.");
+     render();
+   }catch(e){status("No se pudo iniciar el sonido: "+(e&&e.message?e.message:"comprueba la salida de audio y los permisos")+". Revisa si la pestaña está silenciada y la salida de audio del equipo.");}
+ }
+ $("frequency").addEventListener("input",()=>setFrequency(fromPos(Number($("frequency").value))));
+ $("volume").addEventListener("input",()=>{render();if(mode==="explore"&&ac&&env){
+   // Evitar editar la automatización programada de entrada/salida durante la reproducción.
+   status("El cambio de volumen digital se aplicará en la siguiente reproducción.");
+ }});
+ document.querySelectorAll("[data-hz]").forEach(b=>b.addEventListener("click",()=>setFrequency(Number(b.dataset.hz))));
+ $("testAudio").addEventListener("click",()=>{
+   stop();
+   setFrequency(1000);
+   if(Number($("volume").value)<30&&!locked){$("volume").value=50;render();}
+   play(false);
+ });
+ $("play").addEventListener("click",()=>play(false));
+ $("explore").addEventListener("click",()=>play(true));
+ $("stop").addEventListener("click",()=>{stop();status("Audio detenido.");});
+ $("lock").addEventListener("click",()=>{
+   locked=!locked;$("volume").disabled=locked;
+   $("lock").textContent=locked?"Volumen fijado ✓ · Desbloquear":"Fijar volumen para comparar";
+   $("lock").classList.toggle("active",locked);
+   status(locked?"Volumen digital fijado. Mantén también constante el volumen físico del dispositivo.":"Volumen digital desbloqueado. Mantén bajo el nivel físico del equipo.");
+ });
+ function renderObservations(){
+   const tbody=$("results");tbody.replaceChildren();let total=0;
+   for(const f of PRESETS){
+     const tr=document.createElement("tr"),a=document.createElement("td"),b=document.createElement("td");
+     a.textContent=fmt(f);b.textContent=observations[f]||"Sin registrar";
+     if(observations[f])total++;
+     tr.append(a,b);tbody.append(tr);
+   }
+   $("count").textContent=total+" de 8 frecuencias rápidas registradas";
+   $("progress").style.width=(total/8*100)+"%";
+ }
+ function register(value){
+   const target=PRESETS.find(f=>f===Math.round(frequency));
+   if(target===undefined){status("Para registrar, selecciona una de las ocho frecuencias centrales de la práctica. Los extremos infra y ultrasónicos no permiten conclusiones sobre tu audición.");return;}
+   observations[target]=value;renderObservations();
+   status(fmt(target)+": "+value+". Este registro no determina un límite personal de audición.");
+ }
+ $("yes").addEventListener("click",()=>register("Lo distinguí"));
+ $("no").addEventListener("click",()=>register("No lo distinguí"));
+ $("clear").addEventListener("click",()=>{for(const f of PRESETS)delete observations[f];renderObservations();});
+ render();renderObservations();
+})();
+</script>
+</body>
+</html>

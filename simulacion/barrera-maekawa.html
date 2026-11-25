@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Difracción y barrera acústica · Sesión 13</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#1d354a;background:#f7f9fc;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:940px;margin:0 auto;padding:16px}
+h1{font-size:1.48rem;margin:0 0 7px;line-height:1.3}h2{font-size:1.1rem;margin:0 0 12px}
+p{line-height:1.48} .intro{color:#526a7e;margin-top:0}
+.card{background:#fff;border:1px solid #d7e3eb;border-radius:13px;padding:17px;margin:14px 0}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:12px 0}
+.control{flex:1 1 240px;min-width:0}.control label{display:block;font-weight:680;margin-bottom:6px}
+input[type=range]{width:100%;accent-color:#1d758c;min-height:42px;cursor:pointer}
+select{font:inherit;border:1px solid #a9bfce;border-radius:8px;padding:11px;min-height:44px;background:#fff;color:#213a4e;width:100%}
+button{font:inherit;background:#edf5f8;border:1px solid #9eb8c8;padding:10px 13px;border-radius:9px;min-height:44px;color:#1c5670;font-weight:700;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #8bb9cd;outline-offset:2px}
+.primary{background:#256d87;border-color:#256d87;color:white}.active{background:#256d87;color:white}
+.readout{font-weight:760;font-size:1.1rem;color:#1f6884}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.kpi{background:#eef5f8;padding:12px;border-radius:8px}
+.kpi small{color:#526d80;display:block;line-height:1.3;font-size:.78rem}
+.kpi strong{font-size:1.23rem;font-variant-numeric:tabular-nums;display:block;margin-top:6px}
+svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:8px 17px;font-size:.86rem;color:#4d6578;margin:8px 0}
+.legend span{display:flex;align-items:center;gap:6px}.sample{display:inline-block;width:20px;border-top:3px solid #4a809d}.sample.dash{border-top:2px dashed #9c9d98}.sample.bent{border-color:#bf7648}
+.note{padding:12px;background:#f0f7f9;border-left:4px solid #37889c;border-radius:4px;line-height:1.46;margin:12px 0}
+.caveat{color:#536c7e;font-size:.86rem}
+.bars{display:grid;gap:9px}.barrow{display:grid;grid-template-columns:75px minmax(0,1fr) 64px;gap:9px;align-items:center;font-size:.9rem}
+.track{background:#e9eef3;border-radius:5px;height:22px;overflow:hidden}
+.fill{height:100%;background:#387e99;border-radius:5px;transition:width .2s ease}.fill.selected{background:#ba7647}
+.diff{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media(max-width:560px){main{padding:10px}.card{padding:12px}h1{font-size:1.25rem}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi{padding:9px}.barrow{grid-template-columns:68px minmax(0,1fr) 59px}}
+</style>
+</head>
+<body><main>
+<h1>¿Cuánto protege una barrera acústica?</h1>
+<p class="intro">Explora por qué los <strong>graves rodean mejor los bordes</strong> y por qué la altura de una barrera cambia la protección del oyente. Es un modelo idealizado, no una medición de una barrera real.</p>
+<section class="card">
+<h2>1. Mueve la altura y cambia la frecuencia</h2>
+<div class="controls">
+ <div class="control"><label for="height">Altura de la barrera: <output id="heightVal" class="readout">2,8 m</output></label>
+ <input id="height" type="range" min="1.6" max="5" step="0.2" value="2.8" aria-label="Altura de la barrera en metros"></div>
+ <div class="control"><label for="freq">Frecuencia de la fuente</label>
+ <select id="freq"><option value="125">125 Hz · grave</option><option value="500" selected>500 Hz · medio</option><option value="2000">2.000 Hz · medio-agudo</option><option value="4000">4.000 Hz · agudo</option></select></div>
+</div>
+<div style="display:flex;gap:9px;flex-wrap:wrap">
+<button id="toggleBarrier" type="button" class="active" aria-pressed="true">Barrera colocada</button>
+<button id="reset" type="button">↺ Reiniciar</button>
+</div>
+<svg id="scene" viewBox="0 0 820 350" role="img" aria-label="Perfil esquemático de fuente, barrera y receptor; camino directo y camino difractado por el borde superior"></svg>
+<div class="legend">
+ <span><i class="sample dash"></i> Camino directo ideal</span>
+ <span><i class="sample bent"></i> Camino sobre el borde</span>
+ <span><i class="sample"></i> Barrera</span>
+</div>
+<div class="kpis" aria-live="polite">
+ <div class="kpi"><small>Longitud de onda λ</small><strong id="lambda">0,69 m</strong></div>
+ <div class="kpi"><small>Rodeo adicional δ</small><strong id="delta">0,18 m</strong></div>
+ <div class="kpi"><small>Número de Fresnel N</small><strong id="fresnel">0,51</strong></div>
+ <div class="kpi"><small>Reducción idealizada*</small><strong id="loss">11,2 dB</strong></div>
+</div>
+<p id="comment" class="note" aria-live="polite">La barrera interrumpe la línea de visión. Una onda puede difractarse por su borde y llegar al oyente.</p>
+<p class="caveat">*Estimación orientativa mediante 10·log₁₀(3 + 20N), para una barrera opaca y suficientemente larga, con línea de visión bloqueada. Se limita visualmente a 25 dB; no es un máximo físico universal. El modelo no considera extremos laterales, transmisión, suelo ni viento.</p>
+</section>
+<section class="card">
+<h2>2. Compara graves y agudos con la misma barrera</h2>
+<p>Al conservar la geometría, el rodeo adicional δ es el mismo; la <strong>longitud de onda cambia</strong> con la frecuencia. Observa cómo varía la reducción estimada.</p>
+<div class="bars" id="bars"></div>
+<p class="caveat">Las barras comparan estimaciones <strong>por bandas de frecuencia</strong> y no equivalen a dBA total, a una medición calibrada ni a la eficacia garantizada de un cerramiento real.</p>
+</section>
+</main>
+<script>
+"use strict";
+(()=>{
+const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
+let enabled=true;
+const source={x:0,y:1.5},edgeX=8,receiver={x:20,y:1.5},speed=343,frequencies=[125,500,2000,4000];
+const fmt=n=>n.toFixed(2).replace(".",","),one=n=>n.toFixed(1).replace(".",",");
+const px=x=>78+(x/20)*670,py=y=>300-y*49;
+function element(tag,attrs={},txt){const e=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);if(txt!==undefined)e.textContent=txt;return e;}
+function append(parent,tag,attrs,txt){parent.appendChild(element(tag,attrs,txt));}
+function model(f,h){
+ const lambda=speed/f;
+ const straight=Math.hypot(receiver.x-source.x,receiver.y-source.y);
+ const over=Math.hypot(edgeX-source.x,h-source.y)+Math.hypot(receiver.x-edgeX,h-receiver.y);
+ const delta=Math.max(0,over-straight);
+ const N=2*delta/lambda;
+ const loss=enabled?Math.min(25,10*Math.log10(3+20*N)):0;
+ return {lambda,straight,over,delta,N,loss};
+}
+function scene(h){
+ const svg=$("scene");svg.replaceChildren();
+ append(svg,"rect",{x:34,y:300,width:755,height:14,rx:4,fill:"#d3ddd3"});
+ append(svg,"line",{x1:36,y1:300,x2:789,y2:300,stroke:"#aab7ac","stroke-width":2});
+ const srcx=px(source.x),srcy=py(source.y),recx=px(receiver.x),recy=py(receiver.y);
+ if(enabled){
+ const bx=px(edgeX),by=py(h);
+ append(svg,"path",{d:"M "+bx+" "+by+" L "+bx+" "+300+" L "+recx+" "+300+" Z",fill:"#dce9ee","fill-opacity":.4});
+ append(svg,"path",{d:"M "+srcx+" "+srcy+" L "+recx+" "+recy,stroke:"#8f9ba4","stroke-width":2.5,fill:"none","stroke-dasharray":"9 7"});
+ append(svg,"path",{d:"M "+srcx+" "+srcy+" L "+bx+" "+by+" L "+recx+" "+recy,stroke:"#bd794d","stroke-width":4,fill:"none","stroke-linecap":"round","stroke-linejoin":"round"});
+ append(svg,"rect",{x:bx-7,y:by,width:14,height:300-by,rx:3,fill:"#3c809a"});
+ append(svg,"circle",{cx:bx,cy:by,r:7,fill:"#3c809a",stroke:"#fff","stroke-width":2});
+ append(svg,"text",{x:bx,y:Math.max(20,by-24),"text-anchor":"middle",fill:"#286c86","font-size":17,"font-weight":700},one(h)+" m");
+ append(svg,"text",{x:bx,y:325,"text-anchor":"middle",fill:"#526b7c","font-size":14},"Barrera");
+ append(svg,"text",{x:496,y:155,"text-anchor":"middle",fill:"#8d5935","font-size":14},"Camino difractado");
+ }else{
+ append(svg,"path",{d:"M "+srcx+" "+srcy+" L "+recx+" "+recy,stroke:"#4083a1","stroke-width":4,fill:"none"});
+ append(svg,"text",{x:420,y:160,"text-anchor":"middle",fill:"#285f7a","font-size":18},"Sin barrera: camino directo");
+ }
+ append(svg,"rect",{x:srcx-12,y:srcy-16,width:24,height:34,rx:4,fill:"#425e79"});
+ append(svg,"circle",{cx:srcx,cy:srcy-2,r:5,fill:"#c3d3df"});
+ append(svg,"text",{x:srcx,y:srcy-37,"text-anchor":"middle",fill:"#2b4a65","font-size":15},"Fuente S");
+ append(svg,"circle",{cx:recx,cy:recy-7,r:12,fill:"#566e8b"});
+ append(svg,"path",{d:"M "+recx+" "+(recy+7)+" L "+recx+" "+(recy+27),stroke:"#566e8b","stroke-width":7,"stroke-linecap":"round"});
+ append(svg,"text",{x:recx,y:recy-37,"text-anchor":"middle",fill:"#2b4a65","font-size":15},"Receptor R");
+ append(svg,"text",{x:410,y:344,"text-anchor":"middle",fill:"#526a7b","font-size":13},"Geometría ilustrativa: fuente y receptor a 1,5 m de altura; barrera a 8 m de S y 12 m de R");
+}
+function draw(){
+ const h=Number($("height").value),f=Number($("freq").value),m=model(f,h);
+ $("heightVal").textContent=one(h)+" m";
+ $("lambda").textContent=fmt(m.lambda)+" m";
+ $("delta").textContent=enabled?fmt(m.delta)+" m":"—";
+ $("fresnel").textContent=enabled?fmt(m.N):"—";
+ $("loss").textContent=enabled?one(m.loss)+" dB":"0 dB";
+ $("toggleBarrier").textContent=enabled?"Barrera colocada":"Sin barrera";
+ $("toggleBarrier").classList.toggle("active",enabled);
+ $("toggleBarrier").setAttribute("aria-pressed",String(enabled));
+ $("comment").textContent=enabled?
+  "Con la barrera, el camino por encima del borde es más largo que el camino directo. Esa diferencia de recorrido y la frecuencia influyen en la atenuación estimada.":
+  "Al quitar la barrera, el sonido puede seguir el camino directo. No se aplica el cálculo de atenuación por una barrera inexistente.";
+ scene(h);
+ const bars=$("bars");bars.replaceChildren();
+ for(const ff of frequencies){
+   const mm=model(ff,h),row=document.createElement("div");row.className="barrow";
+   const label=document.createElement("span");label.textContent=(ff>=1000?(ff/1000)+" kHz":ff+" Hz");
+   const track=document.createElement("div");track.className="track";
+   const bar=document.createElement("div");bar.className="fill"+(ff===f?" selected":"");bar.style.width=(mm.loss/25*100)+"%";track.append(bar);
+   const value=document.createElement("span");value.className="diff";value.textContent=one(mm.loss)+" dB";
+   row.append(label,track,value);bars.append(row);
+ }
+}
+$("height").addEventListener("input",draw);$("freq").addEventListener("change",draw);
+$("toggleBarrier").addEventListener("click",()=>{enabled=!enabled;draw();});
+$("reset").addEventListener("click",()=>{enabled=true;$("height").value=2.8;$("freq").value=500;draw();});
+draw();
+})();
+</script>
+</body></html>

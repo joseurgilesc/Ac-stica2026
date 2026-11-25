@@ -1,0 +1,34 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Directividad de un monitor — simulación didáctica</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#1b293b;font-family:system-ui,Arial,sans-serif}main{max-width:880px;margin:auto;padding:18px}h1{font-size:1.55rem}.panel{background:white;border:1px solid #dce4ed;border-radius:14px;padding:18px;margin:16px 0}p{line-height:1.5}.muted{color:#526276;font-size:.93rem}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}input[type=range]{width:100%;accent-color:#296ca7}button{border:1px solid #6885a4;padding:10px 14px;border-radius:10px;background:#eff5fc;color:#193c62;cursor:pointer;font-weight:650}button:focus-visible{outline:3px solid #4c98d3}.vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:15px 0}.value{background:#edf5fa;padding:13px;border-radius:10px}.value small{display:block;color:#526276}.value strong{display:block;font-size:1.3rem;margin-top:3px}canvas{width:100%;max-width:700px;height:auto;display:block;margin:0 auto;background:#f9fbfe;border-radius:10px}.warning{border-left:4px solid #b78c46;background:#fff8ea;padding:10px 12px}.active{background:#2169a6;color:white}</style></head><body><main><h1>Directividad: frecuencia y ángulo de escucha</h1>
+<p>Modelo visual y sonoro para observar cómo puede disminuir la señal fuera del eje de un altavoz. <strong>No reproduce el patrón polar de un monitor real</strong>: sus valores son ilustrativos.</p>
+<div class="panel">
+<div class="row"><label for="f"><strong>Frecuencia</strong></label><output id="fv">1000 Hz</output></div><input id="f" type="range" min="125" max="8000" step="125" value="1000">
+<div class="row"><label for="a"><strong>Ángulo respecto al eje frontal</strong></label><output id="av">45°</output></div><input id="a" type="range" min="0" max="90" step="5" value="45">
+<canvas id="polar" width="700" height="335" role="img" aria-label="Diagrama polar del modelo de radiación y posición de escucha"></canvas>
+<div class="vals"><div class="value"><small>Atenuación fuera del eje</small><strong id="db">−1,0 dB</strong></div><div class="value"><small>Amplitud relativa al eje</small><strong id="amp">89 %</strong></div></div>
+<div class="row"><button id="audio">▶ Escuchar tono</button><button id="stop">■ Detener</button><button id="reset">Reiniciar</button></div>
+<p class="muted">El tono se genera digitalmente a volumen moderado. Para comparar un mismo tono, comienza con 0° y cambia el ángulo sin modificar el volumen de tu dispositivo. Los valores no representan mediciones de dB SPL.</p></div>
+<div class="panel"><strong>Aplicación profesional</strong><p>Un monitor puede tener una respuesta distinta fuera de su eje principal. Por ello importa orientar los altavoces hacia la posición de mezcla y consultar las gráficas polares del fabricante. En una sala real, las reflexiones y los cruces entre transductores también modifican el resultado.</p><p class="warning">Advertencia: mantén bajo el volumen, especialmente en frecuencias agudas. Esta demostración no sustituye una prueba con micrófono de medición.</p></div></main>
+<script>
+const $=x=>document.getElementById(x);const c=$('polar'),g=c.getContext('2d');let ctx,osc,gain,playing=false;
+function factor(freq,angle){const rad=angle*Math.PI/180;const n=0.35+5*Math.pow(freq/8000,1.15);return Math.pow(Math.max(.05,Math.cos(rad/2)),n)}
+function fmt(x){return x.toFixed(1).replace('.',',')}
+function draw(){
+ const freq=+$('f').value,angle=+$('a').value; $('fv').textContent=freq+' Hz';$('av').textContent=angle+'°';
+ const amplitude=factor(freq,angle),db=20*Math.log10(amplitude);$('db').textContent=(db<0?'':'+' )+fmt(db)+' dB';$('amp').textContent=Math.round(amplitude*100)+' %';
+ g.clearRect(0,0,700,335);const cx=205,cy=166,R=128;
+ g.strokeStyle='#dce6f0';g.lineWidth=1;for(const r of [R/4,R/2,R*3/4,R]){g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke()}
+ for(let a=0;a<360;a+=30){const t=a*Math.PI/180;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+R*Math.cos(t),cy-R*Math.sin(t));g.stroke()}
+ g.beginPath();for(let i=0;i<=360;i++){const t=i*Math.PI/180;const symmetry=Math.acos(Math.cos(t))*180/Math.PI;const radius=R*factor(freq,symmetry);const x=cx+radius*Math.cos(t),y=cy-radius*Math.sin(t);i?g.lineTo(x,y):g.moveTo(x,y)}g.closePath();g.fillStyle='rgba(40,128,190,.19)';g.fill();g.strokeStyle='#287eb8';g.lineWidth=3;g.stroke();
+ const t=angle*Math.PI/180;g.setLineDash([6,5]);g.strokeStyle='#c38a34';g.lineWidth=2;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+R*Math.cos(t),cy-R*Math.sin(t));g.stroke();g.setLineDash([]);
+ g.fillStyle='#c38a34';g.beginPath();g.arc(cx+R*amplitude*Math.cos(t),cy-R*amplitude*Math.sin(t),5,0,Math.PI*2);g.fill();
+ g.fillStyle='#344860';g.fillRect(cx-15,cy-20,30,40);g.fillStyle='#a4b9ca';g.beginPath();g.arc(cx,cy-10,6,0,Math.PI*2);g.fill();
+ g.fillStyle='#294765';g.font='15px system-ui';g.fillText('0° (eje)',cx+R+13,cy+5);g.fillText('90°',cx-16,cy-R-12);
+ g.font='17px system-ui';g.fillText('Radiación relativa',420,105);
+ g.font='14px system-ui';g.fillStyle='#54657b';g.fillText('Azul: patrón ilustrativo',420,139);g.fillText('Naranja: dirección de escucha',420,165);g.fillText('Punto en el patrón:',420,209);g.font='bold 21px system-ui';g.fillStyle='#224c76';g.fillText(fmt(db)+' dB',420,239);
+ if(playing&&osc){osc.frequency.setTargetAtTime(freq,ctx.currentTime,.025);gain.gain.setTargetAtTime(.035*amplitude,ctx.currentTime,.04)}
+}
+function stop(){if(osc){try{osc.stop()}catch(e){}osc.disconnect();osc=null}if(gain){gain.disconnect();gain=null}playing=false;$('audio').textContent='▶ Escuchar tono'}
+$('audio').onclick=()=>{if(playing){stop();return}ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();osc=ctx.createOscillator();gain=ctx.createGain();osc.type='sine';gain.gain.value=0;osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=+$('f').value;osc.start();playing=true;$('audio').textContent='⏸ Detener sonido';draw()};
+$('stop').onclick=stop;$('reset').onclick=()=>{$('f').value=1000;$('a').value=45;draw()};$('f').oninput=draw;$('a').oninput=draw;window.addEventListener('pagehide',stop);draw();
+</script></body></html>

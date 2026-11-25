@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360">
+<rect width="900" height="360" fill="#0f172a"/>
+<line x1="70" y1="180" x2="840" y2="180" stroke="#64748b" stroke-width="2"/>
+<line x1="70" y1="55" x2="70" y2="305" stroke="#64748b" stroke-width="2"/>
+<text x="78" y="72" fill="#cbd5e1" font-family="system-ui" font-size="18">Presión</text>
+<text x="780" y="330" fill="#cbd5e1" font-family="system-ui" font-size="18">Tiempo</text>
+
+<line x1="70" y1="95" x2="840" y2="95" stroke="#f59e0b" stroke-width="2" stroke-dasharray="8 7"/>
+<line x1="70" y1="122" x2="840" y2="122" stroke="#22c55e" stroke-width="3" stroke-dasharray="10 7"/>
+<text x="690" y="88" fill="#fbbf24" font-family="system-ui" font-size="17" font-weight="700">Peak = máximo</text>
+<text x="650" y="116" fill="#4ade80" font-family="system-ui" font-size="17" font-weight="700">RMS = nivel efectivo</text>
+
+<path d="M70 180
+ C95 105,120 105,145 180
+ S195 255,220 180
+ S270 105,295 180
+ S345 255,370 180
+ S420 105,445 180
+ S495 255,520 180
+ S570 105,595 180
+ S645 255,670 180
+ S720 105,745 180
+ S795 255,820 180" fill="none" stroke="#38bdf8" stroke-width="4"/>
+
+<circle cx="120" cy="105" r="6" fill="#f59e0b"/>
+<line x1="120" y1="105" x2="120" y2="95" stroke="#f59e0b" stroke-width="2"/>
+<text x="92" y="286" fill="#94a3b8" font-family="system-ui" font-size="15">La señal cambia continuamente</text>
+
+<rect x="95" y="307" width="710" height="1" fill="#334155"/>
+<text x="95" y="343" fill="#cbd5e1" font-family="system-ui" font-size="16">Peak mira un instante. RMS resume el efecto energético de la señal durante un intervalo.</text>
+</svg>

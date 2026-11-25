@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAS → Onda Sinusoidal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+<style>
+  body { margin: 0; padding: 8px; background: #0F1923; display: flex; flex-direction: column; align-items: center; font-family: system-ui, sans-serif; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding-bottom: 6px; }
+  .ctrl { display: flex; flex-direction: column; align-items: center; gap: 1px; background: #162231; border-radius: 6px; padding: 4px 8px; border: 1px solid rgba(36,157,143,0.25); }
+  .ctrl label { font-size: 8px; color: #8899AA; text-transform: uppercase; }
+  .ctrl .val { font-size: 13px; font-weight: 700; color: #5BC0B3; }
+  input[type=range] { width: 75px; accent-color: #249D8F; }
+  .btn { padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(36,157,143,0.4); background: #162231; color: #8899AA; cursor: pointer; font-size: 10px; align-self: center; }
+  .btn.on { background: #249D8F; color: #fff; border-color: #249D8F; }
+  .btn.sound { border-color: rgba(232,116,97,0.5); }
+  .btn.sound.on { background: #E87461; border-color: #E87461; }
+</style>
+</head>
+<body>
+<div class="controls">
+  <div class="ctrl"><label>Amplitud / Vol</label><span class="val" id="av">55</span><input type="range" id="as" min="15" max="75" value="55"></div>
+  <div class="ctrl"><label>Frecuencia</label><span class="val" id="fv">220 Hz</span><input type="range" id="fs" min="1" max="8" value="2" step="0.25"></div>
+  <button class="btn on" id="pb">Pausa</button>
+  <button class="btn sound on" id="sb">🔊 Sonido</button>
+</div>
+<div id="cv"></div>
+
+<script>
+let A=55, freqVal=2, paused=false, phase=0;
+let osc=null, soundOn=true, audioStarted=false;
+
+function freqToHz(f){ return f*110; }
+function ampToDb(a){ return map(a,15,75,-30,-6); }
+
+function startAudio(){
+  if(!audioStarted){ Tone.start(); audioStarted=true; }
+}
+
+function toggleSound(){
+  startAudio();
+  if(soundOn){
+    if(osc){osc.stop();osc.dispose();osc=null;}
+    soundOn=false;
+    document.getElementById('sb').textContent='🔇 Silencio';
+    document.getElementById('sb').classList.remove('on');
+  } else {
+    osc = new Tone.Oscillator(freqToHz(freqVal),'sine').toDestination().start();
+    osc.volume.value = ampToDb(A);
+    soundOn=true;
+    document.getElementById('sb').textContent='🔊 Sonido';
+    document.getElementById('sb').classList.add('on');
+  }
+}
+
+function setup(){
+  let c = createCanvas(580,220);
+  c.parent('cv');
+
+  document.getElementById('as').oninput=function(){
+    A=+this.value;
+    document.getElementById('av').textContent=A;
+    if(osc) osc.volume.value = ampToDb(A);
+  };
+  document.getElementById('fs').oninput=function(){
+    freqVal=+this.value;
+    document.getElementById('fv').textContent=freqToHz(freqVal)+' Hz';
+    if(osc) osc.frequency.value = freqToHz(freqVal);
+  };
+  document.getElementById('pb').onclick=function(){
+    paused=!paused;
+    this.textContent=paused?'Reanudar':'Pausa';
+    this.classList.toggle('on',!paused);
+    if(paused){ if(osc) osc.stop(); }
+    else { if(soundOn && osc){ osc.start(); } }
+  };
+  document.getElementById('sb').onclick=toggleSound;
+}
+
+function draw(){
+  background(15,25,35);
+
+  if(!paused){
+    phase += 0.025 * 2 * freqVal;
+  }
+
+  let sx=85, st=25, sb=165;
+  let massY = sb + sin(phase)*A;
+
+  // Support
+  stroke(140); strokeWeight(2); line(sx,6,sx,st);
+  fill(140); noStroke(); triangle(sx-7,6,sx+7,6,sx,2);
+
+  // Spring
+  stroke('#5BC0B3'); strokeWeight(1.8); noFill();
+  beginShape();
+  for(let i=0;i<=16;i++){
+    let sy=st+(massY-st-12)*(i/16);
+    vertex(sx+(i%2==0?-6:6),sy);
+  }
+  endShape();
+
+  // Mass
+  fill('#249D8F'); stroke('#249D8F'); strokeWeight(1);
+  rect(sx-13,massY-2,26,15,3);
+
+  // Labels
+  fill(160); noStroke(); textAlign(CENTER); textSize(9);
+  text('Masa',sx,massY+24);
+  text('Resorte',sx,4);
+
+  // Equilibrium
+  stroke(80,90,105,100); strokeWeight(1);
+  drawingContext.setLineDash([2,4]); line(sx-20,sb,sx+20,sb); drawingContext.setLineDash([]);
+
+  // Wave zone
+  let w0=150, w1=570, wy=110;
+  stroke(45,55,68); strokeWeight(1); line(w0,wy,w1,wy);
+
+  // Connector line to wave start
+  let waveStartY = wy + sin(phase)*A;
+  stroke('#E87461', 80); strokeWeight(1);
+  drawingContext.setLineDash([3,4]);
+  line(sx+13, massY, w0, waveStartY);
+  drawingContext.setLineDash([]);
+
+  // Wave trace — like an oscilloscope: x=w0 is "now", right side is the past
+  noFill(); strokeWeight(2); stroke('#249D8F');
+  beginShape();
+  for(let x=w0; x<=w1; x+=1.5){
+    // x=w0 → phase=actual, x=w1 → phase=4 ciclos atrás
+    let pastPhase = map(x, w0, w1, 0, 4*TWO_PI);
+    let y = wy + sin(phase - pastPhase)*A;
+    vertex(x,y);
+  }
+  endShape();
+
+  // Current point dot at wave start
+  fill('#E87461'); noStroke();
+  ellipse(w0, waveStartY, 6, 6);
+
+  // "Paper" direction arrow
+  stroke('#249D8F', 100); strokeWeight(1.2);
+  let ax=w0+160;
+  line(ax-22,wy-65,ax+22,wy-65);
+  fill('#249D8F',100); noStroke();
+  triangle(ax+22,wy-65,ax+16,wy-69,ax+16,wy-61);
+  fill('#249D8F',120); textSize(8); textAlign(CENTER); text('papel →',ax,wy-71);
+
+  // Title
+  fill(180); textSize(11); textAlign(CENTER);
+  text('Movimiento Armónico Simple → Onda Sinusoidal',290,214);
+
+  // Frequency display
+  if(soundOn){
+    fill('#E87461'); textSize(9); textAlign(RIGHT);
+    text('🔊 '+freqToHz(freqVal)+' Hz',570,14);
+  }
+
+  // Amplitude indicator
+  fill(150); textSize(8); textAlign(LEFT);
+  text('A='+A+'  ≈ '+ampToDb(A).toFixed(0)+' dB',10,14);
+}
+</script>
+</body>
+</html>

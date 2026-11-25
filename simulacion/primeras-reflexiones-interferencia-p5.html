@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diseña tus paneles acústicos · Primeras reflexiones | Sesión 12</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#20394b;background:#f5f8fb;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:1030px;margin:auto;padding:16px}
+h1{font-size:1.55rem;line-height:1.25;margin:0 0 10px}h2{font-size:1.14rem;margin:0 0 9px}h3{font-size:1rem;margin:0 0 10px}
+p{line-height:1.53;margin:7px 0 12px}.muted{color:#516b7d}.small{font-size:.82rem}
+.card{background:white;border:1px solid #dce6ed;border-radius:15px;padding:18px;margin:14px 0}
+.field-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.group{border:1px solid #dce7ed;border-radius:11px;padding:14px;margin:14px 0;background:#fafcfd}
+.group legend{font-weight:800;padding:0 7px}
+.field{display:flex;flex-direction:column;gap:4px}
+label{font-size:.88rem;font-weight:700;line-height:1.3}
+input[type=number]{font:inherit;border-radius:8px;border:1px solid #aac3d0;background:white;padding:10px 12px;min-height:43px;width:100%;color:#163e50}
+select{font:inherit;border-radius:8px;border:1px solid #aac3d0;background:white;padding:10px;min-height:43px;width:100%;color:#163e50}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #7bbed0;outline-offset:2px}
+.note{background:#edf6f8;border-left:4px solid #2c7b94;border-radius:7px;padding:11px 14px}
+.warn{background:#fff6e9;border-left:4px solid #b67e34;border-radius:7px;padding:12px 15px}
+#errors{display:none}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+button{font:inherit;font-weight:750;background:#e9f3f8;border:1px solid #b4cbd7;border-radius:9px;min-height:43px;padding:10px 15px;color:#23576d;cursor:pointer}
+button.active{background:#1b7087;color:#fff;border-color:#1b7087}
+button.primary{background:#1b7087;color:white;border-color:#1b7087}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.84rem;color:#536b7b;margin:10px 0}
+.legend span{display:inline-flex;gap:7px;align-items:center}
+.legend span::before{content:"";width:19px;height:4px;border-radius:5px;background:var(--swatch);display:inline-block}
+.canvas-holder{width:100%;overflow:hidden}
+canvas{display:block;width:100%!important;max-width:100%;height:auto!important}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:13px 0}
+.metric{background:#eaf4f7;border-radius:10px;padding:11px}
+.metric small{display:block;color:#526979}.metric strong{font-size:1.02rem;color:#20667c}
+.results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.result{border:1px solid #d9e6ec;border-radius:11px;padding:13px}
+.result h3{margin:0 0 6px}.result p{font-size:.88rem;margin:4px 0}
+.result strong{color:#125f77}
+table{width:100%;border-collapse:collapse;font-size:.87rem;margin:12px 0}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #dce7ed;vertical-align:top}
+th{background:#edf5f8}output{font-variant-numeric:tabular-nums}
+footer{font-size:.85rem;color:#4c6675;margin:19px 0 36px}
+@media(max-width:720px){main{padding:9px}.card{padding:13px}.field-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.results{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.field-grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+</head>
+<body>
+<main>
+<h1>¿Dónde colocar los paneles acústicos?</h1>
+<p class="muted">Laboratorio virtual de <strong>primeras reflexiones</strong> basado en la técnica del espejo del video de Audio University (4:10). Ingresa las medidas de tu sala, los monitores y el punto de escucha. Obtendrás puntos orientativos para tratamiento de <strong>paredes laterales y techo</strong>.</p>
+<section class="card">
+<h2>1. Introduce las medidas (metros)</h2>
+<div class="note"><strong>Actividad:</strong> abre el <a href="planos-tres-espacios.html" target="_blank" rel="noopener">plano A, B o C</a> y <strong>escribe manualmente todas sus medidas</strong> en los campos vacíos. El simulador no carga los casos de forma automática. Antes de calcular, toma una <strong>captura de los datos ingresados</strong> para adjuntarla a Classroom.</div>
+<div class="note"><strong>Sistema de coordenadas:</strong> visto desde arriba, la pared frontal está detrás de los monitores. <strong>X</strong> se mide desde la pared izquierda; <strong>Y</strong>, desde la pared frontal; <strong>Z</strong>, desde el suelo. La sala se considera rectangular.</div>
+<form id="form" novalidate>
+<fieldset class="group">
+<legend>Dimensiones de la sala</legend>
+<div class="field-grid">
+<div class="field"><label for="roomW">Ancho (X)</label><input id="roomW" type="number" min="2" max="15" step=".1" inputmode="decimal"></div>
+<div class="field"><label for="roomL">Largo (Y)</label><input id="roomL" type="number" min="2" max="20" step=".1" inputmode="decimal"></div>
+<div class="field"><label for="roomH">Altura (Z)</label><input id="roomH" type="number" min="1.8" max="8" step=".1" inputmode="decimal"></div>
+</div>
+</fieldset>
+<fieldset class="group">
+<legend>Monitores izquierdo y derecho</legend>
+<p class="small muted">Usaremos dos monitores de iguales dimensiones. Indica la posición del <strong>centro horizontal</strong> de cada caja; la altura de la base es la distancia desde el suelo hasta la parte inferior de la caja.</p>
+<div class="field-grid">
+<div class="field"><label for="leftX">Monitor izquierdo · X</label><input id="leftX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="rightX">Monitor derecho · X</label><input id="rightX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="rearGap">Separación trasera de pared frontal (Y)</label><input id="rearGap" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="boxW">Ancho de cada monitor</label><input id="boxW" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="boxH">Alto de cada monitor</label><input id="boxH" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="boxD">Profundidad de cada monitor</label><input id="boxD" type="number" step=".01" min=".05" inputmode="decimal"></div>
+<div class="field"><label for="bottomZ">Altura de la base del monitor (Z)</label><input id="bottomZ" type="number" step=".05" min="0" inputmode="decimal"></div>
+</div>
+</fieldset>
+<fieldset class="group">
+<legend>Posición del oyente</legend>
+<div class="field-grid">
+<div class="field"><label for="earX">Orejas · X desde pared izquierda</label><input id="earX" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="earY">Orejas · Y desde pared frontal</label><input id="earY" type="number" step=".05" min="0" inputmode="decimal"></div>
+<div class="field"><label for="earZ">Altura de los oídos (Z)</label><input id="earZ" type="number" step=".05" min="0" inputmode="decimal"></div>
+</div>
+</fieldset>
+</form>
+<div class="actions">
+<button type="button" id="clear" class="primary">Limpiar campos para un nuevo plano</button>
+<button type="button" id="export">Descargar resultados (.txt)</button>
+</div>
+<div id="errors" class="warn" aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>2. Sala en 3D y primeras reflexiones</h2>
+<p class="muted">Arrastra para girar el modelo, usa la rueda o el gesto de pellizcar para acercarte. Los paneles de color muestran áreas orientativas; las líneas muestran el camino del sonido.</p>
+<div id="entered-summary" class="note" aria-live="polite"><strong>Medidas:</strong> completa los campos de la sección anterior para ver un resumen aquí.</div>
+<div id="scene3d-canvas" class="canvas-holder" style="min-height:280px;touch-action:none" aria-label="Vista tridimensional interactiva de sala monitores oyente y paneles de primera reflexión"></div>
+<div class="actions"><button type="button" id="reset3d">Reiniciar cámara 3D</button></div>
+<h3>Plano de planta (vista superior)</h3>
+<p class="muted small">Los puntos y trayectorias se calculan con reflexión especular. Las líneas parten del <strong>centro frontal aproximado</strong> de cada caja.</p>
+<div class="actions" role="group" aria-label="Elegir superficie para visualizar">
+<button type="button" class="active" data-surface="all" aria-pressed="true">Todas</button>
+<button type="button" data-surface="left" aria-pressed="false">Pared izquierda</button>
+<button type="button" data-surface="right" aria-pressed="false">Pared derecha</button>
+<button type="button" data-surface="ceiling" aria-pressed="false">Techo</button>
+</div>
+<div class="legend">
+<span style="--swatch:#258199">Sonido directo</span>
+<span style="--swatch:#d27843">Reflexión lateral</span>
+<span style="--swatch:#765cb3">Reflexión de techo</span>
+</div>
+<div id="plan-canvas" class="canvas-holder" aria-label="Plano a escala de la sala, monitores, oyente y trayectorias reflejadas"></div>
+<div class="metrics">
+<div class="metric"><small>Centro acústico estimado de los monitores</small><strong id="heightCenter">—</strong></div>
+<div class="metric"><small>Distancia directa · monitor izquierdo</small><strong id="directL">—</strong></div>
+<div class="metric"><small>Distancia directa · monitor derecho</small><strong id="directR">—</strong></div>
+</div>
+<h3>Vista lateral (altura y techo)</h3>
+<div id="side-canvas" class="canvas-holder" aria-label="Vista lateral con monitor, oyente y punto de reflexión en el techo"></div>
+<p class="small muted">En la planta, la reflexión del techo aparece proyectada sobre el suelo. En la vista lateral se muestra su altura real. La pantalla representa el centro acústico aproximado en la cara frontal del monitor; su posición física exacta depende del diseño del altavoz.</p>
+</section>
+<section class="card">
+<h2>3. ¿Dónde podrían colocarse los paneles?</h2>
+<div id="results" aria-live="polite"></div>
+<p class="note"><strong>Lectura de resultados:</strong> las coordenadas son <em>centros teóricos de primera reflexión</em>. Para paredes, la posición se expresa como distancia desde el frente y altura sobre el suelo. Para el techo, se expresa como distancia desde la pared izquierda y frontal. El programa también propone una cobertura ilustrativa de paneles.</p>
+</section>
+<section class="card">
+<h2>4. Para practicar desde casa</h2>
+<p>Utiliza primero las medidas del ejemplo y registra las recomendaciones. Después cambia <strong>solo la posición del oyente</strong> y compara los resultados. Finalmente cambia <strong>solo la altura de la base de los monitores</strong> y explica qué posiciones se alteran. Justifica tus conclusiones con la técnica del espejo del video.</p>
+<p><strong>Entrega sugerida:</strong> captura del plano, tabla de puntos y respuestas sobre los cambios observados. El botón <strong>«Descargar resultados»</strong> guarda las medidas y coordenadas.</p>
+</section>
+<footer><strong>Limitaciones importantes:</strong> modelo de geometría especular para una sala rectangular, con monitores idealizados como puntos de emisión en el centro de su cara frontal. El tamaño de las cajas se usa para estimar ese punto, dibujarlas a escala y revisar su encaje en la sala; <strong>no determina por sí solo el tamaño acústicamente óptimo de los paneles</strong>. Las dimensiones ilustrativas propuestas (0,60 × 1,20 m) no sustituyen criterios de cobertura, espesor, coeficientes de absorción por frecuencia, directividad del altavoz ni mediciones profesionales. No se calculan RT60, modos de sala ni una respuesta en frecuencia real.</footer>
+</main>
+<script>
+window.addEventListener("load",function(){
+"use strict";
+const ids=["roomW","roomL","roomH","leftX","rightX","rearGap","boxW","boxH","boxD","bottomZ","earX","earY","earZ"];
+const $=id=>document.getElementById(id);
+const fmt=(n,d=2)=>Number(n).toLocaleString("es-EC",{minimumFractionDigits:d,maximumFractionDigits:d});
+let model=null,selection="all",drawPlan=()=>{},drawSide=()=>{},resetCamera=()=>{};
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);}
+function reflected(s,e,surface,W,H){
+ let t,point,mirror;
+ if(surface==="left"){
+   t=s.x/(s.x+e.x);point={x:0,y:s.y+(e.y-s.y)*t,z:s.z+(e.z-s.z)*t};mirror={x:-s.x,y:s.y,z:s.z};
+ } else if(surface==="right"){
+   t=(W-s.x)/((W-s.x)+(W-e.x));point={x:W,y:s.y+(e.y-s.y)*t,z:s.z+(e.z-s.z)*t};mirror={x:2*W-s.x,y:s.y,z:s.z};
+ } else {
+   t=(H-s.z)/((H-s.z)+(H-e.z));point={x:s.x+(e.x-s.x)*t,y:s.y+(e.y-s.y)*t,z:H};mirror={x:s.x,y:s.y,z:2*H-s.z};
+ }
+ const direct=dist(s,e),via=dist(mirror,e);
+ return {point,direct,via,extra:via-direct,delay:(via-direct)/344};
+}
+function getModel(){
+ const v={};const errs=[];
+ for(const id of ids){
+   const raw=$(id).value.trim();
+   v[id]=raw===""?NaN:Number(raw.replace(",","."));
+   if(!Number.isFinite(v[id]))errs.push("Introduce un número válido en «"+$(id).previousElementSibling.textContent+"».");
+ }
+ if(errs.length)return {errs};
+ const W=v.roomW,L=v.roomL,H=v.roomH;
+ if(W<2||W>15||L<2||L>20||H<1.8||H>8)errs.push("Comprueba las medidas de la sala (ancho 2–15 m, largo 2–20 m, alto 1,8–8 m).");
+ if(v.boxW<.05||v.boxH<.05||v.boxD<.05)errs.push("Las tres dimensiones del monitor deben ser positivas.");
+ if(v.bottomZ<0||v.bottomZ+v.boxH>=H)errs.push("Los monitores deben quedar completamente por debajo del techo.");
+ if(v.rearGap<0||v.rearGap+v.boxD>=L)errs.push("La caja del monitor debe caber en el largo de la sala.");
+ if(v.leftX-v.boxW/2<=0||v.leftX+v.boxW/2>=W||v.rightX-v.boxW/2<=0||v.rightX+v.boxW/2>=W)errs.push("Los monitores deben quedar dentro del ancho de la sala, incluyendo su tamaño.");
+ if(v.leftX>=v.rightX)errs.push("La coordenada X del monitor izquierdo debe ser menor que la del derecho.");
+ if(v.earX<=0||v.earX>=W||v.earY<=0||v.earY>=L||v.earZ<=0||v.earZ>=H)errs.push("El oyente debe estar dentro de la sala.");
+ if(errs.length)return {errs,v};
+ const sy=v.rearGap+v.boxD,sz=v.bottomZ+v.boxH/2;
+ const speaker=[{name:"Izquierdo",x:v.leftX,y:sy,z:sz},{name:"Derecho",x:v.rightX,y:sy,z:sz}];
+ const ear={x:v.earX,y:v.earY,z:v.earZ};
+ const faces=["left","right","ceiling"];
+ const rays={};
+ for(const face of faces)rays[face]=speaker.map(s=>reflected(s,ear,face,W,H));
+ if(speaker.some(s=>dist(s,ear)<.15))errs.push("La posición de escucha está demasiado cerca de un monitor para esta demostración.");
+ return {errs,v,speaker,ear,rays};
+}
+function planGroup(face,rays){
+ const p=rays.map(r=>r.point),av=(k)=>(p[0][k]+p[1][k])/2;
+ if(face==="ceiling"){
+  const sx=Math.abs(p[0].x-p[1].x),sy=Math.abs(p[0].y-p[1].y),single=(Math.max(sx,sy)<=1.0&&Math.min(sx,sy)<=.4);
+  return {single,desc:single?"Una nube de 1,20 × 0,60 m como referencia.":"Dos nubes de 1,20 × 0,60 m como referencia, una por cada punto.",location:"X = "+fmt(av("x"))+" m desde la pared izquierda; Y = "+fmt(av("y"))+" m desde el frente."};
+ }
+ const dy=Math.abs(p[0].y-p[1].y),dz=Math.abs(p[0].z-p[1].z);
+ const single=(dy<=.5&&dz<=.8);
+ return {single,desc:single?"Un panel de 0,60 × 1,20 m (vertical) como referencia.":"Dos paneles de 0,60 × 1,20 m como referencia, uno por cada punto.",location:"Y = "+fmt(av("y"))+" m desde el frente; centro a Z = "+fmt(av("z"))+" m de altura."};
+}
+function renderText(){
+ if(!model || model.errs.length){$("results").textContent="Corrige las medidas para calcular los puntos.";return;}
+ const m=model,v=m.v;
+ $("heightCenter").textContent=fmt(m.speaker[0].z)+" m";
+ $("directL").textContent=fmt(dist(m.speaker[0],m.ear))+" m";
+ $("directR").textContent=fmt(dist(m.speaker[1],m.ear))+" m";
+ const label={left:"Pared izquierda",right:"Pared derecha",ceiling:"Techo"};
+ let html='<div class="results">';
+ for(const face of ["left","right","ceiling"]){
+  const g=planGroup(face,m.rays[face]);
+  html+='<div class="result"><h3>'+label[face]+'</h3><p><strong>Centro de la zona:</strong> '+g.location+'</p><p>'+g.desc+'</p></div>';
+ }
+ html+='</div><h3 style="margin-top:18px">Coordenadas de cada reflexión</h3><table><thead><tr><th>Superficie</th><th>Monitor</th><th>Ubicación del rebote</th><th>Recorrido extra / retardo</th></tr></thead><tbody>';
+ for(const face of ["left","right","ceiling"]){
+  m.rays[face].forEach((r,i)=>{
+   const p=r.point;
+   const loc=face==="ceiling"?'X '+fmt(p.x)+' m · Y '+fmt(p.y)+' m':'Y '+fmt(p.y)+' m · Z '+fmt(p.z)+' m';
+   html+='<tr><td>'+label[face]+'</td><td>'+m.speaker[i].name+'</td><td>'+loc+'</td><td>'+fmt(r.extra)+' m / '+fmt(r.delay*1000,1)+' ms</td></tr>';
+  });
+ }
+ html+='</tbody></table><p class="small muted">Cuando los puntos están próximos se propone una zona común; si están separados se sugieren dos paneles. Si un panel próximo a una esquina no cabe íntegramente, ajusta su posición y cobertura en un diseño real.</p>';
+ $("results").innerHTML=html;
+}
+function validateRender(){
+ const box=$("errors");
+ const summary=$("entered-summary");
+ if(ids.some(id=>$(id).value.trim()==="")){
+  model=null;box.style.display="none";box.textContent="";
+  $("results").textContent="Introduce manualmente todas las medidas de tu plano para visualizar las ubicaciones propuestas.";
+  summary.innerHTML="<strong>Medidas:</strong> completa todos los campos antes de calcular.";
+  $("heightCenter").textContent="—";$("directL").textContent="—";$("directR").textContent="—";
+  drawPlan();drawSide();return;
+ }
+ model=getModel();
+ if(model.errs.length){
+  box.style.display="block";box.textContent=model.errs.join(" ");
+  summary.innerHTML="<strong>Revisa las medidas ingresadas:</strong> el plano no cumple las condiciones geométricas.";
+ }else{
+  box.style.display="none";box.textContent="";
+  const v=model.v;
+  summary.innerHTML="<strong>Datos introducidos manualmente (metros):</strong> Sala: "+fmt(v.roomW)+" × "+fmt(v.roomL)+" × "+fmt(v.roomH)
+   +" · Monitores X: "+fmt(v.leftX)+" / "+fmt(v.rightX)+" · Separación al frente: "+fmt(v.rearGap)
+   +" · Caja: "+fmt(v.boxW)+" × "+fmt(v.boxH)+" × "+fmt(v.boxD)
+   +" · Base Z: "+fmt(v.bottomZ)+" · Oyente X/Y/Z: "+fmt(v.earX)+" / "+fmt(v.earY)+" / "+fmt(v.earZ)+".";
+ }
+ renderText();drawPlan();drawSide();
+}
+function exportReport(){
+ if(!model||model.errs.length){$("errors").focus();return;}
+ const m=model;const label={left:"PARED IZQUIERDA",right:"PARED DERECHA",ceiling:"TECHO"};
+ let lines=["SESION 12 - PUNTOS DE PRIMERA REFLEXION","MODELO GEOMETRICO IDEALIZADO (NO MEDICION)","", "MEDIDAS (metros)"];
+ for(const id of ids)lines.push(id+": "+m.v[id]);
+ lines.push("","UBICACIONES");
+ for(const face of ["left","right","ceiling"]){
+  const g=planGroup(face,m.rays[face]);lines.push("",label[face],g.location,g.desc);
+  m.rays[face].forEach((r,i)=>lines.push("Monitor "+m.speaker[i].name+": X="+fmt(r.point.x)+" m, Y="+fmt(r.point.y)+" m, Z="+fmt(r.point.z)+" m; retardo="+fmt(r.delay*1000,2)+" ms"));
+ }
+ lines.push("","La ubicacion es orientativa y debe verificarse en la sala con tecnica del espejo y medidas cuando sea posible.");
+ const blob=new Blob([lines.join("\n")],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="sesion12-primeras-reflexiones.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+const pt=(p,x,y,sc)=>({x:x+p.x*sc,y:y+p.y*sc});
+function drawLegend(p,str,x,y,color){
+ p.noStroke();p.fill(color);p.circle(x,y,9);p.fill("#385366");p.textSize(12);p.text(str,x+10,y+4);
+}
+if(typeof window.p5!=="function"){
+ $("scene3d-canvas").textContent="No se pudo cargar el visor 3D sin p5.js. La tabla de coordenadas sigue disponible.";
+ $("plan-canvas").textContent="No se pudo cargar p5.js. Revisa tu conexión y abre esta página en otra pestaña.";
+ $("side-canvas").textContent="El cálculo numérico continúa disponible aunque no se cargue el dibujo.";
+}else{
+new p5(p=>{
+ let cameraNeedsReset=true;
+ let currentCaseSignature="";
+ p.setup=()=>{
+   const c=p.createCanvas(820,510,p.WEBGL);c.parent("scene3d-canvas");
+   p.pixelDensity(1);p.frameRate(30);
+   resetCamera=()=>{cameraNeedsReset=true};
+ };
+ const C=(r,g,b,a=255)=>[r,g,b,a];
+ function edge(a,b,color=[88,120,143,220],weight=1.7){
+   p.stroke(...color);p.strokeWeight(weight);
+   p.line(...a,...b);
+ }
+ p.draw=()=>{
+   p.background(247,250,252);
+   if(!model||model.errs.length)return;
+   const m=model,v=m.v,W=v.roomW,L=v.roomL,H=v.roomH;
+   const scale=Math.min(440/Math.max(W,L),230/H,75);
+   const cx=(x)=>(x-W/2)*scale;
+   const cy=(z)=>(H/2-z)*scale;
+   const cz=(y)=>(y-L/2)*scale;
+   const point=a=>[cx(a.x),cy(a.z),cz(a.y)];
+   const cameraSig=W+"|"+L+"|"+H;
+   if(cameraNeedsReset||cameraSig!==currentCaseSignature){
+     const r=Math.max(W,L,H)*scale;
+     p.camera(r*.98,-r*.78,r*1.0,0,0,0,0,1,0);
+     cameraNeedsReset=false;currentCaseSignature=cameraSig;
+   }
+   p.perspective(Math.PI/3,820/510,1,6500);
+   p.orbitControl(1,1,.9);
+   p.ambientLight(170,170,170);p.directionalLight(255,255,255,-.3,-1,-.5);
+   // Semi-transparent floor and frame: open roof for interior viewing.
+   p.push();p.noStroke();p.fill(222,232,239,130);
+   p.translate(0,cy(0),0);p.box(W*scale,3,L*scale);p.pop();
+   const corner=(x,z,y)=>[cx(x),cy(z),cz(y)];
+   for(const z of [0,H])for(const x of [0,W])edge(corner(x,z,0),corner(x,z,L));
+   for(const z of [0,H])for(const y of [0,L])edge(corner(0,z,y),corner(W,z,y));
+   for(const x of [0,W])for(const y of [0,L])edge(corner(x,0,y),corner(x,H,y));
+   // 1 m floor reference lines
+   for(let x=1;x<W;x+=1)edge(corner(x,0,0),corner(x,0,L),[204,218,228,170],1);
+   for(let y=1;y<L;y+=1)edge(corner(0,0,y),corner(W,0,y),[204,218,228,170],1);
+   // Speaker boxes, oriented with front on +Y.
+   for(const s of m.speaker){
+      p.push();p.noStroke();p.fill(57,83,106);
+      p.translate(cx(s.x),cy(v.bottomZ+v.boxH/2),cz(v.rearGap+v.boxD/2));
+      p.box(v.boxW*scale,v.boxH*scale,v.boxD*scale);
+      p.pop();
+      p.push();p.noStroke();p.fill(83,176,191);
+      p.translate(...point(s));p.sphere(Math.max(3,scale*.065),9,7);p.pop();
+   }
+   // Listener: head at ear point and simplified seated support
+   const e=m.ear;
+   p.push();p.noStroke();p.fill(31,125,139);
+   p.translate(...point(e));p.sphere(Math.max(6,scale*.13),12,9);p.pop();
+   edge(point({x:e.x,y:e.y,z:e.z-.13}),point({x:e.x,y:e.y,z:.47}),[41,114,135,210],3);
+   // Treatment areas; exact reflection centers shown as spheres.
+   const faces=selection==="all"?["left","right","ceiling"]:[selection];
+   for(const face of faces){
+     const pp=m.rays[face].map(r=>r.point),group=planGroup(face,m.rays[face]);
+     const targets=group.single?[{
+       x:(pp[0].x+pp[1].x)/2,y:(pp[0].y+pp[1].y)/2,z:(pp[0].z+pp[1].z)/2
+     }]:pp;
+     for(const target of targets){
+       if(face==="ceiling"){
+          const dx=Math.abs(pp[0].x-pp[1].x),dy=Math.abs(pp[0].y-pp[1].y);
+          const pw=dx>=dy?1.2:.6,pd=dx>=dy?.6:1.2;
+          const px=Math.max(pw/2,Math.min(W-pw/2,target.x));
+          const py=Math.max(pd/2,Math.min(L-pd/2,target.y));
+          p.push();p.noStroke();p.fill(131,108,180,210);
+          p.translate(cx(px),cy(H-.035),cz(py));p.box(pw*scale,Math.max(scale*.07,3),pd*scale);p.pop();
+       }else{
+          const xx=face==="left"?.065:W-.065;
+          const yz=Math.max(.6,Math.min(H-.6,target.z));
+          const yy=Math.max(.30,Math.min(L-.30,target.y));
+          p.push();p.noStroke();p.fill(211,122,67,215);
+          p.translate(cx(xx),cy(yz),cz(yy));p.box(Math.max(scale*.07,3),1.2*scale,.60*scale);p.pop();
+       }
+     }
+     for(let i=0;i<m.speaker.length;i++){
+       const q=m.rays[face][i].point,s=m.speaker[i],color=face==="ceiling"?[126,91,184,255]:[207,111,58,255];
+       edge(point(s),point(q),color,2.8);
+       edge(point(q),point(e),color,2.8);
+       p.push();p.noStroke();p.fill(...color);p.translate(...point(q));p.sphere(Math.max(4,scale*.07),9,7);p.pop();
+     }
+   }
+   for(const s of m.speaker)edge(point(s),point(e),[31,137,149,230],2.3);
+ };
+},"scene3d-canvas");
+new p5(p=>{
+ p.setup=()=>{const c=p.createCanvas(820,535);c.parent("plan-canvas");p.pixelDensity(1);p.noLoop();drawPlan=()=>p.redraw();};
+ p.draw=()=>{
+  p.background(255);p.textFont("Arial");
+  if(!model||model.errs.length){p.fill("#627789");p.textSize(18);p.text("Introduce medidas válidas para ver el plano.",45,70);return;}
+  const m=model,v=m.v,W=v.roomW,L=v.roomL;
+  const sc=Math.min(510/W,415/L),x=65,y=65;
+  const X=q=>x+q*sc,Y=q=>y+q*sc;
+  p.noFill();p.stroke("#6b8797");p.strokeWeight(4);p.rect(x,y,W*sc,L*sc);
+  p.noStroke();p.fill("#34536a");p.textSize(14);p.text("PARED FRONTAL",x+8,y-15);p.text("PARED POSTERIOR",x+8,y+L*sc+22);
+  p.text("Pared izquierda",x+W*sc+18,y+30);p.text("Pared derecha",x+W*sc+18,y+49);
+  p.text("Ancho "+fmt(W)+" m",x+W*sc+18,y+92);p.text("Largo "+fmt(L)+" m",x+W*sc+18,y+110);
+  const e=m.ear;
+  for(const s of m.speaker){
+   p.stroke("#258199");p.strokeWeight(2.2);p.line(X(s.x),Y(s.y),X(e.x),Y(e.y));
+  }
+  const faces=selection==="all"?["left","right","ceiling"]:[selection];
+  // Coloured areas are illustrative panel coverage, not physical panel specifications.
+  for(const face of faces){
+   const pp=m.rays[face].map(r=>r.point),g=planGroup(face,m.rays[face]);
+   if(face==="ceiling"){
+    const points=g.single?[{x:(pp[0].x+pp[1].x)/2,y:(pp[0].y+pp[1].y)/2}]:pp;
+    for(const q of points){
+     const dx=Math.abs(pp[0].x-pp[1].x),dy=Math.abs(pp[0].y-pp[1].y);
+     const rw=dx>=dy?1.2:.6,rh=dx>=dy?.6:1.2;
+     p.fill(118,92,179,45);p.stroke("#765cb3");p.strokeWeight(1.4);
+     p.rect(X(Math.max(0,Math.min(W-rw,q.x-rw/2))),Y(Math.max(0,Math.min(L-rh,q.y-rh/2))),rw*sc,rh*sc,3);
+    }
+   }else{
+    const wallX=face==="left"?0:W;
+    const locations=g.single?[(pp[0].y+pp[1].y)/2]:pp.map(q=>q.y);
+    for(const loc of locations){
+     const ylo=Math.max(0,Math.min(L-.6,loc-.3));
+     p.stroke("#d27843");p.strokeWeight(9);p.strokeCap(p.ROUND);
+     p.line(X(wallX),Y(ylo),X(wallX),Y(ylo+.6));
+    }
+   }
+  }
+  for(const face of faces){
+   const color=face==="ceiling"?"#765cb3":"#d27843";
+   for(let i=0;i<m.speaker.length;i++){
+    const s=m.speaker[i],r=m.rays[face][i],q=r.point;
+    p.stroke(color);p.strokeWeight(2);p.drawingContext.setLineDash(face==="ceiling"?[6,4]:[]);
+    p.line(X(s.x),Y(s.y),X(q.x),Y(q.y));p.line(X(q.x),Y(q.y),X(e.x),Y(e.y));
+    p.drawingContext.setLineDash([]);p.noStroke();p.fill(color);p.circle(X(q.x),Y(q.y),11);
+    p.fill("#27485a");p.textSize(12);p.text(face==="ceiling"?"T"+(i+1):face==="left"?"I"+(i+1):"D"+(i+1),X(q.x)+9,Y(q.y)-8);
+   }
+  }
+  // scaled monitor footprint; source defined on the front face
+  for(let i=0;i<m.speaker.length;i++){
+   const s=m.speaker[i],top=v.rearGap;
+   p.fill("#244962");p.noStroke();p.rect(X(s.x-v.boxW/2),Y(top),v.boxW*sc,v.boxD*sc,2);
+   p.fill("#fff");p.textSize(11);p.textAlign(p.CENTER);p.text(i===0?"L":"R",X(s.x),Y(top)+v.boxD*sc/2+4);p.textAlign(p.LEFT);
+  }
+  p.noStroke();p.fill("#127f84");p.circle(X(e.x),Y(e.y),15);
+  p.fill("#193e51");p.textSize(13);p.text("Oyente",X(e.x)+12,Y(e.y)+4);
+  p.fill("#546e7d");p.textSize(12);p.text("Líneas y rebotes proyectados sobre el plano de la sala.",65,518);
+ };
+},"plan-canvas");
+new p5(p=>{
+ p.setup=()=>{const c=p.createCanvas(820,305);c.parent("side-canvas");p.pixelDensity(1);p.noLoop();drawSide=()=>p.redraw();};
+ p.draw=()=>{
+  p.background(255);p.textFont("Arial");
+  if(!model||model.errs.length){p.fill("#627789");p.text("Introduce medidas válidas para ver la elevación.",30,60);return;}
+  const m=model,v=m.v, sc=Math.min(570/v.roomL,225/v.roomH), ox=60,oy=263;
+  const X=y=>ox+y*sc,Y=z=>oy-z*sc;
+  p.stroke("#6b8797");p.strokeWeight(3);p.noFill();p.rect(X(0),Y(v.roomH),v.roomL*sc,v.roomH*sc);
+  p.noStroke();p.fill("#35556a");p.textSize(13);p.text("TECHO",X(0)+6,Y(v.roomH)-9);p.text("SUELO",X(0)+6,oy+19);
+  p.fill("#244962");p.rect(X(v.rearGap),Y(v.bottomZ+v.boxH),v.boxD*sc,v.boxH*sc);
+  const s=m.speaker[0],e=m.ear,r=m.rays.ceiling[0],q=r.point;
+  p.stroke("#258199");p.strokeWeight(2);p.line(X(s.y),Y(s.z),X(e.y),Y(e.z));
+  if(selection==="ceiling"||selection==="all"){
+   p.stroke("#765cb3");p.strokeWeight(2.3);
+   p.line(X(s.y),Y(s.z),X(q.y),Y(q.z));p.line(X(q.y),Y(q.z),X(e.y),Y(e.z));
+   p.noStroke();p.fill("#765cb3");p.circle(X(q.y),Y(q.z),11);
+  }
+  p.noStroke();p.fill("#127f84");p.circle(X(e.y),Y(e.z),14);
+  p.fill("#315064");p.textSize(12);p.text("Monitor L",X(s.y)+10,Y(s.z)-18);
+  p.text("Oídos",X(e.y)+12,Y(e.z)-13);
+  p.text("Vista lateral: pared frontal a la izquierda; distancias en metros.",60,300);
+ };
+},"side-canvas");
+}
+for(const id of ids)$(id).addEventListener("input",validateRender);
+$("clear").addEventListener("click",()=>{for(const id of ids)$(id).value="";resetCamera();validateRender();});
+$("reset3d").addEventListener("click",()=>resetCamera());
+$("export").addEventListener("click",exportReport);
+document.querySelectorAll("[data-surface]").forEach(btn=>btn.addEventListener("click",()=>{
+ selection=btn.dataset.surface;
+ document.querySelectorAll("[data-surface]").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",b===btn?"true":"false")});
+ drawPlan();drawSide();
+}));
+validateRender();
+});
+</script>
+</body>
+</html>
